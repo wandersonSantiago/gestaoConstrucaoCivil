@@ -1,5 +1,5 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller;
 
-public class PessoaController {
+public class PessoaRestController {
 
 }

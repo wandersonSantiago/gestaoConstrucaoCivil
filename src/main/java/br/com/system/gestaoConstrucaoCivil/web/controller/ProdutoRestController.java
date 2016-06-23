@@ -1,5 +1,15 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller;
 
-public class ProdutoController {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import br.com.system.gestaoConstrucaoCivil.service.ProdutoService;
+
+@RestController
+@RequestMapping("/rest/produto")
+public class ProdutoRestController {
+
+	@Autowired
+	 private ProdutoService produtoService;
 }
