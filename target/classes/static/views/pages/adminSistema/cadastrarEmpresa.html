@@ -1,11 +1,107 @@
 <meta charset="UTF-8">
-<div class="generic-container">
-	<div class="panel panel-default"></div>
-	<div class="panel panel-default">
-		<!-- Default panel contents -->
-		<div class="panel-heading">
-			<span class="lead">Pagina cadastrar Empresa  </span>
+<div class="row">
+<div class="col-sm-3"></div>
+		<div  class="col-sm-3">
+			<h1>
+				<span class="label label-primary">Cadastro de Empresa</span>
+			</h1>
 		</div>
-		<div class="tablecontainer"></div>
 	</div>
+	<br>
+<div class="container col-sm-12 ">
+	<form role="form-vertical">
+		<div class="row">
+		<label class="col-sm-1 control-label" for="razaoSocial">Razão Social</label> 
+			<div class="col-sm-7">
+				<input class="form-control" id="razaoSocial" type="text">
+			</div>
+		</div>
+	<br>
+		<div class="row">
+			<label class="col-sm-1 control-label" for="nomeFantasia">Nome Fantasia</label>
+			<div class="col-sm-7">
+				<input class="form-control" id="nomeFantasia" type="text" aria-describedby="basic-addon1">
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<label class="col-sm-1 control-label" for="cnpj">CNPJ</label>
+			<div class="col-sm-3">
+				<input class="form-control" id="cnpj" type="text">
+			</div>
+			<label class="col-sm-1 control-label" for="fone">Telefone</label>
+			<div class="col-sm-3">
+				<input class="form-control" id="fone" type="text">
+			</div>
+		</div>
+			<br>
+				
+					<h4>Endereço</h4>
+				
+			<br>
+		<div class="row">
+			<label class="col-sm-1 control-label" for="cep">CEP</label>
+			<div class="col-sm-3">
+				<input class="form-control" id="cep" type="search" placeholder="Busca Cep">
+			</div>
+			<label class="col-sm-1 control-label" for="numero">Numero</label>
+			<div class="col-sm-1">
+				<input class="form-control" id="numero" type="text">			
+			</div>
+		</div>
+		<br>
+		
+		<div class="row">
+		<fieldset disabled>
+			<label class="col-sm-1 control-label" for="endereco">Endereço</label>
+			<div class="col-sm-7">
+				<input class="form-control" id="endereco" type="text" >
+			</div>
+		</div>
+		<br>
+			<div class="row">
+			<fieldset disabled>
+				<label class="col-sm-1 control-label" for="bairro">Bairro</label>
+				<div class="col-sm-3">
+					<input class="form-control" id="bairro" type="text">			
+				</div>
+					<label class="col-sm-1 control-label" for="cidade">Cidade</label>
+				<div class="col-sm-3">
+					<input class="form-control" id="cidade" type="text">			
+				</div>
+			</div>
+			<br>
+			<div class="row">
+			<fieldset disabled>
+				<label class="col-sm-1 control-label" for="estado">Estado</label>
+				<div class="col-sm-3">
+					<input class="form-control" id="estado" type="text">			
+				</div>
+					<label class="col-sm-1 control-label" for="pais">Pais</label>
+				<div class="col-sm-3">
+					<input class="form-control" id="pais" type="text">			
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<label class="col-sm-1 control-label" for="complemento">Complemento</label>
+				<div class="col-sm-7">
+					<input class="form-control" id="complemento" type="text" >
+				</div>
+		</div>
+		<br>
+		
+		<div class="row " >
+		<div class="col-sm-1"></div>
+				<div class="col-sm-3">
+					<button type="submit" name="submit"	class="btn btn-lg btn-primary btn-block btn-signin">Cadastrar</button>
+					</div>
+				<div class="col-sm-3">
+		
+				<button type="submit" name="submit"	class="btn btn-lg btn-danger btn-block btn-signin">Cancelar</button>
+				</div>
+		</div>
+			
+		
+	</form>
 </div>
