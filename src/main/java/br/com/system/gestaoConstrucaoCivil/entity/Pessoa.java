@@ -6,11 +6,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "pessoa")
 public abstract class Pessoa extends AbstractPersistable<Long>{
 
@@ -32,7 +35,7 @@ public abstract class Pessoa extends AbstractPersistable<Long>{
 	protected String telefoneCelular;
 	@Column(nullable = false)
 	protected Date dataNascimento;
-	
+   
 	
 	public String getNomeCompleto() {
 		return nomeCompleto;

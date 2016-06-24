@@ -1,8 +1,13 @@
 package br.com.system.gestaoConstrucaoCivil.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -16,7 +21,13 @@ public class Produto extends AbstractPersistable<Long>{
 	@Column(nullable = false,length = 50)
 	private String codigoBarra;
 	
-	private Fornecedor fornecedor;
+	@ManyToMany(cascade = CascadeType.ALL)
+	private List<Fornecedor> fornecedores;
+	@JoinTable(
+		     name = "produto_fornecedor",
+		     joinColumns = @JoinColumn(name = "id"),
+		     inverseJoinColumns = @JoinColumn(name = "id")
+		)
 	@Column(nullable = false,length = 50)
 	private String descricao;
 	@Column(nullable = false)
@@ -37,11 +48,12 @@ public class Produto extends AbstractPersistable<Long>{
 	public void setCodigoBarra(String codigoBarra) {
 		this.codigoBarra = codigoBarra;
 	}
-	public Fornecedor getFornecedor() {
-		return fornecedor;
+	
+	public List<Fornecedor> getFornecedores() {
+		return fornecedores;
 	}
-	public void setFornecedor(Fornecedor fornecedor) {
-		this.fornecedor = fornecedor;
+	public void setFornecedores(List<Fornecedor> fornecedores) {
+		this.fornecedores = fornecedores;
 	}
 	public String getDescricao() {
 		return descricao;

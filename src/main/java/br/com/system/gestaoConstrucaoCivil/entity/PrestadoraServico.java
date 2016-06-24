@@ -1,8 +1,12 @@
 package br.com.system.gestaoConstrucaoCivil.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -16,7 +20,8 @@ public class PrestadoraServico extends AbstractPersistable<Long>{
 	@JoinColumn(name="id_dado_empresa",nullable = false)
 	private DadoEmpresa dadoEmpresa;
 	
-	
+	@OneToMany(mappedBy = "prestadoraServico", cascade = CascadeType.ALL)
+	private List<Servico> servicos;
 	public DadoEmpresa getDadoEmpresa() {
 		return dadoEmpresa;
 	}

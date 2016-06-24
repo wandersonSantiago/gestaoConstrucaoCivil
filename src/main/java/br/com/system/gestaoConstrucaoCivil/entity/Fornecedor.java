@@ -1,8 +1,11 @@
 package br.com.system.gestaoConstrucaoCivil.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -15,15 +18,31 @@ public class Fornecedor extends AbstractPersistable<Long> {
 	
 	@Column(nullable = false,length = 50)
 	private String contato;
-	@Column(nullable = false,length = 50)
+	@Column(nullable = true,length = 50)
 	private String observacao;
 	@ManyToOne
 	@JoinColumn(name="id_dado_empresa",nullable = false)
 	private DadoEmpresa dadosEmpresa;
 	@Column(nullable = false)
 	private boolean ativo;
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(
+		     name = "produto_fornecedor",
+		     joinColumns = @JoinColumn(name = "id"),
+		     inverseJoinColumns = @JoinColumn(name = "id")
+		)
+    private Produto produto;
 	
 	
+	
+	
+	public Produto getProduto() {
+		return produto;
+	}
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
 	public String getContato() {
 		return contato;
 	}

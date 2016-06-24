@@ -1,5 +1,6 @@
 package br.com.system.gestaoConstrucaoCivil.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -12,9 +13,10 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class Servico extends AbstractPersistable<Long>{
 
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
 	@JoinColumn(name="id_prestadora_servico",nullable = false)
 	private PrestadoraServico prestadoraServico;
+	
 	@ManyToOne
 	@JoinColumn(name="id_imovel",nullable = false)
 	private Imovel imovel;

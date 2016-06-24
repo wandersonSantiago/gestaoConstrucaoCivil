@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.entity;
 
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +16,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
 @Table(name = "funcionario")
-public class Funcionario  extends AbstractPersistable<Long>{
+public class Funcionario  extends Pessoa implements Serializable{
 
 	
 	@Column(nullable = false)
