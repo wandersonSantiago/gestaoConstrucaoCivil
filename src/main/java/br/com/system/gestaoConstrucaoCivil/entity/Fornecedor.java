@@ -1,6 +1,8 @@
 package br.com.system.gestaoConstrucaoCivil.entity;
 
-import javax.persistence.CascadeType;
+
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -13,8 +15,9 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
 @Table(name = "fornecedor")
-public class Fornecedor extends AbstractPersistable<Long> {
+public class Fornecedor extends AbstractPersistable<Long>{
 
+	
 	
 	@Column(nullable = false,length = 50)
 	private String contato;
@@ -25,24 +28,13 @@ public class Fornecedor extends AbstractPersistable<Long> {
 	private DadoEmpresa dadosEmpresa;
 	@Column(nullable = false)
 	private boolean ativo;
-
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
+	private List<Produto> produtos;
 	@JoinTable(
-		     name = "produto_fornecedor",
-		     joinColumns = @JoinColumn(name = "id"),
-		     inverseJoinColumns = @JoinColumn(name = "id")
+			 name = "produto_fornecedor",
+		     joinColumns = @JoinColumn(name = "id_fornecedor"),
+		     inverseJoinColumns = @JoinColumn(name = "id_produto")
 		)
-    private Produto produto;
-	
-	
-	
-	
-	public Produto getProduto() {
-		return produto;
-	}
-	public void setProduto(Produto produto) {
-		this.produto = produto;
-	}
 	public String getContato() {
 		return contato;
 	}

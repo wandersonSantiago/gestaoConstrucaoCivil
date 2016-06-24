@@ -1,8 +1,8 @@
 package br.com.system.gestaoConstrucaoCivil.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -18,16 +18,13 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Table(name = "produto")
 public class Produto extends AbstractPersistable<Long>{
 
+	
+
+	
 	@Column(nullable = false,length = 50)
 	private String codigoBarra;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	private List<Fornecedor> fornecedores;
-	@JoinTable(
-		     name = "produto_fornecedor",
-		     joinColumns = @JoinColumn(name = "id"),
-		     inverseJoinColumns = @JoinColumn(name = "id")
-		)
+
 	@Column(nullable = false,length = 50)
 	private String descricao;
 	@Column(nullable = false)
@@ -40,21 +37,20 @@ public class Produto extends AbstractPersistable<Long>{
     @ManyToOne
     @JoinColumn(name="id_categoria",nullable = false)
 	private Categoria categoria;
-	
-	
-	public String getCodigoBarra() {
+	@ManyToMany
+	private List<Fornecedor> fornecedores;
+	@JoinTable(
+			 name = "fornecedor_produtos",
+		     joinColumns = @JoinColumn(name = "id_produto"),
+		     inverseJoinColumns = @JoinColumn(name = "id_fornecedor")
+		)
+    public String getCodigoBarra() {
 		return codigoBarra;
 	}
 	public void setCodigoBarra(String codigoBarra) {
 		this.codigoBarra = codigoBarra;
 	}
 	
-	public List<Fornecedor> getFornecedores() {
-		return fornecedores;
-	}
-	public void setFornecedores(List<Fornecedor> fornecedores) {
-		this.fornecedores = fornecedores;
-	}
 	public String getDescricao() {
 		return descricao;
 	}
@@ -86,4 +82,4 @@ public class Produto extends AbstractPersistable<Long>{
 		this.categoria = categoria;
 	}
 
-}
+	}
