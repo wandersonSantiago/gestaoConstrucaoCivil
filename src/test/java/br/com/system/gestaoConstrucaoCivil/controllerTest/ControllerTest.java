@@ -169,11 +169,11 @@ public class ControllerTest {
 	@Test
 	public void testeBuscarProduto() throws JsonProcessingException {
 		
-		Produto produto = protudoRepository.findOne(132L);
+		Produto produto = protudoRepository.findOne(134L);
 		for(Fornecedor fornecedor: produto.getFornecedores())
 	       {
-	           System.out.println("1 - " + fornecedor.getContato());
-	           System.out.println("Teste:" + fornecedor.getDadosEmpresa().getRazaoSocial());
+	           System.out.println("1 - " + produto.getDescricao());
+	           System.out.println("Teste " + fornecedor.getContato());
 	       }
 	}
 	/*@Test
