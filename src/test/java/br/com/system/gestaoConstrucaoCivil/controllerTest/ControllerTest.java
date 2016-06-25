@@ -15,6 +15,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import br.com.system.gestaoConstrucaoCivil.GestaoConstrucaoCivilApplication;
 import br.com.system.gestaoConstrucaoCivil.entity.Categoria;
+import br.com.system.gestaoConstrucaoCivil.entity.DadoEmpresa;
 import br.com.system.gestaoConstrucaoCivil.entity.Fornecedor;
 import br.com.system.gestaoConstrucaoCivil.entity.Produto;
 import br.com.system.gestaoConstrucaoCivil.entity.UnidadeMedida;
@@ -130,40 +131,22 @@ public class ControllerTest {
 	 * 
 	 * tipoEmpreendimentoRepository.save(tipoEmpreendimentoCasa); }
 	 */
-    /*
-	@Test
+    
+	
 	public void testeCriarFornecedor() throws JsonProcessingException {
 		
 		
 		Fornecedor fornecedor = new Fornecedor();
 		fornecedor.setAtivo(true);
-		fornecedor.setContato("Lula da Silva");
+		fornecedor.setContato("Jose Silva");
 		
-		DadoEmpresa dadosEmpresa = new DadoEmpresa();
-		dadosEmpresa.setNomeFantasia("Loja de Materiais");
-		dadosEmpresa.setCnpj("87.712.933/8569-12");
-		dadosEmpresa.setInscricaoEstadual("1111.111.566.848");
-		dadosEmpresa.setRazaoSocial("Loja de Materiais LTDA");
-		dadosEmpresa.setEmail("lula@terra.com");
-		dadosEmpresa.setTelefone("89332320006");
-		Endereco endereco = new Endereco(); 
-		endereco.setRua("Rua Av do Sol"); 
-		endereco.setBairro("Bairro Pele");
-		endereco.setCidade("Valinhos"); 
-		endereco.setCep("132222-111");
-		endereco.setNumero(11); 
-		endereco.setEstado("SP");
-		
-		enderecoRepository.save(endereco); 
-        dadosEmpresa.setEndereco(endereco);
-        dadosEmpresaRepository.save(dadosEmpresa);
-		
-        fornecedor.setDadosEmpresa(dadosEmpresa);
-		fornecedor.setObservacao("Corinthians > Santos");
+		DadoEmpresa dadosEmpresa = dadosEmpresaRepository.findOne(61L);
+	    fornecedor.setDadosEmpresa(dadosEmpresa);
+		fornecedor.setObservacao("NAO SEI");
 		fornecedorRepository.save(fornecedor);
-	}*/
+	}
 	
-    /*@Test
+	
 	public void testeCriarProduto() throws JsonProcessingException {
 		
 		Produto produto = new Produto();
@@ -171,19 +154,28 @@ public class ControllerTest {
 		Categoria categoria = categoriaRepository.findOne(4L);
 		
 		produto.setCategoria(categoria);
-		produto.setCodigoBarra("1231231231321");
-		produto.setDescricao("Tinta");
+		produto.setCodigoBarra("99999991");
+		produto.setDescricao("cimento votoran");
 		
 		UnidadeMedida unidadeMedida =  unidadeRepository.findOne(109L);
-		unidadeMedida.setDescricaoCategoria("KM");
 		produto.setUnidadeMedida(unidadeMedida);
-		produto.setUnidadeMedida(unidadeMedida);
-		produto.setValorCompra(10000.0);
+	    produto.setValorCompra(30000.0);
 		List <Fornecedor> fornecedores = fornecedorRepository.findAll();
 		produto.setFornecedores(fornecedores);
-		protudoRepository.save(produto);
 		
-	}*/
+		protudoRepository.save(produto);
+    	
+	}
+	@Test
+	public void testeBuscarProduto() throws JsonProcessingException {
+		
+		Produto produto = protudoRepository.findOne(132L);
+		for(Fornecedor fornecedor: produto.getFornecedores())
+	       {
+	           System.out.println("1 - " + fornecedor.getContato());
+	           System.out.println("Teste:" + fornecedor.getDadosEmpresa().getRazaoSocial());
+	       }
+	}
 	/*@Test
 	public void testeCriarFornecedor() throws JsonProcessingException {
 		

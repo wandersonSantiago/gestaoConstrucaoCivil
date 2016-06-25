@@ -12,8 +12,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 @Entity
 @Table(name = "funcionario")
 public class Funcionario  extends Pessoa implements Serializable{
