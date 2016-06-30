@@ -1,36 +1,60 @@
 
-<meta charset="UTF-8">
-<div class="generic-container">
+<aside class="main-sidebar">
 
-	<div id="sidebar-wrapper">
-		<ul class="sidebar-nav">
-			<div class="panel panel-default"></div>
-			<input type="text" class="form-control" placeholder="Search">
+	<section class="sidebar">
+
+<!-- dados do usuario logado -->
+		<div class="user-panel">
+			<div class="pull-left image">
+				<img src="public/img/avatar_2x.png" class="img-circle"
+					alt="User Image">
+			</div>
+			<div class="pull-left info">
+				<p>Administrador</p>
+				<a href="#"><i class="glyphicon glyphicon-star-empty"></i> Online</a>
+			</div>
+		</div>
 
 
-			<li class="sidebar-brand"><a href="#"> Módulo Admin Sistema</a></li>
-			<li><a href="#/cadastrarEmpresa">cadastrar Empresa</a></li>
-			<li><a href="#/cadastrarAdminEmpresa">Cadastrar Admin Empresa</a></li>
-			<li><a href="">Visualizar Empresas</a></li>
-			<li><a href="">Relátorios</a></li>
+		<div></div>
 
 
-			<li class="sidebar-brand"><a href="#"> Módulo Admin Empresa</a></li>
-			<li><a href="#/cadastrarEmpreendimento">cadastrar
-					Empreendimento</a></li>
-			<li><a href="">Atribuir Engenheiro</a></li>
-			<li><a href="">Visualizar Obras</a></li>
-			<li><a href="">Relátorios</a></li>
+<!-- menu admin Sistema -->
+		<ul class="sidebar-menu">
 
+			<li class="header"><h4 >Administrador Sistema</h4></li>
+			
+			<li class="treeview"><a href=""><i class="glyphicon glyphicon-hand-right"></i> <span>Cadastrar</span>
+					<i class="fa fa-angle-left pull-right"></i></a>
+				<ul class="treeview-menu">
+					<li><a href="#/cadastrarEmpresa">Cadastrar Empresa</a></li>
+					<li><a href="#/cadastrarAdminEmpresa">Cadastrar Admin Empresa</a></li>
+				</ul></li>
+				<li class="treeview"><a href=""><i class="glyphicon glyphicon-hand-right"></i> <span>Consultar</span>
+					<i class="fa fa-angle-left pull-right"></i></a>
+				<ul class="treeview-menu">
+					<li><a href="#/cadastrarEmpresa">Consultar Empresa</a></li>
+				
+				</ul></li>
 		</ul>
-	</div>
-</div>
+		
+		
+<!-- menu admin Empresa -->		
+		<ul class="sidebar-menu">
+
+			<li class="header"><h4>Administrador Empresa</h4></li>
+
+			<li class="active"><a href="#"><i class="glyphicon glyphicon-hand-right"></i> <span>Link</span></a></li>
+			<li><a href="#"><i class="glyphicon glyphicon-hand-right"></i> <span>Another
+						Link</span></a></li>
+			<li class="treeview"><a href=""><i class="glyphicon glyphicon-hand-right"></i> <span>Multilevel</span>
+					<i class="fa fa-angle-left pull-right"></i></a>
+				<ul class="treeview-menu">
+					<li><a href="#/cadastrarEmpresa">Cadastrar Empresa</a></li>
+					<li><a href="#">Link in level 2</a></li>
+				</ul></li>
+		</ul>
+	</section>
 
 
-<!-- Menu Toggle Script -->
-<script>
-	$("#menu-toggle").click(function(e) {
-		e.preventDefault();
-		$("#wrapper").toggleClass("toggled");
-	});
-</script>
+</aside>

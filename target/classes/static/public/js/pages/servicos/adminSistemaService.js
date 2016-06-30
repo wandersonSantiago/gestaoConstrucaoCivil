@@ -1,4 +1,4 @@
-app.factory('adminSistemaService', function($http, dados){
+app.factory('adminSistemaService', function($http){
 	
 	return{
 		
@@ -12,7 +12,10 @@ app.factory('adminSistemaService', function($http, dados){
 			});
 		},
 		empresaCreate: function(empresa){
+			console.log(empresa.razaoSocial);
+			console.log(empresa);
 			return $http.post('rest/adminSistema/cadastrarEmpresa', empresa)
+			
 			.then(function(response){
 				return response.data;
 			},function(errResponse){

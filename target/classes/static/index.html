@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 
-<html  id="ng-app" ng-app="gcc">
+<html id="ng-app" ng-app="gcc">
 <head>
-
-
 
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,74 +23,66 @@
 	rel="stylesheet" />
 <link href="public/css/app.css" rel="stylesheet" />
 <link href="public/css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="public/components/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="publiC/dist/css/AdminLTE.min.css">
+<link rel="stylesheet" href="public/dist/css/skins/skin-blue.min.css">
 
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <script
 	src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-	<link href="/public/css/login.css" rel="stylesheet" />
+<link href="/public/css/login.css" rel="stylesheet" />
 
 
 
 </head>
-<body>
-	<div id="wrapper">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-12" >
-				<div class="row">
-					<div class="col-md-12">
-					<div ng-model="logado = true"></div>
-						<div ng-if="logado" ng-include="'views/templates/header.html'"></div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2">
-						<div ng-if="logado" ng-include="'views/templates/menu.html'"></div>
-					</div>
-					
-					<div class="row">
-						<div class="col-md-12">
-						
-							<div ng-view></div>
-						</div>
-					</div>
-				</div>
-				<div id="page-content-wrapper">
-					<div class="container-fluid">
-						<div class="row">
 
-							<div class="col-md-12">
-								<div ng-if="logado" ng-include="'views/templates/footer.html'"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+
+
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
+
+		<div ng-include="'views/templates/header.html'"></div>
+
+		<div ng-include="'views/templates/menu.html'"></div>
+
+		<div class="content-wrapper">
+
+
+			<section class="content">
+
+				<div ng-view></div>
+
+			</section>
 		</div>
-	
-
-</div>
 
 
+		<div ng-include="'views/templates/footer.html'"></div>
 
-	<script src="public/components/jquery/dist/jquery.min.js"></script>
+
+	</div>
+
+	<script src="public/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+	<script src="public/dist/js/appTeste.js"></script>
 	<script src="public/components/angular/angular.js"></script>
-	<script
-		src="public/components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+	<script	src="public/components/angular-toastr/dist/angular-toastr.tpls.js"></script>
 	<script src="public/components/angular-animate/angular-animate.js"></script>
 	<script src="public/components/angular-touch/angular-touch.js"></script>
-	<script
-		src="public/components/angular-locale-pt-br/angular-locale_pt-br.js"></script>
+	<script	src="public/components/angular-locale-pt-br/angular-locale_pt-br.js"></script>
 	<script src="public/components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 	<script src="public/components/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script
-		src="public/components/angular-block-ui/dist/angular-block-ui.min.js"></script>
+	<script	src="public/components/angular-block-ui/dist/angular-block-ui.min.js"></script>
 	<script src="public/components/angular-route/angular-route.min.js"></script>
 	<script src="public/components/Chart.js/Chart.js"></script>
 	<script src="public/components/angular-chart.js/dist/angular-chart.js"></script>
 	<script src="public/components/ngstorage/ngStorage.min.js"></script>
-
 	<script src="public/js/pages/app.js"></script>
 	<script src="public/js/pages/route/rotas.js"></script>
+	<script src="public/js/pages/controller/adminSistemaController.js"></script>
+	<script src="public/js/pages/servicos/adminSistemaService.js"></script>
 </body>
 </html>

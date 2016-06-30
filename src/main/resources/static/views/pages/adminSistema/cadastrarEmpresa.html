@@ -1,5 +1,5 @@
 <meta charset="UTF-8">
-<div class="generic-container">
+<div class="generic-container" ng-controller="adminSistemaController as adminCtrl" >
 
 	<div class="panel panel-primary">
 		<!-- Default panel contents -->
@@ -10,12 +10,12 @@
 
 			<br>
 			<div class="container col-sm-12 ">
-				<form role="form-vertical">
+				<form role="form-vertical" ng-submit="adminCtrl.createEmpresa()" >
 					<div class="row">
 						<label class="col-sm-1 control-label" for="razaoSocial">Razão
 							Social</label>
 						<div class="col-sm-11">
-							<input class="form-control" id="razaoSocial" type="text">
+							<input class="form-control" ng-model="adminCtrl.empresa.razaoSocial" id="razaoSocial" type="text">
 						</div>
 					</div>
 					<br>
@@ -23,7 +23,16 @@
 						<label class="col-sm-1 control-label" for="nomeFantasia">Nome
 							Fantasia</label>
 						<div class="col-sm-11">
-							<input class="form-control" id="nomeFantasia" type="text"
+							<input class="form-control" ng-model="adminCtrl.empresa.nomeFantasia" id="nomeFantasia" type="text"
+								aria-describedby="basic-addon1">
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<label class="col-sm-1 control-label" for="nomeFantasia">Email
+							</label>
+						<div class="col-sm-11">
+							<input class="form-control" ng-model="adminCtrl.empresa.email" id="email" type="text"
 								aria-describedby="basic-addon1">
 						</div>
 					</div>
@@ -31,15 +40,15 @@
 					<div class="row">
 						<label class="col-sm-1 control-label" for="cnpj">CNPJ</label>
 						<div class="col-sm-5">
-							<input class="form-control" id="cnpj" type="text">
+							<input class="form-control" ng-model="adminCtrl.empresa.cnpj" id="cnpj" type="text">
 						</div>
 						<label class="col-sm-1 control-label" for="fone">Telefone</label>
 						<div class="col-sm-5">
-							<input class="form-control" id="fone" type="text">
+							<input class="form-control" ng-model="adminCtrl.empresa.telefone" id="fone" type="text">
 						</div>
 					</div>
 					<br>
-
+									
 					<h4>Endereço</h4>
 
 					<br>
@@ -99,12 +108,12 @@
 					<div class="row ">
 						<div class="col-sm-3"></div>
 						<div class="col-sm-3">
-							<button type="submit" name="submit"
-								class="btn btn-lg btn-primary btn-block btn-signin">Cadastrar</button>
+							<input type="submit" id="submit" 
+								class="btn btn-lg btn-primary btn-block btn-signin">
 						</div>
 						<div class="col-sm-3">
 
-							<button type="submit" name="submit"
+							<button type="submit" name="submit" 
 								class="btn btn-lg btn-danger btn-block btn-signin">Cancelar</button>
 						</div>
 					</div>

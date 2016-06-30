@@ -29,7 +29,7 @@ app.config(['$routeProvider','$httpProvider', function($routeProvider, $httpProv
 	
 	//Rota de erro
 	.otherwise({
-		redirectTo : "/404"
+		redirectTo : "/"
 	})
 }]);
 
