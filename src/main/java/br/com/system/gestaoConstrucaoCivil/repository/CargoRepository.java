@@ -6,5 +6,6 @@ import br.com.system.gestaoConstrucaoCivil.entity.Cargo;
 
 public interface CargoRepository extends JpaRepository<Cargo,Long>{
 
+
 	
 }
