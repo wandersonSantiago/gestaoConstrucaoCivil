@@ -15,9 +15,6 @@ public class EmpresaContratante extends AbstractPersistable<Long> {
 	@ManyToOne
 	@JoinColumn(name = "id_dado_empresa", nullable = false)
 	private DadoEmpresa dadoEmpresa;
-	@Column(nullable =false)
-	private Double valor;
-	
 	
 	public DadoEmpresa getDadoEmpresa() {
 		return dadoEmpresa;
@@ -25,15 +22,5 @@ public class EmpresaContratante extends AbstractPersistable<Long> {
 	public void setDadoEmpresa(DadoEmpresa dadoEmpresa) {
 		this.dadoEmpresa = dadoEmpresa;
 	}
-	public Double getValor() {
-		return valor;
-	}
-	public void setValor(Double valor) {
-		this.valor = valor;
-	}
-	
-	
-	
-	
 	
 }

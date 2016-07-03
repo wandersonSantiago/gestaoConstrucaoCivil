@@ -12,8 +12,6 @@ app.factory('adminSistemaService', function($http){
 			});
 		},
 		empresaCreate: function(empresa){
-			console.log(empresa.razaoSocial);
-			console.log(empresa);
 			return $http.post('rest/adminSistema/cadastrarEmpresa', empresa)
 			
 			.then(function(response){

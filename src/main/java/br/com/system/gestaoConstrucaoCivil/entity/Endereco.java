@@ -22,7 +22,8 @@ public class Endereco extends AbstractPersistable<Long>  {
 	private String estado;
 	@Column(nullable = false)
 	private String cep;
-	
+	@Column(nullable = false)
+	private String complemento;
 	
 	
 	public String getRua() {
@@ -61,5 +62,11 @@ public class Endereco extends AbstractPersistable<Long>  {
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-
+	public String getComplemento() {
+		return complemento;
+	}
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+    
 }
