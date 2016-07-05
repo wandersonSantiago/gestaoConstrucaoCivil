@@ -24,7 +24,7 @@ public class CargoRestController {
 	 @RequestMapping(method = RequestMethod.GET)
 	 public ResponseEntity<Iterable<Cargo>> buscarCargos() {
 	  
-	  System.out.println("CHAMOU LISTA");
+	  System.out.println("lista ok");
 	  Iterable<Cargo> cargo = cargoService.buscarTodos();
 	  return new ResponseEntity<Iterable<Cargo>>(cargo, HttpStatus.OK);
 	 }
@@ -33,7 +33,7 @@ public class CargoRestController {
 	 {
 		 cargoService.salvarOuEditar(cargo);
 		 HttpHeaders headers =new HttpHeaders();
-		 headers.setLocation(ucBuilder.path("/rest/cargo/cadastrarCargo").buildAndExpand(cargo.getId()).toUri());
+		 headers.setLocation(ucBuilder.path("/rest/cargo/cadastrarCargo/{id}").buildAndExpand(cargo.getId()).toUri());
 		 return new ResponseEntity(headers, HttpStatus.CREATED);
 	 }
 	

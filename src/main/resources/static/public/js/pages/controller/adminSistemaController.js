@@ -2,7 +2,7 @@ app.controller('adminSistemaController', function($scope, adminSistemaService, $
 	
 	var self = this;
 	
-	self.dadoEmpresa = {razaoSocial: "", nomeFantasia: "", cnpj: "", inscricaoEstadual:"", endereco:"", telefone:"", email:"",complemento:"" }
+	//self.dadoEmpresa = {razaoSocial: "", nomeFantasia: "", cnpj: "", inscricaoEstadual:"", endereco:"", telefone:"", email:"",complemento:"" }
     
 	
 	self.createEmpresa = function(empresa){
