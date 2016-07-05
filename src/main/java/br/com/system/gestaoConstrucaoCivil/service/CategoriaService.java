@@ -22,4 +22,9 @@ public class CategoriaService {
 		
 		return categoriaRepository.findAll();
 	}
+	@Transactional(readOnly = false)
+	public void salvarOuEditar(Categoria categoria)
+	{
+		categoriaRepository.save(categoria);
+	}
 }

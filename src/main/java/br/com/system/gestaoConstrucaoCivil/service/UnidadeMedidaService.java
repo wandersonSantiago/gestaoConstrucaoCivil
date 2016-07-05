@@ -22,4 +22,9 @@ public class UnidadeMedidaService {
 	 		 	
 	 		return unidadeMedidaRepository.findAll(); 
 	 }
+	 @Transactional(readOnly = false)
+	 public void salvarOuEditar(UnidadeMedida unidadeMedida)
+	 {
+		 unidadeMedidaRepository.save(unidadeMedida);
+	 }
 }

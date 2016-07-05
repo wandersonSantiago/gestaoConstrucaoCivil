@@ -11,7 +11,6 @@ import br.com.system.gestaoConstrucaoCivil.service.DadoEmpresaService;
 public class DadoEmpresaRestController {
 
 	
-	 
 	 @Autowired
 	 private DadoEmpresaService dadoEmpresaService;
 	 

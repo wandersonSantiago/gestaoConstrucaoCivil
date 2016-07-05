@@ -23,7 +23,11 @@ app.config(['$routeProvider','$httpProvider', function($routeProvider, $httpProv
 	.when('/cadastrarEmpreendimento', {
 		templateUrl : "views/pages/adminEmpresa/cadastrarEmpreendimento.html",
 	})
-
+    
+	//Rotas Cadastrar Cargo
+	.when('/cadastrarCargo', {
+		templateUrl : "views/pages/cargo/cadastrarCargo.html",
+	})
 	
 		
 	

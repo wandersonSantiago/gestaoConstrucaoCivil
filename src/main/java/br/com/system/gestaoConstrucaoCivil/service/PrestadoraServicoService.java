@@ -21,4 +21,9 @@ public class PrestadoraServicoService {
 	 		
 	 		return prestadoraServicoRepository.findAll();
 	 	}
+	 @Transactional(readOnly = false)
+	 public void salvarOuEditar(PrestadoraServico prestadoraServico)
+	 {
+		 prestadoraServicoRepository.save(prestadoraServico);
+	 }
 }

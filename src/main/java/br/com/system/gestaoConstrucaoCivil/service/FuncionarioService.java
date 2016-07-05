@@ -22,4 +22,9 @@ public class FuncionarioService {
 	 		
 	 		return funcionarioRepository.findAll();
 	 }
+	@Transactional(readOnly = false)
+	public void salvarOuEditar(Funcionario funcionario)
+	{
+		funcionarioRepository.save(funcionario);
+	}
 }

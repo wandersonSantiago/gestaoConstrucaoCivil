@@ -21,5 +21,12 @@ public class ProdutoService {
 	public List<Produto> buscarTodos() {
 	 		
 	 		return produtoRepository.findAll();
-	 	}
+	 }
+	
+	@Transactional(readOnly = false)
+	public void salvarOuEditar(Produto produto)
+	{
+		produtoRepository.save(produto);
+	}
+	
 }

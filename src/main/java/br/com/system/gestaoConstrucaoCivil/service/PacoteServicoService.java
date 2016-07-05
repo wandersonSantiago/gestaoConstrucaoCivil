@@ -21,5 +21,9 @@ public class PacoteServicoService {
 			
 			return pacoteServicoRepository.findAll();
 		}
-	 
+	 @Transactional(readOnly = false)
+	 public void salvarOuEditar(PacoteServico pacoteServico)
+	 {
+		 pacoteServicoRepository.save(pacoteServico);
+	 }
 }

@@ -22,5 +22,10 @@ public class TipoEmpreendimentoService {
 		
 		return tipoEmpreendimentoRepository.findAll();
 	}
+     @Transactional(readOnly = false)
+     public void salvarOuEditar(TipoEmpreendimento tipoEmpreendimento)
+     {
+    	 tipoEmpreendimentoRepository.save(tipoEmpreendimento);
+     }
     
 }

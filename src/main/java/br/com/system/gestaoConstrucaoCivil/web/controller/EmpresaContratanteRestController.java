@@ -29,18 +29,19 @@ public class EmpresaContratanteRestController {
     
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<EmpresaContratante> buscarCargo(@PathVariable Long id) {
+		System.out.println("Chamadou o lista");
 		return new ResponseEntity<EmpresaContratante>(empresaContratanteService.buscarPorId(id), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity salvarEmpresaContratante(@RequestBody EmpresaContratante empresaContratante, UriComponentsBuilder ucBuilder) {
-		
+		System.out.println("Chamadou o salvar");
 		enderecoService.salvarOuEditar(empresaContratante.getDadoEmpresa().getEndereco());
 	    dadoEmpresaService.salvarOuEditar(empresaContratante.getDadoEmpresa());
 		empresaContratanteService.salvarOuEditar(empresaContratante);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("rest/adminSistema/cadastrarEmpresa/{empresa}").buildAndExpand(empresaContratante.getId()).toUri());
-		
+										
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 
