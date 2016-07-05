@@ -15,6 +15,7 @@ app.factory('adminSistemaService', function($http){
 			return $http.post('rest/adminSistema/cadastrarEmpresa', empresa)
 			
 			.then(function(response){
+				console.log("teste");
 				return response.data;
 			},function(errResponse){
 				console.error('Erro ao tentar gravar empresa');
