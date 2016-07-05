@@ -15,7 +15,7 @@ import br.com.system.gestaoConstrucaoCivil.entity.Cargo;
 import br.com.system.gestaoConstrucaoCivil.service.CargoService;
 
 @RestController
-@RequestMapping("/rest/cargo") 
+@RequestMapping("/rest/cargo/cadastrarCargo") 
 public class CargoRestController {
 
 	 @Autowired
@@ -23,15 +23,17 @@ public class CargoRestController {
 	 
 	 @RequestMapping(method = RequestMethod.GET)
 	 public ResponseEntity<Iterable<Cargo>> buscarCargos() {
+	  
+	  System.out.println("CHAMOU LISTA");
 	  Iterable<Cargo> cargo = cargoService.buscarTodos();
 	  return new ResponseEntity<Iterable<Cargo>>(cargo, HttpStatus.OK);
 	 }
 	 @RequestMapping(method = RequestMethod.POST)
-	 public ResponseEntity salvarCargo(@RequestBody Cargo cargo,UriComponentsBuilder ucBuilder)
+	 public ResponseEntity salva(@RequestBody Cargo cargo,UriComponentsBuilder ucBuilder)
 	 {
 		 cargoService.salvarOuEditar(cargo);
 		 HttpHeaders headers =new HttpHeaders();
-		 headers.setLocation(ucBuilder.path("rest/cargo/{cargo}").buildAndExpand(cargo.getId()).toUri());
+		 headers.setLocation(ucBuilder.path("/rest/cargo/cadastrarCargo").buildAndExpand(cargo.getId()).toUri());
 		 return new ResponseEntity(headers, HttpStatus.CREATED);
 	 }
 	

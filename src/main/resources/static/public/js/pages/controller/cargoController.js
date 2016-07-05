@@ -2,11 +2,11 @@ app.controller('cargoController', function($scope, cargoService, $routeParams){
 	
 	var self = this;
 	
-	
-	
-	self.createEmpresa = function(cargo){
-		console.log("Teste");
-		console.log(self.cargo);
+	self.cargo = {descricao:""}
+	   
+	 self.createCargo = function(cargo){
+		
+		
 		cargoService.cargoCreate(self.cargo);
 	}
 	
