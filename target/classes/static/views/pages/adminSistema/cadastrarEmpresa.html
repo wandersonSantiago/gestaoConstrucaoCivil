@@ -40,18 +40,18 @@
 					<div class="row">
 						<label class="col-sm-1 control-label" for="cnpj">CNPJ</label>
 						<div class="col-sm-5">
-							<input class="form-control" ng-model="adminCtrl.empresa.dadoEmpresa.cnpj" id="cnpj" type="text">
+							<input class="form-control" ng-model="adminCtrl.empresa.dadoEmpresa.cnpj" id="cnpj" type="text" ui-mask="{{maskCnpj}}" />
 						</div>
 						<label class="col-sm-1 control-label" for="telefone">Telefone</label>
 						<div class="col-sm-5">
-							<input class="form-control" ng-model="adminCtrl.empresa.dadoEmpresa.telefone" id="telefone" type="text">
+							<input class="form-control" ng-model="adminCtrl.empresa.dadoEmpresa.telefone" id="telefone" type="text" ui-mask="{{maskFone}}">
 						</div>
 					</div>
 					<br>
 					<div class="row">
 					  <label class="col-sm-1 control-label" for="inscricaoEstadual">Inscricao Estadual</label>
 						<div class="col-sm-5">
-							<input class="form-control" ng-model="adminCtrl.empresa.dadoEmpresa.inscricaoEstadual" id="inscricaoEstadual" type="text">
+							<input class="form-control" ng-model="adminCtrl.empresa.dadoEmpresa.inscricaoEstadual" id="inscricaoEstadual" type="text" ui-mask="{{maskIscEstadual}}">
 						</div>
 					</div>
 					<br>

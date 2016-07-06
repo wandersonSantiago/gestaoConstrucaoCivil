@@ -2,7 +2,7 @@ app.controller('adminSistemaController', function($scope, adminSistemaService, $
 	
 	var self = this;
   
-	
+		
 	self.createEmpresa = function(empresa){
 		console.log("funfou o controle");
 		console.log(self.empresa);
@@ -10,5 +10,9 @@ app.controller('adminSistemaController', function($scope, adminSistemaService, $
 		
 		self.empresa = empresa;
 	}
+	$scope.maskFone= '(99) 9999 - 999?9';
+	$scope.maskCnpj= '99.999.999/9999-99';
+	$scope.maskIscEstadual= '999.999.999.999';
+	
 	
 });
