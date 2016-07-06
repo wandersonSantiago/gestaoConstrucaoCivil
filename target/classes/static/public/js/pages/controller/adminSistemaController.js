@@ -8,11 +8,13 @@ app.controller('adminSistemaController', function($scope, adminSistemaService, $
 		console.log("funfou o controle");
 		console.log(self.empresa);
 		adminSistemaService.empresaCreate(self.empresa);
-		self.empresa = empresa;
+	
+			self.empresa = empresa;
+		
 	}
 	
 	
-	self.sucesso;
+	
 	
 	
 	$scope.maskFone= '(99) 9999 - 999?9';

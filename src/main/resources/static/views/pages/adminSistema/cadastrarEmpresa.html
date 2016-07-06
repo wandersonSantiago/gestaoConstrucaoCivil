@@ -11,26 +11,35 @@
 
 			<br>
 			<div class="container col-sm-12 ">
-				<form role="form-vertical" ng-submit="adminCtrl.createEmpresa()">
+				<form role="form-vertical" name="formAdminSistema"
+					ng-submit="adminCtrl.createEmpresa()">
 					<div class="row">
 						<label class="col-sm-1 control-label" for="razaoSocial">Razão
 							Social</label>
-						<div class="col-sm-11">
-							<input class="form-control"
+						<div class="col-sm-11" ng-class="{ 'has-error' : formAdminSistema.razaoSocial.$invalid && !fromAdminSistema.razaoSocial.$pristine }">
+							<input class="form-control" ng-minlength="5" ng-maxlength="50" 
 								ng-model="adminCtrl.empresa.dadoEmpresa.razaoSocial"
-								id="razaoSocial" type="text" required>
+								id="razaoSocial" name="razaoSocial" type="text" required>
 						</div>
 					</div>
+					<p ng-show="formAdminSistema.razaoSocial.$error.minlength"
+						class="alert alert-warning ">campo Razão Social no minimo 5 caracter</p>
+					<p ng-show="formAdminSistema.razaoSocial.$error.maxlength"
+						class="alert alert-warning ">campo Razão Social no maximo 50 caracter</p>
 					<br>
 					<div class="row">
 						<label class="col-sm-1 control-label" for="nomeFantasia">Nome
 							Fantasia</label>
-						<div class="col-sm-11">
-							<input class="form-control"
+						<div class="col-sm-11" ng-class="{ 'has-error' : formAdminSistema.nomeFantasia.$invalid && !fromAdminSistema.razaoSocial.$pristine }">
+							<input class="form-control" ng-minlength="5" ng-maxlength="50"
 								ng-model="adminCtrl.empresa.dadoEmpresa.nomeFantasia"
-								id="nomeFantasia" type="text" required>
+								id="nomeFantasia" name="nomeFantasia" type="text" required>
 						</div>
 					</div>
+					<p ng-show="formAdminSistema.nomeFantasia.$error.minlength"
+						class="alert alert-warning ">campo nome Fantasia no minimo 5 caracter</p>
+					<p ng-show="formAdminSistema.nomeFantasia.$error.maxlength"
+						class="alert alert-warning ">campo nome Fantasia no maximo 50 caracter</p>
 					<br>
 					<div class="row">
 						<label class="col-sm-1 control-label" for="nomeFantasia">Email
@@ -83,12 +92,19 @@
 
 						</div>
 						<label class="col-sm-1 control-label" for="numero">Numero</label>
-						<div class="col-sm-5">
-							<input class="form-control"
+						<div class="col-sm-5"
+							ng-class="{ 'has-error' : formAdminSistema.numeroEmpresa.$invalid && !fromAdminSistema.numeroEmpresa.$pristine }">
+							<input class="form-control" name="numeroEmpresa"
 								ng-model="adminCtrl.empresa.dadoEmpresa.endereco.numero"
-								id="numero" type="text" required>
+								id="numero" type="text" ng-minlength="1" ng-maxlength="7"
+								required>
 						</div>
 					</div>
+					<p ng-show="formAdminSistema.numeroEmpresa.$error.minlength"
+						class="alert alert-warning ">campo numero no minimo 1 caracter</p>
+					<p ng-show="formAdminSistema.numeroEmpresa.$error.maxlength"
+						class="alert alert-warning ">campo numero no maximo 7 caracter</p>
+
 					<br>
 
 					<div class="row">
@@ -142,14 +158,32 @@
 						</div>
 					</div>
 					<br>
-					<div ng-if="sucesso" class="alert alert-success">
+
+
+					<div ng-if="gravado" class="alert alert-info alert-dismissible"
+						role="alert">
+						<button type="button" class="close" data-dismiss="alert"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
 						<strong>Sucesso</strong> cadastro realizado
 					</div>
+
+
+					<div ng-if="naoGravado"
+						class="alert alert-danger alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<strong>Error</strong> cadastro não realizado
+					</div>
+
 
 					<div class="row ">
 						<div class="col-sm-3"></div>
 						<div class="col-sm-3">
-							<input type="submit" id="submit" ng-model="sucesso"
+							<input type="submit" id="submit"
 								class="btn btn-lg btn-primary btn-block btn-signin">
 						</div>
 						<div class="col-sm-3">
@@ -158,7 +192,7 @@
 								class="btn btn-lg btn-danger btn-block btn-signin">Cancelar</button>
 						</div>
 					</div>
-					
+
 
 
 				</form>

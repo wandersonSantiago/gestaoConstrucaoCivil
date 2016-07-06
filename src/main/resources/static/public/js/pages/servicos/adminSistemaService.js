@@ -1,4 +1,5 @@
-app.factory('adminSistemaService', function($http){
+app.factory('adminSistemaService', function($rootScope, $http){
+	
 	
 	return{
 		
@@ -16,15 +17,15 @@ app.factory('adminSistemaService', function($http){
 			
 			.then(function(response){
 				console.log("teste");
-				alert('salvo com sucesso');
-				sucesso = true;
-				console.log(sucesso);
+				$rootScope.gravado = true;
+				
 				return response.data;
 			
 			},function(errResponse){
 				console.error('Erro ao tentar gravar empresa');
+				$rootScope.naoGravado = true;
 				return $q.reject(errResponse);
-				alert('não foi salvo');
+				
 			});
 		},
 		
