@@ -16,10 +16,15 @@ app.factory('adminSistemaService', function($http){
 			
 			.then(function(response){
 				console.log("teste");
+				alert('salvo com sucesso');
+				sucesso = true;
+				console.log(sucesso);
 				return response.data;
+			
 			},function(errResponse){
 				console.error('Erro ao tentar gravar empresa');
 				return $q.reject(errResponse);
+				alert('não foi salvo');
 			});
 		},
 		
