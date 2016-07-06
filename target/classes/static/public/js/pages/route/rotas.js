@@ -29,7 +29,11 @@ app.config(['$routeProvider','$httpProvider', function($routeProvider, $httpProv
 		templateUrl : "views/pages/cargo/cadastrarCargo.html",
 	})
 	
+	//Rotas Recursos Humanos
 		
+	.when('/cadastrarFuncionario', {
+		templateUrl:"views/pages/recursosHumanos/cadastrarFuncionario.html",
+	})
 	
 	//Rota de erro
 	.otherwise({
