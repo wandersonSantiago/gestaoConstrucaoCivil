@@ -7,6 +7,7 @@ app.controller('cadastrarFuncionarioController', function($scope, cadastrarFunci
 	self.cadastrarFuncionario = function(funcionario){
 		console.log("funfou o controle");
 		console.log(self.funcionario);
+		console.log("TESTE:" + self.funcionario.nomeCompleto);
 		cadastrarFuncionarioService.funcionarioCreate(self.funcionario);
 	
 			self.funcionario = funcionario;

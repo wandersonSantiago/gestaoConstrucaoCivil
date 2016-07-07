@@ -1,4 +1,4 @@
-app.factory('cargoService', function($http)
+app.factory('cargoService', function($http,$q)
 {
 
 	 return {

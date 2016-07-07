@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 @Table(name = "funcionario")
 public class Funcionario  extends Pessoa implements Serializable{
 
-	
+
 	@Column(nullable = false)
 	private Integer carteiraTrabalho;
 	@Column(nullable = false)
@@ -31,9 +31,9 @@ public class Funcionario  extends Pessoa implements Serializable{
 	@JoinColumn(name="id_cargo")
 	private Cargo cargo;
 	
-	
 	public Integer getCarteiraTrabalho() {
 		return carteiraTrabalho;
+	    
 	}
 	public void setCarteiraTrabalho(Integer carteiraTrabalho) {
 		this.carteiraTrabalho = carteiraTrabalho;

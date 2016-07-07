@@ -3,7 +3,7 @@ app.factory('cadastrarFuncionarioService', function($rootScope, $http){
 	
 	return{
 		funcionarioCreate: function(funcionario){
-			return $http.post('rest/adminSistema/cadastrarEmpresa', funcionario)
+			return $http.post('/rest/recursosHumanos/cadastrarFuncionario', funcionario)
 			
 			.then(function(response){
 				console.log("teste");
