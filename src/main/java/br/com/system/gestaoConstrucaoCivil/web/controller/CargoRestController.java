@@ -21,9 +21,8 @@ public class CargoRestController {
 	 @Autowired
 	 private CargoService cargoService;
 	 
-	 @RequestMapping(method = RequestMethod.GET)
-	 public ResponseEntity<Iterable<Cargo>> buscarCargos() {
-	  
+	 @RequestMapping(method = RequestMethod.GET, value="/cargos")
+	 public ResponseEntity<Iterable<Cargo>> buscarCargos() {	  
 	  System.out.println("lista ok");
 	  Iterable<Cargo> cargo = cargoService.buscarTodos();
 	  return new ResponseEntity<Iterable<Cargo>>(cargo, HttpStatus.OK);

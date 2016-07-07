@@ -5,8 +5,7 @@ app.controller('cargoController', function($scope, cargoService, $routeParams){
 	
 	   
 	 self.createCargo = function(cargo){
-		
-		
+	
 		cargoService.cargoCreate(self.cargo);
 	}
 	
