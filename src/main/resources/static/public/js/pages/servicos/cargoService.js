@@ -12,7 +12,7 @@ app.factory('cargoService', function($http,$q)
 				});
 			},
 			cargoFindAll: function(){
-				return $http.get('rest/cargo/listarCargo')
+				return $http.get('rest/cargo/cadastrarCargo/listarCargo')
 				.then(function(response){
 					return response.data;
 				},function(errResponse){

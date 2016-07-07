@@ -26,52 +26,67 @@
 						class="alert alert-warning ">campo Nome no minimo 5 caracter</p>
 					<p ng-show="formCadastrarFuncionario.nome.$error.maxlength"
 						class="alert alert-warning ">campo Nome no maximo 50 caracter</p>
+						
 					<br>
+					
 					<div class="row">
 						<label class="col-sm-1 control-label" for="rg">RG</label>
 						<div class="col-sm-5">
 
 							<input class="form-control"
-								ng-model="cadFuncCtrl.funcionario.pessoa.rg" id="rg" type="text"
+								ng-model="cadFuncCtrl.funcionario.rg" id="rg" type="text"
 								required>
 						</div>
 						<label class="col-sm-1 control-label" for="cpf">CPF</label>
 						<div class="col-sm-5">
 
 							<input class="form-control"
-								ng-model="cadFuncCtrl.funcionario.pessoa.cpf" id="cpf"
+								ng-model="cadFuncCtrl.funcionario.cpf" id="cpf"
 								type="text" required>
 						</div>
 					</div>
-					<br> <br>
+					<br> 
+					
+					<br>
+					
 					<div class="row">
 						<label class="col-sm-1 control-label" for="telefoneFixo">Telefone
 							Fixo</label>
 						<div class="col-sm-5">
 							<input class="form-control"
-								ng-model="cadFuncCtrl.funcionario.pessoa.telefoneFixo"
+								ng-model="cadFuncCtrl.funcionario.telefoneFixo"
 								id="telefoneFixo" type="tel" ui-mask="{{maskFone}}" required>
 						</div>
 						<label class="col-sm-1 control-label" for="telefoneCelular">Telefone
 							Celular</label>
 						<div class="col-sm-5">
 							<input class="form-control"
-								ng-model="cadFuncCtrl.funcionario.pessoa.telefoneCelular"
+								ng-model="cadFuncCtrl.funcionario.telefoneCelular"
 								id="telefoneCelular" type="tel" ui-mask="{{maskFone}}" required>
 						</div>
 					</div>
+					
 					<br>
+					
 					<div class="row">
 						<label class="col-sm-1 control-label" for="dataNascimento">Data
 							Nasc</label>
 						<div class="col-sm-5">
 							<input class="form-control"
-								ng-model="cadFuncCtrl.funcionario.pessoa.dataNascimento"
-								id="dataNascimento" type="date" required>
+								ng-model="cadFuncCtrl.funcionario.dataNascimento"
+								id="dataNascimento" type="text" required  >
+						</div>
+						<label class="col-sm-1 control-label" for="idade">idade</label>
+						<div class="col-sm-5">
+							<input class="form-control"
+								ng-model="cadFuncCtrl.funcionario.idade"
+								id="idade" type="text" required  >
 						</div>
 					</div>
+					<br>
+						
 					<h4>Dados Funcional</h4>
-
+<br>
 					<div class="row">
 						<label class="col-sm-1 control-label" for="carteiraTrabalho">carteira</label>
 						<div class="col-sm-5">
@@ -86,7 +101,7 @@
 						<div class="col-sm-5">
 							<input class="form-control"
 								ng-model="cadFuncCtrl.funcionario.dataAdmissao"
-								id="dataAdmissao" type="date" required>
+								id="dataAdmissao" type="date" >
 						</div>
 
 					</div>

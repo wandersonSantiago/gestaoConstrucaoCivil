@@ -8,5 +8,20 @@ app.controller('cargoController', function($scope, cargoService, $routeParams){
 	
 		cargoService.cargoCreate(self.cargo);
 	}
+	 
+	 
+	$scope.listaCargo  = [];
+	 
+			 
+	$scope.listaCargo.push(
+			
+	cargoService.cargoFindAll()
+	);
+	 
+		 
+	
+	 
+	 console.log($scope.listaCargo);
+
 	
 });

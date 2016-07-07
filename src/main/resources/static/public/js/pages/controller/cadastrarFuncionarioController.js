@@ -1,4 +1,4 @@
-app.controller('cadastrarFuncionarioController', function($scope, cadastrarFuncionarioService, $routeParams){
+app.controller('cadastrarFuncionarioController', function($scope, cargoService,  cadastrarFuncionarioService, $routeParams){
 	
 	var self = this;
   
@@ -7,10 +7,10 @@ app.controller('cadastrarFuncionarioController', function($scope, cadastrarFunci
 	self.cadastrarFuncionario = function(funcionario){
 		console.log("funfou o controle");
 		console.log(self.funcionario);
-		console.log("TESTE:" + self.funcionario.nomeCompleto);
+		console.log("TESTE:" + self.funcionario.dataNascimento);
 		cadastrarFuncionarioService.funcionarioCreate(self.funcionario);
 	
-			self.funcionario = funcionario;
+		self.funcionario = funcionario;
 		
 	}
 	

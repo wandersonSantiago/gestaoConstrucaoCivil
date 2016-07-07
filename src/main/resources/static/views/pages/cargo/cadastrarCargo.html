@@ -18,7 +18,15 @@
 						</div>
 					</div>
 					<br>
-
+					<div >
+					<ul ng-repeat=" listarCargos in listaCargo ">
+					<li>
+					{{ listarCargos.descricao }}
+					</li>
+					</ul>
+					
+					</div>
+		
 					<div class="row ">
 						<div class="col-sm-3"></div>
 						<div class="col-sm-3">
@@ -27,7 +35,7 @@
 						</div>
 						<div class="col-sm-3">
 
-							<button id="submit" type="submit" name="submit" 
+							<button  type="button" name="submit"  ng-click="cargoCtr.listarCargos()"
 								class="btn btn-lg btn-danger btn-block btn-signin">Cancelar</button>
 						</div>
 					</div>
