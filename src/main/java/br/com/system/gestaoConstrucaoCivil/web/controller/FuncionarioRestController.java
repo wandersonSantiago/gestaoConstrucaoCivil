@@ -35,7 +35,7 @@ public class FuncionarioRestController {
 		 System.out.println("data:" + funcionario.getDataNascimento());
 		 System.out.println("Carteira:" + funcionario.getCarteiraTrabalho());
 		 System.out.println("Rua" + funcionario.getEndereco().getRua());
-		 
+		 System.out.println("cargo" + funcionario.getCargo());
 		 enderecoService.salvarOuEditar(funcionario.getEndereco());
 		 pessoaService.salvarOuEditar(funcionario);
 		 HttpHeaders headers =new HttpHeaders();

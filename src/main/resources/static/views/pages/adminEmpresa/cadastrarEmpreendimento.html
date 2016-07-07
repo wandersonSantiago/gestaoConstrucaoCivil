@@ -4,7 +4,7 @@
 	<div class="panel panel-primary">
 		<!-- Default panel contents -->
 		<div class="panel-heading">
-			<span class="lead">Pagina cadastrar Empreendimento </span>
+			<span class="lead"> cadastrar Empreendimento </span>
 		</div>
 		<div class="panel-body">
 
@@ -12,37 +12,66 @@
 			<div class="container col-sm-12 ">
 				<form role="form-vertical">
 					<div class="row">
-						<label class="col-sm-1 control-label" for="razaoSocial">Razão
-							Social</label>
+						<label class="col-sm-1 control-label" for="descricao">Descrição</label>
 						<div class="col-sm-11">
-							<input class="form-control" id="razaoSocial" type="text">
+							<input class="form-control" id="descricao" type="text">
 						</div>
 					</div>
 					<br>
 					<div class="row">
-						<label class="col-sm-1 control-label" for="nomeFantasia">Nome
-							Fantasia</label>
-						<div class="col-sm-11">
-							<input class="form-control" id="nomeFantasia" type="text"
-								aria-describedby="basic-addon1">
+						<label class="col-sm-2 control-label" for="valorMaximoGastar">Valor
+							Total</label>
+						<div class="col-sm-4">
+							<input class="form-control" id="valorMaximoGastar" type="text">
+						</div>
+						<label class="col-sm-2 control-label" for="tipoEmpreendimento">Tipo
+							Empreendimento</label>
+						<div class="col-sm-4">
+							<select class="form-control select2" style="width: 100%;">
+
+							</select>
 						</div>
 					</div>
 					<br>
 					<div class="row">
-						<label class="col-sm-1 control-label" for="cnpj">CNPJ</label>
-						<div class="col-sm-5">
-							<input class="form-control" id="cnpj" type="text">
+						<label class="col-sm-2 control-label" for="dataAbertura">Data
+							Abertura</label>
+						<div class="col-sm-4">
+							<input class="form-control" id="dataAbertura" type="text">
 						</div>
-						<label class="col-sm-1 control-label" for="fone">Telefone</label>
-						<div class="col-sm-5">
-							<input class="form-control" id="fone" type="text">
+						<label class="col-sm-2 control-label" for="datafechamento">Data
+							Fechamento</label>
+						<div class="col-sm-4">
+							<input class="form-control" id="datafechamento" type="text">
+						</div>
+					</div>
+					<br>
+
+					<h4>Equipe responsavel</h4>
+					<hr>
+					<div class="row">
+						<label class="col-sm-2 control-label"
+							for="engenheiroResponsavelFuncionario">Engenheiro
+							Funcionario</label>
+						<div class="col-sm-4">
+								<select class="form-control select2" style="width: 100%;">
+
+							</select>
+						</div>
+						<label class="col-sm-2 control-label"
+							for="engenheiroResponsavelTerceiro">Engenheiro
+							Terceirizado</label>
+						<div class="col-sm-4">
+								<select class="form-control select2" style="width: 100%;">
+
+							</select>
 						</div>
 					</div>
 					<br>
 
 					<h4>Endereço</h4>
 
-					<br>
+					<hr>
 					<div class="row">
 						<label class="col-sm-1 control-label" for="cep">CEP</label>
 						<div class="col-sm-5">

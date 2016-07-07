@@ -74,7 +74,7 @@
 						<div class="col-sm-5">
 							<input class="form-control"
 								ng-model="cadFuncCtrl.funcionario.dataNascimento"
-								id="dataNascimento" type="text" required  >
+								id="dataNascimento" type="text" ui-mask="{{maskData}}" required  >
 						</div>
 						<label class="col-sm-1 control-label" for="idade">idade</label>
 						<div class="col-sm-5">
@@ -101,25 +101,21 @@
 						<div class="col-sm-5">
 							<input class="form-control"
 								ng-model="cadFuncCtrl.funcionario.dataAdmissao"
-								id="dataAdmissao" type="date" >
+								id="dataAdmissao" type="date" ui-mask="{{maskData}}" required >
 						</div>
 
 					</div>
 					<div class="row">
-						<label class="col-sm-1 control-label" for="cargo">Cargo</label>
-						<div class="col-sm-5">
-							<select class="form-control select2" style="width: 100%;">
-								<option selected="selected">Alabama</option>
-								<option>Alaska</option>
-
-							</select>
-						</div>
 						<label class="col-sm-1 control-label" for="empreendimento">Empreendimento</label>
 						<div class="col-sm-5">
-							<select class="form-control select2" style="width: 100%;">
-								<option selected="selected">Alabama</option>
-								<option>Alaska</option>
-
+							<select class="form-control select2"  ng-model="cadFuncCtrl.funcionario.empreendimento" ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.shade for listarEmpreendimentos in listarEmpreendimento" " style="width: 100%;">
+		
+							</select>
+						</div>
+						<label class="col-sm-1 control-label" for="cargo">Cargo</label>
+						<div class="col-sm-5">
+							<select class="form-control select2" ng-model="cadFuncCtrl.funcionario.cargo" ng-options="listarCargos.descricao group by listarCargos.shade for listarCargos in listaCargo"  style="width: 100%;">
+	
 							</select>
 						</div>
 					</div>
