@@ -1,4 +1,4 @@
-app.controller('cadastrarFuncionarioController', function($scope, cargoService,
+app.controller('cadastrarFuncionarioController', function($scope, cargoService, empreendimentoService,
 		cadastrarFuncionarioService, $routeParams) {
 
 	var self = this;
@@ -24,17 +24,16 @@ app.controller('cadastrarFuncionarioController', function($scope, cargoService,
 			return $q.reject(errResponse);
 		});
 
-	console.log($scope.listaCargo);
+	empreendimentoService.empreendimentoFindAll().
+	  then(function(t){
+		  $scope.listarEmpreendimento = t;
+	  }, function(errResponse){
+			console.error('Erro ao tentar buscar empreendimento');
+			return $q.reject(errResponse);
+		});
+	
 
-	$scope.listarEmpreendimento.push({
-		descricao : 'parque dos cristais'
-	});
-	$scope.listarEmpreendimento.push({
-		descricao : 'parque dos diamantes'
-	});
-	$scope.listarEmpreendimento.push({
-		descricao : 'parque dos patos'
-	});
+	
 
 	$scope.maskFone = '(99) 9999 - 999?9';
 	$scope.maskCnpj = '99.999.999/9999-99';

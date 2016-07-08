@@ -9,7 +9,7 @@ app.controller('adminSistemaController', function($scope, adminSistemaService, $
 		console.log(self.empresa);
 		adminSistemaService.empresaCreate(self.empresa);
 	
-			self.empresa = empresa;
+		self.empresa = empresa;
 		
 	}
 	

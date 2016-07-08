@@ -21,6 +21,7 @@ public class EmpreendimentoService {
 		
 		return empreendimentoRepository.findAll();
 	}
+    
     @Transactional(readOnly = false)
     public void salvarOuEditar(Empreendimento empreendimento)
     {

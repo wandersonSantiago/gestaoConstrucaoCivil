@@ -1,36 +1,36 @@
-app.factory('empreendimentoService', function($rootScope, $http){
+app.factory('tipoEmpreendimentoService', function($rootScope, $http){
 	
 	
 	return{
 		
-		empreendimentoFindAll: function(){
-			return $http.get('rest/empreendimento/cadastrarEmpreendimento/listaEmpreendimento')
+		tipoEmpreendimentoFindAll: function(){
+			return $http.get('rest/tipoEmpreendimento/listarTipoEmpreendimento')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				console.error('Erro ao tentar buscar Empresa');
+				console.error('Erro ao tentar buscar tipo');
 				return $q.reject(errResponse);
 			});
 		},
-		empreendimentoCreate: function(empreendimento){
-			console.log("passei aqui");
-			return $http.post('rest/empreendimento/cadastrarEmpreendimento', empreendimento)
+		tipoEmpreendimentoCreate: function(tipoEmpreendimento){
+			console.log(tipoEmpreendimento);
+			return $http.post('rest/tipoEmpreendimento/cadastrarTipoEmpreendimento', tipoEmpreendimento)
 			
 			.then(function(response){
-				console.log("empreendimento gravado");
+				console.log("gravado");
 				$rootScope.gravado = true;
 				
 				return response.data;
 			
 			},function(errResponse){
-				console.error('Erro ao tentar gravar empreendimento');
+				console.error('Erro ao tentar gravar empresa');
 				$rootScope.naoGravado = true;
 				return $q.reject(errResponse);
 				
 			});
 		},
 		
-		empreendimentoFindOne: function(id){
+		tipoEmpreendimentoFindOne: function(id){
 			return $http.get('rest/adminSistema/buscaEmpresa' +id)
 			.then(function(response){
 				return response.data;
@@ -39,7 +39,7 @@ app.factory('empreendimentoService', function($rootScope, $http){
 				return $q.reject(errResponse);
 			});
 		},
-		empreendimentoUpdate: function(item, id){
+		tipoEmpreendimentoUpdate: function(item, id){
 			return $http.put('/rest/adminSistema/updateEmpresa' +id, item)
 			.then(function(response){
 				return response.data;
@@ -48,7 +48,7 @@ app.factory('empreendimentoService', function($rootScope, $http){
 				return $q.reject(errResponse);
 			});
 		},
-		empreendimentoDelete: function(id){
+		tipoEmpreendimentoDelete: function(id){
 			return $http.delete('/rest/adminSistema/deletarEmpresa' +id)
 			.then(function(response){
 				return response.data;
