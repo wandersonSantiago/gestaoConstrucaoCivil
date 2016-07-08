@@ -1,5 +1,5 @@
 <meta charset="UTF-8">
-<div class="generic-container">
+<div class="generic-container" ng-controller="empreendimentoController as empCtrl">
 
 	<div class="panel panel-primary">
 		<!-- Default panel contents -->
@@ -27,7 +27,9 @@
 						<label class="col-sm-2 control-label" for="tipoEmpreendimento">Tipo
 							Empreendimento</label>
 						<div class="col-sm-4">
-							<select class="form-control select2" style="width: 100%;">
+							<select class="form-control select2" ng-model="empCtrl.empreendimento.tipoEmpreendimento" 
+							ng-options="listarTipoEmpreendimentos.descricaoTipoEmpreendimento group by listarTipoEmpreendimentos.shade for listarTipoEmpreendimentos in listarTipoEmpreendimento" 
+							  style="width: 100%;">
 
 							</select>
 						</div>
@@ -37,12 +39,12 @@
 						<label class="col-sm-2 control-label" for="dataAbertura">Data
 							Abertura</label>
 						<div class="col-sm-4">
-							<input class="form-control" id="dataAbertura" type="text">
+							<input class="form-control" id="dataAbertura" type="text" ui-mask="{{maskData}}" required >
 						</div>
 						<label class="col-sm-2 control-label" for="datafechamento">Data
 							Fechamento</label>
 						<div class="col-sm-4">
-							<input class="form-control" id="datafechamento" type="text">
+							<input class="form-control" id="datafechamento" type="text" ui-mask="{{maskData}}" required >
 						</div>
 					</div>
 					<br>
@@ -125,6 +127,25 @@
 					</div>
 					<br>
 
+						<div ng-if="gravado" class="alert alert-info alert-dismissible"
+						role="alert">
+						<button type="button" class="close" data-dismiss="alert"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<strong>Sucesso</strong> cadastro realizado
+					</div>
+
+
+					<div ng-if="naoGravado"
+						class="alert alert-danger alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<strong>Error</strong> cadastro não realizado
+					</div>
+					<br>
 					<div class="row ">
 						<div class="col-sm-3"></div>
 						<div class="col-sm-3">
