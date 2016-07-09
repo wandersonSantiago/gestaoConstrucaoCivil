@@ -1,0 +1,49 @@
+<meta charset="UTF-8">
+<div class="generic-container"
+	ng-controller="adminSistemaController as adminCtrl">
+
+	<div class="panel panel-primary">
+		<!-- Default panel contents -->
+		<div class="panel-heading">
+			<span class="lead">Lista de Empresa </span>
+		</div>
+		<div class="panel-body">
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+						<th>id Empreendimento</th>
+						<th>Descrição Empreendimento</th>
+						<th>Tipo Empreendimento</th>
+						<th>Data Inicio</th>
+						<th>Valor Total</th>
+						<th>Valor Gasto</th>
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" listaEmpresas in listaEmpresa ">
+					<tr>
+						<td>{{ listaEmpresas.dadoEmpresa.razaoSocial }}</td>
+						<td>{{ listaEmpresas.dadoEmpresa.nomeFantasia }}</td>
+						<td>{{ listaEmpresas.dadoEmpresa.cnpj }}</td>
+						<td>{{ listaEmpresas.dadoEmpresa.telefone }}</td>
+						<td>{{ listaEmpresas.dadoEmpresa.inscricaoEstadual }}</td>
+						<td>{{ listaEmpresas.dadoEmpresa.endereco.estado }}</td>
+					</tr>
+
+				</tbody>
+				<tfoot>
+					<tr>
+						<th>fim</th>
+						<th>fim</th>
+
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+		<!-- /.box-body -->
+	</div>
+	<!-- /.box -->
+</div>
+<!-- /.col -->
+</div>
+<!-- /.row -->

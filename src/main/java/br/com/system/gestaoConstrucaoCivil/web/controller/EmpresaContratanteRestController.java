@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 import br.com.system.gestaoConstrucaoCivil.entity.EmpresaContratante;
+import br.com.system.gestaoConstrucaoCivil.entity.TipoEmpreendimento;
 import br.com.system.gestaoConstrucaoCivil.service.DadoEmpresaService;
 import br.com.system.gestaoConstrucaoCivil.service.EmpresaContratanteService;
 import br.com.system.gestaoConstrucaoCivil.service.EnderecoService;
@@ -26,6 +27,14 @@ public class EmpresaContratanteRestController {
     public EnderecoService enderecoService;
     @Autowired
     public DadoEmpresaService dadoEmpresaService;
+    
+	@RequestMapping(method = RequestMethod.GET, value="/listarEmpresa")
+	 public ResponseEntity<Iterable<EmpresaContratante>> buscarEmpresaContratante() {	  
+	  System.out.println("lista ok");
+	  Iterable<EmpresaContratante> empresaContratante = empresaContratanteService.buscarTodos();
+	  return new ResponseEntity<Iterable<EmpresaContratante>>(empresaContratante, HttpStatus.OK);
+	 }
+	
     
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<EmpresaContratante> buscarCargo(@PathVariable Long id) {

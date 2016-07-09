@@ -2,7 +2,7 @@ app.controller('adminSistemaController', function($scope, adminSistemaService, $
 	
 	var self = this;
   
-	
+	$scope.listaEmpresa = [];
 		
 	self.createEmpresa = function(empresa, sucesso){
 		console.log("funfou o controle");
@@ -14,7 +14,13 @@ app.controller('adminSistemaController', function($scope, adminSistemaService, $
 	}
 	
 	
-	
+	adminSistemaService.empresaFindAll().
+	  then(function(c){
+		  $scope.listaEmpresa = c;
+	  }, function(errResponse){
+			console.error('Erro ao tentar buscar empresa');
+			return $q.reject(errResponse);
+		});
 	
 	
 	$scope.maskFone= '(99) 9999 - 999?9';

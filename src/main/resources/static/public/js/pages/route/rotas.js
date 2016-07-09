@@ -18,6 +18,10 @@ app.config(['$routeProvider','$httpProvider', function($routeProvider, $httpProv
 		templateUrl : "views/pages/adminSistema/cadastrarAdmiEmpresa.html",
 	})
 	
+	.when('/listaAdminEmpresa', {
+		templateUrl : "views/pages/adminSistema/listaAdminEmpresa.html",
+	})
+	
 	
 	//Rotas Administrador Empresa
 	.when('/cadastrarEmpreendimento', {
@@ -29,18 +33,20 @@ app.config(['$routeProvider','$httpProvider', function($routeProvider, $httpProv
     	.when('/listaTipoEmpreendimento', {
 		templateUrl : "views/pages/adminEmpresa/listaTipoEmpreendimento.html",
 	})
-    
-	
-	//Rotas Cadastrar Cargo
-	.when('/cadastrarCargo', {
-		templateUrl : "views/pages/cargo/cadastrarCargo.html",
+	.when('/listaEmpreendimento', {
+		templateUrl : "views/pages/adminEmpresa/listaEmpreendimento.html",
 	})
-	
+    
 	//Rotas Recursos Humanos
 		
 	.when('/cadastrarFuncionario', {
-		templateUrl:"views/pages/recursosHumanos/cadastrarFuncionario.html",
+		templateUrl:"views/pages/recursosHumanos/cadastrarFuncionario.html",		
 	})
+		.when('/cadastrarCargo', {
+		templateUrl : "views/pages/recursosHumanos/cadastrarCargo.html",
+	})
+	
+	
 	//Rotas Cadastrar Unidade Medida
 	.when('/cadastrarUnidadeMedida', {
 		templateUrl:"views/pages/produto/cadastrarUnidadeMedida.html",

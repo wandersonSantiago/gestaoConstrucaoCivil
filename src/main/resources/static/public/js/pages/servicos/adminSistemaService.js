@@ -4,7 +4,7 @@ app.factory('adminSistemaService', function($rootScope, $http){
 	return{
 		
 		empresaFindAll: function(){
-			return $http.get('rest/adminSistema/listarEmpresa')
+			return $http.get('rest/adminSistema/cadastrarEmpresa/listarEmpresa')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){

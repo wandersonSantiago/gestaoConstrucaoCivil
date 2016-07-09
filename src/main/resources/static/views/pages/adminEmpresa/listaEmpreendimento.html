@@ -1,0 +1,49 @@
+<meta charset="UTF-8">
+<div class="generic-container"
+	ng-controller="empreendimentoController as tipoCtr">
+
+	<div class="panel panel-primary">
+		<!-- Default panel contents -->
+		<div class="panel-heading">
+			<span class="lead">Lista de Empreendimento </span>
+		</div>
+		<div class="panel-body">
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+						<th>id Empreendimento</th>
+						<th>Descrição Empreendimento</th>
+						<th>Tipo Empreendimento</th>
+						<th>Data Inicio</th>
+						<th>Valor Total</th>
+						<th>Valor Gasto</th>
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" listarEmpreendimentos in listarEmpreendimento ">
+					<tr>
+						<td>{{ listarEmpreendimentos.id }}</td>
+						<td>{{ listarEmpreendimentos.descricao }}</td>
+						<td>{{ listarEmpreendimentos.tipoEmpreendimento.descricaoTipoEmpreendimento }}</td>
+						<td>{{ listarEmpreendimentos.dataAbertura }}</td>
+						<td>{{ listarEmpreendimentos.valorMaximoGastar }}</td>
+						<td>{{ listarEmpreendimentos.valoresGastos }}</td>
+					</tr>
+
+				</tbody>
+				<tfoot>
+					<tr>
+						<th>fim</th>
+						<th>fim</th>
+
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+		<!-- /.box-body -->
+	</div>
+	<!-- /.box -->
+</div>
+<!-- /.col -->
+</div>
+<!-- /.row -->
