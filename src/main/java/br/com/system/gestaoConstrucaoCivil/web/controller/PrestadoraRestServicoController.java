@@ -14,15 +14,15 @@ import br.com.system.gestaoConstrucaoCivil.entity.PrestadoraServico;
 import br.com.system.gestaoConstrucaoCivil.service.PrestadoraServicoService;
 
 @RestController
-@RequestMapping("/rest/prestadoraServico")
+@RequestMapping("/rest/prestadoraServico/cadastrarPrestadoraService")
 public class PrestadoraRestServicoController {
 	 
 	 @Autowired
 	 private PrestadoraServicoService prestadoraServicoService;
 	
-	 @RequestMapping(method = RequestMethod.GET, value="/listarUsuario")
-	 public ResponseEntity<Iterable<PrestadoraServico>> buscarUsuarios() {	  
-	  System.out.println("lista ok");
+	 @RequestMapping(method = RequestMethod.GET, value="/listarPrestadoraServico")
+	 public ResponseEntity<Iterable<PrestadoraServico>> buscarPrestadoraServico() {	  
+	  
 	  Iterable<PrestadoraServico> prestadoraServico = prestadoraServicoService.buscarTodos();
 	  return new ResponseEntity<Iterable<PrestadoraServico>>(prestadoraServico, HttpStatus.OK);
 	 }
@@ -32,7 +32,7 @@ public class PrestadoraRestServicoController {
 	 {
 		 prestadoraServicoService.salvarOuEditar(prestadoraServico);
 		 HttpHeaders headers =new HttpHeaders();
-		 headers.setLocation(ucBuilder.path("/rest/rrestadoraServico/cadastrarPrestadoraServico/{id}").buildAndExpand(prestadoraServico.getId()).toUri());
+		 headers.setLocation(ucBuilder.path("/rest/prestadoraServico/cadastrarPrestadoraServico/{id}").buildAndExpand(prestadoraServico.getId()).toUri());
 		 return new ResponseEntity(headers, HttpStatus.CREATED);
 	 }
 }

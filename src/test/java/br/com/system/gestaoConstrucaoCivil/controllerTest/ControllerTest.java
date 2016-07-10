@@ -12,14 +12,8 @@ import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import br.com.system.gestaoConstrucaoCivil.GestaoConstrucaoCivilApplication;
-import br.com.system.gestaoConstrucaoCivil.entity.Categoria;
-import br.com.system.gestaoConstrucaoCivil.entity.DadoEmpresa;
-import br.com.system.gestaoConstrucaoCivil.entity.Fornecedor;
-import br.com.system.gestaoConstrucaoCivil.entity.Produto;
-import br.com.system.gestaoConstrucaoCivil.entity.UnidadeMedida;
+import br.com.system.gestaoConstrucaoCivil.entity.Funcionario;
 import br.com.system.gestaoConstrucaoCivil.repository.CargoRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.CategoriaRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.DadoEmpresaRepository;
@@ -70,6 +64,7 @@ public class ControllerTest {
 	
 	private RestTemplate restTemplate = new TestRestTemplate();
 
+	
 	/*
 	 * @Test public void testCriarCargoApi() throws JsonProcessingException {
 	 * 
@@ -86,7 +81,15 @@ public class ControllerTest {
 	 * 
 	 * }
 	 */
-
+    @Test
+    public void teste()
+    {
+    	List<Funcionario> l =  funcionarioRepository.findByCreadNotNull();
+        for(int i = 0 ; i < l.size(); i++)
+        {
+        	System.out.println(l.get(i).getNomeCompleto());
+        }
+    }
 	
 	/*  @Test
 	  public void testeCriarEnderecoAPI() throws JsonProcessingException{
@@ -133,7 +136,7 @@ public class ControllerTest {
 	 * tipoEmpreendimentoRepository.save(tipoEmpreendimentoCasa); }
 	 */
     
-	
+	/*
 	public void testeCriarFornecedor() throws JsonProcessingException {
 		
 		
@@ -146,9 +149,9 @@ public class ControllerTest {
 		fornecedor.setObservacao("NAO SEI");
 		fornecedorRepository.save(fornecedor);
 	}
+	*/
 	
-	
-	public void testeCriarProduto() throws JsonProcessingException {
+/*	public void testeCriarProduto() throws JsonProcessingException {
 		
 		Produto produto = new Produto();
 		produto.setAtivo(true);
@@ -166,8 +169,8 @@ public class ControllerTest {
 		
 		protudoRepository.save(produto);
     	
-	}
-	@Test
+	}*/
+/*	@Test
 	public void testeBuscarProduto() throws JsonProcessingException {
 		
 		Produto produto = protudoRepository.findOne(134L);
@@ -176,7 +179,7 @@ public class ControllerTest {
 	           System.out.println("1 - " + produto.getDescricao());
 	           System.out.println("Teste " + fornecedor.getContato());
 	       }
-	}
+	}*/
 	/*@Test
 	public void testeCriarFornecedor() throws JsonProcessingException {
 		

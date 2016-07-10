@@ -22,9 +22,14 @@ public class FuncionarioService {
 	 		
 	 		return funcionarioRepository.findAll();
 	 }
+	public List<Funcionario> buscarFuncionarioEngenheiro()
+	{
+		return funcionarioRepository.findByCreadNotNull();
+	}
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(Funcionario funcionario)
 	{
 		funcionarioRepository.save(funcionario);
 	}
+	
 }

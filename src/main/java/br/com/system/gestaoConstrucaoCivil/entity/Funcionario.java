@@ -30,7 +30,8 @@ public class Funcionario  extends Pessoa implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="id_cargo")
 	private Cargo cargo;
-	
+	@Column(nullable = true )
+	private Integer cread;
 	public Integer getCarteiraTrabalho() {
 		return carteiraTrabalho;
 	    
@@ -62,4 +63,11 @@ public class Funcionario  extends Pessoa implements Serializable{
 	public void setCargo(Cargo cargo) {
 		this.cargo = cargo;
 	}
+	public Integer getCread() {
+		return cread;
+	}
+	public void setCread(Integer cread) {
+		this.cread = cread;
+	}
+	
 }

@@ -22,7 +22,7 @@ public class Endereco extends AbstractPersistable<Long>  {
 	private String estado;
 	@Column(nullable = false)
 	private String cep;
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String complemento;
 	
 	

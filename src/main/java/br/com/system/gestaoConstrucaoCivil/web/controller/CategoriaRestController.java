@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Categoria;
+import br.com.system.gestaoConstrucaoCivil.entity.Servico;
 import br.com.system.gestaoConstrucaoCivil.service.CategoriaService;
 
 
@@ -21,6 +22,14 @@ public class CategoriaRestController {
 	 
 	 @Autowired
 	 private CategoriaService categoriaService;
+	 
+	 @RequestMapping(method = RequestMethod.GET, value="/listarCategoria")
+	 public ResponseEntity<Iterable<Categoria>> buscarCategoria() {	  
+	  
+	  Iterable<Categoria> categoria = categoriaService.buscarTodos();
+	  return new ResponseEntity<Iterable<Categoria>>(categoria, HttpStatus.OK);
+	 }
+	 
 	 
 	 @RequestMapping(method = RequestMethod.POST)
 	 public ResponseEntity salvarCargo(@RequestBody Categoria categoria,UriComponentsBuilder ucBuilder)
