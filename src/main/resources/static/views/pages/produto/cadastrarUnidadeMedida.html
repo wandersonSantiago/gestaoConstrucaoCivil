@@ -1,27 +1,26 @@
 <meta charset="UTF-8">
-<div class="generic-container" ng-controller="unidadeMedidaController as unidadeMedidaCtr" >
+<div class="generic-container"  ng-controller="unidadeMedidaController as unidadeMedidaoCtr" >
 
 	<div class="panel panel-primary">
 		<!-- Default panel contents -->
 		<div class="panel-heading">
-			<span class="lead">Pagina cadastrar Unidade Medida </span>
+			<span class="lead">Cadastrar Unidade Medida </span>
 		</div>
 		<div class="panel-body">
 
 			<br>
 			<div class="container col-sm-12 ">
-				<form role="form-vertical" ng-submit="unidadeMedidaCtr.createUnidadeMedida()" >
+				<form role="form-vertical" ng-submit="unidadeMedidaoCtr.cadastrarUnidadeMedida()" >
 					<div class="row">
-						<label class="col-sm-1 control-label" for="descricaoMedida">Unidade de Medida</label>
-						<div class="col-sm-11">
-							<input class="form-control" ng-model="unidadeMedidaCtr.unidadeMedida.descricaoMedida" id="descricaoMedida" type="text">
+						<label class="col-sm-4 control-label" for="descricaoMedida"> Descrição Unidade Medida</label>
+						<div class="col-sm-8">
+							<input class="form-control" ng-model="unidadeMedidaoCtr.unidadeMedida.descricaoMedida" id="descricaoMedida" type="text">
 						</div>
 					</div>
 					<br>
-					<div >
-					</div>
-		
-						<div ng-if="gravado" class="alert alert-info alert-dismissible"
+					<br>
+						
+								<div ng-if="gravado" class="alert alert-info alert-dismissible"
 						role="alert">
 						<button type="button" class="close" data-dismiss="alert"
 							aria-label="Close">
@@ -40,15 +39,18 @@
 						<strong>Error</strong> cadastro não realizado
 					</div>
 					<br>
+					
+							
 					<div class="row ">
 						<div class="col-sm-3"></div>
 						<div class="col-sm-3">
 							<input type="submit" id="submit" 
 								class="btn btn-lg btn-primary btn-block btn-signin">
 						</div>
+						
 						<div class="col-sm-3">
 
-							<button  type="button" name="submit"  ng-click="unidadeMedidaCtr.buscarUnidadeMedidaCtr()"
+							<button  type="button" name="submit"
 								class="btn btn-lg btn-danger btn-block btn-signin">Cancelar</button>
 						</div>
 					</div>

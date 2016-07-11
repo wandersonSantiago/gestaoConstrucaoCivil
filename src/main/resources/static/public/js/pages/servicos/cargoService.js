@@ -21,4 +21,5 @@ app.factory('cargoService', function($http,$q)
 				});
 			},
 	 }
+	 
 });

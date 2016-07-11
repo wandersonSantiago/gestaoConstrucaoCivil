@@ -1,11 +1,12 @@
-app.controller('unidadeMedidaController', function($scope, unidadeMedidaService, $routeParams){
+app.controller('unidadeMedidaController', function($scope,unidadeMedidaService, $routeParams){
 	
 	var self = this;
 		
 	$scope.listaUnidadeMedida = [];
 	
 	
-	 self.createUnidadeMedida = function(unidadeMedida){
+	 self.cadastrarUnidadeMedida = function(unidadeMedida){
+		 console.log(self.unidadeMedida);
 		 unidadeMedidaService.unidadeMedidaCreate(self.unidadeMedida);
 	}
 	 
