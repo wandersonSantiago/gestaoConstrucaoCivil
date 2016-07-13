@@ -31,7 +31,7 @@ public class Funcionario  extends Pessoa implements Serializable{
 	@JoinColumn(name="id_cargo")
 	private Cargo cargo;
 	@Column(nullable = true )
-	private Integer cread;
+	private Integer crea;
 	public Integer getCarteiraTrabalho() {
 		return carteiraTrabalho;
 	    
@@ -63,11 +63,12 @@ public class Funcionario  extends Pessoa implements Serializable{
 	public void setCargo(Cargo cargo) {
 		this.cargo = cargo;
 	}
-	public Integer getCread() {
-		return cread;
+	public Integer getCrea() {
+		return crea;
 	}
-	public void setCread(Integer cread) {
-		this.cread = cread;
+	public void setCrea(Integer crea) {
+		this.crea = crea;
 	}
+    
 	
 }

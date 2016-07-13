@@ -47,9 +47,12 @@ app.config(['$routeProvider','$httpProvider', function($routeProvider, $httpProv
 	})
 	
 	
-	//Rotas Cadastrar Unidade Medida
+	//Rotas Produto
 	.when('/cadastrarUnidadeMedida', {
 		templateUrl:"views/pages/produto/cadastrarUnidadeMedida.html",
+	})
+	.when('/cadastrarProduto', {
+		templateUrl:"views/pages/produto/cadastrarProduto.html",
 	})
 	
 	//Rota de erro

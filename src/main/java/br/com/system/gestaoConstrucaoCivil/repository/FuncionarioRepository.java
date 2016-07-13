@@ -10,5 +10,5 @@ import br.com.system.gestaoConstrucaoCivil.entity.Funcionario;
 
 public interface FuncionarioRepository extends JpaRepository<Funcionario,Long>{
 
-	List<Funcionario> findByCreadNotNull();
+	List<Funcionario> findByCreaNotNull();
 }

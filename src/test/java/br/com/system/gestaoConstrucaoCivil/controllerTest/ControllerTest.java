@@ -84,7 +84,7 @@ public class ControllerTest {
     @Test
     public void teste()
     {
-    	List<Funcionario> l =  funcionarioRepository.findByCreadNotNull();
+    	List<Funcionario> l =  funcionarioRepository.findByCreaNotNull();
         for(int i = 0 ; i < l.size(); i++)
         {
         	System.out.println(l.get(i).getNomeCompleto());

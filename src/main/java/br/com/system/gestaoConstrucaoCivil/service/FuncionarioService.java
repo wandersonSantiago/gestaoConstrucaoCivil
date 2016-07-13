@@ -24,7 +24,7 @@ public class FuncionarioService {
 	 }
 	public List<Funcionario> buscarFuncionarioEngenheiro()
 	{
-		return funcionarioRepository.findByCreadNotNull();
+		return funcionarioRepository.findByCreaNotNull();
 	}
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(Funcionario funcionario)
