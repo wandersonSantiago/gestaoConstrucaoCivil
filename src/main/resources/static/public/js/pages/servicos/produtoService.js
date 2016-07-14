@@ -6,7 +6,7 @@ app.factory('produtoService', function($rootScope, $http,$q){
 			return $http.post('/rest/produto/cadastrarProduto', produto)
 			
 			.then(function(response){
-				console.log("teste");
+				
 				$rootScope.gravado = true;
 				
 				return response.data;

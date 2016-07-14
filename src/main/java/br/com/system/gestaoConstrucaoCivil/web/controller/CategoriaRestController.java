@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Categoria;
-import br.com.system.gestaoConstrucaoCivil.entity.Servico;
+import br.com.system.gestaoConstrucaoCivil.entity.ServicoEmpresa;
 import br.com.system.gestaoConstrucaoCivil.service.CategoriaService;
 
 
