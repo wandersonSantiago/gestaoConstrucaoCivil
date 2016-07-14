@@ -10,25 +10,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.system.gestaoConstrucaoCivil.entity.Servico;
-import br.com.system.gestaoConstrucaoCivil.service.ServicoService;
+import br.com.system.gestaoConstrucaoCivil.entity.ServicoEmpresa;
+import br.com.system.gestaoConstrucaoCivil.service.ServicoEmpresaService;
 
 @RestController
 @RequestMapping("/rest/servico/cadastrarServico")
-public class ServicoRestController {
+public class ServicoEmpresaRestController {
 
 	@Autowired
-	 private ServicoService servicoService;
+	 private ServicoEmpresaService servicoService;
 	
 	 @RequestMapping(method = RequestMethod.GET, value="/listarServico")
-	 public ResponseEntity<Iterable<Servico>> buscarServico() {	  
+	 public ResponseEntity<Iterable<ServicoEmpresa>> buscarServico() {	  
 	  
-	  Iterable<Servico> servico = servicoService.buscarTodos();
-	  return new ResponseEntity<Iterable<Servico>>(servico, HttpStatus.OK);
+	  Iterable<ServicoEmpresa> servico = servicoService.buscarTodos();
+	  return new ResponseEntity<Iterable<ServicoEmpresa>>(servico, HttpStatus.OK);
 	 }
 	 
 	 @RequestMapping(method = RequestMethod.POST)
-	 public ResponseEntity salva(@RequestBody Servico servico,UriComponentsBuilder ucBuilder)
+	 public ResponseEntity salva(@RequestBody ServicoEmpresa servico,UriComponentsBuilder ucBuilder)
 	 {
 		 servicoService.salvarOuEditar(servico);
 		 HttpHeaders headers = new HttpHeaders();
