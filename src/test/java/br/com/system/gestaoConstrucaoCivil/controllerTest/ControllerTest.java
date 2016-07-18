@@ -12,8 +12,11 @@ import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import br.com.system.gestaoConstrucaoCivil.GestaoConstrucaoCivilApplication;
 import br.com.system.gestaoConstrucaoCivil.entity.Funcionario;
+
 import br.com.system.gestaoConstrucaoCivil.repository.CargoRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.CategoriaRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.DadoEmpresaRepository;
@@ -81,15 +84,7 @@ public class ControllerTest {
 	 * 
 	 * }
 	 */
-    @Test
-    public void teste()
-    {
-    	List<Funcionario> l =  funcionarioRepository.findByCreaNotNull();
-        for(int i = 0 ; i < l.size(); i++)
-        {
-        	System.out.println(l.get(i).getNomeCompleto());
-        }
-    }
+  
 	
 	/*  @Test
 	  public void testeCriarEnderecoAPI() throws JsonProcessingException{
@@ -260,7 +255,7 @@ public class ControllerTest {
         
 		
 	}*/
-	
+
 	/*@Test
 	public void testeCriarEmpreendimento() throws JsonProcessingException {
 	

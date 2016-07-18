@@ -23,7 +23,7 @@ app.factory('fornecedorService', function($rootScope, $http,$q){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				console.error('Erro ao tentar buscar os fornecedor');
+				console.error('Erro ao tentar buscar os fornecedores');
 				return $q.reject(errResponse);
 			});
 		},
