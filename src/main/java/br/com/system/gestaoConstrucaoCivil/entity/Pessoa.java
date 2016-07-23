@@ -12,6 +12,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,7 +28,7 @@ public abstract class Pessoa implements Serializable{
 	protected String nomeCompleto;
 	@Column(nullable = false)
 	protected Integer idade;
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="id_endereco",nullable = false)
 	protected Endereco endereco;
 	@Column(nullable = false,length = 20)

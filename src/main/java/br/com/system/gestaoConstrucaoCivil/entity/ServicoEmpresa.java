@@ -22,9 +22,11 @@ public class ServicoEmpresa extends AbstractPersistable<Long>{
 	private Imovel imovel;
 	
 	private Double porcentagem;
+	
 	@ManyToOne
 	@JoinColumn(name="id_pacote_servico",nullable = false)
 	private PacoteServico pacoteServico;
+	
 	@ManyToOne
 	@JoinColumn(name="id_empreendimento",nullable = false)
 	private Empreendimento empreendimento;

@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -22,7 +23,7 @@ public class Fornecedor extends AbstractPersistable<Long> {
 	private String contato;
 	@Column(nullable = true, length = 50)
 	private String observacao;
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "id_dado_empresa", nullable = false)
 	private DadoEmpresa dadosEmpresa;
 	@Column(nullable = false)
