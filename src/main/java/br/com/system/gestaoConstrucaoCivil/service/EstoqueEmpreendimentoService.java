@@ -5,19 +5,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.system.gestaoConstrucaoCivil.entity.ProdutoEstoque;
-import br.com.system.gestaoConstrucaoCivil.repository.ProdutoEstoqueRepository;
+import br.com.system.gestaoConstrucaoCivil.entity.EstoqueEmpreendimento;
+import br.com.system.gestaoConstrucaoCivil.repository.EstoqueEmpreendimentoRepository;
 
 
 @Service
 @Transactional(readOnly = true,propagation = Propagation.REQUIRED)
-public class ProdutoEstoqueService {
+public class EstoqueEmpreendimentoService {
 
 	@Autowired
-	private ProdutoEstoqueRepository produtoEstoqueRepository;
+	private EstoqueEmpreendimentoRepository produtoEstoqueRepository;
 	
 	@Transactional(readOnly = false)
-	public void salvarOuEditar(ProdutoEstoque produtoEstoque)
+	public void salvarOuEditar(EstoqueEmpreendimento produtoEstoque)
 	{
 		produtoEstoqueRepository.save(produtoEstoque);
 	}

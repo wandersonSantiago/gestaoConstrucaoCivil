@@ -51,6 +51,7 @@ public class Empreendimento extends AbstractPersistable<Long> {
     @Column(nullable = false)
 	private boolean ativo;
 	
+    
 	
 	public Endereco getEnderecoEmpreendimento() {
 		return enderecoEmpreendimento;

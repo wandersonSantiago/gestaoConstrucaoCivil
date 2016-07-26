@@ -8,7 +8,7 @@ import br.com.system.gestaoConstrucaoCivil.service.ProdutoService;
 
 @RestController
 @RequestMapping("/rest/produtoEstoque")
-public class ProdutoEstoqueRestController {
+public class EstoqueEmpreendimentoRestController {
 
 	@Autowired
 	 private ProdutoService produtoService;

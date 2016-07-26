@@ -37,14 +37,7 @@ public class EmpreendimentoRestController {
 		@RequestMapping(method = RequestMethod.POST)
 		public ResponseEntity salvarEmpresaContratante(@RequestBody Empreendimento empreendimento, UriComponentsBuilder ucBuilder) {
 		
-			if(empreendimento.getEnderecoEmpreendimento() == null)
-			{
-			  System.out.println("SIM"); 
-			}
-			else
-			{
-			 System.out.println("NAO");
-			}
+			
 			enderecoService.salvarOuEditar(empreendimento.getEnderecoEmpreendimento());
 			System.out.println("Chamadou o salvar");
 			empreendimentoService.salvarOuEditar(empreendimento);
