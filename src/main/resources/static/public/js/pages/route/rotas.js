@@ -9,41 +9,73 @@ app.config(['$routeProvider','$httpProvider', function($routeProvider, $httpProv
 		templateUrl : "views/login.html"
 	})
 
-	//Rotas Administrador Sistema
+	
+//ROTAS ADMIN SISTEMA
+	
+				//CADASTRAR
 	.when('/cadastrarEmpresa', {
-		templateUrl : "views/pages/adminSistema/cadastrarEmpresa.html",
+		templateUrl : "views/pages/adminSistema/cadastrar/cadastrarEmpresa.html",
+	//	controller : "adminSistemaController",
+		
 	})
 	
 	.when('/cadastrarAdminEmpresa', {
-		templateUrl : "views/pages/adminSistema/cadastrarAdmiEmpresa.html",
+		templateUrl : "views/pages/adminSistema/cadastrar/cadastrarAdmiEmpresa.html",
+	//	controller : "adminSistemaController",
 	})
 	
+				//LISTAR
 	.when('/listaAdminEmpresa', {
-		templateUrl : "views/pages/adminSistema/listaAdminEmpresa.html",
+		templateUrl : "views/pages/adminSistema/lista/listaAdminEmpresa.html",
+	//	controller : "adminSistemaController",
+	})
+	
+				
+	.when('/listaEmpresa', {
+		templateUrl : "views/pages/adminSistema/lista/listaEmpresa.html",
+	//	controller : "adminSistemaController",
+	})
+				//EDITAR
+	
+	.when('/editarEmpresa', {
+		templateUrl : "views/pages/adminSistema/editar/editarEmpresa.html",
+	//	controller : "adminSistemaController",
 	})
 	
 	
-	//Rotas Administrador Empresa
+//ROTAS ADMINISTRADOR EMPRESA
+	
+			//CADASTRAR
 	.when('/cadastrarEmpreendimento', {
-		templateUrl : "views/pages/adminEmpresa/cadastrarEmpreendimento.html",
+		templateUrl : "views/pages/adminEmpresa/cadastrar/cadastrarEmpreendimento.html",
+	//	controller : "empreendimento-controller.js",
+			
 	})
 	.when('/cadastrarTipoEmpreendimento', {
-		templateUrl : "views/pages/adminEmpresa/cadastrarTipoEmpreendimento.html",
+		templateUrl : "views/pages/adminEmpresa/cadastrar/cadastrarTipoEmpreendimento.html",
+	//	controller : "tipo-empreendimento-controller.js",
 	})
+	
+			//LISTAR
     	.when('/listaTipoEmpreendimento', {
-		templateUrl : "views/pages/adminEmpresa/listaTipoEmpreendimento.html",
+		templateUrl : "views/pages/adminEmpresa/lista/listaTipoEmpreendimento.html",
+//		controller : "tipo-empreendimento-controller.js",
 	})
 	.when('/listaEmpreendimento', {
-		templateUrl : "views/pages/adminEmpresa/listaEmpreendimento.html",
+		templateUrl : "views/pages/adminEmpresa/lista/listaEmpreendimento.html",
+	//	controller : "empreendimento-controller.js",
 	})
     
-	//Rotas Recursos Humanos
-		
+//ROTAS RECURSOS HUMANOS
+	
+		//CADASTRAR
 	.when('/cadastrarFuncionario', {
-		templateUrl:"views/pages/recursosHumanos/cadastrarFuncionario.html",		
+		templateUrl:"views/pages/recursosHumanos/cadastrar/cadastrarFuncionario.html",		
+//		controller : "funcionario-controller.js"
 	})
 		.when('/cadastrarCargo', {
-		templateUrl : "views/pages/recursosHumanos/cadastrarCargo.html",
+		templateUrl : "views/pages/recursosHumanos/cadastrar/cadastrarCargo.html",
+	//	controller : "cargo-controller.js"
 	})
 	
 	

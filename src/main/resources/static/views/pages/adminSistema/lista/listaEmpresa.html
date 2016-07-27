@@ -1,0 +1,50 @@
+<meta charset="UTF-8">
+<div class="generic-container"
+	ng-controller="adminSistemaController as adminCtrl">
+
+	<div class="panel panel-primary">
+		<!-- Default panel contents -->
+		<div class="panel-heading">
+			<span class="lead">Lista de Empresa </span>
+		</div>
+		<div class="panel-body">
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+						<th>Razão Social</th>
+						<th>Nome  Fantasia</th>
+						<th>Tipo Empresa</th>
+						<th>CNPJ</th>
+						<th>Telefone</th>
+						<th>Inscrição Estadual</th>
+						<th>estado</th>
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" listaEmpresas in listaEmpresa ">
+					<tr>
+					<td><h3><a href="#/editarEmpresa/{{dadoEmpresa.id}}">{{ listaEmpresas.dadoEmpresa.razaoSocial }}</a></h3></td>
+						<td>{{ listaEmpresas.dadoEmpresa.nomeFantasia }}</td>
+						<td>{{ listaEmpresas.dadoEmpresa.cnpj }}</td>
+						<td>{{ listaEmpresas.dadoEmpresa.telefone }}</td>
+						<td>{{ listaEmpresas.dadoEmpresa.inscricaoEstadual }}</td>
+						<td>{{ listaEmpresas.dadoEmpresa.endereco.estado }}</td>
+					</tr>
+
+				</tbody>
+				<tfoot>
+					<tr>
+						<th>fim</th>
+						<th>fim</th>
+
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+		<!-- /.box-body -->
+	</div>
+	<!-- /.box -->
+</div>
+<!-- /.col -->
+</div>
+<!-- /.row -->

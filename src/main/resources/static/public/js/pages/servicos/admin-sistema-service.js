@@ -1,7 +1,16 @@
-app.factory('adminSistemaService', function($rootScope, toastr, $http){
+app.factory('adminSistemaService', function($rootScope, toastr, $http, $q){
 	
 	
 	return{
+		
+		buscarEmpresa: function(param){
+			console.log("service admin" );
+			return $http.get('rest/adminSistema/cadastrarEmpresa/listarEmpresaId/'+param)
+			.then(function(response){
+				return response.data;
+			});
+			
+		},
 		
 		empresaFindAll: function(){
 			return $http.get('rest/adminSistema/cadastrarEmpresa/listarEmpresa')
@@ -13,6 +22,8 @@ app.factory('adminSistemaService', function($rootScope, toastr, $http){
 				return $q.reject(errResponse);
 			});
 		},
+		
+		
 		empresaCreate: function(empresa){
 			return $http.post('rest/adminSistema/cadastrarEmpresa', empresa)
 			

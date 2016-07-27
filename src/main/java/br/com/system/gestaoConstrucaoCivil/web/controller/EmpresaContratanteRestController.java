@@ -1,5 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpHeaders;
@@ -16,6 +18,7 @@ import br.com.system.gestaoConstrucaoCivil.entity.TipoEmpreendimento;
 import br.com.system.gestaoConstrucaoCivil.service.DadoEmpresaService;
 import br.com.system.gestaoConstrucaoCivil.service.EmpresaContratanteService;
 import br.com.system.gestaoConstrucaoCivil.service.EnderecoService;
+
 
 @RestController
 @RequestMapping("rest/adminSistema/cadastrarEmpresa")
@@ -35,6 +38,11 @@ public class EmpresaContratanteRestController {
 	  return new ResponseEntity<Iterable<EmpresaContratante>>(empresaContratante, HttpStatus.OK);
 	 }
 	
+	@RequestMapping(value = "/listarEmpresaId/{idEmpresa}", method = RequestMethod.GET)
+	public EmpresaContratante buscarEmpresaPorId(@PathVariable Long id, HttpSession session) {
+		System.out.println("Chamadou empresa");
+		return empresaContratanteService.buscarPorId(id);
+	}
     
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<EmpresaContratante> buscarCargo(@PathVariable Long id) {
