@@ -1,4 +1,4 @@
-app.factory('produtoService', function($rootScope, $http,$q){
+app.factory('produtoService', function($rootScope, toastr, $http,$q){
 	
 	
 	return{
@@ -7,13 +7,13 @@ app.factory('produtoService', function($rootScope, $http,$q){
 			
 			.then(function(response){
 				
-				$rootScope.gravado = true;
+				toastr.info('produto cadastrado');
 				
 				return response.data;
 			
 			},function(errResponse){
 				console.error('Erro ao tentar gravar o Produto');
-				$rootScope.naoGravado = true;
+				toastr.error('produto não cadastrado');
 				return $q.reject(errResponse);
 				
 			});
@@ -23,6 +23,7 @@ app.factory('produtoService', function($rootScope, $http,$q){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
+				toastr.error('erro ao buscar produtos');
 				console.error('Erro ao tentar buscar os produtos');
 				return $q.reject(errResponse);
 			});

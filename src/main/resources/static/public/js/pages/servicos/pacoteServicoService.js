@@ -1,4 +1,4 @@
-app.factory('pacoteServicoService', function($rootScope, $http,$q){
+app.factory('pacoteServicoService', function($rootScope, toastr, $http,$q){
 	
 	
 	return{
@@ -7,13 +7,13 @@ app.factory('pacoteServicoService', function($rootScope, $http,$q){
 			
 			.then(function(response){
 			
-				$rootScope.gravado = true;
+				toastr.info('pacotes de serviço cadastrado');
 				
 				return response.data;
 			
 			},function(errResponse){
 				console.error('Erro ao tentar gravar o pacote de servico');
-				$rootScope.naoGravado = true;
+				toastr.error('pacotes de serviço não cadastrado');
 				return $q.reject(errResponse);
 				
 			});
@@ -23,6 +23,7 @@ app.factory('pacoteServicoService', function($rootScope, $http,$q){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
+				toastr.error('erro ao buscar pacotes de serviços');
 				console.error('Erro ao tentar buscar os pacotes de servico');
 				return $q.reject(errResponse);
 			});

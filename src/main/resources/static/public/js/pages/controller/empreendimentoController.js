@@ -35,4 +35,5 @@ app.controller('empreendimentoController', function($scope, empreendimentoServic
 	$scope.maskIscEstadual = '999.999.999.999';
 	$scope.maskCep = '99999-999';
 	$scope.maskData = '9999-99-99';
+	
 });

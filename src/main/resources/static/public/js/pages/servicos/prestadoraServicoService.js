@@ -1,4 +1,4 @@
-app.factory('prestadoraServicoService', function($rootScope, $http,$q){
+app.factory('prestadoraServicoService', function($rootScope, toastr, $http,$q){
 	
 	
 	return{
@@ -7,13 +7,13 @@ app.factory('prestadoraServicoService', function($rootScope, $http,$q){
 			
 			.then(function(response){
 			
-				$rootScope.gravado = true;
+				toastr.info('prestadora de serviço cadastrado');
 				
 				return response.data;
 			
 			},function(errResponse){
 				console.error('Erro ao tentar gravar o prestadora de servico');
-				$rootScope.naoGravado = true;
+				toastr.error('errro ao cadastrar prestadora de serviço');
 				return $q.reject(errResponse);
 				
 			});
@@ -23,6 +23,7 @@ app.factory('prestadoraServicoService', function($rootScope, $http,$q){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
+				toastr.info('erro ao buscar prestadoras de serviços');
 				console.error('Erro ao tentar buscar as prestadoras de servico');
 				return $q.reject(errResponse);
 			});

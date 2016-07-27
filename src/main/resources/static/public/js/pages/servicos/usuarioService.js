@@ -1,4 +1,4 @@
-app.factory('usuarioService', function($rootScope, $http,$q){
+app.factory('usuarioService', function($rootScope, toastr, $http,$q){
 	
 	
 	return{
@@ -7,13 +7,13 @@ app.factory('usuarioService', function($rootScope, $http,$q){
 			
 			.then(function(response){
 			
-				$rootScope.gravado = true;
+				toastr.info('usuario cadastrado');
 				
 				return response.data;
 			
 			},function(errResponse){
 				console.error('Erro ao tentar gravar o usuario');
-				$rootScope.naoGravado = true;
+				toastr.error('usuario não cadastrado');
 				return $q.reject(errResponse);
 				
 			});

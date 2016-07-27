@@ -1,4 +1,4 @@
-app.factory('empreendimentoService', function($rootScope, $http){
+app.factory('empreendimentoService', function($rootScope, toastr, $http){
 	
 	
 	return{
@@ -8,6 +8,7 @@ app.factory('empreendimentoService', function($rootScope, $http){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
+				toastr.error('Erro ao buscar empreendimento');
 				console.error('Erro ao tentar buscar Empresa');
 				return $q.reject(errResponse);
 			});
@@ -18,13 +19,13 @@ app.factory('empreendimentoService', function($rootScope, $http){
 			
 			.then(function(response){
 				console.log("empreendimento gravado");
-				$rootScope.gravado = true;
+				toastr.info('Empreendimento cadastrado');
 				
 				return response.data;
 			
 			},function(errResponse){
 				console.error('Erro ao tentar gravar empreendimento');
-				$rootScope.naoGravado = true;
+				toastr.info('Empreendimento não cadastrado');
 				return $q.reject(errResponse);
 				
 			});

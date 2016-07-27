@@ -1,4 +1,4 @@
-app.factory('adminSistemaService', function($rootScope, $http){
+app.factory('adminSistemaService', function($rootScope, toastr, $http){
 	
 	
 	return{
@@ -8,6 +8,7 @@ app.factory('adminSistemaService', function($rootScope, $http){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
+				toastr.error('Erro ao Buscar Empresas');
 				console.error('Erro ao tentar buscar Empresa');
 				return $q.reject(errResponse);
 			});
@@ -17,13 +18,12 @@ app.factory('adminSistemaService', function($rootScope, $http){
 			
 			.then(function(response){
 				console.log("teste");
-				$rootScope.gravado = true;
-				
+				toastr.info('Empresa cadastrado');
 				return response.data;
 			
 			},function(errResponse){
 				console.error('Erro ao tentar gravar empresa');
-				$rootScope.naoGravado = true;
+				toastr.error('Empresa não cadastrado');
 				return $q.reject(errResponse);
 				
 			});

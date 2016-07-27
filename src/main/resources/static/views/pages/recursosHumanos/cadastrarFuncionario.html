@@ -2,7 +2,7 @@
 <div class="generic-container"
 	ng-controller="cadastrarFuncionarioController as cadFuncCtrl">
 
-	<div class="panel panel-primary">
+	<div class="panel panel-default">
 		<!-- Default panel contents -->
 		<div class="panel-heading">
 			<span class="lead">Cadastrar Funcionario </span>
@@ -74,7 +74,7 @@
 						<div class="col-sm-5">
 							<input class="form-control"
 								ng-model="cadFuncCtrl.funcionario.dataNascimento"
-								id="dataNascimento" type="text" ui-mask="{{maskData}}" required  >
+								id="dataNascimento" type="date"  required  >
 						</div>
 						<label class="col-sm-1 control-label" for="idade">idade</label>
 						<div class="col-sm-5">
@@ -107,16 +107,20 @@
 					</div>
 					<div class="row">
 						<label class="col-sm-1 control-label" for="empreendimento">Empreendimento</label>
-						<div class="col-sm-5">
+						<div class="col-sm-3">
 							<select class="form-control select2"  ng-model="cadFuncCtrl.funcionario.empreendimento" ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.shade for listarEmpreendimentos in listarEmpreendimento"  style="width: 100%;">
 		
 							</select>
 						</div>
 						<label class="col-sm-1 control-label" for="cargo">Cargo</label>
-						<div class="col-sm-5">
+						<div class="col-sm-3">
 							<select class="form-control select2" ng-model="cadFuncCtrl.funcionario.cargo" ng-options="listarCargos.descricao group by listarCargos.shade for listarCargos in listaCargo"  style="width: 100%;">
 	
 							</select>
+						</div>
+						<label class="col-sm-1 control-label" for="crea">CREA</label>
+						<div class="col-sm-3">
+							<input ng-model="cadFuncCtrl.funcionario.crea" class="form-control" id="crea" type="text">
 						</div>
 					</div>
 

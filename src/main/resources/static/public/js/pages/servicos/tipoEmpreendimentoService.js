@@ -1,4 +1,4 @@
-app.factory('tipoEmpreendimentoService', function($rootScope, $http){
+app.factory('tipoEmpreendimentoService', function($rootScope, toastr, $http){
 	
 	
 	return{
@@ -8,6 +8,7 @@ app.factory('tipoEmpreendimentoService', function($rootScope, $http){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
+				toastr.error('erro ao buscar tipo de empreendimento');
 				console.error('Erro ao tentar buscar tipo');
 				return $q.reject(errResponse);
 			});

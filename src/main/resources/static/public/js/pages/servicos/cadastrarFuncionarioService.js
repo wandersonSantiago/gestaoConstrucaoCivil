@@ -1,4 +1,4 @@
-app.factory('cadastrarFuncionarioService', function($rootScope, $http){
+app.factory('cadastrarFuncionarioService', function($rootScope, toastr, $http){
 	
 	
 	return{
@@ -7,13 +7,13 @@ app.factory('cadastrarFuncionarioService', function($rootScope, $http){
 			
 			.then(function(response){
 				console.log("teste");
-				$rootScope.gravado = true;
+				toastr.info('Funcionario cadastrado');
 				
 				return response.data;
 			
 			},function(errResponse){
 				console.error('Erro ao tentar gravar funcionario');
-				$rootScope.naoGravado = true;
+				toastr.error('Funcionario não cadastrado');
 				return $q.reject(errResponse);
 				
 			});

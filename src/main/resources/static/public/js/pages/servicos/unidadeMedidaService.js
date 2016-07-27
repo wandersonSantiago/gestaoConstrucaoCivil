@@ -1,4 +1,4 @@
-app.factory('unidadeMedidaService', function($rootScope, $http,$q){
+app.factory('unidadeMedidaService', function($rootScope, toastr, $http,$q){
 	
 	
 	return{
@@ -7,13 +7,13 @@ app.factory('unidadeMedidaService', function($rootScope, $http,$q){
 			
 			.then(function(response){
 				console.log("teste");
-				$rootScope.gravado = true;
+				toastr.info('unidade de medida cadastrado');
 				
 				return response.data;
 			
 			},function(errResponse){
 				console.error('Erro ao tentar gravar Unidade Medida');
-				$rootScope.naoGravado = true;
+				toastr.error('unidade de medida não cadastrado');
 				return $q.reject(errResponse);
 				
 			});
