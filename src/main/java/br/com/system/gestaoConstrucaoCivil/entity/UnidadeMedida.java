@@ -22,18 +22,18 @@ public class UnidadeMedida implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 	@Column(nullable = false,length = 50)
-	private String descricaoMedida;
+	private String descricao;
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getDescricaoMedida() {
-		return descricaoMedida;
+	public String getDescricao() {
+		return descricao;
 	}
-	public void setDescricaoMedida(String descricaoMedida) {
-		this.descricaoMedida = descricaoMedida;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 	
 	@Override

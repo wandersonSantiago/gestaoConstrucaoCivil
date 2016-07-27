@@ -12,17 +12,17 @@ public class Seguranca extends AbstractPersistable<Long>{
 
 	
 	@Column(nullable = false,length = 50)
-	private String descricaoSeguranca;
+	private String descricao;
 	
 	private TipoModulo tipoModulo;
 
 
-	public String getDescricaoSeguranca() {
-		return descricaoSeguranca;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setDescricaoSeguranca(String descricaoSeguranca) {
-		this.descricaoSeguranca = descricaoSeguranca;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public TipoModulo getTipoModulo() {

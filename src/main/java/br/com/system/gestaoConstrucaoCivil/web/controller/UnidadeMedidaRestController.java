@@ -30,7 +30,7 @@ public class UnidadeMedidaRestController {
 	 @RequestMapping(method = RequestMethod.POST,value="/cadastrarUnidadeMedida")
 	 public ResponseEntity salva(@RequestBody UnidadeMedida unidadeMedida,UriComponentsBuilder ucBuilder)
 	 {
-		 System.out.println(unidadeMedida.getDescricaoMedida());
+		 System.out.println(unidadeMedida.getDescricao());
 		 unidadeMedidadService.salvarOuEditar(unidadeMedida);
 		 HttpHeaders headers =new HttpHeaders();
 		 headers.setLocation(ucBuilder.path("/rest/produto/cadastrarUnidadeMedida/{id}").buildAndExpand(unidadeMedida.getId()).toUri());

@@ -33,6 +33,9 @@ public class EstoqueEmpreendimento implements Serializable{
 	@Column(nullable = false)
 	private Integer quantidade;
 	
+	@Column(nullable = false)
+	private String localizacao;
+	
 	@OneToOne
 	@JoinColumn(name="id_empreendimento",nullable = true)
 	private Empreendimento empreendimento;
@@ -68,6 +71,13 @@ public class EstoqueEmpreendimento implements Serializable{
 	}
 	public void setProduto(List<Produto> produto) {
 		this.produto = produto;
+	}
+	
+	public String getLocalizacao() {
+		return localizacao;
+	}
+	public void setLocalizacao(String localizacao) {
+		this.localizacao = localizacao;
 	}
 	@Override
 	public int hashCode() {

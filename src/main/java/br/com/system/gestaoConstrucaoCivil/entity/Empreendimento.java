@@ -3,6 +3,8 @@ package br.com.system.gestaoConstrucaoCivil.entity;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -11,6 +13,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import br.com.system.gestaoConstrucaoCivil.enuns.TiposEmpreendimentoEnum;
 
 @Entity
 @Table(name = "empreendimento")
@@ -29,9 +33,8 @@ public class Empreendimento extends AbstractPersistable<Long> {
 	@JoinColumn(name="id_engenheiro_responsavel_terceiro",nullable = true)
 	private PrestadoraServico engenheiroResponsavelTerceiro;
 	
-	@ManyToOne
-	@JoinColumn(name="id_tipo_empreendimento",nullable = false)
-	private TipoEmpreendimento tipoEmpreendimento;
+	@Enumerated(EnumType.STRING)
+	private TiposEmpreendimentoEnum tipoEmpreendimento;
     
 	@Column(nullable = false)
 	String descricao;
@@ -42,6 +45,8 @@ public class Empreendimento extends AbstractPersistable<Long> {
 	private Double valorMaximoGastar;
 	@Column(nullable = false)
 	private Double valoresGastos = 0.0;
+	@Column(nullable = false)
+	private Double porcentagem;
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dataAbertura;
@@ -78,10 +83,11 @@ public class Empreendimento extends AbstractPersistable<Long> {
 	public void setEngenheiroResponsavelTerceiro(PrestadoraServico engenheiroResponsavelTerceiro) {
 		this.engenheiroResponsavelTerceiro = engenheiroResponsavelTerceiro;
 	}
-	public TipoEmpreendimento getTipoEmpreendimento() {
+
+	public TiposEmpreendimentoEnum getTipoEmpreendimento() {
 		return tipoEmpreendimento;
 	}
-	public void setTipoEmpreendimento(TipoEmpreendimento tipoEmpreendimento) {
+	public void setTipoEmpreendimento(TiposEmpreendimentoEnum tipoEmpreendimento) {
 		this.tipoEmpreendimento = tipoEmpreendimento;
 	}
 	public Double getValorMaximoGastar() {
@@ -122,5 +128,12 @@ public class Empreendimento extends AbstractPersistable<Long> {
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
 	}
+	public Double getPorcentagem() {
+		return porcentagem;
+	}
+	public void setPorcentagem(Double porcentagem) {
+		this.porcentagem = porcentagem;
+	}
 
+	
 }

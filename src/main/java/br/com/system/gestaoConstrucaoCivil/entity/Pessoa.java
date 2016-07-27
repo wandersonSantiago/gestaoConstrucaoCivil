@@ -41,6 +41,8 @@ public abstract class Pessoa implements Serializable{
 	protected String telefoneCelular;
 	@Column(nullable = false)
 	protected Date dataNascimento;
+	@Column(nullable = false)
+	protected String sexo;
    
 	
 	public String getNomeCompleto() {
@@ -96,6 +98,13 @@ public abstract class Pessoa implements Serializable{
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getSexo() {
+		return sexo;
+	}
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
 	@Override
 	public int hashCode() {

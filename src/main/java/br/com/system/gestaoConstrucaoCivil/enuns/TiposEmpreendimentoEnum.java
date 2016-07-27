@@ -1,6 +1,6 @@
-package br.com.system.gestaoConstrucaoCivil.entity;
+package br.com.system.gestaoConstrucaoCivil.enuns;
 
-public enum TiposEmpreendimento {
+public enum TiposEmpreendimentoEnum {
 	EDIFICIO_COMERCIAL("Edifício comercial"),
 	EDIFICIO_RESIDENCIAL("Edifício residencial"), 
 	CONDOMINIO_DE_CASA("Condomínio de casas"), 
@@ -10,7 +10,7 @@ public enum TiposEmpreendimento {
 
 	private String descricao;
 
-	TiposEmpreendimento(String descricao) {
+	TiposEmpreendimentoEnum(String descricao) {
 		this.descricao = descricao;
 	}
 

@@ -15,16 +15,16 @@ public class SubCategoria extends AbstractPersistable<Long>{
 
 	
 	@Column(nullable = false,length = 50)
-	private String descricaoSubCategoria;
+	private String descricao;
 	@OneToOne
 	@JoinColumn(name="id_categoria")
 	private Categoria categoria;
 	
-	public String getDescricaoSubCategoria() {
-		return descricaoSubCategoria;
+	public String getDescricao() {
+		return descricao;
 	}
-	public void setDescricaoSubCategoria(String descricaoSubCategoria) {
-		this.descricaoSubCategoria = descricaoSubCategoria;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 	public Categoria getCategoria() {
 		return categoria;

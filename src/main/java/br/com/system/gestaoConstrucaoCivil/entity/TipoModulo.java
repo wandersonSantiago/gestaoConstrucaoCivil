@@ -12,15 +12,15 @@ public class TipoModulo extends AbstractPersistable<Long>{
 
 	
 	@Column(nullable = false,length = 50)
-	private String descricaoModulo;
+	private String descricao;
 	@Column(nullable = false)
 	private Integer tipo;
 	
-	public String getDescricaoModulo() {
-		return descricaoModulo;
+	public String getDescricao() {
+		return descricao;
 	}
-	public void setDescricaoModulo(String descricaoModulo) {
-		this.descricaoModulo = descricaoModulo;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 	public Integer getTipo() {
 		return tipo;
