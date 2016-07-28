@@ -27,8 +27,7 @@ public class UsuarioRestController {
 	 }
 	 
 	 @RequestMapping(method = RequestMethod.POST)
-	 public ResponseEntity salva(@RequestBody Usuario usuario,UriComponentsBuilder ucBuilder)
-	 {
+	 public ResponseEntity salva(@RequestBody Usuario usuario,UriComponentsBuilder ucBuilder){
 		 usuarioService.salvarOuEditar(usuario);
 		 HttpHeaders headers =new HttpHeaders();
 		 headers.setLocation(ucBuilder.path("/rest/usuario/cadastrarUsuario/{id}").buildAndExpand(usuario.getId()).toUri());

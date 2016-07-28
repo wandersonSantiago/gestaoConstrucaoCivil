@@ -9,37 +9,82 @@ app.config(['$routeProvider','$httpProvider', function($routeProvider, $httpProv
 		templateUrl : "views/login.html"
 	})
 
-	//Rotas Administrador Sistema
+	
+//ROTAS ADMIN SISTEMA
+	
+				//CADASTRAR
 	.when('/cadastrarEmpresa', {
-		templateUrl : "views/pages/adminSistema/cadastrarEmpresa.html",
+		templateUrl : "views/pages/adminSistema/cadastrar/cadastrarEmpresa.html",
+	//	controller : "adminSistemaController",
+		
 	})
 	
 	.when('/cadastrarAdminEmpresa', {
-		templateUrl : "views/pages/adminSistema/cadastrarAdmiEmpresa.html",
+		templateUrl : "views/pages/adminSistema/cadastrar/cadastrarAdmiEmpresa.html",
+	//	controller : "adminSistemaController",
+	})
+	
+				//LISTAR
+	.when('/listaAdminEmpresa', {
+		templateUrl : "views/pages/adminSistema/lista/listaAdminEmpresa.html",
+	//	controller : "adminSistemaController",
+	})
+	
+				
+	.when('/listaEmpresa', {
+		templateUrl : "views/pages/adminSistema/lista/listaEmpresa.html",
+	//	controller : "adminSistemaController",
+	})
+				//EDITAR
+	
+	.when('/editarEmpresa/:idEmpresa', {
+		templateUrl : "views/pages/adminSistema/editar/editarEmpresa.html",
+	//	controller : "adminSistemaController",
 	})
 	
 	
-	//Rotas Administrador Empresa
+//ROTAS ADMINISTRADOR EMPRESA
+	
+			//CADASTRAR
 	.when('/cadastrarEmpreendimento', {
-		templateUrl : "views/pages/adminEmpresa/cadastrarEmpreendimento.html",
+		templateUrl : "views/pages/adminEmpresa/cadastrar/cadastrarEmpreendimento.html",
+	//	controller : "empreendimento-controller.js",
+			
 	})
 	.when('/cadastrarTipoEmpreendimento', {
-		templateUrl : "views/pages/adminEmpresa/cadastrarTipoEmpreendimento.html",
+		templateUrl : "views/pages/adminEmpresa/cadastrar/cadastrarTipoEmpreendimento.html",
+	//	controller : "tipo-empreendimento-controller.js",
 	})
+	
+			//LISTAR
     	.when('/listaTipoEmpreendimento', {
-		templateUrl : "views/pages/adminEmpresa/listaTipoEmpreendimento.html",
+		templateUrl : "views/pages/adminEmpresa/lista/listaTipoEmpreendimento.html",
+//		controller : "tipo-empreendimento-controller.js",
+	})
+	.when('/listaEmpreendimento', {
+		templateUrl : "views/pages/adminEmpresa/lista/listaEmpreendimento.html",
+	//	controller : "empreendimento-controller.js",
 	})
     
+//ROTAS RECURSOS HUMANOS
 	
-	//Rotas Cadastrar Cargo
-	.when('/cadastrarCargo', {
-		templateUrl : "views/pages/cargo/cadastrarCargo.html",
+		//CADASTRAR
+	.when('/cadastrarFuncionario', {
+		templateUrl:"views/pages/recursosHumanos/cadastrar/cadastrarFuncionario.html",		
+//		controller : "funcionario-controller.js"
+	})
+		.when('/cadastrarCargo', {
+		templateUrl : "views/pages/recursosHumanos/cadastrar/cadastrarCargo.html",
+	//	controller : "cargo-controller.js"
 	})
 	
-	//Rotas Recursos Humanos
-		
-	.when('/cadastrarFuncionario', {
-		templateUrl:"views/pages/recursosHumanos/cadastrarFuncionario.html",
+	
+	//Rotas Produto
+	.when('/cadastrarUnidadeMedida', {
+		templateUrl:"views/pages/produto/cadastrarUnidadeMedida.html",
+	})
+	.when('/cadastrarProduto', {
+		templateUrl:"views/pages/produto/cadastrarProduto.html",
 	})
 	
 	//Rota de erro
