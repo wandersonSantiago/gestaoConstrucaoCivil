@@ -3,11 +3,11 @@ app.controller('adminSistemaController', function($scope, adminSistemaService, $
 	var self = this;
   
 	self.empresa = null;
-	var idEmpresa =  $routeParams.id;
-	//$scope.ativarBusca = 1;
-	$scope.listaEmpresa = [];
+	var idEmpresa =  5;
+	//self.ativarBusca = null;
 	
-	console.log(idEmpresa);
+	
+	console.log("to aqui",self.empresas);
 	
 	self.createEmpresa = function(empresa, sucesso){
 		console.log(self.empresa);
@@ -27,13 +27,14 @@ app.controller('adminSistemaController', function($scope, adminSistemaService, $
 //carrega a lista de empresa, quando acessa o controller
 	self.buscarEmpresas = function(){
 		adminSistemaService.empresaFindAll().
-		then(function(p){
-			$scope.listaEmpresa = p;
-			console.log("uyfudduquduyfudfc");
+		then(function(e){
+			self.empresas = e;
+			console.log("to aqui",self.empresas);
 		}, function(errResponse){
 			toastr.error('Erro ao buscar empresas');
 		});
 	};
+	self.empresas = [];
 	
 //busca a empresa atraves do id
 	self.buscarEmpresaPorId = function(id){
@@ -46,16 +47,16 @@ app.controller('adminSistemaController', function($scope, adminSistemaService, $
 			toastr.error('Erro ao buscar empresas');
 		});
 	};
-//verifica se o params esta com o id		
+//verifica se o params esta com o ide executa o metodo de busca 	
 	if(idEmpresa){
 		self.buscarEmpresaPorId(idEmpresa);
 		
 	}
 	
-	if(!idEmpresa){
+	/*if(self.ativarBusca == 1){
 		
 		self.buscarEmpresas();
-	}
+	}*/
 	
 	$scope.maskFone= '(99) 9999 - 999?9';
 	$scope.maskCnpj= '99.999.999/9999-99';

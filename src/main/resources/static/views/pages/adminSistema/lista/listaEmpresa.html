@@ -2,12 +2,12 @@
 <div class="generic-container"
 	ng-controller="adminSistemaController as adminCtrl" >
 
-	<div class="panel panel-primary">
+	<div class="panel panel-primary" ng-init="adminCtrl.buscarEmpresas()">
 		<!-- Default panel contents -->
 		<div class="panel-heading">
 			<span class="lead">Lista de Empresa </span>
 		</div>
-		<div class="panel-body" ng-model="adminCtrl.ativarBusca" ng-init="adminCtrl.ativarBusca = 1" >
+		<div class="panel-body"  >
 			<table class="table table-hover table-bordered">
 				<thead>
 					<tr>
@@ -21,14 +21,14 @@
 					</tr>
 				</thead>
 				<tbody
-					ng-repeat=" listaEmpresas in listaEmpresa ">
+					ng-repeat=" empresa in adminCtrl.empresas ">
 					<tr>
-					<td><h3><a href="#/editarEmpresa/{{listaEmpresas.empresaContratante.id}}">{{ listaEmpresas.dadoEmpresa.razaoSocial }}</a></h3></td>
-						<td>{{ listaEmpresas.dadoEmpresa.nomeFantasia }}</td>
-						<td>{{ listaEmpresas.dadoEmpresa.cnpj }}</td>
-						<td>{{ listaEmpresas.dadoEmpresa.telefone }}</td>
-						<td>{{ listaEmpresas.dadoEmpresa.inscricaoEstadual }}</td>
-						<td>{{ listaEmpresas.dadoEmpresa.endereco.estado }}</td>
+					<td><h3><a href="#/editarEmpresa/{{empresa.id}}">{{ empresa.razaoSocial }}</a></h3></td>
+						<td>{{ empresa.nomeFantasia }}</td>
+						<td>{{ empresa.cnpj }}</td>
+						<td>{{ empresa.telefone }}</td>
+						<td>{{ empresa.inscricaoEstadual }}</td>
+						<td>{{ empresa.estado }}</td>
 					</tr>
 
 				</tbody>

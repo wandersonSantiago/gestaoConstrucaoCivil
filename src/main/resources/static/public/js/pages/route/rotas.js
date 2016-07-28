@@ -37,7 +37,7 @@ app.config(['$routeProvider','$httpProvider', function($routeProvider, $httpProv
 	})
 				//EDITAR
 	
-	.when('/editarEmpresa', {
+	.when('/editarEmpresa/:idEmpresa', {
 		templateUrl : "views/pages/adminSistema/editar/editarEmpresa.html",
 	//	controller : "adminSistemaController",
 	})
