@@ -5,15 +5,14 @@ app.factory('adminSistemaService', function($rootScope, toastr, $http, $q){
 		
 		buscarEmpresa: function(param){
 			console.log("service admin" );
-			return $http.get('rest/adminSistema/cadastrarEmpresa/listarEmpresaId/'+param)
+			return $http.get('rest/adminSistema/listarEmpresaId/'+param)
 			.then(function(response){
 				return response.data;
 			});
 			
-		},
-		
+		},	
 		empresaFindAll: function(){
-			return $http.get('rest/adminSistema/cadastrarEmpresa/listarEmpresa')
+			return $http.get('rest/adminSistema/listarEmpresa')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
@@ -22,39 +21,24 @@ app.factory('adminSistemaService', function($rootScope, toastr, $http, $q){
 				return $q.reject(errResponse);
 			});
 		},
-		
-		
+				
 		empresaCreate: function(empresa){
 			return $http.post('rest/adminSistema/cadastrarEmpresa', empresa)
-			
 			.then(function(response){
-				console.log("teste");
 				toastr.info('Empresa cadastrado');
 				return response.data;
-			
 			},function(errResponse){
-				console.error('Erro ao tentar gravar empresa');
 				toastr.error('Empresa não cadastrado');
 				return $q.reject(errResponse);
-				
 			});
 		},
-		
-		empresaFindOne: function(id){
-			return $http.get('rest/adminSistema/buscaEmpresa' +id)
+		empresaUpdate: function(empresa){
+			return $http.put('/rest/adminSistema/alterarEmpresa',empresa)
 			.then(function(response){
+				toastr.info('Empresa  Alterado');
 				return response.data;
 			},function(errResponse){
-				console.error('Erro ao tentar Buscar empresa');
-				return $q.reject(errResponse);
-			});
-		},
-		empresaUpdate: function(item, id){
-			return $http.put('/rest/adminSistema/updateEmpresa' +id, item)
-			.then(function(response){
-				return response.data;
-			},function(errResponse){
-				console.error('Erro ao tentar Alterar empresa');
+				toastr.error('Empresa não Alterado');
 				return $q.reject(errResponse);
 			});
 		},

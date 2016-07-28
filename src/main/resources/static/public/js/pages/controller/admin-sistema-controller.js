@@ -3,32 +3,40 @@ app.controller('adminSistemaController', function($scope, adminSistemaService, $
 	var self = this;
   
 	self.empresa = null;
-	var idEmpresa =  $routeParams.idEmpresa;
-	
+	var idEmpresa =  $routeParams.id;
+	//$scope.ativarBusca = 1;
 	$scope.listaEmpresa = [];
 	
 	console.log(idEmpresa);
+	
 	self.createEmpresa = function(empresa, sucesso){
-		console.log("funfou o controle");
 		console.log(self.empresa);
 		adminSistemaService.empresaCreate(self.empresa);
 	
 		self.empresa = empresa;
 		
 	}
+	
+	self.updateEmpresa = function(empresa, sucesso){
+		console.log(self.empresa);
+		adminSistemaService.empresaUpdate(self.empresa);
+	
+		self.empresa = empresa;
+		
+	}
 //carrega a lista de empresa, quando acessa o controller
-	adminSistemaService.empresaFindAll().
-	  then(function(c){
-		  console.log("funfou o controle");
-		  console.log(idEmpresa);
-		  $scope.listaEmpresa = c;
-	  }, function(errResponse){
-			console.error('Erro ao tentar buscar empresa');
-			return $q.reject(errResponse);
+	self.buscarEmpresas = function(){
+		adminSistemaService.empresaFindAll().
+		then(function(p){
+			$scope.listaEmpresa = p;
+			console.log("uyfudduquduyfudfc");
+		}, function(errResponse){
+			toastr.error('Erro ao buscar empresas');
 		});
+	};
 	
 //busca a empresa atraves do id
-	self.buscarEmpresa = function(id){
+	self.buscarEmpresaPorId = function(id){
 		if(!id)return;
 		adminSistemaService.buscarEmpresa(id).
 		then(function(p){
@@ -40,7 +48,13 @@ app.controller('adminSistemaController', function($scope, adminSistemaService, $
 	};
 //verifica se o params esta com o id		
 	if(idEmpresa){
-		self.buscarEmpresa(idEmpresa);
+		self.buscarEmpresaPorId(idEmpresa);
+		
+	}
+	
+	if(!idEmpresa){
+		
+		self.buscarEmpresas();
 	}
 	
 	$scope.maskFone= '(99) 9999 - 999?9';

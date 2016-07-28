@@ -1,13 +1,13 @@
 <meta charset="UTF-8">
 <div class="generic-container"
-	ng-controller="adminSistemaController as adminCtrl">
+	ng-controller="adminSistemaController as adminCtrl" >
 
 	<div class="panel panel-primary">
 		<!-- Default panel contents -->
 		<div class="panel-heading">
 			<span class="lead">Lista de Empresa </span>
 		</div>
-		<div class="panel-body">
+		<div class="panel-body" ng-model="adminCtrl.ativarBusca" ng-init="adminCtrl.ativarBusca = 1" >
 			<table class="table table-hover table-bordered">
 				<thead>
 					<tr>
@@ -23,7 +23,7 @@
 				<tbody
 					ng-repeat=" listaEmpresas in listaEmpresa ">
 					<tr>
-					<td><h3><a href="#/editarEmpresa/{{5}}">{{ listaEmpresas.dadoEmpresa.razaoSocial }}</a></h3></td>
+					<td><h3><a href="#/editarEmpresa/{{listaEmpresas.empresaContratante.id}}">{{ listaEmpresas.dadoEmpresa.razaoSocial }}</a></h3></td>
 						<td>{{ listaEmpresas.dadoEmpresa.nomeFantasia }}</td>
 						<td>{{ listaEmpresas.dadoEmpresa.cnpj }}</td>
 						<td>{{ listaEmpresas.dadoEmpresa.telefone }}</td>
