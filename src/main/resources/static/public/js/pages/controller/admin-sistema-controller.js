@@ -3,16 +3,12 @@ app.controller('adminSistemaController', function($scope, adminSistemaService, $
 	var self = this;
   
 	self.empresa = null;
-	var idEmpresa =  5;
-	//self.ativarBusca = null;
-	
-	
-	console.log("to aqui",self.empresas);
+	var idEmpresa =  $routeParams.idEmpresa;
+
 	
 	self.createEmpresa = function(empresa, sucesso){
 		console.log(self.empresa);
 		adminSistemaService.empresaCreate(self.empresa);
-	
 		self.empresa = empresa;
 		
 	}
@@ -28,13 +24,13 @@ app.controller('adminSistemaController', function($scope, adminSistemaService, $
 	self.buscarEmpresas = function(){
 		adminSistemaService.empresaFindAll().
 		then(function(e){
-			self.empresas = e;
-			console.log("to aqui",self.empresas);
+			self.listaEmpresa = e;
+			console.log("to aqui",self.listaEmpresa);
 		}, function(errResponse){
 			toastr.error('Erro ao buscar empresas');
 		});
 	};
-	self.empresas = [];
+
 	
 //busca a empresa atraves do id
 	self.buscarEmpresaPorId = function(id){

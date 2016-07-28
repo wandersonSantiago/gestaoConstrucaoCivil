@@ -21,14 +21,14 @@
 					</tr>
 				</thead>
 				<tbody
-					ng-repeat=" empresa in adminCtrl.empresas ">
+					ng-repeat=" empresa in adminCtrl.listaEmpresa ">
 					<tr>
-					<td><h3><a href="#/editarEmpresa/{{empresa.id}}">{{ empresa.razaoSocial }}</a></h3></td>
-						<td>{{ empresa.nomeFantasia }}</td>
-						<td>{{ empresa.cnpj }}</td>
-						<td>{{ empresa.telefone }}</td>
-						<td>{{ empresa.inscricaoEstadual }}</td>
-						<td>{{ empresa.estado }}</td>
+					<td><h5><a href="#/editarEmpresa/{{empresa.id}}">{{ empresa.dadoEmpresa.razaoSocial }}</a></h5></td>
+						<td><h5><a href="#/editarEmpresa/{{empresa.id}}">{{ empresa.dadoEmpresa.nomeFantasia }}</a></h5></td>
+						<td><h5><a href="#/editarEmpresa/{{empresa.id}}">{{ empresa.dadoEmpresa.cnpj }}</a></h5></td>
+						<td><h5><a href="#/editarEmpresa/{{empresa.id}}">{{ empresa.dadoEmpresa.telefone }}</a></h5></td>
+						<td><h5><a href="#/editarEmpresa/{{empresa.id}}">{{ empresa.dadoEmpresa.inscricaoEstadual}}</a></h5></td>
+						<td><h5><a href="#/editarEmpresa/{{empresa.id}}">{{ empresa.dadoEmpresa.endereco.estado }}</a></h5></td>
 					</tr>
 
 				</tbody>
