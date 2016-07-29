@@ -10,14 +10,15 @@ app.controller('PrestadoraServicoController', function($scope,PrestadoraServicoS
 		 prestadoraServicoService.prestadoraServicoCreate(self.prestadoraServico);
 	}
 	 
-	
-	 prestadoraServicoService.prestadoraServicoFindAll().
-	  then(function(prestadoraServico){
-		  $scope.listaPrestadoraServico = prestadoraServico;
-	  }, function(errResponse){
-			console.error('Erro ao tentar buscar prestadora de servico');
-			return $q.reject(errResponse);
-		});
+	 self.buscarPrestadoraServico = function(){
+		 prestadoraServicoService.prestadoraServicoFindAll().
+			then(function(t){
+				self.listaPrestadoraServico = t;
+				}, function(errResponse){
+				toastr.error('Erro ao tentar buscar prestadora de servico');
+			});
+		};
 	 
+		 
 	
 });

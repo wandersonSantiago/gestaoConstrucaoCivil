@@ -2,7 +2,7 @@ app.controller('tipoEmpreendimentoController', function($scope, tipoEmpreendimen
 	
 	var self = this;
   
-	$scope.listarTipoEmpreendimento = [];
+	
 		
 	self.createTipoEmpreendimento = function(tipoEmpreendimento){
 		console.log("funfou o controle");
@@ -14,14 +14,14 @@ app.controller('tipoEmpreendimentoController', function($scope, tipoEmpreendimen
 	}
 	
 
-	tipoEmpreendimentoService.tipoEmpreendimentoFindAll().
-	  then(function(t){
-		  $scope.listarTipoEmpreendimento = t;
-	  }, function(errResponse){
-			console.error('Erro ao tentar buscar tipo');
-			return $q.reject(errResponse);
-		});
+	 self.buscarTipoEmpreendimentos = function(){
+		 tipoEmpreendimentoService.tipoEmpreendimentoFindAll().
+			then(function(t){
+				$scope.listarTipoEmpreendimento = t;
+				}, function(errResponse){
+				toastr.error('Erro ao tentar buscar tipo empreendimento');
+			});
+		};
 	
-	
-	
+		
 });

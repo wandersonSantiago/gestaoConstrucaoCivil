@@ -10,14 +10,17 @@ app.controller('fornecedorController', function($scope,fornecedorService, $route
 		 fornecedorService.fornecedorCreate(self.fornecedor);
 	}
 	 
+	 
+	 self.buscarFornecedores = function(){
+		 fornecedorService.fornecedorFindAll().
+			then(function(t){
+				self.listaFornecedor = t;
+				}, function(errResponse){
+				toastr.error('Erro ao tentar buscar fornecedor');
+			});
+		};
+		
 	
-	 fornecedorService.fornecedorFindAll().
-	  then(function(fornecedor){
-		  $scope.listaFornecedor = fornecedor;
-	  }, function(errResponse){
-			console.error('Erro ao tentar buscar fornecedor');
-			return $q.reject(errResponse);
-		});
 	 
 	
 });

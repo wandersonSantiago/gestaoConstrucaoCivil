@@ -1,8 +1,6 @@
 app.controller('unidadeMedidaController', function($scope,unidadeMedidaService, $routeParams){
 	
 	var self = this;
-		
-	$scope.listaUnidadeMedida = [];
 	
 	
 	 self.cadastrarUnidadeMedida = function(unidadeMedida){
@@ -10,14 +8,14 @@ app.controller('unidadeMedidaController', function($scope,unidadeMedidaService, 
 		 unidadeMedidaService.unidadeMedidaCreate(self.unidadeMedida);
 	}
 	 
+	 self.buscarUnidadeMedidas = function(){
+		 unidadeMedidaService.unidadeMedidaFindAll().
+			then(function(t){
+				self.listaunidadeMedida = t;
+				}, function(errResponse){
+				toastr.error('Erro ao tentar buscar unidade medida');
+			});
+		};
 	
-	 unidadeMedidaService.unidadeMedidaFindAll().
-	  then(function(unidadeMedida){
-		  $scope.listaunidadeMedida = unidadeMedida;
-	  }, function(errResponse){
-			console.error('Erro ao tentar buscar unidade medida');
-			return $q.reject(errResponse);
-		});
-	 
-	
+		
 });

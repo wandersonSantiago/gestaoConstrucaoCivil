@@ -1,39 +1,23 @@
-app.controller('cadastrarFuncionarioController', function($scope, cargoService, empreendimentoService,
-		cadastrarFuncionarioService, $routeParams) {
+app.controller('cadastrarFuncionarioController', function($scope, cadastrarFuncionarioService, cargoService, $routeParams) {
 
 	var self = this;
-	$scope.listaCargo = [];
-	$scope.listarEmpreendimento = [];
 
 	self.cadastrarFuncionario = function(funcionario) {
-		console.log("funfou o controle");
-		console.log(self.funcionario);
-		console.log("TESTE:" + self.funcionario.dataNascimento);
-		cadastrarFuncionarioService.funcionarioCreate(self.funcionario);
-
+		adastrarFuncionarioService.funcionarioCreate(self.funcionario);
 		self.funcionario = funcionario;
 
 	}
 
-	
-	cargoService.cargoFindAll().
-	  then(function(c){
-		  $scope.listaCargo = c;
-	  }, function(errResponse){
-			console.error('Erro ao tentar buscar cargo');
-			return $q.reject(errResponse);
-		});
-
-	empreendimentoService.empreendimentoFindAll().
-	  then(function(t){
-		  $scope.listarEmpreendimento = t;
-	  }, function(errResponse){
-			console.error('Erro ao tentar buscar empreendimento');
-			return $q.reject(errResponse);
-		});
-	
-
-	
+	 self.buscarFuncionarios = function(){
+		 cadastrarFuncionarioService.funcionarioFindAll().
+			then(function(f){
+				self.listaFuncionarios = f;
+				}, function(errResponse){
+				toastr.error('Erro ao tentar buscar funcionarios');
+			});
+		};
+		
+			
 
 	$scope.maskFone = '(99) 9999 - 999?9';
 	$scope.maskCnpj = '99.999.999/9999-99';

@@ -1,12 +1,12 @@
 <meta charset="UTF-8">
 <div class="generic-container" ng-controller="empreendimentoController as empCtrl">
 
-	<div class="panel panel-primary">
+	<div class="box box-primary" >
 		<!-- Default panel contents -->
-		<div class="panel-heading">
+		<div class="box-header" >
 			<span class="lead"> cadastrar Empreendimento </span>
 		</div>
-		<div class="panel-body">
+		<div class="panel-body" >
 
 			<br>
 			<div class="container col-sm-12 ">
@@ -27,13 +27,14 @@
 						</div>
 						<label class="col-sm-2 control-label" for="tipoEmpreendimento">Tipo
 							Empreendimento</label>
-						<div class="col-sm-4">
+						<div class="col-sm-4" ng-controller="tipoEmpreendimentoController as tipoEmpCtrl" ng-init="tipoEmpCtrl.buscarTipoEmpreendimentos()" >
 							<select class="form-control select2" ng-model="empCtrl.empreendimento.tipoEmpreendimento" 
-							ng-options="listarTipoEmpreendimentos.descricaoTipoEmpreendimento group by listarTipoEmpreendimentos.shade for listarTipoEmpreendimentos in listarTipoEmpreendimento" 
+							ng-options="listarTipoEmpreendimentos.descricaoTipoEmpreendimento for listarTipoEmpreendimentos in listarTipoEmpreendimento" 
 							  style=" width: 100%;" >
-
+								<option value="">---Selecione---</option>
 							</select>
 						</div>
+						{{empCtrl.listarTipoEmpreendimento.descricaoTipoEmpreendimento}}
 					</div>
 					<br>
 					<div class="row">

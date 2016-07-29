@@ -10,14 +10,15 @@ app.controller('pacoteServicoController', function($scope,pacoteServicoService, 
 		 pacoteServicoService.pacoteServicoCreate(self.pacoteServico);
 	}
 	 
+	 self.buscarPacoteServicos = function(){
+		 pacoteServicoService.pacoteServicoFindAll().
+			then(function(f){
+				self.listaPacoteServicos = f;
+				}, function(errResponse){
+				toastr.error('Erro ao tentar buscar os pacotes de serviço');
+			});
+		};
 	
-	 pacoteServicoService.pacoteServicoFindAll().
-	  then(function(pacoteServico){
-		  $scope.listaPacoteServico = pacoteServico;
-	  }, function(errResponse){
-			console.error('Erro ao tentar buscar os pacotes de serviço');
-			return $q.reject(errResponse);
-		});
-	 
 	
+	  
 });

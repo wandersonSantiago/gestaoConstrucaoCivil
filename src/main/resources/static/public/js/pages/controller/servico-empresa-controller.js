@@ -2,7 +2,6 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 	
 	var self = this;
 		
-	$scope.listaServicoEmpresa = [];
 	
 	
 	 self.cadastrarServicoEmpresa = function(servicoEmpresa){
@@ -10,14 +9,14 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 		 servicoEmpresaService.servicoEmpresaCreate(self.servicoEmpresa);
 	}
 	 
+	 self.buscarServicoEmpresas = function(){
+		 servicoEmpresaService.servicoEmpresaFindAll().
+			then(function(t){
+				self.listaServicoEmpresa = t;
+				}, function(errResponse){
+				toastr.error('Erro ao tentar buscar os servicos das empresas');
+			});
+		};
 	
-	 servicoEmpresaService.servicoEmpresaFindAll().
-	  then(function(servicoEmpresa){
-		  $scope.listaServicoEmpresa = servicoEmpresa;
-	  }, function(errResponse){
-			console.error('Erro ao tentar buscar os servicos das empresas');
-			return $q.reject(errResponse);
-		});
-	 
-	
+		
 });

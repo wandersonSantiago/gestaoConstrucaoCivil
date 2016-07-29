@@ -11,13 +11,14 @@ app.controller('usuarioController', function($scope,usuarioService, $routeParams
 	}
 	 
 	
-	 usuarioService.usuarioFindAll().
-	  then(function(usuario){
-		  $scope.listaUsuario = usuario;
-	  }, function(errResponse){
-			console.error('Erro ao tentar buscar Usuario');
-			return $q.reject(errResponse);
-		});
+	 self.buscarUsuarios = function(){
+		 usuarioService.usuarioFindAll().
+			then(function(u){
+				self.listaUsuario = u;
+				}, function(errResponse){
+				toastr.error('Erro ao tentar buscar Usuario');
+			});
+		};
 	 
 	
 });

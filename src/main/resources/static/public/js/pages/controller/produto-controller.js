@@ -2,22 +2,21 @@ app.controller('produtoController', function($scope,produtoService, $routeParams
 	
 	var self = this;
 		
-	$scope.listaProduto = [];
-	
 	
 	 self.cadastrarProduto = function(produto){
 		 console.log(self.produto);
 		 produtoService.produtoCreate(self.produto);
 	}
 	 
+	 self.buscarProdutos = function(){
+		 produtoService.produtoFindAll().
+			then(function(t){
+				self.listaProduto = t;
+				}, function(errResponse){
+				toastr.error('Erro ao tentar buscar produto');
+			});
+		};
 	
-	 produtoService.produtoFindAll().
-	  then(function(produto){
-		  $scope.listaProduto = produto;
-	  }, function(errResponse){
-			console.error('Erro ao tentar buscar produto');
-			return $q.reject(errResponse);
-		});
-	 
+	  
 	
 });
