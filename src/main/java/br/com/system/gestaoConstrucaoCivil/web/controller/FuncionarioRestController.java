@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Cargo;
+import br.com.system.gestaoConstrucaoCivil.entity.EmpresaContratante;
 import br.com.system.gestaoConstrucaoCivil.entity.Funcionario;
 import br.com.system.gestaoConstrucaoCivil.service.EnderecoService;
 import br.com.system.gestaoConstrucaoCivil.service.FuncionarioService;
@@ -19,7 +21,7 @@ import br.com.system.gestaoConstrucaoCivil.service.PessoaService;
 
 
 @RestController
-@RequestMapping("/rest/recursosHumanos/cadastrarFuncionario")
+@RequestMapping("/rest/recursosHumanos")
 public class FuncionarioRestController {
 
 
@@ -38,7 +40,8 @@ public class FuncionarioRestController {
 	  Iterable<Funcionario> funcionarioEngenheiro = funcionarioService.buscarFuncionarioEngenheiro();
 	  return new ResponseEntity<Iterable<Funcionario>>(funcionarioEngenheiro, HttpStatus.OK);
 	 }
-	 @RequestMapping(method = RequestMethod.GET, value="/listarFuncionario")
+	 
+	 @RequestMapping(method = RequestMethod.GET, value="/listarFuncionarios")
 	 public ResponseEntity<Iterable<Funcionario>> buscarTodos() {	  
 	  
 	  Iterable<Funcionario> funcionarios = funcionarioService.buscarTodos();
@@ -46,7 +49,15 @@ public class FuncionarioRestController {
 	 }
 	 
 	 
-	 @RequestMapping(method = RequestMethod.POST)
+		@RequestMapping(value = "/listarFuncionarioPorId/{id}", method = RequestMethod.GET)
+		public ResponseEntity<Funcionario> buscarFuncionarioPorId(@PathVariable Long id) {
+			System.out.println("Chamadou o lista Funcionario");
+			return new ResponseEntity<Funcionario>(funcionarioService.buscarFuncionarioPorId(id), HttpStatus.OK);
+		}
+		
+		
+	 
+	 @RequestMapping( value="/cadastrarFuncionario/", method = RequestMethod.POST)
 	 public ResponseEntity salvar(@RequestBody Funcionario funcionario,UriComponentsBuilder ucBuilder)
 	 {
 		 enderecoService.salvarOuEditar(funcionario.getEndereco());

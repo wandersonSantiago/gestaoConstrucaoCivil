@@ -19,6 +19,18 @@ app.factory('cadastrarFuncionarioService', function($rootScope, toastr, $http){
 			});
 		},
 		
+		
+		
+		buscarFuncionario: function(param){
+			return $http.get('/rest/recursosHumanos/listarFuncionarioPorId/'+param)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				toastr.error('Erro ao Buscar Funcionario');
+				return $q.reject(errResponse);
+			});
+		},
+		
 		funcionarioFindAll: function(){
 			return $http.get('/rest/recursosHumanos/listarFuncionarios')
 			.then(function(response){

@@ -26,6 +26,12 @@ public class FuncionarioService {
 	{
 		return funcionarioRepository.findByCreaNotNull();
 	}
+	
+	public Funcionario buscarFuncionarioPorId(Long id){
+	
+		return funcionarioRepository.findOne(id);
+	}
+	
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(Funcionario funcionario)
 	{

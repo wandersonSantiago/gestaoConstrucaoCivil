@@ -41,6 +41,23 @@ app.config(['$routeProvider','$httpProvider', function($routeProvider, $httpProv
 		templateUrl : "views/pages/adminSistema/editar/editarEmpresa.html",
 	//	controller : "adminSistemaController",
 	})
+			
+		//CONFIGURAÇÕES
+	
+	
+				//CADASTRAR
+	
+	.when('/cadastrarTipoEmpreendimento', {
+		templateUrl : "views/pages/adminSistema/configuracao/cadastrar/cadastrarTipoEmpreendimento.html",
+	//	controller : "tipo-empreendimento-controller.js",
+	})
+	
+				//LISTAR
+	.when('/listaTipoEmpreendimento', {
+		templateUrl : "views/pages/adminSistema/configuracao/listar/listaTipoEmpreendimento.html",
+		//controller : "tipo-empreendimento-controller.js",
+	})
+	
 	
 	
 //ROTAS ADMINISTRADOR EMPRESA
@@ -51,16 +68,9 @@ app.config(['$routeProvider','$httpProvider', function($routeProvider, $httpProv
 	//	controller : "empreendimento-controller.js",
 			
 	})
-	.when('/cadastrarTipoEmpreendimento', {
-		templateUrl : "views/pages/adminEmpresa/cadastrar/cadastrarTipoEmpreendimento.html",
-	//	controller : "tipo-empreendimento-controller.js",
-	})
 	
 			//LISTAR
-    	.when('/listaTipoEmpreendimento', {
-		templateUrl : "views/pages/adminEmpresa/lista/listaTipoEmpreendimento.html",
-//		controller : "tipo-empreendimento-controller.js",
-	})
+    	
 	.when('/listaEmpreendimento', {
 		templateUrl : "views/pages/adminEmpresa/lista/listaEmpreendimento.html",
 	//	controller : "empreendimento-controller.js",
@@ -78,6 +88,20 @@ app.config(['$routeProvider','$httpProvider', function($routeProvider, $httpProv
 	//	controller : "cargo-controller.js"
 	})
 	
+	
+		//CONSULTA
+	.when('/listaFuncionario', {
+		templateUrl:"views/pages/recursosHumanos/lista/listaFuncionario.html",		
+//		controller : "funcionario-controller.js"
+	})
+	
+	
+	//EDITAR
+	
+	.when('/editarFuncionario/:idFuncionario', {
+		templateUrl:"views/pages/recursosHumanos/editar/editarFuncionario.html",		
+//		controller : "funcionario-controller.js"
+	})
 	
 	//Rotas Produto
 	.when('/cadastrarUnidadeMedida', {
