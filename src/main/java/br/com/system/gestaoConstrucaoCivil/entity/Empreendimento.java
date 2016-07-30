@@ -14,7 +14,7 @@ import javax.persistence.TemporalType;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import br.com.system.gestaoConstrucaoCivil.enuns.TiposEmpreendimentoEnum;
+import br.com.system.gestaoConstrucaoCivil.enuns.TipoEmpreendimentoEnum;
 
 @Entity
 @Table(name = "empreendimento")
@@ -34,7 +34,7 @@ public class Empreendimento extends AbstractPersistable<Long> {
 	private PrestadoraServico engenheiroResponsavelTerceiro;
 	
 	@Enumerated(EnumType.STRING)
-	private TiposEmpreendimentoEnum tipoEmpreendimento;
+	private TipoEmpreendimentoEnum tipoEmpreendimento;
     
 	@Column(nullable = false)
 	String descricao;
@@ -84,10 +84,10 @@ public class Empreendimento extends AbstractPersistable<Long> {
 		this.engenheiroResponsavelTerceiro = engenheiroResponsavelTerceiro;
 	}
 
-	public TiposEmpreendimentoEnum getTipoEmpreendimento() {
+	public TipoEmpreendimentoEnum getTipoEmpreendimento() {
 		return tipoEmpreendimento;
 	}
-	public void setTipoEmpreendimento(TiposEmpreendimentoEnum tipoEmpreendimento) {
+	public void setTipoEmpreendimento(TipoEmpreendimentoEnum tipoEmpreendimento) {
 		this.tipoEmpreendimento = tipoEmpreendimento;
 	}
 	public Double getValorMaximoGastar() {

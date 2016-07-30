@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.entity;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -23,7 +24,7 @@ public class DadoEmpresa extends AbstractPersistable<Long>  {
 	private String cnpj;
 	@Column(nullable = false,length = 20)
 	private String inscricaoEstadual;
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST} )
     @JoinColumn(name="id_endereco",nullable = false)
 	private Endereco endereco;
 	@Column(nullable = false,length = 15)

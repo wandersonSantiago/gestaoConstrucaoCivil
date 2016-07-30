@@ -1,7 +1,5 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpHeaders;
@@ -33,24 +31,19 @@ public class EmpresaContratanteRestController {
     
 	@RequestMapping(method = RequestMethod.GET, value="/listarEmpresa")
 	 public ResponseEntity<Iterable<EmpresaContratante>> buscarEmpresaContratante() {	  
-	  System.out.println("lista ok");
 	  Iterable<EmpresaContratante> empresaContratante = empresaContratanteService.buscarTodos();
 	  return new ResponseEntity<Iterable<EmpresaContratante>>(empresaContratante, HttpStatus.OK);
 	 }
 	
-	
-    
 	@RequestMapping(value = "/listarEmpresaId/{id}", method = RequestMethod.GET)
 	public ResponseEntity<EmpresaContratante> buscarEmpresaPorId(@PathVariable Long id) {
-		System.out.println("Chamadou o lista");
+		
 		return new ResponseEntity<EmpresaContratante>(empresaContratanteService.buscarPorId(id), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value ="/cadastrarEmpresa", method = RequestMethod.POST)
 	public ResponseEntity salvarEmpresaContratante(@RequestBody EmpresaContratante empresaContratante, UriComponentsBuilder ucBuilder) {
-		System.out.println("Chamadou o salvar");
-		enderecoService.salvarOuEditar(empresaContratante.getDadoEmpresa().getEndereco());
-	    dadoEmpresaService.salvarOuEditar(empresaContratante.getDadoEmpresa());
+		
 		empresaContratanteService.salvarOuEditar(empresaContratante);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("rest/adminSistema/cadastrarEmpresa/{empresa}").buildAndExpand(empresaContratante.getId()).toUri());
@@ -60,8 +53,7 @@ public class EmpresaContratanteRestController {
 
 	@RequestMapping(value = "/alterarEmpresa", method = RequestMethod.PUT)
 	public ResponseEntity alterarEmpresaContratante(@RequestBody EmpresaContratante empresaContratante, UriComponentsBuilder ucBuilder) {
-		enderecoService.salvarOuEditar(empresaContratante.getDadoEmpresa().getEndereco());
-	    dadoEmpresaService.salvarOuEditar(empresaContratante.getDadoEmpresa());
+		
 		empresaContratanteService.salvarOuEditar(empresaContratante);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("rest/adminSistema/alterarEmpresa/{empresa}").buildAndExpand(empresaContratante.getId()).toUri());

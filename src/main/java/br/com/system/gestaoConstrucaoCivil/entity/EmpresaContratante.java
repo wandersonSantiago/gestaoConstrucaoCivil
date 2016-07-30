@@ -1,11 +1,12 @@
 package br.com.system.gestaoConstrucaoCivil.entity;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -13,7 +14,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Table(name = "empresa_contratante")
 public class EmpresaContratante extends AbstractPersistable<Long> {
 
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST} )
 	@JoinColumn(name = "id_dado_empresa", nullable = false)
 	private DadoEmpresa dadoEmpresa;
 	

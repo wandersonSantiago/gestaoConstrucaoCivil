@@ -21,6 +21,10 @@ public class EmpreendimentoService {
 		
 		return empreendimentoRepository.findAll();
 	}
+    public Empreendimento buscarPorId(Long id)
+    {
+    	return empreendimentoRepository.findOne(id);
+    }
     
     @Transactional(readOnly = false)
     public void salvarOuEditar(Empreendimento empreendimento)
