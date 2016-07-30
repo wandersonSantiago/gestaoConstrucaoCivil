@@ -13,7 +13,8 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class ServicoEmpresa extends AbstractPersistable<Long>{
 
 	
-	@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+	//@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+	@ManyToOne
 	@JoinColumn(name="id_prestadora_servico",nullable = false)
 	private PrestadoraServico prestadoraServico;
 	

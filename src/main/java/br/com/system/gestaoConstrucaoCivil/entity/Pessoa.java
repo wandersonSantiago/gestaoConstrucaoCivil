@@ -3,6 +3,7 @@ package br.com.system.gestaoConstrucaoCivil.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +29,7 @@ public abstract class Pessoa implements Serializable{
 	protected String nomeCompleto;
 	@Column(nullable = false)
 	protected Integer idade;
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST})
 	@JoinColumn(name="id_endereco",nullable = false)
 	protected Endereco endereco;
 	@Column(nullable = false,length = 20)

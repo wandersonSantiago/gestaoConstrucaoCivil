@@ -23,7 +23,7 @@ public class Fornecedor extends AbstractPersistable<Long> {
 	private String contato;
 	@Column(nullable = true, length = 50)
 	private String observacao;
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST})
 	@JoinColumn(name = "id_dado_empresa", nullable = false)
 	private DadoEmpresa dadosEmpresa;
 	@Column(nullable = false)

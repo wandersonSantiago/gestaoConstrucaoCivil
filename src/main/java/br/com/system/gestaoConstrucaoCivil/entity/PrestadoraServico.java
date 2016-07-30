@@ -17,7 +17,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Table(name = "prestadora_servico")
 public class PrestadoraServico extends AbstractPersistable<Long>{
 
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST})
 	@JoinColumn(name="id_dado_empresa",nullable = false)
 	private DadoEmpresa dadoEmpresa;
 	
