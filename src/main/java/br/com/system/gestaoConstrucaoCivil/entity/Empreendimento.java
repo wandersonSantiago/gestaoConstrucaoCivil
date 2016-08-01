@@ -1,6 +1,8 @@
 package br.com.system.gestaoConstrucaoCivil.entity;
 
 import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -21,7 +23,7 @@ import br.com.system.gestaoConstrucaoCivil.enuns.TipoEmpreendimentoEnum;
 public class Empreendimento extends AbstractPersistable<Long> {
 
 
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST})
 	@JoinColumn(name="id_endereco_empreendimento",nullable = false)
 	private Endereco enderecoEmpreendimento;
 	

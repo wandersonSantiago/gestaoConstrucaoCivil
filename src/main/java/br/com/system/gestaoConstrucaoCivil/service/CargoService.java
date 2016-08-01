@@ -28,4 +28,8 @@ public class CargoService {
 		
 		return cargoRepository.findAll();
 	}
+    public Cargo buscarPorId(Long id)
+    {
+    	return cargoRepository.findOne(id);
+    }
 }

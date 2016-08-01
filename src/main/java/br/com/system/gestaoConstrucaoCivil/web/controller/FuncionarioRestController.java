@@ -60,7 +60,6 @@ public class FuncionarioRestController {
 	 @RequestMapping( value="/cadastrarFuncionario/", method = RequestMethod.POST)
 	 public ResponseEntity salvar(@RequestBody Funcionario funcionario,UriComponentsBuilder ucBuilder)
 	 {
-		 enderecoService.salvarOuEditar(funcionario.getEndereco());
 		 pessoaService.salvarOuEditar(funcionario);
 		 HttpHeaders headers =new HttpHeaders();
 		 headers.setLocation(ucBuilder.path("/rest/recursosHumanos/cadastrarFuncionario/{id}").buildAndExpand(funcionario.getId()).toUri());

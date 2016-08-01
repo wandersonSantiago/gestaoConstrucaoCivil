@@ -69,6 +69,7 @@ public class Funcionario  extends Pessoa implements Serializable{
 	public void setCrea(Integer crea) {
 		this.crea = crea;
 	}
+	
     
 	
 }

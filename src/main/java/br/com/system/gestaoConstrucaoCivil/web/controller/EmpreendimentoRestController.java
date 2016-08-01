@@ -50,7 +50,6 @@ public class EmpreendimentoRestController {
 	public ResponseEntity salvarEmpreendimento(@RequestBody Empreendimento empreendimento,
 			UriComponentsBuilder ucBuilder) {
 
-		enderecoService.salvarOuEditar(empreendimento.getEnderecoEmpreendimento());
 		empreendimentoService.salvarOuEditar(empreendimento);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("rest/empreendimento/cadastrarEmpreendimento/{empreendimento}")
