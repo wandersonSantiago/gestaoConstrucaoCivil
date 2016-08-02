@@ -41,14 +41,13 @@ public class Empreendimento extends AbstractPersistable<Long> {
 	@Column(nullable = false)
 	String descricao;
 	
-	@Column(nullable = false)
-	private String crea;
+	
 	@Column(nullable = false)
 	private Double valorMaximoGastar;
 	@Column(nullable = false)
 	private Double valoresGastos = 0.0;
 	@Column(nullable = false)
-	private Double porcentagem;
+	private Double porcentagem =  0.0;
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dataAbertura;
@@ -118,12 +117,7 @@ public class Empreendimento extends AbstractPersistable<Long> {
 		this.datafechamento = datafechamento;
 	}
 	
-	public String getCrea() {
-		return crea;
-	}
-	public void setCrea(String crea) {
-		this.crea = crea;
-	}
+	
 	public boolean isAtivo() {
 		return ativo;
 	}

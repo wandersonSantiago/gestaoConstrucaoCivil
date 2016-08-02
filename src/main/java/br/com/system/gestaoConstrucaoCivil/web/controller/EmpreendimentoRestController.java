@@ -19,7 +19,7 @@ import br.com.system.gestaoConstrucaoCivil.service.EmpreendimentoService;
 import br.com.system.gestaoConstrucaoCivil.service.EnderecoService;
 
 @RestController
-@RequestMapping("rest/empreendimento/cadastrarEmpreendimento")
+@RequestMapping("rest/empreendimento")
 public class EmpreendimentoRestController {
 
 	@Autowired
@@ -46,10 +46,10 @@ public class EmpreendimentoRestController {
 		return new ResponseEntity<Empreendimento>(empreendimentoService.buscarPorId(id), HttpStatus.OK);
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value = "/cadastrarEmpreendimento", method = RequestMethod.POST)
 	public ResponseEntity salvarEmpreendimento(@RequestBody Empreendimento empreendimento,
 			UriComponentsBuilder ucBuilder) {
-
+		System.out.println("gravar emprendimento");
 		empreendimentoService.salvarOuEditar(empreendimento);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("rest/empreendimento/cadastrarEmpreendimento/{empreendimento}")

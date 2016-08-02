@@ -75,6 +75,13 @@ app.config(['$routeProvider','$httpProvider', function($routeProvider, $httpProv
 		templateUrl : "views/pages/adminEmpresa/lista/listaEmpreendimento.html",
 	//	controller : "empreendimento-controller.js",
 	})
+	
+	
+	
+		//EDITAR
+	.when('/editarEmpreendimento/:idEmpreendimento',{
+		templateUrl : "views/pages/adminEmpresa/editar/editarEmpreendimento.html",
+	})
     
 //ROTAS RECURSOS HUMANOS
 	

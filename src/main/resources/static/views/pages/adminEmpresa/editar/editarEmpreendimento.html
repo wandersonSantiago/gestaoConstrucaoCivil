@@ -41,12 +41,14 @@
 						<label class="col-sm-1 control-label" for="dataAbertura">Data
 							Abertura</label>
 						<div class="col-sm-4">
-							<input ng-model="empCtrl.empreendimento.dataAbertura" class="form-control" id="dataAbertura" type="date" required >
+							<input class="form-control" id="dataAbertura" type="date" required >
+							{{empCtrl.empreendimento.dataAbertura | date:'dd/MM/yyyy '}}
 						</div>
 						<label class="col-sm-2 control-label" for="datafechamento">Data
 							Fechamento</label>
 						<div class="col-sm-5">
-							<input ng-model="empCtrl.empreendimento.datafechamento" class="form-control" id="datafechamento" type="date"  required >
+							<input  class="form-control" id="datafechamento" type="date"  required >
+							{{empCtrl.empreendimento.datafechamento | date:'dd/MM/yyyy '}}
 						</div>
 					</div>
 					<br>

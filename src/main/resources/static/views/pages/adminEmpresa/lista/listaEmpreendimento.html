@@ -2,7 +2,7 @@
 <div class="generic-container"
 	ng-controller="empreendimentoController as tipoCtr">
 
-	<div class="box box-primary">
+	<div class="box box-primary" ng-init="tipoCtr.buscarEmpreendimentos()">
 	
 		<div class="box-header">
 			<span class="lead">Lista de Empreendimento </span>
@@ -17,21 +17,27 @@
 						<th>Data Inicio</th>
 						<th>Valor Total</th>
 						<th>Valor Gasto</th>
+						<th>Serviços</th>
+						
 					</tr>
 				</thead>
 				<tbody
-					ng-repeat=" listarEmpreendimentos in listarEmpreendimento ">
+					ng-repeat=" empreendimento in empreendimentos ">
 					<tr>
-						<td>{{ listarEmpreendimentos.id }}</td>
-						<td>{{ listarEmpreendimentos.descricao }}</td>
-						<td>{{ listarEmpreendimentos.tipoEmpreendimento.descricaoTipoEmpreendimento }}</td>
-						<td>{{ listarEmpreendimentos.dataAbertura }}</td>
-						<td>{{ listarEmpreendimentos.valorMaximoGastar }}</td>
-						<td>{{ listarEmpreendimentos.valoresGastos }}</td>
+						<td>{{ empreendimento.id }}</td>
+						<td>{{ empreendimento.descricao }}</td>
+						<td>{{ empreendimento.tipoEmpreendimento}}</td>
+						<td>{{ empreendimento.dataAbertura }}</td>
+						<td>{{ empreendimento.valorMaximoGastar }}</td>
+						<td>{{ empreendimento.valoresGastos }}</td>
+						<td>|<a href="#/editarEmpreendimento/{{empreendimento.id}}"><i class="glyphicon glyphicon-pencil"></i></a> | |
+						<a href="#/editarEmpreendimento/{{empreendimento.id}}"><i class="glyphicon glyphicon-search"></i></a>|</td>
+						
 					</tr>
 
 				</tbody>
 				<tfoot>
+				
 					<tr>
 						<th>fim</th>
 						<th>fim</th>

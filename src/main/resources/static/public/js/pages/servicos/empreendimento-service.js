@@ -3,8 +3,20 @@ app.factory('empreendimentoService', function($rootScope, toastr, $http){
 	
 	return{
 		
+		tipoEmpreendimentoFindAll: function(){
+			return $http.get('rest/empreendimento/tiposEmpreendimentos')
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				toastr.error('erro ao buscar tipo de empreendimento');
+				console.error('Erro ao tentar buscar tipo');
+				return $q.reject(errResponse);
+			});
+		},
+	
+		
 		empreendimentoFindAll: function(){
-			return $http.get('rest/empreendimento/cadastrarEmpreendimento/listaEmpreendimento')
+			return $http.get('rest/empreendimento/listaEmpreendimento')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
@@ -31,12 +43,12 @@ app.factory('empreendimentoService', function($rootScope, toastr, $http){
 			});
 		},
 		
-		empreendimentoFindOne: function(id){
-			return $http.get('rest/adminSistema/buscaEmpresa' +id)
+		empreendimentoFindOne: function(param){
+			return $http.get('rest/empreendimento/listarEmpreendimentoId/'+param)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				console.error('Erro ao tentar Buscar empresa');
+				console.error('Erro ao tentar Buscar empreendimento');
 				return $q.reject(errResponse);
 			});
 		},

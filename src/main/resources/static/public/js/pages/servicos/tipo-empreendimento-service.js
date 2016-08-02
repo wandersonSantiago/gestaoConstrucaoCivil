@@ -4,7 +4,7 @@ app.factory('tipoEmpreendimentoService', function($rootScope, toastr, $http){
 	return{
 		
 		tipoEmpreendimentoFindAll: function(){
-			return $http.get('rest/tipoEmpreendimento/listarTipoEmpreendimento')
+			return $http.get('rest/empreendimento/tiposEmpreendimentos')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
