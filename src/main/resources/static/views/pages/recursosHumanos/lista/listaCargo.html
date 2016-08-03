@@ -1,8 +1,8 @@
 <meta charset="UTF-8">
 <div class="generic-container"
-	ng-controller="empreendimentoController as tipoCtr">
+	ng-controller="cargoController as cargoCtr">
 
-	<div class="box box-primary" ng-init="tipoCtr.buscarEmpreendimentos()">
+	<div class="box box-primary" ng-init="cargoCtr.buscarCargos()">
 	
 		<div class="box-header">
 			<span class="lead">Lista de Empreendimento </span>
@@ -12,24 +12,17 @@
 				<thead>
 					<tr>
 					
-						<th>Descrição Empreendimento</th>
-						<th>Tipo Empreendimento</th>
-						<th>Data Inicio</th>
-						<th>Valor Total</th>
-						<th>Valor Gasto</th>
-						<th>Serviços</th>
+						<th>Descrição</th>
+				
 						
 					</tr>
 				</thead>
 				<tbody
-					ng-repeat=" empreendimento in empreendimentos ">
+					ng-repeat=" cargo in cargos ">
 					<tr>
 						
-						<td>{{ empreendimento.descricao }}</td>
-						<td>{{ empreendimento.tipoEmpreendimento}}</td>
-						<td>{{ empreendimento.dataAbertura }}</td>
-						<td>{{ empreendimento.valorMaximoGastar }}</td>
-						<td>{{ empreendimento.valoresGastos }}</td>
+						<td>{{ cargo.descricao }}</td>
+						
 						<td><a href="#/editarEmpreendimento/{{empreendimento.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						<i class="glyphicon glyphicon-minus"></i>
 						<a href="#/vizualizarEmpreendimento/{{empreendimento.id}}"><i class="glyphicon glyphicon-search"></i></a></td>

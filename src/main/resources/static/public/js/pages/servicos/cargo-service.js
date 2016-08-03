@@ -12,6 +12,8 @@ app.factory('cargoService', function($http,$q , toastr)
 					return $q.reject(errResponse);
 				});
 			},
+			
+			
 			cargoFindAll: function(){
 				return $http.get('rest/cargo/cadastrarCargo/listarCargo')
 				.then(function(response){

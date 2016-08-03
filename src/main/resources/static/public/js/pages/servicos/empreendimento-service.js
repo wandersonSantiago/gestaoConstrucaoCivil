@@ -52,12 +52,13 @@ app.factory('empreendimentoService', function($rootScope, toastr, $http){
 				return $q.reject(errResponse);
 			});
 		},
-		empreendimentoUpdate: function(item, id){
-			return $http.put('/rest/adminSistema/updateEmpresa' +id, item)
+		empreendimentoUpdate: function(empreendimento){
+			return $http.put('rest/empreendimento/alterarEmpreendimento', empreendimento)
 			.then(function(response){
+				toastr.info('empreendimento Alterado empresa');
 				return response.data;
 			},function(errResponse){
-				console.error('Erro ao tentar Alterar empresa');
+				toastr.error('Erro ao tentar Alterar empresa');
 				return $q.reject(errResponse);
 			});
 		},

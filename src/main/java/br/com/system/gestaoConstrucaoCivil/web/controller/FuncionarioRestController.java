@@ -34,7 +34,7 @@ public class FuncionarioRestController {
 	 private EnderecoService enderecoService;
      
 	
-	 @RequestMapping(method = RequestMethod.GET, value="/listarEngenheiro")
+	 @RequestMapping(method = RequestMethod.GET, value="/buscaFuncionarioEngenheiro")
 	 public ResponseEntity<Iterable<Funcionario>> buscarEngenheiros() {	  
 	  System.out.println("lista ok");
 	  Iterable<Funcionario> funcionarioEngenheiro = funcionarioService.buscarFuncionarioEngenheiro();

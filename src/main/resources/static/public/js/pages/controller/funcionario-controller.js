@@ -19,6 +19,15 @@ app.controller('cadastrarFuncionarioController', function($scope, cadastrarFunci
 			});
 		};
 		
+		self.buscarFuncionariosEngenheiro = function(){
+			 cadastrarFuncionarioService.funcionarioEngenheiroFindAll().
+				then(function(f){
+					$scope.engenheiro = f;
+					}, function(errResponse){
+					toastr.error('Erro ao tentar buscar funcionarios');
+				});
+			};
+			
 //busca a empresa atraves do id
 		
 		self.buscarFuncionarioPorId = function(id){

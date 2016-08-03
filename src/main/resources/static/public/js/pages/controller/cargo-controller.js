@@ -12,7 +12,7 @@ app.controller('cargoController', function($scope, cargoService, $routeParams){
 	 self.buscarCargos = function(){
 		 cargoService.cargoFindAll().
 			then(function(c){
-				$scope.listaCargo = c;
+				$scope.cargos = c;
 				}, function(errResponse){
 				toastr.error('Erro ao tentar buscar cargo');
 			});

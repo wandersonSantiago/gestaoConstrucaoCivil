@@ -12,6 +12,12 @@ app.controller('empreendimentoController', function($scope, empreendimentoServic
 		
 	}
 	
+	self.updateEmpreendimento = function(empreendimento){
+		empreendimentoService.empreendimentoUpdate(self.empreendimento);
+		self.empreendimento = empreendimento;
+		
+	}
+	
 	 self.buscarEmpreendimentos = function(){
 		 empreendimentoService.empreendimentoFindAll().
 			then(function(t){
