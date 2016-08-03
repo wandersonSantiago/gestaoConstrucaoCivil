@@ -8,6 +8,8 @@
 			<span class="lead">Lista de Funcionarios </span>
 		</div>
 		<div class="panel-body"  >
+		
+		<input class="form-control" type="text" placeholder="Buscar" ng-model="buscaFuncionario" >
 			<table class="table table-hover table-bordered">
 				<thead>
 					<tr>
@@ -20,7 +22,7 @@
 					</tr>
 				</thead>
 				<tbody
-					ng-repeat=" funcionario in funCtrl.listaFuncionarios ">
+					ng-repeat=" funcionario in funCtrl.listaFuncionarios | filter : buscaFuncionario">
 					<tr>
 					<td><h5><a href="#/editarFuncionario/{{funcionario.id}}">{{ funcionario.nomeCompleto }}</a></h5></td>
 						<td><h5><a href="#/editarFuncionario/{{funcionario.id}}">{{ funcionario.cpf }}</a></h5></td>

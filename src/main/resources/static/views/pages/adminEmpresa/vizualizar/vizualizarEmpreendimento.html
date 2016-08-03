@@ -21,16 +21,20 @@
 			
 			<h3><span class="label label-default input-group-addon">R$</span><span class="label label-default input-group-addon">Financeiro</span></h3>
 			<br>
+			
+	
 			<div class="row">
+					<center>
+						<h5><label class="col-sm-1 label-control" for="previsto">Valor Previstos</label></h5>
+						<h3><label class="col-sm-1 label label-info " for="previsto"> {{empCtrl.empreendimento.valorMaximoGastar}}</label></h3>
 			
-						<h5><label class="col-sm-1 control-label" for="previsto">Valor Previstos</label></h5>
-						<h3><label class="col-sm-1 label label-info " for=""previsto"">{{empCtrl.empreendimento.valorMaximoGastar}}</label></h3>
 			
-						<h5><label class="col-sm-1 control-label" for="gastos">Valores gastos</label></h5>
+						<h5><label class="col-sm-1  label-control" for="gastos">Valores gastos</label></h5>
 						<h3><label class="col-sm-1 label label-warning" for="gastos">{{empCtrl.empreendimento.valoresGastos}}</label></h3>
 			
 						<h5><label class="col-sm-1 control-label" for="gastar">valor a gastar</label></h5>
 						<h3><label class="col-sm-1 label label-success" for="gastar">{{empCtrl.empreendimento.valorMaximoGastar - empCtrl.empreendimento.valoresGastos}}</label></h3>
+			</center>
 			</div>
 			<hr>
 			
@@ -48,7 +52,20 @@
 						
 						<h5><label class="col-sm-1 control-label" for="porcentagem">concluido</label></h5>
 						<h3><label class="col-sm-1 label label-warning " for="porcentagem">{{empCtrl.empreendimento.porcentagem}}</label></h3>
-			</div>
+				</div>
+				<br>
+				<div class="row">
+				<h5><label class="col-sm-3 control-label" for="porcentagem">Andamento do Empreendimento</label></h5>
+				</div>
+				
+				
+				<div class=" progress">
+				
+  					<div class="progress-bar" role="progressbar" aria-valuenow="{{empCtrl.empreendimento.porcentagem}}" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+ 							
+ 						 {{empCtrl.empreendimento.porcentagem}}
+						  </div>
+					</div>
 			<br> 
 				<hr>
 			

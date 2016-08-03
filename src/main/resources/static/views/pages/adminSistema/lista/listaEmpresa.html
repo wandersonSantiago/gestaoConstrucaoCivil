@@ -7,8 +7,9 @@
 		<div class="box-header">
 			<span class="lead">Lista de Empresa </span>
 		</div>
-		<div class="panel-body"  >
-			<table class="table table-hover table-bordered">
+		<div class="panel-body table-responsive"  >
+		<input type="text" class="form-control" ng-model="buscaEmpresa" placeholder="Buscar">
+			<table class="table  table-hover table-bordered">
 				<thead>
 					<tr>
 						<th>Razão Social</th>
@@ -20,7 +21,7 @@
 					</tr>
 				</thead>
 				<tbody
-					ng-repeat=" empresa in adminCtrl.listaEmpresa ">
+					ng-repeat=" empresa in adminCtrl.listaEmpresa | filter : buscaEmpresa ">
 					<tr>
 					<td><h5><a href="#/editarEmpresa/{{empresa.id}}">{{ empresa.dadoEmpresa.razaoSocial }}</a></h5></td>
 						<td><h5><a href="#/editarEmpresa/{{empresa.id}}">{{ empresa.dadoEmpresa.nomeFantasia }}</a></h5></td>

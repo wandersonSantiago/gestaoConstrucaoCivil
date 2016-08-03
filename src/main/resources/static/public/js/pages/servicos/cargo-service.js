@@ -8,19 +8,40 @@ app.factory('cargoService', function($http,$q , toastr)
 					toastr.info('Cargo cadastrado');
 					return response.data;
 				},function(errResponse){
-					toastr.error('Cargo cadastrado');
+					toastr.error('Cargo não cadastrado');
 					return $q.reject(errResponse);
 				});
 			},
 			
 			
 			cargoFindAll: function(){
-				return $http.get('rest/cargo/cadastrarCargo/listarCargo')
+				return $http.get('rest/cargo/listarCargo')
 				.then(function(response){
 					return response.data;
 				},function(errResponse){
 					toastr.error('erro ao buscar cargos');
-					console.error('Erro ao tentar buscar cargo');
+				
+					return $q.reject(errResponse);
+				});
+			},
+			
+			cargoFindOne: function(param){
+				return $http.get('rest/cargo/listarCargoId/'+param)
+				.then(function(response){
+					return response.data;
+				},function(errResponse){
+					toastr.error('erro ao buscar cargo');
+					return $q.reject(errResponse);
+				});
+			},
+			
+			cargoUpdate: function(cargo){
+				return $http.put('rest/cargo/editarCargo', cargo)
+				.then(function(response){
+					toastr.info('Cargo Alterado ');
+					return response.data;
+				},function(errResponse){
+					toastr.error('Erro ao tentar Alterar cargo');
 					return $q.reject(errResponse);
 				});
 			},

@@ -8,6 +8,7 @@
 			<span class="lead">Lista de Empresa </span>
 		</div>
 		<div class="panel-body">
+		<input type="text" class="form-control" ng-model="buscaAdminEmpresa" placeholder="Busca" >
 			<table class="table table-hover table-bordered">
 				<thead>
 					<tr>
@@ -21,7 +22,7 @@
 					</tr>
 				</thead>
 				<tbody
-					ng-repeat=" listaEmpresas in listaEmpresa ">
+					ng-repeat=" listaEmpresas in listaEmpresa | filter : buscaAdminEmpresa ">
 					<tr>
 					<h3><a href="#/editarEmpresa">{{ listaEmpresas.dadoEmpresa.razaoSocial }}</a></h3>
 						<td>{{ listaEmpresas.dadoEmpresa.nomeFantasia }}</td>

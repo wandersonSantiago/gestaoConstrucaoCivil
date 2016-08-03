@@ -119,13 +119,13 @@
 					<div class="row">
 						<label class="col-sm-1 control-label" for="empreendimento">Empreendimento</label>
 						<div class="col-sm-3" ng-controller="empreendimentoController as empCtrl" ng-init="empCtrl.buscarEmpreendimentos()">
-							<select class="form-control select2"  ng-model="cadFuncCtrl.funcionario.empreendimento" ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.shade for listarEmpreendimentos in listarEmpreendimento"  style="width: 100%;">
+							<select class="form-control select2"  ng-model="cadFuncCtrl.funcionario.empreendimento" ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.shade for listarEmpreendimentos in empreendimentos"  style="width: 100%;">
 								<option value="">--selecione--</option>
 							</select>
 						</div>
 						<label class="col-sm-1 control-label" for="cargo">Cargo</label>
 						<div class="col-sm-3" ng-controller="cargoController as cargoCtrl" ng-init="cargoCtrl.buscarCargos()">
-							<select class="form-control select2" ng-model="cadFuncCtrl.funcionario.cargo" ng-options="listarCargos.descricao group by listarCargos.shade for listarCargos in listaCargo"  style="width: 100%;">
+							<select class="form-control select2" ng-model="cadFuncCtrl.funcionario.cargo" ng-options="listarCargos.descricao group by listarCargos.shade for listarCargos in cargos"  style="width: 100%;">
 									<option value="">--selecione--</option>
 							</select>
 						</div>
