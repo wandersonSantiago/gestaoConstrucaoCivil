@@ -57,7 +57,7 @@ public class FuncionarioRestController {
 		
 		
 	 
-	 @RequestMapping( value="/cadastrarFuncionario/", method = RequestMethod.POST)
+	 @RequestMapping( value="/cadastrarFuncionario", method = RequestMethod.POST)
 	 public ResponseEntity salvar(@RequestBody Funcionario funcionario,UriComponentsBuilder ucBuilder)
 	 {
 		 pessoaService.salvarOuEditar(funcionario);
