@@ -24,9 +24,7 @@ public class EmpreendimentoRestController {
 
 	@Autowired
 	private EmpreendimentoService empreendimentoService;
-	@Autowired
-	private EnderecoService enderecoService;
-
+	
 	@RequestMapping(method = RequestMethod.GET, value = "/listaEmpreendimento")
 	public ResponseEntity<Iterable<Empreendimento>> empreendimentos() {
 		Iterable<Empreendimento> empreendimento = empreendimentoService.buscarTodos();
@@ -51,6 +49,7 @@ public class EmpreendimentoRestController {
 			UriComponentsBuilder ucBuilder) {
 		System.out.println("gravar emprendimento");
 		empreendimentoService.salvarOuEditar(empreendimento);
+		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("rest/empreendimento/cadastrarEmpreendimento/{empreendimento}")
 				.buildAndExpand(empreendimento.getId()).toUri());

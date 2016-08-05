@@ -70,7 +70,7 @@
 							for="engenheiroResponsavelFuncionario">Engenheiro
 							Funcionario</label>
 						<div class="col-sm-4" ng-if="!funcionarios " ng-controller="cadastrarFuncionarioController as funCtrl" ng-init="funCtrl.buscarFuncionariosEngenheiro()">
-								<select class="form-control select2" ng-model="empCtrl.empreendimento.funcionario.engenheiroResponsavelFuncionario" ng-options="engenheiros.nomeCompleto  group by engenheiros.shade for engenheiros in engenheiro" style="width: 100%;">
+								<select class="form-control select2" ng-model="empCtrl.empreendimento.engenheiroResponsavelFuncionario" ng-options="engenheiros.nomeCompleto  group by engenheiros.shade for engenheiros in engenheiro" style="width: 100%;">
 									<option value="">---Selecione---</option>                                                                                 
 															</select>
 						</div>
