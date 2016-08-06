@@ -127,14 +127,19 @@ app.config(['$routeProvider','$httpProvider', function($routeProvider, $httpProv
 //		controller : "funcionario-controller.js"
 	})
 	
-	//Rotas Produto
+	//Rotas Almoxarifado
 	.when('/cadastrarUnidadeMedida', {
 		templateUrl:"views/pages/produto/cadastrarUnidadeMedida.html",
 	})
 	.when('/cadastrarProduto', {
 		templateUrl:"views/pages/produto/cadastrarProduto.html",
 	})
-	
+	.when('/cadastrarFornecedor', {
+		templateUrl:"views/pages/produto/cadastrarFornecedor.html",
+	})
+	.when('/cadastrarCategoria', {
+		templateUrl:"views/pages/produto/cadastrarCategoria.html",
+	})
 	//Rota de erro
 	.otherwise({
 		redirectTo : "/"

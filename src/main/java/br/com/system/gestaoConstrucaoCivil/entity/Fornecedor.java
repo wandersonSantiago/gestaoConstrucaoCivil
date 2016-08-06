@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -25,7 +24,7 @@ public class Fornecedor extends AbstractPersistable<Long> {
 	private String observacao;
 	@OneToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST})
 	@JoinColumn(name = "id_dado_empresa", nullable = false)
-	private DadoEmpresa dadosEmpresa;
+	private DadoEmpresa dadoEmpresa;
 	@Column(nullable = false)
 	private boolean ativo;
 	
@@ -49,13 +48,13 @@ public class Fornecedor extends AbstractPersistable<Long> {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-
-	public DadoEmpresa getDadosEmpresa() {
-		return dadosEmpresa;
+    
+	public DadoEmpresa getDadoEmpresa() {
+		return dadoEmpresa;
 	}
 
-	public void setDadosEmpresa(DadoEmpresa dadosEmpresa) {
-		this.dadosEmpresa = dadosEmpresa;
+	public void setDadoEmpresa(DadoEmpresa dadoEmpresa) {
+		this.dadoEmpresa = dadoEmpresa;
 	}
 
 	public boolean isAtivo() {

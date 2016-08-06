@@ -26,4 +26,8 @@ public class FornecedorService {
 	{
 		fornecedorRepository.save(fornecedor);
 	}
+	public Fornecedor buscarFornecedorPorId(Long id) {
+		
+		return fornecedorRepository.findOne(id);
+	}
 }

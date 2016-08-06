@@ -3,9 +3,9 @@ app.controller('fornecedorController', function($scope,fornecedorService, $route
 	var self = this;
 		
 	$scope.listaFornecedor = [];
+	var idFornecedor = $routeParams.idFornecedor;
 	
-	
-	 self.cadastrarFornecedor = function(fornecedor){
+	 self.createFornecedor = function(fornecedor){
 		 console.log(self.fornecedor);
 		 fornecedorService.fornecedorCreate(self.fornecedor);
 	}
@@ -19,8 +19,4 @@ app.controller('fornecedorController', function($scope,fornecedorService, $route
 				toastr.error('Erro ao tentar buscar fornecedor');
 			});
 		};
-		
-	
-	 
-	
 });
