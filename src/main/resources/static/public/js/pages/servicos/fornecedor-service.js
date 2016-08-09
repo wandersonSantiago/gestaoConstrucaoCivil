@@ -3,7 +3,7 @@ app.factory('fornecedorService', function($rootScope, toastr, $http,$q){
 	
 	return{
 		fornecedorCreate: function(fornecedor){
-			return $http.post('/rest/produto/cadastrarFornecedor', fornecedor)
+			return $http.post('/rest/almoxarifado/cadastrarFornecedor', fornecedor)
 			
 			.then(function(response){
 			
@@ -19,7 +19,7 @@ app.factory('fornecedorService', function($rootScope, toastr, $http,$q){
 			});
 		},
 		fornecedorFindAll: function(){
-			return $http.get('rest/produto/listarFornecedor')
+			return $http.get('rest/almoxarifado/listarFornecedor')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){

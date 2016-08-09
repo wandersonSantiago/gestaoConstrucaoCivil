@@ -129,16 +129,16 @@ app.config(['$routeProvider','$httpProvider', function($routeProvider, $httpProv
 	
 	//Rotas Almoxarifado
 	.when('/cadastrarUnidadeMedida', {
-		templateUrl:"views/pages/produto/cadastrarUnidadeMedida.html",
+		templateUrl:"views/pages/almoxarifado/cadastrarUnidadeMedida.html",
 	})
 	.when('/cadastrarProduto', {
-		templateUrl:"views/pages/produto/cadastrarProduto.html",
+		templateUrl:"views/pages/almoxarifado/cadastrarProduto.html",
 	})
 	.when('/cadastrarFornecedor', {
-		templateUrl:"views/pages/produto/cadastrarFornecedor.html",
+		templateUrl:"views/pages/almoxarifado/cadastrarFornecedor.html",
 	})
 	.when('/cadastrarCategoria', {
-		templateUrl:"views/pages/produto/cadastrarCategoria.html",
+		templateUrl:"views/pages/almoxarifado/cadastrarCategoria.html",
 	})
 	//Rota de erro
 	.otherwise({

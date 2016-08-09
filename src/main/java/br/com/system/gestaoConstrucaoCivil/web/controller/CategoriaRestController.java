@@ -15,7 +15,7 @@ import br.com.system.gestaoConstrucaoCivil.entity.Categoria;
 import br.com.system.gestaoConstrucaoCivil.service.CategoriaService;
 
 @RestController
-@RequestMapping("/rest/produto")
+@RequestMapping("/rest/almoxarifado")
 public class CategoriaRestController {
 
 	@Autowired
@@ -39,7 +39,7 @@ public class CategoriaRestController {
 	public ResponseEntity salvarCargo(@RequestBody Categoria categoria, UriComponentsBuilder ucBuilder) {
 		categoriaService.salvarOuEditar(categoria);
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("rest/produto/cadastrarCategoria/{id}").buildAndExpand(categoria.getId()).toUri());
+		headers.setLocation(ucBuilder.path("rest/almoxarifado/cadastrarCategoria/{id}").buildAndExpand(categoria.getId()).toUri());
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 
@@ -47,7 +47,7 @@ public class CategoriaRestController {
 	public ResponseEntity alterarCategoria(@RequestBody Categoria categoria, UriComponentsBuilder ucBuilder) {
 		categoriaService.salvarOuEditar(categoria);
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("rest/produto/alterarCategoria/{categoria}")
+		headers.setLocation(ucBuilder.path("rest/almoxarifado/alterarCategoria/{categoria}")
 				.buildAndExpand(categoria.getId()).toUri());
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}

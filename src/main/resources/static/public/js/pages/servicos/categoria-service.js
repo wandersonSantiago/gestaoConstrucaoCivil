@@ -3,7 +3,7 @@ app.factory('categoriaService', function($rootScope, toastr, $http,$q){
 	
 	return{
 		categoriaCreate: function(categoria){
-			return $http.post('rest/produto/cadastrarCategoria',categoria)
+			return $http.post('rest/almoxarifado/cadastrarCategoria',categoria)
 			
 			.then(function(response){
 			
@@ -19,7 +19,7 @@ app.factory('categoriaService', function($rootScope, toastr, $http,$q){
 			});
 		},
 		fornecedorFindAll: function(){
-			return $http.get('rest/produto/listarCategoria')
+			return $http.get('rest/almoxarifado/listarCategoria')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){

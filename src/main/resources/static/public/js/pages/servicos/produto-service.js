@@ -3,7 +3,7 @@ app.factory('produtoService', function($rootScope, toastr, $http,$q){
 	
 	return{
 		produtoCreate: function(produto){
-			return $http.post('/rest/produto/cadastrarProduto', produto)
+			return $http.post('/rest/almoxarifado/cadastrarProduto', produto)
 			
 			.then(function(response){
 				
@@ -19,7 +19,7 @@ app.factory('produtoService', function($rootScope, toastr, $http,$q){
 			});
 		},
 		produtoFindAll: function(){
-			return $http.get('rest/produto/cadastrarProduto/listarProduto')
+			return $http.get('rest/almoxarifado/cadastrarProduto/listarProduto')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){

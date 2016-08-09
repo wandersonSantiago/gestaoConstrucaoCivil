@@ -15,7 +15,7 @@ import br.com.system.gestaoConstrucaoCivil.entity.Fornecedor;
 import br.com.system.gestaoConstrucaoCivil.service.FornecedorService;
 
 @RestController
-@RequestMapping("/rest/produto")
+@RequestMapping("/rest/almoxarifado")
 public class FornecedorRestController {
 
 	@Autowired
@@ -39,7 +39,7 @@ public class FornecedorRestController {
 		fornecedorService.salvarOuEditar(fornecedor);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(
-				ucBuilder.path("rest/produto/cadastrarFornecedor/{id}").buildAndExpand(fornecedor.getId()).toUri());
+				ucBuilder.path("rest/almoxarifado/cadastrarFornecedor/{id}").buildAndExpand(fornecedor.getId()).toUri());
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 
@@ -47,7 +47,7 @@ public class FornecedorRestController {
 	public ResponseEntity alterarFornecedor(@RequestBody Fornecedor fornecedor, UriComponentsBuilder ucBuilder) {
 		fornecedorService.salvarOuEditar(fornecedor);
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("rest/produto/alterarFornecedor/{fornecedor}")
+		headers.setLocation(ucBuilder.path("rest/almoxarifado/alterarFornecedor/{fornecedor}")
 				.buildAndExpand(fornecedor.getId()).toUri());
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}

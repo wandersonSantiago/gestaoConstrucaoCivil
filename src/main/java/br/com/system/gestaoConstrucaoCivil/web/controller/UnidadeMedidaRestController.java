@@ -14,7 +14,7 @@ import br.com.system.gestaoConstrucaoCivil.entity.UnidadeMedida;
 import br.com.system.gestaoConstrucaoCivil.service.UnidadeMedidaService;
 
 @RestController
-@RequestMapping("/rest/produto/")
+@RequestMapping("/rest/almoxarifado")
 public class UnidadeMedidaRestController {
 
 	@Autowired
@@ -33,7 +33,7 @@ public class UnidadeMedidaRestController {
 		 System.out.println(unidadeMedida.getDescricao());
 		 unidadeMedidadService.salvarOuEditar(unidadeMedida);
 		 HttpHeaders headers =new HttpHeaders();
-		 headers.setLocation(ucBuilder.path("/rest/produto/cadastrarUnidadeMedida/{id}").buildAndExpand(unidadeMedida.getId()).toUri());
+		 headers.setLocation(ucBuilder.path("/rest/almoxarifado/cadastrarUnidadeMedida/{id}").buildAndExpand(unidadeMedida.getId()).toUri());
 		 return new ResponseEntity(headers, HttpStatus.CREATED);
 	 }
 }

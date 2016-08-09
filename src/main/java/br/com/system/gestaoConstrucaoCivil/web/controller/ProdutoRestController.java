@@ -14,7 +14,7 @@ import br.com.system.gestaoConstrucaoCivil.entity.Produto;
 import br.com.system.gestaoConstrucaoCivil.service.ProdutoService;
 
 @RestController
-@RequestMapping("/rest/produto/cadastrarProduto")
+@RequestMapping("/rest/almoxarifado")
 public class ProdutoRestController {
 
 	 @Autowired
@@ -33,7 +33,7 @@ public class ProdutoRestController {
 	 {
 		 produtoService.salvarOuEditar(produto);
 		 HttpHeaders headers = new HttpHeaders();
-		 headers.setLocation(ucBuilder.path("/rest/produto/cadastrarProduto/{id}").buildAndExpand(produto.getId()).toUri());
+		 headers.setLocation(ucBuilder.path("/rest/almoxarifado/cadastrarProduto/{id}").buildAndExpand(produto.getId()).toUri());
 		 return new ResponseEntity(headers, HttpStatus.CREATED);
 	 }
 }

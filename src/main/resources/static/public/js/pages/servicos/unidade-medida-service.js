@@ -3,7 +3,7 @@ app.factory('unidadeMedidaService', function($rootScope, toastr, $http,$q){
 	
 	return{
 		unidadeMedidaCreate: function(unidadeMedida){
-			return $http.post('/rest/produto/cadastrarUnidadeMedida', unidadeMedida)
+			return $http.post('/rest/almoxarifado/cadastrarUnidadeMedida', unidadeMedida)
 			
 			.then(function(response){
 				console.log("teste");
@@ -19,7 +19,7 @@ app.factory('unidadeMedidaService', function($rootScope, toastr, $http,$q){
 			});
 		},
 		unidadeMedidaFindAll: function(){
-			return $http.get('rest/produto/cadastrarUnidadeMedida/listarUnidadeMedida')
+			return $http.get('rest/almoxarifado/cadastrarUnidadeMedida/listarUnidadeMedida')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
