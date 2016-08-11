@@ -89,6 +89,11 @@ app.config(['$routeProvider','$httpProvider', function($routeProvider, $httpProv
 	.when('/vizualizarEmpreendimento/:idEmpreendimento',{
 		templateUrl : "views/pages/adminEmpresa/vizualizar/vizualizarEmpreendimento.html",
 	})
+	
+		//CONFIGURACAO
+	.when('/configEmpreendimento',{
+		templateUrl : "views/pages/adminEmpresa/configuracao/configEmpreendimento.html",
+	})
     
 	
 //ROTAS RECURSOS HUMANOS

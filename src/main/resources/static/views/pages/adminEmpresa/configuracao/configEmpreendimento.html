@@ -1,0 +1,79 @@
+<meta charset="UTF-8">
+<div class="generic-container"
+	ng-controller="cadastrarFuncionarioController as cadFuncCtrl">
+
+	<div class="box box-primary">
+		<!-- Default panel contents -->
+		<div class="box-header">
+			<span class="lead">Configuracao Empreendimento </span>
+		</div>
+		<div class="panel-body">
+			<form class="form-inline">
+
+				<div class="row">
+					<label class="col-sm-2 control-label" for="empreendimento">Empreendimento</label>
+					<div class="col-sm-3"
+						ng-controller="empreendimentoController as empCtrl"
+						ng-init="empCtrl.buscarEmpreendimentos()">
+						<select class="form-control select2"
+							ng-model="cadFuncCtrl.funcionario.empreendimento"
+							ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.shade for listarEmpreendimentos in empreendimentos"
+							style="width: 100%;">
+							<option value="">--selecione--</option>
+						</select>
+					</div>
+				</div>
+				<br>
+				<div class="form-group">
+					<label for="edificio">Edificio</label> <input type="number"
+						class="form-control" id="edificio"
+						placeholder="Quantidade de edificio no empreendiomento">
+				</div>
+				<div class="form-group">
+					<label for="andar">Andar</label> <input type="number"
+						class="form-control" id="andar"
+						title="quantidade de andar no edificio"
+						placeholder="quantidade de andar no edificio">
+				</div>
+				<div class="form-group">
+					<label for="apartamento">Apartamento</label> <input type="number"
+						class="form-control" id="apartamento"
+						title="quantidade de apartamento por andar"
+						placeholder="quantidade de apartamento">
+				</div>
+				<br> <br>
+				<div class="col-sm-9">
+					<label for="outros">Outros</label> 
+					<input class="form-control" type="text" ng-model="outros"> <input
+						class="btn-primary" value="adicionar"
+						title="pressione para adicionar a lista" type="button">
+
+				</div>
+				<br> <br>
+				<div class="col-sm-5 panel panel-primary">
+					<div class=" panel-heading">Outros</div>
+					<div class="panel-body">
+						<table class="table table-hover table-bordered">
+
+							<tbody ng-repeat=" empreendimento in empreendimentos ">
+								<tr>
+
+									<td>{{ teste }}</td>
+
+
+								</tr>
+
+							</tbody>
+							<tfoot>
+
+
+							</tfoot>
+						</table>
+					</div>
+				</div>
+
+			</form>
+		</div>
+		<div class="tablecontainer"></div>
+	</div>
+</div>
