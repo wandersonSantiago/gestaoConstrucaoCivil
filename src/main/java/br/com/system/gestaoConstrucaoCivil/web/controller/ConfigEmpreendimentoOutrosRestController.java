@@ -1,5 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,10 +27,10 @@ public class ConfigEmpreendimentoOutrosRestController {
      
      
     @RequestMapping(value = "/cadastrarConfigEmpreendimentoOutros", method = RequestMethod.POST)
-    public ResponseEntity salvarConfigEmpreendimento(@RequestBody ConfigEmpreendimentoOutros configEmpreendimentoOutros, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity salvarConfigEmpreendimento(@RequestBody List<ConfigEmpreendimentoOutros> configEmpreendimentoOutros, UriComponentsBuilder ucBuilder) {
     	configEmpreeendimentoOutrosService.salvarOuEditar(configEmpreendimentoOutros);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("rest/servico/cadastrarConfigEmpreendimentoOutros/{id}").buildAndExpand(configEmpreendimentoOutros.getId()).toUri());
+       // headers.setLocation(ucBuilder.path("rest/servico/cadastrarConfigEmpreendimentoOutros/{id}").buildAndExpand(configEmpreendimentoOutros.getId()).toUri());
        System.out.println(configEmpreendimentoOutros);
         return new ResponseEntity(headers, HttpStatus.CREATED);
     }

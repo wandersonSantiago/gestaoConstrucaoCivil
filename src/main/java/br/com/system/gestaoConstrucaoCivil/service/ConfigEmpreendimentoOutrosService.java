@@ -19,7 +19,7 @@ public class ConfigEmpreendimentoOutrosService {
     private ConfigEmpreendimentoOutrosRepository configEmpreendimentoOutrosRepository;
      
     @Transactional(readOnly = false)
-    public void salvarOuEditar(ConfigEmpreendimentoOutros configEmpreendimentoOutros)
+    public void salvarOuEditar(List<ConfigEmpreendimentoOutros> configEmpreendimentoOutros)
     {
     	configEmpreendimentoOutrosRepository.save(configEmpreendimentoOutros);
     }
