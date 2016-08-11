@@ -6,6 +6,8 @@ app.controller('empreendimentoController', function($scope, empreendimentoServic
 	
 	$scope.listaOutros =[];
 			
+	
+	
 	self.adicionarOutros = function(){
 		
 		var outros = document.getElementById("descricaoOutros");
@@ -26,9 +28,10 @@ app.controller('empreendimentoController', function($scope, empreendimentoServic
 		
 	}
 	
-	self.createConfigEmpreendimento = function(configEmpreendimento, listaOutros){
-		empreendimentoService.configEmpreendimento(self.configEmpreendimento, $scope.listaOutros );
-	//	empreendimentoService.configEmpreendimentoOutrosCreate($scope.listaOutros);
+	self.createConfigEmpreendimento = function(configEmpreendimentoEdificio, listaOutros){
+		console.log(self.configEmpreendimentoEdificio);
+		empreendimentoService.configEmpreendimentoTorreCreate(self.configEmpreendimentoEdificio);
+		empreendimentoService.configEmpreendimentoOutrosCreate($scope.listaOutros);
 		
 		
 	}

@@ -31,7 +31,7 @@ public class ConfigEmpreendimentoOutrosRestController {
     	configEmpreeendimentoOutrosService.salvarOuEditar(configEmpreendimentoOutros);
         HttpHeaders headers = new HttpHeaders();
        // headers.setLocation(ucBuilder.path("rest/servico/cadastrarConfigEmpreendimentoOutros/{id}").buildAndExpand(configEmpreendimentoOutros.getId()).toUri());
-       System.out.println(configEmpreendimentoOutros);
+      
         return new ResponseEntity(headers, HttpStatus.CREATED);
     }
      

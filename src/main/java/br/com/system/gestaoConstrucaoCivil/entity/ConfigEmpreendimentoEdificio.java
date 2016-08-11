@@ -9,23 +9,34 @@ import javax.persistence.Table;
 @Table(name = "config_empreendimento_edificio")
 public class ConfigEmpreendimentoEdificio extends ConfigEmpreendimento implements Serializable{
  
-    private Integer QuantidadeAndarPorTorre;
+    private Integer quantidadeAndarPorTorre;
+   
+    private Integer quantidadeTorre;
      
-    private Integer QuantidadeApartamentoPorAndar;
+    private Integer quantidadeApartamentoPorAndar;
  
     public Integer getQuantidadeAndarPorTorre() {
-        return QuantidadeAndarPorTorre;
+        return quantidadeAndarPorTorre;
     }
  
     public void setQuantidadeAndarPorTorre(Integer quantidadeAndarPorTorre) {
-        QuantidadeAndarPorTorre = quantidadeAndarPorTorre;
+        this.quantidadeAndarPorTorre = quantidadeAndarPorTorre;
     }
  
-    public Integer getQuantidadeApartamentoPorAndar() {
-        return QuantidadeApartamentoPorAndar;
+    
+    public Integer getQuantidadeTorre() {
+		return quantidadeTorre;
+	}
+
+	public void setQuantidadeTorre(Integer quantidadeTorre) {
+		this.quantidadeTorre = quantidadeTorre;
+	}
+
+	public Integer getQuantidadeApartamentoPorAndar() {
+        return quantidadeApartamentoPorAndar;
     }
  
     public void setQuantidadeApartamentoPorAndar(Integer quantidadeApartamentoPorAndar) {
-        QuantidadeApartamentoPorAndar = quantidadeApartamentoPorAndar;
+        this.quantidadeApartamentoPorAndar = quantidadeApartamentoPorAndar;
     }
 }

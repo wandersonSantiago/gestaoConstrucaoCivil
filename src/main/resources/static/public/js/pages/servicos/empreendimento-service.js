@@ -43,20 +43,36 @@ app.factory('empreendimentoService', function($rootScope, toastr, $http){
 			});
 		},
 		
-		configEmpreendimento: function(configEmpreendimento , listaOutros){
+		configEmpreendimentoTorreCreate: function(configEmpreendimentoEdificio){
 			console.log("passei aqui");
-			console.log(listaOutros);
-		//	return $http.post('rest/servico/cadastrarConfigEmpreendimento', configEmpreendimento)
-			return $http.post('rest/servico/cadastrarConfigEmpreendimentoOutros', listaOutros)
-			.then(function(response){
+				return $http.post('rest/servico/cadastrarConfigEmpreendimento', configEmpreendimentoEdificio)
+				.then(function(response){
 				console.log("empreendimento gravado");
-				toastr.info('Empreendimento cadastrado');
+				toastr.info('Empreendimento Edificio cadastrado');
 				
 				return response.data;
 			
 			},function(errResponse){
-				console.error('Erro ao tentar gravar empreendimento');
-				toastr.info('Empreendimento não cadastrado');
+				console.error('Erro ao tentar gravar qunatidade de Edificio');
+				toastr.info('Empreendimento Edificio não cadastrado');
+				return $q.reject(errResponse);
+				
+			});
+		},
+		configEmpreendimentoOutrosCreate: function( listaOutros){
+			console.log("passei aqui");
+			console.log(listaOutros);
+		
+			return $http.post('rest/servico/cadastrarConfigEmpreendimentoOutros', listaOutros)
+			.then(function(response){
+				console.log("empreendimento Outros gravado");
+				toastr.info('Empreendimento Outros cadastrado');
+				
+				return response.data;
+			
+			},function(errResponse){
+				console.error('Erro ao tentar gravar empreendimento Outros');
+				toastr.info('Empreendimento não cadastrado Outros');
 				return $q.reject(errResponse);
 				
 			});
