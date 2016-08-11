@@ -3,7 +3,21 @@ app.controller('empreendimentoController', function($scope, empreendimentoServic
 	var self = this;
   
 	var idEmpreendimento = $routeParams.idEmpreendimento;
+	
+	$scope.listaOutros =[];
+			
+	self.adicionarOutros = function(){
 		
+		var outros = document.getElementById("descricaoOutros");
+		
+		$scope.listaOutros.push({
+			
+			descricao : descricaoOutros.value
+		});
+					console.log($scope.listaOutros);
+					
+					descricaoOutros.value = "";
+	}
 	
 	
 	self.createEmpreendimento = function(empreendimento){
@@ -11,6 +25,14 @@ app.controller('empreendimentoController', function($scope, empreendimentoServic
 		self.empreendimento = empreendimento;
 		
 	}
+	
+	self.createConfigEmpreendimento = function(configEmpreendimento, listaOutros){
+		empreendimentoService.configEmpreendimento(self.configEmpreendimento, $scope.listaOutros );
+	//	empreendimentoService.configEmpreendimentoOutrosCreate($scope.listaOutros);
+		
+		
+	}
+	
 	
 	self.updateEmpreendimento = function(empreendimento){
 		empreendimentoService.empreendimentoUpdate(self.empreendimento);

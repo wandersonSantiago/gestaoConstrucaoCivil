@@ -43,6 +43,24 @@ app.factory('empreendimentoService', function($rootScope, toastr, $http){
 			});
 		},
 		
+		configEmpreendimento: function(configEmpreendimento , listaOutros){
+			console.log("passei aqui");
+			console.log(listaOutros);
+		//	return $http.post('rest/servico/cadastrarConfigEmpreendimento', configEmpreendimento)
+			return $http.post('rest/servico/cadastrarConfigEmpreendimentoOutros', listaOutros)
+			.then(function(response){
+				console.log("empreendimento gravado");
+				toastr.info('Empreendimento cadastrado');
+				
+				return response.data;
+			
+			},function(errResponse){
+				console.error('Erro ao tentar gravar empreendimento');
+				toastr.info('Empreendimento não cadastrado');
+				return $q.reject(errResponse);
+				
+			});
+		},
 		empreendimentoFindOne: function(param){
 			return $http.get('rest/empreendimento/listarEmpreendimentoId/'+param)
 			.then(function(response){
