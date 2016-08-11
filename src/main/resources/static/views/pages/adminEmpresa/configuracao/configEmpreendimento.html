@@ -15,10 +15,9 @@
 				<div class="row">
 					<label class="col-sm-2 control-label" for="empreendimento">Empreendimento</label>
 					<div class="col-sm-5"
-						ng-controller="empreendimentoController as empCtrl"
 						ng-init="empCtrl.buscarEmpreendimentos()">
 						<select class="form-control select2"
-							ng-model="cadFuncCtrl.funcionario.empreendimento"
+							ng-model="empCtrl.configEmpreendimentoEdificio.empreendimento"
 							ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.shade for listarEmpreendimentos in empreendimentos"
 							style="width: 100%;">
 							<option value="">--selecione--</option>
@@ -26,7 +25,22 @@
 					</div>
 				</div>
 				<br>
-				<div class="row">
+				<div class="row" ng-if="!verdade">
+					<label class="col-sm-2 control-label" for="casa">Casas</label> 
+					<div class="col-sm-2">
+					<input type="number" class="form-control" id="casa" ng-model="empCtrl.configEmpreendimentoCasa.quantidadeTorre"	title="quantidade de residencias no empreendimento">
+					</div>
+				
+					<label  class="col-sm-2 control-label" for="andar">Andar</label>
+					<div class="col-sm-2">
+					 <input type="number" class="form-control" id="andar" ng-model="empCtrl.configEmpreendimentoCasa.quantidadeAndarPorTorre" title="quantidade de andar na residencia">
+					</div>
+		
+				</div>
+				<input type="button" value="teste" ng-click="empCtrl.verificar()">
+					{{empCtrl.configEmpreendimentoEdificio.empreendimento.tipoEmpreendimento }}
+				
+				<div class="row" ng-if="verdade">
 					<label class="col-sm-2 control-label" for="edificio">Edificio</label> 
 					<div class="col-sm-2">
 					<input type="number" class="form-control" id="edificio" ng-model="empCtrl.configEmpreendimentoEdificio.quantidadeTorre"	title="quantidade de torres no empreendimento">
@@ -34,12 +48,12 @@
 				
 					<label  class="col-sm-2 control-label" for="andar">Andar</label>
 					<div class="col-sm-2">
-					 <input type="number" class="form-control" id="andar" ng-model="empCtrl.configEmpreendimentoEdificio.QuantidadeAndarPorTorre" title="quantidade de andar no edificio">
+					 <input type="number" class="form-control" id="andar" ng-model="empCtrl.configEmpreendimentoEdificio.quantidadeAndarPorTorre" title="quantidade de andar no edificio">
 					</div>
 				
 					<label class="col-sm-2 control-label" for="apartamento">Apartamento</label> 
 					<div class="col-sm-2">
-					<input type="number" class="form-control" id="apartamento" ng-model="empCtrl.configEmpreendimentoEdificio.QuantidadeApartamentoPorAndar" title="quantidade de apartamento por andar">
+					<input type="number" class="form-control" id="apartamento" ng-model="empCtrl.configEmpreendimentoEdificio.quantidadeApartamentoPorAndar" title="quantidade de apartamento por andar">
 					</div>
 				</div>
 				<br> <br>

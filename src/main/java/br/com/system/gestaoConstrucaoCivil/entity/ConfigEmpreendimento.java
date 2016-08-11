@@ -14,13 +14,16 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
- 
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoEmpreendimentoEnum;
 import ch.qos.logback.core.subst.Token.Type;
  
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "config_empreendimento")
+@JsonDeserialize(as=ConfigEmpreendimentoEdificio.class)
 public abstract class ConfigEmpreendimento  implements Serializable {
  
     @Id

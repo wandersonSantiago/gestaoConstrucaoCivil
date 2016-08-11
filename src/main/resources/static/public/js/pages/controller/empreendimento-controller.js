@@ -7,6 +7,15 @@ app.controller('empreendimentoController', function($scope, empreendimentoServic
 	$scope.listaOutros =[];
 			
 	
+	self.verificar = function(){
+		console.log("verifiquei");
+		if($scope.empreendimentos){
+			
+			$scope.verdade = true;
+		}
+			
+		console.log($scope.empreendimentos);
+	}
 	
 	self.adicionarOutros = function(){
 		
