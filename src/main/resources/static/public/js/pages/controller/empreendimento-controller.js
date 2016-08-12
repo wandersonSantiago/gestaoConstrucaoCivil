@@ -5,18 +5,44 @@ app.controller('empreendimentoController', function($scope, empreendimentoServic
 	var idEmpreendimento = $routeParams.idEmpreendimento;
 	
 	$scope.listaOutros =[];
-			
 	
-	self.verificar = function(){
-		console.log("verifiquei");
-		if($scope.empreendimentos){
-			
-			$scope.verdade = true;
+	
+	self.ativarExcluirLote = function(listaOutros){
+		$scope.listaOutros.filter(function(outro){
+		if(outro.selecionado){
+			$scope.ativadoExcluirLote = true;
 		}
+		});
+	}
+		
+
+	//apagar outros empreendimentos, somente da lista de front
+	self.apagarOutros = function(listaOutros){
+		
+		$scope.listaOutros = listaOutros.filter(function(outro){
 			
-		console.log($scope.empreendimentos);
+			if(!outro.selecionado) return outro;
+			$scope.ativadoExcluirLote = null;
+		});
+		
+		
 	}
 	
+	//verifica qual tipo de empreendimento, para renderizar os componentes corretos
+	self.verificar = function(){
+	
+		if(self.configEmpreendimentoEdificio.empreendimento.tipoEmpreendimento == "EDIFICIO_RESIDENCIAL"){
+			
+			$scope.verdade = true;
+		}else{
+			
+		$scope.verdade = null;
+		
+		}
+	}
+	
+	
+	//cria uma lista de outros
 	self.adicionarOutros = function(){
 		
 		var outros = document.getElementById("descricaoOutros");
@@ -25,9 +51,9 @@ app.controller('empreendimentoController', function($scope, empreendimentoServic
 			
 			descricao : descricaoOutros.value
 		});
-					console.log($scope.listaOutros);
-					
+										
 					descricaoOutros.value = "";
+					$scope.descricaoOutro = null;
 	}
 	
 	
@@ -38,11 +64,11 @@ app.controller('empreendimentoController', function($scope, empreendimentoServic
 	}
 	
 	self.createConfigEmpreendimento = function(configEmpreendimentoEdificio, listaOutros){
-		console.log(self.configEmpreendimentoEdificio);
 		empreendimentoService.configEmpreendimentoTorreCreate(self.configEmpreendimentoEdificio);
 		empreendimentoService.configEmpreendimentoOutrosCreate($scope.listaOutros);
 		
-		
+		self.configEmpreendimentoEdificio = configEmpreendimentoEdificio =[];
+		$scope.listaOutros = listaOutros =[];
 	}
 	
 	
