@@ -1,4 +1,4 @@
-app.controller('empreendimentoController', function($scope, empreendimentoService,  $routeParams){
+app.controller('empreendimentoController', function($scope, empreendimentoService,   $routeParams){
 	
 	var self = this;
   
