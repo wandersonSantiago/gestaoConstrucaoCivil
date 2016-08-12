@@ -37,28 +37,31 @@ app.factory('empreendimentoService', function($rootScope, toastr, $http){
 			
 			},function(errResponse){
 				console.error('Erro ao tentar gravar empreendimento');
-				toastr.info('Empreendimento não cadastrado');
+				toastr.error('Empreendimento não cadastrado');
 				return $q.reject(errResponse);
 				
 			});
 		},
 		
-		configEmpreendimentoTorreCreate: function(configEmpreendimentoEdificio){
-			console.log("passei aqui");
-				return $http.post('rest/servico/cadastrarConfigEmpreendimento', configEmpreendimentoEdificio)
+		configEmpreendimentoEdificioCreate: function(configEmpreendimentoEdificio, configEmpreendimentoCasa){
+		
+				return $http.post('rest/servico/cadastrarConfigEmpreendimento', configEmpreendimentoEdificio, configEmpreendimentoCasa)
 				.then(function(response){
-				console.log("empreendimento gravado");
+				console.log(configEmpreendimentoEdificio);
+				console.log(configEmpreendimentoCasa);
+				
 				toastr.info('Empreendimento Edificio cadastrado');
 				
 				return response.data;
 			
 			},function(errResponse){
-				console.error('Erro ao tentar gravar qunatidade de Edificio');
-				toastr.info('Empreendimento Edificio não cadastrado');
+				
+				toastr.error('Empreendimento Edificio não cadastrado');
 				return $q.reject(errResponse);
 				
 			});
 		},
+		
 		configEmpreendimentoOutrosCreate: function( listaOutros){
 			console.log("passei aqui");
 			console.log(listaOutros);

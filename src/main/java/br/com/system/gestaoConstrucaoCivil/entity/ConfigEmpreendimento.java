@@ -18,7 +18,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoEmpreendimentoEnum;
-import ch.qos.logback.core.subst.Token.Type;
+
  
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)

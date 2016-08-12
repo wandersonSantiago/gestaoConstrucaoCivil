@@ -26,7 +26,7 @@ public class ConfigEmpreendimentoRestController {
     public ResponseEntity salvarConfigEmpreendimento(@RequestBody ConfigEmpreendimento configEmpreendimento, UriComponentsBuilder ucBuilder) {
         configEmpreeendimentoService.salvarOuEditar(configEmpreendimento);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("rest/servico/cadastrarConfigEmpreendimento/{id}").buildAndExpand(configEmpreendimento.getId()).toUri());
+        headers.setLocation(ucBuilder.path("rest/servico/cadastrarConfigEmpreendimento/{configEmpreendimento}").buildAndExpand(configEmpreendimento.getId()).toUri());
        System.out.println(configEmpreendimento);
         return new ResponseEntity(headers, HttpStatus.CREATED);
     }

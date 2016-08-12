@@ -22,30 +22,30 @@
 								ng-model="empCtrl.configEmpreendimentoEdificio.empreendimento"
 								ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.shade for listarEmpreendimentos in empreendimentos"
 								style="width: 100%;">
-								<option value="">--selecione--</option>
+								<option  value="">--selecione--</option>
 							</select>
 						</div>
 					</div>
 					<br>
-					<div class="row" ng-if="!verdade">
+					<div class="row" ng-if="verificaTipoCasa">
 						<label class="col-sm-2 control-label" for="casa">Casas</label>
 						<div class="col-sm-2">
 							<input type="number" interger class="form-control" id="casa"
-								ng-model="empCtrl.configEmpreendimentoCasa.quantidadeTorre"
+								ng-model="empCtrl.configEmpreendimentoCasa.quantidadeCasa"
 								title="quantidade de residencias no empreendimento"
 								required="required">
 						</div>
 
-						<label class="col-sm-2 control-label" for="andar">Andar</label>
+						<label class="col-sm-2 control-label" for="andarPorCasa">Andar</label>
 						<div class="col-sm-2">
-							<input type="number" class="form-control" id="andar"
-								ng-model="empCtrl.configEmpreendimentoCasa.quantidadeAndarPorTorre"
+							<input type="number" class="form-control" id="andarPorCasa"
+								ng-model="empCtrl.configEmpreendimentoCasa.quantidadeAndarPorCasa"
 								title="quantidade de andar na residencia" required="required" />
 						</div>
 
 					</div>
 
-					<div class="row" ng-if="verdade">
+					<div class="row" ng-if="verificaTipoEdificio">
 						<label class="col-sm-2 control-label" for="edificio">Edificio</label>
 						<div class="col-sm-2">
 							<input type="number" class="form-control" id="edificio"
@@ -127,7 +127,7 @@
 					<div class="row ">
 						<div class="col-sm-3"></div>
 						<div class="col-sm-3">
-							<button type="submit" name="submit" ng-disabled="!empCtrl.configEmpreendimentoEdificio.empreendimento"
+							<button type="submit" name="submit" ng-disabled="!empCtrl.configEmpreendimentoEdificio.empreendimento "
 								class="btn btn-lg btn-primary btn-block btn-signin">Cadastrar</button>
 						</div>
 						<div class="col-sm-3">

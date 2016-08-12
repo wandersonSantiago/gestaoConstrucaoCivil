@@ -1,7 +1,8 @@
 package br.com.system.gestaoConstrucaoCivil.entity;
  
 import java.io.Serializable;
- 
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
  
@@ -9,10 +10,13 @@ import javax.persistence.Table;
 @Table(name = "config_empreendimento_edificio")
 public class ConfigEmpreendimentoEdificio extends ConfigEmpreendimento implements Serializable{
  
+	@Column(nullable = false,length = 10)
     private Integer quantidadeAndarPorTorre;
    
+	@Column(nullable = false,length = 10)
     private Integer quantidadeTorre;
      
+	@Column(nullable = false,length = 10)
     private Integer quantidadeApartamentoPorAndar;
  
     public Integer getQuantidadeAndarPorTorre() {

@@ -30,13 +30,19 @@ app.controller('empreendimentoController', function($scope, empreendimentoServic
 	
 	//verifica qual tipo de empreendimento, para renderizar os componentes corretos
 	self.verificar = function(){
-	
-		if(self.configEmpreendimentoEdificio.empreendimento.tipoEmpreendimento == "EDIFICIO_RESIDENCIAL"){
+	/*if(self.configEmpreendimentoEdificio == null){
+		$scope.verificaTipoEdificio = false;
+		$scope.verificaTipoCasa = false;
+		console.log("nullo empre");
+	}*/
+		if(self.configEmpreendimentoEdificio.empreendimento.tipoEmpreendimento == "CONDOMINIO_DE_EDIFICIO_RESIDENCIAL"){
+			$scope.verificaTipoCasa = false;
+			$scope.verificaTipoEdificio = true;
 			
-			$scope.verdade = true;
-		}else{
-			
-		$scope.verdade = null;
+		}else
+		if(self.configEmpreendimentoEdificio.empreendimento.tipoEmpreendimento == "CONDOMINIO_DE_CASA"){
+			$scope.verificaTipoEdificio = false;
+			$scope.verificaTipoCasa = true;
 		
 		}
 	}
@@ -63,12 +69,18 @@ app.controller('empreendimentoController', function($scope, empreendimentoServic
 		
 	}
 	
-	self.createConfigEmpreendimento = function(configEmpreendimentoEdificio, listaOutros){
-		empreendimentoService.configEmpreendimentoTorreCreate(self.configEmpreendimentoEdificio);
-		empreendimentoService.configEmpreendimentoOutrosCreate($scope.listaOutros);
+	
+	self.createConfigEmpreendimento = function(configEmpreendimentoEdificio, configEmpreendimentoCasa, listaOutros){
 		
+
+		empreendimentoService.configEmpreendimentoEdificioCreate(self.configEmpreendimentoEdificio , self.configEmpreendimentoCasa);
+		empreendimentoService.configEmpreendimentoOutrosCreate($scope.listaOutros);
 		self.configEmpreendimentoEdificio = configEmpreendimentoEdificio =[];
 		$scope.listaOutros = listaOutros =[];
+		self.configEmpreendimentoCasa = configEmpreendimentoCasa =[];
+	
+	
+	
 	}
 	
 	

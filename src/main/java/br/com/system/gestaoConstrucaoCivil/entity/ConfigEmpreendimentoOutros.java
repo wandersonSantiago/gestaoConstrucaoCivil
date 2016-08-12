@@ -18,7 +18,7 @@ public class ConfigEmpreendimentoOutros implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
      
-    @Column(nullable = false,length = 50)
+    @Column(nullable = false,length = 250)
     private String descricao;
  
     public Long getId() {

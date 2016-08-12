@@ -17,7 +17,7 @@ public class CriaEmpreendimento {
 		empreendimento.setDataAbertura(new Date());
 		empreendimento.setDatafechamento(null);
 		empreendimento.setEnderecoEmpreendimento(new CriaEndereco().getEndereco());
-        empreendimento.setTipoEmpreendimento(TipoEmpreendimentoEnum.CONDOMINIO_DE_EDIFICIO_COMERCIAL);
+        empreendimento.setTipoEmpreendimento(TipoEmpreendimentoEnum.CONDOMINIO_DE_EDIFICIO_RESIDENCIAL);
         empreendimento.setValoresGastos(0.0);
         empreendimento.setValorMaximoGastar(200000000.0);
         empreendimento.setPorcentagem(0.0);
