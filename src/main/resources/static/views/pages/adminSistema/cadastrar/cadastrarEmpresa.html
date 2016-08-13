@@ -54,27 +54,39 @@
 					<div class="row">
 						<label class="col-sm-1 control-label" for="cnpj">CNPJ</label>
 						<div class="col-sm-5">
-							<input class="form-control"
+							<input class="form-control" name="cnpjField"
 								ng-model="adminCtrl.empresa.dadoEmpresa.cnpj" id="cnpj"
-								type="text" ui-mask="{{maskCnpj}}" required>
+								type="text" ui-br-cnpj-mask required>
+					<!--  <br><p><code>{{formAdminSistema.cnpjField.$error.cnpj? 'Digite um CNPJ válido!!' : '' }}</code></p> -->
+   						<p ng-show="formAdminSistema.cnpjField.$error.cnpj"
+						class="alert alert-warning ">Digite um CNPJ válido!!</p>
 						</div>
+						
 						<label class="col-sm-1 control-label" for="telefone">Telefone</label>
 						<div class="col-sm-5">
 							<input class="form-control"
 								ng-model="adminCtrl.empresa.dadoEmpresa.telefone" id="telefone"
-								type="tel" ui-mask="{{maskFone}}" required>
+								type="tel" ui-br-phone-number required>
 						</div>
 					</div>
 					<br>
 					<div class="row">
-						<label class="col-sm-1 control-label" for="inscricaoEstadual">Inscricao
-							Estadual</label>
+					<label class="col-sm-1 control-label" for="inscricaoEstadual">Inscricao	Estadual</label>
+					<div  class="col-sm-2">
+					<select class="form-control" ng-init="ufs=['AC','AL','AM','AP','BA','CE','DF','ES','GO','MA',
+      'MG','MS','MT','PA','PB','PE','PI','PR','RJ','RN','RO','RR','RS','SC','SE','SP','TO']" ng-model="selectedUF" ng-options="uf for uf in ufs">
+					<option value="">selecione o estado</option>
+					</select>
+					</div>
+					
 						<div class="col-sm-5">
-							<input class="form-control"
+							<input class="form-control" name="iefield" 
 								ng-model="adminCtrl.empresa.dadoEmpresa.inscricaoEstadual"
-								id="inscricaoEstadual" type="text" ui-mask="{{maskIscEstadual}}"
+								id="inscricaoEstadual" type="text" ui-br-ie-mask='selectedUF'
 								required>
+		 <br><p><code>{{formAdminSistema.iefield.$error.ie? 'Digite uma inscriçao Estadual válida!!' : '' }}</code></p>
 						</div>
+							
 					</div>
 					<br>
 
@@ -84,13 +96,20 @@
 					<div class="row">
 						<label class="col-sm-1 control-label" for="cep">CEP</label>
 						<div class="col-sm-5">
-							<!-- <input class="form-control" id="cep" type="search"
-								placeholder="Busca Cep"> -->
-							<input class="form-control"
+							<input class="form-control" name="cepField"
 								ng-model="adminCtrl.empresa.dadoEmpresa.endereco.cep" id="cep"
-								type="text" ui-mask="{{maskCep}}" required>
-
+								type="text" ui-br-cep-mask required>
+			<br><p><code>{{formAdminSistema.cepField.$error.cep? 'Digite um CEP válido!!' : '' }}</code></p>
+								
+								
+						Cep: <input type="text" ng-model="adminCtrl.cep">
+						<button type="button" ng-click="adminCtrl.findCep()">Find Cep</button>
+						<br>
+						<br> Cidade: {{city}}
+						
+						
 						</div>
+						
 						<label class="col-sm-1 control-label" for="numero">Numero</label>
 						<div class="col-sm-5"
 							ng-class="{ 'has-error' : formAdminSistema.numeroEmpresa.$invalid && !fromAdminSistema.numeroEmpresa.$pristine }">
@@ -129,7 +148,7 @@
 						<label class="col-sm-1 control-label" for="cidade">Cidade</label>
 						<div class="col-sm-5">
 							<input class="form-control"
-								ng-model="adminCtrl.empresa.dadoEmpresa.endereco.cidade"
+								ng-model="empresa.dadoEmpresa.endereco.cidade"
 								id="cidade" type="text" required>
 						</div>
 					</div>
@@ -191,6 +210,14 @@
 							
 						</div>
 					</div>
+					<!-- <div ng-controller="buscaCep">
+						Cep: <input type="text" ng-model="cep">
+						<button type="button" ng-click="findCep()">Find Cep</button>
+						<br>
+						<br> Cidade: {{city}}
+						
+						{{adminCtrl.empresa.dadoEmpresa.endereco.cidade = city.localidade}}
+					</div> -->
 
 				</form>
 			</div>

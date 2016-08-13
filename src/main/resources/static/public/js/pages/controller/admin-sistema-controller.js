@@ -1,10 +1,30 @@
-app.controller('adminSistemaController', function($scope, adminSistemaService, $routeParams){
+app.controller('adminSistemaController', function($scope, adminSistemaService, buscaCepService, $routeParams){
 	
 	var self = this;
   
 	self.empresa = null;
 	var idEmpresa =  $routeParams.idEmpresa;
 
+	$scope.cep = "99150000", $scope.city = null;
+	self.findCep = function () {
+		
+		console.log("teste");
+		buscaCepService.get({'cep': self.cep}).$promise
+		.then(function success(result){
+			$scope.city = result;
+			$scope.empresa.dadoEmpresa.endereco.cidade = $scope.city.localidade;
+			$scope.empresa.dadoEmpresa.endereco.bairro = $scope.bairro.localidade;
+			$scope.empresa.dadoEmpresa.endereco.cidade = $scope.city.localidade;
+			$scope.empresa.dadoEmpresa.endereco.cidade = $scope.city.localidade;
+			$scope.empresa.dadoEmpresa.endereco.cidade = $scope.city.localidade;
+			$scope.empresa.dadoEmpresa.endereco.cidade = $scope.city.localidade;
+			$scope.empresa.dadoEmpresa.endereco.cidade = $scope.city.localidade;
+			
+		}).catch(function error(msg) {
+			console.error('Error');
+		});
+    }
+	
 	
 	self.createEmpresa = function(empresa, sucesso){
 		console.log(self.empresa);

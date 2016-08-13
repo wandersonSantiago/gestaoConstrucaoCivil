@@ -18,9 +18,9 @@
 							Social</label>
 						<div class="col-sm-11" ng-class="{ 'has-error' : formAdminSistema.razaoSocial.$invalid && !fromAdminSistema.razaoSocial.$pristine }">
 							<input class="form-control" ng-minlength="5" ng-maxlength="50" 
-								ng-model="adminCtrl.empresa.dadoEmpresa.razaoSocial" 
+								ng-model="adminCtrl.empresa.dadoEmpresa.razaoSocial"
 								id="razaoSocial" name="razaoSocial" type="text" required>
-						</div> 
+						</div>
 					</div>
 					<p ng-show="formAdminSistema.razaoSocial.$error.minlength"
 						class="alert alert-warning ">campo Razão Social no minimo 5 caracter</p>
@@ -54,27 +54,37 @@
 					<div class="row">
 						<label class="col-sm-1 control-label" for="cnpj">CNPJ</label>
 						<div class="col-sm-5">
-							<input class="form-control"
+							<input class="form-control" name="cnpjField"
 								ng-model="adminCtrl.empresa.dadoEmpresa.cnpj" id="cnpj"
-								type="text" ui-mask="{{maskCnpj}}" required>
+								type="text" ui-br-cnpj-mask required>
+					 <br><p><code>{{formAdminSistema.cnpjField.$error.cnpj? 'Digite um CNPJ válido!!' : '' }}</code></p>
+   						
 						</div>
+						
 						<label class="col-sm-1 control-label" for="telefone">Telefone</label>
 						<div class="col-sm-5">
 							<input class="form-control"
 								ng-model="adminCtrl.empresa.dadoEmpresa.telefone" id="telefone"
-								type="tel" ui-mask="{{maskFone}}" required>
+								type="tel" ui-br-phone-number required>
 						</div>
 					</div>
 					<br>
 					<div class="row">
-						<label class="col-sm-1 control-label" for="inscricaoEstadual">Inscricao
-							Estadual</label>
+					<label class="col-sm-1 control-label" for="inscricaoEstadual">Inscricao	Estadual</label>
+					<div  class="col-sm-2">
+					<select class="form-control" ng-init="ufs=['SP','RJ','MG','MT','AC','AL','AM','TO']" ng-model="selectedUF" ng-options="uf for uf in ufs">
+					<option value="">selecione o estado</option>
+					</select>
+					</div>
+					
 						<div class="col-sm-5">
-							<input class="form-control"
+							<input class="form-control" name="iefield" 
 								ng-model="adminCtrl.empresa.dadoEmpresa.inscricaoEstadual"
-								id="inscricaoEstadual" type="text" ui-mask="{{maskIscEstadual}}"
+								id="inscricaoEstadual" type="text" ui-br-ie-mask='selectedUF'
 								required>
+		 <br><p><code>{{formAdminSistema.iefield.$error.ie? 'Digite uma inscriçao Estadual válida!!' : '' }}</code></p>
 						</div>
+							
 					</div>
 					<br>
 
@@ -84,13 +94,13 @@
 					<div class="row">
 						<label class="col-sm-1 control-label" for="cep">CEP</label>
 						<div class="col-sm-5">
-							<!-- <input class="form-control" id="cep" type="search"
-								placeholder="Busca Cep"> -->
-							<input class="form-control"
+							<input class="form-control" name="cepField"
 								ng-model="adminCtrl.empresa.dadoEmpresa.endereco.cep" id="cep"
-								type="text" ui-mask="{{maskCep}}" required>
-
+								type="text" ui-br-cep-mask required>
+			<br><p><code>{{formAdminSistema.cepField.$error.cep? 'Digite um CEP válido!!' : '' }}</code></p>
+								
 						</div>
+						
 						<label class="col-sm-1 control-label" for="numero">Numero</label>
 						<div class="col-sm-5"
 							ng-class="{ 'has-error' : formAdminSistema.numeroEmpresa.$invalid && !fromAdminSistema.numeroEmpresa.$pristine }">
