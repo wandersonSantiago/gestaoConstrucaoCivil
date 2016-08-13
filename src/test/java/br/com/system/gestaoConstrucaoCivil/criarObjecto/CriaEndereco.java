@@ -13,12 +13,11 @@ public class CriaEndereco {
 	{
 		endereco = new Endereco();
 		endereco.setBairro("Jardim Vila Santana");
-		endereco.setRua("Rua fradique coutinho");
+		endereco.setLogradouro("Rua fradique coutinho");
 		endereco.setNumero(97);
-		endereco.setCidade("Valinhos");
+		endereco.setLocalidade("Valinhos");
 		endereco.setCep("13270021");
-		endereco.setEstado("SP");
-		endereco.setCidade("Valinhos");
+		endereco.setUf("SP");
 		endereco.setComplemento("Fundo");
 	}
    public Endereco getEndereco()
