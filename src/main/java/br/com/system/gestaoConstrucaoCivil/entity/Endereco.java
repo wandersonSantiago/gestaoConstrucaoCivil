@@ -11,26 +11,25 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class Endereco extends AbstractPersistable<Long>  {
 
 	@Column(nullable = false,length = 50)
-	private String rua;
+	private String logradouro;
 	@Column(nullable = false,length = 50)
 	private String bairro;
 	@Column(nullable = false,length = 50)
-	private String cidade;
+	private String localidade;
 	@Column(nullable = false)
 	private Integer numero;
 	@Column(nullable = false)
-	private String estado;
+	private String uf;
 	@Column(nullable = false)
 	private String cep;
 	@Column(nullable = true)
 	private String complemento;
 	
-	
-	public String getRua() {
-		return rua;
+	public String getLogradouro() {
+		return logradouro;
 	}
-	public void setRua(String rua) {
-		this.rua = rua;
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
 	}
 	public String getBairro() {
 		return bairro;
@@ -38,11 +37,11 @@ public class Endereco extends AbstractPersistable<Long>  {
 	public void setBairro(String bairro) {
 		this.bairro = bairro;
 	}
-	public String getCidade() {
-		return cidade;
+	public String getLocalidade() {
+		return localidade;
 	}
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
+	public void setLocalidade(String localidade) {
+		this.localidade = localidade;
 	}
 	public Integer getNumero() {
 		return numero;
@@ -50,11 +49,11 @@ public class Endereco extends AbstractPersistable<Long>  {
 	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
-	public String getEstado() {
-		return estado;
+	public String getUf() {
+		return uf;
 	}
-	public void setEstado(String estado) {
-		this.estado = estado;
+	public void setUf(String uf) {
+		this.uf = uf;
 	}
 	public String getCep() {
 		return cep;
@@ -68,5 +67,7 @@ public class Endereco extends AbstractPersistable<Long>  {
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
-    
+	
+	
+	
 }
