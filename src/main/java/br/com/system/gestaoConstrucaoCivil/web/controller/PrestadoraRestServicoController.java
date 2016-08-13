@@ -30,9 +30,11 @@ public class PrestadoraRestServicoController {
 	 @RequestMapping(method = RequestMethod.POST)
 	 public ResponseEntity salva(@RequestBody PrestadoraServico prestadoraServico,UriComponentsBuilder ucBuilder)
 	 {
+		 System.out.println(prestadoraServico);
+		 
 		 prestadoraServicoService.salvarOuEditar(prestadoraServico);
 		 HttpHeaders headers =new HttpHeaders();
-		 headers.setLocation(ucBuilder.path("/rest/prestadoraServico/cadastrarPrestadoraServico/{id}").buildAndExpand(prestadoraServico.getId()).toUri());
+		 headers.setLocation(ucBuilder.path("/rest/prestadoraServico/cadastrarPrestadoraServico/{prestadoraServico}").buildAndExpand(prestadoraServico.getId()).toUri());
 		 return new ResponseEntity(headers, HttpStatus.CREATED);
 	 }
 }

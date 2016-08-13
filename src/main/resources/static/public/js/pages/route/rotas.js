@@ -69,6 +69,12 @@ app.config(['$routeProvider','$httpProvider', function($routeProvider, $httpProv
 			
 	})
 	
+	.when('/cadastrarPrestadoraServico', {
+		templateUrl : "views/pages/adminEmpresa/cadastrar/cadastrarPrestadoraDeServico.html",
+	//	controller : "empreendimento-controller.js",
+			
+	})
+	
 			//LISTAR
     	
 	.when('/listaEmpreendimento', {

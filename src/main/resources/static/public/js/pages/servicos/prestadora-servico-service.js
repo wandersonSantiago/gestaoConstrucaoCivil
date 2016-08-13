@@ -3,7 +3,7 @@ app.factory('prestadoraServicoService', function($rootScope, toastr, $http,$q){
 	
 	return{
 		prestadoraServicoCreate: function(prestadoraServico){
-			return $http.post('/rest/prestadoraServico/cadastrarPrestadoraServico',prestadoraServico)
+			return $http.post('/rest/prestadoraServico/cadastrarPrestadoraServico', prestadoraServico)
 			
 			.then(function(response){
 			
@@ -12,7 +12,7 @@ app.factory('prestadoraServicoService', function($rootScope, toastr, $http,$q){
 				return response.data;
 			
 			},function(errResponse){
-				console.error('Erro ao tentar gravar o prestadora de servico');
+				
 				toastr.error('errro ao cadastrar prestadora de serviço');
 				return $q.reject(errResponse);
 				

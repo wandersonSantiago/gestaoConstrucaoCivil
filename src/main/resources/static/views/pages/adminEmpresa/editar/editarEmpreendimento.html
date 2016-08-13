@@ -25,7 +25,7 @@
 						<label class="col-sm-1 control-label" for="valorMaximoGastar">Valor
 							Total</label>
 						<div class="col-sm-4">
-							<input ng-model="empCtrl.empreendimento.valorMaximoGastar" class="form-control" id="valorMaximoGastar" type="text" >
+							<input ng-model="empCtrl.empreendimento.valorMaximoGastar" class="form-control" id="valorMaximoGastar" type="text"  ui-money-mask="2">
 						</div>
 						<label class="col-sm-2 control-label" for="tipoEmpreendimento">Tipo
 							Empreendimento</label>
@@ -43,14 +43,15 @@
 						<label class="col-sm-1 control-label" for="dataAbertura">Data
 							Abertura</label>
 						<div class="col-sm-4">
-							<input class="form-control" id="dataAbertura" type="date" required >
+							<input class="form-control" id="dataAbertura" ng-model="empCtrl.empreendimento.dataAbertura" type="text" required >
 							{{empCtrl.empreendimento.dataAbertura | date:'dd/MM/yyyy '}}
 						</div>
+						{{empCtrl.empreendimento.datafechamento | date:'dd/MM/yyyy '}}
 						<label class="col-sm-2 control-label" for="datafechamento">Data
 							Fechamento</label>
 						<div class="col-sm-5">
-							<input  class="form-control" id="datafechamento" type="date"  required >
-							{{empCtrl.empreendimento.datafechamento | date:'dd/MM/yyyy '}}
+							<input  class="form-control" id="datafechamento" ng-model="empCtrl.empreendimento.datafechamento" type="text"  required >
+						
 						</div>
 					</div>
 					<br>
@@ -88,27 +89,44 @@
 						</div>
 					</div>
 					<br>
-					<h4>Endereço</h4>
+				<h4>Endereço</h4>
 
 					<hr>
 					<div class="row">
 						<label class="col-sm-1 control-label" for="cep">CEP</label>
 						<div class="col-sm-5">
-							<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.cep" class="form-control" id="cep" type="search"
-								placeholder="Busca Cep">
+							<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.cep" name="cepField" class="form-control" id="cep" type="search"
+								placeholder="Busca Cep"  ui-br-cep-mask required>
+								<button type="button" class="btn-primary" ng-click="empCtrl.findCep()">Buscar CEP</button>
+			<br><p><code>{{empreendimentoForm.cepField.$error.cep? 'Digite um CEP válido!!' : '' }}</code></p>
+								
 						</div>
+						
+						
 						<label class="col-sm-1 control-label" for="numero">Numero</label>
-						<div class="col-sm-5">
-							<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.numero" class="form-control" id="numero" type="text">
+						<div class="col-sm-5"
+							ng-class="{ 'has-error' : empreendimentoForm.numeroEmpresa.$invalid && !empreendimentoForm.numeroEmpresa.$pristine }">
+							<input class="form-control" name="numeroEmpresa"
+								ng-model="empCtrl.empreendimento.enderecoEmpreendimento.numero"
+								id="numero" type="text" ng-minlength="1" ng-maxlength="7"
+								required>
 						</div>
 					</div>
+						<br>
+					<p ng-show="empreendimentoForm.numeroEmpresa.$error.minlength"
+						class="alert alert-warning ">campo numero no minimo 1 caracter</p>
+					<p ng-show="empreendimentoForm.numeroEmpresa.$error.maxlength"
+						class="alert alert-warning ">campo numero no maximo 7 caracter</p>
+
 					<br>
+					
+				
 
 					<div class="row">
 						
 							<label class="col-sm-1 control-label" for="rua">Rua</label>
 							<div class="col-sm-11">
-								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.rua" class="form-control" id="rua" type="text">
+								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.logradouro" class="form-control" id="rua" type="text">
 							</div>
 					</div>
 					<br>
@@ -120,7 +138,7 @@
 							</div>
 							<label class="col-sm-1 control-label" for="cidade">Cidade</label>
 							<div class="col-sm-5">
-								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.cidade" class="form-control" id="cidade" type="text">
+								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.localidade" class="form-control" id="cidade" type="text">
 							</div>
 					</div>
 					<br>
@@ -128,7 +146,7 @@
 
 							<label class="col-sm-1 control-label" for="estado">Estado</label>
 							<div class="col-sm-5">
-								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.estado" class="form-control" id="estado" type="text">
+								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.uf" class="form-control" id="estado" type="text">
 							</div>
 						
 					</div>
@@ -163,13 +181,12 @@
 					<div class="row ">
 						<div class="col-sm-3"></div>
 						<div class="col-sm-3">
-							<button type="submit" name="submit"
-								class="btn btn-lg btn-primary btn-block btn-signin">Cadastrar</button>
+							<input type="submit" id="submit" value="Alterar Dados"
+								class="btn btn-lg btn-primary btn-block btn-signin">
 						</div>
 						<div class="col-sm-3">
-
-							<button type="submit" name="submit"
-								class="btn btn-lg btn-danger btn-block btn-signin">Cancelar</button>
+							<a class="btn btn-lg btn-success btn-block btn-signin" href="#/listaEmpreendimento">Voltar</a>
+							
 						</div>
 					</div>
 

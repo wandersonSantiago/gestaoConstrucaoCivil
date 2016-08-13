@@ -1,9 +1,24 @@
-app.controller('PrestadoraServicoController', function($scope,PrestadoraServicoService, $routeParams){
+app.controller('prestadoraServicoController', function($scope, buscaCepService, prestadoraServicoService, $routeParams){
 	
 	var self = this;
 		
 	$scope.listaPrestadoraServico = [];
 	
+	
+
+
+	self.findCep = function () {
+		
+		self.cep = $scope.prestadoraCtrl.prestadoraServico.dadoEmpresa.endereco.cep;
+		console.log(self.cep );
+		buscaCepService.get({'cep': self.cep}).$promise
+		.then(function success(result){
+			$scope.prestadoraCtrl.prestadoraServico.dadoEmpresa.endereco = result;
+			}).catch(function error(msg) {
+			console.error('Error');
+		});
+		
+    }
 	
 	 self.cadastrarPrestadoraServico = function(prestadoraServico){
 		 console.log(self.prestadoraServico);
