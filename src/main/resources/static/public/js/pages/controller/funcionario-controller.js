@@ -1,8 +1,27 @@
-app.controller('cadastrarFuncionarioController', function($scope, cadastrarFuncionarioService, cargoService, $routeParams) {
+app.controller('cadastrarFuncionarioController', function($scope, buscaCepService, cadastrarFuncionarioService, cargoService, $routeParams) {
 
 	var self = this;
 	
 	var idFuncionario = $routeParams.idFuncionario;
+	
+	
+
+	self.findCep = function () {
+		
+		self.cep = $scope.cadFuncCtrl.funcionario.endereco.cep;
+		console.log(self.cep );
+		buscaCepService.get({'cep': self.cep}).$promise
+		.then(function success(result){
+			$scope.cadFuncCtrl.funcionario.endereco = result;
+		
+
+	
+		}).catch(function error(msg) {
+			console.error('Error');
+		});
+		
+    }
+	
 	
 	self.cadastrarFuncionario = function(funcionario) {
 		cadastrarFuncionarioService.funcionarioCreate(self.funcionario);

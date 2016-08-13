@@ -99,6 +99,7 @@
 							<input class="form-control" name="cepField"
 								ng-model="adminCtrl.empresa.dadoEmpresa.endereco.cep" id="cep"
 								type="text" ui-br-cep-mask required>
+								<button type="button" class="btn-primary" ng-click="adminCtrl.findCep()">Buscar CEP</button>
 			<br><p><code>{{formAdminSistema.cepField.$error.cep? 'Digite um CEP válido!!' : '' }}</code></p>
 								
 						</div>

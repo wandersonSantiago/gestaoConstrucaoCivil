@@ -105,9 +105,9 @@
 			<br><p><code>{{formAdminSistema.cepField.$error.cep? 'Digite um CEP válido!!' : '' }}</code></p>
 								
 						
-						
+					
 						</div>
-						
+							
 						<label class="col-sm-1 control-label" for="numero">Numero</label>
 						<div class="col-sm-5"
 							ng-class="{ 'has-error' : formAdminSistema.numeroEmpresa.$invalid && !fromAdminSistema.numeroEmpresa.$pristine }">
@@ -129,7 +129,7 @@
 						<label class="col-sm-1 control-label" for="rua">Rua</label>
 						<div class="col-sm-11">
 							<input class="form-control"
-								ng-model="adminCtrl.empresa.dadoEmpresa.endereco.rua" id="rua"
+								ng-model="adminCtrl.empresa.dadoEmpresa.endereco.logradouro" id="rua"
 								type="text" required>
 						</div>
 					</div>
@@ -146,7 +146,7 @@
 						<label class="col-sm-1 control-label" for="cidade">Cidade</label>
 						<div class="col-sm-5">
 							<input class="form-control"
-								ng-model="adminCtrl.empresa.dadoEmpresa.endereco.cidade"
+								ng-model="adminCtrl.empresa.dadoEmpresa.endereco.localidade"
 								id="cidade" type="text" required>
 						</div>
 					</div>
@@ -156,7 +156,7 @@
 						<label class="col-sm-1 control-label" for="estado">Estado</label>
 						<div class="col-sm-5">
 							<input class="form-control"
-								ng-model="adminCtrl.empresa.dadoEmpresa.endereco.estado"
+								ng-model="adminCtrl.empresa.dadoEmpresa.endereco.uf"
 								id="estado" type="text" required>
 						</div>
 						<!--<label class="col-sm-1 control-label" for="pais">Pais</label>

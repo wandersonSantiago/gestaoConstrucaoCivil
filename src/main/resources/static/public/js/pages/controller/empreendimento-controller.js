@@ -1,10 +1,30 @@
-app.controller('empreendimentoController', function($scope, empreendimentoService,   $routeParams){
+app.controller('empreendimentoController', function($scope, buscaCepService, empreendimentoService,   $routeParams){
 	
 	var self = this;
   
 	var idEmpreendimento = $routeParams.idEmpreendimento;
 	
 	$scope.listaOutros =[];
+	
+	
+
+
+	self.findCep = function () {
+		
+		self.cep = $scope.empCtrl.empreendimento.enderecoEmpreendimento.cep;
+		console.log(self.cep );
+		buscaCepService.get({'cep': self.cep}).$promise
+		.then(function success(result){
+			$scope.empCtrl.empreendimento.enderecoEmpreendimento = result;
+		
+
+	
+		}).catch(function error(msg) {
+			console.error('Error');
+		});
+		
+    }
+	
 	
 	
 	self.ativarExcluirLote = function(listaOutros){
