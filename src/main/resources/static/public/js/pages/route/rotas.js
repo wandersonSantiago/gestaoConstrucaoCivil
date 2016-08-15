@@ -111,6 +111,23 @@ app.config(['$routeProvider','$httpProvider', function($routeProvider, $httpProv
 	})
     
 	
+	
+//SERVIÇOS
+	
+		//CADASTRAR
+	
+	.when('/cadastrarPacotesServicos', {
+		templateUrl:"views/pages/servicos/cadastrar/cadastrarPacoteServico.html",		
+
+	})
+	
+	//CONSULTA
+	
+		.when('/listaPacoteServico', {
+		templateUrl:"views/pages/servicos/lista/listaPacoteServico.html",		
+
+	})
+	
 //ROTAS RECURSOS HUMANOS
 	
 		//CADASTRAR

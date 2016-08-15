@@ -1,0 +1,76 @@
+<meta charset="UTF-8">
+<br>
+<br>
+<div class="generic-container" ng-controller="pacoteServicoController as pacotesCtrl">
+
+	<div class="box box-primary" >
+		<!-- Default panel contents -->
+		<div class="box-header" >
+			<span class="lead"> cadastrar Pacotes de Serviços </span>
+		</div>
+		<div class="panel-body" >
+
+			<br>
+			<div class="container col-sm-12 ">
+				<form role="form-vertical" name="pacotesForm" ng-submit="pacotesCtrl.cadastrarPacoteServico()">
+					
+					<br>
+					<div class="row">
+						<label class="col-sm-1 control-label" for="codigo">Codigo Pacote</label>
+						<div class="col-sm-2">
+							<input  class="form-control" ng-model="pacotesCtrl.pacoteServico.codigoPacote" id="codigo" type="text"  required >
+						</div>										
+					</div>
+					<br>
+					<div class="row">
+						<label class="col-sm-1 control-label" for="nome">Nome Pacote</label>
+						<div class="col-sm-4">
+							<input  class="form-control" id="nome" type="text" ng-model="pacotesCtrl.pacoteServico.descricao" required >
+						</div>
+					</div>
+					<br>
+					<br>
+					
+			
+					<div class="row">
+						<label class="col-sm-1 control-label" for="servicos">Serviços atribuidos</label>
+						<div class="col-sm-6">
+					      <textarea class="textarea form-control" ng-model="pacotesCtrl.pacoteServico.servicosAtribuidos"   ></textarea>
+            	   	</div>										
+					</div>
+					<br>
+					<div class="row">
+						<label class="col-sm-1 control-label" for="criterio">Critério de Serviços</label>
+							<div class="col-sm-6">
+					      <textarea class="textarea form-control"  ng-model="pacotesCtrl.pacoteServico.criterioServico" ></textarea>
+            	   	</div>	
+					</div>
+					<br>
+					<div class="row">
+						<label class="col-sm-1 control-label" for="valor">Valor</label>
+						<div class="col-sm-4">
+							<input  class="form-control" id="valor" type="text" ng-model="pacotesCtrl.pacoteServico.valor" ui-money-mask="2"  required >
+						</div>
+					</div>
+							<br>
+							<br>
+							
+					<div class="row ">
+						<div class="col-sm-3"></div>
+						<div class="col-sm-3">
+							<input type="submit" id="submit" value="Salvar"
+								class="btn btn-lg btn-primary btn-block btn-signin">
+						</div>
+						<div class="col-sm-3">
+							<a class="btn btn-lg btn-success btn-block btn-signin" href="#/">Menu Principal</a>
+							
+						</div>
+					</div>
+					
+				</form>
+			</div>
+
+		</div>
+		<div class="tablecontainer"></div>
+	</div>
+</div>

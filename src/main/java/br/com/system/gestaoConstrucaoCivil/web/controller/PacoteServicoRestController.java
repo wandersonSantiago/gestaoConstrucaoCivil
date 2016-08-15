@@ -27,10 +27,9 @@ public class PacoteServicoRestController {
 	  return new ResponseEntity<Iterable<PacoteServico>>(pacoteServico, HttpStatus.OK);
 	 }
 	 
-	 @RequestMapping(method = RequestMethod.POST)
+	 @RequestMapping(value="/cadastrarPacoteServico", method = RequestMethod.POST)
 	 public ResponseEntity salva(@RequestBody PacoteServico pacoteServico,UriComponentsBuilder ucBuilder)
-	 {
-		 pacoteServicoService.salvarOuEditar(pacoteServico);
+	 {	 pacoteServicoService.salvarOuEditar(pacoteServico);
 		 HttpHeaders headers =new HttpHeaders();
 		 headers.setLocation(ucBuilder.path("/rest/pacoteServico/cadastrarPacoteServico/{id}").buildAndExpand(pacoteServico.getId()).toUri());
 		 return new ResponseEntity(headers, HttpStatus.CREATED);
