@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
  
 import br.com.system.gestaoConstrucaoCivil.entity.ConfigEmpreendimento;
+import br.com.system.gestaoConstrucaoCivil.entity.ConfigEmpreendimentoCasa;
+import br.com.system.gestaoConstrucaoCivil.entity.ConfigEmpreendimentoEdificio;
 import br.com.system.gestaoConstrucaoCivil.service.ConfigEmpreendimentoService;
  
 @RestController
@@ -22,12 +24,20 @@ public class ConfigEmpreendimentoRestController {
     ConfigEmpreendimentoService configEmpreeendimentoService;
      
      
-    @RequestMapping(value = "/cadastrarConfigEmpreendimento", method = RequestMethod.POST)
-    public ResponseEntity salvarConfigEmpreendimento(@RequestBody ConfigEmpreendimento configEmpreendimento, UriComponentsBuilder ucBuilder) {
-        configEmpreeendimentoService.salvarOuEditar(configEmpreendimento);
+    @RequestMapping(value = "/cadastrarConfigEmpreendimentoEdificio", method = RequestMethod.POST)
+    public ResponseEntity salvarConfigEmpreendimentoEdificio(@RequestBody ConfigEmpreendimentoEdificio configEmpreendimentoEdificio, UriComponentsBuilder ucBuilder) {
+        configEmpreeendimentoService.salvarOuEditar(configEmpreendimentoEdificio);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("rest/servico/cadastrarConfigEmpreendimento/{configEmpreendimento}").buildAndExpand(configEmpreendimento.getId()).toUri());
-       System.out.println(configEmpreendimento);
+        headers.setLocation(ucBuilder.path("rest/servico/cadastrarConfigEmpreendimentoEdificio/{configEmpreendimento}").buildAndExpand(configEmpreendimentoEdificio.getId()).toUri());
+     
+        return new ResponseEntity(headers, HttpStatus.CREATED);
+    }
+    @RequestMapping(value = "/cadastrarConfigEmpreendimentoCasa", method = RequestMethod.POST)
+    public ResponseEntity salvarConfigEmpreendimentoCasa(@RequestBody ConfigEmpreendimentoCasa configEmpreendimentoCasa, UriComponentsBuilder ucBuilder) {
+        configEmpreeendimentoService.salvarOuEditar(configEmpreendimentoCasa);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("rest/servico/cadastrarConfigEmpreendimentoCasa/{configEmpreendimento}").buildAndExpand(configEmpreendimentoCasa.getId()).toUri());
+    
         return new ResponseEntity(headers, HttpStatus.CREATED);
     }
      

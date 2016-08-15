@@ -45,7 +45,7 @@ app.factory('empreendimentoService', function($rootScope, toastr, $http){
 		
 		configEmpreendimentoEdificioCreate: function(configEmpreendimentoEdificio){
 		
-				return $http.post('rest/servico/cadastrarConfigEmpreendimento', configEmpreendimentoEdificio)
+				return $http.post('rest/servico/cadastrarConfigEmpreendimentoEdificio', configEmpreendimentoEdificio)
 				.then(function(response){
 				console.log(configEmpreendimentoEdificio);
 			
@@ -64,7 +64,7 @@ app.factory('empreendimentoService', function($rootScope, toastr, $http){
 		
 		configEmpreendimentoCasaCreate: function(configEmpreendimentoCasa){
 			
-			return $http.post('rest/servico/cadastrarConfigEmpreendimento', configEmpreendimentoCasa)
+			return $http.post('rest/servico/cadastrarConfigEmpreendimentoCasa', configEmpreendimentoCasa)
 			.then(function(response){
 		
 			console.log(configEmpreendimentoCasa);
