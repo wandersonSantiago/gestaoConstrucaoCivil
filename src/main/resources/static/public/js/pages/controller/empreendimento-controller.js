@@ -38,8 +38,7 @@ app.controller('empreendimentoController', function($scope, buscaCepService, emp
 
 	//apagar outros empreendimentos, somente da lista de front
 	self.apagarOutros = function(listaOutros){
-		
-		$scope.listaOutros = listaOutros.filter(function(outro){
+			$scope.listaOutros = listaOutros.filter(function(outro){
 			
 			if(!outro.selecionado) return outro;
 			$scope.ativadoExcluirLote = null;
@@ -55,12 +54,12 @@ app.controller('empreendimentoController', function($scope, buscaCepService, emp
 		$scope.verificaTipoCasa = false;
 		console.log("nullo empre");
 	}*/
-		if(self.configEmpreendimentoEdificio.empreendimento.tipoEmpreendimento == "CONDOMINIO_DE_EDIFICIO_RESIDENCIAL"){
+		if(self.configEmpreendimento.empreendimento.tipoEmpreendimento == "CONDOMINIO_DE_EDIFICIO_RESIDENCIAL"){
 			$scope.verificaTipoCasa = false;
 			$scope.verificaTipoEdificio = true;
 			
 		}else
-		if(self.configEmpreendimentoEdificio.empreendimento.tipoEmpreendimento == "CONDOMINIO_DE_CASA"){
+		if(self.configEmpreendimento.empreendimento.tipoEmpreendimento == "CONDOMINIO_DE_CASA"){
 			$scope.verificaTipoEdificio = false;
 			$scope.verificaTipoCasa = true;
 		
@@ -92,15 +91,20 @@ app.controller('empreendimentoController', function($scope, buscaCepService, emp
 	
 	self.createConfigEmpreendimento = function(configEmpreendimentoEdificio, configEmpreendimentoCasa, listaOutros){
 		
+		if(self.configEmpreendimentoEdificio){
+			empreendimentoService.configEmpreendimentoEdificioCreate(self.configEmpreendimentoEdificio);
+			empreendimentoService.configEmpreendimentoOutrosCreate($scope.listaOutros);
+			self.configEmpreendimentoEdificio = null;
+			$scope.listaOutros = listaOutros =[];
+			
+		}else if(self.configEmpreendimentoCasa){
+			empreendimentoService.configEmpreendimentoCasaCreate( self.configEmpreendimentoCasa);
+			empreendimentoService.configEmpreendimentoOutrosCreate($scope.listaOutros);
+			$scope.listaOutros = listaOutros =[];
+			self.configEmpreendimentoCasa = null;
+		
+		}
 
-		empreendimentoService.configEmpreendimentoEdificioCreate(self.configEmpreendimentoEdificio , self.configEmpreendimentoCasa);
-		empreendimentoService.configEmpreendimentoOutrosCreate($scope.listaOutros);
-		self.configEmpreendimentoEdificio = configEmpreendimentoEdificio =[];
-		$scope.listaOutros = listaOutros =[];
-		self.configEmpreendimentoCasa = configEmpreendimentoCasa =[];
-	
-	
-	
 	}
 	
 	

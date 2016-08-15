@@ -21,9 +21,17 @@ public class PrestadoraServicoService {
 	 		
 	 		return prestadoraServicoRepository.findAll();
 	 	}
+	 
+	 
 	 @Transactional(readOnly = false)
 	 public void salvarOuEditar(PrestadoraServico prestadoraServico)
 	 {
 		 prestadoraServicoRepository.save(prestadoraServico);
+	 }
+	 
+	 	 
+	 public PrestadoraServico buscarPorId(Long id){
+		 
+		 return prestadoraServicoRepository.findOne(id);
 	 }
 }

@@ -23,8 +23,8 @@ import br.com.system.gestaoConstrucaoCivil.enuns.TipoEmpreendimentoEnum;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "config_empreendimento")
-@JsonDeserialize(as=ConfigEmpreendimentoEdificio.class)
-public abstract class ConfigEmpreendimento  implements Serializable {
+
+public  class ConfigEmpreendimento  implements Serializable {
  
     @Id
     @Column(unique = true, nullable = false)

@@ -9,14 +9,10 @@ app.controller('cadastrarFuncionarioController', function($scope, buscaCepServic
 	self.findCep = function () {
 		
 		self.cep = $scope.cadFuncCtrl.funcionario.endereco.cep;
-		console.log(self.cep );
 		buscaCepService.get({'cep': self.cep}).$promise
 		.then(function success(result){
 			$scope.cadFuncCtrl.funcionario.endereco = result;
-		
-
-	
-		}).catch(function error(msg) {
+			}).catch(function error(msg) {
 			console.error('Error');
 		});
 		
@@ -47,7 +43,7 @@ app.controller('cadastrarFuncionarioController', function($scope, buscaCepServic
 				});
 			};
 			
-//busca a empresa atraves do id
+//busca o funcionario atraves do id
 		
 		self.buscarFuncionarioPorId = function(id){
 			if(!id)return;

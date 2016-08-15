@@ -43,12 +43,12 @@ app.factory('empreendimentoService', function($rootScope, toastr, $http){
 			});
 		},
 		
-		configEmpreendimentoEdificioCreate: function(configEmpreendimentoEdificio, configEmpreendimentoCasa){
+		configEmpreendimentoEdificioCreate: function(configEmpreendimentoEdificio){
 		
-				return $http.post('rest/servico/cadastrarConfigEmpreendimento', configEmpreendimentoEdificio, configEmpreendimentoCasa)
+				return $http.post('rest/servico/cadastrarConfigEmpreendimento', configEmpreendimentoEdificio)
 				.then(function(response){
 				console.log(configEmpreendimentoEdificio);
-				console.log(configEmpreendimentoCasa);
+			
 				
 				toastr.info('Empreendimento Edificio cadastrado');
 				
@@ -62,19 +62,38 @@ app.factory('empreendimentoService', function($rootScope, toastr, $http){
 			});
 		},
 		
+		configEmpreendimentoCasaCreate: function(configEmpreendimentoCasa){
+			
+			return $http.post('rest/servico/cadastrarConfigEmpreendimento', configEmpreendimentoCasa)
+			.then(function(response){
+		
+			console.log(configEmpreendimentoCasa);
+			
+			toastr.info('Empreendimento Casa cadastrado');
+			
+			return response.data;
+		
+		},function(errResponse){
+			
+			toastr.error('Empreendimento Casa não cadastrado');
+			return $q.reject(errResponse);
+			
+		});
+	},
+	
 		configEmpreendimentoOutrosCreate: function( listaOutros){
 			console.log("passei aqui");
 			console.log(listaOutros);
 		
 			return $http.post('rest/servico/cadastrarConfigEmpreendimentoOutros', listaOutros)
 			.then(function(response){
-				console.log("empreendimento Outros gravado");
-				toastr.info('Empreendimento Outros cadastrado');
+				
+				//toastr.info('Empreendimento Outros cadastrado');
 				
 				return response.data;
 			
 			},function(errResponse){
-				console.error('Erro ao tentar gravar empreendimento Outros');
+			
 				toastr.info('Empreendimento não cadastrado Outros');
 				return $q.reject(errResponse);
 				

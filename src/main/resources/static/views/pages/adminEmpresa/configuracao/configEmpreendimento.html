@@ -21,7 +21,7 @@
 						<div class="col-sm-5" ng-init="empCtrl.buscarEmpreendimentos()">
 							<select class="form-control select2"
 								ng-click="empCtrl.verificar()"
-								ng-model="empCtrl.configEmpreendimentoEdificio.empreendimento"
+								ng-model="empCtrl.configEmpreendimento.empreendimento"
 								ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.shade for listarEmpreendimentos in empreendimentos"
 								style="width: 100%;">
 								<option  value="">--selecione--</option>
@@ -129,7 +129,7 @@
 					<div class="row ">
 						<div class="col-sm-3"></div>
 						<div class="col-sm-3">
-							<button type="submit" name="submit" ng-disabled="!empCtrl.configEmpreendimentoEdificio.empreendimento "
+							<button type="submit" name="submit" ng-disabled="!empCtrl.configEmpreendimento.empreendimento "
 								class="btn btn-lg btn-primary btn-block btn-signin">Cadastrar</button>
 						</div>
 						<div class="col-sm-3">

@@ -82,11 +82,20 @@ app.config(['$routeProvider','$httpProvider', function($routeProvider, $httpProv
 	//	controller : "empreendimento-controller.js",
 	})
 	
+	.when('/listaPrestadoraServico', {
+		templateUrl : "views/pages/adminEmpresa/lista/listaPrestadoraServico.html",
+	//	controller : "empreendimento-controller.js",
+	})
 	
 	
 		//EDITAR
 	.when('/editarEmpreendimento/:idEmpreendimento',{
 		templateUrl : "views/pages/adminEmpresa/editar/editarEmpreendimento.html",
+	})
+	
+	
+	.when('/editarPrestadoraServico/:idPrestadoraServico',{
+		templateUrl : "views/pages/adminEmpresa/editar/editarPrestadoraServico.html",
 	})
 	
 	
