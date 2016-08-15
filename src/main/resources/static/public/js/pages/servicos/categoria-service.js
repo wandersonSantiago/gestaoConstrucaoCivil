@@ -18,7 +18,7 @@ app.factory('categoriaService', function($rootScope, toastr, $http,$q){
 				
 			});
 		},
-		fornecedorFindAll: function(){
+		categoriaFindAll: function(){
 			return $http.get('rest/almoxarifado/listarCategoria')
 			.then(function(response){
 				return response.data;

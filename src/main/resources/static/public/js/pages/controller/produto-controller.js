@@ -4,8 +4,9 @@ app.controller('produtoController', function($scope,produtoService, $routeParams
 		
 	
 	 self.cadastrarProduto = function(produto){
-		 console.log(self.produto);
-		 produtoService.produtoCreate(self.produto);
+			 produtoService.produtoCreate(self.produto);
+			 
+			 self.produto = produto=[];
 	}
 	 
 	 self.buscarProdutos = function(){

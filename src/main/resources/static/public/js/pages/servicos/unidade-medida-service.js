@@ -19,7 +19,7 @@ app.factory('unidadeMedidaService', function($rootScope, toastr, $http,$q){
 			});
 		},
 		unidadeMedidaFindAll: function(){
-			return $http.get('rest/almoxarifado/cadastrarUnidadeMedida/listarUnidadeMedida')
+			return $http.get('rest/almoxarifado/listarUnidadeMedida')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){

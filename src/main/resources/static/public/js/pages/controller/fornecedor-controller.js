@@ -32,7 +32,8 @@ self.findCep = function () {
 	 self.buscarFornecedores = function(){
 		 fornecedorService.fornecedorFindAll().
 			then(function(t){
-				self.listaFornecedor = t;
+				$scope.listaFornecedor = t;
+			
 				}, function(errResponse){
 				toastr.error('Erro ao tentar buscar fornecedor');
 			});

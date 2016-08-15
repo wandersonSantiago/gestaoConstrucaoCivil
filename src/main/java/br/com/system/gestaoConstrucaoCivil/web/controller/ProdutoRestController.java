@@ -28,7 +28,7 @@ public class ProdutoRestController {
 	  return new ResponseEntity<Iterable<Produto>>(produto, HttpStatus.OK);
 	 }
 	 
-	 @RequestMapping(method = RequestMethod.POST)
+	 @RequestMapping(value="/cadastrarProduto", method = RequestMethod.POST)
 	 public ResponseEntity salva(@RequestBody Produto produto,UriComponentsBuilder ucBuilder)
 	 {
 		 produtoService.salvarOuEditar(produto);

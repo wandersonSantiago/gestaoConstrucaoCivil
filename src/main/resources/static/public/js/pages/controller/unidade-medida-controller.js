@@ -11,7 +11,7 @@ app.controller('unidadeMedidaController', function($scope,unidadeMedidaService, 
 	 self.buscarUnidadeMedidas = function(){
 		 unidadeMedidaService.unidadeMedidaFindAll().
 			then(function(t){
-				self.listaunidadeMedida = t;
+				$scope.listaunidadeMedida = t;
 				}, function(errResponse){
 				toastr.error('Erro ao tentar buscar unidade medida');
 			});
