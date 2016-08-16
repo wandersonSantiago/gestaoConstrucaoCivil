@@ -22,6 +22,7 @@ public class PrestadoraServico extends AbstractPersistable<Long>{
 	private DadoEmpresa dadoEmpresa;
 	
 	@OneToMany(mappedBy = "prestadoraServico", cascade = CascadeType.ALL)
+	//@ManyToOne usar
 	private List<ServicoEmpresa> servicos;
 	
 	public DadoEmpresa getDadoEmpresa() {

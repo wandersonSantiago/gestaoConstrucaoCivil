@@ -26,7 +26,12 @@ public class ConfigEmpreendimentoRestController {
      
     @RequestMapping(value = "/cadastrarConfigEmpreendimentoEdificio", method = RequestMethod.POST)
     public ResponseEntity salvarConfigEmpreendimentoEdificio(@RequestBody ConfigEmpreendimentoEdificio configEmpreendimentoEdificio, UriComponentsBuilder ucBuilder) {
-        configEmpreeendimentoService.salvarOuEditar(configEmpreendimentoEdificio);
+        
+    	if(configEmpreendimentoEdificio.getEmpreendimento()==null)
+    	{
+    		System.out.println("SIM");
+    	}
+    	configEmpreeendimentoService.salvarOuEditar(configEmpreendimentoEdificio);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("rest/servico/cadastrarConfigEmpreendimentoEdificio/{configEmpreendimento}").buildAndExpand(configEmpreendimentoEdificio.getId()).toUri());
      

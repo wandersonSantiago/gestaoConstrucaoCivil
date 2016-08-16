@@ -21,6 +21,8 @@ public class ConfigEmpreendimentoOutros implements Serializable {
     @Column(nullable = false,length = 250)
     private String descricao;
  
+    @Column(name = "id_empreedimento",nullable = false)
+    Empreendimento empreendimento;
     public Long getId() {
         return id;
     }
@@ -37,7 +39,16 @@ public class ConfigEmpreendimentoOutros implements Serializable {
         this.descricao = descricao;
     }
  
-    @Override
+    
+    public Empreendimento getEmpreendimento() {
+		return empreendimento;
+	}
+
+	public void setEmpreendimento(Empreendimento empreendimento) {
+		this.empreendimento = empreendimento;
+	}
+
+	@Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;

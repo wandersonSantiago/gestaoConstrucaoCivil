@@ -92,15 +92,17 @@ app.controller('empreendimentoController', function($scope, buscaCepService, emp
 	self.createConfigEmpreendimento = function(configEmpreendimentoEdificio, configEmpreendimentoCasa, listaOutros){
 		
 		if(self.configEmpreendimentoEdificio){
+			self.configEmpreendimentoEdificio.empreendimento = $scope.empCtrl.configEmpreendimento.empreendimento;
 			empreendimentoService.configEmpreendimentoEdificioCreate(self.configEmpreendimentoEdificio);
-			empreendimentoService.configEmpreendimentoOutrosCreate($scope.listaOutros);
+			//empreendimentoService.configEmpreendimentoOutrosCreate($scope.listaOutros);
 			self.configEmpreendimentoEdificio = null;
-			$scope.listaOutros = listaOutros =[];
+			//$scope.listaOutros = listaOutros =[];
 			
 		}else if(self.configEmpreendimentoCasa){
+			self.configEmpreendimentoCasa.empreendimento = $scope.empCtrl.configEmpreendimento.empreendimento;
 			empreendimentoService.configEmpreendimentoCasaCreate( self.configEmpreendimentoCasa);
-			empreendimentoService.configEmpreendimentoOutrosCreate($scope.listaOutros);
-			$scope.listaOutros = listaOutros =[];
+			//empreendimentoService.configEmpreendimentoOutrosCreate($scope.listaOutros);
+			//$scope.listaOutros = listaOutros =[];
 			self.configEmpreendimentoCasa = null;
 		
 		}
