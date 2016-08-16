@@ -31,6 +31,12 @@ public class EmpreendimentoRestController {
 		return new ResponseEntity<Iterable<Empreendimento>>(empreendimento, HttpStatus.OK);
 	}
 
+	@RequestMapping(method = RequestMethod.GET, value = "/listaEmpreendimentoSemConfiguracao")
+	public ResponseEntity<Iterable<Empreendimento>> buscaEmpreendimentoSemConfiguracao() {
+		Iterable<Empreendimento> empreendimento = empreendimentoService.buscaEmpreendimentoSemConfiguracao();
+		return new ResponseEntity<Iterable<Empreendimento>>(empreendimento, HttpStatus.OK);
+	}
+	
 	@RequestMapping(method = RequestMethod.GET, value = "/tiposEmpreendimentos")
 	public ResponseEntity<Iterable<TipoEmpreendimentoEnum>> tiposEmpreendimentos() {
 
