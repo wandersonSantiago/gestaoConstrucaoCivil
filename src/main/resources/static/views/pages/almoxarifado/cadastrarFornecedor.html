@@ -29,6 +29,8 @@
 					<p ng-show="formFornecedor.razaoSocial.$error.maxlength"
 						class="alert alert-warning ">campo Razão Social no maximo 50 caracter</p>
 					<br>
+					
+					
 					<div class="row">
 						<label class="col-sm-1 control-label" for="nomeFantasia">Nome
 							Fantasia</label>
@@ -43,57 +45,83 @@
 					<p ng-show="formFornecedor.nomeFantasia.$error.maxlength"
 						class="alert alert-warning ">campo nome Fantasia no maximo 50 caracter</p>
 					<br>
+					
+					
 					<div class="row">
 						<label class="col-sm-1 control-label" for="nomeFantasia">Email
 						</label>
 						<div class="col-sm-11">
-							<input class="form-control"
+							<input class="form-control" name="emailPrestadora"
 								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.email" id="email"
 								type="email" required>
+								<p ng-show="formFornecedor.emailPrestadora.$error.email"
+						class="alert alert-warning ">Digite um Email Válido</p>
 						</div>
 					</div>
 					<br>
+					
+					
 					<div class="row">
 						<label class="col-sm-1 control-label" for="cnpj">CNPJ</label>
 						<div class="col-sm-5">
-							<input class="form-control"
+							<input class="form-control" name="cnpjField"
 								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.cnpj" id="cnpj"
-								type="text" ui-mask="{{maskCnpj}}" required>
+								type="text" ui-br-cnpj-mask required>
+								<p ng-show="formFornecedor.cnpjField.$error.cnpj"
+								class="alert alert-warning ">Digite um CNPJ válido!!</p>
 						</div>
+						
+						
 						<label class="col-sm-1 control-label" for="telefone">Telefone</label>
 						<div class="col-sm-5">
 							<input class="form-control"
 								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.telefone" id="telefone"
-								type="tel" ui-mask="{{maskFone}}" required>
+								type="tel" ui-br-phone-number required>
 						</div>
 					</div>
 					<br>
+					
+					
 					<div class="row">
 						<label class="col-sm-1 control-label" for="inscricaoEstadual">Inscrição Estadual</label>
+						<div  class="col-sm-2">
+					<select class="form-control" ng-init="ufs=['AC','AL','AM','AP','BA','CE','DF','ES','GO','MA',
+      				'MG','MS','MT','PA','PB','PE','PI','PR','RJ','RN','RO','RR','RS','SC','SE','SP','TO']" ng-model="selectedUF" ng-options="uf for uf in ufs">
+					<option value="">selecione o estado</option>
+					</select>
+					</div>
+					
 						<div class="col-sm-5">
-							<input class="form-control"
+							<input class="form-control" name="iefield" 
 								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.inscricaoEstadual"
-								id="inscricaoEstadual" type="text" ui-mask="{{maskIscEstadual}}"
+								id="inscricaoEstadual" type="text" ui-br-ie-mask='selectedUF'
 								required>
+						 <p ng-show="formFornecedor.iefield.$error.ie"	class="alert alert-warning ">Digite um Inscrição Estadual Válida</p>
 						</div>
+							
 					</div>
 					<br>
 
+
+
 					<h4>Endereço</h4>
+
+
 
 					<br>
 					<div class="row">
 						<label class="col-sm-1 control-label" for="cep">CEP</label>
 						<div class="col-sm-5">
-							<!-- <input class="form-control" id="cep" type="search"
-								placeholder="Busca Cep"> -->
+						
 							<input class="form-control"
 								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.endereco.cep" id="cep"
-								type="text" name="cepField" ui-br-cep-mask required>
-								<button type="button" class="btn-primary" ng-click="fornecedorCtrl.findCep()">Buscar CEP</button>
-			<br><p><code>{{formFornecedor.cepField.$error.cep? 'Digite um CEP válido!!' : '' }}</code></p>
-
+								type="text" name="cepField" ui-br-cep-mask ng-blur="fornecedorCtrl.findCep()"  onkeyup="if(this.value.length > 8) { numeroEmpresa.focus(); }"   ui-br-cep-mask required>
+								
+							<p ng-show="formFornecedor.cepField.$error.cep" class="alert alert-warning ">Digite um CEP Válido</p>
 						</div>
+						
+						
+						
 						<label class="col-sm-1 control-label" for="numero">Número</label>
 						<div class="col-sm-5"
 							ng-class="{ 'has-error' : formFornecedor.numeroEmpresa.$invalid && !formFornecedor.numeroEmpresa.$pristine }">
@@ -110,6 +138,7 @@
 
 					<br>
 
+
 					<div class="row">
 						<!-- <fieldset disabled> -->
 						<label class="col-sm-1 control-label" for="rua">Rua</label>
@@ -120,15 +149,19 @@
 						</div>
 					</div>
 					<br>
+					
+					
 					<div class="row">
 						<!-- <fieldset disabled> -->
 						<label class="col-sm-1 control-label" for="bairro">Bairro</label>
 						<div class="col-sm-5">
 							<input class="form-control"
 								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.endereco.bairro"
-								id="bairro" type="text" reuired>
+								id="bairro" type="text" required>
 
 						</div>
+						
+						
 						<label class="col-sm-1 control-label" for="cidade">Cidade</label>
 						<div class="col-sm-5">
 							<input class="form-control"
@@ -137,6 +170,8 @@
 						</div>
 					</div>
 					<br>
+					
+					
 					<div class="row">
 						<!-- <fieldset disabled> -->
 						<label class="col-sm-1 control-label" for="estado">Estado</label>
@@ -145,12 +180,11 @@
 								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.endereco.uf"
 								id="estado" type="text" required>
 						</div>
-						<!--<label class="col-sm-1 control-label" for="pais">Pais</label>
-							<div class="col-sm-5">
-								<input class="form-control" id="pais" type="text">
-							</div>-->
+						
 					</div>
 					<br>
+					
+					
 					<div class="row">
 						<label class="col-sm-1 control-label" for="contato">Complemento</label>
 						<div class="col-sm-11">
@@ -161,6 +195,8 @@
 						</div>
 					</div>
 					<br>
+					
+					
 					<div class="row">
 						<label class="col-sm-1 control-label" for="contato">Contato</label>
 						<div class="col-sm-11">
@@ -172,6 +208,8 @@
 					</div>
 					
 					<br>
+					
+					
 					<div class="row">
 						<label class="col-sm-1 control-label" for="observacao">Observação</label>
 						<div class="col-sm-11">
@@ -183,25 +221,6 @@
 					</div>
 					<br>
                     
-
-					<div ng-if="gravado" class="alert alert-info alert-dismissible"
-						role="alert">
-						<button type="button" class="close" data-dismiss="alert"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<strong>Sucesso</strong> cadastro realizado
-					</div>
-
-
-					<div ng-if="naoGravado"
-						class="alert alert-danger alert-dismissible" role="alert">
-						<button type="button" class="close" data-dismiss="alert"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<strong>Error</strong> cadastro não realizado
-					</div>
 
 
 					<div class="row ">

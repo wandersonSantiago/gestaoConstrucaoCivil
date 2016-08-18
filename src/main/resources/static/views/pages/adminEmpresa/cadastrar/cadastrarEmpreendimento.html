@@ -27,12 +27,17 @@
 						class="alert alert-warning ">campo descricao no maximo 50 caracter</p>
 					<br>
 					<br>
+					
+					
 					<div class="row">
 						<label class="col-sm-1 control-label" for="valorMaximoGastar">Valor
 							Total</label>
 						<div class="col-sm-4">
-							<input ng-model="empCtrl.empreendimento.valorMaximoGastar" class="form-control" id="valorMaximoGastar" type="text" ui-money-mask="2" >
+							<input ng-model="empCtrl.empreendimento.valorMaximoGastar" class="form-control" id="valorMaximoGastar" type="text" ui-money-mask="2" required>
 						</div>
+						
+						
+						
 						<label class="col-sm-2 control-label" for="tipoEmpreendimento">Tipo
 							Empreendimento</label>
 						<div class="col-sm-5" ng-init="empCtrl.buscarTipoEmpreendimentos()" >
@@ -45,16 +50,20 @@
 					
 					</div>
 					<br>
+					
+					
 					<div class="row">
 						<label class="col-sm-1 control-label" for="dataAbertura">Data
 							Abertura</label>
 						<div class="col-sm-4">
-							<input ng-model="empCtrl.empreendimento.dataAbertura" class="form-control" id="dataAbertura" type="date"  required >
+							<input ng-model="empCtrl.empreendimento.dataAbertura" class="form-control" id="dataAbertura" type="date" onkeyup="if(this.value.length > 9) { dataFechamento.focus(); }"  required >
 						</div>
+						
+						
 						<label class="col-sm-2 control-label" for="datafechamento">Data
 							Fechamento</label>
 						<div class="col-sm-5">
-							<input ng-model="empCtrl.empreendimento.datafechamento" class="form-control" id="datafechamento" type="date"  required >
+							<input ng-model="empCtrl.empreendimento.datafechamento" class="form-control" id="datafechamento" type="date" name="dataFechamento" required >
 						</div>
 					</div>
 					<br>
@@ -78,15 +87,17 @@
 							for="engenheiroResponsavelFuncionario">Engenheiro
 							Funcionario</label>
 						<div class="col-sm-4" ng-if="!funcionarios " ng-controller="cadastrarFuncionarioController as funCtrl" ng-init="funCtrl.buscarFuncionariosEngenheiro()">
-								<select class="form-control select2" ng-model="empCtrl.empreendimento.engenheiroResponsavelFuncionario" ng-options="engenheiros.nomeCompleto  group by engenheiros.shade for engenheiros in engenheiro" style="width: 100%;">
+								<select class="form-control select2" ng-model="empCtrl.empreendimento.engenheiroResponsavelFuncionario" ng-options="engenheiros.nomeCompleto  group by engenheiros.shade for engenheiros in engenheiro" style="width: 100%;" required>
 									<option value="">---Selecione---</option>                                                                                 
 															</select>
 						</div>
+					
+					
 						<label class="col-sm-2 control-label" ng-if="funcionarios"
 							for="engenheiroResponsavelTerceiro">Engenheiro
 							Terceirizado</label>
 						<div class="col-sm-4">
-								<select class="form-control select2" style="width: 100%;" ng-if="funcionarios">
+								<select class="form-control select2" style="width: 100%;" ng-if="funcionarios" required>
 									<option value="">---Selecione---</option>
 							</select>
 						</div>
@@ -95,17 +106,22 @@
 					<h4>Endereço</h4>
 
 					<hr>
+					
+					
 					<div class="row">
 						<label class="col-sm-1 control-label" for="cep">CEP</label>
 						<div class="col-sm-5">
-							<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.cep" name="cepField" class="form-control" id="cep" type="search"
+							<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.cep" ng-blur="empCtrl.findCep()"  onkeyup="if(this.value.length > 8) { numeroEmpresa.focus(); }" name="cepField" class="form-control" id="cep" type="search"
 								placeholder="Busca Cep"  ui-br-cep-mask required>
-								<button type="button" class="btn-primary" ng-click="empCtrl.findCep()">Buscar CEP</button>
-			<br><p><code>{{empreendimentoForm.cepField.$error.cep? 'Digite um CEP válido!!' : '' }}</code></p>
-								
+								<!-- <button type="button" class="btn-primary" >Buscar CEP</button> -->
+			
+								<p ng-show="empreendimentoForm.cepField.$error.cep"
+						class="alert alert-warning ">Digite um CEP Válido</p>
 						</div>
 						
 						
+					
+					
 						<label class="col-sm-1 control-label" for="numero">Numero</label>
 						<div class="col-sm-5"
 							ng-class="{ 'has-error' : empreendimentoForm.numeroEmpresa.$invalid && !empreendimentoForm.numeroEmpresa.$pristine }">
@@ -129,31 +145,39 @@
 						
 							<label class="col-sm-1 control-label" for="rua">Rua</label>
 							<div class="col-sm-11">
-								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.logradouro" class="form-control" id="rua" type="text">
+								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.logradouro" class="form-control" id="rua" type="text" required>
 							</div>
 					</div>
 					<br>
+				
+				
 					<div class="row">
 						
 							<label class="col-sm-1 control-label" for="bairro">Bairro</label>
 							<div class="col-sm-5">
-								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.bairro" class="form-control" id="bairro" type="text">
+								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.bairro" class="form-control" id="bairro" type="text" required>
 							</div>
+					
+					
 							<label class="col-sm-1 control-label" for="cidade">Cidade</label>
 							<div class="col-sm-5">
-								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.localidade" class="form-control" id="cidade" type="text">
+								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.localidade" class="form-control" id="cidade" type="text" required>
 							</div>
 					</div>
 					<br>
+				
+				
 					<div class="row">
 
 							<label class="col-sm-1 control-label" for="estado">Estado</label>
 							<div class="col-sm-5">
-								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.uf" class="form-control" id="estado" type="text">
+								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.uf" class="form-control" id="estado" type="text" required>
 							</div>
 						
 					</div>
 					<br>
+					
+					
 					<div class="row">
 						<label class="col-sm-1 control-label" for="complemento">Complemento</label>
 						<div class="col-sm-11">
@@ -162,24 +186,8 @@
 					</div>
 					<br>
 
-						<div ng-if="gravado" class="alert alert-info alert-dismissible"
-						role="alert">
-						<button type="button" class="close" data-dismiss="alert"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<strong>Sucesso</strong> cadastro realizado
-					</div>
-
-
-					<div ng-if="naoGravado"
-						class="alert alert-danger alert-dismissible" role="alert">
-						<button type="button" class="close" data-dismiss="alert"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<strong>Error</strong> cadastro não realizado
-					</div>
+						
+						
 					<br>
 					<div class="row ">
 						<div class="col-sm-3"></div>

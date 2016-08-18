@@ -47,9 +47,11 @@
 						<label class="col-sm-1 control-label" for="nomeFantasia">Email
 						</label>
 						<div class="col-sm-11">
-							<input class="form-control"
+							<input class="form-control" name="emailPrestadora"
 								ng-model="adminCtrl.empresa.dadoEmpresa.email" id="email"
 								type="email" required>
+								<p ng-show="formAdminSistema.emailPrestadora.$error.email"
+						class="alert alert-warning ">Digite um Email Válido</p>
 						</div>
 					</div>
 					<br>
@@ -59,7 +61,7 @@
 							<input class="form-control" name="cnpjField"
 								ng-model="adminCtrl.empresa.dadoEmpresa.cnpj" id="cnpj"
 								type="text" ui-br-cnpj-mask required>
-					<!--  <br><p><code>{{formAdminSistema.cnpjField.$error.cnpj? 'Digite um CNPJ válido!!' : '' }}</code></p> -->
+					
    						<p ng-show="formAdminSistema.cnpjField.$error.cnpj"
 						class="alert alert-warning ">Digite um CNPJ válido!!</p>
 						</div>
@@ -86,7 +88,7 @@
 								ng-model="adminCtrl.empresa.dadoEmpresa.inscricaoEstadual"
 								id="inscricaoEstadual" type="text" ui-br-ie-mask='selectedUF'
 								required>
-		 <br><p><code>{{formAdminSistema.iefield.$error.ie? 'Digite uma inscriçao Estadual válida!!' : '' }}</code></p>
+						 <p ng-show="formAdminSistema.iefield.$error.ie"	class="alert alert-warning ">Digite um Inscrição Estadual Válida</p>
 						</div>
 							
 					</div>
@@ -98,11 +100,10 @@
 					<div class="row">
 						<label class="col-sm-1 control-label" for="cep">CEP</label>
 						<div class="col-sm-5">
-							<input class="form-control" name="cepField"
-								ng-model="adminCtrl.empresa.dadoEmpresa.endereco.cep" id="cep"
-								type="text" ui-br-cep-mask required>
-								<button type="button" class="btn-primary" ng-click="adminCtrl.findCep()">Buscar CEP</button>
-			<br><p><code>{{formAdminSistema.cepField.$error.cep? 'Digite um CEP válido!!' : '' }}</code></p>
+							<input class="form-control" name="cepField"	ng-model="adminCtrl.empresa.dadoEmpresa.endereco.cep" id="cep"
+								type="text"  ng-blur="adminCtrl.findCep()"  onkeyup="if(this.value.length > 8) { numeroEmpresa.focus(); }"   ui-br-cep-mask required>
+								
+							<p ng-show="formAdminSistema.cepField.$error.cep" class="alert alert-warning ">Digite um CEP Válido</p>
 								
 						
 					
@@ -175,26 +176,6 @@
 						</div>
 					</div>
 					<br>
-
-
-					<div ng-if="gravado" class="alert alert-info alert-dismissible"
-						role="alert">
-						<button type="button" class="close" data-dismiss="alert"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<strong>Sucesso</strong> cadastro realizado
-					</div>
-
-
-					<div ng-if="naoGravado"
-						class="alert alert-danger alert-dismissible" role="alert">
-						<button type="button" class="close" data-dismiss="alert"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<strong>Error</strong> cadastro não realizado
-					</div>
 
 
 					<div class="row ">
