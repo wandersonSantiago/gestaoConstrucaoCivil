@@ -24,108 +24,81 @@
 
 			<li class="header"><h4 >Administrador Sistema</h4></li>
 			
-			<li class="treeview"><a href=""><i class="glyphicon glyphicon-hand-right"></i> <span>Cadastrar</span>
-					<i class="fa fa-angle-left pull-right"></i></a>
+			<li class="treeview"><a href=""><i class="glyphicon glyphicon-user"></i> <span>Usuarios</span>
+				<i class="fa fa-angle-left pull-right"></i></a>
 				<ul class="treeview-menu">
-					<li><a href="#/cadastrarEmpresa">Empresa</a></li>
-					<li><a href="#/cadastrarAdminEmpresa">Admin Empresa</a></li>
+					<li><a href="#/cadastrarUsuario">Cadastrar Usuario</a></li>
+					<li><a href="#/listaUsuario">Lista de Usuarios</a></li>
+					<li><a href="#/permissaoUsuario">Permissões de Usuarios</a></li>
 				</ul></li>
-				<li class="treeview"><a href=""><i class="glyphicon glyphicon-hand-right"></i> <span>Consultar</span>
-					<i class="fa fa-angle-left pull-right"></i></a>
+				
+			<li class="treeview"><a href=""><i class="glyphicon glyphicon-home"></i> <span>Empresa</span>
+				<i class="fa fa-angle-left pull-right"></i></a>
 				<ul class="treeview-menu">
-					<li><a href="#/listaEmpresa" > Empresa</a></li>
-				</ul>
+					<li><a href="#/cadastrarEmpresa">Cadastrar Empresa</a></li>
+					<li><a href="#/listaEmpresa" > Lista de Empresa</a></li>
+				</ul></li>
 				
 				
-			<li class="treeview">
-              <a href="">
-                <i class="fa fa-share"></i> <span>Configuração</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li>
-                  <a href=""><i class="fa fa-circle-o"></i> Cadastrar <i class="fa fa-angle-left pull-right"></i></a>
-                  <ul class="treeview-menu">
-                    <li><a href="#/cadastrarTipoEmpreendimento"><i class="fa fa-circle-o"></i> Tipo empreendimento</a></li>
-                 
-                  </ul>
-                </li>
-                <li>
-                  <a href=""><i class="fa fa-circle-o"></i> Listar <i class="fa fa-angle-left pull-right"></i></a>
-                  <ul class="treeview-menu">
-                    <li><a href="#/listaTipoEmpreendimento"><i class="fa fa-circle-o"></i> Tipo empreendimento</a></li>
-                 
-                  </ul>
-                </li>
-               
-              </ul>
-            </li>
 	
-		
-		
 <!-- menu admin Empresa -->		
 		
 
 			<li class="header"><h4>Administrador Empresa</h4></li>
 
 		
-			<li class="treeview"><a href=""><i class="glyphicon glyphicon-hand-right"></i> <span>Cadastrar</span>
+			<li class="treeview"><a href=""><i class="glyphicon glyphicon-user"></i> <span>Usuarios</span>
 					<i class="fa fa-angle-left pull-right"></i></a>
-				<ul class="treeview-menu">
-				<li><a href="#/cadastrarEmpreendimento">Empreendimento</a></li>
-				<li><a href="#/cadastrarPrestadoraServico">Prestadora de Servico</a></li>
-					</ul></li>
-					<li class="treeview"><a href=""><i class="glyphicon glyphicon-hand-right"></i> <span>Consultar</span>
-					<i class="fa fa-angle-left pull-right"></i></a>
-				<ul class="treeview-menu">
-				<li><a href="#/listaEmpreendimento"> Empreendimento</a></li>
-				     <li><a href="#/listaPrestadoraServico"> Prestadora Servico</a></li>
+					<ul class="treeview-menu">
+						<li><a href="#/cadastrarUsuario">Cadastrar Usuario</a></li>
+						<li><a href="#/listaUsuario">Lista de Usuarios</a></li>
+						<li><a href="#/permissaoUsuario">Permissões de Usuarios</a></li>
+					</ul>
+			</li>
 				
-					</ul></li>
-					<li class="treeview">
-              <a href="">
-                <i class="fa fa-share"></i> <span>Configuração</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li>
-                  <a href=""><i class="fa fa-circle-o"></i> Cadastrar <i class="fa fa-angle-left pull-right"></i></a>
-                  <ul class="treeview-menu">
-                    <li><a href="#/configEmpreendimento"><i class="fa fa-circle-o"></i> Empreendimento</a></li>
-                 
-                  </ul>
-                </li>
-                <li>
-                  <a href=""><i class="fa fa-circle-o"></i> Listar <i class="fa fa-angle-left pull-right"></i></a>
-                  <ul class="treeview-menu">
-                    <li><a href="#/listaTipoEmpreendimento"><i class="fa fa-circle-o"></i> Tipo empreendimento</a></li>
-                
-                 
-                  </ul>
-                </li>
-               
-              </ul>
-            </li>
-	
+				
+			<li class="treeview"><a href=""><i class=" glyphicon glyphicon-object-align-bottom"></i> <span>Empreendimento</span>
+					<i class="fa fa-angle-left pull-right"></i></a>
+					<ul class="treeview-menu">
+						<li><a href="#/cadastrarEmpreendimento">Cadastro de Empreendimentos</a></li>
+						<li><a href="#/listaEmpreendimento">Lista de empreendimentos</a></li>
+						<li><a href="#/configEmpreendimento"> Configuração de Empreendimentos</a></li>
+						<li><a href="#/listaTipoEmpreendimento"><i class="fa fa-circle-o"></i> Lista Tipo empreendimento</a></li>
+				
+					</ul>
+			</li>
+			
+			
+			<li class="treeview"><a href=""><i class=" glyphicon glyphicon-wrench"></i> <span>Prestadora de Serviços</span>
+					<i class="fa fa-angle-left pull-right"></i></a>
+					<ul class="treeview-menu">
+						<li><a href="#/cadastrarPrestadoraServico">Cadastrar Prestadora de Servico</a></li>
+				    	<li><a href="#/listaPrestadoraServico"> Lista de Prestadora Servico</a></li>
+				
+					</ul>
+			</li>
+		
+		
 		<!-- menu Serviços -->		
 		
 
 			<li class="header"><h4>Serviços</h4></li>
 
-		
 			<li class="treeview"><a href=""><i class="glyphicon glyphicon-hand-right"></i> <span>Cadastrar</span>
-					<i class="fa fa-angle-left pull-right"></i></a>
+				<i class="fa fa-angle-left pull-right"></i></a>
 				<ul class="treeview-menu">
-				<li><a href="#/cadastrarPacotesServicos">Pacotes de Serviços</a></li>
+					<li><a href="#/cadastrarPacotesServicos">Pacotes de Serviços</a></li>
 			
-					</ul></li>
-					<li class="treeview"><a href=""><i class="glyphicon glyphicon-hand-right"></i> <span>Consultar</span>
+				</ul>
+			</li>
+			
+				<li class="treeview"><a href=""><i class="glyphicon glyphicon-hand-right"></i> <span>Consultar</span>
 					<i class="fa fa-angle-left pull-right"></i></a>
-				<ul class="treeview-menu">
-				<li><a href="#/listaPacoteServico"> Pacotes de Serviços</a></li>
-				    
-				
-					</ul></li>
+					<ul class="treeview-menu">
+						<li><a href="#/listaPacoteServico"> Pacotes de Serviços</a></li>
+				    				
+					</ul>
+				</li>
 				
 	
 		

@@ -26,7 +26,7 @@ public class UsuarioRestController {
 	  return new ResponseEntity<Iterable<Usuario>>(usuario, HttpStatus.OK);
 	 }
 	 
-	 @RequestMapping(method = RequestMethod.POST)
+	 @RequestMapping(method = RequestMethod.POST, value="/cadastrarUsuario")
 	 public ResponseEntity salva(@RequestBody Usuario usuario,UriComponentsBuilder ucBuilder){
 		 usuarioService.salvarOuEditar(usuario);
 		 HttpHeaders headers =new HttpHeaders();

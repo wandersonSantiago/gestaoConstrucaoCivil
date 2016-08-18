@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -15,7 +17,14 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Table(name = "usuario")
 public class Usuario extends AbstractPersistable<Long>{
 
+	@ManyToOne
+	@JoinColumn(name="id_funcionario",nullable = true)
+	private Funcionario funcionario;
 
+	@ManyToOne
+	@JoinColumn(name="id_empreendimento",nullable = true)
+	private Empreendimento empreendimento;
+	
 	@Column(nullable = false,length = 50)
 	private String nome;
 	@Column(nullable = false,length = 40)
@@ -59,6 +68,18 @@ public class Usuario extends AbstractPersistable<Long>{
 	}
 	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
+	}
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
+	public Empreendimento getEmpreendimento() {
+		return empreendimento;
+	}
+	public void setEmpreendimento(Empreendimento empreendimento) {
+		this.empreendimento = empreendimento;
 	}
 	
 }

@@ -75,6 +75,12 @@ app.config(['$routeProvider','$httpProvider', function($routeProvider, $httpProv
 			
 	})
 	
+	.when('/cadastrarUsuario', {
+		templateUrl : "views/pages/adminEmpresa/cadastrar/cadastrarUsuario.html",
+	
+			
+	})
+	
 			//LISTAR
     	
 	.when('/listaEmpreendimento', {

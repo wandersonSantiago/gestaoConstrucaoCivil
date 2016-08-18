@@ -6,8 +6,10 @@ app.controller('usuarioController', function($scope,usuarioService, $routeParams
 	
 	
 	 self.cadastrarUsuario = function(usuario){
-		 console.log(self.usuario);
+		
 		 usuarioService.usuarioCreate(self.usuario);
+		 
+		 self.usuario = usuario = [];
 	}
 	 
 	

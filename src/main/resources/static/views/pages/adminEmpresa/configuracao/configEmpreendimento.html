@@ -22,7 +22,7 @@
 							<select class="form-control select2"
 								ng-click="empCtrl.verificar()"
 								ng-model="empCtrl.configEmpreendimento.empreendimento"
-								ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.shade for listarEmpreendimentos in empreendimentos"
+								ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.tipoEmpreendimento for listarEmpreendimentos in empreendimentos"
 								style="width: 100%;">
 								<option  value="">--selecione--</option>
 							</select>

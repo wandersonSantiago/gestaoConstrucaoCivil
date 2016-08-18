@@ -28,7 +28,7 @@ app.controller('cadastrarFuncionarioController', function($scope, buscaCepServic
 	 self.buscarFuncionarios = function(){
 		 cadastrarFuncionarioService.funcionarioFindAll().
 			then(function(f){
-				self.listaFuncionarios = f;
+				$scope.listaFuncionarios = f;
 				}, function(errResponse){
 				toastr.error('Erro ao tentar buscar funcionarios');
 			});
