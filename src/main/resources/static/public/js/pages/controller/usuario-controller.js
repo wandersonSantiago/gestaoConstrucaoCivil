@@ -1,4 +1,4 @@
-app.controller('usuarioController', function($scope,usuarioService, $routeParams){
+app.controller('usuarioController', function($scope, toastr, usuarioService, $routeParams){
 	
 	var self = this;
 		
@@ -6,10 +6,15 @@ app.controller('usuarioController', function($scope,usuarioService, $routeParams
 	
 	
 	 self.cadastrarUsuario = function(usuario){
-		
-		 usuarioService.usuarioCreate(self.usuario);
-		 
-		 self.usuario = usuario = [];
+		if(self.senha == self.senhaRepitida){
+			self.usuario.senha = self.senha;
+			usuarioService.usuarioCreate(self.usuario);
+			
+			//self.usuario = usuario = [];
+		}else{			
+			toastr.error('senha não coencidem, digite novamente');
+			
+		}
 	}
 	 
 	
