@@ -40,27 +40,27 @@
 
 </head>
 
-
+<div ng-if="!logado" ng-view></div>
 
 <body class="hold-transition skin-purple sidebar-mini">
-	<div class="wrapper">
+	<div ng-if="logado" class="wrapper">
 
-		<div ng-include="'views/templates/header.html'"></div>
+		<div ng-if="logado" ng-include="'views/templates/header.html'"></div>
 
-		<div ng-include="'views/templates/menu.html'"></div>
+		<div ng-if="logado" ng-include="'views/templates/menu.html'"></div>
 
-		<div class="content-wrapper">
+		<div ng-if="logado"  class="content-wrapper">
 
 
 			<section class="content">
 
-				<div ng-view></div>
+				<div ng-if="logado" ng-view></div>
 
 			</section>
 		</div>
 
 
-		<div ng-include="'views/templates/footer.html'"></div>
+		<div ng-if="logado" ng-include="'views/templates/footer.html'"></div>
 
 
 	</div>
@@ -118,6 +118,8 @@
 	<script src="public/js/pages/controller/prestadora-servico-controller.js"></script>
 	<script src="public/js/pages/controller/pacote-servico-controller.js"></script>
 	<script src="public/js/pages/controller/usuario-controller.js"></script>
+	<script src="public/js/pages/login.js"></script>
+	<script src="public/js/pages/auth/auth.js"></script>
 	
 </body>
 </html>

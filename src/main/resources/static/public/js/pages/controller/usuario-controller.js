@@ -1,8 +1,13 @@
-app.controller('usuarioController', function($scope, toastr, usuarioService, $routeParams){
+app.controller('usuarioController', function($scope, toastr, usuarioService, $http, $routeParams){
 	
 	var self = this;
 		
 	$scope.listaUsuario = [];
+	
+	
+	$http.get('/rest/usuario/usuario/').then(function(response) {
+		self.user = response.data.name;
+	});
 	
 	
 	 self.cadastrarUsuario = function(usuario){

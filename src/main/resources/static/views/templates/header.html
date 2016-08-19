@@ -12,12 +12,12 @@
 		</a>
 		
 		
-		<ul class="nav navbar-nav pull-right" >
-				<li><a>Seja Bem-vindo: Administrador
+		<ul class="nav navbar-nav pull-right" ng-controller="usuarioController as userCtrl" >
+				<li><a>Seja Bem-vindo: {{userCtrl.user}}
 				</a></li>
 
 				<li>
-					<a href="" > Logout <i class="glyphicon glyphicon-log-out"></i>
+					<a href="" ng-controller="loginController as loginCtrl"  ng-click="loginCtrl.logout()" > Logout <i class="glyphicon glyphicon-log-out"></i>
 					</a>
 				</li>
 

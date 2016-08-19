@@ -1,7 +1,12 @@
-app.config(['$routeProvider','$httpProvider', function($routeProvider, $httpProvider) {
+
+app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpProvider) {
+	
+	
+//	$locationProvider.html5Mode(true);
+	
 	$routeProvider
 	
-	.when('/', {
+	.when('/home', {
 		templateUrl : "views/home.html"
 	})
 	
@@ -183,9 +188,39 @@ app.config(['$routeProvider','$httpProvider', function($routeProvider, $httpProv
 	.when('/cadastrarCategoria', {
 		templateUrl:"views/pages/almoxarifado/cadastrarCategoria.html",
 	})
-	//Rota de erro
-	.otherwise({
-		redirectTo : "/"
+	
+		
+	.when('/',{
+		redirectTo : "/login"
 	})
+	
+	
+		.otherwise({
+			redirectTo : "/404"
+		});
+
+	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+} ]).factory('authHttpResponseInterceptor',['$q','$location','$rootScope','$localStorage',function($q,$location, $rootScope, $localStorage){
+    return {
+        response: function(response){
+            if (response.status === 401) {
+                console.log("Response 401");
+            }
+            return response || $q.when(response);
+        },
+        responseError: function(rejection) {
+            if (rejection.status === 401) {
+            	$rootScope.user  = null;
+            	$rootScope.authenticated = false;
+                $location.path('/login').search('returnTo', $location.path());
+            }
+            return $q.reject(rejection);
+        }
+    }
+}])
+.config(['$httpProvider',function($httpProvider) {
+    $httpProvider.interceptors.push('authHttpResponseInterceptor');
 }]);
+
+
 
