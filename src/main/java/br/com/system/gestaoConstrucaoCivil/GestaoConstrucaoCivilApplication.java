@@ -62,12 +62,13 @@ public class GestaoConstrucaoCivilApplication {
 	}
 	
 
-	@Configuration
+	/*@Configuration
 	@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 	protected static class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			// @formatter:off
+			System.out.println("OK CHAMANDO");
 			http
 				.httpBasic().and()
 				.authorizeRequests()
@@ -82,5 +83,5 @@ public class GestaoConstrucaoCivilApplication {
 			// @formatter:on
 		}
 	}
-	
+	*/
 }
