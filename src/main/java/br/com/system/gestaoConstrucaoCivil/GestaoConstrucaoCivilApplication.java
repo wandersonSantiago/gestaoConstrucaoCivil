@@ -71,7 +71,7 @@ public class GestaoConstrucaoCivilApplication {
 			http
 				.httpBasic().and()
 				.authorizeRequests()
-					.antMatchers("/public/**","/views/index.html", "/views/template/footer.html", "/views/template/header.html", "/views/template/menu.html",
+					.antMatchers(
 							"/", "/login", "/message", "/home").permitAll()
 					.anyRequest().authenticated()
 					.and()

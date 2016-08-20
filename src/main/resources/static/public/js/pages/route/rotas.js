@@ -198,29 +198,15 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 		.otherwise({
 			redirectTo : "/404"
 		});
-
 	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-} ]).factory('authHttpResponseInterceptor',['$q','$location','$rootScope','$localStorage',function($q,$location, $rootScope, $localStorage){
-    return {
-        response: function(response){
-            if (response.status === 401) {
-                console.log("Response 401");
-            }
-            return response || $q.when(response);
-        },
-        responseError: function(rejection) {
-            if (rejection.status === 401) {
-            	$rootScope.user  = null;
-            	$rootScope.authenticated = false;
-                $location.path('/login').search('returnTo', $location.path());
-            }
-            return $q.reject(rejection);
-        }
-    }
-}])
-.config(['$httpProvider',function($httpProvider) {
-    $httpProvider.interceptors.push('authHttpResponseInterceptor');
-}]);
+
+}]).run(function(auth) {
+
+// Initialize auth module with the home page and login/logout path
+// respectively
+auth.init('/', '/login', '/logout');
+
+});
 
 
 

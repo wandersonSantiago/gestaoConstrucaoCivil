@@ -43,7 +43,7 @@
 <div ng-if="!logado" ng-view></div>
 
 <body class="hold-transition skin-purple sidebar-mini">
-	<div ng-if="logado" class="wrapper">
+	<div ng-show="logado" class="wrapper">
 
 		<div ng-if="logado" ng-include="'views/templates/header.html'"></div>
 
