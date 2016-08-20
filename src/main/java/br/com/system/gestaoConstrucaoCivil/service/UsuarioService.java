@@ -18,6 +18,12 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
+	
+	public Usuario buscarUsuarioPorNome(String nomeUsuario)
+	{
+		 return usuarioRepository.findByNome(nomeUsuario);
+	}
+	
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(Usuario usuario)
 	{
