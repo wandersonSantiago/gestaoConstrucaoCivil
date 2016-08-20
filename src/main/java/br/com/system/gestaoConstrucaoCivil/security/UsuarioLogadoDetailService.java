@@ -13,9 +13,9 @@ import br.com.system.gestaoConstrucaoCivil.service.UsuarioService;
 
 @Service
 @Transactional
-public class UsuarioLogadoDetailService implements UserDetailsService{
+public class UsuarioLogadoDetailService /*implements UserDetailsService*/{
 
-	@Autowired
+	/*@Autowired
 	private UsuarioService usuarioService;
 	
 	@Override
@@ -30,6 +30,6 @@ public class UsuarioLogadoDetailService implements UserDetailsService{
 			throw new  UsernameNotFoundException("Usuário " + nomeUsuario +"  não encontrado");
 		}
 		return new UsuarioLogado(usuario);
-	}
+	}*/
 
 }
