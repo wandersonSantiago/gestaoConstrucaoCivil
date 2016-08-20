@@ -16,6 +16,15 @@ public class DadoEmpresaService {
 	@Autowired
 	private DadoEmpresaRepository dadoEmpresaRepository;
 	
+	public boolean existeCnpjCadastrado(String cnpj)
+	{
+		return dadoEmpresaRepository.existeCnpj(cnpj);
+	}
+	public boolean existeIeCadastrado(String ie)
+	{
+		return dadoEmpresaRepository.existeIe(ie);
+	}
+	
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(DadoEmpresa dadoEmpresa)
 	{
