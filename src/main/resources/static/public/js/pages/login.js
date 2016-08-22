@@ -19,7 +19,7 @@ app.controller( 'loginController', function($route, $location, $rootScope, auth)
 				console.log("estou no método de login");
 					if (authenticated) {
 						$rootScope.logado = true;
-						$location.path("/home");
+						$location.path("#/");
 						console.log("Logado com sucesso")
 						self.error = false;
 					} else {

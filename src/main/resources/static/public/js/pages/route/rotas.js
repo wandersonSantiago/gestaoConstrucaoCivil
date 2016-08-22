@@ -229,7 +229,7 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 	
 	
 	.when('/',{
-		redirectTo : "/login"
+		redirectTo : "/home"
 	})
 	
 	
