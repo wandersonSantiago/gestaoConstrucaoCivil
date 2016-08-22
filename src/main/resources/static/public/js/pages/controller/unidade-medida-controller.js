@@ -4,8 +4,8 @@ app.controller('unidadeMedidaController', function($scope,unidadeMedidaService, 
 	
 	
 	 self.cadastrarUnidadeMedida = function(unidadeMedida){
-		 console.log(self.unidadeMedida);
 		 unidadeMedidaService.unidadeMedidaCreate(self.unidadeMedida);
+		 self.unidadeMedida = unidadeMedida;
 	}
 	 
 	 self.buscarUnidadeMedidas = function(){

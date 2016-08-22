@@ -26,15 +26,15 @@ app.controller('prestadoraServicoController', function($scope, buscaCepService, 
 	
 //CADASTRAR
 	 self.cadastrarPrestadoraServico = function(prestadoraServico){
-		 console.log(self.prestadoraServico);
 		 prestadoraServicoService.prestadoraServicoCreate(self.prestadoraServico);
+		 self.prestadoraServico = prestadoraServico;
 	}
 	 
 	
 //ALTERAR	 
 	 	self.editarPrestadoraServico = function(prestadoraServico){
 			prestadoraServicoService.prestadoraServicoUpdate(self.prestadoraServico);
-						
+			 self.prestadoraServico = prestadoraServico;
 		}
 	 	
 

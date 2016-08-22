@@ -3,9 +3,9 @@
 <br>
 <div class="generic-container"  ng-controller="produtoController as protudoCtr" >
 
-	<div class="panel panel-primary">
+<div class="box box-primary" >
 		<!-- Default panel contents -->
-		<div class="panel-heading">
+		<div class="box-header" >
 			<span class="lead">Cadastrar Produto </span>
 		</div>
 		<div class="panel-body">
@@ -40,9 +40,9 @@
 					<br>
 					<div class="row">
 						<label class="col-sm-4 control-label" for="fornecedor">Fornecedor</label>
-						<div class="col-sm-8" ng-controller="fornecedorController as forCtrl" ng-init="forCtrl.buscarFornecedores()" >
+						<div class="col-sm-8" ng-controller="fornecedorController as forCtrl" ng-init="forCtrl.buscarFornecedor()" >
 							<select class="form-control select2" ng-model="protudoCtr.produto.fornecedor.dadoEmpresa.razaoSocial" 
-							ng-options="listaFornecedores.dadoEmpresa.razaoSocial for listaFornecedores in listaFornecedor" 
+							ng-options="listaFornecedores.dadoEmpresa.razaoSocial for listaFornecedores in forCtrl.fornecedores" 
 							  style=" width: 100%;" required >
 								<option value="">---Selecione---</option>
 							</select>
@@ -60,7 +60,7 @@
 						<label class="col-sm-4 control-label" for="unidadeMedida">Unidade de Medida</label>
 						<div class="col-sm-8" ng-controller="unidadeMedidaController as unidadeCtrl" ng-init="unidadeCtrl.buscarUnidadeMedidas()">
 						<select class="form-control select2" ng-model="protudoCtr.produto.unidadeMedida" 
-							ng-options="listaunidadeMedidas.descricao for listaunidadeMedidas in listaunidadeMedida" 
+							ng-options="listaunidadeMedidas.descricao for listaunidadeMedidas in unidadeCtrl.listaunidadeMedida" 
 							  style=" width: 100%;" required >
 								<option value="">---Selecione---</option>
 							</select>
@@ -72,7 +72,7 @@
 						<label class="col-sm-4 control-label" for="categoria">Categoria</label>
 						<div class="col-sm-8" ng-controller="categoriaController as categoriaCtrl" ng-init="categoriaCtrl.buscarCategoria()">
 						<select class="form-control select2" ng-model="protudoCtr.produto.categoria" 
-							ng-options="listaCategorias.descricao for listaCategorias in listaCategoria" 
+							ng-options="listaCategorias.descricao for listaCategorias in categoriaCtrl.categorias" 
 							  style=" width: 100%;" required >
 								<option value="">---Selecione---</option>
 							</select>

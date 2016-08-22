@@ -1,0 +1,48 @@
+<meta charset="UTF-8">
+<br>
+<br>
+<div class="generic-container"
+	ng-controller="categoriaController as catCtr">
+
+	<div class="box box-primary" ng-init="catCtr.buscarCategoria()">
+	
+		<div class="box-header">
+			<span class="lead">Lista de Categorias </span>
+		</div>
+		<div class="panel-body">
+		<input type="text" class="form-control" ng-model="buscarCategoria" placeholder="buscar">
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+					
+						<th>Estatus</th>
+						<th>Descrição</th>
+						
+						
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" categoria in catCtr.categorias | filter : buscaCategoria ">
+					<tr>
+						
+						<td>{{ categoria.ativo }}</td>
+						<td>{{ categoria.descricao }}</td>
+					
+						<td><a href="#/editarCategoria/{{categoria.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						
+					</tr>
+
+				</tbody>
+				<tfoot>
+				
+					
+				</tfoot>
+			</table>
+		</div>
+		<!-- /.box-body -->
+	</div>
+	<!-- /.box -->
+</div>
+<!-- /.col -->
+</div>
+<!-- /.row -->

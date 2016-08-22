@@ -5,8 +5,8 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 	
 	
 	 self.cadastrarServicoEmpresa = function(servicoEmpresa){
-		 console.log(self.servicoEmpresa);
 		 servicoEmpresaService.servicoEmpresaCreate(self.servicoEmpresa);
+		 self.servicoEmpresa = servicoEmpresa;
 	}
 	 
 	 self.buscarServicoEmpresas = function(){

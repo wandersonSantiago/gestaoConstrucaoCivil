@@ -5,14 +5,13 @@ app.controller('produtoController', function($scope,produtoService, $routeParams
 	
 	 self.cadastrarProduto = function(produto){
 			 produtoService.produtoCreate(self.produto);
-			 
-			 self.produto = produto=[];
+			 self.produto = produto;
 	}
 	 
-	 self.buscarProdutos = function(){
+	 self.buscarProduto = function(){
 		 produtoService.produtoFindAll().
 			then(function(t){
-				self.listaProduto = t;
+				self.produto = t;
 				}, function(errResponse){
 				toastr.error('Erro ao tentar buscar produto');
 			});

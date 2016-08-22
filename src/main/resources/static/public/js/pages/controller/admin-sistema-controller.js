@@ -26,14 +26,14 @@ app.controller('adminSistemaController', function($scope, adminSistemaService, b
 	
 	
 	self.createEmpresa = function(empresa, sucesso){
-		console.log(self.empresa);
+		
 		adminSistemaService.empresaCreate(self.empresa);
 		self.empresa = empresa;
 		
 	}
 	
 	self.updateEmpresa = function(empresa, sucesso){
-		console.log(self.empresa);
+		
 		adminSistemaService.empresaUpdate(self.empresa);
 	
 		self.empresa = empresa;

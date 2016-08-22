@@ -11,8 +11,8 @@ app.controller('usuarioController', function($scope, toastr, usuarioService, $ht
 	});
 	
 	self.alterarUsuario = function(usuario){
-		
 		usuarioService.usuarioUpdate(self.usuario);
+		self.usuario = usuario = [];
 	}
 	
 	 self.cadastrarUsuario = function(usuario){

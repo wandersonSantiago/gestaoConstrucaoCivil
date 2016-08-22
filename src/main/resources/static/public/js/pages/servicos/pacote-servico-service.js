@@ -24,5 +24,16 @@ app.factory('pacoteServicoService', function($rootScope, toastr, $http,$q){
 			});
 		},
 		
+		pacoteServicoFindOne: function(param){
+			return $http.get('rest/pacoteServico/listarPacoteServicoId/'+param)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				console.error('Erro ao tentar Buscar pacote de Serviço');
+				return $q.reject(errResponse);
+			});
+		},
+		
+		
 	}
 });

@@ -147,6 +147,10 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 		templateUrl:"views/pages/servicos/lista/listaPacoteServico.html",		
 
 	})
+	//EDITAR
+	.when('/editarPacotesServico/:idPacoteServico', {
+		templateUrl : "views/pages/servicos/editar/editarPacoteServico.html"
+	})
 	
 //ROTAS RECURSOS HUMANOS
 	
@@ -185,20 +189,45 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 	})
 	
 	//Rotas Almoxarifado
+	
+	//CADASTRAR
 	.when('/cadastrarUnidadeMedida', {
-		templateUrl:"views/pages/almoxarifado/cadastrarUnidadeMedida.html",
+		templateUrl:"views/pages/almoxarifado/cadastrar/cadastrarUnidadeMedida.html",
 	})
 	.when('/cadastrarProduto', {
-		templateUrl:"views/pages/almoxarifado/cadastrarProduto.html",
+		templateUrl:"views/pages/almoxarifado/cadastrar/cadastrarProduto.html",
 	})
 	.when('/cadastrarFornecedor', {
-		templateUrl:"views/pages/almoxarifado/cadastrarFornecedor.html",
+		templateUrl:"views/pages/almoxarifado/cadastrar/cadastrarFornecedor.html",
 	})
 	.when('/cadastrarCategoria', {
-		templateUrl:"views/pages/almoxarifado/cadastrarCategoria.html",
+		templateUrl:"views/pages/almoxarifado/cadastrar/cadastrarCategoria.html",
 	})
 	
+	//CONSULTAR
+	.when('/consultarCategoria', {
+		templateUrl:"views/pages/almoxarifado/consultar/consultarCategoria.html",
+	})
+	.when('/consultarProduto', {
+		templateUrl:"views/pages/almoxarifado/consultar/consultarProduto.html",
+	})
+	.when('/consultarFornecedor', {
+		templateUrl:"views/pages/almoxarifado/consultar/consultarFornecedor.html",
+	})
+	
+	//EDIATR
+	.when('/editarCategoria/:idCategoria', {
+		templateUrl:"views/pages/almoxarifado/editar/editarCategoria.html",
+	})
+	.when('/editarProduto/:idProduto', {
+		templateUrl:"views/pages/almoxarifado/editar/editarProduto.html",
+	})
+	.when('/editarFornecedor/:idFornecedor', {
+		templateUrl:"views/pages/almoxarifado/editar/editarFornecedor.html",
+	})
 		
+	
+	
 	.when('/',{
 		redirectTo : "/login"
 	})
@@ -207,6 +236,8 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 		.otherwise({
 			redirectTo : "/404"
 		});
+	
+	
 	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 }]).run(function(auth) {

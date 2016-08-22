@@ -16,9 +16,6 @@ app.controller('empreendimentoController', function($scope, buscaCepService, emp
 		buscaCepService.get({'cep': self.cep}).$promise
 		.then(function success(result){
 			$scope.empCtrl.empreendimento.enderecoEmpreendimento = result;
-		
-
-	
 		}).catch(function error(msg) {
 			console.error('Error');
 		});
@@ -39,7 +36,6 @@ app.controller('empreendimentoController', function($scope, buscaCepService, emp
 	//apagar outros empreendimentos, somente da lista de front
 	self.apagarOutros = function(listaOutros){
 			$scope.listaOutros = listaOutros.filter(function(outro){
-			
 			if(!outro.selecionado) return outro;
 			$scope.ativadoExcluirLote = null;
 		});
@@ -69,12 +65,9 @@ app.controller('empreendimentoController', function($scope, buscaCepService, emp
 	
 	//cria uma lista de outros
 	self.adicionarOutros = function(){
-			
 		$scope.listaOutros.push({
-			
 			descricao : descricaoOutros.value
 		});
-										
 					descricaoOutros.value = "";
 					$scope.descricaoOutro = null;
 	}

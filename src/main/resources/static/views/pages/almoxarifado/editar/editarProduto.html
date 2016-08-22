@@ -1,0 +1,124 @@
+<meta charset="UTF-8">
+<br>
+<br>
+<div class="generic-container"  ng-controller="produtoController as protudoCtr" >
+
+<div class="box box-primary" >
+		<!-- Default panel contents -->
+		<div class="box-header" >
+			<span class="lead">Cadastrar Produto </span>
+		</div>
+		<div class="panel-body">
+
+			<br>
+			<div class="container col-sm-12 ">
+				<form role="form-vertical" ng-submit="protudoCtr.alterarProduto()" >
+					
+					<div class="row">
+						<label class="col-sm-4 control-label" for="ativo"> Ativo</label>
+						<div class="col-sm-1">
+					
+					<input type="checkbox" ng-model="protudoCtr.produto.ativo">
+					
+					</div>
+					</div>
+					
+					<br>
+					<div class="row">
+						<label class="col-sm-4 control-label" for="descricao"> Descrição Produto</label>
+						<div class="col-sm-8">
+							<input class="form-control" ng-model="protudoCtr.produto.descricao" id="descricaoProduto" type="text">
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<label class="col-sm-4 control-label" for="codigoBarra">Código Barras</label>
+						<div class="col-sm-8">
+							<input class="form-control" ng-model="protudoCtr.produto.codigoBarra" id="codigoBarra" type="text">
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<label class="col-sm-4 control-label" for="fornecedor">Fornecedor</label>
+						<div class="col-sm-8" ng-controller="fornecedorController as forCtrl" ng-init="forCtrl.buscarFornecedores()" >
+							<select class="form-control select2" ng-model="protudoCtr.produto.fornecedor.dadoEmpresa.razaoSocial" 
+							ng-options="listaFornecedores.dadoEmpresa.razaoSocial for listaFornecedores in listaFornecedor" 
+							  style=" width: 100%;" required >
+								<option value="">---Selecione---</option>
+							</select>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<label class="col-sm-4 control-label" for="valorCompra">Valor de Compra</label>
+						<div class="col-sm-8">
+							<input class="form-control" ng-model="protudoCtr.produto.valorCompra" id="valorCompra"  type="text" ui-money-mask="2">
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<label class="col-sm-4 control-label" for="unidadeMedida">Unidade de Medida</label>
+						<div class="col-sm-8" ng-controller="unidadeMedidaController as unidadeCtrl" ng-init="unidadeCtrl.buscarUnidadeMedidas()">
+						<select class="form-control select2" ng-model="protudoCtr.produto.unidadeMedida" 
+							ng-options="listaunidadeMedidas.descricao for listaunidadeMedidas in listaunidadeMedida" 
+							  style=" width: 100%;" required >
+								<option value="">---Selecione---</option>
+							</select>
+						</div>
+					</div>
+					
+		            <br>
+		            <div class="row">
+						<label class="col-sm-4 control-label" for="categoria">Categoria</label>
+						<div class="col-sm-8" ng-controller="categoriaController as categoriaCtrl" ng-init="categoriaCtrl.buscarCategoria()">
+						<select class="form-control select2" ng-model="protudoCtr.produto.categoria" 
+							ng-options="listaCategorias.descricao for listaCategorias in listaCategoria" 
+							  style=" width: 100%;" required >
+								<option value="">---Selecione---</option>
+							</select>
+						</div>
+					</div>
+		
+					<br>
+					<br>	
+						<div ng-if="gravado" class="alert alert-info alert-dismissible"
+						role="alert">
+						<button type="button" class="close" data-dismiss="alert"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<strong>Sucesso</strong> cadastro realizado
+					</div>
+
+
+					<div ng-if="naoGravado"
+						class="alert alert-danger alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<strong>Error</strong> cadastro não realizado
+					</div>
+					<br>
+					
+							
+					<div class="row ">
+						<div class="col-sm-3"></div>
+						<div class="col-sm-3">
+							<input type="submit" id="submit" value="Salvar"
+								class="btn btn-lg btn-primary btn-block btn-signin">
+						</div>
+						<div class="col-sm-3">
+							<a class="btn btn-lg btn-success btn-block btn-signin" href="#/">Menu Principal</a>
+							
+						</div>
+					</div>
+
+
+				</form>
+			</div>
+
+		</div>
+		<div class="tablecontainer"></div>
+	</div>
+</div>

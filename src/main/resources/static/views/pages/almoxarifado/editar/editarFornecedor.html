@@ -4,9 +4,9 @@
 <div class="generic-container"
 	ng-controller="fornecedorController as fornecedorCtrl">
 
-	<div class="box box-primary">
-
-		<div class="box-header">
+	<div class="box box-primary" >
+		<!-- Default panel contents -->
+		<div class="box-header" >
 			<span class="lead">Pagina Cadastrar Fornecedor </span>
 		</div>
 		<div class="panel-body">
@@ -14,7 +14,7 @@
 			<br>
 			<div class="container col-sm-12 ">
 				<form role="form-vertical" name="formFornecedor"
-					ng-submit="fornecedorCtrl.createFornecedor()">
+					ng-submit="fornecedorCtrl.alterarFornecedor()">
 					<div class="row">
 						<label class="col-sm-1 control-label" for="razaoSocial">Razão
 							Social</label>

@@ -5,10 +5,7 @@ app.controller('tipoEmpreendimentoController', function($scope, tipoEmpreendimen
 	
 		
 	self.createTipoEmpreendimento = function(tipoEmpreendimento){
-		console.log("funfou o controle");
-		console.log(self.tipoEmpreendimento);
 		tipoEmpreendimentoService.tipoEmpreendimentoCreate(self.tipoEmpreendimento);
-	
 		self.tipoEmpreendimento = tipoEmpreendimento;
 		
 	}
