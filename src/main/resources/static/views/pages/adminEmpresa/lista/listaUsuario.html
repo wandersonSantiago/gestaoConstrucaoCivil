@@ -1,0 +1,57 @@
+<meta charset="UTF-8">
+<br>
+<br>
+<div class="generic-container"
+	ng-controller="usuarioController as userCtr">
+
+	<div class="box box-primary" ng-init="userCtr.buscarUsuarios()">
+	
+		<div class="box-header">
+			<span class="lead">Lista de Usuario </span>
+		</div>
+		<div class="panel-body">
+		<input type="text" class="form-control" ng-model="buscaUsuario" placeholder="buscar">
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+					
+						<th>Estatus</th>
+						<th>Nome Usuario</th>
+						<th>Usuario</th>
+						<th>Empreendimento</th>
+						<th>Data de cadastro</th>
+						<th>Serviços</th>
+						
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" user in userCtr.usuarios | filter : buscaUsuario ">
+					<tr>
+						
+						<td>{{ user.ativo }}</td>
+						<td>{{ user.nome }}</td>
+						<td>{{ user.email}}</td>
+						<td>{{ user.empreendimento.descricao}}</td>
+						<td>{{ user.dataCadastro }}</td>
+						
+						<td><a href="#/editarUsuario/{{user.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						<i class="glyphicon glyphicon-minus"></i>
+						<a href="#/permissaoUsuario/{{user.id}}"><i class="glyphicon glyphicon-search"></i></a></td>
+						
+						
+					</tr>
+
+				</tbody>
+				<tfoot>
+				
+					
+				</tfoot>
+			</table>
+		</div>
+		<!-- /.box-body -->
+	</div>
+	<!-- /.box -->
+</div>
+<!-- /.col -->
+</div>
+<!-- /.row -->

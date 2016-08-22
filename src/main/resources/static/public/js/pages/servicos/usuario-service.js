@@ -19,7 +19,7 @@ app.factory('usuarioService', function($rootScope, toastr, $http,$q){
 			});
 		},
 		usuarioFindAll: function(){
-			return $http.get('rest/usuario/cadastrarUsuario/listarUsuario')
+			return $http.get('rest/usuario/listarUsuario')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
@@ -28,5 +28,14 @@ app.factory('usuarioService', function($rootScope, toastr, $http,$q){
 			});
 		},
 		
+		usuarioFindOne: function(param){
+			return $http.get('rest/usuario/listarUsuarioId/'+param)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				console.error('Erro ao tentar Buscar Usuario');
+				return $q.reject(errResponse);
+			});
+		},
 	}
 });

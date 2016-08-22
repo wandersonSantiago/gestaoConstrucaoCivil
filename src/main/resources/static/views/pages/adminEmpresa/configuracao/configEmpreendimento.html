@@ -18,11 +18,11 @@
 
 					<div class="row">
 						<label class="col-sm-2 control-label" for="empreendimento">Empreendimento</label>
-						<div class="col-sm-5" ng-init="empCtrl.buscarEmpreendimentos()">
+						<div class="col-sm-5" ng-init="empCtrl.empreendimentoSemConfiguracaoFindAll()">
 							<select class="form-control select2"
 								ng-click="empCtrl.verificar()"
 								ng-model="empCtrl.configEmpreendimento.empreendimento"
-								ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.tipoEmpreendimento for listarEmpreendimentos in empreendimentos"
+								ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.tipoEmpreendimento for listarEmpreendimentos in empreendimentoSemConfiguracao"
 								style="width: 100%;">
 								<option  value="">--selecione--</option>
 							</select>

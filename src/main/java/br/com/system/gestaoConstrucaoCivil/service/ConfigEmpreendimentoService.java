@@ -27,6 +27,7 @@ public class ConfigEmpreendimentoService {
          
         return configEmpreendimentoRepository.findAll();
     }
+    
     public ConfigEmpreendimento buscarPorId(Long id)
     {
         return configEmpreendimentoRepository.findOne(id);

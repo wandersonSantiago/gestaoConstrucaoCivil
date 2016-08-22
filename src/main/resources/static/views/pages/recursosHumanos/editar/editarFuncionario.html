@@ -144,23 +144,26 @@
 					<div class="row">
 						<label class="col-sm-1 control-label" for="cep">CEP</label>
 						<div class="col-sm-5">
-						
-							<input class="form-control"
-								ng-model="cadFuncCtrl.funcionario.endereco.cep" id="cep"
-								type="text" ui-mask="{{maskCep}}" required>
+							<input class="form-control"	ng-model="cadFuncCtrl.funcionario.endereco.cep" id="cep" name="cepField"
+								type="text" placeholder="Busca Cep"  ng-blur="cadFuncCtrl.findCep()"  onkeyup="if(this.value.length > 8) { numeroEmpresa.focus(); }"   ui-br-cep-mask required>
+								
+							<p ng-show="formCadastrarFuncionario.cepField.$error.cep" class="alert alert-warning ">Digite um CEP Válido</p>
 
 						</div>
+						
+						
+						
 						<label class="col-sm-1 control-label" for="numero">Numero</label>
 						<div class="col-sm-5"
-							ng-class="{ 'has-error' : formAdminSistema.numeroEmpresa.$invalid && !fromAdminSistema.numeroEmpresa.$pristine }">
+							ng-class="{ 'has-error' : formCadastrarFuncionario.numeroEmpresa.$invalid && !formCadastrarFuncionario.numeroEmpresa.$pristine }">
 							<input class="form-control" name="numeroEmpresa"
 								ng-model="cadFuncCtrl.funcionario.endereco.numero" id="numero"
 								type="text" ng-minlength="1" ng-maxlength="7" required>
 						</div>
 					</div>
-					<p ng-show="formAdminSistema.numeroEmpresa.$error.minlength"
+					<p ng-show="formCadastrarFuncionario.numeroEmpresa.$error.minlength"
 						class="alert alert-warning ">campo numero no minimo 1 caracter</p>
-					<p ng-show="formAdminSistema.numeroEmpresa.$error.maxlength"
+					<p ng-show="formCadastrarFuncionario.numeroEmpresa.$error.maxlength"
 						class="alert alert-warning ">campo numero no maximo 7 caracter</p>
 
 					<br>
@@ -170,7 +173,7 @@
 						<label class="col-sm-1 control-label" for="rua">Rua</label>
 						<div class="col-sm-11">
 							<input class="form-control"
-								ng-model="cadFuncCtrl.funcionario.endereco.rua" id="rua"
+								ng-model="cadFuncCtrl.funcionario.endereco.logradouro" id="rua"
 								type="text" required>
 						</div>
 					</div>
@@ -187,7 +190,7 @@
 						<label class="col-sm-1 control-label" for="cidade">Cidade</label>
 						<div class="col-sm-5">
 							<input class="form-control"
-								ng-model="cadFuncCtrl.funcionario.endereco.cidade" id="cidade"
+								ng-model="cadFuncCtrl.funcionario.endereco.localidade" id="cidade"
 								type="text" required>
 						</div>
 					</div>
@@ -197,7 +200,7 @@
 						<label class="col-sm-1 control-label" for="estado">Estado</label>
 						<div class="col-sm-5">
 							<input class="form-control"
-								ng-model="cadFuncCtrl.funcionario.endereco.estado" id="estado"
+								ng-model="cadFuncCtrl.funcionario.endereco.uf" id="estado"
 								type="text" required>
 						</div>
 

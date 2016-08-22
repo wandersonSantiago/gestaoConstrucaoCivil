@@ -29,6 +29,11 @@ public class UsuarioService {
 	{
 		usuarioRepository.save(usuario);
 	}
+	
+	public Usuario buscarUsuarioPorId(Long id){
+		return usuarioRepository.findOne(id);
+	}
+	
 	public List<Usuario> buscarTodos(){
 			
 		return usuarioRepository.findAll();

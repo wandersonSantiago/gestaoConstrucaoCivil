@@ -98,6 +98,11 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 	//	controller : "empreendimento-controller.js",
 	})
 	
+	.when('/listaUsuario', {
+		templateUrl : "views/pages/adminEmpresa/lista/listaUsuario.html",
+	
+	})
+	
 	
 		//EDITAR
 	.when('/editarEmpreendimento/:idEmpreendimento',{
@@ -107,6 +112,10 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 	
 	.when('/editarPrestadoraServico/:idPrestadoraServico',{
 		templateUrl : "views/pages/adminEmpresa/editar/editarPrestadoraServico.html",
+	})
+	
+	.when('/editarUsuario/:idUsuario',{
+		templateUrl : "views/pages/adminEmpresa/editar/editarUsuario.html",
 	})
 	
 	

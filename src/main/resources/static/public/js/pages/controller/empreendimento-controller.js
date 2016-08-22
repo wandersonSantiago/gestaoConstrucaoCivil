@@ -69,9 +69,7 @@ app.controller('empreendimentoController', function($scope, buscaCepService, emp
 	
 	//cria uma lista de outros
 	self.adicionarOutros = function(){
-		
-		var outros = document.getElementById("descricaoOutros");
-		
+			
 		$scope.listaOutros.push({
 			
 			descricao : descricaoOutros.value
@@ -94,15 +92,14 @@ app.controller('empreendimentoController', function($scope, buscaCepService, emp
 		if(self.configEmpreendimentoEdificio){
 			self.configEmpreendimentoEdificio.empreendimento = $scope.empCtrl.configEmpreendimento.empreendimento;
 			empreendimentoService.configEmpreendimentoEdificioCreate(self.configEmpreendimentoEdificio);
-			//empreendimentoService.configEmpreendimentoOutrosCreate($scope.listaOutros);
+
 			self.configEmpreendimentoEdificio = null;
-			//$scope.listaOutros = listaOutros =[];
+			
 			
 		}else if(self.configEmpreendimentoCasa){
 			self.configEmpreendimentoCasa.empreendimento = $scope.empCtrl.configEmpreendimento.empreendimento;
 			empreendimentoService.configEmpreendimentoCasaCreate( self.configEmpreendimentoCasa);
-			//empreendimentoService.configEmpreendimentoOutrosCreate($scope.listaOutros);
-			//$scope.listaOutros = listaOutros =[];
+	
 			self.configEmpreendimentoCasa = null;
 		
 		}
@@ -116,6 +113,15 @@ app.controller('empreendimentoController', function($scope, buscaCepService, emp
 		
 	}
 	
+	self.empreendimentoSemConfiguracaoFindAll = function(){
+		 empreendimentoService.empreendimentoSemConfiguracaoFindAll().
+			then(function(t){
+				$scope.empreendimentoSemConfiguracao = t;
+				}, function(errResponse){
+				toastr.error('Erro ao tentar buscar empreendimento');
+			});
+		};
+		
 	 self.buscarEmpreendimentos = function(){
 		 empreendimentoService.empreendimentoFindAll().
 			then(function(t){
