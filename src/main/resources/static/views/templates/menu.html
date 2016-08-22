@@ -50,9 +50,9 @@
 			<li class="treeview"><a href=""><i class="glyphicon glyphicon-user"></i> <span>Usuarios</span>
 					<i class="fa fa-angle-left pull-right"></i></a>
 					<ul class="treeview-menu">
-						<li><a href="#/cadastrarUsuario">Cadastrar Usuario</a></li>
-						<li><a href="#/listaUsuario">Lista de Usuarios</a></li>
-						<li><a href="#/permissaoUsuario">Permissões de Usuarios</a></li>
+						<li><a class="top" href="#/cadastrarUsuario">Cadastrar Usuario</a></li>
+						<li><a class="top" href="#/listaUsuario">Lista de Usuarios</a></li>
+						<li><a class="top" href="#/permissaoUsuario">Permissões de Usuarios</a></li>
 					</ul>
 			</li>
 				
@@ -60,9 +60,9 @@
 			<li class="treeview"><a href=""><i class=" glyphicon glyphicon-object-align-bottom"></i> <span>Empreendimento</span>
 					<i class="fa fa-angle-left pull-right"></i></a>
 					<ul class="treeview-menu">
-						<li><a href="#/cadastrarEmpreendimento">Cadastro de Empreendimentos</a></li>
-						<li><a href="#/listaEmpreendimento">Lista de empreendimentos</a></li>
-						<li><a href="#/configEmpreendimento"> Configuração de Empreendimentos</a></li>
+						<li><a class="top" href="#/cadastrarEmpreendimento">Cadastro de Empreendimentos</a></li>
+						<li><a class="top" href="#/listaEmpreendimento">Lista de empreendimentos</a></li>
+						<li><a class="top" href="#/configEmpreendimento"> Configuração de Empreendimentos</a></li>
 						
 				
 					</ul>
@@ -72,8 +72,8 @@
 			<li class="treeview"><a href=""><i class=" glyphicon glyphicon-wrench"></i> <span>Prestadora de Serviços</span>
 					<i class="fa fa-angle-left pull-right"></i></a>
 					<ul class="treeview-menu">
-						<li><a href="#/cadastrarPrestadoraServico">Cadastrar Prestadora de Servico</a></li>
-				    	<li><a href="#/listaPrestadoraServico"> Lista de Prestadora Servico</a></li>
+						<li><a class="top" href="#/cadastrarPrestadoraServico">Cadastrar Prestadora de Servico</a></li>
+				    	<li><a class="top" href="#/listaPrestadoraServico"> Lista de Prestadora Servico</a></li>
 				
 					</ul>
 			</li>
@@ -87,7 +87,7 @@
 			<li class="treeview"><a href=""><i class="glyphicon glyphicon-hand-right"></i> <span>Cadastrar</span>
 				<i class="fa fa-angle-left pull-right"></i></a>
 				<ul class="treeview-menu">
-					<li><a href="#/cadastrarPacotesServicos">Pacotes de Serviços</a></li>
+					<li><a class="top" href="#/cadastrarPacotesServicos">Pacotes de Serviços</a></li>
 			
 				</ul>
 			</li>
@@ -95,7 +95,7 @@
 				<li class="treeview"><a href=""><i class="glyphicon glyphicon-hand-right"></i> <span>Consultar</span>
 					<i class="fa fa-angle-left pull-right"></i></a>
 					<ul class="treeview-menu">
-						<li><a href="#/listaPacoteServico"> Pacotes de Serviços</a></li>
+						<li><a class="top" href="#/listaPacoteServico"> Pacotes de Serviços</a></li>
 				    				
 					</ul>
 				</li>
@@ -112,15 +112,15 @@
 			<li class="treeview"><a href=""><i class="glyphicon glyphicon-hand-right"></i> <span>Cadastrar</span>
 					<i class="fa fa-angle-left pull-right"></i></a>
 				<ul class="treeview-menu">
-					<li><a href="#/cadastrarFuncionario">Funcionario</a></li>
-					<li><a href="#/cadastrarCargo">Cargo</a></li>
+					<li><a class="top" href="#/cadastrarFuncionario">Funcionario</a></li>
+					<li><a class="top" href="#/cadastrarCargo">Cargo</a></li>
 					
 				</ul></li>
 				<li class="treeview"><a href=""><i class="glyphicon glyphicon-hand-right"></i> <span>Consultar</span>
 					<i class="fa fa-angle-left pull-right"></i></a>
 				<ul class="treeview-menu">
-					<li><a href="#/listaFuncionario">Funcionario</a></li>
-					<li><a href="#/listaCargo">Cargo</a></li>
+					<li><a class="top" href="#/listaFuncionario">Funcionario</a></li>
+					<li><a class="top" href="#/listaCargo">Cargo</a></li>
 				
 				</ul></li>
 		
@@ -133,21 +133,29 @@
 			<li class="treeview"><a href=""><i class="glyphicon glyphicon-hand-right"></i> <span>Cadastrar</span>
 					<i class="fa fa-angle-left pull-right"></i></a>
 				<ul class="treeview-menu">
-				<li><a href="#/cadastrarProduto">Produto</a></li>
-				<li><a href="#/cadastrarUnidadeMedida">Unidade de Medida</a></li>
-				<li><a href="#/cadastrarFornecedor">Fornecedor</a></li>
-				<li><a href="#/cadastrarCategoria">Categoria</a></li>
+				<li><a class="top" href="#/cadastrarProduto">Produto</a></li>
+				<li><a class="top" href="#/cadastrarUnidadeMedida">Unidade de Medida</a></li>
+				<li><a class="top" href="#/cadastrarFornecedor">Fornecedor</a></li>
+				<li><a class="top" href="#/cadastrarCategoria">Categoria</a></li>
 					</ul></li>
 					<li class="treeview"><a href=""><i class="glyphicon glyphicon-hand-right"></i> <span>Consultar</span>
 					<i class="fa fa-angle-left pull-right"></i></a>
 				<ul class="treeview-menu">
-				<li><a href="#/listaProduto">Produto</a></li>
+				
 				
 				
 					</ul></li>
 		
 		</ul>
-		
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$('.top').click(function() {
+				$('html,body').animate({
+					scrollTop : 0
+				}, 'slow');
+			});
+		});
+	</script>
 	</section>
 
 

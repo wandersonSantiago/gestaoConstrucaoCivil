@@ -44,13 +44,22 @@ public class UsuarioRestController {
 	 
 	 
 	 @RequestMapping(method = RequestMethod.POST, value="/cadastrarUsuario")
-	 public ResponseEntity<?> salva(@RequestBody Usuario usuario,UriComponentsBuilder ucBuilder){
+	 public ResponseEntity<Usuario> salva(@RequestBody Usuario usuario,UriComponentsBuilder ucBuilder){
 		 usuarioService.salvarOuEditar(usuario);
 		 HttpHeaders headers =new HttpHeaders();
 		 headers.setLocation(ucBuilder.path("/rest/usuario/cadastrarUsuario/{id}").buildAndExpand(usuario.getId()).toUri());
 		 return new ResponseEntity<Usuario>(headers, HttpStatus.CREATED);
 	 }
 
+	 @RequestMapping(method = RequestMethod.PUT, value="/alterarUsuario")
+	 public ResponseEntity<Usuario> alterarUsuario(@RequestBody Usuario usuario,UriComponentsBuilder ucBuilder){
+		 usuarioService.salvarOuEditar(usuario);
+		 HttpHeaders headers =new HttpHeaders();
+		 headers.setLocation(ucBuilder.path("/rest/usuario/alterarUsuario/{id}").buildAndExpand(usuario.getId()).toUri());
+		 return new ResponseEntity<Usuario>(headers, HttpStatus.CREATED);
+	 }
+
+	 
 	 @RequestMapping(value = "/listarUsuarioId/{id}", method = RequestMethod.GET)
 		public ResponseEntity<Usuario> buscarUsuarioPorId(@PathVariable Long id) {
 			return new ResponseEntity<Usuario>(usuarioService.buscarUsuarioPorId(id), HttpStatus.OK);

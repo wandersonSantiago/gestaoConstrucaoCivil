@@ -37,5 +37,15 @@ app.factory('usuarioService', function($rootScope, toastr, $http,$q){
 				return $q.reject(errResponse);
 			});
 		},
+		usuarioUpdate: function(usuario){
+			return $http.put('rest/usuario/alterarUsuario', usuario)
+			.then(function(response){
+				toastr.info('usuario Alterado empresa');
+				return response.data;
+			},function(errResponse){
+				toastr.error('Erro ao tentar Alterar usuario');
+				return $q.reject(errResponse);
+			});
+		},
 	}
 });
