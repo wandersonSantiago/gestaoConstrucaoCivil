@@ -12,13 +12,13 @@ import javax.persistence.Table;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.system.gestaoConstrucaoCivil.enuns.TipoNota;
+import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
 
 @Entity
 @Table(name = "nota_fiscal")
 public class NotaFiscal extends AbstractPersistable<Long>{
 
-	private TipoNota tipoNota;
+	private TipoNotaEnum tipoNota;
 	private Integer numero;
 	private Integer chaveAcesso;
 	private Date dataNota;
@@ -31,7 +31,7 @@ public class NotaFiscal extends AbstractPersistable<Long>{
 	@OneToMany(mappedBy = "notaFiscal" , cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private List<ItemNotaFiscal> itens;
 
-	public TipoNota getTipoNota() {
+	public TipoNotaEnum getTipoNota() {
 		return tipoNota;
 	}
     
@@ -43,7 +43,7 @@ public class NotaFiscal extends AbstractPersistable<Long>{
 		this.chaveAcesso = chaveAcesso;
 	}
 
-	public void setTipoNota(TipoNota tipoNota) {
+	public void setTipoNota(TipoNotaEnum tipoNota) {
 		this.tipoNota = tipoNota;
 	}
 
@@ -70,13 +70,8 @@ public class NotaFiscal extends AbstractPersistable<Long>{
 	public void setDataVencimento(Date dataVencimento) {
 		this.dataVencimento = dataVencimento;
 	}
-	public Integer getSerie() {
-		return serie;
-	}
+	
 
-	public void setSerie(Integer serie) {
-		this.serie = serie;
-	}
 	
 	public Fornecedor getFornecedor() {
 		return fornecedor;
@@ -108,6 +103,14 @@ public class NotaFiscal extends AbstractPersistable<Long>{
 
 	public void setValorTotal(Double valorTotal) {
 		this.valorTotal = valorTotal;
+	}
+
+	public Integer getSerie() {
+		return serie;
+	}
+
+	public void setSerie(Integer serie) {
+		this.serie = serie;
 	}
 	
 	

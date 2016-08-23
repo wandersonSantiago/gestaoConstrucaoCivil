@@ -2,7 +2,9 @@ package br.com.system.gestaoConstrucaoCivil.enuns;
 
 public enum TipoNotaEnum {
 
-	NOTA_FISCAL,
+	NOTA_FISCAL_ENTRADA,
+	NOTA_FISCAL_SAIDA,
 	DEVOLUCAO,
-	AJUSTE_ESTOQUE
+	AJUSTE_ESTOQUE,
+	TRANSFERENCIA_ESTOQUE_EMPREENDIMENTO
 }
