@@ -1,6 +1,6 @@
 package br.com.system.gestaoConstrucaoCivil.enuns;
 
-public enum TipoNota {
+public enum TipoNotaEnum {
 
 	NOTA_FISCAL,
 	DEVOLUCAO,
