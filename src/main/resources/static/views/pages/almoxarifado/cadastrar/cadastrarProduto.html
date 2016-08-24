@@ -15,62 +15,61 @@
 				<form role="form-vertical" ng-submit="protudoCtr.cadastrarProduto()" >
 					
 					<div class="row">
-						<label class="col-sm-4 control-label" for="ativo"> Ativo</label>
-						<div class="col-sm-1">
-					
-					<input type="checkbox" ng-model="protudoCtr.produto.ativo">
-					
-					</div>
+						<label class="col-sm-2 control-label" for="ativo"> Ativo</label>
+						<div class="col-sm-3">
+							<input type="checkbox" ng-model="protudoCtr.produto.ativo">
+						</div>
 					</div>
 					
 					<br>
+					
 					<div class="row">
-						<label class="col-sm-4 control-label" for="descricao"> Descrição Produto</label>
-						<div class="col-sm-8">
+						<label class="col-sm-2 control-label" for="descricao"> Descrição Produto</label>
+						<div class="col-sm-5">
 							<input class="form-control" ng-model="protudoCtr.produto.descricao" id="descricaoProduto" type="text">
 						</div>
 					</div>
+					
 					<br>
+										
 					<div class="row">
-						<label class="col-sm-4 control-label" for="codigoBarra">Código Barras</label>
-						<div class="col-sm-8">
+						<label class="col-sm-2 control-label" for="codigoBarra">Código Barras</label>
+						<div class="col-sm-4">
 							<input class="form-control" ng-model="protudoCtr.produto.codigoBarra" id="codigoBarra" type="text">
 						</div>
-					</div>
-					<br>
-					<div class="row">
-						<label class="col-sm-4 control-label" for="fornecedor">Fornecedor</label>
-						<div class="col-sm-8" ng-controller="fornecedorController as forCtrl" ng-init="forCtrl.buscarFornecedor()" >
-							<select class="form-control select2" ng-model="protudoCtr.produto.fornecedor.dadoEmpresa.razaoSocial" 
-							ng-options="listaFornecedores.dadoEmpresa.razaoSocial for listaFornecedores in forCtrl.fornecedores" 
-							  style=" width: 100%;" required >
-								<option value="">---Selecione---</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="row">
-						<label class="col-sm-4 control-label" for="valorCompra">Valor de Compra</label>
-						<div class="col-sm-8">
+						<label class="col-sm-2 control-label" for="valorCompra">Valor de Compra</label>
+						<div class="col-sm-4">
 							<input class="form-control" ng-model="protudoCtr.produto.valorCompra" id="valorCompra"  type="text" ui-money-mask="2">
 						</div>
 					</div>
+					
 					<br>
+					
 					<div class="row">
-						<label class="col-sm-4 control-label" for="unidadeMedida">Unidade de Medida</label>
-						<div class="col-sm-8" ng-controller="unidadeMedidaController as unidadeCtrl" ng-init="unidadeCtrl.buscarUnidadeMedidas()">
+						<label class="col-sm-2 control-label" for="qtdMaxima">Quantidade Maxima</label>
+						<div class="col-sm-4">
+							<input class="form-control" ng-model="protudoCtr.produto.quantidadeMaxima" id=""qtdMaxima"" type="text">
+						</div>
+						<label class="col-sm-2 control-label" for="qtdMinima">Quantidade Minima</label>
+						<div class="col-sm-4">
+							<input class="form-control" ng-model="protudoCtr.produto.quantidadeMinima" id="qtdMinima"  type="text" ui-money-mask="2">
+						</div>
+					</div>
+					
+					<br>
+					
+					<div class="row">
+						<label class="col-sm-2 control-label" for="unidadeMedida">Unidade de Medida</label>
+						<div class="col-sm-4" ng-controller="unidadeMedidaController as unidadeCtrl" ng-init="unidadeCtrl.buscarUnidadeMedidas()">
 						<select class="form-control select2" ng-model="protudoCtr.produto.unidadeMedida" 
 							ng-options="listaunidadeMedidas.descricao for listaunidadeMedidas in unidadeCtrl.listaunidadeMedida" 
 							  style=" width: 100%;" required >
 								<option value="">---Selecione---</option>
 							</select>
 						</div>
-					</div>
-					
-		            <br>
-		            <div class="row">
-						<label class="col-sm-4 control-label" for="categoria">Categoria</label>
-						<div class="col-sm-8" ng-controller="categoriaController as categoriaCtrl" ng-init="categoriaCtrl.buscarCategoria()">
+				
+						<label class="col-sm-2 control-label" for="categoria">Categoria</label>
+						<div class="col-sm-4" ng-controller="categoriaController as categoriaCtrl" ng-init="categoriaCtrl.buscarCategoria()">
 						<select class="form-control select2" ng-model="protudoCtr.produto.categoria" 
 							ng-options="listaCategorias.descricao for listaCategorias in categoriaCtrl.categorias" 
 							  style=" width: 100%;" required >
@@ -80,27 +79,58 @@
 					</div>
 		
 					<br>
-					<br>	
-						<div ng-if="gravado" class="alert alert-info alert-dismissible"
-						role="alert">
-						<button type="button" class="close" data-dismiss="alert"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<strong>Sucesso</strong> cadastro realizado
-					</div>
-
-
-					<div ng-if="naoGravado"
-						class="alert alert-danger alert-dismissible" role="alert">
-						<button type="button" class="close" data-dismiss="alert"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<strong>Error</strong> cadastro não realizado
-					</div>
-					<br>
 					
+					<div class="row">
+						<label class="col-sm-2 control-label" for="fornecedor">Fornecedor</label>
+						<div class="col-sm-4" ng-controller="fornecedorController as forCtrl" ng-init="forCtrl.buscarFornecedor()" >
+							<select class="form-control select2" ng-model="protudoCtr.fornecedor" id="fornecedor"
+							ng-options="listaFornecedores.dadoEmpresa.razaoSocial for listaFornecedores in forCtrl.fornecedores" 
+							  style=" width: 100%;" required >
+								<option value="">---Selecione---</option>
+							</select>
+						</div>
+					
+						<div class="col-sm-2">
+							<input class="btn btn-lg btn-primary btn-block btn-signin"
+								ng-click="protudoCtr.adicionarFornecedores()" value="adicionar"
+								title="pressione para adicionar a lista" type="button" ng-disabled="!protudoCtr.fornecedor" >
+						</div>
+					</div>
+			
+					<br> <br>
+					<div class="panel panel-primary">
+						<div class="panel-heading">Lista de Fornecedores</div>
+						<div class="panel-body">
+						<table class="table table-hover ">
+							<thead>
+								<tr>
+								<th>Selecionar</th>
+								<th>Razão social</th>
+								<th>Nome Fantasia</th>
+								<th>CNPJ</th>
+								<th>Excluir</th>
+									
+								</tr>
+							</thead>
+				
+							<tbody 	ng-repeat="fornecedores in listaFornecedores" ng-model="selecionado"  >
+							<tr>
+								<td><input type="checkbox"   ng-model="fornecedores.selecionado" ng-click="empCtrl.ativarExcluirLote(listaFornecedores)" ></td>					
+								<td>{{fornecedores.razaoSocial}}</td>
+								<td>{{fornecedores.nomeFantasia}}</td>	
+								<td>{{fornecedores.cnpj}}</td>			
+								<td><a  ng-click="empCtrl.apagarOutros(listaFornecedores)"><i class="glyphicon glyphicon-remove-circle"></i></a> 
+							</tr>
+							</tbody>
+							<tfoot>
+							<tr>
+								<th><input type="button" class="btn-danger" ng-if="ativadoExcluirLote"  value="excluir" name="apagar" ng-click="empCtrl.apagarOutros(listaOutros)"></th>
+							</tr>
+							</tfoot>
+				
+						</table>
+					</div>
+					</div>
 							
 					<div class="row ">
 						<div class="col-sm-3"></div>
