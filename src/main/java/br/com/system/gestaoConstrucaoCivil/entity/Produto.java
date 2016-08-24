@@ -27,10 +27,10 @@ public class Produto extends AbstractPersistable<Long> {
 	@Column(nullable = false)
 	private boolean ativo;
 	@ManyToOne
-	@JoinColumn(name = "id_unidade_medida", nullable = false)
+	@JoinColumn(name = "id_unidade_medida", nullable = true)
 	private UnidadeMedida unidadeMedida;
 	@ManyToOne
-	@JoinColumn(name = "id_categoria", nullable = false)
+	@JoinColumn(name = "id_categoria", nullable = true)
 	private Categoria categoria;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -38,6 +38,13 @@ public class Produto extends AbstractPersistable<Long> {
 	inverseJoinColumns = @JoinColumn(name = "id_fornecedor"))
 	private List<Fornecedor> fornecedores;
 
+	@Column(nullable = false)
+	private Integer quantidadeMaxima;
+	
+	@Column(nullable = false)
+	private Integer quantidadeMinima;
+	
+	
 	public String getCodigoBarra() {
 		return codigoBarra;
 	}
@@ -92,6 +99,22 @@ public class Produto extends AbstractPersistable<Long> {
 
 	public void setFornecedores(List<Fornecedor> fornecedores) {
 		this.fornecedores = fornecedores;
+	}
+
+	public Integer getQuantidadeMaxima() {
+		return quantidadeMaxima;
+	}
+
+	public void setQuantidadeMaxima(Integer quantidadeMaxima) {
+		this.quantidadeMaxima = quantidadeMaxima;
+	}
+
+	public Integer getQuantidadeMinima() {
+		return quantidadeMinima;
+	}
+
+	public void setQuantidadeMinima(Integer quantidadeMinima) {
+		this.quantidadeMinima = quantidadeMinima;
 	}
 	
 

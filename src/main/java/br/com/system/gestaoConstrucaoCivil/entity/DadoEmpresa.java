@@ -18,11 +18,11 @@ public class DadoEmpresa extends AbstractPersistable<Long>  {
 	
 	@Column(nullable = false,length = 50)
 	private String razaoSocial;
-	@Column(nullable = false,length = 50)
+	@Column(nullable = false,length = 50,unique = true)
 	private String nomeFantasia;
-	@Column(nullable = false,length = 20)
+	@Column(nullable = false,length = 20, unique = true)
 	private String cnpj;
-	@Column(nullable = false,length = 20)
+	@Column(nullable = false,length = 20, unique = true)
 	private String inscricaoEstadual;
 	@OneToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST} )
     @JoinColumn(name="id_endereco",nullable = false)

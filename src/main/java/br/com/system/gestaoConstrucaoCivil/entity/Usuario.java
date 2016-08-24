@@ -27,6 +27,8 @@ public class Usuario extends AbstractPersistable<Long>{
 	
 	@Column(nullable = false,length = 50)
 	private String nome;
+	@Column(nullable = false,length = 50)
+	private String login;
 	@Column(nullable = false,length = 40)
 	private String email;
 	@Column(nullable = false,length = 256)
@@ -43,6 +45,13 @@ public class Usuario extends AbstractPersistable<Long>{
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public String getLogin() {
+		return login;
+	}
+	public void setLogin(String login) {
+		this.login = login;
 	}
 	public String getEmail() {
 		return email;

@@ -32,9 +32,9 @@ public abstract class Pessoa implements Serializable{
 	@OneToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST})
 	@JoinColumn(name="id_endereco",nullable = false)
 	protected Endereco endereco;
-	@Column(nullable = false,length = 20)
+	@Column(nullable = false,length = 20,unique = true)
 	protected String rg;
-	@Column(nullable = false,length = 20)
+	@Column(nullable = false,length = 20,unique = true)
 	protected String cpf;
 	@Column(nullable = false,length = 15)
 	protected String telefoneFixo;
