@@ -2,8 +2,11 @@ package br.com.system.gestaoConstrucaoCivil.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -12,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import br.com.system.gestaoConstrucaoCivil.enuns.UnidadeMedidaEnum;
 
 @Entity
 @Table(name = "produto")
@@ -26,14 +31,13 @@ public class Produto extends AbstractPersistable<Long> {
 	private Double valorCompra;
 	@Column(nullable = false)
 	private boolean ativo;
-	@ManyToOne
-	@JoinColumn(name = "id_unidade_medida", nullable = true)
-	private UnidadeMedida unidadeMedida;
+	@Enumerated(EnumType.STRING)
+	private UnidadeMedidaEnum unidadeMedida;
 	@ManyToOne
 	@JoinColumn(name = "id_categoria", nullable = true)
 	private Categoria categoria;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(cascade = {CascadeType.MERGE ,CascadeType.PERSIST},fetch = FetchType.EAGER)
 	@JoinTable(name = "produtos_fornecedores", joinColumns = @JoinColumn(name = "id_produto"), 
 	inverseJoinColumns = @JoinColumn(name = "id_fornecedor"))
 	private List<Fornecedor> fornecedores;
@@ -76,12 +80,13 @@ public class Produto extends AbstractPersistable<Long> {
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
 	}
+    
 
-	public UnidadeMedida getUnidadeMedida() {
+	public UnidadeMedidaEnum getUnidadeMedida() {
 		return unidadeMedida;
 	}
 
-	public void setUnidadeMedida(UnidadeMedida unidadeMedida) {
+	public void setUnidadeMedida(UnidadeMedidaEnum unidadeMedida) {
 		this.unidadeMedida = unidadeMedida;
 	}
 
