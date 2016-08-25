@@ -3,6 +3,7 @@ app.factory('produtoService', function($rootScope, toastr, $http,$q){
 	
 	return{
 		produtoCreate: function(produto){
+			console.log(produto);
 			return $http.post('/rest/almoxarifado/cadastrarProduto', produto)
 			
 			.then(function(response){

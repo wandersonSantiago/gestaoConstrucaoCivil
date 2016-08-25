@@ -1,5 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.system.gestaoConstrucaoCivil.entity.UnidadeMedida;
+import br.com.system.gestaoConstrucaoCivil.enuns.UnidadeMedidaEnum;
 import br.com.system.gestaoConstrucaoCivil.service.UnidadeMedidaService;
 
 @RestController
@@ -21,11 +24,11 @@ public class UnidadeMedidaRestController {
 	 private UnidadeMedidaService unidadeMedidadService;
 	
 	 @RequestMapping(method = RequestMethod.GET, value="/listarUnidadeMedida")
-	 public ResponseEntity<Iterable<UnidadeMedida>> buscarUnidadeMedida() {	  
-	  System.out.println("lista ok");
-	  Iterable<UnidadeMedida> unidadeMedida = unidadeMedidadService.buscarTodos();
-	  return new ResponseEntity<Iterable<UnidadeMedida>>(unidadeMedida, HttpStatus.OK);
-	 }
+	 public ResponseEntity<Iterable<UnidadeMedidaEnum>> unidadeMedida() {
+
+	Iterable<UnidadeMedidaEnum> unidadeMedida = Arrays.asList(UnidadeMedidaEnum.values());
+	return new ResponseEntity<Iterable<UnidadeMedidaEnum>>(unidadeMedida, HttpStatus.OK);
+ }
 	 
 	 @RequestMapping(method = RequestMethod.POST,value="/cadastrarUnidadeMedida")
 	 public ResponseEntity salva(@RequestBody UnidadeMedida unidadeMedida,UriComponentsBuilder ucBuilder)

@@ -1,9 +1,10 @@
 app.controller('produtoController', function($scope,produtoService, $routeParams){
 	
 	var self = this;
-		$scope.listaFornecedores = [];
+		self.listaFornecedores = [];
 	
 	 self.cadastrarProduto = function(produto){
+		 self.produto.fornecedor = self.listaFornecedores;
 			 produtoService.produtoCreate(self.produto);
 			 self.produto = produto;
 	}
@@ -19,19 +20,17 @@ app.controller('produtoController', function($scope,produtoService, $routeParams
 	
 		//cria uma lista de fornecedores
 		self.adicionarFornecedores = function(){
-			$scope.listaFornecedores.push({
-				razaoSocial : self.fornecedor.dadoEmpresa.razaoSocial ,
-				nomeFantasia : self.fornecedor.dadoEmpresa.nomeFantasia ,
-				cnpj : self.fornecedor.dadoEmpresa.cnpj
+			self.listaFornecedores.push({
+				fornecedor : self.fornecedor.dadoEmpresa
 			});
-			console.log($scope.listaFornecedores);
-						fornecedor.value = "";
-						$scope.fornecedor = null;
+			console.log(self.listaFornecedores);
+			self.fornecedor = null;
 		}
 		
 		self.ativarExcluirLote = function(listaFornecedores){
-			$scope.listaFornecedores.filter(function(fornecedor){
-			if(listaFornecedores.selecionado){
+			console.log("ativado");
+			self.listaFornecedores.filter(function(fornecedores){
+			if(fornecedores.selecionado){
 				$scope.ativadoExcluirLote = true;
 			}
 			});
@@ -39,13 +38,11 @@ app.controller('produtoController', function($scope,produtoService, $routeParams
 			
 
 		//apagar outros empreendimentos, somente da lista de front
-		self.apagarFornecedores = function(fornecedor){
-				$scope.fornecedor = fornecedor.filter(function(outro){
-				if(!outro.fornecedor) return outro;
+		self.apagarFornecedores = function(listaFornecedores){
+			console.log("apagar");
+				self.listaFornecedores = listaFornecedores.filter(function(fornecedores){
+				if(!fornecedores.selecionado) return fornecedores;
 				$scope.ativadoExcluirLote = null;
 			});
-			
-			
 		}
-	
 });
