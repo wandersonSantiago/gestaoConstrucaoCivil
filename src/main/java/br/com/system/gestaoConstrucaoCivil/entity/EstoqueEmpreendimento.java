@@ -33,7 +33,7 @@ public class EstoqueEmpreendimento implements Serializable{
 	@Column(nullable = false)
 	private Integer quantidade;
 	
-	@Column(nullable = false)
+    @Column(nullable = true)
 	private String localizacao;
 	
 	@OneToOne
@@ -68,7 +68,7 @@ public class EstoqueEmpreendimento implements Serializable{
 	
 	public List<Produto> getProduto() {
 		return produto;
-	}
+	}	
 	public void setProduto(List<Produto> produto) {
 		this.produto = produto;
 	}
@@ -102,6 +102,6 @@ public class EstoqueEmpreendimento implements Serializable{
 			return false;
 		return true;
 	}
-	
+    
 	
 }
