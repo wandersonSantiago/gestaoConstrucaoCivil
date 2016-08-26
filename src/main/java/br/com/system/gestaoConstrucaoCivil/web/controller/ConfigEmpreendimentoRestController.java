@@ -23,7 +23,7 @@ public class ConfigEmpreendimentoRestController {
     @Autowired
     ConfigEmpreendimentoService configEmpreeendimentoService;
      
-     
+    /* 
     @RequestMapping(value = "/cadastrarConfigEmpreendimentoEdificio", method = RequestMethod.POST)
     public ResponseEntity salvarConfigEmpreendimentoEdificio(@RequestBody ConfigEmpreendimentoEdificio configEmpreendimentoEdificio, UriComponentsBuilder ucBuilder) {
         
@@ -36,7 +36,7 @@ public class ConfigEmpreendimentoRestController {
         headers.setLocation(ucBuilder.path("rest/servico/cadastrarConfigEmpreendimentoEdificio/{configEmpreendimento}").buildAndExpand(configEmpreendimentoEdificio.getId()).toUri());
      
         return new ResponseEntity(headers, HttpStatus.CREATED);
-    }
+    }*//*
     @RequestMapping(value = "/cadastrarConfigEmpreendimentoCasa", method = RequestMethod.POST)
     public ResponseEntity salvarConfigEmpreendimentoCasa(@RequestBody ConfigEmpreendimentoCasa configEmpreendimentoCasa, UriComponentsBuilder ucBuilder) {
         configEmpreeendimentoService.salvarOuEditar(configEmpreendimentoCasa);
@@ -45,7 +45,7 @@ public class ConfigEmpreendimentoRestController {
     
         return new ResponseEntity(headers, HttpStatus.CREATED);
     }
-     
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/listarConfigEmpreendimento")
     public ResponseEntity<Iterable<ConfigEmpreendimento>> buscarConfigEmpreendimento() {
  

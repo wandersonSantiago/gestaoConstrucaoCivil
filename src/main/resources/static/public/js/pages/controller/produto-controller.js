@@ -4,7 +4,7 @@ app.controller('produtoController', function($scope,produtoService, $routeParams
 		self.listaFornecedores = [];
 	
 	 self.cadastrarProduto = function(produto){
-		 self.produto.fornecedor = self.listaFornecedores;
+		 self.produto.fornecedores = self.listaFornecedores;
 			 produtoService.produtoCreate(self.produto);
 			 self.produto = produto;
 	}
@@ -24,7 +24,7 @@ app.controller('produtoController', function($scope,produtoService, $routeParams
 				fornecedor : self.fornecedor.dadoEmpresa
 			});
 			console.log(self.listaFornecedores);
-			self.fornecedor = null;
+			self.fornecedores = null;
 		}
 		
 		self.ativarExcluirLote = function(listaFornecedores){
