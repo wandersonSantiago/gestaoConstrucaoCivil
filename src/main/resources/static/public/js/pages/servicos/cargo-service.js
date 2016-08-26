@@ -3,7 +3,7 @@ app.factory('cargoService', function($http,$q , $rootScope, toastr)
 
 	 return {
 		 salva: function(cargo){
-			 return $http.post('rest/recursosHumanos/salva', cargo)
+			 return $http.post('rest/recursosHumanos/cargo/salva', cargo)
 				.then(function(response){
 					sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 					return response.data;
@@ -15,7 +15,7 @@ app.factory('cargoService', function($http,$q , $rootScope, toastr)
 			
 			
 			lista: function(){
-				return $http.get('rest/recursosHumanos/lista')
+				return $http.get('rest/recursosHumanos/cargo/lista')
 				.then(function(response){
 					return response.data;
 				},function(errResponse){
@@ -24,7 +24,7 @@ app.factory('cargoService', function($http,$q , $rootScope, toastr)
 			},
 			
 			buscaPorId: function(param){
-				return $http.get('rest/recursosHumanos/buscaPorId/'+param)
+				return $http.get('rest/recursosHumanos/cargo/buscaPorId/'+param)
 				.then(function(response){
 					return response.data;
 				},function(errResponse){
@@ -34,7 +34,7 @@ app.factory('cargoService', function($http,$q , $rootScope, toastr)
 			},
 			
 			altera: function(cargo){
-				return $http.put('rest/recursosHumanos/altera', cargo)
+				return $http.put('rest/recursosHumanos/cargo/altera', cargo)
 				.then(function(response){
 					sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 					return response.data;

@@ -14,7 +14,7 @@ import br.com.system.gestaoConstrucaoCivil.entity.Cargo;
 import br.com.system.gestaoConstrucaoCivil.service.CargoService;
 
 @RestController
-@RequestMapping("/rest/recursosHumanos")
+@RequestMapping("/rest/recursosHumanos/cargo")
 public class CargoRestController implements ICargo {
 
 	@Autowired
