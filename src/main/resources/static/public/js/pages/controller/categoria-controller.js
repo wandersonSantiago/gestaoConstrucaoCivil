@@ -5,40 +5,43 @@ app.controller('categoriaController', function($scope, categoriaService, $routeP
 	
 	var idCategoria = $routeParams.idCategoria;
 	
-	 self.createCategoria = function(categoria){
-		 categoriaService.categoriaCreate(self.categoria);
-		 self.categoria = categoria;
+	 self.salva = function(categoria){
+		 categoriaService.salva(self.categoria).
+			then(function(t){
+				self.categoria = null;
+				}, function(errResponse){
+			});
 	}
 	 
-	 self.alterarCategoria = function(categoria){
-		 categoriaService.updateCategoria(self.categoria);
-		 self.categoria = categoria;
+	 self.altera = function(categoria){
+		 categoriaService.altera(self.categoria).
+			then(function(t){
+				self.categoria = null;
+				}, function(errResponse){
+			});
 	 }
 	 
 	 
-	 self.buscarCategoria = function(){
-		 categoriaService.categoriaFindAll().
+	 self.lista = function(){
+		 categoriaService.lista().
 			then(function(t){
 				self.categorias = t;
 				}, function(errResponse){
-				toastr.error('Erro ao tentar buscar Categoria');
 			});
 		};
 		
-		self.buscarCategoriaPorId = function(id){
+		self.buscaPorId = function(id){
 			if(!id)return;
-			categoriaService.categoriaFindOne(id).
+			categoriaService.buscaPorId(id).
 			then(function(p){
 				self.categoria = p;
 				}, function(errResponse){
-				toastr.error('Erro ao buscar pacote de serviço');
-			});
+		});
 		};
 		
 	
 		if(idCategoria){
-			
-			self.buscarCategoriaPorId(idCategoria);
+			self.buscaPorId(idCategoria);
 		}
 		
 });

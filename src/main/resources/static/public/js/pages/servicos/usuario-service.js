@@ -2,48 +2,43 @@ app.factory('usuarioService', function($rootScope, toastr, $http,$q){
 	
 	
 	return{
-		usuarioCreate: function(usuario){
-			return $http.post('/rest/usuario/cadastrarUsuario', usuario)
-			
+		
+		salva: function(usuario){
+			return $http.post('/rest/usuario/salva', usuario)
 			.then(function(response){
-			
-				toastr.info('usuario cadastrado');
-				
+				sweetAlert({ timer : 3000, text :"Salvo com sucesso",  type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
-			
 			},function(errResponse){
-				console.error('Erro ao tentar gravar o usuario');
-				toastr.error('usuario não cadastrado');
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
-				
 			});
 		},
-		usuarioFindAll: function(){
-			return $http.get('rest/usuario/listarUsuario')
+		lista: function(){
+			return $http.get('rest/usuario/lista')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				console.error('Erro ao tentar buscar os usuario');
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
 		
-		usuarioFindOne: function(param){
-			return $http.get('rest/usuario/listarUsuarioId/'+param)
+		buscaPorId: function(param){
+			return $http.get('rest/usuario/buscaPorId/'+param)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				console.error('Erro ao tentar Buscar Usuario');
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
-		usuarioUpdate: function(usuario){
-			return $http.put('rest/usuario/alterarUsuario', usuario)
+		altera: function(usuario){
+			return $http.put('rest/usuario/altera', usuario)
 			.then(function(response){
-				toastr.info('usuario Alterado empresa');
+				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				toastr.error('Erro ao tentar Alterar usuario');
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},

@@ -1,0 +1,138 @@
+<meta charset="UTF-8">
+<br>
+<br>
+<div class="generic-container"	ng-controller="configEmpreendimentoController as configCtrl">
+	<div class="box box-primary">
+		<div class="box-header">
+			<span class="lead"> Configuração Empreendimento </span>
+		</div>
+		<div class="panel-body">
+		<br>
+			<div class="container col-sm-12 ">
+				<form role="form-vertical"
+					ng-submit="configCtrl.salvaConfigEmpreendimento()">
+
+					<div class="row" >
+						<label class="col-sm-2 control-label" for="empreendimento">Empreendimento</label>
+						<div class="col-sm-5" ng-init="configCtrl.empreendimentoSemConfiguracaoLista()">
+							<select class="form-control select2"
+								ng-click="configCtrl.verificar()"
+								ng-model="configCtrl.configEmpreendimento.empreendimento"
+								ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.tipoEmpreendimento for listarEmpreendimentos in empreendimentoSemConfiguracao"
+								style="width: 100%;">
+								<option  value="">--selecione--</option>
+							</select>
+						</div>
+					</div>
+					
+					<br>
+					
+					<div class="row" ng-if="verificaTipoCasa">
+						<label class="col-sm-2 control-label" for="casa">Casas</label>
+						<div class="col-sm-2">
+							<input type="number" interger class="form-control" id="casa"
+								ng-model="configCtrl.configEmpreendimentoCasa.quantidadeCasa"
+								title="quantidade de residencias no empreendimento"
+								required="required">
+						</div>
+
+						<label class="col-sm-2 control-label" for="andarPorCasa">Andar</label>
+						<div class="col-sm-2">
+							<input type="number" class="form-control" id="andarPorCasa"
+								ng-model="configCtrl.configEmpreendimentoCasa.quantidadeAndarPorCasa"
+								title="quantidade de andar na residencia" required="required" />
+						</div>
+
+					</div>
+
+					<div class="row" ng-if="verificaTipoEdificio">
+						<label class="col-sm-2 control-label" for="edificio">Edificio</label>
+						<div class="col-sm-2">
+							<input type="number" class="form-control" id="edificio"
+								ng-model="configCtrl.configEmpreendimentoEdificio.quantidadeTorre"
+								title="quantidade de torres no empreendimento"
+								required="required">
+						</div>
+
+						<label class="col-sm-2 control-label" for="andar">Andar</label>
+						<div class="col-sm-2">
+							<input type="number" class="form-control" id="andar"
+								ng-model="configCtrl.configEmpreendimentoEdificio.quantidadeAndarPorTorre"
+								title="quantidade de andar no edificio" required="required">
+						</div>
+
+						<label class="col-sm-2 control-label" for="apartamento">Apartamento</label>
+						<div class="col-sm-2">
+							<input type="number" class="form-control" id="apartamento"
+								ng-model="configCtrl.configEmpreendimentoEdificio.quantidadeApartamentoPorAndar"
+								title="quantidade de apartamento por andar" required="required">
+						</div>
+					</div>
+					<br> <br>
+					<div class="row">
+						<label class="col-sm-2 control-label" for="outros">Outros</label>
+						<div class="col-sm-5">
+							<input class="form-control" ng-model="descricaoOutro" type="text" id="descricaoOutros">
+						</div>
+						<div class="col-sm-2">
+							<input class="btn btn-lg btn-primary btn-block btn-signin"
+								ng-click="configCtrl.adicionarOutros()" value="adicionar"
+								title="pressione para adicionar a lista" type="button" ng-disabled="!descricaoOutro" >
+						</div>
+					</div>
+					
+					<br> <br>
+
+					<div class="panel panel-primary">
+						<div class="panel-heading">Lista de Outros</div>
+						<div class="panel-body">
+							<table class="table table-hover ">
+								<thead>
+									<tr>
+										<th>Selecionar</th>
+										<th>Descrição Empreendimento</th>
+										<th>Excluir</th>
+
+									</tr>
+								</thead>
+								<tbody ng-repeat="outro in listaOutros" ng-model="selecionado">
+									<tr>
+										<td><input type="checkbox" ng-model="outro.selecionado"
+											ng-click="configCtrl.ativarExcluirLote(listaOutros)"></td>
+										<td>{{outro.descricao}}</td>
+
+										<td><a ng-click="empCtrl.apagarOutros(listaOutros)"><i
+												class="glyphicon glyphicon-remove-circle"></i></a>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										<th><input type="button" class="btn-danger"
+											ng-if="ativadoExcluirLote" value="excluir" name="apagar"
+											ng-click="configCtrl.apagarOutros(listaOutros)"></th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+					
+					<br>
+					
+					<div class="row ">
+						<div class="col-sm-3"></div>
+						<div class="col-sm-3">
+							<button type="submit" name="submit" ng-disabled="!configCtrl.configEmpreendimento.empreendimento "
+								class="btn btn-lg btn-primary btn-block btn-signin">Cadastrar</button>
+						</div>
+						<div class="col-sm-3">
+
+							<button type="submit" name="submit" 
+								class="btn btn-lg btn-danger btn-block btn-signin">Cancelar</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="tablecontainer"></div>
+		</div>
+	</div>
+	</div>

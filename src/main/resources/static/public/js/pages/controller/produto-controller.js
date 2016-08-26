@@ -3,18 +3,30 @@ app.controller('produtoController', function($scope,produtoService, $routeParams
 	var self = this;
 		self.listaFornecedores = [];
 	
-	 self.cadastrarProduto = function(produto){
+	 self.salva = function(produto){
 		 self.produto.fornecedores = self.listaFornecedores;
-			 produtoService.produtoCreate(self.produto);
-			 self.produto = produto;
-	}
+			 produtoService.salva(self.produto).
+				then(function(response){
+					self.produto = null;
+					self.listaFornecedores = null;
+					}, function(errResponse){
+				});
+	 }
+	 self.altera = function(produto){
+		 self.produto.fornecedores = self.listaFornecedores;
+			 produtoService.altera(self.produto).
+				then(function(response){
+					self.produto = null;
+					self.listaFornecedores = null;
+					}, function(errResponse){
+				});
+	 }
 	 
-	 self.buscarProduto = function(){
-		 produtoService.produtoFindAll().
+	 self.lista = function(){
+		 produtoService.lista().
 			then(function(t){
 				self.produto = t;
 				}, function(errResponse){
-				toastr.error('Erro ao tentar buscar produto');
 			});
 		};
 	

@@ -16,28 +16,36 @@ import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 import br.com.system.gestaoConstrucaoCivil.service.PacoteServicoService;
 
 @RestController
-@RequestMapping("/rest/pacoteServico")
+@RequestMapping("/rest/servicos/pacotes")
 public class PacoteServicoRestController {
 
 	@Autowired
 	 private PacoteServicoService pacoteServicoService;
 	
-	 @RequestMapping(method = RequestMethod.GET, value="/listarPacoteServico")
+	 @RequestMapping(method = RequestMethod.GET, value="/lista")
 	 public ResponseEntity<Iterable<PacoteServico>> buscarPacoteServico() {	  
 	  
 	  Iterable<PacoteServico> pacoteServico = pacoteServicoService.buscarTodos();
 	  return new ResponseEntity<Iterable<PacoteServico>>(pacoteServico, HttpStatus.OK);
 	 }
 	 
-	 @RequestMapping(value="/cadastrarPacoteServico", method = RequestMethod.POST)
+	 @RequestMapping(value="/salva", method = RequestMethod.POST)
 	 public ResponseEntity salva(@RequestBody PacoteServico pacoteServico,UriComponentsBuilder ucBuilder)
 	 {	 pacoteServicoService.salvarOuEditar(pacoteServico);
 		 HttpHeaders headers =new HttpHeaders();
-		 headers.setLocation(ucBuilder.path("/rest/pacoteServico/cadastrarPacoteServico/{id}").buildAndExpand(pacoteServico.getId()).toUri());
+		 headers.setLocation(ucBuilder.path("/rest/servicos/pacotes/salva/{id}").buildAndExpand(pacoteServico.getId()).toUri());
 		 return new ResponseEntity(headers, HttpStatus.CREATED);
 	 }
 	 
-	 @RequestMapping(value = "/listarPacoteServicoId/{id}", method = RequestMethod.GET)
+	 @RequestMapping(value="/altera", method = RequestMethod.PUT)
+	 public ResponseEntity altera(@RequestBody PacoteServico pacoteServico,UriComponentsBuilder ucBuilder)
+	 {	 pacoteServicoService.salvarOuEditar(pacoteServico);
+		 HttpHeaders headers =new HttpHeaders();
+		 headers.setLocation(ucBuilder.path("/rest/servicos/pacotes/altera/{id}").buildAndExpand(pacoteServico.getId()).toUri());
+		 return new ResponseEntity(headers, HttpStatus.CREATED);
+	 }
+	 
+	 @RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
 		public ResponseEntity<PacoteServico> buscarPacoteServicoPorId(@PathVariable Long id) {
 			return new ResponseEntity<PacoteServico>(pacoteServicoService.buscarPacoteServicoPorId(id), HttpStatus.OK);
 		}

@@ -14,26 +14,33 @@ import br.com.system.gestaoConstrucaoCivil.entity.Produto;
 import br.com.system.gestaoConstrucaoCivil.service.ProdutoService;
 
 @RestController
-@RequestMapping("/rest/almoxarifado")
+@RequestMapping("/rest/almoxarifado/produto")
 public class ProdutoRestController {
 
 	 @Autowired
 	 private ProdutoService produtoService;
 	
 	
-	 @RequestMapping(method = RequestMethod.GET, value="/listarProduto")
+	 @RequestMapping(method = RequestMethod.GET, value="/lista")
 	 public ResponseEntity<Iterable<Produto>> buscarProduto() {	  
 	  
 	  Iterable<Produto> produto = produtoService.buscarTodos();
 	  return new ResponseEntity<Iterable<Produto>>(produto, HttpStatus.OK);
 	 }
 	 
-	 @RequestMapping(value="/cadastrarProduto", method = RequestMethod.POST)
+	 @RequestMapping(value="/salva", method = RequestMethod.POST)
 	 public ResponseEntity salva(@RequestBody Produto produto,UriComponentsBuilder ucBuilder)
-	 {
-		 produtoService.salvarOuEditar(produto);
+	 { produtoService.salvarOuEditar(produto);
 		 HttpHeaders headers = new HttpHeaders();
-		 headers.setLocation(ucBuilder.path("/rest/almoxarifado/cadastrarProduto/{id}").buildAndExpand(produto.getId()).toUri());
+		 headers.setLocation(ucBuilder.path("/rest/almoxarifado/produto/salva/{id}").buildAndExpand(produto.getId()).toUri());
+		 return new ResponseEntity(headers, HttpStatus.CREATED);
+	 }
+	 
+	 @RequestMapping(value="/altera", method = RequestMethod.PUT)
+	 public ResponseEntity altera(@RequestBody Produto produto,UriComponentsBuilder ucBuilder)
+	 { produtoService.salvarOuEditar(produto);
+		 HttpHeaders headers = new HttpHeaders();
+		 headers.setLocation(ucBuilder.path("/rest/almoxarifado/produto/altera/{id}").buildAndExpand(produto.getId()).toUri());
 		 return new ResponseEntity(headers, HttpStatus.CREATED);
 	 }
 }

@@ -5,48 +5,45 @@ app.factory('prestadoraServicoService', function($rootScope, toastr, $http,$q){
 		
 		
 	
-		prestadoraServicoCreate: function(prestadoraServico){
-			return $http.post('/rest/prestadoraServico/cadastrarPrestadoraServico', prestadoraServico)
+		salva: function(prestadoraServico){
+			return $http.post('/rest/empreedimento/prestadoraServico/salva', prestadoraServico)
 				.then(function(response){
-						toastr.info('prestadora de serviço cadastrado');
+					sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 						return response.data;
 				},function(errResponse){
-					toastr.error('errro ao cadastrar prestadora de serviço');
+					sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
 					return $q.reject(errResponse);
 				});
 		},
 		
 		
-		prestadoraServicoFindAll: function(){
-			return $http.get('rest/prestadoraServico/listaPrestadoraServico')
+		lista: function(){
+			return $http.get('rest/empreendimento/prestadoraServico/lista')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				toastr.info('erro ao buscar prestadoras de serviços');
-
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
 		
-		prestadoraServicoFindOne: function(param){
-			return $http.get('rest/prestadoraServico/buscaPrestadoraServicoPorId/'+param)
+		buscaPorId: function(param){
+			return $http.get('rest/empreendimento/prestadoraServico/buscaPorId/'+param)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				toastr.error('erro ao buscar prestadora Sevico');
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
 		
-		
-		
-		prestadoraServicoUpdate: function(prestadoraServico){
-			return $http.put('/rest/prestadoraServico/alterarPrestadoraServico', prestadoraServico)
+		altera: function(prestadoraServico){
+			return $http.put('/rest/empreendimento/prestadoraServico/altera', prestadoraServico)
 			.then(function(response){
-				toastr.info('Alterado prestadora serviço');
+				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				toastr.error('Erro ao tentar prestadora serviço');
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},

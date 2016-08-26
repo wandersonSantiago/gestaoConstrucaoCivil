@@ -3,51 +3,51 @@ app.factory('adminSistemaService', function($rootScope, toastr, $http, $q){
 	
 	return{
 		
-		buscarEmpresa: function(param){
+		buscaPorId: function(param){
 			console.log("service admin" );
-			return $http.get('rest/adminSistema/listarEmpresaId/'+param)
+			return $http.get('rest/empresaContratada/buscaPorId/'+param)
 			.then(function(response){
+				sweetAlert({ timer : 3000, text :"falha de conexão", type : "error", width: 300, higth: 100, padding: 20});
 				return response.data;
 			});
 			
 		},	
-		empresaFindAll: function(){
-			return $http.get('rest/adminSistema/listarEmpresa')
+		lista: function(){
+			return $http.get('rest/empresaContratada/lista')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				toastr.error('Erro ao Buscar Empresas');
-				console.error('Erro ao tentar buscar Empresa');
+				sweetAlert({ timer : 3000,  text :"falha de conexão", type : "error", width: 300, higth: 100, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
 				
-		empresaCreate: function(empresa){
-			return $http.post('rest/adminSistema/cadastrarEmpresa', empresa)
+		salva: function(empresa){
+			return $http.post('rest/empresaContratada/salva', empresa)
 			.then(function(response){
-				toastr.info('Empresa cadastrado');
+				sweetAlert({ timer : 3000,  text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				toastr.error('Empresa não cadastrado');
+				sweetAlert({ timer : 3000,  text :"falha na conexão", type : "error", width: 300, higth: 100, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
-		empresaUpdate: function(empresa){
-			return $http.put('/rest/adminSistema/alterarEmpresa',empresa)
+		altera: function(empresa){
+			return $http.put('/rest/empresaContratada/altera',empresa)
 			.then(function(response){
-				toastr.info('Empresa  Alterado');
+				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				toastr.error('Empresa não Alterado');
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
-		empresaDelete: function(id){
-			return $http.delete('/rest/adminSistema/deletarEmpresa' +id)
+		exclui: function(id){
+			return $http.delete('/rest/empresaContratada/exclui' +id)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				console.error('Erro ao tentar apagar empresa');
+				sweetAlert({ timer : 3000,  text :"falha na conexão", type : "error", width: 300, higth: 100, padding: 20});
 				return $q.reject(errResponse);
 			});
 		}

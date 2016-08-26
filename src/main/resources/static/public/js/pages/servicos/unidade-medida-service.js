@@ -1,29 +1,14 @@
-app.factory('unidadeMedidaService', function($rootScope, toastr, $http,$q){
+app.factory('unidadeMedidaService', function($rootScope,  $http,$q){
 	
 	
 	return{
-		unidadeMedidaCreate: function(unidadeMedida){
-			return $http.post('/rest/almoxarifado/cadastrarUnidadeMedida', unidadeMedida)
-			
-			.then(function(response){
-				console.log("teste");
-				toastr.info('unidade de medida cadastrado');
-				
-				return response.data;
-			
-			},function(errResponse){
-				console.error('Erro ao tentar gravar Unidade Medida');
-				toastr.error('unidade de medida não cadastrado');
-				return $q.reject(errResponse);
-				
-			});
-		},
-		unidadeMedidaFindAll: function(){
-			return $http.get('rest/almoxarifado/listarUnidadeMedida')
+		
+		lista: function(){
+			return $http.get('rest/almoxarifado/unidadeMedida/lista')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				console.error('Erro ao tentar buscar cargo');
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},

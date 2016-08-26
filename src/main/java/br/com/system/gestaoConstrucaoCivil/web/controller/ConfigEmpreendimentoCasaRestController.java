@@ -18,24 +18,24 @@ import br.com.system.gestaoConstrucaoCivil.service.ConfigEmpreendimentoCasaServi
 
 
 @RestController
-@RequestMapping("/rest/servico")
+@RequestMapping("/rest/empreendimento/configuracao")
 public class ConfigEmpreendimentoCasaRestController {
 
 	@Autowired
     ConfigEmpreendimentoCasaService configEmpreeendimentoCasaService;
 	
 	
-	@RequestMapping(value = "/cadastrarConfigEmpreendimentoCasa", method = RequestMethod.POST)
+	@RequestMapping(value = "/salvaCasa", method = RequestMethod.POST)
     public ResponseEntity salvarConfigEmpreendimentoCasa(@RequestBody ConfigEmpreendimentoCasa configEmpreendimentoCasa, UriComponentsBuilder ucBuilder) {
         
 		configEmpreeendimentoCasaService.salvarOuEditar(configEmpreendimentoCasa);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("rest/servico/cadastrarConfigEmpreendimentoCasa/{configEmpreendimento}").buildAndExpand(configEmpreendimentoCasa.getId()).toUri());
+        headers.setLocation(ucBuilder.path("rest/empreendimento/configuracao/salvaCasa/{configEmpreendimento}").buildAndExpand(configEmpreendimentoCasa.getId()).toUri());
     
         return new ResponseEntity(headers, HttpStatus.CREATED);
     }
 	
-	@RequestMapping(value = "/listarConfiEmpreendimentoCasa/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/listaCasa/{id}", method = RequestMethod.GET)
     public ResponseEntity<ConfigEmpreendimentoCasa> buscarConfigEmpreendimentoCasaPorId(@PathVariable Long id) {
         return new ResponseEntity<ConfigEmpreendimentoCasa>(configEmpreeendimentoCasaService.buscarPorId(id), HttpStatus.OK);
     }

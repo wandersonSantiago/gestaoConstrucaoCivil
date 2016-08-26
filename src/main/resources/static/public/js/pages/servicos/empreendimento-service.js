@@ -3,137 +3,55 @@ app.factory('empreendimentoService', function($rootScope, toastr, $http){
 	
 	return{
 		
-		tipoEmpreendimentoFindAll: function(){
-			return $http.get('rest/empreendimento/tiposEmpreendimentos')
+						
+		lista: function(){
+			return $http.get('rest/empreendimento/empreendimento/lista')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				toastr.error('erro ao buscar tipo de empreendimento');
-				
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
-	
-		empreendimentoSemConfiguracaoFindAll: function(){
-			return $http.get('rest/empreendimento//listaEmpreendimentoSemConfiguracao')
+		salva: function(empreendimento){
+			return $http.post('rest/empreendimento/empreendimento/salva', empreendimento)
 			.then(function(response){
+				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				toastr.error('Erro ao buscar empreendimento sem configuração');
-				
-				return $q.reject(errResponse);
-			});
-		},
-		
-		empreendimentoFindAll: function(){
-			return $http.get('rest/empreendimento/listaEmpreendimento')
-			.then(function(response){
-				return response.data;
-			},function(errResponse){
-				toastr.error('Erro ao buscar empreendimento');
-			
-				return $q.reject(errResponse);
-			});
-		},
-		empreendimentoCreate: function(empreendimento){
-			console.log("passei aqui");
-			return $http.post('rest/empreendimento/cadastrarEmpreendimento', empreendimento)
-			
-			.then(function(response){
-				console.log("empreendimento gravado");
-				toastr.info('Empreendimento cadastrado');
-				
-				return response.data;
-			
-			},function(errResponse){
-				console.error('Erro ao tentar gravar empreendimento');
-				toastr.error('Empreendimento não cadastrado');
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
 				
 			});
 		},
 		
-		configEmpreendimentoEdificioCreate: function(configEmpreendimentoEdificio){
 		
-				return $http.post('rest/servico/cadastrarConfigEmpreendimentoEdificio', configEmpreendimentoEdificio)
-				.then(function(response){
-				console.log(configEmpreendimentoEdificio);
-			
-				
-				toastr.info('Empreendimento Edificio cadastrado');
-				
-				return response.data;
-			
-			},function(errResponse){
-				
-				toastr.error('Empreendimento Edificio não cadastrado');
-				return $q.reject(errResponse);
-				
-			});
-		},
-		
-		configEmpreendimentoCasaCreate: function(configEmpreendimentoCasa){
-			
-			return $http.post('rest/servico/cadastrarConfigEmpreendimentoCasa', configEmpreendimentoCasa)
-			.then(function(response){
-		
-			console.log(configEmpreendimentoCasa);
-			
-			toastr.info('Empreendimento Casa cadastrado');
-			
-			return response.data;
-		
-		},function(errResponse){
-			
-			toastr.error('Empreendimento Casa não cadastrado');
-			return $q.reject(errResponse);
-			
-		});
-	},
-	
-		configEmpreendimentoOutrosCreate: function( listaOutros){
-			console.log("passei aqui");
-			console.log(listaOutros);
-		
-			return $http.post('rest/servico/cadastrarConfigEmpreendimentoOutros', listaOutros)
-			.then(function(response){
-				
-				//toastr.info('Empreendimento Outros cadastrado');
-				
-				return response.data;
-			
-			},function(errResponse){
-			
-				toastr.info('Empreendimento não cadastrado Outros');
-				return $q.reject(errResponse);
-				
-			});
-		},
-		empreendimentoFindOne: function(param){
-			return $http.get('rest/empreendimento/listarEmpreendimentoId/'+param)
+		buscaPorId: function(param){
+			return $http.get('rest/empreendimento/empreendimento/buscaPorId/'+param)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				console.error('Erro ao tentar Buscar empreendimento');
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
-		empreendimentoUpdate: function(empreendimento){
-			return $http.put('rest/empreendimento/alterarEmpreendimento', empreendimento)
+		altera: function(empreendimento){
+			return $http.put('rest/empreendimento/empreendimento/altera', empreendimento)
 			.then(function(response){
-				toastr.info('empreendimento Alterado empresa');
+				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				toastr.error('Erro ao tentar Alterar empresa');
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
-		empreendimentoDelete: function(id){
-			return $http.delete('/rest/adminSistema/deletarEmpresa' +id)
+		exclui: function(id){
+			return $http.delete('/rest/empreendimento/empreendimento/exclui' +id)
 			.then(function(response){
+				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				console.error('Erro ao tentar apagar empresa');
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
 			});
 		}

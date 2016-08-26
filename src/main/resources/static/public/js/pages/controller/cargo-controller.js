@@ -6,35 +6,41 @@ app.controller('cargoController', function($scope, cargoService, $routeParams){
 	
 	
 	
-	 self.createCargo = function(cargo){
-		cargoService.cargoCreate(self.cargo);
-		self.cargo = cargo;
+	 self.salva = function(cargo){
+		cargoService.salva(self.cargo).
+		then(function(c){
+			self.cargo = null;
+			}, function(errResponse){
+		});
 	}
 	 
-	 self.updateCargo = function(cargo){
-			cargoService.cargoUpdate(self.cargo);
-			self.cargo = cargo;
+	 self.altera = function(cargo){
+			cargoService.altera(self.cargo).
+			then(function(c){
+				self.cargo = null;
+				}, function(errResponse){
+			});
 		}
 	 
-	 self.buscarCargos = function(){
-		 cargoService.cargoFindAll().
+	 self.lista = function(){
+		 cargoService.lista().
 			then(function(c){
 				$scope.cargos = c;
 				}, function(errResponse){
-				toastr.error('Erro ao tentar buscar cargo');
+			
 			});
 		};
-		self.buscarCargoPorId = function(id){
+		self.buscaPorId = function(id){
 			if(!id)return;
-			 cargoService.cargoFindOne(id).
+			 cargoService.buscaPorId(id).
 				then(function(c){
 					self.cargo = c;
 					}, function(errResponse){
-					toastr.error('Erro ao tentar buscar cargo');
+				
 				});
 			};
 			if(idCargo){
-				self.buscarCargoPorId(idCargo);
+				self.buscaPorId(idCargo);
 			}
 		 
 	

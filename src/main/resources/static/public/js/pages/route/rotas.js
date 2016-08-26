@@ -14,218 +14,171 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 		templateUrl : "views/login.html"
 	})
 
-	
+//==================================================================================	
 //ROTAS ADMIN SISTEMA
 	
-				//CADASTRAR
-	.when('/cadastrarEmpresa', {
-		templateUrl : "views/pages/adminSistema/cadastrar/cadastrarEmpresa.html",
-	//	controller : "adminSistemaController",
+	//EMPRESA CONTRATADA
+	
+	.when('/empresaContratada/cadastrar', {
+		templateUrl : "views/pages/empresaContratada/cadastrar.html",
 		
 	})
 	
-	.when('/cadastrarAdminEmpresa', {
-		templateUrl : "views/pages/adminSistema/cadastrar/cadastrarAdmiEmpresa.html",
-	//	controller : "adminSistemaController",
+	.when('/empresaContratada/editar/:idEmpresa', {
+		templateUrl : "views/pages/empresaContratada/editar.html",
 	})
-	
-				//LISTAR
-	.when('/listaAdminEmpresa', {
-		templateUrl : "views/pages/adminSistema/lista/listaAdminEmpresa.html",
-	//	controller : "adminSistemaController",
+					
+	.when('/empresaContratada/lista', {
+		templateUrl : "views/pages/empresaContratada/lista.html",
+
 	})
-	
 				
-	.when('/listaEmpresa', {
-		templateUrl : "views/pages/adminSistema/lista/listaEmpresa.html",
-	//	controller : "adminSistemaController",
-	})
-				//EDITAR
-	
-	.when('/editarEmpresa/:idEmpresa', {
-		templateUrl : "views/pages/adminSistema/editar/editarEmpresa.html",
-	//	controller : "adminSistemaController",
-	})
-			
-		//CONFIGURAÇÕES
-	
-	
-			/*	//CADASTRAR
-	
-	.when('/cadastrarTipoEmpreendimento', {
-		templateUrl : "views/pages/adminSistema/configuracao/cadastrar/cadastrarTipoEmpreendimento.html",
-	//	controller : "tipo-empreendimento-controller.js",
-	})
-	
-				//LISTAR
-	.when('/listaTipoEmpreendimento', {
-		templateUrl : "views/pages/adminSistema/configuracao/listar/listaTipoEmpreendimento.html",
-		//controller : "tipo-empreendimento-controller.js",
-	})*/
-	
-	
+//===========================================================================================	
 	
 //ROTAS ADMINISTRADOR EMPRESA
 	
-			//CADASTRAR
-	.when('/cadastrarEmpreendimento', {
-		templateUrl : "views/pages/adminEmpresa/cadastrar/cadastrarEmpreendimento.html",
-	//	controller : "empreendimento-controller.js",
-			
+	//EMPREENDIMENTO
+	.when('/empreendimento/empreendimento/cadastrar', {
+		templateUrl : "views/pages/empreendimento/empreendimento/cadastrar.html",
+})
+	.when('/empreendimento/empreendimento/editar/:idEmpreendimento',{
+		templateUrl : "views/pages/empreendimento/empreendimento/editar.html",
+	})
+	.when('/empreendimento/empreendimento/lista', {
+		templateUrl : "views/pages/empreendimento/empreendimento/lista.html",
+	})
+	.when('/empreendimento/empreendimento/vizualizar/:idEmpreendimento',{
+		templateUrl : "views/pages/empreendimento/empreendimento/vizualizar.html",
 	})
 	
-	.when('/cadastrarPrestadoraServico', {
-		templateUrl : "views/pages/adminEmpresa/cadastrar/cadastrarPrestadoraDeServico.html",
-	//	controller : "empreendimento-controller.js",
-			
+	//CONFIGURAÇÃO EMPREENDIMENTO
+	
+	.when('/empreendimento/configuracao/cadastrar',{
+		templateUrl : "views/pages/empreendimento/configuracao/cadastrar.html",
+	})
+	.when('/empreendimento/configuracao/editar/:idConfigEmpreendimento',{
+		templateUrl : "views/pages/empreendimento/configuracao/editar.html",
+	})
+	.when('/empreendimento/configuracao/lista',{
+		templateUrl : "views/pages/empreendimento/configuracao/lista.html",
 	})
 	
-	.when('/cadastrarUsuario', {
-		templateUrl : "views/pages/adminEmpresa/cadastrar/cadastrarUsuario.html",
+	//PRESTADORA DE SERVIÇOS
 	
-			
+	.when('/empreendimento/prestadoraServico/cadastrar', {
+		templateUrl : "views/pages/empreendimento/prestadoraServico/cadastrar.html",
 	})
-	
-			//LISTAR
-    	
-	.when('/listaEmpreendimento', {
-		templateUrl : "views/pages/adminEmpresa/lista/listaEmpreendimento.html",
-	//	controller : "empreendimento-controller.js",
+	.when('/empreendimento/prestadoraServico/editar/:idPrestadoraServico', {
+		templateUrl : "views/pages/empreendimento/prestadoraServico/cadastrar.html",
 	})
-	
-	.when('/listaPrestadoraServico', {
-		templateUrl : "views/pages/adminEmpresa/lista/listaPrestadoraServico.html",
-	//	controller : "empreendimento-controller.js",
-	})
-	
-	.when('/listaUsuario', {
-		templateUrl : "views/pages/adminEmpresa/lista/listaUsuario.html",
-	
-	})
-	
-	
-		//EDITAR
-	.when('/editarEmpreendimento/:idEmpreendimento',{
-		templateUrl : "views/pages/adminEmpresa/editar/editarEmpreendimento.html",
+	.when('/empreendimento/prestadoraServico/lista', {
+		templateUrl : "views/pages/empreendimento/prestadoraServico/lista.html",
 	})
 	
 	
-	.when('/editarPrestadoraServico/:idPrestadoraServico',{
-		templateUrl : "views/pages/adminEmpresa/editar/editarPrestadoraServico.html",
+//=====================================================================================
+//ROTAS USUARIOS
+	
+	.when('/usuario/cadastrar', {
+		templateUrl : "views/pages/usuario/cadastrar.html",
+	})
+	.when('/usuario/editar/:idUsuario', {
+		templateUrl : "views/pages/usuario/editar.html",
+	})
+	.when('/usuario/lista', {
+		templateUrl : "views/pages/usuario/lista.html",
+	})
+	.when('/usuario/permissao', {
+		templateUrl : "views/pages/usuario/permissao.html",
 	})
 	
-	.when('/editarUsuario/:idUsuario',{
-		templateUrl : "views/pages/adminEmpresa/editar/editarUsuario.html",
-	})
 	
-	
-		//Vizualização
-	
-	.when('/vizualizarEmpreendimento/:idEmpreendimento',{
-		templateUrl : "views/pages/adminEmpresa/vizualizar/vizualizarEmpreendimento.html",
-	})
-	
-		//CONFIGURACAO
-	.when('/configEmpreendimento',{
-		templateUrl : "views/pages/adminEmpresa/configuracao/configEmpreendimento.html",
-	})
-    
-	
-	
+//================================================================================		
 //SERVIÇOS
 	
-		//CADASTRAR
-	
-	.when('/cadastrarPacotesServicos', {
-		templateUrl:"views/pages/servicos/cadastrar/cadastrarPacoteServico.html",		
-
+	.when('/servicos/pacotes/cadastrar', {
+		templateUrl:"views/pages/servicos/pacotes/cadastrar.html",		
+	})
+	.when('/servicos/pacotes/editar/:idPacoteServico', {
+		templateUrl : "views/pages/servicos/pacotes/editar.html"
+	})
+	.when('/servicos/pacotes/lista', {
+		templateUrl:"views/pages/servicos/pacotes/lista.html",		
 	})
 	
-	//CONSULTA
 	
-		.when('/listaPacoteServico', {
-		templateUrl:"views/pages/servicos/lista/listaPacoteServico.html",		
-
-	})
-	//EDITAR
-	.when('/editarPacotesServico/:idPacoteServico', {
-		templateUrl : "views/pages/servicos/editar/editarPacoteServico.html"
-	})
-	
+//====================================================================================	
 //ROTAS RECURSOS HUMANOS
 	
-		//CADASTRAR
-	.when('/cadastrarFuncionario', {
-		templateUrl:"views/pages/recursosHumanos/cadastrar/cadastrarFuncionario.html",		
-//		controller : "funcionario-controller.js"
+		//CARGO
+	
+	.when('/recursosHumanos/cargo/cadastrar', {
+		templateUrl : "views/pages/recursosHumanos/cargo/cadastrar.html",
 	})
-		.when('/cadastrarCargo', {
-		templateUrl : "views/pages/recursosHumanos/cadastrar/cadastrarCargo.html",
-	//	controller : "cargo-controller.js"
+	.when('/recursosHumanos/cargo/editar/:idCargo', {
+		templateUrl : "views/pages/recursosHumanos/cargo/editar.html",
+	})
+	.when('/recursosHumanos/cargo/lista', {
+		templateUrl : "views/pages/recursosHumanos/cargo/lista.html",
+	})
+	
+	//FUNCIONARIO
+	
+	.when('/recursosHumanos/funcionario/cadastrar', {
+		templateUrl:"views/pages/recursosHumanos/funcionario/cadastrar.html",		
+	})
+	.when('/recursosHumanos/funcionario/editar/:idFuncionario', {
+		templateUrl:"views/pages/recursosHumanos/funcionario/editar.html",		
+	})
+	.when('/recursosHumanos/funcionario/lista', {
+		templateUrl:"views/pages/recursosHumanos/funcionario/lista.html",		
 	})
 	
 	
-		//CONSULTA
-	.when('/listaFuncionario', {
-		templateUrl:"views/pages/recursosHumanos/lista/listaFuncionario.html",		
-//		controller : "funcionario-controller.js"
+//==================================================================================
+	
+//ROTAS ALMOXARIFADO
+	
+	//CATEGORIA
+	
+	.when('/almoxarifado/categoria/cadastrar', {
+		templateUrl:"views/pages/almoxarifado/categoria/cadastrar.html",
 	})
-	.when('/listaCargo', {
-		templateUrl:"views/pages/recursosHumanos/lista/listaCargo.html",		
-//		controller : "funcionario-controller.js"
+	.when('/almoxarifado/categoria/editar/:idCategoria', {
+		templateUrl:"views/pages/almoxarifado/categoria/editar.html",
+	})
+	.when('/almoxarifado/categoria/lista', {
+		templateUrl:"views/pages/almoxarifado/categoria/lista.html",
 	})
 	
 	
-	//EDITAR
+	//FORNECEDOR
 	
-	.when('/editarFuncionario/:idFuncionario', {
-		templateUrl:"views/pages/recursosHumanos/editar/editarFuncionario.html",		
-//		controller : "funcionario-controller.js"
+	.when('/almoxarifado/fornecedor/cadastrar', {
+		templateUrl:"views/pages/almoxarifado/fornecedor/cadastrar.html",
 	})
-	
-	.when('/editarCargo/:idCargo', {
-		templateUrl:"views/pages/recursosHumanos/editar/editarCargo.html",		
-//		controller : "funcionario-controller.js"
+	.when('/almoxarifado/fornecedor/editar/:idFornecedor', {
+		templateUrl:"views/pages/almoxarifado/fornecedor/editar.html",
 	})
-	
-	//Rotas Almoxarifado
-	
-	//CADASTRAR
-	.when('/cadastrarUnidadeMedida', {
-		templateUrl:"views/pages/almoxarifado/cadastrar/cadastrarUnidadeMedida.html",
-	})
-	.when('/cadastrarProduto', {
-		templateUrl:"views/pages/almoxarifado/cadastrar/cadastrarProduto.html",
-	})
-	.when('/cadastrarFornecedor', {
-		templateUrl:"views/pages/almoxarifado/cadastrar/cadastrarFornecedor.html",
-	})
-	.when('/cadastrarCategoria', {
-		templateUrl:"views/pages/almoxarifado/cadastrar/cadastrarCategoria.html",
+	.when('/almoxarifado/fornecedor/lista', {
+		templateUrl:"views/pages/almoxarifado/fornecedor/lista.html",
 	})
 	
-	//CONSULTAR
-	.when('/consultarCategoria', {
-		templateUrl:"views/pages/almoxarifado/consultar/consultarCategoria.html",
+	
+	//PRODUTO
+	
+	.when('/almoxarifado/produto/cadastrar', {
+		templateUrl:"views/pages/almoxarifado/produto/cadastrar.html",
 	})
-	.when('/consultarProduto', {
-		templateUrl:"views/pages/almoxarifado/consultar/consultarProduto.html",
+	.when('/almoxarifado/produto/editar/:idProduto', {
+		templateUrl:"views/pages/almoxarifado/produto/editar.html",
 	})
-	.when('/consultarFornecedor', {
-		templateUrl:"views/pages/almoxarifado/consultar/consultarFornecedor.html",
+	.when('/almoxarifado/produto/lista', {
+		templateUrl:"views/pages/almoxarifado/produto/lista.html",
 	})
 	
-	//EDIATR
-	.when('/editarCategoria/:idCategoria', {
-		templateUrl:"views/pages/almoxarifado/editar/editarCategoria.html",
-	})
-	.when('/editarProduto/:idProduto', {
-		templateUrl:"views/pages/almoxarifado/editar/editarProduto.html",
-	})
-	.when('/editarFornecedor/:idFornecedor', {
-		templateUrl:"views/pages/almoxarifado/editar/editarFornecedor.html",
-	})
-		
+//==============================================================================
+	//ROTAS DE ESCAPE
 	
 	
 	.when('/',{

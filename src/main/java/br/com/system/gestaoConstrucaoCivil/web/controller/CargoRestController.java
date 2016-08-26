@@ -14,7 +14,7 @@ import br.com.system.gestaoConstrucaoCivil.entity.Cargo;
 import br.com.system.gestaoConstrucaoCivil.service.CargoService;
 
 @RestController
-@RequestMapping("/rest/cargo")
+@RequestMapping("/rest/recursosHumanos")
 public class CargoRestController implements ICargo {
 
 	@Autowired
@@ -32,14 +32,14 @@ public class CargoRestController implements ICargo {
 	public ResponseEntity salva(@RequestBody Cargo cargo, UriComponentsBuilder ucBuilder) {
 		cargoService.salvarOuEditar(cargo);
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/rest/cargo/cadastrarCargo/{id}").buildAndExpand(cargo.getId()).toUri());
+		headers.setLocation(ucBuilder.path("/rest/recursosHumanos/salva/{id}").buildAndExpand(cargo.getId()).toUri());
 		return new ResponseEntity(HttpStatus.CREATED);
 	}
 
 	public ResponseEntity updateCargo(@RequestBody Cargo cargo, UriComponentsBuilder ucBuilder) {
 		cargoService.salvarOuEditar(cargo);
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/rest/cargo/editarCargo/{id}").buildAndExpand(cargo.getId()).toUri());
+		headers.setLocation(ucBuilder.path("/rest/recursosHumanos/altera/{id}").buildAndExpand(cargo.getId()).toUri());
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 

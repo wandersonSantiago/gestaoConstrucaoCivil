@@ -11,15 +11,15 @@ import br.com.system.gestaoConstrucaoCivil.entity.Cargo;
 
 public interface ICargo {
 
-	@RequestMapping(value = "/cadastrarCargo", method = RequestMethod.POST)
+	@RequestMapping(value = "/salva", method = RequestMethod.POST)
 	public ResponseEntity salva(@RequestBody Cargo cargo,UriComponentsBuilder ucBuilder);
 	
-	@RequestMapping(method = RequestMethod.GET, value="/listarCargo")
+	@RequestMapping(method = RequestMethod.GET, value="/lista")
 	public ResponseEntity<Iterable<Cargo>> buscarCargos();
 	
-    @RequestMapping(value = "/listarCargoId/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Cargo> buscarCargoPorId(@PathVariable Long id) ;
 	
-	@RequestMapping(value = "/editarCargo", method = RequestMethod.PUT)
+	@RequestMapping(value = "/altera", method = RequestMethod.PUT)
 	public ResponseEntity updateCargo(@RequestBody Cargo cargo,UriComponentsBuilder ucBuilder);
 }

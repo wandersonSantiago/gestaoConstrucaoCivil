@@ -10,55 +10,61 @@ app.controller('usuarioController', function($scope, toastr, usuarioService, $ht
 		self.user = response.data.name;
 	});
 	
-	self.alterarUsuario = function(usuario){
-		usuarioService.usuarioUpdate(self.usuario);
-		self.usuario = usuario = [];
-	}
-	
-	 self.cadastrarUsuario = function(usuario){
+	self.altera = function(usuario){
 		if(self.senha == self.senhaRepitida){
 			self.usuario.senha = self.senha;
-			usuarioService.usuarioCreate(self.usuario);
-			
-			self.usuario = usuario = [];
+			usuarioService.altera(self.usuario).
+			then(function(response){
+				self.usuario = null;
+				}, function(errResponse){
+			});
 		}else{			
-			toastr.error('senha não coencidem, digite novamente');
-			
+			sweetAlert({ timer : 3000, text: "senha não coencidem, digite novamente" , type : "error", width: 300, higth: 100, padding: 20});
+		
+		}
+	}
+	
+	 self.salva = function(usuario){
+		if(self.senha == self.senhaRepitida){
+			self.usuario.senha = self.senha;
+			usuarioService.salva(self.usuario).
+			then(function(response){
+				self.usuario = null;
+				}, function(errResponse){
+			});
+		}else{			
+			sweetAlert({ timer : 3000, text: "senha não coencidem, digite novamente" , type : "error", width: 300, higth: 100, padding: 20});
+		
 		}
 	}
 	 
 	
-	 self.buscarUsuarios = function(){
-		 usuarioService.usuarioFindAll().
+	 self.lista = function(){
+		 usuarioService.lista().
 			then(function(u){
-				
 				if(u.ativo == true){
 					u.ativo = "ativo";
 					self.usuarios = u;
-						
 				}else{
 					u.ativo = "inativo";
 					self.usuarios = u;
 				}
-				
 				console.log(self.usuarios.ativo);
 				}, function(errResponse){
-				toastr.error('Erro ao tentar buscar Usuario');
 			});
 		};
 		//busca a usuario atraves do id
-		self.buscarUsuarioPorId = function(id){
+		self.buscaPorId = function(id){
 			if(!id)return;
-			usuarioService.usuarioFindOne(id).
+			usuarioService.buscaPorId(id).
 			then(function(p){
 				self.usuario = p;
 				}, function(errResponse){
-				toastr.error('Erro ao buscar empreendimento');
 			});
 		};
 	//verifica se o params esta com o ide executa o metodo de busca 	
 		if(idUsuario){
-			self.buscarUsuarioPorId(idUsuario);
+			self.buscaPorId(idUsuario);
 			
 		}
 	

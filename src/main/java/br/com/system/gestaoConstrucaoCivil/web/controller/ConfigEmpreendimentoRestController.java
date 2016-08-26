@@ -17,7 +17,7 @@ import br.com.system.gestaoConstrucaoCivil.entity.ConfigEmpreendimentoEdificio;
 import br.com.system.gestaoConstrucaoCivil.service.ConfigEmpreendimentoService;
  
 @RestController
-@RequestMapping("/rest/servico")
+@RequestMapping("/rest/empreendimento/configuracao")
 public class ConfigEmpreendimentoRestController {
      
     @Autowired
@@ -46,14 +46,14 @@ public class ConfigEmpreendimentoRestController {
         return new ResponseEntity(headers, HttpStatus.CREATED);
     }
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/listarConfigEmpreendimento")
+    @RequestMapping(method = RequestMethod.GET, value = "/lista")
     public ResponseEntity<Iterable<ConfigEmpreendimento>> buscarConfigEmpreendimento() {
  
         Iterable<ConfigEmpreendimento> configEmpreendimento = configEmpreeendimentoService.buscarTodos();
         return new ResponseEntity<Iterable<ConfigEmpreendimento>>(configEmpreendimento, HttpStatus.OK);
     }
      
-    @RequestMapping(value = "/listarConfiEmpreendimento/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
     public ResponseEntity<ConfigEmpreendimento> buscarConfigEmpreendimentoPorId(@PathVariable Long id) {
         return new ResponseEntity<ConfigEmpreendimento>(configEmpreeendimentoService.buscarPorId(id), HttpStatus.OK);
     }

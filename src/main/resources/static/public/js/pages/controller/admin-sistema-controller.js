@@ -15,66 +15,49 @@ app.controller('adminSistemaController', function($scope, adminSistemaService, b
 		buscaCepService.get({'cep': self.cep}).$promise
 		.then(function success(result){
 			$scope.adminCtrl.empresa.dadoEmpresa.endereco = result;
-		
-		console.log($scope.adminCtrl.empresa.dadoEmpresa.endereco);
-	
 		}).catch(function error(msg) {
-			console.error('Error');
 		});
-		
-    }
+   }
 	
 	
-	self.createEmpresa = function(empresa, sucesso){
+	self.salva = function(empresa, sucesso){
 		
-		adminSistemaService.empresaCreate(self.empresa);
+		adminSistemaService.salva(self.empresa);
 		self.empresa = empresa;
 		
 	}
 	
-	self.updateEmpresa = function(empresa, sucesso){
-		
-		adminSistemaService.empresaUpdate(self.empresa);
+	self.altera = function(empresa, sucesso){
+		adminSistemaService.altera(self.empresa).
+		then(function(e){
+			self.empresa = null;
+		}, function(errResponse){
+		});
+}
 	
-		self.empresa = empresa;
-		
-	}
 //carrega a lista de empresa, quando acessa o controller
-	self.buscarEmpresas = function(){
-		adminSistemaService.empresaFindAll().
+	self.lista = function(){
+		adminSistemaService.lista().
 		then(function(e){
 			self.listaEmpresa = e;
-			console.log("to aqui",self.listaEmpresa);
 		}, function(errResponse){
-			toastr.error('Erro ao buscar empresas');
 		});
 	};
 
 	
 //busca a empresa atraves do id
-	self.buscarEmpresaPorId = function(id){
+	self.buscaPorId = function(id){
 		if(!id)return;
-		adminSistemaService.buscarEmpresa(id).
+		adminSistemaService.buscaPorId(id).
 		then(function(p){
 			self.empresa = p;
-			console.log(idEmpresa);
 		}, function(errResponse){
-			toastr.error('Erro ao buscar empresas');
 		});
 	};
 //verifica se o params esta com o ide executa o metodo de busca 	
 	if(idEmpresa){
-		self.buscarEmpresaPorId(idEmpresa);
-		
+		self.buscaPorId(idEmpresa);
 	}
 	
-	/*if(self.ativarBusca == 1){
-		
-		self.buscarEmpresas();
-	}*/
 	
-	$scope.maskFone= '(99) 9999 - 999?9';
-	$scope.maskCnpj= '99.999.999/9999-99';
-	$scope.maskIscEstadual= '999.999.999.999';
-	$scope.maskCep = '99999-999';
 });

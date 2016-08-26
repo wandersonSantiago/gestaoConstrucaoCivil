@@ -14,25 +14,24 @@ import br.com.system.gestaoConstrucaoCivil.entity.ServicoEmpresa;
 import br.com.system.gestaoConstrucaoCivil.service.ServicoEmpresaService;
 
 @RestController
-@RequestMapping("/rest/servico/cadastrarServico")
+@RequestMapping("/rest/servico/vincular")
 public class ServicoEmpresaRestController {
 
 	@Autowired
 	 private ServicoEmpresaService servicoService;
 	
-	 @RequestMapping(method = RequestMethod.GET, value="/listarServico")
+	 @RequestMapping(method = RequestMethod.GET, value="/lista")
 	 public ResponseEntity<Iterable<ServicoEmpresa>> buscarServico() {	  
-	  
 	  Iterable<ServicoEmpresa> servico = servicoService.buscarTodos();
 	  return new ResponseEntity<Iterable<ServicoEmpresa>>(servico, HttpStatus.OK);
 	 }
 	 
-	 @RequestMapping(method = RequestMethod.POST)
+	 @RequestMapping( value="/salva", method = RequestMethod.POST)
 	 public ResponseEntity salva(@RequestBody ServicoEmpresa servico,UriComponentsBuilder ucBuilder)
 	 {
 		 servicoService.salvarOuEditar(servico);
 		 HttpHeaders headers = new HttpHeaders();
-		 headers.setLocation(ucBuilder.path("/rest/servico/cadastrarServico/{id}").buildAndExpand(servico.getId()).toUri());
+		 headers.setLocation(ucBuilder.path("/rest/servico/vincular/salva/{id}").buildAndExpand(servico.getId()).toUri());
 		 return new ResponseEntity(headers, HttpStatus.CREATED);
 	 }
 }

@@ -17,26 +17,17 @@ import br.com.system.gestaoConstrucaoCivil.enuns.UnidadeMedidaEnum;
 import br.com.system.gestaoConstrucaoCivil.service.UnidadeMedidaService;
 
 @RestController
-@RequestMapping("/rest/almoxarifado")
+@RequestMapping("/rest/almoxarifado/unidadeMedida")
 public class UnidadeMedidaRestController {
 
 	@Autowired
 	 private UnidadeMedidaService unidadeMedidadService;
 	
-	 @RequestMapping(method = RequestMethod.GET, value="/listarUnidadeMedida")
+	 @RequestMapping(method = RequestMethod.GET, value="/lista")
 	 public ResponseEntity<Iterable<UnidadeMedidaEnum>> unidadeMedida() {
 
 	Iterable<UnidadeMedidaEnum> unidadeMedida = Arrays.asList(UnidadeMedidaEnum.values());
 	return new ResponseEntity<Iterable<UnidadeMedidaEnum>>(unidadeMedida, HttpStatus.OK);
  }
-	 
-	 @RequestMapping(method = RequestMethod.POST,value="/cadastrarUnidadeMedida")
-	 public ResponseEntity salva(@RequestBody UnidadeMedida unidadeMedida,UriComponentsBuilder ucBuilder)
-	 {
-		 System.out.println(unidadeMedida.getDescricao());
-		 unidadeMedidadService.salvarOuEditar(unidadeMedida);
-		 HttpHeaders headers =new HttpHeaders();
-		 headers.setLocation(ucBuilder.path("/rest/almoxarifado/cadastrarUnidadeMedida/{id}").buildAndExpand(unidadeMedida.getId()).toUri());
-		 return new ResponseEntity(headers, HttpStatus.CREATED);
-	 }
+	
 }

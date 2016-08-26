@@ -15,39 +15,39 @@ import br.com.system.gestaoConstrucaoCivil.entity.Fornecedor;
 import br.com.system.gestaoConstrucaoCivil.service.FornecedorService;
 
 @RestController
-@RequestMapping("/rest/almoxarifado")
+@RequestMapping("/rest/almoxarifado/fornecedor")
 public class FornecedorRestController {
 
 	@Autowired
 	private FornecedorService fornecedorService;
 
-	@RequestMapping(method = RequestMethod.GET, value = "/listarFornecedor")
+	@RequestMapping(method = RequestMethod.GET, value = "/lista")
 	public ResponseEntity<Iterable<Fornecedor>> buscarFornecedores() {
 
 		Iterable<Fornecedor> fornecedor = fornecedorService.buscarTodos();
 		return new ResponseEntity<Iterable<Fornecedor>>(fornecedor, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/listarFornecedorPorId/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Fornecedor> buscarFornecedorPorId(@PathVariable Long id) {
 
 		return new ResponseEntity<Fornecedor>(fornecedorService.buscarFornecedorPorId(id), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/cadastrarFornecedor", method = RequestMethod.POST)
+	@RequestMapping(value = "/salva", method = RequestMethod.POST)
 	public ResponseEntity salva(@RequestBody Fornecedor fornecedor, UriComponentsBuilder ucBuilder) {
 		fornecedorService.salvarOuEditar(fornecedor);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(
-				ucBuilder.path("rest/almoxarifado/cadastrarFornecedor/{id}").buildAndExpand(fornecedor.getId()).toUri());
+				ucBuilder.path("rest/almoxarifado/fornecedor/salva/{id}").buildAndExpand(fornecedor.getId()).toUri());
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/alterarFornecedor", method = RequestMethod.PUT)
+	@RequestMapping(value = "/altera", method = RequestMethod.PUT)
 	public ResponseEntity alterarFornecedor(@RequestBody Fornecedor fornecedor, UriComponentsBuilder ucBuilder) {
 		fornecedorService.salvarOuEditar(fornecedor);
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("rest/almoxarifado/alterarFornecedor/{fornecedor}")
+		headers.setLocation(ucBuilder.path("rest/almoxarifado/fornecedor/altera/{fornecedor}")
 				.buildAndExpand(fornecedor.getId()).toUri());
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}

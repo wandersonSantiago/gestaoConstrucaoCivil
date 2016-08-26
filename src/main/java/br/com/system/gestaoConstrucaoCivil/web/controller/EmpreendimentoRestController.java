@@ -19,19 +19,19 @@ import br.com.system.gestaoConstrucaoCivil.service.EmpreendimentoService;
 import br.com.system.gestaoConstrucaoCivil.service.EnderecoService;
 
 @RestController
-@RequestMapping("rest/empreendimento")
+@RequestMapping("rest/empreendimento/empreendimento")
 public class EmpreendimentoRestController {
 
 	@Autowired
 	private EmpreendimentoService empreendimentoService;
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/listaEmpreendimento")
+	@RequestMapping(method = RequestMethod.GET, value = "/lista")
 	public ResponseEntity<Iterable<Empreendimento>> empreendimentos() {
 		Iterable<Empreendimento> empreendimento = empreendimentoService.buscarTodos();
 		return new ResponseEntity<Iterable<Empreendimento>>(empreendimento, HttpStatus.OK);
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/listaEmpreendimentoSemConfiguracao")
+	@RequestMapping(method = RequestMethod.GET, value = "/empreendimentoSemConfiguracaoLista")
 	public ResponseEntity<Iterable<Empreendimento>> buscaEmpreendimentoSemConfiguracao() {
 		Iterable<Empreendimento> empreendimento = empreendimentoService.buscaEmpreendimentoSemConfiguracao();
 		return new ResponseEntity<Iterable<Empreendimento>>(empreendimento, HttpStatus.OK);
@@ -45,30 +45,27 @@ public class EmpreendimentoRestController {
 
 	}
 
-	@RequestMapping(value = "/listarEmpreendimentoId/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Empreendimento> buscarEmpreendimentoPorId(@PathVariable Long id) {
 		return new ResponseEntity<Empreendimento>(empreendimentoService.buscarPorId(id), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/cadastrarEmpreendimento", method = RequestMethod.POST)
+	@RequestMapping(value = "/salva", method = RequestMethod.POST)
 	public ResponseEntity salvarEmpreendimento(@RequestBody Empreendimento empreendimento,
 			UriComponentsBuilder ucBuilder) {
-		System.out.println("gravar emprendimento");
 		empreendimentoService.salvarOuEditar(empreendimento);
-		
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("rest/empreendimento/cadastrarEmpreendimento/{empreendimento}")
+		headers.setLocation(ucBuilder.path("rest/empreendimento/empreendimento/salva/{empreendimento}")
 				.buildAndExpand(empreendimento.getId()).toUri());
-
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/alterarEmpreendimento", method = RequestMethod.PUT)
+	@RequestMapping(value = "/altera", method = RequestMethod.PUT)
 	public ResponseEntity alterarEmpreendimento(@RequestBody Empreendimento empreendimento,
 			UriComponentsBuilder ucBuilder) {
 		empreendimentoService.salvarOuEditar(empreendimento);
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("rest/empreendimento/alterarEmpreendimento/{empreendimento}")
+		headers.setLocation(ucBuilder.path("rest/empreendimento/empreendimento/altera/{empreendimento}")
 				.buildAndExpand(empreendimento.getId()).toUri());
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}

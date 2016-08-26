@@ -3,45 +3,43 @@ app.factory('fornecedorService', function($rootScope, toastr, $http,$q){
 	
 	return{
 		
-		fornecedorUpdate: function(fornecedor){
-			return $http.put('rest/almoxarifado/alterarFornecedor', fornecedor)
+		altera: function(fornecedor){
+			return $http.put('rest/almoxarifado/fornecedor/altera', fornecedor)
 			.then(function(response){
-				toastr.info('fornecedor Alterado ');
+				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				toastr.error('Erro ao tentar Alterar fornecedor');
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
 		
-		fornecedorCreate: function(fornecedor){
-			return $http.post('/rest/almoxarifado/cadastrarFornecedor', fornecedor)
+		salva: function(fornecedor){
+			return $http.post('/rest/almoxarifado/fornecedor/salva', fornecedor)
 			.then(function(response){
-				toastr.info('Fornecedor cadastrado');
+				sweetAlert({ timer : 3000, text :"Salvo com sucesso",  type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				console.error('Erro ao tentar gravar o fornecedor');
-				toastr.error('fornecedor não cadastrado');
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
-		fornecedorFindAll: function(){
-			return $http.get('rest/almoxarifado/listarFornecedor')
+		lista: function(){
+			return $http.get('rest/almoxarifado/fornecedor/lista')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				toastr.error('erro ao buscar fornecedores');
-				console.error('Erro ao tentar buscar os fornecedores');
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
 		
-		fornecedorFindOne: function(param){
-			return $http.get('rest/almoxarifado/listarFornecedorPorId/'+param)
+		buscaPorId: function(param){
+			return $http.get('rest/almoxarifado/fornecedor/buscaPorId/'+param)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				console.error('Erro ao tentar Buscar Fornecedor');
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},

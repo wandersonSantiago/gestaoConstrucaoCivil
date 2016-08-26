@@ -19,7 +19,7 @@ import br.com.system.gestaoConstrucaoCivil.service.EnderecoService;
 
 
 @RestController
-@RequestMapping("rest/adminSistema")
+@RequestMapping("rest/empresaContratada")
 public class EmpresaContratanteRestController {
 
 	@Autowired
@@ -29,34 +29,34 @@ public class EmpresaContratanteRestController {
     @Autowired
     public DadoEmpresaService dadoEmpresaService;
     
-	@RequestMapping(method = RequestMethod.GET, value="/listarEmpresa")
+	@RequestMapping(method = RequestMethod.GET, value="/lista")
 	 public ResponseEntity<Iterable<EmpresaContratante>> buscarEmpresaContratante() {	  
 	  Iterable<EmpresaContratante> empresaContratante = empresaContratanteService.buscarTodos();
 	  return new ResponseEntity<Iterable<EmpresaContratante>>(empresaContratante, HttpStatus.OK);
 	 }
 	
-	@RequestMapping(value = "/listarEmpresaId/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
 	public ResponseEntity<EmpresaContratante> buscarEmpresaPorId(@PathVariable Long id) {
 		
 		return new ResponseEntity<EmpresaContratante>(empresaContratanteService.buscarPorId(id), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value ="/cadastrarEmpresa", method = RequestMethod.POST)
+	@RequestMapping(value ="/salva", method = RequestMethod.POST)
 	public ResponseEntity salvarEmpresaContratante(@RequestBody EmpresaContratante empresaContratante, UriComponentsBuilder ucBuilder) {
 		
 		empresaContratanteService.salvarOuEditar(empresaContratante);
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("rest/adminSistema/cadastrarEmpresa/{empresa}").buildAndExpand(empresaContratante.getId()).toUri());
+		headers.setLocation(ucBuilder.path("rest/empresaContratada/salva/{empresa}").buildAndExpand(empresaContratante.getId()).toUri());
 										
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/alterarEmpresa", method = RequestMethod.PUT)
+	@RequestMapping(value = "/altera", method = RequestMethod.PUT)
 	public ResponseEntity alterarEmpresaContratante(@RequestBody EmpresaContratante empresaContratante, UriComponentsBuilder ucBuilder) {
 		
 		empresaContratanteService.salvarOuEditar(empresaContratante);
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("rest/adminSistema/alterarEmpresa/{empresa}").buildAndExpand(empresaContratante.getId()).toUri());
+		headers.setLocation(ucBuilder.path("rest/empresaContratada/altera/{empresa}").buildAndExpand(empresaContratante.getId()).toUri());
 										
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}

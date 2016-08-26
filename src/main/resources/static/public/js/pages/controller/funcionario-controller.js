@@ -19,56 +19,53 @@ app.controller('cadastrarFuncionarioController', function($scope, buscaCepServic
     }
 	
 	
-	self.cadastrarFuncionario = function(funcionario) {
-		cadastrarFuncionarioService.funcionarioCreate(self.funcionario);
-		self.funcionario = funcionario;
-
+	self.salva = function(funcionario) {
+		cadastrarFuncionarioService.salva(self.funcionario).
+		then(function(response){
+			self.funcionario = null;
+			}, function(errResponse){
+		});
+	}
+	
+	self.altera = function(funcionario) {
+		cadastrarFuncionarioService.altera(self.funcionario).
+		then(function(response){
+			self.funcionario = null;
+			}, function(errResponse){
+		});
 	}
 
-	 self.buscarFuncionarios = function(){
-		 cadastrarFuncionarioService.funcionarioFindAll().
+	 self.lista = function(){
+		 cadastrarFuncionarioService.lista().
 			then(function(f){
 				self.listaFuncionarios = f;
 				$scope.listaFuncionario = f;				
 				}, function(errResponse){
-				toastr.error('Erro ao tentar buscar funcionarios');
 			});
 		};
 		
 		self.buscarFuncionariosEngenheiro = function(){
-			 cadastrarFuncionarioService.funcionarioEngenheiroFindAll().
+			 cadastrarFuncionarioService.buscarFuncionariosEngenheiro().
 				then(function(f){
 					$scope.engenheiro = f;
 					}, function(errResponse){
-					toastr.error('Erro ao tentar buscar funcionarios');
 				});
 			};
 			
 //busca o funcionario atraves do id
 		
-		self.buscarFuncionarioPorId = function(id){
+		self.buscarPorId = function(id){
 			if(!id)return;
-			cadastrarFuncionarioService.buscarFuncionario(id).
+			cadastrarFuncionarioService.buscarPorId(id).
 			then(function(p){
 				self.funcionario = p;
-				console.log(idFuncionario);
-			}, function(errResponse){
-				toastr.error('Erro ao buscar funcionario');
+		}, function(errResponse){
 			});
 		};
 //verifica se o params esta com o ide executa o metodo de busca 	
 		if(idFuncionario){
-			self.buscarFuncionarioPorId(idFuncionario);
+			self.buscarPorId(idFuncionario);
 			
 		}
-		
-		
-			
-
-	$scope.maskFone = '(99) 9999 - 999?9';
-	$scope.maskCnpj = '99.999.999/9999-99';
-	$scope.maskIscEstadual = '999.999.999.999';
-	$scope.maskCep = '99999-999';
-	$scope.maskData = '9999-99-99';
 
 });

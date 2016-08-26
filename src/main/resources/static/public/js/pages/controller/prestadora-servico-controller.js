@@ -12,12 +12,10 @@ app.controller('prestadoraServicoController', function($scope, buscaCepService, 
 	self.findCep = function () {
 		
 		self.cep = $scope.prestadoraCtrl.prestadoraServico.dadoEmpresa.endereco.cep;
-		console.log(self.cep );
 		buscaCepService.get({'cep': self.cep}).$promise
 		.then(function success(result){
 			$scope.prestadoraCtrl.prestadoraServico.dadoEmpresa.endereco = result;
 			}).catch(function error(msg) {
-			console.error('Error');
 		});
 		
     }
@@ -25,44 +23,48 @@ app.controller('prestadoraServicoController', function($scope, buscaCepService, 
 	
 	
 //CADASTRAR
-	 self.cadastrarPrestadoraServico = function(prestadoraServico){
-		 prestadoraServicoService.prestadoraServicoCreate(self.prestadoraServico);
-		 self.prestadoraServico = prestadoraServico;
+	 self.salva = function(prestadoraServico){
+		 prestadoraServicoService.salva(self.prestadoraServico).
+			then(function(response){
+				self.prestadoraServico = null;
+				}, function(errResponse){
+			});
+		 
 	}
 	 
 	
 //ALTERAR	 
-	 	self.editarPrestadoraServico = function(prestadoraServico){
-			prestadoraServicoService.prestadoraServicoUpdate(self.prestadoraServico);
-			 self.prestadoraServico = prestadoraServico;
+	 	self.altera = function(prestadoraServico){
+			prestadoraServicoService.altera(self.prestadoraServico).
+			then(function(response){
+				self.prestadoraServico = null;
+				}, function(errResponse){
+			});
 		}
 	 	
 
 //BUSCAR
-		 self.buscarPrestadoraServico = function(){
+		 self.lista = function(){
 			 prestadoraServicoService.prestadoraServicoFindAll().
 				then(function(p){
 					$scope.prestadoraServicos = p;
 					}, function(errResponse){
-					toastr.error('Erro ao tentar buscar prestadora de servico');
 				});
 			};
 			
 			
-			self.buscarPrestadoraServicoPorId = function(id){
+			self.buscaPorId = function(id){
 				if(!id)return;
-				prestadoraServicoService.prestadoraServicoFindOne(id).
+				prestadoraServicoService.buscaPorId(id).
 					then(function(p){
 						self.prestadoraServico = p;
-						
-						}, function(errResponse){
-						toastr.error('Erro ao tentar buscar prestadora Servico');
+							}, function(errResponse){
 					});
 				};
 				
 				if(idPrestadoraServico){
 					
-					self.buscarPrestadoraServicoPorId(idPrestadoraServico);
+					self.buscaPorId(idPrestadoraServico);
 				}
 			 
 	

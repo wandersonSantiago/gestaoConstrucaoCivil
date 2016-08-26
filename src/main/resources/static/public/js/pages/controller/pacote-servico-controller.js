@@ -6,34 +6,45 @@ app.controller('pacoteServicoController', function($scope, pacoteServicoService,
 	
 	
 	
-	 self.cadastrarPacoteServico = function(pacoteServico){
-		 pacoteServicoService.pacoteServicoCreate(self.pacoteServico);
-		 self.pacoteServico = pacoteServico;
+	 self.salva = function(pacoteServico){
+		 pacoteServicoService.salva(self.pacoteServico).
+			then(function(response){
+				self.pacoteServico = null;
+				}, function(errResponse){
+			});
+		 
 	}
 	 
-	 self.buscarPacoteServicos = function(){
-		 pacoteServicoService.pacoteServicoFindAll().
+	 self.altera = function(pacoteServico){
+		 pacoteServicoService.altera(self.pacoteServico).
+			then(function(response){
+				self.pacoteServico = null;
+				}, function(errResponse){
+			});
+		 
+	}
+	 
+	 self.lista = function(){
+		 pacoteServicoService.lista().
 			then(function(f){
 				$scope.listaPacoteServicos = f;
 				}, function(errResponse){
-				toastr.error('Erro ao tentar buscar os pacotes de serviço');
 			});
 		};
 		
-		self.buscarPacoteServicoPorId = function(id){
+		self.buscaPorId = function(id){
 			if(!id)return;
-			pacoteServicoService.pacoteServicoFindOne(id).
+			pacoteServicoService.buscaPorId(id).
 			then(function(p){
 				self.pacoteServico = p;
 				}, function(errResponse){
-				toastr.error('Erro ao buscar pacote de serviço');
 			});
 		};
 		
 	
 		if(idPacoteServico){
 			
-			self.buscarPacoteServicoPorId(idPacoteServico);
+			self.buscaPorId(idPacoteServico);
 		}
 		
 		

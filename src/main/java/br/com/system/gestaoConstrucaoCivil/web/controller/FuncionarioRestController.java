@@ -21,7 +21,7 @@ import br.com.system.gestaoConstrucaoCivil.service.PessoaService;
 
 
 @RestController
-@RequestMapping("/rest/recursosHumanos")
+@RequestMapping("/rest/recursosHumanos/funcionario")
 public class FuncionarioRestController {
 
 
@@ -34,14 +34,14 @@ public class FuncionarioRestController {
 	 private EnderecoService enderecoService;
      
 	
-	 @RequestMapping(method = RequestMethod.GET, value="/buscaFuncionarioEngenheiro")
+	 @RequestMapping(method = RequestMethod.GET, value="/buscarFuncionariosEngenheiro")
 	 public ResponseEntity<Iterable<Funcionario>> buscarEngenheiros() {	  
 	  System.out.println("lista ok");
 	  Iterable<Funcionario> funcionarioEngenheiro = funcionarioService.buscarFuncionarioEngenheiro();
 	  return new ResponseEntity<Iterable<Funcionario>>(funcionarioEngenheiro, HttpStatus.OK);
 	 }
 	 
-	 @RequestMapping(method = RequestMethod.GET, value="/listarFuncionarios")
+	 @RequestMapping(method = RequestMethod.GET, value="/lista")
 	 public ResponseEntity<Iterable<Funcionario>> buscarTodos() {	  
 	  
 	  Iterable<Funcionario> funcionarios = funcionarioService.buscarTodos();
@@ -49,7 +49,7 @@ public class FuncionarioRestController {
 	 }
 	 
 	 
-		@RequestMapping(value = "/listarFuncionarioPorId/{id}", method = RequestMethod.GET)
+		@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
 		public ResponseEntity<Funcionario> buscarFuncionarioPorId(@PathVariable Long id) {
 			System.out.println("Chamadou o lista Funcionario");
 			return new ResponseEntity<Funcionario>(funcionarioService.buscarFuncionarioPorId(id), HttpStatus.OK);
@@ -57,12 +57,12 @@ public class FuncionarioRestController {
 		
 		
 	 
-	 @RequestMapping( value="/cadastrarFuncionario", method = RequestMethod.POST)
+	 @RequestMapping( value="/salva", method = RequestMethod.POST)
 	 public ResponseEntity salvar(@RequestBody Funcionario funcionario,UriComponentsBuilder ucBuilder)
 	 {
 		 pessoaService.salvarOuEditar(funcionario);
 		 HttpHeaders headers =new HttpHeaders();
-		 headers.setLocation(ucBuilder.path("/rest/recursosHumanos/cadastrarFuncionario/{id}").buildAndExpand(funcionario.getId()).toUri());
+		 headers.setLocation(ucBuilder.path("/rest/recursosHumanos/funcionario/salva/{id}").buildAndExpand(funcionario.getId()).toUri());
 		 return new ResponseEntity(headers, HttpStatus.CREATED);
 	 }
 }

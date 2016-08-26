@@ -2,54 +2,57 @@ app.factory('cadastrarFuncionarioService', function($rootScope, toastr, $http){
 	
 	
 	return{
-		funcionarioCreate: function(funcionario){
-			return $http.post('/rest/recursosHumanos/cadastrarFuncionario', funcionario)
-			
+		salva: function(funcionario){
+			return $http.post('/rest/recursosHumanos/funcionario/salva', funcionario)
 			.then(function(response){
-				console.log("teste");
-				toastr.info('Funcionario cadastrado');
-				
-				return response.data;
-			
-			},function(errResponse){
-				console.error('Erro ao tentar gravar funcionario');
-				toastr.error('Funcionario não cadastrado');
-				return $q.reject(errResponse);
-				
-			});
-		},
-		
-		
-		
-		buscarFuncionario: function(param){
-			return $http.get('/rest/recursosHumanos/listarFuncionarioPorId/'+param)
-			.then(function(response){
+				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				toastr.error('Erro ao Buscar Funcionario');
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
 		
-		funcionarioEngenheiroFindAll: function(){
-			return $http.get('/rest/recursosHumanos/buscaFuncionarioEngenheiro')
+		altera: function(funcionario){
+			return $http.put('/rest/recursosHumanos/funcionario/altera', funcionario)
+			.then(function(response){
+				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
+		
+		
+		buscarPorId: function(param){
+			return $http.get('/rest/recursosHumanos/funcionario/buscaPorId/'+param)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				toastr.error('Erro ao Buscar Empresas');
+				sweetAlert({ timer : 3000,  type : "error", width: 200, higth: 100, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
+		
+		buscarFuncionariosEngenheiro: function(){
+			return $http.get('/rest/recursosHumanos/funcionario/buscarFuncionariosEngenheiro')
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 3000,  type : "error", width: 200, higth: 100, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
 			
 		
 		
-		funcionarioFindAll: function(){
-			return $http.get('/rest/recursosHumanos/listarFuncionarios')
+		lista: function(){
+			return $http.get('/rest/recursosHumanos/funcionario/lista')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				toastr.error('Erro ao Buscar Empresas');
-				console.error('Erro ao tentar buscar Empresa');
+				sweetAlert({ timer : 3000,  type : "error", width: 200, higth: 100, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},

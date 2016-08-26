@@ -16,24 +16,24 @@ import br.com.system.gestaoConstrucaoCivil.service.ConfigEmpreendimentoEdificioS
 
 
 @RestController
-@RequestMapping("/rest/servico")
+@RequestMapping("/rest/empreendimento/configuracao")
 public class ConfigEmpreendimentoEdificioRestController {
 
 	 @Autowired
 	 ConfigEmpreendimentoEdificioService configEmpreeendimentoEdificioService;
 	
-	@RequestMapping(value = "/cadastrarConfigEmpreendimentoEdificio", method = RequestMethod.POST)
+	@RequestMapping(value = "/salvaEdificio", method = RequestMethod.POST)
     public ResponseEntity salvarConfigEmpreendimentoEdificio(@RequestBody ConfigEmpreendimentoEdificio configEmpreendimentoEdificio, UriComponentsBuilder ucBuilder) {
         
     	
     	configEmpreeendimentoEdificioService.salvarOuEditar(configEmpreendimentoEdificio);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("rest/servico/cadastrarConfigEmpreendimentoEdificio/{configEmpreendimento}").buildAndExpand(configEmpreendimentoEdificio.getId()).toUri());
+        headers.setLocation(ucBuilder.path("rest/empreendimento/configuracao/salvaEdificio/{configEmpreendimento}").buildAndExpand(configEmpreendimentoEdificio.getId()).toUri());
      
         return new ResponseEntity(headers, HttpStatus.CREATED);
     }
 	
-	@RequestMapping(value = "/listarConfiEmpreendimentoEdificio/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/listaEdificio/{id}", method = RequestMethod.GET)
     public ResponseEntity<ConfigEmpreendimentoEdificio> buscarConfigEmpreendimentoEdificioPorId(@PathVariable Long id) {
         return new ResponseEntity<ConfigEmpreendimentoEdificio>(configEmpreeendimentoEdificioService.buscarPorId(id), HttpStatus.OK);
     }

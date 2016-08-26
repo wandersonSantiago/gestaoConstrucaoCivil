@@ -2,29 +2,34 @@ app.factory('servicoEmpresaService', function($rootScope, toastr, $http,$q){
 	
 	
 	return{
-		servicoEmpresaCreate: function(servicoEmpresa){
-			return $http.post('/rest/servicoEmpresa/cadastrarServicoEmpresa', servicoEmpresa)
-			
+		salva: function(servicoEmpresa){
+			return $http.post('/rest/servico/vincular/salva', servicoEmpresa)
 			.then(function(response){
-			
-				toastr.info('serviço cadastrado');
-				
+				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
-			
 			},function(errResponse){
-				console.error('Erro ao tentar gravar o servico da empresa');
-				toastr.error('serviço não cadastrado');
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
-				
 			});
 		},
-		fornecedorFindAll: function(){
-			return $http.get('rest/servicoEmpresa/cadastrarServicoEmpresa/listarServicoEmpresa')
+		
+		altera: function(servicoEmpresa){
+			return $http.post('/rest/servico/vincular/altera', servicoEmpresa)
+			.then(function(response){
+				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
+		
+		lista: function(){
+			return $http.get('rest/servico/vincular/lista')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				toastr.error('Erro ao tentar buscar os serviços das empresa');
-				console.error('Erro ao tentar buscar os serviços das empresa');
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},

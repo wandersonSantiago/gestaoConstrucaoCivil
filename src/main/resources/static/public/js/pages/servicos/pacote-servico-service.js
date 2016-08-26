@@ -2,38 +2,49 @@ app.factory('pacoteServicoService', function($rootScope, toastr, $http,$q){
 	
 	
 	return{
-		pacoteServicoCreate: function(pacoteServico){
-			return $http.post('/rest/pacoteServico/cadastrarPacoteServico', pacoteServico)
+		salva: function(pacoteServico){
+			return $http.post('/rest/servicos/pacotes/salva', pacoteServico)
 			.then(function(response){
-			toastr.info('pacotes de serviço cadastrado');
+				sweetAlert({ timer : 3000, text :"Salvo com sucesso",  type : "success", width: 300, higth: 100, padding: 20});
 			return response.data;
 			},function(errResponse){
-			
-				toastr.error('pacotes de serviço não cadastrado');
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
-		pacoteServicoFindAll: function(){
-			return $http.get('rest/pacoteServico/listarPacoteServico')
+		
+		
+		altera: function(pacoteServico){
+			return $http.put('/rest/servicos/pacotes/altera', pacoteServico)
+			.then(function(response){
+				sweetAlert({ timer : 3000, text :"Salvo com sucesso",  type : "success", width: 300, higth: 100, padding: 20});
+			return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
+
+		
+		lista: function(){
+			return $http.get('rest/servicos/pacotes/lista')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				toastr.error('erro ao buscar pacotes de serviços');
-		
+				sweetAlert({ timer : 3000,  type : "error", width: 200, higth: 100, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
 		
-		pacoteServicoFindOne: function(param){
-			return $http.get('rest/pacoteServico/listarPacoteServicoId/'+param)
+		
+		buscaPorId: function(param){
+			return $http.get('rest/servicos/pacotes/buscaPorId/'+param)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				console.error('Erro ao tentar Buscar pacote de Serviço');
+				sweetAlert({ timer : 3000,  type : "error", width: 200, higth: 100, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
-		
-		
 	}
 });

@@ -17,7 +17,7 @@ import br.com.system.gestaoConstrucaoCivil.entity.ConfigEmpreendimentoOutros;
 import br.com.system.gestaoConstrucaoCivil.service.ConfigEmpreendimentoOutrosService;
 
 @RestController
-@RequestMapping("/rest/servico")
+@RequestMapping("/rest/empreendimento/configuracao")
 public class ConfigEmpreendimentoOutrosRestController {
 
 	
@@ -26,22 +26,20 @@ public class ConfigEmpreendimentoOutrosRestController {
     ConfigEmpreendimentoOutrosService configEmpreeendimentoOutrosService;
      
      
-    @RequestMapping(value = "/cadastrarConfigEmpreendimentoOutros", method = RequestMethod.POST)
+    @RequestMapping(value = "/salvaOutros", method = RequestMethod.POST)
     public ResponseEntity salvarConfigEmpreendimento(@RequestBody List<ConfigEmpreendimentoOutros> configEmpreendimentoOutros, UriComponentsBuilder ucBuilder) {
     	configEmpreeendimentoOutrosService.salvarOuEditar(configEmpreendimentoOutros);
         HttpHeaders headers = new HttpHeaders();
-       // headers.setLocation(ucBuilder.path("rest/servico/cadastrarConfigEmpreendimentoOutros/{id}").buildAndExpand(configEmpreendimentoOutros.getId()).toUri());
-      
-        return new ResponseEntity(headers, HttpStatus.CREATED);
+          return new ResponseEntity(headers, HttpStatus.CREATED);
     }
      
-    @RequestMapping(method = RequestMethod.GET, value = "/listarConfigEmpreendimentoOutros")
+    @RequestMapping(method = RequestMethod.GET, value = "/listaOutros")
     public ResponseEntity<Iterable<ConfigEmpreendimentoOutros>> buscarConfigEmpreendimento() {
     	Iterable<ConfigEmpreendimentoOutros> configEmpreendimentoOutros = configEmpreeendimentoOutrosService.buscarTodos();
         return new ResponseEntity<Iterable<ConfigEmpreendimentoOutros>>(configEmpreendimentoOutros, HttpStatus.OK);
     }
      
-    @RequestMapping(value = "/listarConfiEmpreendimentoOutros/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/buscaOutrosPorId/{id}", method = RequestMethod.GET)
     public ResponseEntity<ConfigEmpreendimentoOutros> buscarConfigEmpreendimentoPorId(@PathVariable Long id) {
         return new ResponseEntity<ConfigEmpreendimentoOutros>(configEmpreeendimentoOutrosService.buscarPorId(id), HttpStatus.OK);
     }

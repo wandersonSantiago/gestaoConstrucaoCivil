@@ -15,19 +15,19 @@ import br.com.system.gestaoConstrucaoCivil.entity.Categoria;
 import br.com.system.gestaoConstrucaoCivil.service.CategoriaService;
 
 @RestController
-@RequestMapping("/rest/almoxarifado")
+@RequestMapping("/rest/almoxarifado/categoria")
 public class CategoriaRestController {
 
 	@Autowired
 	private CategoriaService categoriaService;
 
-	@RequestMapping(method = RequestMethod.GET, value = "/listarCategoria")
+	@RequestMapping(method = RequestMethod.GET, value = "/lista")
 	public ResponseEntity<Iterable<Categoria>> buscarCategoria() {
-
-		Iterable<Categoria> categoria = categoriaService.buscarTodos();
+	Iterable<Categoria> categoria = categoriaService.buscarTodos();
 		return new ResponseEntity<Iterable<Categoria>>(categoria, HttpStatus.OK);
 	}
-	@RequestMapping(value = "/listarCategoriaPorId/{id}", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Categoria> buscarCategoriaPorId(@PathVariable Long id) {
 
 		return new ResponseEntity<Categoria>(categoriaService.buscarCategoriaPorId(id), HttpStatus.OK);
@@ -35,19 +35,19 @@ public class CategoriaRestController {
 	
 	
 	
-	@RequestMapping(value = "/cadastrarCategoria", method = RequestMethod.POST)
+	@RequestMapping(value = "/salva", method = RequestMethod.POST)
 	public ResponseEntity salvarCargo(@RequestBody Categoria categoria, UriComponentsBuilder ucBuilder) {
 		categoriaService.salvarOuEditar(categoria);
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("rest/almoxarifado/cadastrarCategoria/{id}").buildAndExpand(categoria.getId()).toUri());
+		headers.setLocation(ucBuilder.path("rest/almoxarifado/categoria/salva/{id}").buildAndExpand(categoria.getId()).toUri());
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/alterarCategoria", method = RequestMethod.PUT)
+	@RequestMapping(value = "/altera", method = RequestMethod.PUT)
 	public ResponseEntity alterarCategoria(@RequestBody Categoria categoria, UriComponentsBuilder ucBuilder) {
 		categoriaService.salvarOuEditar(categoria);
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("rest/almoxarifado/alterarCategoria/{categoria}")
+		headers.setLocation(ucBuilder.path("rest/almoxarifado/categoria/altera/{categoria}")
 				.buildAndExpand(categoria.getId()).toUri());
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}

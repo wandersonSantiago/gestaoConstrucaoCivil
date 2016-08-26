@@ -4,17 +4,27 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 		
 	
 	
-	 self.cadastrarServicoEmpresa = function(servicoEmpresa){
-		 servicoEmpresaService.servicoEmpresaCreate(self.servicoEmpresa);
-		 self.servicoEmpresa = servicoEmpresa;
-	}
+	 self.salva = function(servicoEmpresa){
+		 servicoEmpresaService.salva(self.servicoEmpresa).
+			then(function(response){
+				self.servicoEmpresa = null;
+				}, function(errResponse){
+			});
+		}
 	 
-	 self.buscarServicoEmpresas = function(){
-		 servicoEmpresaService.servicoEmpresaFindAll().
+	 self.altera = function(servicoEmpresa){
+		 servicoEmpresaService.altera(self.servicoEmpresa).
+			then(function(response){
+				self.servicoEmpresa = null;
+				}, function(errResponse){
+			});
+		}
+	 
+	 self.lista = function(){
+		 servicoEmpresaService.lista().
 			then(function(t){
 				self.listaServicoEmpresa = t;
 				}, function(errResponse){
-				toastr.error('Erro ao tentar buscar os servicos das empresas');
 			});
 		};
 	
