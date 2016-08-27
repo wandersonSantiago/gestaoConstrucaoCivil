@@ -37,7 +37,7 @@ public class Produto extends AbstractPersistable<Long> {
 	@JoinColumn(name = "id_categoria", nullable = true)
 	private Categoria categoria;
 	
-	@ManyToMany(cascade = {CascadeType.MERGE ,CascadeType.PERSIST},fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "produtos_fornecedores", joinColumns = @JoinColumn(name = "id_produto"), 
 	inverseJoinColumns = @JoinColumn(name = "id_fornecedor"))
 	private List<Fornecedor> fornecedores;

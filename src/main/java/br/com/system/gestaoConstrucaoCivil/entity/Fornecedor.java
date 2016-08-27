@@ -28,7 +28,7 @@ public class Fornecedor extends AbstractPersistable<Long> {
 	@Column(nullable = false)
 	private boolean ativo;
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL ,fetch = FetchType.LAZY)
 	@JoinTable(name = "produtos_fornecedores", joinColumns = @JoinColumn(name = "id_fornecedor"), 
 	inverseJoinColumns = @JoinColumn(name = "id_produto"))
 	private List<Produto> produtos;
