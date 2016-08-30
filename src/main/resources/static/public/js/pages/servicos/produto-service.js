@@ -3,6 +3,7 @@ app.factory('produtoService', function($rootScope, toastr, $http,$q){
 	
 	return{
 		salva: function(produto){			
+			console.log(produto);
 			return $http.post('/rest/almoxarifado/produto/salva', produto)
 			.then(function(response){
 				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});

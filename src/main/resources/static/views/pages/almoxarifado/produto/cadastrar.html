@@ -116,9 +116,9 @@
 							<tbody 	ng-repeat="fornecedores in protudoCtr.listaFornecedores" ng-model="selecionado"  >
 							<tr>
 								<td><input type="checkbox"   ng-model="fornecedores.selecionado" ng-click="protudoCtr.ativarExcluirLote(listaFornecedores)" ></td>					
-								<td>{{fornecedores.fornecedor.razaoSocial}}</td>
-								<td>{{fornecedores.fornecedor.nomeFantasia}}</td>	
-								<td>{{fornecedores.fornecedor.cnpj}}</td>			
+								<td>{{fornecedores.fornecedor.dadoEmpresa.razaoSocial}}</td>
+								<td>{{fornecedores.fornecedor.dadoEmpresa.nomeFantasia}}</td>	
+								<td>{{fornecedores.fornecedor.dadoEmpresa.cnpj}}</td>			
 								
 							</tr>
 							</tbody>

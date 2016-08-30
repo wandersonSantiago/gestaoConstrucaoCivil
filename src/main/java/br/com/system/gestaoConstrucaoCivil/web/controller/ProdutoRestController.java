@@ -30,7 +30,13 @@ public class ProdutoRestController {
 	 
 	 @RequestMapping(value="/salva", method = RequestMethod.POST)
 	 public ResponseEntity salva(@RequestBody Produto produto,UriComponentsBuilder ucBuilder)
-	 { produtoService.salvarOuEditar(produto);
+	 {
+		 for(int i = 0 ; i < produto.getFornecedores().size(); i++ ){
+			 System.out.println(produto.getFornecedores().get(i).getId());
+			 System.out.println(produto.getId());
+		 }
+		
+		// produtoService.salvarOuEditar(produto);
 		 HttpHeaders headers = new HttpHeaders();
 		 headers.setLocation(ucBuilder.path("/rest/almoxarifado/produto/salva/{id}").buildAndExpand(produto.getId()).toUri());
 		 return new ResponseEntity(headers, HttpStatus.CREATED);
