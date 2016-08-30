@@ -177,6 +177,14 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 		templateUrl:"views/pages/almoxarifado/produto/lista.html",
 	})
 	
+	//ESTOQUE
+	
+	.when('/almoxarifado/produto/entradaEstoque', {
+		templateUrl:"views/pages/almoxarifado/produto/entradaEstoque.html",
+	})
+	.when('/almoxarifado/produto/saidaEstoque', {
+		templateUrl:"views/pages/almoxarifado/produto/saidaEstoque.html",
+	})
 //==============================================================================
 	//ROTAS DE ESCAPE
 	

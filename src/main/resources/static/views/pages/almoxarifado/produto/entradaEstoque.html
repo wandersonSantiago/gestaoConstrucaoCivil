@@ -1,0 +1,167 @@
+<meta charset="UTF-8">
+<br>
+<br>
+<div class="generic-container"  ng-controller="notaFiscalController as notaFiscalCtrl" >
+
+<div class="box box-primary" >
+		<!-- Default panel contents -->
+		<div class="box-header" >
+			<span class="lead">Entrada Estoque Produto </span>
+		</div>
+		<div class="panel-body">
+
+			<br>
+			<div class="container col-sm-12 " ng-init="notaFiscalCtrl.codigoBarras()">
+				<form role="form-vertical" ng-submit="notaFiscalCtrl.salva()" >
+					
+				<h3>Descrição Produto</h3>
+					
+					<br>
+					
+					<div class="row">
+						<label class="col-sm-2 control-label" for="descricao"> Descrição Produto</label>
+						<div class="col-sm-5">
+							<input class="form-control"  id="descricaoProduto" type="text" disabled>
+						</div>
+					</div>
+					
+					<br>
+										
+					<div class="row">
+						<label class="col-sm-2 control-label" for="codigoBarra">Código Barras</label>
+						<div class="col-sm-4">
+							<input class="form-control"  id="codigoBarra" type="text" disabled>
+						</div>
+					</div>
+						
+					<br>
+					
+					<div class="row">
+						<label class="col-sm-2 control-label" for="qtdMaxima">Quantidade Maxima</label>
+						<div class="col-sm-4">
+							<input class="form-control"  id=""qtdMaxima" type="text" disabled>
+						</div>
+						<label class="col-sm-2 control-label" for="qtdMinima">Quantidade Minima</label>
+						<div class="col-sm-4">
+							<input class="form-control"  id="qtdMinima"  type="text" disabled>
+						</div>
+					</div>
+					
+					<br>
+					
+					<div class="row">
+						<label class="col-sm-2 control-label" for="unidadeMedida">Unidade de Medida</label>
+						<div class="col-sm-4" ng-controller="unidadeMedidaController as unidadeCtrl" ng-init="unidadeCtrl.lista()">
+						<select class="form-control select2"  
+							ng-options="listaunidadeMedidas for listaunidadeMedidas in unidadeCtrl.listaUnidadeMedida" 
+							  style=" width: 100%;" required disabled>
+								<option value="">---Selecione---</option>
+							</select>
+						</div>
+				
+						<label class="col-sm-2 control-label" for="categoria">Categoria</label>
+						<div class="col-sm-4" ng-controller="categoriaController as categoriaCtrl" ng-init="categoriaCtrl.lista()">
+						<select class="form-control select2"  
+							ng-options="listaCategorias.descricao for listaCategorias in categoriaCtrl.categorias" 
+							  style=" width: 100%;" required disabled>
+								<option value="">---Selecione---</option>
+							</select>
+						</div>
+					</div>
+					
+					
+					<br>
+										
+					<hr>
+					
+					<h3>Nota fiscal</h3>
+					
+					<br>
+		
+					<div class="row">
+						<label class="col-sm-2 control-label" for="numeroNota">Numero nota Fiscal</label>
+						<div class="col-sm-4">
+							<input class="form-control"  id="numeroNota" type="text" >
+						</div>
+						<label class="col-sm-2 control-label" for="chave">Chave de Acesso</label>
+						<div class="col-sm-4">
+							<input class="form-control"  id="chave"  type="text" >
+						</div>
+					</div>
+					
+					<br>
+						
+					<div class="row">
+						<label class="col-sm-2 control-label" for="dataNota">Data Nota Fiscal</label>
+						<div class="col-sm-4">
+							<input class="form-control"  id="dataNota" type="text" ui-date >
+						</div>
+						<label class="col-sm-2 control-label" for="vencimento">Vencimento</label>
+						<div class="col-sm-4">
+							<input class="form-control"  id="vencimento"  type="text" ui-date >
+						</div>
+					</div>
+					
+					<br>
+					
+					<div class="row">
+						<label class="col-sm-2 control-label" for="qtdMinima">Quantidade produto</label>
+						<div class="col-sm-4">
+							<input class="form-control"  id="qtdMinima"  type="text" >
+						</div>
+						<label class="col-sm-2 control-label" for="valorCompra">Valor de Compra</label>
+						<div class="col-sm-4">
+							<input class="form-control"  id="valorCompra"  type="text" ui-money-mask="2">
+						</div>
+					</div>
+					
+					<br>
+					
+					<div class="row">
+						<label class="col-sm-2 control-label" for="obs">Observação</label>
+						<div class="col-sm-4">
+							<input class="form-control"  id="obs" type="text" >
+						</div>
+						<label class="col-sm-2 control-label" for="valor">Valor Total</label>
+						<div class="col-sm-4">
+							<input class="form-control"  id="valor"  type="text" ui-money-mask="2">
+						</div>
+					</div>
+					
+					<br>
+					<hr>
+					<h3>Fornecedor</h3>
+					<br>
+					<div class="row">
+						<label class="col-sm-2 control-label" for="fornecedor">Fornecedor</label>
+						<div class="col-sm-4" ng-controller="fornecedorController as forCtrl" ng-init="forCtrl.lista()" >
+							<select class="form-control select2" ng-model="protudoCtr.fornecedor" id="fornecedor"
+							ng-options="listaFornecedores.dadoEmpresa.razaoSocial for listaFornecedores in forCtrl.fornecedores" 
+							  style=" width: 100%;" >
+								<option value="">---Selecione---</option>
+							</select>
+						</div>
+					</div>
+						
+					<br>
+					
+					<div class="row ">
+						<div class="col-sm-3"></div>
+						<div class="col-sm-3">
+							<input type="submit" id="submit" value="Salvar"
+								class="btn btn-lg btn-primary btn-block btn-signin">
+						</div>
+						<div class="col-sm-3">
+							<a class="btn btn-lg btn-success btn-block btn-signin" href="#/">Menu Principal</a>
+							
+						</div>
+					</div>
+
+
+				</form>
+			</div>
+
+		</div>
+		<div class="tablecontainer"></div>
+	</div>
+</div>
