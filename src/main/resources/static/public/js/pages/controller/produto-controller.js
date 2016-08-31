@@ -36,7 +36,7 @@ app.controller('produtoController', function($scope,produtoService, $routeParams
 		self.adicionarFornecedores = function(fornecedor){
 			self.listaFornecedores.push({
 				 
-				
+				fornecedor
 			});
 			
 			console.log(self.listaFornecedores);
