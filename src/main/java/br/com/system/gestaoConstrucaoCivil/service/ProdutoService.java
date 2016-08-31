@@ -23,6 +23,11 @@ public class ProdutoService {
 	 		return produtoRepository.findAll();
 	 }
 	
+	public Produto buscaProdutoPorId(Long id){
+		
+		return produtoRepository.findOne(id);
+	}
+	
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(Produto produto)
 	{

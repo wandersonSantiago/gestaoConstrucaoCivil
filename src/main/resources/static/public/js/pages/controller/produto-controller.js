@@ -1,6 +1,7 @@
 app.controller('produtoController', function($scope,produtoService, $routeParams){
 	
 	var self = this;
+	var idProduto = $routeParams.idProduto;
 		self.listaFornecedores = [];
 	
 	 self.salva = function(produto){
@@ -25,16 +26,19 @@ app.controller('produtoController', function($scope,produtoService, $routeParams
 	 self.lista = function(){
 		 produtoService.lista().
 			then(function(t){
-				self.produto = t;
+				self.produtos = t;
+				console.log(self.produtos);
 				}, function(errResponse){
 			});
 		};
 	
 		//cria uma lista de fornecedores
-		self.adicionarFornecedores = function(){
+		self.adicionarFornecedores = function(fornecedor){
 			self.listaFornecedores.push({
-				fornecedor : self.fornecedor
+				 
+				
 			});
+			
 			console.log(self.listaFornecedores);
 			self.fornecedores = null;
 		}
@@ -56,5 +60,17 @@ app.controller('produtoController', function($scope,produtoService, $routeParams
 				if(!fornecedores.selecionado) return fornecedores;
 				$scope.ativadoExcluirLote = null;
 			});
+		}
+		self.buscaPorId = function(id){
+			if(!id)return;
+			produtoService.buscaPorId(id).
+			then(function(p){
+				self.produto = p;
+				}, function(errResponse){
+			});
+		};
+		
+		if(idProduto){
+			self.buscaPorId(idProduto);
 		}
 });
