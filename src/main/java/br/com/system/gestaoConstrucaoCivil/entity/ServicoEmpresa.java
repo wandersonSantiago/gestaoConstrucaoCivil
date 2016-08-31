@@ -19,9 +19,6 @@ public class ServicoEmpresa extends AbstractPersistable<Long>{
 	@JoinColumn(name="id_prestadora_servico",nullable = false)
 	private PrestadoraServico prestadoraServico;
 	
-	@ManyToOne
-	@JoinColumn(name="id_imovel",nullable = false)
-	private Imovel imovel;
 	
 	private Double porcentagem;
 	
@@ -42,12 +39,7 @@ public class ServicoEmpresa extends AbstractPersistable<Long>{
 	public void setPrestadoraServico(PrestadoraServico prestadoraServico) {
 		this.prestadoraServico = prestadoraServico;
 	}
-	public Imovel getImovel() {
-		return imovel;
-	}
-	public void setImovel(Imovel imovel) {
-		this.imovel = imovel;
-	}
+	
 	public Double getPorcentagem() {
 		return porcentagem;
 	}
