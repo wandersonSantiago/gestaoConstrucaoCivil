@@ -15,6 +15,7 @@ import br.com.system.gestaoConstrucaoCivil.repository.ProdutoRepository;
 public class ProdutoService {
 
 
+	
 	@Autowired
 	private ProdutoRepository produtoRepository;
 	
@@ -32,6 +33,8 @@ public class ProdutoService {
 	public void salvarOuEditar(Produto produto)
 	{
 		produtoRepository.save(produto);
+	
 	}
+	
 	
 }

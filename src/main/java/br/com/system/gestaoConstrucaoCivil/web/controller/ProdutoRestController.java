@@ -39,10 +39,10 @@ public class ProdutoRestController {
 	 @RequestMapping(value="/salva", method = RequestMethod.POST)
 	 public ResponseEntity salva(@RequestBody Produto produto,UriComponentsBuilder ucBuilder)
 	 {
-		 /*for(int i = 0 ; i < produto.getFornecedores().size(); i++ ){
+		 for(int i = 0 ; i < produto.getFornecedores().size(); i++ ){
 			 System.out.println(produto.getFornecedores().get(i).getContato());
-			 System.out.println(produto.getCodigoBarra());
-		 }*/
+			 System.out.println(produto.getDescricao());
+		 }
 		
 		 produtoService.salvarOuEditar(produto);
 		 HttpHeaders headers = new HttpHeaders();

@@ -4,7 +4,7 @@ app.controller('produtoController', function($scope,produtoService, $routeParams
 	var idProduto = $routeParams.idProduto;
 		self.listaFornecedores = [];
 	
-	 self.salva = function(produto){
+		self.salva = function(produto){
 		 self.produto.fornecedores = self.listaFornecedores;
 			 produtoService.salva(self.produto).
 				then(function(response){
@@ -13,7 +13,7 @@ app.controller('produtoController', function($scope,produtoService, $routeParams
 					}, function(errResponse){
 				});
 	 }
-	 self.altera = function(produto){
+	 	self.altera = function(produto){
 		 self.produto.fornecedores = self.listaFornecedores;
 			 produtoService.altera(self.produto).
 				then(function(response){
@@ -23,7 +23,7 @@ app.controller('produtoController', function($scope,produtoService, $routeParams
 				});
 	 }
 	 
-	 self.lista = function(){
+	 	self.lista = function(){
 		 produtoService.lista().
 			then(function(t){
 				self.produtos = t;
@@ -34,10 +34,9 @@ app.controller('produtoController', function($scope,produtoService, $routeParams
 	
 		//cria uma lista de fornecedores
 		self.adicionarFornecedores = function(fornecedor){
-			self.listaFornecedores.push({
-				 
-				fornecedor
-			});
+			self.listaFornecedores.push(
+				 fornecedor
+			);
 			
 			console.log(self.listaFornecedores);
 			self.fornecedores = null;
