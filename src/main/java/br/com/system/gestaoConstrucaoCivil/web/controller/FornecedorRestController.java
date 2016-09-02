@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import br.com.system.gestaoConstrucaoCivil.entity.Fornecedor;
+import br.com.system.gestaoConstrucaoCivil.findControll.FornecedorFindControll;
 import br.com.system.gestaoConstrucaoCivil.service.FornecedorService;
 
 @RestController
@@ -20,10 +23,12 @@ public class FornecedorRestController {
 
 	@Autowired
 	private FornecedorService fornecedorService;
-
+	
+	
+	
+	@JsonView(FornecedorFindControll.class)
 	@RequestMapping(method = RequestMethod.GET, value = "/lista")
 	public ResponseEntity<Iterable<Fornecedor>> buscarFornecedores() {
-
 		Iterable<Fornecedor> fornecedor = fornecedorService.buscarTodos();
 		return new ResponseEntity<Iterable<Fornecedor>>(fornecedor, HttpStatus.OK);
 	}
