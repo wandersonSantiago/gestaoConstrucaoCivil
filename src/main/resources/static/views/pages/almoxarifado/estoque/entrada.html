@@ -1,0 +1,110 @@
+<meta charset="UTF-8">
+<br>
+<br>
+<div class="generic-container"  ng-controller="notaFiscalController as notaFiscalCtrl" >
+
+<div class="box box-primary" >
+		<!-- Default panel contents -->
+		<div class="box-header" >
+			<span class="lead">Entrada Estoque Produto </span>
+		</div>
+		<div class="panel-body">
+
+			<br>
+			<div class="container col-sm-12 " >
+				<form role="form-vertical" ng-submit="notaFiscalCtrl.salva()" >
+					
+									
+					<h3>Nota fiscal</h3>
+					
+					<br>
+		
+					<div class="row">
+						<!-- <label class="col-sm-2 control-label" for="numeroNota">Numero nota Fiscal</label> -->
+						<div class="col-sm-3">
+							<input class="form-control"  id="numeroNota" type="text" title="informe o numero da nota fiscal" placeholder="Numero nota fiscal" >
+						</div>
+						<!-- <label class="col-sm-2 control-label" for="chave">Chave de Acesso</label> -->
+						<div class="col-sm-3">
+							<input class="form-control"  id="chave"  type="text" title="informe a chave de acesso da nota fiscal" placeholder="chave de acesso nota fiscal" >
+						</div>
+						<!-- <label class="col-sm-2 control-label" for="dataNota">Data Nota Fiscal</label> -->
+						<div class="col-sm-3">
+							<input class="form-control"  id="dataNota" type="text" ng-model="notaFiscalCtrl.dataNota" ui-date title="informe a data da nota fiscal"  placeholder="data nota fiscal">
+						</div>
+						<!-- <label class="col-sm-2 control-label" for="vencimento">Vencimento</label> -->
+						<div class="col-sm-3">
+							<input class="form-control"  id="vencimento"  type="text" ng-model="notaFiscalCtrl.dataVencimento" ui-date title="informe a data de vencimento da nota fiscal" placeholder="vecimento nota fiscal">
+						</div>
+					</div>
+					
+					<br>
+					<hr>
+					<div class="row">						
+						<div class="col-sm-4">
+							<input class="form-control"  id="produto"  type="text" title="adicione o produto na nota fiscal, atraves do codigo item ou codigo de barras" placeholder="Adicionar Produto">
+						</div>
+					</div>
+					<br>
+					
+					<hr>
+					<table class="table table-hover table-bordered">
+					
+					<tbody
+						ng-repeat=" funcionario in funCtrl.listaFuncionarios | filter : buscaFuncionario">
+						<tr>
+							<td><input class="form-control"  id="codigoBarras"  type="text" placeholder="Código de barras"></td>
+							<td><input class="form-control"  id="descricaoProduto"  type="text" placeholder="descrição do Produto" ></td>
+							<td><input class="form-control"  id="quantidadeProduto"  type="text" placeholder="quantidade"></td>
+							<td><input class="form-control"  id="valorProduto"  type="text" ui-money-mask placeholder="Preço"></td>
+						</tr>
+	
+					</tbody>
+					<tfoot>
+						<tr>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th>{{somaTotal}}</th>
+	
+						</tr>
+					</tfoot>
+				</table>
+
+					<br>
+					<hr>
+					<h3>Fornecedor</h3>
+					<br>
+					<div class="row">
+							<div class="col-sm-4" ng-controller="fornecedorController as forCtrl" ng-init="forCtrl.lista()" >
+							<select class="form-control select2" ng-model="protudoCtr.fornecedor" id="fornecedor"
+							ng-options="listaFornecedores.dadoEmpresa.razaoSocial for listaFornecedores in forCtrl.fornecedores" 
+							  style=" width: 100%;" >
+								<option value="">---Fornecedor---</option>
+							</select>
+						</div>
+					</div>
+						
+					<br>
+					<div class="row">
+						
+							<input class="form-control"  id="obs" type="text" placeholder="Observação">
+												
+					</div>
+					<br>
+					<div class="row ">
+						
+						
+							<input type="submit" id="submit" value="Salvar"	class="btn btn-lg btn-primary btn-block btn-signin">
+						
+						
+					</div>
+
+
+				</form>
+			</div>
+
+		</div>
+		<div class="tablecontainer"></div>
+	</div>
+</div>

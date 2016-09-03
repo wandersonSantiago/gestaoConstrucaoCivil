@@ -1,0 +1,48 @@
+<meta charset="UTF-8">
+<br>
+<br>
+<div class="generic-container"
+	ng-controller="areaProdutoController as areaCtrl">
+
+	<div class="box box-primary" ng-init="areaCtrl.lista()">
+	
+		<div class="box-header">
+			<span class="lead">Lista de Areas Produto </span>
+		</div>
+		<div class="panel-body">
+		<input type="text" class="form-control" ng-model="buscar" placeholder="buscar">
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+					
+						<th>Status</th>
+						<th>Descrição</th>
+						
+						
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" areaProduto in areaCtrl.listaAreaProduto | filter : buscar ">
+					<tr>
+						
+						<td>{{ areaProduto.ativo }}</td>
+						<td>{{ areaProduto.descricao }}</td>
+					
+						<td><a href="#/almoxarifado/areaProduto/editar/{{areaProduto.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						
+					</tr>
+
+				</tbody>
+				<tfoot>
+				
+					
+				</tfoot>
+			</table>
+		</div>
+		<!-- /.box-body -->
+	</div>
+	<!-- /.box -->
+</div>
+<!-- /.col -->
+</div>
+<!-- /.row -->

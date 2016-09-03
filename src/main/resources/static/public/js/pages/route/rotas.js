@@ -9,7 +9,9 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 	.when('/home', {
 		templateUrl : "views/home.html"
 	})
-	
+	.when('/404', {
+		templateUrl : "views/erros/404.html"
+	})
 		.when('/login', {
 		templateUrl : "views/login.html"
 	})
@@ -177,13 +179,36 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 		templateUrl:"views/pages/almoxarifado/produto/lista.html",
 	})
 	
+	//AREA DO PRODUTO
+	
+	.when('/almoxarifado/areaProduto/cadastrar', {
+		templateUrl:"views/pages/almoxarifado/areaProduto/cadastrar.html",
+	})
+	.when('/almoxarifado/areaProduto/editar/:idAreaProduto', {
+		templateUrl:"views/pages/almoxarifado/areaProduto/editar.html",
+	})
+	.when('/almoxarifado/areaProduto/lista', {
+		templateUrl:"views/pages/almoxarifado/areaProduto/lista.html",
+	})
+	
+	//FABRICANTE
+	
+	.when('/almoxarifado/fabricante/cadastrar', {
+		templateUrl:"views/pages/almoxarifado/fabricante/cadastrar.html",
+	})
+	.when('/almoxarifado/fabricante/editar/:idFabricante', {
+		templateUrl:"views/pages/almoxarifado/fabricante/editar.html",
+	})
+	.when('/almoxarifado/fabricante/lista', {
+		templateUrl:"views/pages/almoxarifado/fabricante/lista.html",
+	})
 	//ESTOQUE
 	
-	.when('/almoxarifado/produto/entradaEstoque', {
-		templateUrl:"views/pages/almoxarifado/produto/entradaEstoque.html",
+	.when('/almoxarifado/estoque/entrada', {
+		templateUrl:"views/pages/almoxarifado/estoque/entrada.html",
 	})
-	.when('/almoxarifado/produto/saidaEstoque', {
-		templateUrl:"views/pages/almoxarifado/produto/saidaEstoque.html",
+	.when('/almoxarifado/estoque/saida', {
+		templateUrl:"views/pages/almoxarifado/estoque/saida.html",
 	})
 //==============================================================================
 	//ROTAS DE ESCAPE

@@ -1,0 +1,244 @@
+<meta charset="UTF-8">
+<br>
+<br>
+<div class="generic-container"
+	ng-controller="fabricanteController as fabricanteCtrl">
+
+<div class="box box-primary" >
+		<!-- Default panel contents -->
+		<div class="box-header" >
+			<span class="lead">Cadastro de Fabricante</span>
+		</div>
+		<div class="panel-body">
+
+			<br>
+			<div class="container col-sm-12 ">
+				<form role="form-vertical" name="formFabricante"
+					ng-submit="fabricanteCtrl.salva()">
+					<div class="row">
+						<label class="col-sm-1 control-label" for="razaoSocial">Razão
+							Social</label>
+						<div class="col-sm-11" ng-class="{ 'has-error' : formFabricante.razaoSocial.$invalid && !formFabricante.razaoSocial.$pristine }">
+							<input class="form-control" ng-minlength="5" ng-maxlength="50" 
+								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.razaoSocial"
+								id="razaoSocial" name="razaoSocial" type="text" required>
+						</div>
+					</div>
+					<p ng-show="formFabricante.razaoSocial.$error.minlength"
+						class="alert alert-warning ">campo Razão Social no minimo 5 caracter</p>
+					<p ng-show="formFabricante.razaoSocial.$error.maxlength"
+						class="alert alert-warning ">campo Razão Social no maximo 50 caracter</p>
+					<br>
+					
+					
+					<div class="row">
+						<label class="col-sm-1 control-label" for="nomeFantasia">Nome
+							Fantasia</label>
+						<div class="col-sm-11" ng-class="{ 'has-error' : formFabricante.nomeFantasia.$invalid && !formFabricante.razaoSocial.$pristine }">
+							<input class="form-control" ng-minlength="5" ng-maxlength="50"
+								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.nomeFantasia"
+								id="nomeFantasia" name="nomeFantasia" type="text" required>
+						</div>
+					</div>
+					<p ng-show="formFabricante.nomeFantasia.$error.minlength"
+						class="alert alert-warning ">campo nome Fantasia no minimo 5 caracter</p>
+					<p ng-show="formFabricante.nomeFantasia.$error.maxlength"
+						class="alert alert-warning ">campo nome Fantasia no maximo 50 caracter</p>
+					<br>
+					
+					
+					<div class="row">
+						<label class="col-sm-1 control-label" for="nomeFantasia">Email
+						</label>
+						<div class="col-sm-11">
+							<input class="form-control" name="emailPrestadora"
+								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.email" id="email"
+								type="email" required>
+								<p ng-show="formFabricante.emailPrestadora.$error.email"
+						class="alert alert-warning ">Digite um Email Válido</p>
+						</div>
+					</div>
+					<br>
+					
+					
+					<div class="row">
+						<label class="col-sm-1 control-label" for="cnpj">CNPJ</label>
+						<div class="col-sm-5">
+							<input class="form-control" name="cnpjField"
+								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.cnpj" id="cnpj"
+								type="text" ui-br-cnpj-mask required>
+								<p ng-show="formFabricante.cnpjField.$error.cnpj"
+								class="alert alert-warning ">Digite um CNPJ válido!!</p>
+						</div>
+						
+						
+						<label class="col-sm-1 control-label" for="telefone">Telefone</label>
+						<div class="col-sm-5">
+							<input class="form-control"
+								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.telefone" id="telefone"
+								type="tel" ui-br-phone-number required>
+						</div>
+					</div>
+					<br>
+					
+					
+					<div class="row">
+						<label class="col-sm-1 control-label" for="inscricaoEstadual">Inscrição Estadual</label>
+						<div  class="col-sm-2">
+					<select class="form-control" ng-init="ufs=['AC','AL','AM','AP','BA','CE','DF','ES','GO','MA',
+      				'MG','MS','MT','PA','PB','PE','PI','PR','RJ','RN','RO','RR','RS','SC','SE','SP','TO']" ng-model="selectedUF" ng-options="uf for uf in ufs">
+					<option value="">selecione o estado</option>
+					</select>
+					</div>
+					
+						<div class="col-sm-5">
+							<input class="form-control" name="iefield" 
+								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.inscricaoEstadual"
+								id="inscricaoEstadual" type="text" ui-br-ie-mask='selectedUF'
+								required>
+						 <p ng-show="formFabricante.iefield.$error.ie"	class="alert alert-warning ">Digite um Inscrição Estadual Válida</p>
+						</div>
+							
+					</div>
+					<br>
+
+
+
+					<h4>Endereço</h4>
+
+
+
+					<br>
+					<div class="row">
+						<label class="col-sm-1 control-label" for="cep">CEP</label>
+						<div class="col-sm-5">
+						
+							<input class="form-control"
+								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.endereco.cep" id="cep"
+								type="text" name="cepField" ui-br-cep-mask ng-blur="fabricanteCtrl.findCep()"  onkeyup="if(this.value.length > 8) { numeroEmpresa.focus(); }"   ui-br-cep-mask required>
+								
+							<p ng-show="formFabricante.cepField.$error.cep" class="alert alert-warning ">Digite um CEP Válido</p>
+						</div>
+						
+						
+						
+						<label class="col-sm-1 control-label" for="numero">Número</label>
+						<div class="col-sm-5"
+							ng-class="{ 'has-error' : formFabricante.numeroEmpresa.$invalid && !formFabricante.numeroEmpresa.$pristine }">
+							<input class="form-control" name="numeroEmpresa"
+								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.endereco.numero"
+								id="numero" type="text" ng-minlength="1" ng-maxlength="7"
+								required>
+						</div>
+					</div>
+					<p ng-show="formFabricante.numeroEmpresa.$error.minlength"
+						class="alert alert-warning ">campo numero no minimo 1 caracter</p>
+					<p ng-show="formFabricante.numeroEmpresa.$error.maxlength"
+						class="alert alert-warning ">campo numero no maximo 7 caracter</p>
+
+					<br>
+
+
+					<div class="row">
+						<!-- <fieldset disabled> -->
+						<label class="col-sm-1 control-label" for="rua">Rua</label>
+						<div class="col-sm-11">
+							<input class="form-control"
+								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.endereco.logradouro" id="rua"
+								type="text" required>
+						</div>
+					</div>
+					<br>
+					
+					
+					<div class="row">
+						<!-- <fieldset disabled> -->
+						<label class="col-sm-1 control-label" for="bairro">Bairro</label>
+						<div class="col-sm-5">
+							<input class="form-control"
+								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.endereco.bairro"
+								id="bairro" type="text" required>
+
+						</div>
+						
+						
+						<label class="col-sm-1 control-label" for="cidade">Cidade</label>
+						<div class="col-sm-5">
+							<input class="form-control"
+								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.endereco.localidade"
+								id="cidade" type="text" required>
+						</div>
+					</div>
+					<br>
+					
+					
+					<div class="row">
+						<!-- <fieldset disabled> -->
+						<label class="col-sm-1 control-label" for="estado">Estado</label>
+						<div class="col-sm-5">
+							<input class="form-control"
+								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.endereco.uf"
+								id="estado" type="text" required>
+						</div>
+						
+					</div>
+					<br>
+					
+					
+					<div class="row">
+						<label class="col-sm-1 control-label" for="contato">Complemento</label>
+						<div class="col-sm-11">
+							<input class="form-control"
+								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.endereco.complemento"
+								id="complemento" type="text">
+
+						</div>
+					</div>
+					<br>
+					
+					
+					<div class="row">
+						<label class="col-sm-1 control-label" for="contato">Contato</label>
+						<div class="col-sm-11">
+							<input class="form-control"
+								ng-model="fabricanteCtrl.fabricante.contato"
+								id="contato" type="text">
+
+						</div>
+					</div>
+					
+					<br>
+					
+					
+					<div class="row">
+						<label class="col-sm-1 control-label" for="observacao">Observação</label>
+						<div class="col-sm-11">
+							<input class="form-control"
+								ng-model="fabricanteCtrl.fabricante.observacao"
+								id="observacao" type="text">
+
+						</div>
+					</div>
+					<br>
+                    
+
+
+					<div class="row ">
+						<div class="col-sm-3"></div>
+						<div class="col-sm-3">
+							<input type="submit" id="submit" value="Salvar"
+								class="btn btn-lg btn-primary btn-block btn-signin">
+						</div>
+						<div class="col-sm-3">
+							<a class="btn btn-lg btn-success btn-block btn-signin" href="#/">Menu Principal</a>
+							
+						</div>
+					</div>
+
+				</form>
+			</div>
+
+		</div>
+		<div class="tablecontainer"></div>
+	</div>
+</div>

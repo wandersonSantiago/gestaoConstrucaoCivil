@@ -44,19 +44,30 @@
 					</div>
 					
 					<br>
-					
 					<div class="row">
-						<label class="col-sm-2 control-label" for="qtdMaxima">Quantidade Maxima</label>
-						<div class="col-sm-4">
-							<input class="form-control" ng-model="protudoCtr.produto.quantidadeMaxima" id=""qtdMaxima" type="text">
+						<label class="col-sm-2 control-label" for="tipoProduto">Tipo do produto</label>
+						<div class="col-sm-4" ng-controller="tipoProdutoController as tipoProdutoCtrl" ng-init="tipoProdutoCtrl.lista()">
+						<select class="form-control select2" ng-model="protudoCtr.produto.tipoProduto" 
+							ng-options="listaTipoProdutos.descricao for listaTipoProdutos in tipoProdutoCtrl.listaTipoProduto" 
+							  style=" width: 100%;" required >
+								<option value="">---Selecione---</option>
+							</select>
 						</div>
-						<label class="col-sm-2 control-label" for="qtdMinima">Quantidade Minima</label>
-						<div class="col-sm-4">
-							<input class="form-control" ng-model="protudoCtr.produto.quantidadeMinima" id="qtdMinima"  type="text">
+				
+						<label class="col-sm-2 control-label" for="areaProduto">Area do produto</label>
+						<div class="col-sm-4" ng-controller="areaProdutoController as areaProdutoCtrl" ng-init="areaProdutoCtrl.lista()">
+						<select class="form-control select2" ng-model="protudoCtr.produto.areaProduto" 
+							ng-options="listaAreaProdutos.descricao for listaAreaProdutos in areaProdutoCtrl.listaAreaProduto" 
+							  style=" width: 100%;" required >
+								<option value="">---Selecione---</option>
+							</select>
 						</div>
 					</div>
-					
+		
 					<br>
+					
+					
+					
 					
 					<div class="row">
 						<label class="col-sm-2 control-label" for="unidadeMedida">Unidade de Medida</label>
@@ -79,6 +90,17 @@
 					</div>
 		
 					<br>
+					<div class="row">
+						<label class="col-sm-2 control-label" for="fabricante">Fabricante</label>
+						<div class="col-sm-4" ng-controller="fabricanteController as fabricanteCtrl" ng-init="fabricanteCtrl.lista()">
+						<select class="form-control select2" ng-model="protudoCtr.produto.fabricante" 
+							ng-options="listaFabricantes.nomeFantasia for listaFabricantes in fabricanteCtrl.listaFabricante" 
+							  style=" width: 100%;" required >
+								<option value="">---Selecione---</option>
+							</select>
+						</div>
+						</div>
+						<br>
 					
 					<div class="row">
 						<label class="col-sm-2 control-label" for="fornecedor">Fornecedor</label>

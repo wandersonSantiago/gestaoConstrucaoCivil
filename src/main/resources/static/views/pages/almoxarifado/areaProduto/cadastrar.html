@@ -1,0 +1,45 @@
+<meta charset="UTF-8">
+<br>
+<br>
+<div class="generic-container"  ng-controller="areaProdutoController as areaCtrl" >
+
+	<div class="box box-primary" >
+		<!-- Default panel contents -->
+		<div class="box-header" >
+			<span class="lead">Cadastrar Area do Produto </span>
+		</div>
+		<div class="panel-body">
+
+			<br>
+			<div class="container col-sm-12 ">
+				<form role="form-vertical" ng-submit="areaCtrl.salva()" >
+					<div class="row">
+						<label class="col-sm-4 control-label" for="descricao"> Descrição da Categoria</label>
+						<div class="col-sm-8">
+							<input class="form-control" ng-model="areaCtrl.areaProduto.descricao" id="descricao" type="text" required>
+						</div>
+					</div>
+					<br>
+					<br>					
+					
+							
+					<div class="row ">
+						<div class="col-sm-3"></div>
+						<div class="col-sm-3">
+							<input type="submit" id="submit" value="Salvar"
+								class="btn btn-lg btn-primary btn-block btn-signin">
+						</div>
+						<div class="col-sm-3">
+							<a class="btn btn-lg btn-success btn-block btn-signin" href="#/">Menu Principal</a>
+							
+						</div>
+					</div>
+
+
+				</form>
+			</div>
+
+		</div>
+		<div class="tablecontainer"></div>
+	</div>
+</div>
