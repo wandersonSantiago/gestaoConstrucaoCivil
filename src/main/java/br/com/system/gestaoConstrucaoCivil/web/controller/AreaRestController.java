@@ -40,7 +40,7 @@ public class AreaRestController  {
 	}
 	
 	@RequestMapping(value = "/altera", method = RequestMethod.PUT)
-	public ResponseEntity alterarCategoria(@RequestBody Area area, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity alterarArea(@RequestBody Area area, UriComponentsBuilder ucBuilder) {
 		areaService.salvarOuEditar(area);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("rest/almoxarifado/area/altera/{area}").buildAndExpand(area.getId()).toUri());
