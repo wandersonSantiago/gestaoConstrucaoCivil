@@ -18,7 +18,7 @@ initialValue = 1,
 allocationSize = 50)
 
 @Table(name = "area")
-public class Area implements Serializable{
+public class AreaProduto implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "area_id_seq")
@@ -59,7 +59,7 @@ public class Area implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Area other = (Area) obj;
+		AreaProduto other = (AreaProduto) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

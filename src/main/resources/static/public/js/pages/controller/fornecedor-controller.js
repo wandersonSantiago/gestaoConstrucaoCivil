@@ -20,8 +20,12 @@ app.controller('fornecedorController', function($scope,fornecedorService, buscaC
 	
 	
 	 self.salva = function(fornecedor){
-			 fornecedorService.salva(self.fornecedor);
-			 self.fornecedor = fornecedor;
+			 fornecedorService.salva(self.fornecedor)
+			 .then(function(response){
+				 self.fornecedor = fornecedor;
+		}).catch(function(errResponse) {
+		});
+			 
 	}
 	 
 	
@@ -37,7 +41,7 @@ app.controller('fornecedorController', function($scope,fornecedorService, buscaC
 	 self.lista = function(){
 		 fornecedorService.lista().
 			then(function(t){
-				self.fornecedores = t;
+				self.listaFornecedor = t;
 				}, function(errResponse){				
 			});
 		};

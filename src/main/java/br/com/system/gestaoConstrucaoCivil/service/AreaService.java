@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.system.gestaoConstrucaoCivil.entity.Area;
+import br.com.system.gestaoConstrucaoCivil.entity.AreaProduto;
 import br.com.system.gestaoConstrucaoCivil.repository.AreaRepository;
 
 @Service
@@ -18,16 +18,16 @@ public class AreaService {
 	private AreaRepository areaRepository;
 	
 	@Transactional(readOnly = false)
-	public void salvarOuEditar(Area area)
+	public void salvarOuEditar(AreaProduto areaProduto)
 	{
-		areaRepository.save(area);
+		areaRepository.save(areaProduto);
 	}
 	
-    public List<Area> buscarTodos(){
+    public List<AreaProduto> buscarTodos(){
 		
 		return areaRepository.findAll();
 	}
-    public Area buscarPorId(Long id)
+    public AreaProduto buscarPorId(Long id)
     {
     	return areaRepository.findOne(id);
     }

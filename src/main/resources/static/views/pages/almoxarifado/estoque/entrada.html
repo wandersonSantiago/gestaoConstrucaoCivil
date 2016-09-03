@@ -51,7 +51,7 @@
 					<table class="table table-hover table-bordered">
 					
 					<tbody
-						ng-repeat=" funcionario in funCtrl.listaFuncionarios | filter : buscaFuncionario">
+						ng-repeat=" f in notaFiscalCtrl.listaItens | filter : busca">
 						<tr>
 							<td><input class="form-control"  id="codigoBarras"  type="text" placeholder="Código de barras"></td>
 							<td><input class="form-control"  id="descricaoProduto"  type="text" placeholder="descrição do Produto" ></td>
@@ -62,7 +62,7 @@
 					</tbody>
 					<tfoot>
 						<tr>
-							<th></th>
+							<th><input type="button" class="btn-danger" ng-if="ativadoExcluirLote"  value="excluir" name="apagar" ng-click="protudoCtr.apagarFornecedores(protudoCtr.listaFornecedores)"></th>
 							<th></th>
 							<th></th>
 							<th>{{somaTotal}}</th>
@@ -78,7 +78,7 @@
 					<div class="row">
 							<div class="col-sm-4" ng-controller="fornecedorController as forCtrl" ng-init="forCtrl.lista()" >
 							<select class="form-control select2" ng-model="protudoCtr.fornecedor" id="fornecedor"
-							ng-options="listaFornecedores.dadoEmpresa.razaoSocial for listaFornecedores in forCtrl.fornecedores" 
+							ng-options="listaFornecedores.dadoEmpresa.nomeFantasia for listaFornecedores in forCtrl.listaFornecedor" 
 							  style=" width: 100%;" >
 								<option value="">---Fornecedor---</option>
 							</select>

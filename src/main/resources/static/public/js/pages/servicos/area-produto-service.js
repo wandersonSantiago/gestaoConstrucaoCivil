@@ -24,6 +24,7 @@ app.factory('areaProdutoService', function($http,$q , $rootScope, toastr)
 			},
 			
 			buscaPorId: function(param){
+				console.log(param);
 				return $http.get('rest/almoxarifado/areaProduto/buscaPorId/'+param)
 				.then(function(response){
 					return response.data;

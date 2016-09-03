@@ -32,10 +32,10 @@ app.controller('notaFiscalController', function($scope,notaFiscalService, $route
 		
 		
 		//cria uma lista de fornecedores
-		self.adicionarFornecedores = function(){
-			self.listaFornecedores.push({
-				fornecedor : self.fornecedor
-			});
+		self.adicionarFornecedores = function(fornecedor){
+			self.listaFornecedores.push(
+				fornecedor 
+			);
 			console.log(self.listaFornecedores);
 			self.fornecedores = null;
 		}

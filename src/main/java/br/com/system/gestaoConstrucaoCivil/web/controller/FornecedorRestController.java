@@ -26,7 +26,7 @@ public class FornecedorRestController {
 	
 	
 	
-	@JsonView(FornecedorFindControll.class)
+	//@JsonView(FornecedorFindControll.class)
 	@RequestMapping(method = RequestMethod.GET, value = "/lista")
 	public ResponseEntity<Iterable<Fornecedor>> buscarFornecedores() {
 		Iterable<Fornecedor> fornecedor = fornecedorService.buscarTodos();

@@ -11,8 +11,13 @@ app.controller('tipoProdutoController', function($scope, tipoProdutoService, bus
 	
 	self.salva = function(tipoProduto, sucesso){
 		
-		tipoProdutoService.salva(self.tipoProduto);
-		self.tipoProduto = tipoProduto;
+		tipoProdutoService.salva(self.tipoProduto).
+		then(function(response){
+			self.tipoProduto = tipoProduto;
+		}, function(errResponse){
+			
+		});
+		
 		
 	}
 	

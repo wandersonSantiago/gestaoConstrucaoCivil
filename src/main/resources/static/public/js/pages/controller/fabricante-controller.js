@@ -22,8 +22,13 @@ app.controller('fabricanteController', function($scope, fabricanteService, busca
 	
 	self.salva = function(fabricante, sucesso){
 		
-		fabricanteService.salva(self.fabricante);
-		self.fabricante = fabricante;
+		fabricanteService.salva(self.fabricante).
+		then(function(response){
+			self.fabricante = fabricante;
+		}, function(errResponse){
+			
+		});
+		
 		
 	}
 	

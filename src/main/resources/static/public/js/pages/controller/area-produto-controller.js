@@ -17,7 +17,7 @@ app.controller('areaProdutoController', function($scope, areaProdutoService, $ro
 	 self.altera = function(areaProduto){
 		 areaProdutoService.altera(self.areaProduto).
 			then(function(c){
-				self.cargo = null;
+				self.areaProduto = null;
 				}, function(errResponse){
 			});
 		}
@@ -25,7 +25,7 @@ app.controller('areaProdutoController', function($scope, areaProdutoService, $ro
 	 self.lista = function(){
 		 areaProdutoService.lista().
 			then(function(c){
-				$scope.listaAreaProduto = c;
+				self.listaAreaProduto = c;
 				}, function(errResponse){
 			
 			});
