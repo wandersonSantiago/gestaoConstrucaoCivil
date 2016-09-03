@@ -27,6 +27,7 @@ public class Fornecedor extends AbstractPersistable<Long> {
 	@Column(nullable = true, length = 50)
 	private String observacao;
 
+	@JsonView(FornecedorFindControll.class)
 	@OneToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST})
 	@JoinColumn(name = "id_dado_empresa", nullable = false)
 	private DadoEmpresa dadoEmpresa;

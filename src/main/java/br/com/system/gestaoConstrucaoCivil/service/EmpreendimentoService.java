@@ -25,6 +25,7 @@ public class EmpreendimentoService {
     {
     	return empreendimentoRepository.findOne(id);
     }
+    
     public List<Empreendimento> buscaEmpreendimentoSemConfiguracao()
     {
     	return empreendimentoRepository.buscaEmpreendimentoSemConfiguracao();
