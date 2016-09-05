@@ -15,7 +15,7 @@ import br.com.system.gestaoConstrucaoCivil.entity.NotaFiscalProtudo;
 import br.com.system.gestaoConstrucaoCivil.service.NotaFiscalProdutoService;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/rest/notaFiscalProduto")
 public class NotaFiscalProtudoRestController {
 
 	@Autowired

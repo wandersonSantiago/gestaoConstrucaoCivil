@@ -2,9 +2,9 @@ app.factory('notaFiscalService', function($rootScope, toastr, $http,$q){
 	
 	
 	return{
-		salva: function(notaFiscal){			
+		salva: function(notaFiscalProduto){			
 		
-			return $http.post('/rest/notaFiscal/salva', notaFiscal)
+			return $http.post('/rest/notaFiscalProduto/salva', notaFiscalProduto)
 			.then(function(response){
 				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
@@ -13,8 +13,8 @@ app.factory('notaFiscalService', function($rootScope, toastr, $http,$q){
 				return $q.reject(errResponse);
 			});
 		},
-		altera: function(notaFiscal){			
-			return $http.put('/rest/notaFiscal/altera', notaFiscal)
+		altera: function(notaFiscalProduto){			
+			return $http.put('/rest/notaFiscal/altera', notaFiscalProduto)
 			.then(function(response){
 				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;

@@ -1,49 +1,50 @@
 app.controller('notaFiscalController', function($scope,notaFiscalService, $routeParams){
 	
 	var self = this;
-		self.listaFornecedores = [];
+		self.listaItensNota = [];
 	
-	 self.salva = function(produto){
-		 self.produto.fornecedores = self.listaFornecedores;
-			 produtoService.salva(self.produto).
+	 self.salva = function(notaFiscalProduto){
+		 self.notaFiscalProduto.itens = self.listaItensNota;	
+		 notaFiscalService.salva(self.notaFiscalProduto).
 				then(function(response){
-					self.produto = null;
-					self.listaFornecedores = null;
+					console.log(self.notaFiscalProduto);
+					self.notaFiscalProduto = null;
+					self.listaItensNota = null;
 					}, function(errResponse){
 				});
 	 }
-	 self.altera = function(produto){
-		 self.produto.fornecedores = self.listaFornecedores;
-			 produtoService.altera(self.produto).
+	 self.altera = function(notaFiscalProduto){
+		 self.notaFiscal.itemNotaFiscal = self.listaItensNota;
+		 notaFiscalService.altera(self.notaFiscalProduto).
 				then(function(response){
-					self.produto = null;
-					self.listaFornecedores = null;
+					self.notaFiscalProduto = null;
+					self.listaItensNota = null;
 					}, function(errResponse){
 				});
 	 }
 	 
 	 self.lista = function(){
-		 produtoService.lista().
+		 notaFiscalService.lista().
 			then(function(t){
-				self.produto = t;
+				self.notaFiscalProduto = t;
 				}, function(errResponse){
 			});
 		};
 		
 		
-		//cria uma lista de fornecedores
-		self.adicionarFornecedores = function(fornecedor){
-			self.listaFornecedores.push(
-				fornecedor 
+		//cria uma lista de Produtos
+		self.adicionarProdutos = function(produto){
+			self.listaItensNota.push(
+				produto 
 			);
-			console.log(self.listaFornecedores);
-			self.fornecedores = null;
+			console.log(self.listaItensNota);
+			
 		}
 		
-		self.ativarExcluirLote = function(listaFornecedores){
+		self.ativarExcluirLote = function(listaItensNota){
 			console.log("ativado");
-			self.listaFornecedores.filter(function(fornecedores){
-			if(fornecedores.selecionado){
+			self.listaItensNota.filter(function(produto){
+			if(produto.selecionado){
 				$scope.ativadoExcluirLote = true;
 			}
 			});
@@ -51,10 +52,10 @@ app.controller('notaFiscalController', function($scope,notaFiscalService, $route
 			
 
 		//apagar outros empreendimentos, somente da lista de front
-		self.apagarFornecedores = function(listaFornecedores){
+		self.apagarProdutos = function(listaItensNota){
 			console.log("apagar");
-				self.listaFornecedores = listaFornecedores.filter(function(fornecedores){
-				if(!fornecedores.selecionado) return fornecedores;
+				self.listaItensNota = listaFornecedores.filter(function(produto){
+				if(!produto.selecionado) return produto;
 				$scope.ativadoExcluirLote = null;
 			});
 		}
