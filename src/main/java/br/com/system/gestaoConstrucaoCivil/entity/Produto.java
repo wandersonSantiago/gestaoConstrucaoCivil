@@ -29,7 +29,7 @@ public class Produto extends AbstractPersistable<Long> {
 	private String descricao;
 	@Column(nullable = false)
 	private Double valorCompra;
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private boolean ativo;
 	@Enumerated(EnumType.STRING)
 	private UnidadeMedidaEnum unidadeMedida;
@@ -42,11 +42,6 @@ public class Produto extends AbstractPersistable<Long> {
 	inverseJoinColumns = @JoinColumn(name = "id_fornecedor"))
 	private List<Fornecedor> fornecedores;
 
-	@Column(nullable = false)
-	private Integer quantidadeMaxima;
-	
-	@Column(nullable = false)
-	private Integer quantidadeMinima;
 	
 	
 	public String getCodigoBarra() {
@@ -106,21 +101,6 @@ public class Produto extends AbstractPersistable<Long> {
 		this.fornecedores = fornecedores;
 	}
 
-	public Integer getQuantidadeMaxima() {
-		return quantidadeMaxima;
-	}
 
-	public void setQuantidadeMaxima(Integer quantidadeMaxima) {
-		this.quantidadeMaxima = quantidadeMaxima;
-	}
-
-	public Integer getQuantidadeMinima() {
-		return quantidadeMinima;
-	}
-
-	public void setQuantidadeMinima(Integer quantidadeMinima) {
-		this.quantidadeMinima = quantidadeMinima;
-	}
-	
 
 }

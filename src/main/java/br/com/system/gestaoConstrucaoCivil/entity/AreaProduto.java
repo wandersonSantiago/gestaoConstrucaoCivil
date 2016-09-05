@@ -24,6 +24,12 @@ public class AreaProduto implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "area_id_seq")
 	private Long id;
 	
+	@Column(nullable = false)
+	private boolean ativo;
+	
+	@Column(nullable = false)
+	public String descricao;
+
 	public Long getId() {
 		return id;
 	}
@@ -31,9 +37,14 @@ public class AreaProduto implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	public boolean isAtivo() {
+		return ativo;
+	}
 
-	@Column(nullable = false)
-	public String descricao;
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
 
 	public String getDescricao() {
 		return descricao;

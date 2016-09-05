@@ -37,9 +37,9 @@
 						<div class="col-sm-4">
 							<input class="form-control" ng-model="protudoCtr.produto.codigoBarra" id="codigoBarra" type="text">
 						</div>
-						<label class="col-sm-2 control-label" for="valorCompra">Valor de Compra</label>
+						<label class="col-sm-2 control-label" for="codigoProduto">Código produto</label>
 						<div class="col-sm-4">
-							<input class="form-control" ng-model="protudoCtr.produto.valorCompra" id="valorCompra"  type="text" ui-money-mask="2">
+							<input class="form-control" ng-model="protudoCtr.produto.codigoProduto" id="codigoProduto"  type="text" >
 						</div>
 					</div>
 					
@@ -94,7 +94,7 @@
 						<label class="col-sm-2 control-label" for="fabricante">Fabricante</label>
 						<div class="col-sm-4" ng-controller="fabricanteController as fabricanteCtrl" ng-init="fabricanteCtrl.lista()">
 						<select class="form-control select2" ng-model="protudoCtr.produto.fabricante" 
-							ng-options="listaFabricantes.nomeFantasia for listaFabricantes in fabricanteCtrl.listaFabricante" 
+							ng-options="listaFabricantes.dadoEmpresa.nomeFantasia for listaFabricantes in fabricanteCtrl.listaFabricante" 
 							  style=" width: 100%;" required >
 								<option value="">---Selecione---</option>
 							</select>
@@ -106,7 +106,7 @@
 						<label class="col-sm-2 control-label" for="fornecedor">Fornecedor</label>
 						<div class="col-sm-4" ng-controller="fornecedorController as forCtrl" ng-init="forCtrl.lista()" >
 							<select class="form-control select2" ng-model="protudoCtr.fornecedor" id="fornecedor"
-							ng-options="listaFornecedores.dadoEmpresa.razaoSocial for listaFornecedores in forCtrl.fornecedores" 
+							ng-options="listaFornecedores.dadoEmpresa.razaoSocial for listaFornecedores in forCtrl.listaFornecedor" 
 							  style=" width: 100%;" >
 								<option value="">---Selecione---</option>
 							</select>

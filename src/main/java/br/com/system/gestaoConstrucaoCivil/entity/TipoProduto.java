@@ -24,6 +24,9 @@ public class TipoProduto  implements Serializable  {
 	private Long id;
 	
 	@Column(nullable = false)
+	private boolean ativo;
+	
+	@Column(nullable = false)
 	private String descricao;
 	
 	
@@ -41,6 +44,14 @@ public class TipoProduto  implements Serializable  {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
+	public boolean isAtivo() {
+		return ativo;
+	}
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -11,6 +11,8 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Table(name = "pacote_servico")
 public class PacoteServico extends AbstractPersistable<Long>{
 
+	@Column(nullable = false)
+	private boolean ativo;
 	
 	@Column(nullable = false)
 	private String codigoPacote;
@@ -30,6 +32,12 @@ public class PacoteServico extends AbstractPersistable<Long>{
 	
 	
 	
+	public boolean isAtivo() {
+		return ativo;
+	}
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
 	public String getCodigoPacote() {
 		return codigoPacote;
 	}

@@ -21,6 +21,9 @@ public class Categoria implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 	
+	@Column(nullable = false)
+	private boolean ativo;
+	
 	@Column(nullable = false,length = 50)
 	private String descricao;
 	
@@ -35,6 +38,13 @@ public class Categoria implements Serializable {
 	}
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	
+	public boolean isAtivo() {
+		return ativo;
+	}
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 	@Override
 	public int hashCode() {

@@ -29,6 +29,7 @@ public class ProdutoRestController {
 	  Iterable<Produto> produto = produtoService.buscarTodos();
 	  return new ResponseEntity<Iterable<Produto>>(produto, HttpStatus.OK);
 	 }
+	
 	 @RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
 		public ResponseEntity<Produto> buscarProdutoPorId(@PathVariable Long id) {
 

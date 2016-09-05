@@ -45,6 +45,7 @@ app.controller('tipoProdutoController', function($scope, tipoProdutoService, bus
 		tipoProdutoService.buscaPorId(id).
 		then(function(p){
 			self.tipoProduto = p;
+			console.log(self.tipoProduto );
 		}, function(errResponse){
 		});
 	};

@@ -17,7 +17,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import ch.qos.logback.core.joran.spi.DefaultClass;
 
 
 @Entity
@@ -45,7 +48,12 @@ public class EstoqueEmpreendimento implements Serializable{
 	inverseJoinColumns = @JoinColumn(name = "id_empreendimento"))
 	private List<Produto>  produto;
 	
+
+	@Column(nullable = false)
+	private Integer quantidadeMaxima = 100;
 	
+	@Column(nullable = false)
+	private Integer quantidadeMinima = 1;
 	
 	public Long getId() {
 		return id;
@@ -78,6 +86,19 @@ public class EstoqueEmpreendimento implements Serializable{
 	}
 	public void setLocalizacao(String localizacao) {
 		this.localizacao = localizacao;
+	}
+	
+	public Integer getQuantidadeMaxima() {
+		return quantidadeMaxima;
+	}
+	public void setQuantidadeMaxima(Integer quantidadeMaxima) {
+		this.quantidadeMaxima = quantidadeMaxima;
+	}
+	public Integer getQuantidadeMinima() {
+		return quantidadeMinima;
+	}
+	public void setQuantidadeMinima(Integer quantidadeMinima) {
+		this.quantidadeMinima = quantidadeMinima;
 	}
 	@Override
 	public int hashCode() {

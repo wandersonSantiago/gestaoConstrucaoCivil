@@ -2,12 +2,12 @@
 <br>
 <br>
 <div class="generic-container"
-	ng-controller="areaProdutoController as areaCtrl">
+	ng-controller="tipoProdutoController as tipoCtrl">
 
-	<div class="box box-primary" ng-init="areaCtrl.lista()">
+	<div class="box box-primary" ng-init="tipoCtrl.lista()">
 	
 		<div class="box-header">
-			<span class="lead">Lista de Areas Produto </span>
+			<span class="lead">Lista Tipo Produto </span>
 		</div>
 		<div class="panel-body">
 		<input type="text" class="form-control" ng-model="buscar" placeholder="buscar">
@@ -22,13 +22,13 @@
 					</tr>
 				</thead>
 				<tbody
-					ng-repeat=" areaProduto in areaCtrl.listaAreaProduto | filter : buscar ">
+					ng-repeat=" tipoProduto in tipoCtrl.listaTipoProduto | filter : buscar ">
 					<tr>
 						
-						<td>{{ areaProduto.ativo }}</td>
-						<td>{{ areaProduto.descricao }}</td>
+						<td>{{ tipoProduto.ativo }}</td>
+						<td>{{ tipoProduto.descricao }}</td>
 					
-						<td><a href="#/almoxarifado/produto/area/editar/{{areaProduto.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						<td><a href="#/almoxarifado/produto/tipo/editar/{{tipoProduto.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						
 					</tr>
 

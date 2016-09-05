@@ -143,14 +143,14 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 	
 	//CATEGORIA
 	
-	.when('/almoxarifado/categoria/cadastrar', {
-		templateUrl:"views/pages/almoxarifado/categoria/cadastrar.html",
+	.when('/almoxarifado/produto/categoria/cadastrar', {
+		templateUrl:"views/pages/almoxarifado/produto/categoria/cadastrar.html",
 	})
-	.when('/almoxarifado/categoria/editar/:idCategoria', {
-		templateUrl:"views/pages/almoxarifado/categoria/editar.html",
+	.when('/almoxarifado/produto/categoria/editar/:idCategoria', {
+		templateUrl:"views/pages/almoxarifado/produto/categoria/editar.html",
 	})
-	.when('/almoxarifado/categoria/lista', {
-		templateUrl:"views/pages/almoxarifado/categoria/lista.html",
+	.when('/almoxarifado/produto/categoria/lista', {
+		templateUrl:"views/pages/almoxarifado/produto/categoria/lista.html",
 	})
 	
 	
@@ -181,14 +181,26 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 	
 	//AREA DO PRODUTO
 	
-	.when('/almoxarifado/areaProduto/cadastrar', {
-		templateUrl:"views/pages/almoxarifado/areaProduto/cadastrar.html",
+	.when('/almoxarifado/produto/area/cadastrar', {
+		templateUrl:"views/pages/almoxarifado/produto/area/cadastrar.html",
 	})
-	.when('/almoxarifado/areaProduto/editar/:idAreaProduto', {
-		templateUrl:"views/pages/almoxarifado/areaProduto/editar.html",
+	.when('/almoxarifado/produto/area/editar/:idAreaProduto', {
+		templateUrl:"views/pages/almoxarifado/produto/area/editar.html",
 	})
-	.when('/almoxarifado/areaProduto/lista', {
-		templateUrl:"views/pages/almoxarifado/areaProduto/lista.html",
+	.when('/almoxarifado/produto/area/lista', {
+		templateUrl:"views/pages/almoxarifado/produto/area/lista.html",
+	})
+	
+	//TIPO DO PRODUTO
+	
+	.when('/almoxarifado/produto/tipo/cadastrar', {
+		templateUrl:"views/pages/almoxarifado/produto/tipo/cadastrar.html",
+	})
+	.when('/almoxarifado/produto/tipo/editar/:idTipoProduto', {
+		templateUrl:"views/pages/almoxarifado/produto/tipo/editar.html",
+	})
+	.when('/almoxarifado/produto/tipo/lista', {
+		templateUrl:"views/pages/almoxarifado/produto/tipo/lista.html",
 	})
 	
 	//FABRICANTE

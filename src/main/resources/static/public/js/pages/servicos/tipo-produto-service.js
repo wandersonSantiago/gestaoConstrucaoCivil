@@ -4,7 +4,7 @@ app.factory('tipoProdutoService', function($rootScope, toastr, $http,$q){
 	return{
 		
 		altera: function(tipoProduto){
-			return $http.put('rest/almoxarifado/tipoProduto/altera', tipoProduto)
+			return $http.put('rest/almoxarifado/produto/tipo/altera', tipoProduto)
 			.then(function(response){
 				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
@@ -15,7 +15,7 @@ app.factory('tipoProdutoService', function($rootScope, toastr, $http,$q){
 		},
 		
 		salva: function(tipoProduto){
-			return $http.post('/rest/almoxarifado/tipoProduto/salva', tipoProduto)
+			return $http.post('/rest/almoxarifado/produto/tipo/salva', tipoProduto)
 			.then(function(response){
 				sweetAlert({ timer : 3000, text :"Salvo com sucesso",  type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
@@ -25,7 +25,7 @@ app.factory('tipoProdutoService', function($rootScope, toastr, $http,$q){
 			});
 		},
 		lista: function(){
-			return $http.get('rest/almoxarifado/tipoProduto/lista')
+			return $http.get('rest/almoxarifado/produto/tipo/lista')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
@@ -35,7 +35,8 @@ app.factory('tipoProdutoService', function($rootScope, toastr, $http,$q){
 		},
 		
 		buscaPorId: function(param){
-			return $http.get('rest/almoxarifado/tipoProduto/buscaPorId/'+param)
+			console.log(param);
+			return $http.get('rest/almoxarifado/produto/tipo/buscaPorId/'+param)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){

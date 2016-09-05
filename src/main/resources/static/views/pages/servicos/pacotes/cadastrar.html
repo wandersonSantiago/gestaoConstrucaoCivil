@@ -15,6 +15,13 @@
 				<form role="form-vertical" name="pacotesForm" ng-submit="pacotesCtrl.salva()">
 					
 					<br>
+					<div class="row">		
+						<label class="col-sm-2 control-label" for="ativo"> Ativo</label>	
+						<div class="col-sm-3">
+							<input type="checkbox" ng-model="pacotesCtrl.pacoteServico.ativo">
+						</div>						
+					</div>
+					<br>
 					<div class="row">
 						<label class="col-sm-2 control-label" for="codigo">Codigo Pacote</label>
 						<div class="col-sm-2">
