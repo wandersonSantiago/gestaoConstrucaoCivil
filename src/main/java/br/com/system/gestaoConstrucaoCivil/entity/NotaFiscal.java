@@ -1,13 +1,24 @@
 package br.com.system.gestaoConstrucaoCivil.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,21 +26,45 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
 
 @Entity
+@SequenceGenerator(name = "nota_fiscal_id_seq",
+sequenceName = "nota_fiscal_id_seq",
+initialValue = 1,
+allocationSize = 50)
 @Table(name = "nota_fiscal")
-public class NotaFiscal extends AbstractPersistable<Long>{
+public class NotaFiscal implements Serializable{
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "nota_fiscal_id_seq")
+	private Long id;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
 	private TipoNotaEnum tipoNota;
+	@Column(nullable = false)
 	private Integer numero;
+	@Column(nullable = false)
 	private Integer chaveAcesso;
+	
+	@Temporal(TemporalType.DATE)
 	private Date dataNota;
+	@Temporal(TemporalType.DATE)
 	private Date dataVencimento;
+	@Column(nullable = false)
 	private Integer serie;
-	private Fornecedor fornecedor;
+	
 	private String observacao;
+	@Column(nullable = false)
 	private Double valorTotal;
 	
-	@OneToMany(mappedBy = "notaFiscal" , cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-	private List<ItemNotaFiscal> itens;
+	
+    
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public TipoNotaEnum getTipoNota() {
 		return tipoNota;
@@ -66,21 +101,11 @@ public class NotaFiscal extends AbstractPersistable<Long>{
 	public Date getDataVencimento() {
 		return dataVencimento;
 	}
-
+	
 	public void setDataVencimento(Date dataVencimento) {
 		this.dataVencimento = dataVencimento;
 	}
-	
-
-	
-	public Fornecedor getFornecedor() {
-		return fornecedor;
-	}
-
-	public void setFornecedor(Fornecedor fornecedor) {
-		this.fornecedor = fornecedor;
-	}
-
+    
 	public String getObservacao() {
 		return observacao;
 	}
@@ -89,28 +114,45 @@ public class NotaFiscal extends AbstractPersistable<Long>{
 		this.observacao = observacao;
 	}
 
-	public List<ItemNotaFiscal> getItens() {
-		return itens;
-	}
-
-	public void setItens(List<ItemNotaFiscal> itens) {
-		this.itens = itens;
-	}
-
-	public Double getValorTotal() {
+    public Double getValorTotal() {
 		return valorTotal;
 	}
 
 	public void setValorTotal(Double valorTotal) {
 		this.valorTotal = valorTotal;
 	}
-
-	public Integer getSerie() {
+	
+    public Integer getSerie() {
 		return serie;
 	}
 
 	public void setSerie(Integer serie) {
 		this.serie = serie;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		NotaFiscal other = (NotaFiscal) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 	
 	

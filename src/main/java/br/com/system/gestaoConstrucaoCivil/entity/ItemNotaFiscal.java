@@ -1,12 +1,17 @@
 package br.com.system.gestaoConstrucaoCivil.entity;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import br.com.system.gestaoConstrucaoCivil.enuns.UnidadeMedidaEnum;
 
 
 @Entity
@@ -14,10 +19,16 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class ItemNotaFiscal extends AbstractPersistable<Long>{
 
 	
+	@Column(nullable = false)
 	private Produto produto;
-	private UnidadeMedida unidadeMedida;
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private UnidadeMedidaEnum unidadeMedida;
+	@Column(nullable = false)
 	private Integer quantidade;
+	@Column(nullable = false)
 	private Double valorUnitario;
+	@Column(nullable = false)
 	private Double valorTotal;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -30,10 +41,10 @@ public class ItemNotaFiscal extends AbstractPersistable<Long>{
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
-	public UnidadeMedida getUnidadeMedida() {
+	public UnidadeMedidaEnum getUnidadeMedida() {
 		return unidadeMedida;
 	}
-	public void setUnidadeMedida(UnidadeMedida unidadeMedida) {
+	public void setUnidadeMedida(UnidadeMedidaEnum unidadeMedida) {
 		this.unidadeMedida = unidadeMedida;
 	}
 	public Integer getQuantidade() {
