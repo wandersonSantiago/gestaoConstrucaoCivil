@@ -17,29 +17,24 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@SequenceGenerator(name = "nota_fiscal_produto_id_seq",
-	sequenceName = "nota_fiscal_produto_id_seq",
-	initialValue = 1,
-	allocationSize = 50)
+@SequenceGenerator(name = "nota_fiscal_produto_id_seq", sequenceName = "nota_fiscal_produto_id_seq", initialValue = 1, allocationSize = 50)
 @Table(name = "nota_fiscal_produto")
-public class NotaFiscalProtudo implements Serializable {
+public class NotaFiscalProduto implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "nota_fiscal_produto_id_seq")
 	private Long id;
-	
-	@ManyToOne
-	@JoinColumn(name="id_nota_fiscal",nullable = true)
+
+	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+	@JoinColumn(name = "id_nota_fiscal", nullable = true)
 	private NotaFiscal notaFiscal;
-	
-	
+
 	@ManyToOne
-	@JoinColumn(name="id_fornecedor",nullable = false)
+	@JoinColumn(name = "id_fornecedor", nullable = false)
 	private Fornecedor fornecedor;
-	
-	@OneToMany(mappedBy = "notaFiscal" , cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+
+	@OneToMany(mappedBy = "notaFiscalProduto", cascade = CascadeType.ALL)
 	private List<ItemNotaFiscal> itens;
-	
 
 	public Long getId() {
 		return id;
@@ -64,13 +59,13 @@ public class NotaFiscalProtudo implements Serializable {
 	public void setFornecedor(Fornecedor fornecedor) {
 		this.fornecedor = fornecedor;
 	}
-	
-	
+
 	public List<ItemNotaFiscal> getItens() {
 		return itens;
 	}
 
 	public void setItens(List<ItemNotaFiscal> itens) {
+
 		this.itens = itens;
 	}
 
@@ -90,7 +85,7 @@ public class NotaFiscalProtudo implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		NotaFiscalProtudo other = (NotaFiscalProtudo) obj;
+		NotaFiscalProduto other = (NotaFiscalProduto) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -98,7 +93,5 @@ public class NotaFiscalProtudo implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
+
 }
