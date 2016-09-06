@@ -15,7 +15,8 @@ app.factory('configEmpreendimentoService', function($rootScope, $http){
 		
 		
 		configEmpreendimentoEdificioSalva: function(configEmpreendimentoEdificio){
-			return $http.post('rest/servico/configuracao/salvaEdificio', configEmpreendimentoEdificio)
+			console.log(configEmpreendimentoEdificio);
+			return $http.post('rest/empreendimento/configuracao/salvaEdificio', configEmpreendimentoEdificio)
 			.then(function(response){			
 				return response.data;
 		},function(errResponse){
@@ -25,7 +26,7 @@ app.factory('configEmpreendimentoService', function($rootScope, $http){
 		},
 		
 		configEmpreendimentoCasaSalva: function(configEmpreendimentoCasa){
-			return $http.post('rest/servico/configuracao/salvaCasa', configEmpreendimentoCasa)
+			return $http.post('rest/empreendimento/configuracao/salvaCasa', configEmpreendimentoCasa)
 			.then(function(response){
 				return response.data;		
 	},function(errResponse){
@@ -35,7 +36,7 @@ app.factory('configEmpreendimentoService', function($rootScope, $http){
 		},
 	
 		configEmpreendimentoOutrosSalva: function( listaOutros){
-			return $http.post('rest/servico/configuracao/salvaOutros', listaOutros)
+			return $http.post('rest/empreendimento/configuracao/salvaOutros', listaOutros)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
