@@ -39,8 +39,7 @@ public class NotaFiscalProduto implements Serializable {
 	@OneToMany(mappedBy = "notaFiscalProduto",cascade = CascadeType.ALL)
 	private List<ItemNotaFiscal> itens;
 	
-
-	public Long getId() {
+    public Long getId() {
 		return id;
 	}
 
