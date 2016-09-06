@@ -32,7 +32,6 @@ public class NotaFiscalProduto implements Serializable {
 	@JoinColumn(name="id_nota_fiscal",nullable = true)
 	private NotaFiscal notaFiscal;
 	
-	
 	@ManyToOne
 	@JoinColumn(name="id_fornecedor",nullable = false)
 	private Fornecedor fornecedor;
