@@ -18,11 +18,10 @@ import br.com.system.gestaoConstrucaoCivil.enuns.UnidadeMedidaEnum;
 @Table(name = "item_nota_fiscal")
 public class ItemNotaFiscal extends AbstractPersistable<Long>{
 
-	
-	@Column(nullable = false)
+	@ManyToOne
+	@JoinColumn(name = "id_produto",nullable = false)
 	private Produto produto;
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
 	private UnidadeMedidaEnum unidadeMedida;
 	@Column(nullable = false)
 	private Integer quantidade;
@@ -31,9 +30,9 @@ public class ItemNotaFiscal extends AbstractPersistable<Long>{
 	@Column(nullable = false)
 	private Double valorTotal;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "nota_fiscal")
-	private NotaFiscal notaFiscal;
+	@ManyToOne
+	@JoinColumn(name = "id_nota_fiscal")
+	private NotaFiscalProduto notaFiscalProduto;
 	
 	public Produto getProduto() {
 		return produto;
@@ -65,13 +64,13 @@ public class ItemNotaFiscal extends AbstractPersistable<Long>{
 	public void setValorTotal(Double valorTotal) {
 		this.valorTotal = valorTotal;
 	}
-	public NotaFiscal getNotaFiscal() {
-		return notaFiscal;
+	public NotaFiscalProduto getNotaFiscalProduto() {
+		return notaFiscalProduto;
 	}
-	public void setNotaFiscal(NotaFiscal notaFiscal) {
-		this.notaFiscal = notaFiscal;
+	public void setNotaFiscalProduto(NotaFiscalProduto notaFiscalProduto) {
+		this.notaFiscalProduto = notaFiscalProduto;
 	}
-	
+     
 	
 	
 }

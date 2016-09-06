@@ -22,13 +22,13 @@ import javax.persistence.Table;
 	initialValue = 1,
 	allocationSize = 50)
 @Table(name = "nota_fiscal_produto")
-public class NotaFiscalProtudo implements Serializable {
+public class NotaFiscalProduto implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "nota_fiscal_produto_id_seq")
 	private Long id;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST})
 	@JoinColumn(name="id_nota_fiscal",nullable = true)
 	private NotaFiscal notaFiscal;
 	
@@ -37,7 +37,7 @@ public class NotaFiscalProtudo implements Serializable {
 	@JoinColumn(name="id_fornecedor",nullable = false)
 	private Fornecedor fornecedor;
 	
-	@OneToMany(mappedBy = "notaFiscal" , cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "notaFiscalProduto",cascade = CascadeType.ALL)
 	private List<ItemNotaFiscal> itens;
 	
 
@@ -71,6 +71,7 @@ public class NotaFiscalProtudo implements Serializable {
 	}
 
 	public void setItens(List<ItemNotaFiscal> itens) {
+		
 		this.itens = itens;
 	}
 
@@ -90,7 +91,7 @@ public class NotaFiscalProtudo implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		NotaFiscalProtudo other = (NotaFiscalProtudo) obj;
+		NotaFiscalProduto other = (NotaFiscalProduto) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

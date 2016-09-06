@@ -38,10 +38,11 @@ public class NotaFiscal implements Serializable{
 	private Long id;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
 	private TipoNotaEnum tipoNota;
+	
 	@Column(nullable = false)
 	private Integer numero;
+	
 	@Column(nullable = false)
 	private Integer chaveAcesso;
 	
@@ -66,10 +67,7 @@ public class NotaFiscal implements Serializable{
 		this.id = id;
 	}
 
-	public TipoNotaEnum getTipoNota() {
-		return tipoNota;
-	}
-    
+	
 	public Integer getChaveAcesso() {
 		return chaveAcesso;
 	}
@@ -78,10 +76,7 @@ public class NotaFiscal implements Serializable{
 		this.chaveAcesso = chaveAcesso;
 	}
 
-	public void setTipoNota(TipoNotaEnum tipoNota) {
-		this.tipoNota = tipoNota;
-	}
-
+	
 	public Integer getNumero() {
 		return numero;
 	}
@@ -128,6 +123,14 @@ public class NotaFiscal implements Serializable{
 
 	public void setSerie(Integer serie) {
 		this.serie = serie;
+	}
+     
+	public TipoNotaEnum getTipoNota() {
+		return tipoNota;
+	}
+
+	public void setTipoNota(TipoNotaEnum tipoNota) {
+		this.tipoNota = tipoNota;
 	}
 
 	@Override
