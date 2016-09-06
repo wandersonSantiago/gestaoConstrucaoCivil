@@ -20,9 +20,9 @@ public class ItemNotaFiscal extends AbstractPersistable<Long> {
 	@ManyToOne
 	@JoinColumn(name = "id_produto", nullable = false)
 	private Produto produto;
-	@Column(nullable = true)
+	/*@Column(nullable = true)
 	@Enumerated(EnumType.STRING)
-	private UnidadeMedidaEnum unidadeMedida;
+	private UnidadeMedidaEnum unidadeMedida;*/
 	@Column(nullable = false)
 	private Integer quantidade;
 	@Column(nullable = false)
@@ -42,13 +42,13 @@ public class ItemNotaFiscal extends AbstractPersistable<Long> {
 		this.produto = produto;
 	}
 
-	public UnidadeMedidaEnum getUnidadeMedida() {
+/*	public UnidadeMedidaEnum getUnidadeMedida() {
 		return unidadeMedida;
 	}
 
 	public void setUnidadeMedida(UnidadeMedidaEnum unidadeMedida) {
 		this.unidadeMedida = unidadeMedida;
-	}
+	}*/
 
 	public Integer getQuantidade() {
 		return quantidade;

@@ -6,7 +6,7 @@ app.controller('notaFiscalController', function($scope,notaFiscalService, $route
 	
 	 self.salva = function(notaFiscalProduto){
 		 self.notaFiscalProduto.notaFiscal = self.notaFiscal;
-		 self.notaFiscalProduto.notaFiscal  = self.itemNotaFiscal.valorTotal;
+		 self.notaFiscalProduto.valorTotal  = self.itemNotaFiscal.valorTotal;
 		 self.notaFiscalProduto.itens = self.listaItensNota;	
 		 notaFiscalService.salva(self.notaFiscalProduto).
 				then(function(response){

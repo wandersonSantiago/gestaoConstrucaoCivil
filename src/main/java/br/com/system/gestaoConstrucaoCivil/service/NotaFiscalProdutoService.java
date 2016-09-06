@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.NotaFiscalProduto;
-import br.com.system.gestaoConstrucaoCivil.regras.Estoque;
 import br.com.system.gestaoConstrucaoCivil.repository.NotaFiscalProdutoRepository;
 
 @Service
