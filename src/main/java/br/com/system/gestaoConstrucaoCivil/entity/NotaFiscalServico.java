@@ -12,21 +12,18 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@SequenceGenerator(name = "nota_fiscal_servico_id_seq",
-sequenceName = "nota_fiscal_servico_id_seq",
-initialValue = 1,
-allocationSize = 50)
+@SequenceGenerator(name = "nota_fiscal_servico_id_seq", sequenceName = "nota_fiscal_servico_id_seq", initialValue = 1, allocationSize = 50)
 @Table(name = "nota_fiscal_servico")
 public class NotaFiscalServico implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "nota_fiscal_servico_id_seq")
 	private Long id;
-	
+
 	@ManyToOne
-	@JoinColumn(name="id_nota_fiscal",nullable = true)
+	@JoinColumn(name = "id_nota_fiscal", nullable = true)
 	private NotaFiscal notaFiscal;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -67,10 +64,5 @@ public class NotaFiscalServico implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-	
+
 }

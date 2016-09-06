@@ -26,39 +26,34 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
 
 @Entity
-@SequenceGenerator(name = "nota_fiscal_id_seq",
-sequenceName = "nota_fiscal_id_seq",
-initialValue = 1,
-allocationSize = 50)
+@SequenceGenerator(name = "nota_fiscal_id_seq", sequenceName = "nota_fiscal_id_seq", initialValue = 1, allocationSize = 50)
 @Table(name = "nota_fiscal")
-public class NotaFiscal implements Serializable{
+public class NotaFiscal implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "nota_fiscal_id_seq")
 	private Long id;
-	
+
 	@Enumerated(EnumType.STRING)
 	private TipoNotaEnum tipoNota;
-	
+
 	@Column(nullable = false)
 	private Integer numero;
-	
+
 	@Column(nullable = false)
 	private Integer chaveAcesso;
-	
+
 	@Temporal(TemporalType.DATE)
 	private Date dataNota;
 	@Temporal(TemporalType.DATE)
 	private Date dataVencimento;
 	@Column(nullable = false)
 	private Integer serie;
-	
+
 	private String observacao;
 	@Column(nullable = false)
 	private Double valorTotal;
-	
-	
-    
+
 	public Long getId() {
 		return id;
 	}
@@ -67,7 +62,6 @@ public class NotaFiscal implements Serializable{
 		this.id = id;
 	}
 
-	
 	public Integer getChaveAcesso() {
 		return chaveAcesso;
 	}
@@ -76,7 +70,6 @@ public class NotaFiscal implements Serializable{
 		this.chaveAcesso = chaveAcesso;
 	}
 
-	
 	public Integer getNumero() {
 		return numero;
 	}
@@ -96,11 +89,11 @@ public class NotaFiscal implements Serializable{
 	public Date getDataVencimento() {
 		return dataVencimento;
 	}
-	
+
 	public void setDataVencimento(Date dataVencimento) {
 		this.dataVencimento = dataVencimento;
 	}
-    
+
 	public String getObservacao() {
 		return observacao;
 	}
@@ -109,22 +102,22 @@ public class NotaFiscal implements Serializable{
 		this.observacao = observacao;
 	}
 
-    public Double getValorTotal() {
+	public Double getValorTotal() {
 		return valorTotal;
 	}
 
 	public void setValorTotal(Double valorTotal) {
 		this.valorTotal = valorTotal;
 	}
-	
-    public Integer getSerie() {
+
+	public Integer getSerie() {
 		return serie;
 	}
 
 	public void setSerie(Integer serie) {
 		this.serie = serie;
 	}
-     
+
 	public TipoNotaEnum getTipoNota() {
 		return tipoNota;
 	}
@@ -157,7 +150,5 @@ public class NotaFiscal implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
+
 }

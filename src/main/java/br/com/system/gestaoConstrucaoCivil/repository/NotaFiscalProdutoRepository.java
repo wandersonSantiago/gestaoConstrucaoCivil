@@ -6,4 +6,5 @@ import br.com.system.gestaoConstrucaoCivil.entity.NotaFiscalProduto;
 
 public interface NotaFiscalProdutoRepository extends JpaRepository<NotaFiscalProduto,Long> {
 
+
 }

@@ -20,12 +20,11 @@ public class NotaFiscalProtudoRestController {
 
 	@Autowired
 	private NotaFiscalProdutoService notaFiscalProdutoService;
-	
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/lista")
 	public ResponseEntity<Iterable<NotaFiscalProduto>> buscarNotaFiscalProduto() {
 		Iterable<NotaFiscalProduto> notaFiscalProtudo = notaFiscalProdutoService.buscarTodos();
-		return new ResponseEntity<Iterable<NotaFiscalProduto>>(notaFiscalProtudo , HttpStatus.OK);
+		return new ResponseEntity<Iterable<NotaFiscalProduto>>(notaFiscalProtudo, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/buscarPorNumeroNota/{numero}", method = RequestMethod.GET)
@@ -38,17 +37,16 @@ public class NotaFiscalProtudoRestController {
 	public ResponseEntity salva(@RequestBody NotaFiscalProduto notaFiscalProtudo, UriComponentsBuilder ucBuilder) {
 		notaFiscalProdutoService.salvarOuEditar(notaFiscalProtudo);
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(
-				ucBuilder.path("").buildAndExpand(notaFiscalProtudo.getId()).toUri());
+		headers.setLocation(ucBuilder.path("").buildAndExpand(notaFiscalProtudo.getId()).toUri());
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/altera", method = RequestMethod.PUT)
-	public ResponseEntity alterarFornecedor(@RequestBody NotaFiscalProduto notaFiscalProtudo, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity alterarFornecedor(@RequestBody NotaFiscalProduto notaFiscalProtudo,
+			UriComponentsBuilder ucBuilder) {
 		notaFiscalProdutoService.salvarOuEditar(notaFiscalProtudo);
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("")
-				.buildAndExpand(notaFiscalProtudo.getId()).toUri());
+		headers.setLocation(ucBuilder.path("").buildAndExpand(notaFiscalProtudo.getId()).toUri());
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 }
