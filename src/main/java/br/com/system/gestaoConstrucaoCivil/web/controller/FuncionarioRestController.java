@@ -65,4 +65,12 @@ public class FuncionarioRestController {
 		 headers.setLocation(ucBuilder.path("/rest/recursosHumanos/funcionario/salva/{id}").buildAndExpand(funcionario.getId()).toUri());
 		 return new ResponseEntity(headers, HttpStatus.CREATED);
 	 }
+	 @RequestMapping( value="/altera", method = RequestMethod.PUT)
+	 public ResponseEntity altera(@RequestBody Funcionario funcionario,UriComponentsBuilder ucBuilder)
+	 {
+		 pessoaService.salvarOuEditar(funcionario);
+		 HttpHeaders headers =new HttpHeaders();
+		 headers.setLocation(ucBuilder.path("/rest/recursosHumanos/funcionario/salva/{id}").buildAndExpand(funcionario.getId()).toUri());
+		 return new ResponseEntity(headers, HttpStatus.CREATED);
+	 }
 }
