@@ -22,8 +22,13 @@ app.controller('adminSistemaController', function($scope, adminSistemaService, b
 	
 	self.salva = function(empresa, sucesso){
 		
-		adminSistemaService.salva(self.empresa);
-		self.empresa = empresa;
+		adminSistemaService.salva(self.empresa).
+		then(function(e){
+			self.empresa = empresa;
+		}, function(errResponse){
+			
+		});
+		
 		
 	}
 	

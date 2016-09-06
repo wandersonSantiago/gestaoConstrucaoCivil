@@ -7,10 +7,12 @@ app.factory('adminSistemaService', function($rootScope, toastr, $http, $q){
 			console.log("service admin" );
 			return $http.get('rest/empresaContratada/buscaPorId/'+param)
 			.then(function(response){
-				sweetAlert({ timer : 3000, text :"falha de conexão", type : "error", width: 300, higth: 100, padding: 20});
+				//sweetAlert({ timer : 3000, text :"falha de conexão", type : "error", width: 300, higth: 100, padding: 20});
 				return response.data;
-			});
-			
+			},function(errResponse){
+					sweetAlert({ timer : 3000,  text :"falha de conexão", type : "error", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
+				});
 		},	
 		lista: function(){
 			return $http.get('rest/empresaContratada/lista')

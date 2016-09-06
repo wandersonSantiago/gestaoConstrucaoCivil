@@ -19,7 +19,7 @@
 					
 						<label class="col-sm-2 control-label" for="empreendimento">Empreendimento</label>
 						<div class="col-sm-8" ng-init="empCtrl.lista()">
-							<select class="form-control select2" ng-model="userCtrl.usuario.empreendimento"
+							<select class="form-control select2" ng-model="userCtrl.usuario.empreendimento.descricao"
 								ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.tipoEmpreendimento for listarEmpreendimentos in empreendimentos"
 								style="width: 100%;">
 								<option  value="">--selecione--</option>
