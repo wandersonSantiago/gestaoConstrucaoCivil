@@ -3,7 +3,7 @@ app.factory('notaFiscalService', function($rootScope, toastr, $http,$q){
 	
 	return{
 		salva: function(notaFiscalProduto){			
-		
+		console.log(notaFiscalProduto);
 			return $http.post('/rest/notaFiscalProduto/salva', notaFiscalProduto)
 			.then(function(response){
 				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});

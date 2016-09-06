@@ -2,8 +2,11 @@ app.controller('notaFiscalController', function($scope,notaFiscalService, $route
 	
 	var self = this;
 		self.listaItensNota = [];
+		
 	
 	 self.salva = function(notaFiscalProduto){
+		 self.notaFiscalProduto.notaFiscal = self.notaFiscal;
+		 self.notaFiscalProduto.notaFiscal  = self.itemNotaFiscal.valorTotal;
 		 self.notaFiscalProduto.itens = self.listaItensNota;	
 		 notaFiscalService.salva(self.notaFiscalProduto).
 				then(function(response){
@@ -34,9 +37,9 @@ app.controller('notaFiscalController', function($scope,notaFiscalService, $route
 		
 		//cria uma lista de Produtos
 		self.adicionarProdutos = function(produto){
-			self.listaItensNota.push(
+			self.listaItensNota.push({
 				produto 
-			);
+			});
 			console.log(self.listaItensNota);
 			
 		}

@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.com.system.gestaoConstrucaoCivil.entity.NotaFiscal;
 import br.com.system.gestaoConstrucaoCivil.entity.NotaFiscalProduto;
+import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
 import br.com.system.gestaoConstrucaoCivil.service.NotaFiscalProdutoService;
 
 @RestController
@@ -35,6 +37,16 @@ public class NotaFiscalProtudoRestController {
 
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
 	public ResponseEntity salva(@RequestBody NotaFiscalProduto notaFiscalProtudo, UriComponentsBuilder ucBuilder) {
+		NotaFiscal nota =  new NotaFiscal();
+		
+		for(int i = 0 ; i < notaFiscalProtudo.getItens().size(); i ++){
+			
+			System.out.println(notaFiscalProtudo.getItens().get(i).getProduto());
+			System.out.println(notaFiscalProtudo.getItens().get(i).getProduto().getUnidadeMedida());
+			System.out.println(notaFiscalProtudo.getItens().get(i).getQuantidade());
+		}
+		nota.setTipoNota(TipoNotaEnum.NOTA_FISCAL_ENTRADA);;
+		notaFiscalProtudo.setNotaFiscal(nota);
 		notaFiscalProdutoService.salvarOuEditar(notaFiscalProtudo);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("").buildAndExpand(notaFiscalProtudo.getId()).toUri());

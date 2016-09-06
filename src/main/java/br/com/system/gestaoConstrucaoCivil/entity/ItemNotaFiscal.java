@@ -20,6 +20,7 @@ public class ItemNotaFiscal extends AbstractPersistable<Long> {
 	@ManyToOne
 	@JoinColumn(name = "id_produto", nullable = false)
 	private Produto produto;
+	@Column(nullable = true)
 	@Enumerated(EnumType.STRING)
 	private UnidadeMedidaEnum unidadeMedida;
 	@Column(nullable = false)
