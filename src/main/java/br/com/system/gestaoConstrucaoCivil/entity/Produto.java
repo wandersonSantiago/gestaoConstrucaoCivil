@@ -27,8 +27,6 @@ public class Produto extends AbstractPersistable<Long> {
 
 	@Column(nullable = false, length = 50)
 	private String descricao;
-	@Column(nullable = false)
-	private Double valorCompra;
 	@Column(nullable = true)
 	private boolean ativo;
 	@Enumerated(EnumType.STRING)
@@ -60,13 +58,6 @@ public class Produto extends AbstractPersistable<Long> {
 		this.descricao = descricao;
 	}
 
-	public Double getValorCompra() {
-		return valorCompra;
-	}
-
-	public void setValorCompra(Double valorCompra) {
-		this.valorCompra = valorCompra;
-	}
 
 	public boolean isAtivo() {
 		return ativo;

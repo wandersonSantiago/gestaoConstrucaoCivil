@@ -6,7 +6,7 @@ app.controller('notaFiscalController', function($scope,notaFiscalService, $route
 	
 	 self.salva = function(notaFiscalProduto){
 		 self.notaFiscalProduto.notaFiscal = self.notaFiscal;
-		 self.notaFiscalProduto.valorTotal  = self.itemNotaFiscal.valorTotal;
+		 self.notaFiscalProduto.notaFiscal.valorTotal  = self.valorTotal;
 		 self.notaFiscalProduto.itens = self.listaItensNota;	
 		 notaFiscalService.salva(self.notaFiscalProduto).
 				then(function(response){
@@ -40,7 +40,13 @@ app.controller('notaFiscalController', function($scope,notaFiscalService, $route
 			self.listaItensNota.push({
 				produto 
 			});
-			console.log(self.listaItensNota);
+			
+	}
+		
+		
+		$scope.somaUnitario = function(quantidade, valorUnitario){
+			return $scope.valorTotal = quantidade * valorUnitario;
+		
 			
 		}
 		

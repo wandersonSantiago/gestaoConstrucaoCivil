@@ -73,7 +73,9 @@
 							<td><input class="form-control"  id="quantidadeProduto"  type="text" placeholder="quantidade"
 							ng-model="f.quantidade"></td>
 							<td><input class="form-control"  id="valorProduto"  type="text"  placeholder="Preço" ui-money-mask
-							ng-model="f.valorUnitario"></td>
+							ng-model="f.valorUnitario" ng-blur="notaFiscalCtrl.somaUnitario(f.quantidade, f.valorUnitario)"> </td>
+							<td><input class="form-control"  id="valorTotal"  type="text"  placeholder="Preço Total" ui-money-mask
+							ng-model="f.valorTotal" >{{somaUnitario(f.quantidade, f.valorUnitario) | currency}}</td>
 						</tr>
 	
 					</tbody>
@@ -82,7 +84,7 @@
 							<th><input type="button" class="btn-danger" ng-if="ativadoExcluirLote"  value="excluir" name="apagar" ng-click="protudoCtr.apagarProdutos(notaFiscalCtrl.listaItensNota)"></th>
 							<th></th>
 							<th></th>
-							<th><input type="text" ng-model="notaFiscalCtrl.itemNotaFiscal.valorTotal"></th>
+							<th><input type="text" ng-model="notaFiscalCtrl.valorTotal"></th>
 	
 						</tr>
 					</tfoot>

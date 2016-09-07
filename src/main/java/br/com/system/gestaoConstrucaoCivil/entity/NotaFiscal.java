@@ -47,7 +47,7 @@ public class NotaFiscal implements Serializable {
 	private Date dataNota;
 	@Temporal(TemporalType.DATE)
 	private Date dataVencimento;
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private Integer serie;
 
 	private String observacao;
