@@ -45,9 +45,12 @@ public class NotaFiscalProtudoRestController {
 			System.out.println(notaFiscalProtudo.getItens().get(i).getProduto());
 			System.out.println(notaFiscalProtudo.getItens().get(i).getProduto().getUnidadeMedida());
 			System.out.println(notaFiscalProtudo.getItens().get(i).getQuantidade());
+			System.out.println("valor total item" + notaFiscalProtudo.getItens().get(i).getValorTotal());
 		}
 		
-		
+		System.out.println(notaFiscalProtudo.getNotaFiscal().getDataNota());
+		System.out.println(notaFiscalProtudo.getNotaFiscal().getDataVencimento());
+		System.out.println("valor total nota" + notaFiscalProtudo.getNotaFiscal().getValorTotal());
 		notaFiscalProtudo.getNotaFiscal().setTipoNota(TipoNotaEnum.NOTA_FISCAL_ENTRADA);
 		notaFiscalProdutoService.salvarOuEditar(notaFiscalProtudo);
 		HttpHeaders headers = new HttpHeaders();

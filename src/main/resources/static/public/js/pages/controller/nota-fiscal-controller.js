@@ -6,7 +6,7 @@ app.controller('notaFiscalController', function($scope,notaFiscalService, $route
 	
 	 self.salva = function(notaFiscalProduto){
 		 self.notaFiscalProduto.notaFiscal = self.notaFiscal;
-		 self.notaFiscalProduto.notaFiscal.valorTotal  = self.valorTotal;
+		self.notaFiscalProduto.notaFiscal.valorTotal  = $scope.valorTotalNota;
 		 self.notaFiscalProduto.itens = self.listaItensNota;	
 		 notaFiscalService.salva(self.notaFiscalProduto).
 				then(function(response){
@@ -43,17 +43,28 @@ app.controller('notaFiscalController', function($scope,notaFiscalService, $route
 			
 	}
 		
+		self.SomaTotal = function(){
+			
+			var totalSoma = 0;
+			for(i =0; i < self.listaItensNota.length ; i ++){
+				var total = self.listaItensNota[i];
+				totalSoma += parseFloat(total.valorTotal);	
+				$scope.valorTotalNota = totalSoma;
+				console.log($scope.valorTotalNota);
+				
+			}
+		
+			}
 		
 		$scope.somaUnitario = function(quantidade, valorUnitario){
 			return $scope.valorTotal = quantidade * valorUnitario;
-		
-			
 		}
 		
+		
+		
 		self.ativarExcluirLote = function(listaItensNota){
-			console.log("ativado");
-			self.listaItensNota.filter(function(produto){
-			if(produto.selecionado){
+			self.listaItensNota.filter(function(f){
+			if(f.selecionado){
 				$scope.ativadoExcluirLote = true;
 			}
 			});
@@ -62,10 +73,11 @@ app.controller('notaFiscalController', function($scope,notaFiscalService, $route
 
 		//apagar outros empreendimentos, somente da lista de front
 		self.apagarProdutos = function(listaItensNota){
-			console.log("apagar");
-				self.listaItensNota = listaFornecedores.filter(function(produto){
-				if(!produto.selecionado) return produto;
-				$scope.ativadoExcluirLote = null;
+				$scope.somaUnitario();
+				self.SomaTotal();
+				self.listaItensNota = self.listaItensNota.filter(function(f){
+				if(!f.selecionado) return f;
+				$scope.ativadoExcluirLote = false;
 			});
 		}
 });

@@ -38,17 +38,17 @@ public class NotaFiscal implements Serializable {
 	private TipoNotaEnum tipoNota;
 
 	@Column(nullable = false)
-	private Integer numero;
+	private Long numero;
 
 	@Column(nullable = false)
-	private Integer chaveAcesso;
+	private Long chaveAcesso;
 
 	@Temporal(TemporalType.DATE)
 	private Date dataNota;
 	@Temporal(TemporalType.DATE)
 	private Date dataVencimento;
 	@Column(nullable = true)
-	private Integer serie;
+	private Long serie;
 
 	private String observacao;
 	@Column(nullable = false)
@@ -62,19 +62,19 @@ public class NotaFiscal implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getChaveAcesso() {
+	public Long getChaveAcesso() {
 		return chaveAcesso;
 	}
 
-	public void setChaveAcesso(Integer chaveAcesso) {
+	public void setChaveAcesso(Long chaveAcesso) {
 		this.chaveAcesso = chaveAcesso;
 	}
 
-	public Integer getNumero() {
+	public Long getNumero() {
 		return numero;
 	}
 
-	public void setNumero(Integer numero) {
+	public void setNumero(Long numero) {
 		this.numero = numero;
 	}
 
@@ -110,11 +110,11 @@ public class NotaFiscal implements Serializable {
 		this.valorTotal = valorTotal;
 	}
 
-	public Integer getSerie() {
+	public Long getSerie() {
 		return serie;
 	}
 
-	public void setSerie(Integer serie) {
+	public void setSerie(Long serie) {
 		this.serie = serie;
 	}
 

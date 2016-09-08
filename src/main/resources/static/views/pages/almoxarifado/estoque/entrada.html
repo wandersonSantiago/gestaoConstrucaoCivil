@@ -32,13 +32,11 @@
 						</div>
 						<!-- <label class="col-sm-2 control-label" for="dataNota">Data Nota Fiscal</label> -->
 						<div class="col-sm-3">
-							<input class="form-control"  id="dataNota" type="text" ng-model="notaFiscalCtrl.dataNota" ui-date title="informe a data da nota fiscal"  placeholder="data nota fiscal"
-							ng-model="notaFiscalCtrl.notaFiscal.dataNota">
+							<input class="form-control"  id="dataNota" type="text" ng-model="notaFiscalCtrl.notaFiscal.dataNota" ui-date title="informe a data da nota fiscal"  placeholder="data nota fiscal">
 						</div>
 						<!-- <label class="col-sm-2 control-label" for="vencimento">Vencimento</label> -->
 						<div class="col-sm-3">
-							<input class="form-control"  id="vencimento"  type="text" ng-model="notaFiscalCtrl.dataVencimento" ui-date title="informe a data de vencimento da nota fiscal" placeholder="vecimento nota fiscal"
-							ng-model="notaFiscalCtrl.notaFiscal.dataVencimento">
+							<input class="form-control"  id="vencimento"  type="text" ng-model="notaFiscalCtrl.notaFiscal.dataVencimento" ui-date title="informe a data de vencimento da nota fiscal" placeholder="vecimento nota fiscal">
 						</div>
 					</div>
 					
@@ -66,30 +64,33 @@
 					<tbody
 						ng-repeat=" f in notaFiscalCtrl.listaItensNota | filter : busca">
 						<tr>
+						<td><input type="checkbox" ng-model="f.selecionado"	ng-click="notaFiscalCtrl.ativarExcluirLote(listaItensNota)"></td>
 							<td><input class="form-control"  id="codigoBarras"  type="text" placeholder="Código de barras"
-							ng-model="f.produto.codigoBarra"></td>
+							ng-model="f.produto.codigoBarra" disabled></td>
 							<td><input class="form-control"  id="descricaoProduto"  type="text" placeholder="descrição do Produto" 
-							ng-model="f.produto.descricao"></td>
+							ng-model="f.produto.descricao" disabled></td>
 							<td><input class="form-control"  id="quantidadeProduto"  type="text" placeholder="quantidade"
 							ng-model="f.quantidade"></td>
 							<td><input class="form-control"  id="valorProduto"  type="text"  placeholder="Preço" ui-money-mask
-							ng-model="f.valorUnitario" ng-blur="notaFiscalCtrl.somaUnitario(f.quantidade, f.valorUnitario)"> </td>
+							ng-model="f.valorUnitario" ng-blur="notaFiscalCtrl.SomaTotal()"> </td>
 							<td><input class="form-control"  id="valorTotal"  type="text"  placeholder="Preço Total" ui-money-mask
-							ng-model="f.valorTotal" >{{somaUnitario(f.quantidade, f.valorUnitario) | currency}}</td>
+							ng-model="f.valorTotal = somaUnitario(f.quantidade, f.valorUnitario)"   disabled></td>
+							
 						</tr>
 	
 					</tbody>
 					<tfoot>
 						<tr>
-							<th><input type="button" class="btn-danger" ng-if="ativadoExcluirLote"  value="excluir" name="apagar" ng-click="protudoCtr.apagarProdutos(notaFiscalCtrl.listaItensNota)"></th>
+							<th><input type="button" class="btn-danger" ng-if="ativadoExcluirLote"  value="excluir" name="apagar" ng-click="notaFiscalCtrl.apagarProdutos(listaItensNota)"></th>
 							<th></th>
 							<th></th>
-							<th><input type="text" ng-model="notaFiscalCtrl.valorTotal"></th>
+							<th></th>
+							<th>{{valorTotalNota | currency}}</th>
 	
 						</tr>
 					</tfoot>
 				</table>
-
+					
 					<br>
 					<hr>
 					<h3>Fornecedor</h3>
