@@ -16,7 +16,9 @@ public class NotaFiscalProdutoService {
 
 	@Autowired
 	private NotaFiscalProdutoRepository notaFiscalProdutoRepository;
-   
+    @Autowired
+    private EstoqueEmpreendimentoService estoque;
+    
     public List<NotaFiscalProduto> buscarTodos() {
 
 		return notaFiscalProdutoRepository.findAll();
@@ -27,7 +29,7 @@ public class NotaFiscalProdutoService {
 		
 		adicionarNotaProdutoItens(notaFiscalProduto);
 		notaFiscalProdutoRepository.save(notaFiscalProduto);
-		
+		estoque.entradaEstoque(notaFiscalProduto);
 		
 	}
 

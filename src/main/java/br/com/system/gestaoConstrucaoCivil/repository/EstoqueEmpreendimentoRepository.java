@@ -10,17 +10,12 @@ import br.com.system.gestaoConstrucaoCivil.entity.EstoqueEmpreendimento;
 
 public interface EstoqueEmpreendimentoRepository extends JpaRepository<EstoqueEmpreendimento,Long>{
 
-	 @Modifying
-	 @Transactional(readOnly = false)
-	 @Query("update EstoqueEmpreendimento set quantidade = (?1 + (SELECT e.quantidade FROM EstoqueEmpreendimento e WHERE e.id  = ?2)) WHERE id = ?2")
-	 void adicionarQuantidadeEstoque(Integer quantidade,Long id);
-		
-	 @Modifying
-	 @Transactional(readOnly = false)
-	 @Query("update EstoqueEmpreendimento set quantidade = ((SELECT e.quantidade FROM EstoqueEmpreendimento e WHERE e.id  = ?2) - ?1) WHERE id = ?2")
-	 void baixarEstoque(Integer quantidade,Long id);
-	   
+	
+	
+	 @Query("SELECT e FROM EstoqueEmpreendimento e JOIN e.produto p  WHERE e.empreendimento.id  = ?1 AND p.id = ?2")
+	 EstoqueEmpreendimento estoque(Long id_empreendimento,Long id);
 	    
-	 @Query("SELECT CASE WHEN COUNT(id) > 0 THEN true ELSE false END FROM EstoqueEmpreendimento e WHERE e.id = :id")
+	 @Query("SELECT CASE WHEN COUNT(e.id) > 0 THEN true ELSE false END FROM EstoqueEmpreendimento e JOIN e.produto p  WHERE p.id = :id")
 	 boolean existeProduto(@Param("id") Long id);
+
 }

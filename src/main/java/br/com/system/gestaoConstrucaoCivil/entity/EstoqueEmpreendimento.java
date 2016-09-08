@@ -44,12 +44,12 @@ public class EstoqueEmpreendimento implements Serializable{
 	@JoinColumn(name="id_empreendimento",nullable = true)
 	private Empreendimento empreendimento;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "empreendimento_protudo", joinColumns = @JoinColumn(name = "id_produto"), 
-	inverseJoinColumns = @JoinColumn(name = "id_empreendimento"))
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "empreendimento_produto", joinColumns = @JoinColumn(name = "id_estoque_empreendimento"), 
+	inverseJoinColumns = @JoinColumn(name = "id_produto"))
 	private List<Produto>  produto;
 	
-
+	
 	@Column(nullable = false)
 	private Integer quantidadeMaxima = 100;
 	
