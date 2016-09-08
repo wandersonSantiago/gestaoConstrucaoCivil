@@ -2,6 +2,7 @@ package br.com.system.gestaoConstrucaoCivil.entity;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -100,6 +101,16 @@ public class EstoqueEmpreendimento implements Serializable{
 	public void setQuantidadeMinima(Integer quantidadeMinima) {
 		this.quantidadeMinima = quantidadeMinima;
 	}
+	public void adicionarProduto(Produto prod)
+	{
+	      if(produto == null)
+	      {
+	    	  produto = new ArrayList<Produto>();
+	      }
+	      produto.add(prod);
+	}
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
