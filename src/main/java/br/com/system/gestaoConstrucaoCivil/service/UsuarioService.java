@@ -38,4 +38,9 @@ public class UsuarioService {
 			
 		return usuarioRepository.findAll();
 	}
+	
+	public Usuario buscarPorLogin(String login)
+	{
+		return usuarioRepository.findByLogin(login);
+	}
 }

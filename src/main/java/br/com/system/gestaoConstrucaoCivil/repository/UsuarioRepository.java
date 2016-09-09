@@ -7,4 +7,5 @@ import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario,Long>{
             
 	Usuario findByNome(String nome);
+	Usuario findByLogin(String login);
 }
