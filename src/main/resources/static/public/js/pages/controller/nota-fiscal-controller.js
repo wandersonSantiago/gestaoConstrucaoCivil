@@ -73,9 +73,11 @@ app.controller('notaFiscalController', function($scope,notaFiscalService, $route
 
 		//apagar outros empreendimentos, somente da lista de front
 		self.apagarProdutos = function(listaItensNota){
-				$scope.somaUnitario();
-				self.SomaTotal();
+			
+				
 				self.listaItensNota = self.listaItensNota.filter(function(f){
+					$scope.somaUnitario(f.quantidade, f.valorUnitario );
+					self.SomaTotal();
 				if(!f.selecionado) return f;
 				$scope.ativadoExcluirLote = false;
 			});
