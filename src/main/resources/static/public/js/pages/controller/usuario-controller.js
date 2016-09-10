@@ -7,7 +7,7 @@ app.controller('usuarioController', function($scope, toastr, usuarioService, $ht
 	$scope.listaUsuario = [];
 		
 	$http.get('/rest/usuario/usuario/').then(function(response) {
-		self.usuario = response.data.name;
+		self.user = response.data.name;
 	});	
 	
 	self.altera = function(usuario){
