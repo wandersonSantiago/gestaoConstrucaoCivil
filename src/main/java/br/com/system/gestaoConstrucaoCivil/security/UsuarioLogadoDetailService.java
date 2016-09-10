@@ -13,23 +13,25 @@ import br.com.system.gestaoConstrucaoCivil.service.UsuarioService;
 
 @Service
 @Transactional
-public class UsuarioLogadoDetailService /*implements UserDetailsService*/{
+public class UsuarioLogadoDetailService implements UserDetailsService{
 
-	/*@Autowired
-	private UsuarioService usuarioService;
+	@Autowired
+	private UsuarioService usuarioService;	
 	
 	@Override
-	public UserDetails loadUserByUsername(String nomeUsuario) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {	
 		
-		Usuario usuario ;
-		try
+		Usuario usuario = usuario = usuarioService.buscarPorLogin(username);
+		
+		if(usuario != null)
 		{
-		   usuario = usuarioService.buscarUsuarioPorNome(nomeUsuario);
-		   
-		}catch (Exception e) {
-			throw new  UsernameNotFoundException("Usuário " + nomeUsuario +"  não encontrado");
+			UserDetailsImpl user = new UserDetailsImpl();
+			user.setUsername(usuario.getId().toString());
+			user.setPassword(usuario.getSenha());
+			
+			return user;
 		}
-		return new UsuarioLogado(usuario);
-	}*/
+		throw new UsernameNotFoundException("Usuario não encontrado");
+	}
 
 }

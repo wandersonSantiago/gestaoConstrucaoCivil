@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.ConfigEmpreendimentoEdificio;
+import br.com.system.gestaoConstrucaoCivil.pojo.ConfigEmpreendimentoEdificioPojo;
 import br.com.system.gestaoConstrucaoCivil.repository.ConfigEmpreendimentoEdificioRepository;
 
 
@@ -34,6 +35,10 @@ public class ConfigEmpreendimentoEdificioService {
     public ConfigEmpreendimentoEdificio buscarPorId(Long id)
     {
         return configEmpreendimentoEdificioRepository.findOne(id);
+    }
+    public void ConfigEmpreendimentoEdificioPojo()
+    {
+    	
     }
  
 }
