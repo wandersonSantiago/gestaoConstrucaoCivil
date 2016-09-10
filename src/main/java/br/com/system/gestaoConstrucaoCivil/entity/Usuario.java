@@ -1,9 +1,11 @@
 package br.com.system.gestaoConstrucaoCivil.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -35,10 +37,7 @@ public class Usuario extends AbstractPersistable<Long>{
 	private String senha;
 	@Column(nullable = false)
 	private boolean ativo;
-	@Column(nullable = false)
-	@Temporal(TemporalType.DATE)
-	private Date dataCadastro;
-	
+	private LocalDate dataCadastro;
 	
 	public String getNome() {
 		return nome;
@@ -71,15 +70,14 @@ public class Usuario extends AbstractPersistable<Long>{
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
 	}
-	
-	public Date getDataCadastro() {
-		return dataCadastro;
-	}
-	public void setDataCadastro(Date dataCadastro) {
-		this.dataCadastro = dataCadastro;
-	}
 	public Funcionario getFuncionario() {
 		return funcionario;
+	}
+	public LocalDate getDataCadastro() {
+		return dataCadastro;
+	} 
+	public void setDataCadastro(LocalDate dataCadastro) {
+		this.dataCadastro = dataCadastro;
 	}
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
