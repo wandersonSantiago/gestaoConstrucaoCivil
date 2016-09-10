@@ -50,7 +50,9 @@ public class NotaFiscal implements Serializable {
 	@Column(nullable = true)
 	private Long serie;
 
+	@Column(nullable = true)
 	private String observacao;
+	
 	@Column(nullable = false)
 	private Double valorTotal;
 
