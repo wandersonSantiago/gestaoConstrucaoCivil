@@ -1,8 +1,11 @@
 package br.com.system.gestaoConstrucaoCivil.service;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +30,9 @@ public class UsuarioService {
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(Usuario usuario)
 	{
+		//String hash = new BCryptPasswordEncoder().encode(usuario.getSenha());
+		//usuario.setSenha(hash);
+		usuario.setDataCadastro(LocalDate.now());
 		usuarioRepository.save(usuario);
 	}
 	
