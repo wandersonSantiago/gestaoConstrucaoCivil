@@ -7,8 +7,8 @@ app.controller('usuarioController', function($scope, toastr, usuarioService, $ht
 	$scope.listaUsuario = [];
 		
 	$http.get('/rest/usuario/usuario/').then(function(response) {
-		self.user = response.data.name;
-	});
+		self.usuario = response.data.name;
+	});	
 	
 	self.altera = function(usuario){
 		if(self.senha == self.senhaRepitida){
