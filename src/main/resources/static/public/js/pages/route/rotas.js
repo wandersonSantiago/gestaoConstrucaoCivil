@@ -108,7 +108,9 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 		templateUrl:"views/pages/servicos/pacotes/lista.html",		
 	})
 	
-	
+	.when('/servicos/vincular/vincular', {
+		templateUrl:"views/pages/servicos/vincular/vincularServicos.html",		
+	})
 //====================================================================================	
 //ROTAS RECURSOS HUMANOS
 	

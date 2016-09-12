@@ -1,0 +1,127 @@
+<meta charset="UTF-8">
+<br>
+<br>
+<div class="generic-container"	ng-controller="configEmpreendimentoController as configCtrl">
+	<div class="box box-primary">
+		<div class="box-header">
+			<span class="lead"> Baixa estoque </span>
+		</div>
+		<div class="panel-body">
+		<br>
+			<div class="container col-sm-12 ">
+				<form role="form-vertical"
+					ng-submit="configCtrl.salvaConfigEmpreendimento()">
+		
+					<div class="row">	
+						<label class="col-sm-1 control-label" for="empreendimento"> Torre</label>	
+						<div class="col-sm-3">
+							<input type="checkbox" ng-model="edificioTorre"  placeholder="outros serviços?">
+						</div>		
+						<label class="col-sm-1 control-label" for="empreendimento"> andar</label>	
+						<div class="col-sm-3">
+							<input type="checkbox" ng-model="edificioAndar"  placeholder="outros serviços?">
+						</div>
+						<label class="col-sm-1 control-label" for="empreendimento"> apartamento</label>	
+						<div class="col-sm-3">
+							<input type="checkbox" ng-model="edificioApartamento"  placeholder="outros serviços?">
+						</div>
+					</div>
+					<br>
+					<div class="row">							
+						<label class="col-sm-1 control-label" for="empreendimento"> Casa</label>	
+						<div class="col-sm-3">
+							<input type="checkbox" ng-model="edificioCasa"  placeholder="outros serviços?">
+						</div>
+						<label class="col-sm-1 control-label" for="empreendimento"> Andar</label>	
+						<div class="col-sm-3">
+							<input type="checkbox" ng-model="edificioAndarCasa"  placeholder="outros serviços?">
+						</div>
+					</div>
+					<br>
+					<div class="row" >
+						
+						<div class="col-sm-2"  >
+							<select class="form-control select2" style=" width: 100%;" ng-if="edificioCasa" required>
+								<option value="">---Casa---</option>
+							</select>
+						</div>
+							<div class="col-sm-2"  >
+							<select class="form-control select2" style=" width: 100%;" ng-if="edificioAndarCasa" required>
+								<option value="">---Andar---</option>
+							</select>
+						</div>
+
+					</div>
+<br>
+					<div class="row" >
+							<div class="col-sm-2"  >
+							<select class="form-control select2" style=" width: 100%;" ng-if="edificioTorre" required>
+								<option value="">---Torre---</option>
+							</select>
+						</div>
+
+						
+							<div class="col-sm-2"  >
+							<select class="form-control select2" style=" width: 100%;" ng-if="edificioAndar" required>
+								<option value="">---Andar---</option>
+							</select>
+						</div>
+	
+							<div class="col-sm-2"  >
+							<select class="form-control select2" style=" width: 100%;" ng-if="edificioApartamento" required>
+								<option value="">---Apartamento---</option>
+							</select>
+						</div>
+					</div>
+<br>					
+					<div class="row">	
+						<label class="col-sm-2 control-label" for="ativo"> outros Serviços?</label>	
+						<div class="col-sm-3">
+							<input type="checkbox" ng-model="outrosAtivo"  placeholder="outros serviços?">
+						</div>		
+					</div>
+<br>					
+					<div class="row" ng-if="outrosAtivo">
+						<div class="col-sm-6"  >
+							<select class="form-control select2" style=" width: 100%;" required>
+								<option value="">---Serviços Outros---</option>
+							</select>
+						</div>						
+					</div>
+					
+					<div class="row" ng-if="!outrosAtivo">				
+						<div class="col-sm-6"  >
+							<select class="form-control select2" style=" width: 100%;" required>
+								<option value="">---Serviços---</option>
+							</select>
+						</div>
+						
+					</div>
+					
+<br>					
+					<div class="row" >				
+						<div class="col-sm-6"  >
+							<select class="form-control select2" style=" width: 100%;" required>
+								<option value="">---Prestadora de Serviço---</option>
+							</select>
+						</div>
+						
+					</div>
+					
+					
+					
+					
+					<br>
+					
+					<div class="row ">
+						
+							<button type="submit" name="submit" 
+								class="btn btn-lg btn-primary btn-block btn-signin">Cadastrar</button>
+						
+					</div>
+				</form>
+			</div>
+			<div class="tablecontainer"></div>
+		</div>
+	</div>
+	</div>
