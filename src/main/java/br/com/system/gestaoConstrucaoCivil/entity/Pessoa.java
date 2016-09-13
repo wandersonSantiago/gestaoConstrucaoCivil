@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -40,6 +42,7 @@ public abstract class Pessoa implements Serializable{
 	protected String telefoneFixo;
 	@Column(nullable = false,length = 15)
 	protected String telefoneCelular;
+	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)
 	protected Date dataNascimento;
 	@Column(nullable = false)

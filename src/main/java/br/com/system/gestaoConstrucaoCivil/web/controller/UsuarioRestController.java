@@ -2,6 +2,8 @@ package br.com.system.gestaoConstrucaoCivil.web.controller;
 
 import java.security.Principal;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 import br.com.system.gestaoConstrucaoCivil.service.UsuarioService;
+import br.com.system.gestaoConstrucaoCivil.view.UsuarioView;
 
 @RestController
 @RequestMapping("/rest/usuario")
@@ -64,4 +67,21 @@ public class UsuarioRestController {
 		public ResponseEntity<Usuario> buscarUsuarioPorId(@PathVariable Long id) {
 			return new ResponseEntity<Usuario>(usuarioService.buscarUsuarioPorId(id), HttpStatus.OK);
 		}
+	 
+	    @RequestMapping("/user")
+		public ResponseEntity<?> user(Principal user, HttpSession session) {
+			
+	    	Usuario usuario = (Usuario) session.getAttribute("usuario");
+			
+	    	Empreendimento empreendimento = (Empreendimento) session.getAttribute("empreendimento");
+			
+	    	
+			
+	    	if(usuario == null){
+				return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+			}
+			UsuarioView u = new UsuarioView(usuario, empreendimento);
+
+			return new ResponseEntity<>(u, HttpStatus.OK);
+		} 
 }

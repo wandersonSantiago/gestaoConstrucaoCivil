@@ -13,7 +13,7 @@ import br.com.system.gestaoConstrucaoCivil.service.UsuarioService;
 
 @Service
 @Transactional
-public class UsuarioLogadoDetailService implements UserDetailsService{
+public class UserDetailsServiceImpl implements UserDetailsService{
 
 	@Autowired
 	private UsuarioService usuarioService;	
@@ -21,13 +21,14 @@ public class UsuarioLogadoDetailService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {	
 		
+		System.out.println("Metodo loadUserByUsername");
 		Usuario usuario = usuario = usuarioService.buscarPorLogin(username);
-		
 		if(usuario != null)
 		{
 			UserDetailsImpl user = new UserDetailsImpl();
 			user.setUsername(usuario.getId().toString());
 			user.setPassword(usuario.getSenha());
+		 
 			
 			return user;
 		}
