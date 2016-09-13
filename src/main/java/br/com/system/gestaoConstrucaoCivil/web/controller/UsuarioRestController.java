@@ -20,6 +20,7 @@ import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 import br.com.system.gestaoConstrucaoCivil.service.UsuarioService;
 import br.com.system.gestaoConstrucaoCivil.view.UsuarioView;
+import ch.qos.logback.core.net.SyslogOutputStream;
 
 @RestController
 @RequestMapping("/rest/usuario")
@@ -33,6 +34,7 @@ public class UsuarioRestController {
 	@RequestMapping(value="/usuario")
 	@ResponseBody
 	public Principal user(Principal user) {
+		System.out.println("chamo o login");
 		return user;
 	}
 	
@@ -68,7 +70,7 @@ public class UsuarioRestController {
 			return new ResponseEntity<Usuario>(usuarioService.buscarUsuarioPorId(id), HttpStatus.OK);
 		}
 	 
-	    @RequestMapping("/user")
+	/**    @RequestMapping("/usuario")
 		public ResponseEntity<?> user(Principal user, HttpSession session) {
 			
 	    	Usuario usuario = (Usuario) session.getAttribute("usuario");
@@ -83,5 +85,5 @@ public class UsuarioRestController {
 			UsuarioView u = new UsuarioView(usuario, empreendimento);
 
 			return new ResponseEntity<>(u, HttpStatus.OK);
-		} 
+		} **/
 }
