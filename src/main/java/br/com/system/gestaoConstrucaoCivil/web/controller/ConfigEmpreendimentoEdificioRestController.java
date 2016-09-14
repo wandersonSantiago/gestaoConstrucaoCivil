@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.system.gestaoConstrucaoCivil.entity.ConfigEmpreendimentoEdificio;
+import br.com.system.gestaoConstrucaoCivil.pojo.ConfigEmpreendimentoEdificioPojo;
 import br.com.system.gestaoConstrucaoCivil.service.ConfigEmpreendimentoEdificioService;
 
 
@@ -38,4 +39,9 @@ public class ConfigEmpreendimentoEdificioRestController {
         return new ResponseEntity<ConfigEmpreendimentoEdificio>(configEmpreeendimentoEdificioService.buscarPorId(id), HttpStatus.OK);
     }
 	
+	@RequestMapping(value = "",method = RequestMethod.GET)
+	public ResponseEntity<ConfigEmpreendimentoEdificioPojo> configPojo() {
+        
+        return new ResponseEntity<ConfigEmpreendimentoEdificioPojo>(configEmpreeendimentoEdificioService.getConfig(),HttpStatus.OK);
+	}
 }

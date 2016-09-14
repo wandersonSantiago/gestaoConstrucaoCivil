@@ -19,26 +19,28 @@ public class ConfigEmpreendimentoEdificioService {
 
 	
 	@Autowired
-    private ConfigEmpreendimentoEdificioRepository configEmpreendimentoEdificioRepository;
-     
+    private ConfigEmpreendimentoEdificioRepository configEdificioRepository;
+    
     @Transactional(readOnly = false)
     public void salvarOuEditar(ConfigEmpreendimentoEdificio configEmpreendimentoEdificio)
     {
-    	configEmpreendimentoEdificioRepository.save(configEmpreendimentoEdificio);
+    	configEdificioRepository.save(configEmpreendimentoEdificio);
     }
      
     public List<ConfigEmpreendimentoEdificio> buscarTodos(){
          
-        return configEmpreendimentoEdificioRepository.findAll();
+        return configEdificioRepository.findAll();
     }
     
     public ConfigEmpreendimentoEdificio buscarPorId(Long id)
     {
-        return configEmpreendimentoEdificioRepository.findOne(id);
+        return configEdificioRepository.findOne(id);
     }
-    public void ConfigEmpreendimentoEdificioPojo()
+    public ConfigEmpreendimentoEdificioPojo getConfig()
     {
-    	
+          ConfigEmpreendimentoEdificio edificio = configEdificioRepository.findByEmpreendimentoId(7L);
+          return new ConfigEmpreendimentoEdificioPojo(edificio);
+    
     }
  
 }
