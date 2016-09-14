@@ -49,4 +49,9 @@ public class UsuarioService {
 	{
 		return usuarioRepository.findByLogin(login);
 	}
+	
+	public boolean existeLoginCadastrado(String login)
+	{
+		return usuarioRepository.existeLogin(login);
+	}
 }

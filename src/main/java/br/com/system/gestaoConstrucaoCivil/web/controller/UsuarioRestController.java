@@ -69,6 +69,10 @@ public class UsuarioRestController {
 		public ResponseEntity<Usuario> buscarUsuarioPorId(@PathVariable Long id) {
 			return new ResponseEntity<Usuario>(usuarioService.buscarUsuarioPorId(id), HttpStatus.OK);
 		}
+	 @RequestMapping(value = "/existeLogin/{login}", method = RequestMethod.GET)
+	 public ResponseEntity<Usuario> verificarSeExisteLogin(@PathVariable String login) {
+			return new ResponseEntity(usuarioService.existeLoginCadastrado(login), HttpStatus.OK);
+		}
 	 
 	/**    @RequestMapping("/usuario")
 		public ResponseEntity<?> user(Principal user, HttpSession session) {
