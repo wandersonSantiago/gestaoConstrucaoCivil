@@ -6,7 +6,7 @@
 	<div class="box box-primary" >
 		<!-- Default panel contents -->
 		<div class="box-header" >
-			<span class="lead"> cadastrar Pacotes de Serviços </span>
+			<span class="lead"> Cadastro Pacotes de Serviços </span>
 		</div>
 		<div class="panel-body" >
 
@@ -18,28 +18,25 @@
 					<div class="row">		
 						<label class="col-sm-2 control-label" for="ativo"> Ativo</label>	
 						<div class="col-sm-3">
-							<input type="checkbox" ng-model="pacotesCtrl.pacoteServico.ativo" required>
+							<input type="checkbox" ng-model="pacotesCtrl.pacoteServico.ativo" >
 						</div>						
 					</div>
 					<br>
 					<div class="row">
-						<label class="col-sm-2 control-label" for="codigo">Codigo Pacote</label>
 						<div class="col-sm-2">
-							<input  class="form-control" ng-model="pacotesCtrl.pacoteServico.codigoPacote" id="codigo" type="text"  required >
+							<input  class="form-control" ng-model="pacotesCtrl.pacoteServico.codigoPacote" id="codigo" placeholder="Código" type="text"  required >
 						</div>										
 					</div>
 					<br>
 					<div class="row">
-						<label class="col-sm-2 control-label" for="nome">Nome Pacote</label>
 						<div class="col-sm-4">
-							<input  class="form-control" id="nome" type="text" ng-model="pacotesCtrl.pacoteServico.descricao" required >
+							<input  class="form-control" id="nome" type="text" ng-model="pacotesCtrl.pacoteServico.descricao" placeholder="Nome" required >
 						</div>
 					</div>
 					<br>
 					<div class="row">
-						<label class="col-sm-2 control-label" for="nome">Categoria</label>
 						<div class="col-sm-4">
-							<input  class="form-control" id="nome" type="text" ng-model="pacotesCtrl.pacoteServico.categoria" required >
+							<input  class="form-control" id="nome" type="text" ng-model="pacotesCtrl.pacoteServico.categoria" placeholder="Categoria" required >
 						</div>
 					</div>
 					<br>
@@ -47,23 +44,20 @@
 					
 			
 					<div class="row">
-						<label class="col-sm-2 control-label" for="servicos">Serviços atribuidos</label>
 						<div class="col-sm-6">
-					      <textarea class="textarea form-control" ng-model="pacotesCtrl.pacoteServico.servicosAtribuidos"  required ></textarea>
+					      <textarea class="textarea form-control" ng-model="pacotesCtrl.pacoteServico.servicosAtribuidos"  placeholder="Serviços Atribuidos" required ></textarea>
             	   	</div>										
 					</div>
 					<br>
 					<div class="row">
-						<label class="col-sm-2 control-label" for="criterio">Critério de Serviços</label>
 							<div class="col-sm-6">
-					      <textarea class="textarea form-control"  ng-model="pacotesCtrl.pacoteServico.criterioServico" required ></textarea>
+					      <textarea class="textarea form-control"  ng-model="pacotesCtrl.pacoteServico.criterioServico" placeholder="Critérios" ></textarea>
             	   	</div>	
 					</div>
 					<br>
 					<div class="row">
-						<label class="col-sm-2 control-label" for="valor">Valor</label>
 						<div class="col-sm-4">
-							<input  class="form-control" id="valor" type="text" ng-model="pacotesCtrl.pacoteServico.valor" ui-money-mask="2"  required >
+							<input  class="form-control" id="valor" type="text" ng-model="pacotesCtrl.pacoteServico.valor" placeholder="Valor" ui-money-mask="2"  required >
 						</div>
 					</div>
 							<br>

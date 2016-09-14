@@ -43,6 +43,11 @@ app.controller('verificaDadosController', function($scope, $rootScope, toastr, v
 				$scope.fabricanteCtrl.fabricante = null;
 			}catch(exception){
 			}
+			try{
+				$scope.fornecedorCtrl.fornecedor = null;
+			}catch(exception){
+			}
+		
 			
 		}
 	

@@ -15,45 +15,6 @@
 			<div class="container col-sm-12 ">
 				<form role="form-vertical" name="formFabricante"
 					ng-submit="fabricanteCtrl.salva()">
-					<div class="row">
-						<div class="col-sm-11" ng-class="{ 'has-error' : formFabricante.razaoSocial.$invalid && !formFabricante.razaoSocial.$pristine }">
-							<input class="form-control" ng-minlength="5" ng-maxlength="50" placeholder="Razão social"
-								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.razaoSocial"
-								id="razaoSocial" name="razaoSocial" type="text" required>
-						</div>
-					</div>
-					<p ng-show="formFabricante.razaoSocial.$error.minlength"
-						class="alert alert-warning ">campo Razão Social no minimo 5 caracter</p>
-					<p ng-show="formFabricante.razaoSocial.$error.maxlength"
-						class="alert alert-warning ">campo Razão Social no maximo 50 caracter</p>
-					<br>
-					
-					
-					<div class="row">
-						<div class="col-sm-11" ng-class="{ 'has-error' : formFabricante.nomeFantasia.$invalid && !formFabricante.razaoSocial.$pristine }">
-							<input class="form-control" ng-minlength="5" ng-maxlength="50" placeholder="Nome fantasia"
-								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.nomeFantasia"
-								id="nomeFantasia" name="nomeFantasia" type="text" required>
-						</div>
-					</div>
-					<p ng-show="formFabricante.nomeFantasia.$error.minlength"
-						class="alert alert-warning ">campo nome Fantasia no minimo 5 caracter</p>
-					<p ng-show="formFabricante.nomeFantasia.$error.maxlength"
-						class="alert alert-warning ">campo nome Fantasia no maximo 50 caracter</p>
-					<br>
-					
-					
-					<div class="row">
-						<div class="col-sm-11">
-							<input class="form-control" name="emailPrestadora" placeholder="E-mail"
-								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.email" id="email"
-								type="email" required>
-								<p ng-show="formFabricante.emailPrestadora.$error.email"
-						class="alert alert-warning ">Digite um Email Válido</p>
-						</div>
-					</div>
-					<br>
-					
 					
 					<div class="row">
 						<div class="col-sm-5" ng-controller="verificaDadosController as verificaCtrl">
@@ -63,35 +24,61 @@
 								<p ng-show="formFabricante.cnpjField.$error.cnpj"
 								class="alert alert-warning ">Digite um CNPJ válido!!</p>
 						</div>
-						
-						
-						<div class="col-sm-5">
-							<input class="form-control" placeholder="Telefone"
-								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.telefone" id="telefone"
-								type="tel" ui-br-phone-number required>
+						<div  class="col-sm-1">
+							<select class="form-control" ng-init="ufs=['AC','AL','AM','AP','BA','CE','DF','ES','GO','MA',
+      						'MG','MS','MT','PA','PB','PE','PI','PR','RJ','RN','RO','RR','RS','SC','SE','SP','TO']" ng-model="selectedUF" ng-options="uf for uf in ufs">
+								<option value="">estado</option>
+							</select>
 						</div>
-					</div>
-					<br>
 					
-					
-					<div class="row">
-						<div  class="col-sm-2">
-					<select class="form-control" ng-init="ufs=['AC','AL','AM','AP','BA','CE','DF','ES','GO','MA',
-      				'MG','MS','MT','PA','PB','PE','PI','PR','RJ','RN','RO','RR','RS','SC','SE','SP','TO']" ng-model="selectedUF" ng-options="uf for uf in ufs">
-					<option value="">estado</option>
-					</select>
-					</div>
-					
-						<div class="col-sm-5" ng-controller="verificaDadosController as verificaCtrl">
+						<div class="col-sm-6" ng-controller="verificaDadosController as verificaCtrl">
 							<input class="form-control" name="iefield" ng-blur="verificaCtrl.verificaIe(fabricanteCtrl.fabricante.dadoEmpresa.inscricaoEstadual)"
 								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.inscricaoEstadual"
 								id="inscricaoEstadual" type="text" ui-br-ie-mask='selectedUF'
 								required>
 						 <p ng-show="formFabricante.iefield.$error.ie"	class="alert alert-warning ">Digite um Inscrição Estadual Válida</p>
 						</div>
-							
 					</div>
 					<br>
+					<div class="row">
+						<div class="col-sm-6" ng-class="{ 'has-error' : formFabricante.razaoSocial.$invalid && !formFabricante.razaoSocial.$pristine }">
+							<input class="form-control" ng-minlength="5" ng-maxlength="50" placeholder="Razão social"
+								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.razaoSocial"
+								id="razaoSocial" name="razaoSocial" type="text" required>
+								<p ng-show="formFabricante.razaoSocial.$error.minlength"
+								class="alert alert-warning ">campo Razão Social no minimo 5 caracter</p>
+								<p ng-show="formFabricante.razaoSocial.$error.maxlength"
+								class="alert alert-warning ">campo Razão Social no maximo 50 caracter</p>
+						</div>
+						<div class="col-sm-6" ng-class="{ 'has-error' : formFabricante.nomeFantasia.$invalid && !formFabricante.razaoSocial.$pristine }">
+							<input class="form-control" ng-minlength="5" ng-maxlength="50" placeholder="Nome fantasia"
+								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.nomeFantasia"
+								id="nomeFantasia" name="nomeFantasia" type="text" required>
+								<p ng-show="formFabricante.nomeFantasia.$error.minlength"
+								class="alert alert-warning ">campo nome Fantasia no minimo 5 caracter</p>
+								<p ng-show="formFabricante.nomeFantasia.$error.maxlength"
+								class="alert alert-warning ">campo nome Fantasia no maximo 50 caracter</p>
+						</div>
+					</div>
+					
+					<br>
+					
+					<div class="row">
+						<div class="col-sm-6">
+							<input class="form-control" name="emailPrestadora" placeholder="E-mail"
+								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.email" id="email"
+								type="email" required>
+								<p ng-show="formFabricante.emailPrestadora.$error.email"
+						class="alert alert-warning ">Digite um Email Válido</p>
+						</div>
+						<div class="col-sm-6">
+							<input class="form-control" placeholder="Telefone"
+								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.telefone" id="telefone"
+								type="tel" ui-br-phone-number required>
+						</div>
+					</div>
+					<br>
+	
 					<hr>
 
 					<h4>Endereço</h4>

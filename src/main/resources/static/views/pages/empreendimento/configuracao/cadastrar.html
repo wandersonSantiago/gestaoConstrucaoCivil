@@ -13,14 +13,13 @@
 					ng-submit="configCtrl.salvaConfigEmpreendimento()">
 
 					<div class="row" >
-						<label class="col-sm-2 control-label" for="empreendimento">Empreendimento</label>
 						<div class="col-sm-5" ng-init="configCtrl.empreendimentoSemConfiguracaoLista()">
 							<select class="form-control select2"
 								ng-click="configCtrl.verificar()"
 								ng-model="configCtrl.configEmpreendimento.empreendimento"
 								ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.tipoEmpreendimento for listarEmpreendimentos in empreendimentoSemConfiguracao"
 								style="width: 100%;">
-								<option  value="">--selecione--</option>
+								<option  value="">--Empreendimento--</option>
 							</select>
 						</div>
 					</div>
@@ -28,17 +27,15 @@
 					<br>
 					
 					<div class="row" ng-if="verificaTipoCasa">
-						<label class="col-sm-2 control-label" for="casa">Casas</label>
 						<div class="col-sm-2">
-							<input type="number" interger class="form-control" id="casa"
+							<input type="number" interger class="form-control" id="casa" placeholder="Casa"
 								ng-model="configCtrl.configEmpreendimentoCasa.quantidadeCasa"
 								title="quantidade de residencias no empreendimento"
 								required="required">
 						</div>
 
-						<label class="col-sm-2 control-label" for="andarPorCasa">Andar</label>
 						<div class="col-sm-2">
-							<input type="number" class="form-control" id="andarPorCasa"
+							<input type="number" class="form-control" id="andarPorCasa" placeholder="Andar"
 								ng-model="configCtrl.configEmpreendimentoCasa.quantidadeAndarPorCasa"
 								title="quantidade de andar na residencia" required="required" />
 						</div>
@@ -46,33 +43,28 @@
 					</div>
 
 					<div class="row" ng-if="verificaTipoEdificio">
-						<label class="col-sm-2 control-label" for="edificio">Edificio</label>
 						<div class="col-sm-2">
-							<input type="number" class="form-control" id="edificio"
+							<input type="number" class="form-control" id="edificio" placeholder="Torre"
 								ng-model="configCtrl.configEmpreendimentoEdificio.quantidadeTorre"
 								title="quantidade de torres no empreendimento"
 								required="required">
 						</div>
-
-						<label class="col-sm-2 control-label" for="andar">Andar</label>
 						<div class="col-sm-2">
-							<input type="number" class="form-control" id="andar"
+							<input type="number" class="form-control" id="andar" placeholder="Andar"
 								ng-model="configCtrl.configEmpreendimentoEdificio.quantidadeAndarPorTorre"
 								title="quantidade de andar no edificio" required="required">
 						</div>
-
-						<label class="col-sm-2 control-label" for="apartamento">Apartamento</label>
 						<div class="col-sm-2">
-							<input type="number" class="form-control" id="apartamento"
+							<input type="number" class="form-control" id="apartamento" placeholder="Apartamento"
 								ng-model="configCtrl.configEmpreendimentoEdificio.quantidadeApartamentoPorAndar"
 								title="quantidade de apartamento por andar" required="required">
 						</div>
 					</div>
 					<br> <br>
 					<div class="row">
-						<label class="col-sm-2 control-label" for="outros">Outros</label>
 						<div class="col-sm-5">
-							<input class="form-control" ng-model="descricaoOutro" type="text" id="descricaoOutros">
+							<input class="form-control" ng-model="descricaoOutro" type="text" id="descricaoOutros" 
+							title="Adicione outros tipos de serviços, exemple : pscina, salão de festa, etc.." placeholder="descrição Outros">
 						</div>
 						<div class="col-sm-2">
 							<input class="btn btn-lg btn-primary btn-block btn-signin"

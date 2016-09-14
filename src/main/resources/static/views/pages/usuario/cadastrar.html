@@ -16,25 +16,16 @@
 
 					
 					<div class="row" ng-controller="empreendimentoController as empCtrl">
-					
-						<label class="col-sm-2 control-label" for="empreendimento">Empreendimento</label>
-						<div class="col-sm-8" ng-init="empCtrl.lista()">
-							<select class="form-control select2" ng-model="userCtrl.usuario.empreendimento"
+						<div class="col-sm-6" ng-init="empCtrl.lista()">
+							<select class="form-control select2" ng-model="userCtrl.usuario.empreendimento" 
 								ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.tipoEmpreendimento for listarEmpreendimentos in empreendimentos"
 								style="width: 100%;" required>
-								<option  value="">--selecione--</option>
+								<option  value="">--selecione o Empreendimento--</option>
 							</select>
-						</div>
-					</div>
-					<br>
-					
-					
-					
-					<div class="row">								
-						<label class="col-sm-2 control-label" for="funcionario">Funcionario</label>
-						<div class="col-sm-8"  ng-controller="cadastrarFuncionarioController as funCtrl" ng-init="funCtrl.lista()">
+						</div>												
+						<div class="col-sm-6"  ng-controller="cadastrarFuncionarioController as funCtrl" ng-init="funCtrl.lista()">
 								<select class="form-control select2" ng-model="userCtrl.usuario.funcionario" ng-options="engenheiros.nomeCompleto  group by engenheiros.shade for engenheiros in listaFuncionario" style="width: 100%;" required>
-									<option value="">---Selecione---</option>                                                                                 
+									<option value="">---Selecione Funcionario---</option>                                                                                 
 							</select>
 						</div>						
 					</div>
@@ -45,23 +36,19 @@
 					<div class="row">
 						<label class="col-sm-2 control-label" for="ativo">Usuario Ativo</label>
 						<div class="col-sm-2">
-							<input type="checkbox" ng-model="userCtrl.usuario.ativo" required>
+							<input type="checkbox" ng-model="userCtrl.usuario.ativo" >
 						</div>
 					</div>
 
 					<br>
 					<div class="row" >
-						<label class="col-sm-2 control-label" for="nome">Nome Usuario</label>
-						<div class="col-sm-8">
-							<input type="text" class="form-control" id="nome" ng-model="userCtrl.usuario.nome"
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="nome" ng-model="userCtrl.usuario.nome" placeholder="Nome"
 								title="Nome de usuario"	required>
 						</div>						
-					</div>
-					<br>
-					<div class="row" >
-						<label class="col-sm-2 control-label" for="usuario">Email Usuario</label>
-						<div class="col-sm-8">
-							<input type="email" class="form-control" id="email" ng-model="userCtrl.usuario.email"
+					
+						<div class="col-sm-6">
+							<input type="email" class="form-control" id="email" ng-model="userCtrl.usuario.email" placeholder="Email"
 								title="Email de usuario, para acesso ao sistema"	required>
 						</div>
 					</div>
@@ -69,23 +56,18 @@
 					
 					<br>
 					<div class="row" >
-						<label class="col-sm-2 control-label" for="nome">Login</label>
 						<div class="col-sm-2">
-							<input type="text" class="form-control" id="nome" ng-model="userCtrl.usuario.login"
+							<input type="text" class="form-control" id="nome" ng-model="userCtrl.usuario.login" placeholder="Usuário"
 								title="Nome de usuario"	required>
 						</div>						
 					
-
-
-						<label class="col-sm-1 control-label" for="senha">Senha</label>
+	
 						<div class="col-sm-2">
-							<input type="password" class="form-control" id="senha" ng-model="userCtrl.senha"
+							<input type="password" class="form-control" id="senha" ng-model="userCtrl.senha" placeholder="Senha"
 								title="Digite uma senha" required>
 						</div>
-
-						<label class="col-sm-1 control-label" for="repitaSenha">Repita a Senha</label>
 						<div class="col-sm-2">
-							<input type="password" class="form-control" id="repitaSenha" ng-model="userCtrl.senhaRepitida"
+							<input type="password" class="form-control" id="repitaSenha" ng-model="userCtrl.senhaRepitida" placeholder="Repita a Senha"
 								title="repita a senha" required>
 						</div>
 						

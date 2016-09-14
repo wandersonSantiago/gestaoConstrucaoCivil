@@ -14,7 +14,7 @@
 			<div class="container col-sm-12 ">
 				<form role="form-vertical" name="empreendimentoForm" ng-submit="empCtrl.salva()">
 					<div class="row"  ng-class="{ 'has-error' : empreendimentoForm.descricaoEmpreendimento.$invalid && !empreendimentoForm.descricaoEmpreendimento.$pristine }">
-						<div class="col-sm-11">
+						<div class="col-sm-12">
 							<input ng-model="empCtrl.empreendimento.descricao" name="descricaoEmpreendimento " ng-minlength="5" ng-maxlength="50"
 							class="form-control" id="descricao" type="text" placeholder="Descrição" required>
 						</div>
@@ -29,14 +29,14 @@
 					
 					
 					<div class="row">
-						<div class="col-sm-4">
+						<div class="col-sm-3">
 							<input ng-model="empCtrl.empreendimento.valorMaximoGastar" placeholder="Valor Máximo" class="form-control" id="valorMaximoGastar" type="text" ui-money-mask="2" required>
 						</div>
 						
 						
 						
 					<div  ng-controller="tipoEmpreendimentoController as tipoCtrl">
-						<div class="col-sm-5"  ng-init="tipoCtrl.lista()" >
+						<div class="col-sm-3"  ng-init="tipoCtrl.lista()" >
 							<select class="form-control select2" ng-model="empCtrl.empreendimento.tipoEmpreendimento" 
 							ng-options="listarTipoEmpreendimentos for listarTipoEmpreendimentos in listarTipoEmpreendimento" 
 							  style=" width: 100%;" required >
@@ -44,17 +44,11 @@
 							</select>
 						</div>
 					</div>
-					
-					</div>
-					<br>
-					
-					
-					<div class="row">						
-						<div class="col-sm-4">
+						<div class="col-sm-3">
 							<input ng-model="empCtrl.empreendimento.dataAbertura" class="form-control" id="dataAbertura" placeholder="data Abertura" type="text" onkeyup="if(this.value.length > 9) { dataFechamento.focus(); }" ui-date required >
 						</div>
 						
-						<div class="col-sm-5">
+						<div class="col-sm-3">
 							<input ng-model="empCtrl.empreendimento.datafechamento" class="form-control" id="datafechamento" placeholder="data Fechamento" type="text" name="dataFechamento" ui-date required >
 						</div>
 					</div>
@@ -66,7 +60,7 @@
 					<hr>
 					
 					<div class="row">
-					<label class="col-sm-3 control-label"> Selecione se o Engenheiro for de Empresa Terceirizado</label>
+					Selecione se o Engenheiro for de Empresa Terceirizado
 					<div class="col-sm-1">
 					
 					<input type="checkbox" ng-model="funcionarios">
@@ -80,8 +74,9 @@
 									<option value="">---Selecione Engenheiro---</option>                                                                                 
 								</select>
 						</div>
-					
-					<div class="col-sm-4">
+				</div>	
+				<div class="row">
+						<div class="col-sm-4">
 								<select class="form-control select2" style="width: 100%;" ng-if="funcionarios" required>
 									<option value="">---Selecione Engenheiro---</option>
 							</select>
@@ -94,7 +89,7 @@
 					
 					
 					<div class="row">
-						<div class="col-sm-5">
+						<div class="col-sm-3">
 							<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.cep" ng-blur="empCtrl.findCep()"  onkeyup="if(this.value.length > 8) { numeroEmpresa.focus(); }" name="cepField" class="form-control" id="cep" type="search"
 								placeholder="CEP"  ui-br-cep-mask required>
 								<!-- <button type="button" class="btn-primary" >Buscar CEP</button> -->
@@ -103,32 +98,29 @@
 						class="alert alert-warning ">Digite um CEP Válido</p>
 						</div>
 						
-					<div class="col-sm-5"
+					</div>	
+					<br>
+					<div class="row">
+						<div class="col-sm-5">
+								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.logradouro" placeholder="Rua" class="form-control" id="rua" type="text" required>
+						</div>
+						<div class="col-sm-2"
 							ng-class="{ 'has-error' : empreendimentoForm.numeroEmpresa.$invalid && !empreendimentoForm.numeroEmpresa.$pristine }">
 							<input class="form-control" name="numeroEmpresa" placeholder="Nº"
 								ng-model="empCtrl.empreendimento.enderecoEmpreendimento.numero"
 								id="numero" type="text" ng-minlength="1" ng-maxlength="7"
 								required>
+								<br>
+								<p ng-show="empreendimentoForm.numeroEmpresa.$error.minlength"
+									class="alert alert-warning ">campo numero no minimo 1 caracter</p>
+								<p ng-show="empreendimentoForm.numeroEmpresa.$error.maxlength"
+									class="alert alert-warning ">campo numero no maximo 7 caracter</p>
+						</div>
+						<div class="col-sm-5">
+							<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.complemento" placeholder="Complemento" class="form-control" id="complemento" type="text">
 						</div>
 					</div>
-						<br>
-					<p ng-show="empreendimentoForm.numeroEmpresa.$error.minlength"
-						class="alert alert-warning ">campo numero no minimo 1 caracter</p>
-					<p ng-show="empreendimentoForm.numeroEmpresa.$error.maxlength"
-						class="alert alert-warning ">campo numero no maximo 7 caracter</p>
-
-					<br>
 					
-				
-
-					<div class="row">
-							<div class="col-sm-11">
-								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.logradouro" placeholder="Rua" class="form-control" id="rua" type="text" required>
-							</div>
-					</div>
-					<br>
-				
-				
 					<div class="row">
 							<div class="col-sm-5">
 								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.bairro" placeholder="Bairro" class="form-control" id="bairro" type="text" required>
@@ -137,30 +129,13 @@
 							<div class="col-sm-5">
 								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.localidade" placeholder="Cidade" class="form-control" id="cidade" type="text" required>
 							</div>
-					</div>
-					<br>
-				
-				
-					<div class="row">
-
-							<div class="col-sm-5">
+							<div class="col-sm-2">
 								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.uf" placeholder="Estado" class="form-control" id="estado" type="text" required>
 							</div>
-						
 					</div>
 					<br>
-					
-					
-					<div class="row">
-						<div class="col-sm-11">
-							<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.complemento" placeholder="Complemento" class="form-control" id="complemento" type="text">
-						</div>
-					</div>
-					<br>
-
-						
-						
-					<br>
+				
+				
 					<div class="row ">
 						
 							<input type="submit" id="submit" value="Salvar"

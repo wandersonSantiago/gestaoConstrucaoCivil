@@ -15,71 +15,67 @@
 			<div class="container col-sm-12 ">
 				<form role="form-vertical" name="formPrestadora"
 					ng-submit="prestadoraCtrl.salva()">
-					<div class="row">
-						<div class="col-sm-11" ng-class="{ 'has-error' : formPrestadora.razaoSocial.$invalid && !formPrestadora.razaoSocial.$pristine }">
-							<input class="form-control" ng-minlength="5" ng-maxlength="50" placeholder="Razão social"
-								ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.razaoSocial"
-								id="razaoSocial" name="razaoSocial" type="text" required>
-						</div>
-					</div>
-					<p ng-show="formPrestadora.razaoSocial.$error.minlength"
-						class="alert alert-warning ">campo Razão Social no minimo 5 caracter</p>
-					<p ng-show="formPrestadora.razaoSocial.$error.maxlength"
-						class="alert alert-warning ">campo Razão Social no maximo 50 caracter</p>
-					<br>
-					<div class="row">
-						<div class="col-sm-11" ng-class="{ 'has-error' : formPrestadora.nomeFantasia.$invalid && !formPrestadora.razaoSocial.$pristine }">
-							<input class="form-control" ng-minlength="5" ng-maxlength="50" placeholder="Nome fantasia"
-								ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.nomeFantasia"
-								id="nomeFantasia" name="nomeFantasia" type="text" required>
-						</div>
-					</div>
-					<p ng-show="formPrestadora.nomeFantasia.$error.minlength"
-						class="alert alert-warning ">campo nome Fantasia no minimo 5 caracter</p>
-					<p ng-show="formPrestadora.nomeFantasia.$error.maxlength"
-						class="alert alert-warning ">campo nome Fantasia no maximo 50 caracter</p>
-					<br>
-					<div class="row">					
-						<div class="col-sm-11">
-							<input class="form-control" placeholder="E-mail"
-								ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.email" id="email"
-								type="email" required>
-						</div>
-					</div>
-					<br>
+					
 					<div class="row">
 						<div class="col-sm-5" ng-controller="verificaDadosController as verificaCtrl">
 							<input class="form-control" name="cnpjField" placeholder="CNPJ" ng-blur="verificaCtrl.verificaCnpj(prestadoraCtrl.prestadoraServico.dadoEmpresa.cnpj)"
 								ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.cnpj" id="cnpj"
 								type="text" ui-br-cnpj-mask required>
 								<p ng-show="formPrestadora.cnpjField.$error.cnpj" class="alert alert-warning ">Digite um CNPJ Válido</p>
-							
 						</div>
-						<div class="col-sm-5">
-							<input class="form-control" placeholder="Telefone"
-								ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.telefone" id="telefone"
-								type="tel" ui-br-phone-number required>
-						</div>
-					</div>
-					<br>
-					<div class="row">
-					<div  class="col-sm-2">
-					<select class="form-control" ng-init="ufs=['AC','AL','AM','AP','BA','CE','DF','ES','GO','MA',
-      'MG','MS','MT','PA','PB','PE','PI','PR','RJ','RN','RO','RR','RS','SC','SE','SP','TO']" ng-model="selectedUF" ng-options="uf for uf in ufs">
-					<option value="">estado</option>
-					</select>
-					</div>
-					
+						<div  class="col-sm-2">
+							<select class="form-control" ng-init="ufs=['AC','AL','AM','AP','BA','CE','DF','ES','GO','MA',
+      						'MG','MS','MT','PA','PB','PE','PI','PR','RJ','RN','RO','RR','RS','SC','SE','SP','TO']" ng-model="selectedUF" ng-options="uf for uf in ufs">
+								<option value="">estado</option>
+							</select>
+						</div>					
 						<div class="col-sm-5" ng-controller="verificaDadosController as verificaCtrl">
 							<input class="form-control" name="iefield"  ng-blur="verificaCtrl.verificaIe(prestadoraCtrl.prestadoraServico.dadoEmpresa.inscricaoEstadual)"
 								ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.inscricaoEstadual"
 								id="inscricaoEstadual" type="text" ui-br-ie-mask='selectedUF'
 								required>
 								<p ng-show="formPrestadora.ieField.$error.ie" class="alert alert-warning ">Digite uma inscrição estadual Válida</p>
-		 
-						</div>
+		 				 </div>
+		 			</div>
+		 			<br>
+					<div class="row">
+							<div class="col-sm-6" ng-class="{ 'has-error' : formPrestadora.razaoSocial.$invalid && !formPrestadora.razaoSocial.$pristine }">
+								<input class="form-control" ng-minlength="5" ng-maxlength="50" placeholder="Razão social"
+									ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.razaoSocial"
+									id="razaoSocial" name="razaoSocial" type="text" required>
 							
+					
+						<p ng-show="formPrestadora.razaoSocial.$error.minlength"
+							class="alert alert-warning ">campo Razão Social no minimo 5 caracter</p>
+						<p ng-show="formPrestadora.razaoSocial.$error.maxlength"
+							class="alert alert-warning ">campo Razão Social no maximo 50 caracter</p>
+						</div>
+						<div class="row">
+							<div class="col-sm-6" ng-class="{ 'has-error' : formPrestadora.nomeFantasia.$invalid && !formPrestadora.razaoSocial.$pristine }">
+								<input class="form-control" ng-minlength="5" ng-maxlength="50" placeholder="Nome fantasia"
+									ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.nomeFantasia"
+									id="nomeFantasia" name="nomeFantasia" type="text" required>
+							</div>
+							<p ng-show="formPrestadora.nomeFantasia.$error.minlength"
+							class="alert alert-warning ">campo nome Fantasia no minimo 5 caracter</p>
+							<p ng-show="formPrestadora.nomeFantasia.$error.maxlength"
+							class="alert alert-warning ">campo nome Fantasia no maximo 50 caracter</p>
+						</div>
 					</div>
+					<br>
+					<div class="row">					
+						<div class="col-sm-6">
+							<input class="form-control" placeholder="E-mail"
+								ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.email" id="email"
+								type="email" required>
+						</div>
+					<div class="col-sm-6">
+							<input class="form-control" placeholder="Telefone"
+								ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.telefone" id="telefone"
+								type="tel" ui-br-phone-number required>
+						</div>
+					</div>
+					
 					<br>
 					<hr>
 

@@ -6,7 +6,7 @@
 	<div class="box box-primary">
 		<!-- Default panel contents -->
 		<div class="box-header">
-			<span class="lead">Pagina cadastrar Cargo </span>
+			<span class="lead">Cadastrar Cargo </span>
 		</div>
 		<div class="panel-body">
 
@@ -14,9 +14,8 @@
 			<div class="container col-sm-12 ">
 				<form role="form-vertical" ng-submit="cargoCtr.salva()" >
 					<div class="row">
-						<label class="col-sm-1 control-label" for="descricaoCargo"> Descrição do Cargo</label>
 						<div class="col-sm-11">
-							<input class="form-control" ng-model="cargoCtr.cargo.descricao" id="descricao" type="text" required>
+							<input class="form-control" ng-model="cargoCtr.cargo.descricao" placeholder="Descrição" id="descricao" type="text" required>
 						</div>
 					</div>
 					<br>

@@ -6,7 +6,7 @@
 <div class="box box-primary" >
 		<!-- Default panel contents -->
 		<div class="box-header" >
-			<span class="lead">Cadastrar Produto </span>
+			<span class="lead">Editar Produto </span>
 		</div>
 		<div class="panel-body">
 
@@ -17,105 +17,85 @@
 					<div class="row">
 						<label class="col-sm-2 control-label" for="ativo"> Ativo</label>
 						<div class="col-sm-3">
-							<input type="checkbox" ng-model="protudoCtr.produto.ativo">
+							<input type="checkbox" ng-model="protudoCtr.produto.ativo" >
 						</div>
 					</div>
 					
 					<br>
 					
 					<div class="row">
-						<label class="col-sm-2 control-label" for="descricao"> Descrição Produto</label>
 						<div class="col-sm-5">
-							<input class="form-control" ng-model="protudoCtr.produto.descricao" id="descricaoProduto" type="text">
+							<input class="form-control" ng-model="protudoCtr.produto.descricao" id="descricaoProduto" placeholder="Descrição" type="text" required>
 						</div>
 					</div>
 					
 					<br>
 										
 					<div class="row">
-						<label class="col-sm-2 control-label" for="codigoBarra">Código Barras</label>
 						<div class="col-sm-4">
-							<input class="form-control" ng-model="protudoCtr.produto.codigoBarra" id="codigoBarra" type="text">
+							<input class="form-control" ng-model="protudoCtr.produto.codigoBarra" id="codigoBarra" placeholder="Código de Barras" type="text" required>
 						</div>
-						<label class="col-sm-2 control-label" for="codigoProduto">Código produto</label>
 						<div class="col-sm-4">
-							<input class="form-control" ng-model="protudoCtr.produto.codigoProduto" id="codigoProduto"  type="text" >
+							<input class="form-control" ng-model="protudoCtr.produto.codigoProduto" id="codigoProduto"  placeholder="Código do Produto" type="text" required>
 						</div>
-					</div>
-					
-					<br>
-					<div class="row">
-						<label class="col-sm-2 control-label" for="tipoProduto">Tipo do produto</label>
 						<div class="col-sm-4" ng-controller="tipoProdutoController as tipoProdutoCtrl" ng-init="tipoProdutoCtrl.lista()">
 						<select class="form-control select2" ng-model="protudoCtr.produto.tipoProduto" 
 							ng-options="listaTipoProdutos.descricao for listaTipoProdutos in tipoProdutoCtrl.listaTipoProduto" 
 							  style=" width: 100%;" required >
-								<option value="">---Selecione---</option>
+								<option value="">---Tipo Produto---</option>
 							</select>
 						</div>
+					</div>
+					
+					<br>
+					<div class="row">
+						
 				
-						<label class="col-sm-2 control-label" for="areaProduto">Area do produto</label>
 						<div class="col-sm-4" ng-controller="areaProdutoController as areaProdutoCtrl" ng-init="areaProdutoCtrl.lista()">
 						<select class="form-control select2" ng-model="protudoCtr.produto.areaProduto" 
 							ng-options="listaAreaProdutos.descricao for listaAreaProdutos in areaProdutoCtrl.listaAreaProduto" 
 							  style=" width: 100%;" required >
-								<option value="">---Selecione---</option>
+								<option value="">---Area Produto---</option>
 							</select>
-						</div>
-					</div>
-		
-					<br>
-					
-					
-					
-					
-					<div class="row">
-						<label class="col-sm-2 control-label" for="unidadeMedida">Unidade de Medida</label>
+						</div>	
 						<div class="col-sm-4" ng-controller="unidadeMedidaController as unidadeCtrl" ng-init="unidadeCtrl.lista()">
 						<select class="form-control select2" ng-model="protudoCtr.produto.unidadeMedida" 
 							ng-options="listaunidadeMedidas for listaunidadeMedidas in unidadeCtrl.listaUnidadeMedida" 
 							  style=" width: 100%;" required >
-								<option value="">---Selecione---</option>
+								<option value="">---Unidade Medida---</option>
 							</select>
 						</div>
 				
-						<label class="col-sm-2 control-label" for="categoria">Categoria</label>
 						<div class="col-sm-4" ng-controller="categoriaController as categoriaCtrl" ng-init="categoriaCtrl.lista()">
 						<select class="form-control select2" ng-model="protudoCtr.produto.categoria" 
 							ng-options="listaCategorias.descricao for listaCategorias in categoriaCtrl.categorias" 
 							  style=" width: 100%;" required >
-								<option value="">---Selecione---</option>
+								<option value="">---Categoria---</option>
 							</select>
 						</div>
 					</div>
 		
 					<br>
 					<div class="row">
-						<label class="col-sm-2 control-label" for="fabricante">Fabricante</label>
 						<div class="col-sm-4" ng-controller="fabricanteController as fabricanteCtrl" ng-init="fabricanteCtrl.lista()">
 						<select class="form-control select2" ng-model="protudoCtr.produto.fabricante" 
 							ng-options="listaFabricantes.dadoEmpresa.nomeFantasia for listaFabricantes in fabricanteCtrl.listaFabricante" 
 							  style=" width: 100%;" required >
-								<option value="">---Selecione---</option>
+								<option value="">---Fabricante---</option>
 							</select>
-						</div>
-						</div>
-						<br>
-					
-					<div class="row">
-						<label class="col-sm-2 control-label" for="fornecedor">Fornecedor</label>
+						</div>						
 						<div class="col-sm-4" ng-controller="fornecedorController as forCtrl" ng-init="forCtrl.lista()" >
 							<select class="form-control select2" ng-model="protudoCtr.fornecedor" id="fornecedor"
 							ng-options="listaFornecedores.dadoEmpresa.razaoSocial for listaFornecedores in forCtrl.listaFornecedor" 
-							  style=" width: 100%;" >
-								<option value="">---Selecione---</option>
+							  style=" width: 100%;" required>
+								<option value="">---Fornecedor---</option>
 							</select>
 						</div>
 					
 						<div class="col-sm-2">
 							<input class="btn btn-lg btn-primary btn-block btn-signin"
 								ng-click="protudoCtr.adicionarFornecedores(protudoCtr.fornecedor)" value="adicionar"
-								title="pressione para adicionar a lista" type="button" ng-disabled="!protudoCtr.fornecedor" >
+								title="pressione para adicionar a lista" type="button" ng-disabled="!protudoCtr.fornecedor" required>
 						</div>
 					</div>
 			
@@ -153,17 +133,12 @@
 						</table>
 					</div>
 					</div>
-							{{selecionado}}
-					<div class="row ">
-						<div class="col-sm-3"></div>
-						<div class="col-sm-3">
-							<input type="submit" id="submit" value="Salvar"
-								class="btn btn-lg btn-primary btn-block btn-signin">
-						</div>
-						<div class="col-sm-3">
-							<a class="btn btn-lg btn-success btn-block btn-signin" href="#/">Menu Principal</a>
 							
-						</div>
+					<div class="row ">
+						
+							<input type="submit" id="submit" value="Salvar" ng-disabled="!protudoCtr.produto.descricao"
+								class="btn btn-lg btn-primary btn-block btn-signin">
+						
 					</div>
 
 

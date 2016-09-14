@@ -16,10 +16,9 @@
 				<form role="form-vertical" name="formCadastrarFuncionario"
 					ng-submit="cadFuncCtrl.salva()">
 					<div class="row">
-						<label class="col-sm-1 control-label" for="nome">Nome</label>
-						<div class="col-sm-11"
+						<div class="col-sm-12"
 							ng-class="{ 'has-error' : formCadastrarFuncionario.nome.$invalid && !formCadastrarFuncionario.nome.$pristine }">
-							<input class="form-control" ng-minlength="5" ng-maxlength="50"
+							<input class="form-control" ng-minlength="5" ng-maxlength="50" placeholder="Nome"
 								ng-model="cadFuncCtrl.funcionario.nomeCompleto"
 								id="nomeCompleto" name="nome" type="text" required>
 						</div>
@@ -32,235 +31,153 @@
 					<br>
 					
 					<div class="row">
-						<label class="col-sm-1 control-label" for="rg">RG</label>
 						<div class="col-sm-5">
-
-							<input class="form-control"
+						<input class="form-control" placeholder="RG"
 								ng-model="cadFuncCtrl.funcionario.rg" id="rg" type="text"
 								required>
 						</div>
 						
-						
-						<label class="col-sm-1 control-label" for="cpf">CPF</label>
 						<div class="col-sm-5">
-
-							<input class="form-control" name="cpfField"
+							<input class="form-control" name="cpfField" placeholder="CPF"
 								ng-model="cadFuncCtrl.funcionario.cpf" id="cpf"
 								type="text" ui-br-cpf-mask required>
 								<p ng-show="formCadastrarFuncionario.cpfField.$error.cpf"
 								class="alert alert-warning ">Digite um CPF válido!!</p>
 						</div>
+						<div class="col-sm-2">
+							<input class="form-control" placeholder="Data Nascimento"
+								ng-model="cadFuncCtrl.funcionario.dataNascimento"
+								id="dataNascimento" type="text" ui-date required  >
+						</div>
 					</div>
 					<br> 
 					
 					<br>
-					
-					
-					
 					<div class="row">
-						<label class="col-sm-1 control-label" for="telefoneFixo">Telefone
-							Fixo</label>
-						<div class="col-sm-5">
-							<input class="form-control"
-								ng-model="cadFuncCtrl.funcionario.telefoneFixo"
-								id="telefoneFixo" type="tel"  ui-br-phone-number required>
-						</div>
-						
-						
-						<label class="col-sm-1 control-label" for="telefoneCelular">Telefone
-							Celular</label>
-						<div class="col-sm-5">
-							<input class="form-control"
-								ng-model="cadFuncCtrl.funcionario.telefoneCelular"
-								id="telefoneCelular" type="tel" ui-br-phone-number required>
-						</div>
-					</div>
-					
-					<br>
-					
-					
-					<div class="row">
-						<label class="col-sm-1 control-label" for="dataNascimento">Data
-							Nasc</label>
-						<div class="col-sm-5">
-							<input class="form-control"
-								ng-model="cadFuncCtrl.funcionario.dataNascimento"
-								id="dataNascimento" type="text" ui-date required  >
-						</div>
-						
-						
-						<label class="col-sm-1 control-label" for="idade">idade</label>
-						<div class="col-sm-5">
-							<input class="form-control"
+					<div class="col-sm-2">
+							<input class="form-control"  placeholder="Idade"
 								ng-model="cadFuncCtrl.funcionario.idade"
 								id="idade" type="text" required  >
 						</div>
-					</div>
-					<br>
-					
-					
-					<div class="row">
-						<label class="col-sm-1 control-label"  for="sexo">Sexo</label>
 						<div class="col-sm-3">
+							<input class="form-control" placeholder="Telefone Fixo"
+								ng-model="cadFuncCtrl.funcionario.telefoneFixo"
+								id="telefoneFixo" type="tel"  ui-br-phone-number required>
+						</div>
+				
+						<div class="col-sm-3">
+							<input class="form-control"
+								ng-model="cadFuncCtrl.funcionario.telefoneCelular" placeholder="Celular"
+								id="telefoneCelular" type="tel" ui-br-phone-number required>
+						</div>
+						<div class="col-sm-4">
 							<select class="form-control select2" ng-model="cadFuncCtrl.funcionario.sexo" style="width: 100%;" required>
-									<option value="">--selecione--</option>
+									<option value="">--Sexo--</option>
 									<option value="Masculino">Masculino</option>
 									<option value="Feminino">Feminino</option>
 							</select>
 						</div>
 					</div>
-						
+					
+					
+					<br>
+					
+						<hr>
 						
 						
 					<h4>Dados Funcional</h4>
 <br>
 					<div class="row">
-						<label class="col-sm-1 control-label" for="carteiraTrabalho">carteira</label>
-						<div class="col-sm-5">
-
-							<input class="form-control"
+						<div class="col-sm-2">
+							<input class="form-control" placeholder="Carteira Trabalho"
 								ng-model="cadFuncCtrl.funcionario.carteiraTrabalho"
 								id="carteiraTrabalho" type="text" required>
 
 						</div>
-						
-						
-						<label class="col-sm-1 control-label" for="dataAdmissao">Data
-							Admissão</label>
-						<div class="col-sm-5">
-							<input class="form-control"
+					
+						<div class="col-sm-2">
+							<input class="form-control" placeholder="Data Adimissão"
 								ng-model="cadFuncCtrl.funcionario.dataAdmissao"
 								id="dataAdmissao" type="text" ui-date required >
 						</div>
 
-					</div>
-					<br>
-					
-					
-					<div class="row">
-						<label class="col-sm-1 control-label" for="empreendimento">Empreendimento</label>
 						<div class="col-sm-3" ng-controller="empreendimentoController as empCtrl" ng-init="empCtrl.lista()">
 							<select class="form-control select2"  ng-model="cadFuncCtrl.funcionario.empreendimento" ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.tipoEmpreendimento for listarEmpreendimentos in empreendimentos"  style="width: 100%;">
-								<option value="">--selecione--</option>
+								<option value="">--Empreendimento--</option>
 							</select>
 						</div>
-						
-						
-						<label class="col-sm-1 control-label" for="cargo">Cargo</label>
+				
 						<div class="col-sm-3" ng-controller="cargoController as cargoCtrl" ng-init="cargoCtrl.lista()">
 							<select class="form-control select2" ng-model="cadFuncCtrl.funcionario.cargo" ng-options="listarCargos.descricao group by listarCargos.shade for listarCargos in cargos"  style="width: 100%;">
-									<option value="">--selecione--</option>
+									<option value="">--Cargo--</option>
 							</select>
 						</div>
-						
-						
-						<label class="col-sm-1 control-label" for="crea">CREA</label>
-						<div class="col-sm-3">
-							<input ng-model="cadFuncCtrl.funcionario.crea" class="form-control" id="crea" type="text">
+		
+						<div class="col-sm-2">
+							<input ng-model="cadFuncCtrl.funcionario.crea" placeholder="CREA" class="form-control" id="crea" type="text">
 						</div>
 					</div>
 
-
+					<hr>
 					<h4>Endereço</h4>
 
 					<br>
 					
 					
 					<div class="row">
-						<label class="col-sm-1 control-label" for="cep">CEP</label>
-						<div class="col-sm-5">
+						<div class="col-sm-3">
 							<input class="form-control"	ng-model="cadFuncCtrl.funcionario.endereco.cep" id="cep" name="cepField"
-								type="text" placeholder="Busca Cep"  ng-blur="cadFuncCtrl.findCep()"  onkeyup="if(this.value.length > 8) { numeroEmpresa.focus(); }"   ui-br-cep-mask required>
+								type="text" placeholder="CEP"  ng-blur="cadFuncCtrl.findCep()"  onkeyup="if(this.value.length > 8) { numeroEmpresa.focus(); }"   ui-br-cep-mask required>
 								
 							<p ng-show="formCadastrarFuncionario.cepField.$error.cep" class="alert alert-warning ">Digite um CEP Válido</p>
 
 						</div>
-						
-						
-						
-						<label class="col-sm-1 control-label" for="numero">Numero</label>
-						<div class="col-sm-5"
-							ng-class="{ 'has-error' : formCadastrarFuncionario.numeroEmpresa.$invalid && !formCadastrarFuncionario.numeroEmpresa.$pristine }">
-							<input class="form-control" name="numeroEmpresa"
-								ng-model="cadFuncCtrl.funcionario.endereco.numero" id="numero"
-								type="text" ng-minlength="1" ng-maxlength="7" required>
-						</div>
-					</div>
-					<p ng-show="formCadastrarFuncionario.numeroEmpresa.$error.minlength"
-						class="alert alert-warning ">campo numero no minimo 1 caracter</p>
-					<p ng-show="formCadastrarFuncionario.numeroEmpresa.$error.maxlength"
-						class="alert alert-warning ">campo numero no maximo 7 caracter</p>
-
+					</div>	
 					<br>
-
-					<div class="row">
-						<!-- <fieldset disabled> -->
-						<label class="col-sm-1 control-label" for="rua">Rua</label>
-						<div class="col-sm-11">
-							<input class="form-control"
+					<div class="row">	
+						<div class="col-sm-5">
+							<input class="form-control" placeholder="Rua"
 								ng-model="cadFuncCtrl.funcionario.endereco.logradouro" id="rua"
 								type="text" required>
 						</div>
+						<div class="col-sm-2"
+							ng-class="{ 'has-error' : formCadastrarFuncionario.numeroEmpresa.$invalid && !formCadastrarFuncionario.numeroEmpresa.$pristine }">
+							<input class="form-control" name="numeroEmpresa" placeholder="N°"
+								ng-model="cadFuncCtrl.funcionario.endereco.numero" id="numero"
+								type="text" ng-minlength="1" ng-maxlength="7" required>
+								<p ng-show="formCadastrarFuncionario.numeroEmpresa.$error.minlength"
+								class="alert alert-warning ">campo numero no minimo 1 caracter</p>
+								<p ng-show="formCadastrarFuncionario.numeroEmpresa.$error.maxlength"
+								class="alert alert-warning ">campo numero no maximo 7 caracter</p>
+						</div>
+						<div class="col-sm-5">
+							<input class="form-control" placeholder="Complemento"
+								ng-model="cadFuncCtrl.funcionario.endereco.complemento"
+								id="complemento" type="text">
+						</div>
 					</div>
 					<br>
 					<div class="row">
-						<!-- <fieldset disabled> -->
-						<label class="col-sm-1 control-label" for="bairro">Bairro</label>
 						<div class="col-sm-5">
-							<input class="form-control"
+							<input class="form-control" placeholder="Bairro"
 								ng-model="cadFuncCtrl.funcionario.endereco.bairro" id="bairro"
 								type="text" reuired>
 
 						</div>
-						<label class="col-sm-1 control-label" for="cidade">Cidade</label>
 						<div class="col-sm-5">
-							<input class="form-control"
+							<input class="form-control" placeholder="Cidade"
 								ng-model="cadFuncCtrl.funcionario.endereco.localidade" id="cidade"
 								type="text" required>
 						</div>
-					</div>
-					<br>
-					<div class="row">
-						<!-- <fieldset disabled> -->
-						<label class="col-sm-1 control-label" for="estado">Estado</label>
-						<div class="col-sm-5">
-							<input class="form-control"
+						<div class="col-sm-2">
+							<input class="form-control" placeholder="Estado"
 								ng-model="cadFuncCtrl.funcionario.endereco.uf" id="estado"
 								type="text" required>
 						</div>
 
 					</div>
+					
 					<br>
-					<div class="row">
-						<label class="col-sm-1 control-label" for="complemento">Complemento</label>
-						<div class="col-sm-11">
-							<input class="form-control"
-								ng-model="cadFuncCtrl.funcionario.endereco.complemento"
-								id="complemento" type="text">
-
-						</div>
-					</div>
-					<br>
-
-
-					<div ng-if="gravado" class="alert alert-info alert-dismissible"
-						role="alert">
-						<button type="button" class="close" data-dismiss="alert"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<strong>Sucesso</strong> cadastro realizado
-					</div>
-
-
-					<div ng-if="naoGravado"
-						class="alert alert-danger alert-dismissible" role="alert">
-						<button type="button" class="close" data-dismiss="alert"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<strong>Error</strong> cadastro não realizado
-					</div>
 
 
 					<div class="row ">
