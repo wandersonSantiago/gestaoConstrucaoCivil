@@ -30,7 +30,7 @@ public class CategoriaRestController {
 	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Categoria> buscarCategoriaPorId(@PathVariable Long id) {
 
-		return new ResponseEntity<Categoria>(categoriaService.buscarCategoriaPorId(id), HttpStatus.OK);
+		return new ResponseEntity<Categoria>(categoriaService.buscarPorId(id), HttpStatus.OK);
 	}
 	
 	

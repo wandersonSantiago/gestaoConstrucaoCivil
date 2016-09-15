@@ -33,7 +33,7 @@ public class ProdutoRestController {
 	 @RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
 		public ResponseEntity<Produto> buscarProdutoPorId(@PathVariable Long id) {
 
-			return new ResponseEntity<Produto>(produtoService.buscaProdutoPorId(id), HttpStatus.OK);
+			return new ResponseEntity<Produto>(produtoService.buscaPorId(id), HttpStatus.OK);
 		}
 
 	 

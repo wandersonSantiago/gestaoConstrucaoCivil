@@ -31,7 +31,7 @@ public class NotaFiscalRestController {
 	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
 	public ResponseEntity<NotaFiscal> buscarFornecedorPorId(@PathVariable Long id) {
 
-		return new ResponseEntity<NotaFiscal>(notaFiscalService.buscarFornecedorPorId(id), HttpStatus.OK);
+		return new ResponseEntity<NotaFiscal>(notaFiscalService.buscarPorId(id), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)

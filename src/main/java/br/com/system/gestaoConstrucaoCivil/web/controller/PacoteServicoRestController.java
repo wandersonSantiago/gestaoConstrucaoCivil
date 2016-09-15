@@ -47,7 +47,7 @@ public class PacoteServicoRestController {
 	 
 	 @RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
 		public ResponseEntity<PacoteServico> buscarPacoteServicoPorId(@PathVariable Long id) {
-			return new ResponseEntity<PacoteServico>(pacoteServicoService.buscarPacoteServicoPorId(id), HttpStatus.OK);
+			return new ResponseEntity<PacoteServico>(pacoteServicoService.buscarPorId(id), HttpStatus.OK);
 		}
 	 
 	

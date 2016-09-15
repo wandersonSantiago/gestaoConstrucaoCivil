@@ -36,7 +36,7 @@ public class FornecedorRestController {
 	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Fornecedor> buscarFornecedorPorId(@PathVariable Long id) {
 
-		return new ResponseEntity<Fornecedor>(fornecedorService.buscarFornecedorPorId(id), HttpStatus.OK);
+		return new ResponseEntity<Fornecedor>(fornecedorService.buscarPorId(id), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
