@@ -7,21 +7,26 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
  
 @Entity
-@Table(name = "outros")
+@SequenceGenerator(name = "config_outros_id_seq", sequenceName = "config_outros_id_seq", initialValue = 1, allocationSize = 1)
+@Table(name = "config_empreendimento_outros")
 public class ConfigEmpreendimentoOutros implements Serializable {
  
-    @Id
-    @Column(unique = true, nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "config_outros_id_seq")
+	private Long id;
+
      
     @Column(nullable = false,length = 250)
     private String descricao;
  
-    @Column(name = "id_empreedimento",nullable = false)
+    @ManyToOne
+	@JoinColumn(name="id_empreendimento",nullable = true)
     Empreendimento empreendimento;
     public Long getId() {
         return id;
