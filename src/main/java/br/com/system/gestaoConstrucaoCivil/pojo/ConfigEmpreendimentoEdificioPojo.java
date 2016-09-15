@@ -26,7 +26,7 @@ public class ConfigEmpreendimentoEdificioPojo {
 
 	private List<Integer> criarArray(Integer tamanho) {
 		List<Integer> array = new ArrayList<Integer>();
-		for (int i = 1; i < tamanho; i++)
+		for (int i = 1; i <= tamanho; i++)
 			array.add(i);
 
 		return array;

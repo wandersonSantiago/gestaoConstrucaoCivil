@@ -3,6 +3,7 @@ app.controller('produtoController', function($scope,produtoService, $routeParams
 	var self = this;
 	var idProduto = $routeParams.idProduto;
 		self.listaFornecedores = [];
+		self.listaProduto =[];
 	
 		self.salva = function(produto){
 		 self.produto.fornecedores = self.listaFornecedores;
@@ -32,13 +33,13 @@ app.controller('produtoController', function($scope,produtoService, $routeParams
 			});
 		};
 	
+		
+		
 		//cria uma lista de fornecedores
 		self.adicionarFornecedores = function(fornecedor){
 			self.listaFornecedores.push(
 				 fornecedor
 			);
-			
-			console.log(self.listaFornecedores);
 			self.fornecedores = null;
 		}
 		
@@ -50,8 +51,6 @@ app.controller('produtoController', function($scope,produtoService, $routeParams
 			}
 			});
 		}
-			
-
 		//apagar outros empreendimentos, somente da lista de front
 		self.apagarFornecedores = function(listaFornecedores){
 			console.log("apagar");
@@ -60,6 +59,37 @@ app.controller('produtoController', function($scope,produtoService, $routeParams
 				$scope.ativadoExcluirLote = null;
 			});
 		}
+		
+		
+		
+		/*
+		
+		self.ativarExcluirLote = function(listaProduto){
+			self.listaProduto.filter(function(produto){
+			if(produto.selecionado){
+				$scope.ativadoExcluirLote = true;
+			}
+			});
+		}
+			
+			self.apagarProduto = function(listaProduto){
+				self.listaProduto = listaProduto.filter(function(produto){
+				if(!produto.selecionado) return produto;
+				$scope.ativadoExcluirLote = null;
+			});
+		}
+		//cria uma lista de outros
+		self.adicionarProduto = function(){
+			self.listaProduto.push({
+				descricao : descricaoProduto.value,
+				quantidade : quantidadeProduto.value
+			});
+						descricaoProduto.value = "";
+						$scope.produto = null;
+			}*/
+		
+		
+		
 		self.buscaPorId = function(id){
 			if(!id)return;
 			produtoService.buscaPorId(id).

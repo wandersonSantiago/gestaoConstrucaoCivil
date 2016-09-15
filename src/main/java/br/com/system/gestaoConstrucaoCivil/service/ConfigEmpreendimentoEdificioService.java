@@ -38,7 +38,7 @@ public class ConfigEmpreendimentoEdificioService {
     }
     public ConfigEmpreendimentoEdificioPojo getConfig()
     {
-          ConfigEmpreendimentoEdificio edificio = configEdificioRepository.findByEmpreendimentoId(7L);
+          ConfigEmpreendimentoEdificio edificio = configEdificioRepository.findByEmpreendimentoId(16L);
           return new ConfigEmpreendimentoEdificioPojo(edificio);
     
     }

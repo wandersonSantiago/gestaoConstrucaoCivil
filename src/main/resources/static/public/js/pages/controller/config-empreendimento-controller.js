@@ -2,7 +2,7 @@ app.controller('configEmpreendimentoController', function($scope, configEmpreend
 	
 	var self = this;
  
-	$scope.listaOutros =[];
+$scope.listaOutros =[];
 	
 	
 	self.ativarExcluirLote = function(listaOutros){
@@ -18,9 +18,15 @@ app.controller('configEmpreendimentoController', function($scope, configEmpreend
 			if(!outro.selecionado) return outro;
 			$scope.ativadoExcluirLote = null;
 		});
-	}
-	
-	
+}
+		self.adicionarOutros = function(){
+			$scope.listaOutros.push({
+				descricao : descricaoOutros.value
+			});
+						descricaoOutros.value = "";
+						$scope.descricaoOutro = null;
+			}
+
 	self.verificar = function(){
 		if(self.configEmpreendimento.empreendimento.tipoEmpreendimento == "CONDOMINIO_DE_EDIFICIO_RESIDENCIAL"){
 			$scope.verificaTipoCasa = false;
@@ -32,15 +38,6 @@ app.controller('configEmpreendimentoController', function($scope, configEmpreend
 		}
 	}
 	
-	//cria uma lista de outros
-	self.adicionarOutros = function(){
-		$scope.listaOutros.push({
-			descricao : descricaoOutros.value
-		});
-					descricaoOutros.value = "";
-					$scope.descricaoOutro = null;
-		}
-	
 	
 
 	self.salvaConfigEmpreendimento = function(configEmpreendimentoEdificio, configEmpreendimentoCasa, listaOutros){
@@ -48,6 +45,7 @@ app.controller('configEmpreendimentoController', function($scope, configEmpreend
 		if(self.configEmpreendimentoEdificio){
 			self.configEmpreendimentoEdificio.empreendimento = $scope.configCtrl.configEmpreendimento.empreendimento;
 			configEmpreendimentoService.configEmpreendimentoEdificioSalva(self.configEmpreendimentoEdificio)
+			configEmpreendimentoService.configEmpreendimentoOutrosSalva(self.listaOutros)
 			. then(function(response){
 				self.limpaCampos();
 				sweetAlert({ timer : 3000,  type : "success", width: 200, higth: 100, padding: 20});
@@ -60,6 +58,7 @@ app.controller('configEmpreendimentoController', function($scope, configEmpreend
 		}else if(self.configEmpreendimentoCasa){
 			self.configEmpreendimentoCasa.empreendimento = $scope.configCtrl.configEmpreendimento.empreendimento;
 			configEmpreendimentoService.configEmpreendimentoCasaSalva( self.configEmpreendimentoCasa)
+			configEmpreendimentoService.configEmpreendimentoOutrosSalva(self.listaOutros)
 			. then(function(response){
 				self.limpaCampos();
 				sweetAlert({ timer : 3000,  type : "success", width: 200, higth: 100, padding: 20});
@@ -81,11 +80,30 @@ app.controller('configEmpreendimentoController', function($scope, configEmpreend
 			});
 		};
 		
+		self.configEmpreendimentoOutrosLista = function(){
+			configEmpreendimentoService.configEmpreendimentoOutrosLista().
+				then(function(t){
+					self.outrosLista = t;
+					}, function(errResponse){
+					
+				});
+			};
+		
+			self.quantidadeEdificio = function(){
+				configEmpreendimentoService.quantidadeEdificio().
+				then(function(t){
+					self.qtdeEdificio = t;
+					console.log(self.qtdeEdificio.quantidadeTorres);
+					}, function(errResponse){
+					
+				});
+			}
 		self.limpaCampos = function(){
 			self.configEmpreendimentoEdificio = null;
 			self.configEmpreendimentoCasa = null;
 			$scope.listaOutros = null;
 			$scope.empreendimentoSemConfiguracao = null;
 		}
+		
 		
 });

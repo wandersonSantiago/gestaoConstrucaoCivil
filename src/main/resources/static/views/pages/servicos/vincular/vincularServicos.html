@@ -52,65 +52,69 @@
 						</div>
 
 					</div>
-<br>
-					<div class="row" >
+					<br>
+					<div class="row" ng-controller="configEmpreendimentoController as configCtrl" ng-init="configCtrl.quantidadeEdificio()">
 							<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-if="edificioTorre" required>
+							<select class="form-control select2" style=" width: 100%;" ng-if="edificioTorre" ng-model="teste"
+							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeTorres" 
+							 title="Selecione a torre a qual será atribuido a saida do produto" required>
 								<option value="">---Torre---</option>
 							</select>
 						</div>
 
 						
 							<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-if="edificioAndar" required>
+							<select class="form-control select2" style=" width: 100%;" ng-if="edificioAndar" ng-model="andar"
+							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeAndares"
+							 title="Selecione o andar a qual será atribuido a saída do produto" required>
 								<option value="">---Andar---</option>
 							</select>
 						</div>
 	
 							<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-if="edificioApartamento" required>
+							<select class="form-control select2" style=" width: 100%;" ng-if="edificioApartamento" ng-model="apartamento"
+							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeApartamentos" 
+							 title="Selecione o apartamento a qual será atribuido a saída do produto" required>
 								<option value="">---Apartamento---</option>
 							</select>
 						</div>
 					</div>
-<br>					
+					<br>					
 					<div class="row">	
 						<label class="col-sm-2 control-label" for="ativo"> outros Serviços?</label>	
 						<div class="col-sm-3">
 							<input type="checkbox" ng-model="outrosAtivo"  placeholder="outros serviços?">
 						</div>		
 					</div>
-<br>					
+					<br>					
 					<div class="row" ng-if="outrosAtivo">
-						<div class="col-sm-6"  >
-							<select class="form-control select2" style=" width: 100%;" required>
-								<option value="">---Serviços Outros---</option>
-							</select>
-						</div>						
+						<div class="col-sm-5"  ng-controller="configEmpreendimentoController as configCtrl">
+							<select class="form-control select2" style=" width: 100%;" ng-model="config" ng-init="configCtrl.configEmpreendimentoOutrosLista()"
+							 ng-options="lista.descricao for lista in configCtrl.outrosLista" required>
+								<option value="">---Outros imoveis---</option>
+							</select>			
 					</div>
-					
-					<div class="row" >				
-						<div class="col-sm-6"  >
-							<select class="form-control select2" style=" width: 100%;" required>
-								<option value="">---Serviços---</option>
-							</select>
-						</div>
-						
 					</div>
-					
-<br>					
-					<div class="row" >				
-						<div class="col-sm-6"  >
-							<select class="form-control select2" style=" width: 100%;" required>
+					<br>
+					<div class="row" ng-controller="pacoteServicoController as pacotesCtrl" ng-init="pacotesCtrl.lista()" >	
+					<div class="col-sm-5">			
+						<select class="form-control " style=" width: 100%;"  ng-model="pacotes"
+							 ng-options="lista.descricao for lista in pacotesCtrl.listaPacoteServicos" 
+							 title="Selecione o pacote de serviço a ser atribuido a empresa" required>
+								<option value="">---Pacotes de Serviço---</option>
+							</select>
+					</div>	
+					</div>					
+					<br>					
+					<div class="row" ng-controller="prestadoraServicoController as prestadoraCtrl" ng-init="prestadoraCtrl.lista()" >	
+					<div class="col-sm-5">			
+						<select class="form-control "   width: 100%;" ng-model="pacotes"
+							 ng-options="lista.razaoSocial for lista in prestadoraServicos.prestadoraServicos" 
+							 title="Selecione o pacote de serviço a ser atribuido a empresa" required>
 								<option value="">---Prestadora de Serviço---</option>
 							</select>
 						</div>
-						
 					</div>
-					
-					
-					
-					
 					<br>
 					
 					<div class="row ">

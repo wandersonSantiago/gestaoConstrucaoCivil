@@ -27,7 +27,7 @@ app.controller('pacoteServicoController', function($scope, pacoteServicoService,
 	 self.lista = function(){
 		 pacoteServicoService.lista().
 			then(function(f){
-				$scope.listaPacoteServicos = f;
+				self.listaPacoteServicos = f;
 				}, function(errResponse){
 			});
 		};

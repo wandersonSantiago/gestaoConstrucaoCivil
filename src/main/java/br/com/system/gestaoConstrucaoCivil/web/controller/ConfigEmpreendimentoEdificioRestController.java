@@ -39,7 +39,7 @@ public class ConfigEmpreendimentoEdificioRestController {
         return new ResponseEntity<ConfigEmpreendimentoEdificio>(configEmpreeendimentoEdificioService.buscarPorId(id), HttpStatus.OK);
     }
 	
-	@RequestMapping(value = "",method = RequestMethod.GET)
+	@RequestMapping(value = "/quantidadeEdificio",method = RequestMethod.GET)
 	public ResponseEntity<ConfigEmpreendimentoEdificioPojo> configPojo() {
         
         return new ResponseEntity<ConfigEmpreendimentoEdificioPojo>(configEmpreeendimentoEdificioService.getConfig(),HttpStatus.OK);

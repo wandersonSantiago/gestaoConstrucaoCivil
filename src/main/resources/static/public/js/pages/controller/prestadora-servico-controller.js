@@ -45,9 +45,9 @@ app.controller('prestadoraServicoController', function($scope, buscaCepService, 
 
 //BUSCAR
 		 self.lista = function(){
-			 prestadoraServicoService.prestadoraServicoFindAll().
+			 prestadoraServicoService.lista().
 				then(function(p){
-					$scope.prestadoraServicos = p;
+					self.prestadoraServicos = p;
 					}, function(errResponse){
 				});
 			};

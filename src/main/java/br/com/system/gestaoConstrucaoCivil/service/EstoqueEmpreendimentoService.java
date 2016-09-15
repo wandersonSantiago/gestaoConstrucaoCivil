@@ -57,14 +57,14 @@ public class EstoqueEmpreendimentoService {
 
 	@Transactional(readOnly = false)
 	private void adicionarQuantidade(Produto produto, Integer quantidade) {
-		EstoqueEmpreendimento estoque = estoqueRepository.estoque(31L, produto.getId());
+		EstoqueEmpreendimento estoque = estoqueRepository.estoque(1L, produto.getId());
 		estoque.setQuantidade(estoque.getQuantidade() + quantidade);
 		salvarOuEditar(estoque);
 	}
 
 	@Transactional(readOnly = false)
 	public void baixarEstoque(Long idProduto, Integer quantidade) {
-		EstoqueEmpreendimento estoque = estoqueRepository.estoque(31L, idProduto);
+		EstoqueEmpreendimento estoque = estoqueRepository.estoque(1L, idProduto);
 		estoque.setQuantidade(estoque.getQuantidade() - quantidade);
 		salvarOuEditar(estoque);
 	}
