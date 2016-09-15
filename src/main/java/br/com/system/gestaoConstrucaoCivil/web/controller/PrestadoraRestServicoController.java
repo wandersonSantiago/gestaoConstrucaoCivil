@@ -17,44 +17,44 @@ import br.com.system.gestaoConstrucaoCivil.entity.PrestadoraServico;
 import br.com.system.gestaoConstrucaoCivil.service.PrestadoraServicoService;
 
 @RestController
-@RequestMapping("/rest/prestadoraServico")
+@RequestMapping("/rest/servicos/prestadoraServico")
 public class PrestadoraRestServicoController {
 	 
 	 @Autowired
 	 private PrestadoraServicoService prestadoraServicoService;
 	
-	 @RequestMapping(method = RequestMethod.GET, value="/listaPrestadoraServico")
-	 public ResponseEntity<Iterable<PrestadoraServico>> buscarPrestadoraServico() {	  
+	 @RequestMapping(method = RequestMethod.GET, value="/lista")
+	 public ResponseEntity<Iterable<PrestadoraServico>> lista() {	  
 	  
 	  Iterable<PrestadoraServico> prestadoraServico = prestadoraServicoService.buscarTodos();
 	  return new ResponseEntity<Iterable<PrestadoraServico>>(prestadoraServico, HttpStatus.OK);
 	 }
 	 
 	 
-	 @RequestMapping(value = "/buscaPrestadoraServicoPorId/{id}", method = RequestMethod.GET)
-	 public ResponseEntity<PrestadoraServico> buscarPrestadoraServicoPorId(@PathVariable Long id) {
+	 @RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
+	 public ResponseEntity<PrestadoraServico> buscarPorId(@PathVariable Long id) {
 			return new ResponseEntity<PrestadoraServico>(prestadoraServicoService.buscarPorId(id), HttpStatus.OK);
 		}
 
 	 
 	 
-	 @RequestMapping(value="/cadastrarPrestadoraServico", method = RequestMethod.POST)
+	 @RequestMapping(value="/salva", method = RequestMethod.POST)
 	 public ResponseEntity salva(@RequestBody PrestadoraServico prestadoraServico,UriComponentsBuilder ucBuilder)
 	 {
 		 System.out.println(prestadoraServico);
 		 
 		 prestadoraServicoService.salvarOuEditar(prestadoraServico);
 		 HttpHeaders headers =new HttpHeaders();
-		 headers.setLocation(ucBuilder.path("/rest/prestadoraServico/cadastrarPrestadoraServico/{prestadoraServico}").buildAndExpand(prestadoraServico.getId()).toUri());
+		 headers.setLocation(ucBuilder.path("/rest/prestadoraServico/salva/{prestadoraServico}").buildAndExpand(prestadoraServico.getId()).toUri());
 		 return new ResponseEntity(headers, HttpStatus.CREATED);
 	 }
 	 
-		@RequestMapping(value = "/alterarPrestadoraServico", method = RequestMethod.PUT)
-		public ResponseEntity alterarPrestadoraServico(@RequestBody PrestadoraServico prestadoraServico, UriComponentsBuilder ucBuilder) {
+		@RequestMapping(value = "/altera", method = RequestMethod.PUT)
+		public ResponseEntity altera(@RequestBody PrestadoraServico prestadoraServico, UriComponentsBuilder ucBuilder) {
 			
 			prestadoraServicoService.salvarOuEditar(prestadoraServico);
 			HttpHeaders headers = new HttpHeaders();
-			headers.setLocation(ucBuilder.path("/rest/prestadoraServico/alterarPrestadoraServico/{prestadoraServico}").buildAndExpand(prestadoraServico.getId()).toUri());
+			headers.setLocation(ucBuilder.path("/rest/prestadoraServico/altera/{prestadoraServico}").buildAndExpand(prestadoraServico.getId()).toUri());
 											
 			return new ResponseEntity(headers, HttpStatus.CREATED);
 		}

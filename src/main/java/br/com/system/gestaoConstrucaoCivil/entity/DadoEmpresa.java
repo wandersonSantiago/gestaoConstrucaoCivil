@@ -18,7 +18,7 @@ public class DadoEmpresa extends AbstractPersistable<Long>  {
 	
 	@Column(nullable = false,length = 50)
 	private String razaoSocial;
-	@Column(nullable = false,length = 50,unique = true)
+	@Column(nullable = false,length = 50)
 	private String nomeFantasia;
 	@Column(nullable = false,length = 20, unique = true)
 	private String cnpj;

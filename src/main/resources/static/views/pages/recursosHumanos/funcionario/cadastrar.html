@@ -30,16 +30,16 @@
 						
 					<br>
 					
-					<div class="row">
-						<div class="col-sm-5">
-						<input class="form-control" placeholder="RG"
+					<div class="row" ng-controller="verificaDadosController as verificaCtrl">
+						<div class="col-sm-5" >
+						<input class="form-control" placeholder="RG" ng-blur="verificaCtrl.verificaRg(cadFuncCtrl.funcionario.rg)"
 								ng-model="cadFuncCtrl.funcionario.rg" id="rg" type="text"
 								required>
 						</div>
 						
 						<div class="col-sm-5">
 							<input class="form-control" name="cpfField" placeholder="CPF"
-								ng-model="cadFuncCtrl.funcionario.cpf" id="cpf"
+								ng-model="cadFuncCtrl.funcionario.cpf" id="cpf" ng-blur="verificaCtrl.verificaCpf(cadFuncCtrl.funcionario.cpf)"
 								type="text" ui-br-cpf-mask required>
 								<p ng-show="formCadastrarFuncionario.cpfField.$error.cpf"
 								class="alert alert-warning ">Digite um CPF válido!!</p>

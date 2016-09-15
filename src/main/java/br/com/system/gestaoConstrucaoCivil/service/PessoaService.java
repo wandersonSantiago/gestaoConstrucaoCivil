@@ -19,4 +19,13 @@ public class PessoaService {
 	{
 	    pessoaRepository.save(pessoa);	
 	}
+	
+	public boolean existeCpf(String cpf){
+		
+		return pessoaRepository.existCpf(cpf);
+	}
+	public boolean existeRg(String rg){
+		
+		return pessoaRepository.existRg(rg);
+	}
 }

@@ -6,7 +6,7 @@ app.factory('prestadoraServicoService', function($rootScope, toastr, $http,$q){
 		
 	
 		salva: function(prestadoraServico){
-			return $http.post('/rest/empreedimento/prestadoraServico/salva', prestadoraServico)
+			return $http.post('/rest/servicos/prestadoraServico/salva', prestadoraServico)
 				.then(function(response){
 					sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 						return response.data;
@@ -18,7 +18,7 @@ app.factory('prestadoraServicoService', function($rootScope, toastr, $http,$q){
 		
 		
 		lista: function(){
-			return $http.get('rest/empreendimento/prestadoraServico/lista')
+			return $http.get('rest/servicos/prestadoraServico/lista')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
@@ -28,7 +28,7 @@ app.factory('prestadoraServicoService', function($rootScope, toastr, $http,$q){
 		},
 		
 		buscaPorId: function(param){
-			return $http.get('rest/empreendimento/prestadoraServico/buscaPorId/'+param)
+			return $http.get('rest/servicos/prestadoraServico/buscaPorId/'+param)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
@@ -38,7 +38,7 @@ app.factory('prestadoraServicoService', function($rootScope, toastr, $http,$q){
 		},
 		
 		altera: function(prestadoraServico){
-			return $http.put('/rest/empreendimento/prestadoraServico/altera', prestadoraServico)
+			return $http.put('/rest/servicos/prestadoraServico/altera', prestadoraServico)
 			.then(function(response){
 				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;

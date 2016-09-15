@@ -65,17 +65,7 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 		templateUrl : "views/pages/empreendimento/configuracao/lista.html",
 	})
 	
-	//PRESTADORA DE SERVIÇOS
 	
-	.when('/empreendimento/prestadoraServico/cadastrar', {
-		templateUrl : "views/pages/empreendimento/prestadoraServico/cadastrar.html",
-	})
-	.when('/empreendimento/prestadoraServico/editar/:idPrestadoraServico', {
-		templateUrl : "views/pages/empreendimento/prestadoraServico/cadastrar.html",
-	})
-	.when('/empreendimento/prestadoraServico/lista', {
-		templateUrl : "views/pages/empreendimento/prestadoraServico/lista.html",
-	})
 	
 	
 //=====================================================================================
@@ -110,6 +100,18 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 	
 	.when('/servicos/vincular/vincular', {
 		templateUrl:"views/pages/servicos/vincular/vincularServicos.html",		
+	})
+	
+	//PRESTADORA DE SERVIÇOS
+	
+	.when('/servicos/prestadoraServico/cadastrar', {
+		templateUrl : "views/pages/servicos/prestadoraServico/cadastrar.html",
+	})
+	.when('/servicos/prestadoraServico/editar/:idPrestadoraServico', {
+		templateUrl : "views/pages/servicos/prestadoraServico/cadastrar.html",
+	})
+	.when('/servicos/prestadoraServico/lista', {
+		templateUrl : "views/pages/servicos/prestadoraServico/lista.html",
 	})
 //====================================================================================	
 //ROTAS RECURSOS HUMANOS
