@@ -11,26 +11,24 @@ import br.com.system.gestaoConstrucaoCivil.entity.PacoteServico;
 import br.com.system.gestaoConstrucaoCivil.repository.PacoteServicoRepository;
 
 @Service
-@Transactional(readOnly = true,propagation = Propagation.REQUIRED)
+@Transactional(readOnly = true, propagation = Propagation.REQUIRED)
 public class PacoteServicoService {
 
 	@Autowired
 	private PacoteServicoRepository pacoteServicoRepository;
-	
-	 public List<PacoteServico> buscarTodos() {
-			
-			return pacoteServicoRepository.findAll();
-		}
-	 
-	 @Transactional(readOnly = false)
-	 public void salvarOuEditar(PacoteServico pacoteServico)
-	 {
-		 pacoteServicoRepository.save(pacoteServico);
-	 }
-	 
-	 
-	 public PacoteServico buscarPacoteServicoPorId(Long id){
-		 
-		 return pacoteServicoRepository.findOne(id);
-	 }
+
+	public List<PacoteServico> buscarTodos() {
+
+		return pacoteServicoRepository.findAll();
+	}
+
+	@Transactional(readOnly = false)
+	public void salvarOuEditar(PacoteServico pacoteServico) {
+		pacoteServicoRepository.save(pacoteServico);
+	}
+
+	public PacoteServico buscarPorId(Long id) {
+
+		return pacoteServicoRepository.findOne(id);
+	}
 }

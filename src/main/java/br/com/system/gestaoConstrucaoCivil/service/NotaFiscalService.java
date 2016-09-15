@@ -21,7 +21,7 @@ public class NotaFiscalService {
 		
 	}
 
-	public NotaFiscal buscarFornecedorPorId(Long id) {
+	public NotaFiscal buscarPorId(Long id) {
 		
 		return notaFiscalRepository.findOne(id);
 	}
