@@ -17,10 +17,10 @@
 					ng-submit="prestadoraCtrl.altera()">
 					
 					<div class="row">
-						<div class="col-sm-5" ng-controller="verificaDadosController as verificaCtrl">
-							<input class="form-control" name="cnpjField" placeholder="CNPJ" ng-blur="verificaCtrl.verificaCnpj(prestadoraCtrl.prestadoraServico.dadoEmpresa.cnpj)"
+						<div class="col-sm-5" >
+							<input class="form-control" name="cnpjField" placeholder="CNPJ" 
 								ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.cnpj" id="cnpj"
-								type="text" ui-br-cnpj-mask required>
+								type="text" ui-br-cnpj-mask disabled required>
 								<p ng-show="formPrestadora.cnpjField.$error.cnpj" class="alert alert-warning ">Digite um CNPJ Válido</p>
 						</div>
 						<div  class="col-sm-2">
@@ -29,10 +29,10 @@
 								<option value="">estado</option>
 							</select>
 						</div>					
-						<div class="col-sm-5" ng-controller="verificaDadosController as verificaCtrl">
-							<input class="form-control" name="iefield"  ng-blur="verificaCtrl.verificaIe(prestadoraCtrl.prestadoraServico.dadoEmpresa.inscricaoEstadual)"
+						<div class="col-sm-5" >
+							<input class="form-control" name="iefield" 
 								ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.inscricaoEstadual"
-								id="inscricaoEstadual" type="text" ui-br-ie-mask='selectedUF'
+								id="inscricaoEstadual" type="text" ui-br-ie-mask='selectedUF' disabled
 								required>
 								<p ng-show="formPrestadora.ieField.$error.ie" class="alert alert-warning ">Digite uma inscrição estadual Válida</p>
 		 				 </div>

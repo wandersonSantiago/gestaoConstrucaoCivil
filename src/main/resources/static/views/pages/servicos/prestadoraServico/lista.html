@@ -25,7 +25,7 @@
 					</tr>
 				</thead>
 				<tbody
-					ng-repeat=" prestadoraServico in prestadoraServicos | filter : buscaPrestadora ">
+					ng-repeat=" prestadoraServico in prestadoraCtr.prestadoraServicos | filter : buscaPrestadora ">
 					<tr>
 					
 						
@@ -35,7 +35,7 @@
 						<td>{{ prestadoraServico.dadoEmpresa.telefone }}</td>
 						<td>{{ prestadoraServico.dadoEmpresa.endereco.localidade }}</td>
 						<td>{{ prestadoraServico.dadoEmpresa.endereco.uf }}</td>
-						<td><a href="#/empreendimento/prestadoraServico/editar/{{prestadoraServico.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						<td><a href="#/servicos/prestadoraServico/editar/{{prestadoraServico.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						
 						
 					</tr>
