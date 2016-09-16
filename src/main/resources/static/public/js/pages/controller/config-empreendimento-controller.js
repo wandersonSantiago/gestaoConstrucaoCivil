@@ -19,12 +19,13 @@ $scope.listaOutros =[];
 			$scope.ativadoExcluirLote = null;
 		});
 }
-		self.adicionarOutros = function(){
+		self.adicionarOutros = function(descricao, configEmpreendimento ){
 			$scope.listaOutros.push({
-				descricao : descricaoOutros.value
+				descricao : descricao,
+				empreendimento : configEmpreendimento
 			});
-						descricaoOutros.value = "";
-						$scope.descricaoOutro = null;
+						console.log(descricao);
+						$scope.descricao = "";
 			}
 
 	self.verificar = function(){
@@ -41,12 +42,16 @@ $scope.listaOutros =[];
 	
 
 	self.salvaConfigEmpreendimento = function(configEmpreendimentoEdificio, configEmpreendimentoCasa, listaOutros){
-	
+		self.configEmpreendimentoOutros = $scope.listaOutros;
+		
+		
 		if(self.configEmpreendimentoEdificio){
 			self.configEmpreendimentoEdificio.empreendimento = $scope.configCtrl.configEmpreendimento.empreendimento;
 			configEmpreendimentoService.configEmpreendimentoEdificioSalva(self.configEmpreendimentoEdificio)
-			configEmpreendimentoService.configEmpreendimentoOutrosSalva(self.listaOutros)
+			//self.configEmpreendimentoOutros.empreendimento = $scope.configCtrl.configEmpreendimento.empreendimento;
+			configEmpreendimentoService.configEmpreendimentoOutrosSalva(self.configEmpreendimentoOutros)
 			. then(function(response){
+				console.log(self.configEmpreendimentoOutros);
 				self.limpaCampos();
 				sweetAlert({ timer : 3000,  type : "success", width: 200, higth: 100, padding: 20});
 				 },
@@ -58,7 +63,7 @@ $scope.listaOutros =[];
 		}else if(self.configEmpreendimentoCasa){
 			self.configEmpreendimentoCasa.empreendimento = $scope.configCtrl.configEmpreendimento.empreendimento;
 			configEmpreendimentoService.configEmpreendimentoCasaSalva( self.configEmpreendimentoCasa)
-			configEmpreendimentoService.configEmpreendimentoOutrosSalva(self.listaOutros)
+			configEmpreendimentoService.configEmpreendimentoOutrosSalva(self.configEmpreendimentoOutros)
 			. then(function(response){
 				self.limpaCampos();
 				sweetAlert({ timer : 3000,  type : "success", width: 200, higth: 100, padding: 20});

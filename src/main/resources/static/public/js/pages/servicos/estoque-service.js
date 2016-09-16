@@ -1,4 +1,4 @@
-app.factory('baixaEstoqueService', function($rootScope, toastr, $http,$q){
+app.factory('estoqueService', function($rootScope, toastr, $http,$q){
 	
 	
 	return{

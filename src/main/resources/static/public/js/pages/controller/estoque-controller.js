@@ -1,10 +1,18 @@
-app.controller('baixaEstoqueController', function($scope,baixaEstoqueService, $routeParams){
+app.controller('estoqueController', function($scope,estoqueService, produtoService, $routeParams){
 	
 	var self = this;
 	
 		self.listaProduto =[];
 	
-		
+		self.lista = function(){
+			 produtoService.lista().
+				then(function(t){
+					self.produtos = t;
+					console.log(self.produtos);
+					}, function(errResponse){
+				});
+			};
+			
 		self.ativarExcluirLote = function(listaProduto){
 			self.listaProduto.filter(function(produto){
 			if(produto.selecionado){

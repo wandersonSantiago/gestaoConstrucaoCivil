@@ -1,7 +1,7 @@
 <meta charset="UTF-8">
 <br>
 <br>
-<div class="generic-container"	ng-controller="configEmpreendimentoController as configCtrl">
+<div class="generic-container"	ng-controller="estoqueController as estoqueCtrl">
 	<div class="box box-primary">
 		<div class="box-header">
 			<span class="lead"> Baixa estoque </span>
@@ -10,7 +10,7 @@
 		<br>
 			<div class="container col-sm-12 ">
 				<form role="form-vertical"
-					ng-submit="configCtrl.salvaConfigEmpreendimento()">
+					ng-submit="estoqueCtrl.salva()">
 		
 					<div class="row">	
 						<label class="col-sm-1 control-label" for="empreendimento"> Torre</label>	
@@ -96,11 +96,11 @@
 						</div>						
 					</div>
 					<br> <br>
-					<div class="row" ng-controller="baixaEstoqueController as pCtrl" ng-init="pCtrl.lista()">
+					<div class="row" ng-init="estoqueCtrl.lista()">
 						
 						<div class="col-sm-3"  >
 							<select class="form-control select2" ng-model="produto"  id="descricaoProduto"
-							ng-options="listaProdutos.descricao for listaProdutos in pCtrl.produtos" 
+							ng-options="listaProdutos.descricao for listaProdutos in estoqueCtrl.produtos" 
 							  style=" width: 100%;" >
 								<option value="">---Produto---</option>
 							</select>
@@ -112,14 +112,14 @@
 						</div>
 						<div class="col-sm-2">
 							<input class="btn btn-lg btn-primary btn-block btn-signin"
-								ng-click=" pCtrl.adicionarProduto()" value="adicionar"
+								ng-click=" estoqueCtrl.adicionarProduto()" value="adicionar"
 								title="pressione para adicionar a lista" type="button" ng-disabled="!produto" >
 						</div>
 					</div>
 					
 					<br> <br>
 
-					<div class="panel panel-primary" ng-controller="baixaEstoqueController as pCtrl">
+					<div class="panel panel-primary" >
 						<div class="panel-heading">Lista de Produtos</div>
 						<div class="panel-body">
 							<table class="table table-hover ">
@@ -134,10 +134,10 @@
 
 									</tr>
 								</thead>
-								<tbody ng-repeat="produto in pCtrl.listaProduto" ng-model="selecionado">
+								<tbody ng-repeat="produto in estoqueCtrl.listaProduto" ng-model="selecionado">
 									<tr>
 										<td><input type="checkbox" ng-model="produto.selecionado"
-											ng-click=" pCtrl.ativarExcluirLote(listaProduto)"></td>
+											ng-click="estoqueCtrl.ativarExcluirLote(listaProduto)"></td>
 										<td>{{produto.descricao}}</td>
 										<td>{{produto.descricao}}</td>
 										<td>{{produto.descricao}}</td>
@@ -150,7 +150,7 @@
 									<tr>
 										<th><input type="button" class="btn-danger"
 											ng-if="ativadoExcluirLote" value="excluir" name="apagar"
-											ng-click=" pCtrl.apagarProduto(listaProduto)"></th>
+											ng-click=" estoqueCtrl.apagarProduto(listaProduto)"></th>
 									</tr>
 								</tfoot>
 							</table>
