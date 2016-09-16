@@ -41,7 +41,8 @@ public class BaixaEstoque implements Serializable {
 	private Integer quantidadeSaida;
 	@Column(name ="data_saida", nullable = true)
 	private LocalDate dataSaida;
-	@ManyToOne(cascade = CascadeType.ALL)
+	
+	@ManyToOne
 	@JoinColumn(name="id_produto",nullable = true)
 	private Produto produto;
 

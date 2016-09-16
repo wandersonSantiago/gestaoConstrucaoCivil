@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.service;
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +26,15 @@ public class BaixaEstoqueService {
 	{
 	    for(int i  = 0 ; i < baixasEstoque.size(); i++)
 	    {
+	    	baixasEstoque.get(i).setDataSaida(LocalDate.now());
 	    	estoque.baixarEstoque(baixasEstoque.get(i).getProduto().getId(),baixasEstoque.get(i).getQuantidadeSaida());
 	    }
 	/*	baixasEstoque.forEach( baixaEstoque->{
 		
 		  estoque.baixarEstoque(baixaEstoque.getProduto().getId(),baixaEstoque.getQuantidadeSaida());
 		});*/
-	    
-	    baixaEstoqueRepository.save(baixasEstoque);
+	   
+		 baixaEstoqueRepository.save(baixasEstoque);
 	}
 	public List<BaixaEstoque> buscarTodos()
 	{

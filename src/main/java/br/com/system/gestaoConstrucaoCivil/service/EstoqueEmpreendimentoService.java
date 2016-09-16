@@ -22,8 +22,12 @@ public class EstoqueEmpreendimentoService {
 	private EstoqueEmpreendimentoRepository estoqueRepository;
 	@Autowired
 	private EmpreendimentoService empreendimento;
-
-	@Transactional(readOnly = false)
+	//Remover depois isso
+	@Autowired
+    EmpreendimentoService serviceEmpr;
+	//
+    
+    @Transactional(readOnly = false)
 	public void salvarOuEditar(EstoqueEmpreendimento produtoEstoque) {
 
 		estoqueRepository.save(produtoEstoque);
@@ -34,15 +38,19 @@ public class EstoqueEmpreendimentoService {
 		
 		notaProduto.getItens().forEach(item -> {
 
-			updateEstoque(item);
+		updateEstoque(item);
 		});
 	}
 
 	private void updateEstoque(ItemNotaFiscal item) {
+		
+		System.out.println("Entrou no update");
 		if (existeProduto(item.getProduto().getId())) {
+			
 			adicionarQuantidade(item.getProduto(), item.getQuantidade());
 		} else {
 			salvarOuEditar(criarNovoEstoque(item.getProduto(), item.getQuantidade()));
+			
 		}
 	}
 
@@ -57,16 +65,27 @@ public class EstoqueEmpreendimentoService {
 
 	@Transactional(readOnly = false)
 	private void adicionarQuantidade(Produto produto, Integer quantidade) {
-		EstoqueEmpreendimento estoque = estoqueRepository.estoque(1L, produto.getId());
+		
+		// Pega o primeiro empreenidmento
+	    //remover depois
+		Empreendimento empr = serviceEmpr.buscarTodos().get(0);
+		//
+		EstoqueEmpreendimento estoque = estoqueRepository.estoque(empr.getId(), produto.getId());
+		
 		estoque.setQuantidade(estoque.getQuantidade() + quantidade);
 		salvarOuEditar(estoque);
 	}
 
 	@Transactional(readOnly = false)
 	public void baixarEstoque(Long idProduto, Integer quantidade) {
-		EstoqueEmpreendimento estoque = estoqueRepository.estoque(1L, idProduto);
+		
+		// Pega o primeiro empreenidmento
+	    //remover depois
+		Empreendimento empr = serviceEmpr.buscarTodos().get(0);
+		//
+		EstoqueEmpreendimento estoque = estoqueRepository.estoque(empr.getId() ,idProduto);
 		estoque.setQuantidade(estoque.getQuantidade() - quantidade);
-		salvarOuEditar(estoque);
+	    salvarOuEditar(estoque);
 	}
 
 	public boolean existeProduto(Long id) {
