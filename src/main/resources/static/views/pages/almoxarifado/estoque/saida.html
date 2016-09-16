@@ -41,12 +41,12 @@
 					<div class="row" >
 						
 						<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-if="edificioCasa" required>
+							<select class="form-control select2" style=" width: 100%;" ng-model="estoqueCtrl.NumeroCasa" ng-if="edificioAndarCasa" required>
 								<option value="">---Casa---</option>
 							</select>
 						</div>
 							<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-if="edificioAndarCasa" required>
+							<select class="form-control select2" style=" width: 100%;" ng-model="estoqueCtrl.andar" ng-if="edificioAndarCasa" required>
 								<option value="">---Andar---</option>
 							</select>
 						</div>
@@ -55,7 +55,7 @@
 <br>
 					<div class="row" ng-controller="configEmpreendimentoController as configCtrl" ng-init="configCtrl.quantidadeEdificio()">
 							<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-if="edificioTorre" ng-model="teste"
+							<select class="form-control select2" style=" width: 100%;" ng-if="edificioTorre" ng-model="estoqueCtrl.torre"
 							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeTorres" 
 							 title="Selecione a torre a qual será atribuido a saida do produto" required>
 								<option value="">---Torre---</option>
@@ -64,7 +64,7 @@
 
 						
 							<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-if="edificioAndar" ng-model="andar"
+							<select class="form-control select2" style=" width: 100%;" ng-if="edificioAndar" ng-model="estoqueCtrl.andar"
 							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeAndares"
 							 title="Selecione o andar a qual será atribuido a saída do produto" required>
 								<option value="">---Andar---</option>
@@ -72,7 +72,7 @@
 						</div>
 	
 							<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-if="edificioApartamento" ng-model="apartamento"
+							<select class="form-control select2" style=" width: 100%;" ng-if="edificioApartamento" ng-model="estoqueCtrl.apartamento"
 							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeApartamentos" 
 							 title="Selecione o apartamento a qual será atribuido a saída do produto" required>
 								<option value="">---Apartamento---</option>
@@ -88,9 +88,9 @@
 					</div>
 					<br>					
 					<div class="row" ng-if="outrosAtivo">
-						<div class="col-sm-5"  ng-controller="configEmpreendimentoController as configCtrl">
-							<select class="form-control select2" style=" width: 100%;" ng-model="config" ng-init="configCtrl.configEmpreendimentoOutrosLista()"
-							 ng-options="lista.descricao for lista in configCtrl.outrosLista" required>
+						<div class="col-sm-5"  ng-controller="configEmpreendimentoController as configCtrl"  ng-init="configCtrl.listaOutros()">
+							<select class="form-control select2" style=" width: 100%;" ng-model="config"
+							 ng-options="lista.descricao for lista in configCtrl.listaOutros" required>
 								<option value="">---Outros imoveis---</option>
 							</select>
 						</div>						
@@ -108,11 +108,11 @@
 							
 						
 						<div class="col-sm-3">
-							<input class="form-control" ng-model="quantidade" type="text" id="quantidadeProduto" placeholder="Quantidade">
+							<input class="form-control" ng-model="quantidade" type="text" id="quantidadeTeste" placeholder="Quantidade">
 						</div>
 						<div class="col-sm-2">
 							<input class="btn btn-lg btn-primary btn-block btn-signin"
-								ng-click=" estoqueCtrl.adicionarProduto()" value="adicionar"
+								ng-click=" estoqueCtrl.adicionarProduto(produto , quantidade, estoqueCtrl.andar, estoqueCtrl.torre , estoqueCtrl.apartamento, estoqueCtrl.NumeroCasa)" value="adicionar"
 								title="pressione para adicionar a lista" type="button" ng-disabled="!produto" >
 						</div>
 					</div>
@@ -126,8 +126,7 @@
 								<thead>
 									<tr>
 										<th>Selecionar</th>
-										<th>Codigo</th>
-										<th>Codigo de Barras</th>
+										
 										<th>Descrição</th>
 										<th>Quantidade</th>
 										
@@ -138,10 +137,8 @@
 									<tr>
 										<td><input type="checkbox" ng-model="produto.selecionado"
 											ng-click="estoqueCtrl.ativarExcluirLote(listaProduto)"></td>
-										<td>{{produto.descricao}}</td>
-										<td>{{produto.descricao}}</td>
-										<td>{{produto.descricao}}</td>
-										<td>{{produto.quantidade}}</td>
+										<td>{{produto.produto.descricao}}</td>
+										<td>{{produto.quantidadeSaida}}</td>
 
 										
 									</tr>

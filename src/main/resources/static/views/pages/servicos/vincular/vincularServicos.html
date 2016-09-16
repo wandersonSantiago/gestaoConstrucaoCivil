@@ -88,9 +88,9 @@
 					</div>
 					<br>					
 					<div class="row" ng-if="outrosAtivo">
-						<div class="col-sm-5"  ng-controller="configEmpreendimentoController as configCtrl">
-							<select class="form-control select2" style=" width: 100%;" ng-model="config" ng-init="configCtrl.configEmpreendimentoOutrosLista()"
-							 ng-options="lista.descricao for lista in configCtrl.outrosLista" required>
+						<div class="col-sm-5"  ng-controller="configEmpreendimentoController as configCtrl" ng-init="configCtrl.listaOutros()">
+							<select class="form-control select2" style=" width: 100%;" ng-model="config" 
+							 ng-options="lista.descricao for lista in configCtrl.listaOutros" required>
 								<option value="">---Outros imoveis---</option>
 							</select>			
 					</div>
@@ -109,7 +109,7 @@
 					<div class="row" ng-controller="prestadoraServicoController as prestadoraCtrl" ng-init="prestadoraCtrl.lista()" >	
 					<div class="col-sm-5">			
 						<select class="form-control "   width: 100%;" ng-model="pacotes"
-							 ng-options="lista.razaoSocial for lista in prestadoraServicos.prestadoraServicos" 
+							 ng-options="lista.dadoEmpresa.nomeFantasia for lista in prestadoraCtrl.prestadoraServicos" 
 							 title="Selecione o pacote de serviço a ser atribuido a empresa" required>
 								<option value="">---Prestadora de Serviço---</option>
 							</select>

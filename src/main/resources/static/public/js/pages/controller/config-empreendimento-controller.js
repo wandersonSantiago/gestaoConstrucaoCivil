@@ -103,6 +103,15 @@ $scope.listaOutros =[];
 					
 				});
 			}
+			
+			self.listaOutros = function(){
+				configEmpreendimentoService.listaOutros().
+				then(function(t){
+					self.listaOutros = t;
+					}, function(errResponse){
+					
+				});
+			}
 		self.limpaCampos = function(){
 			self.configEmpreendimentoEdificio = null;
 			self.configEmpreendimentoCasa = null;

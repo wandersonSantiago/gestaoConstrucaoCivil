@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,11 +29,17 @@ public class BaixaEstoque implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "baixa_estoque_id_seq")
 	Long id;
 	
+	@Column(name ="andar", nullable = false)
 	private Integer andar;
+	@Column(name ="torre", nullable = false)
 	private Integer torre;
+	@Column(name ="apartamento", nullable = true)
 	private Integer apartamento;
+	@Column(name ="Numero_casa", nullable = true)
 	private Integer NumeroCasa;
+	@Column(name ="quantidade_saida", nullable = false)
 	private Integer quantidadeSaida;
+	@Column(name ="data_saida", nullable = true)
 	private LocalDate dataSaida;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_produto",nullable = true)

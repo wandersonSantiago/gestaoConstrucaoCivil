@@ -2,9 +2,9 @@ app.factory('estoqueService', function($rootScope, toastr, $http,$q){
 	
 	
 	return{
-		salva: function(produto){			
-			console.log(produto);
-			return $http.post('/rest/almoxarifado/produto/salva', produto)
+		salva: function(baixaEstoque){			
+			console.log(baixaEstoque);
+			return $http.post('/rest/almoxarifado/estoque/baixa/salva', baixaEstoque)
 			.then(function(response){
 				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
@@ -12,20 +12,9 @@ app.factory('estoqueService', function($rootScope, toastr, $http,$q){
 				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
 			});
-		},
-		salvaFornecedores: function(fornecedores){			
-			console.log(produto);
-			return $http.post('/rest/almoxarifado/produto/salvaFornecedores', fornecedores)
-			.then(function(response){
-				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
-			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
-			});
-		},
-		altera: function(produto){			
-			return $http.put('/rest/almoxarifado/produto/altera', produto)
+		},		
+		altera: function(baixaEstoque){			
+			return $http.put('/rest/almoxarifado/estoque/baixa/altera', baixaEstoque)
 			.then(function(response){
 				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
@@ -35,7 +24,7 @@ app.factory('estoqueService', function($rootScope, toastr, $http,$q){
 			});
 		},
 		lista: function(){
-			return $http.get('rest/almoxarifado/produto/lista')
+			return $http.get('/rest/almoxarifado/estoque/baixa/lista')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
@@ -44,7 +33,7 @@ app.factory('estoqueService', function($rootScope, toastr, $http,$q){
 			});
 		},
 		buscaPorId: function(param){
-			return $http.get('rest/almoxarifado/produto/buscaPorId/'+param)
+			return $http.get('/rest/almoxarifado/estoque/baixa/buscaPorId/'+param)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){

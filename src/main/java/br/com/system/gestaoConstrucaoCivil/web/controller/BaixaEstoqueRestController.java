@@ -24,9 +24,19 @@ public class BaixaEstoqueRestController {
 	private BaixaEstoqueService baixaEstoqueService;
 	
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
-	public ResponseEntity salvar(@RequestBody List<BaixaEstoque> baixasEstoque,UriComponentsBuilder ucBuilder)
+	public ResponseEntity salvar(@RequestBody List<BaixaEstoque> baixaEstoque,UriComponentsBuilder ucBuilder)
 	{
-		baixaEstoqueService.salvarOuEditar(baixasEstoque);
+		for(int i = 0; i < baixaEstoque.size(); i ++){
+			
+			System.out.println("id produto" + baixaEstoque.get(i).getProduto());
+			System.out.println("apartamento" + baixaEstoque.get(i).getApartamento());
+			System.out.println("apartamento" + baixaEstoque.get(i).getAndar());
+			System.out.println("apartamento" + baixaEstoque.get(i).getQuantidadeSaida());
+			System.out.println("apartamento" + baixaEstoque.get(i).getTorre());
+			
+			
+		}
+		baixaEstoqueService.salvarOuEditar(baixaEstoque);
 	
 		HttpHeaders headers = new HttpHeaders();
 		//	headers.setLocation(ucBuilder.path("rest/almoxarifado/estoque/salva/{id}").buildAndExpand(baixaEstoque().getId()).toUri());

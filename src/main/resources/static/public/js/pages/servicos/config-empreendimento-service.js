@@ -13,7 +13,7 @@ app.factory('configEmpreendimentoService', function($rootScope, $http){
 			});
 		},
 		
-		configEmpreendimentoOutrosLista: function(){
+		listaOutros: function(){
 			return $http.get('rest/empreendimento/configuracao/listaOutros')
 			.then(function(response){
 				return response.data;
