@@ -51,7 +51,7 @@
 							</select>
 							</div>
 							<div class="col-sm-2">
-							<input class="btn btn-lg btn-primary btn-block btn-signin"
+							<input class="btn btn-lg btn-primary btn-block btn-signin" 
 								ng-click="notaFiscalCtrl.adicionarProdutos(notaFiscalCtrl.produto)" value="adicionar"
 								title="pressione para adicionar a lista" type="button" ng-disabled="!notaFiscalCtrl.produto" >
 						</div>
@@ -59,7 +59,7 @@
 					<br>
 					
 				
-					<table class="table table-hover ">
+					<table class="table table-hover " ng-show="visialuzarTable">
 					<thead>
 						<tr>
 							<th>selecione</th>
@@ -83,8 +83,7 @@
 							ng-model="f.quantidade" ui-number-mask="0" required></td>
 							<td><input class="form-control"  id="valorProduto"  type="text"  placeholder="Preço" ui-money-mask
 							ng-model="f.valorUnitario" ng-blur="notaFiscalCtrl.SomaTotal()" required> </td>
-							<td> <!-- <input class="form-control"  id="valorTotal"  type="text"  placeholder="Preço Total" ui-money-mask
-							ng-model="f.valorTotal = somaUnitario(f.quantidade, f.valorUnitario)" disabled>  -->{{f.valorTotal = somaUnitario(f.quantidade, f.valorUnitario) | currency}}</td>
+							<td>{{f.valorTotal = somaUnitario(f.quantidade, f.valorUnitario) | currency}}</td>
 							
 						</tr>
 	

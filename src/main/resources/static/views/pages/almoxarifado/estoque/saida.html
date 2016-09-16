@@ -41,12 +41,12 @@
 					<div class="row" >
 						
 						<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-model="estoqueCtrl.NumeroCasa" ng-if="edificioAndarCasa" required>
+							<select class="form-control select2" style=" width: 100%;" ng-model="estoqueCtrl.NumeroCasa" ng-show="edificioCasa" required>
 								<option value="">---Casa---</option>
 							</select>
 						</div>
 							<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-model="estoqueCtrl.andar" ng-if="edificioAndarCasa" required>
+							<select class="form-control select2" style=" width: 100%;" ng-model="estoqueCtrl.andar" ng-show="edificioAndarCasa" required>
 								<option value="">---Andar---</option>
 							</select>
 						</div>
@@ -55,7 +55,7 @@
 <br>
 					<div class="row" ng-controller="configEmpreendimentoController as configCtrl" ng-init="configCtrl.quantidadeEdificio()">
 							<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-if="edificioTorre" ng-model="estoqueCtrl.torre"
+							<select class="form-control select2" style=" width: 100%;" ng-show="edificioTorre" ng-model="estoqueCtrl.torre"
 							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeTorres" 
 							 title="Selecione a torre a qual será atribuido a saida do produto" required>
 								<option value="">---Torre---</option>
@@ -64,7 +64,7 @@
 
 						
 							<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-if="edificioAndar" ng-model="estoqueCtrl.andar"
+							<select class="form-control select2" style=" width: 100%;" ng-show="edificioAndar" ng-model="estoqueCtrl.andar"
 							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeAndares"
 							 title="Selecione o andar a qual será atribuido a saída do produto" required>
 								<option value="">---Andar---</option>
@@ -72,7 +72,7 @@
 						</div>
 	
 							<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-if="edificioApartamento" ng-model="estoqueCtrl.apartamento"
+							<select class="form-control select2" style=" width: 100%;" ng-show="edificioApartamento" ng-model="estoqueCtrl.apartamento"
 							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeApartamentos" 
 							 title="Selecione o apartamento a qual será atribuido a saída do produto" required>
 								<option value="">---Apartamento---</option>

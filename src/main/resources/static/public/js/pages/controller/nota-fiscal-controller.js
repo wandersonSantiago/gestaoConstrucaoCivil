@@ -37,12 +37,43 @@ app.controller('notaFiscalController', function($scope,notaFiscalService, $route
 		
 		//cria uma lista de Produtos
 		self.adicionarProdutos = function(produto){
-			self.listaItensNota.push({
-				produto 
-			});
 			
+			if(self.listaItensNota.length > 0){
+				
+				self.verificaProdutoRepetido();
+				
+			}
+			else{
+				self.listaItensNota.push({
+					produto 
+				});
+				produto = "";
+				$scope.visialuzarTable = true;
+			}
 	}
 		
+	self.verificaProdutoRepetido = function(){
+			
+				for(i = 0; i <= self.listaItensNota.length ; i ++){
+				
+				var item = self.listaItensNota[i];
+				var produto1 = item.produto.id;
+				console.log( produto1);
+				if(produto1 != $scope.produto.id){
+					self.listaItensNota.push({
+						produto 
+					});
+					produto = "";
+					$scope.visialuzarTable = true;
+				}else{
+					console.log("iguais");
+				}
+				
+				}
+			
+	}
+	
+	
 		self.SomaTotal = function(){
 			
 			var totalSoma = 0;
@@ -50,7 +81,6 @@ app.controller('notaFiscalController', function($scope,notaFiscalService, $route
 				var total = self.listaItensNota[i];
 				totalSoma += parseFloat(total.valorTotal);	
 				$scope.valorTotalNota = totalSoma;
-				console.log($scope.valorTotalNota);
 				
 			}
 		
