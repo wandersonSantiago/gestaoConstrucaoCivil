@@ -42,8 +42,9 @@
 					
 					<br>
 				
-					<div class="row" >						
-						<div class="col-sm-4" ng-controller="produtoController as pCtrl" ng-init="pCtrl.lista()" >
+					<div class="row" >			
+					<div class="col-sm-4" ng-controller="produtoController as pCtrl" ng-init="pCtrl.lista()" >
+							<a href="#/almoxarifado/produto/cadastrar"><i class="glyphicon glyphicon-plus"></i>novo</a>
 							<select class="form-control select2" ng-model="notaFiscalCtrl.produto" id="fornecedor"
 							ng-options="listaProdutos.descricao for listaProdutos in pCtrl.produtos" 
 							  style=" width: 100%;" >
@@ -51,6 +52,7 @@
 							</select>
 							</div>
 							<div class="col-sm-2">
+							<br>
 							<input class="btn btn-lg btn-primary btn-block btn-signin" 
 								ng-click="notaFiscalCtrl.adicionarProdutos(notaFiscalCtrl.produto)" value="adicionar"
 								title="pressione para adicionar a lista" type="button" ng-disabled="!notaFiscalCtrl.produto" >
@@ -107,6 +109,7 @@
 					<br>
 					<div class="row">
 							<div class="col-sm-4" ng-controller="fornecedorController as forCtrl" ng-init="forCtrl.lista()" >
+								<a href="#/almoxarifado/fabricante/cadastrar"><i class="glyphicon glyphicon-plus"></i>novo</a>
 							<select class="form-control select2" ng-model="notaFiscalCtrl.notaFiscalProduto.fornecedor" id="fornecedor"
 							ng-options="listaFornecedores.dadoEmpresa.nomeFantasia for listaFornecedores in forCtrl.listaFornecedor" 
 							  style=" width: 100%;" >

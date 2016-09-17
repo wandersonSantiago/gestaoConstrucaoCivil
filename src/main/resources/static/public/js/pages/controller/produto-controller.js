@@ -10,7 +10,10 @@ app.controller('produtoController', function($scope,produtoService, $routeParams
 			 produtoService.salva(self.produto).
 				then(function(response){
 					self.produto = null;
-					self.listaFornecedores = null;
+					$scope.protudoCtr.fornecedor = null;
+					$scope.ativaTabela = false;
+					self.listaFornecedores = listaFornecedores = [];
+					
 					}, function(errResponse){
 				});
 	 }
@@ -40,7 +43,8 @@ app.controller('produtoController', function($scope,produtoService, $routeParams
 			self.listaFornecedores.push(
 				 fornecedor
 			);
-			self.fornecedores = null;
+			$scope.protudoCtr.fornecedor = null;
+			$scope.ativaTabela = true;
 		}
 		
 		self.ativarExcluirLote = function(listaFornecedores){
