@@ -1,18 +1,16 @@
 app.controller('notaFiscalController', function($scope,notaFiscalService, $routeParams){
 	
-	var self = this;
+		var self = this;
 		self.listaItensNota = [];
-		
+		self.existe = true;	
 	
 	 self.salva = function(notaFiscalProduto){
 		 self.notaFiscalProduto.notaFiscal = self.notaFiscal;
-		self.notaFiscalProduto.notaFiscal.valorTotal  = $scope.valorTotalNota;
+		 self.notaFiscalProduto.notaFiscal.valorTotal  = $scope.valorTotalNota;
 		 self.notaFiscalProduto.itens = self.listaItensNota;	
 		 notaFiscalService.salva(self.notaFiscalProduto).
 				then(function(response){
-					console.log(self.notaFiscalProduto);
-					self.notaFiscalProduto = null;
-					self.listaItensNota = null;
+					self.limpaCampos();					
 					}, function(errResponse){
 				});
 	 }
@@ -35,55 +33,53 @@ app.controller('notaFiscalController', function($scope,notaFiscalService, $route
 		};
 		
 		
-		//cria uma lista de Produtos
+		
 		self.adicionarProdutos = function(produto){
-			
-			if(self.listaItensNota.length > 0){
-				
-				self.verificaProdutoRepetido();
-				
+		if(self.listaItensNota.length == 0){				
+				self.salvaNotaNaLista(produto);				
 			}
 			else{
-				self.listaItensNota.push({
-					produto 
-				});
-				produto = "";
-				$scope.visialuzarTable = true;
+				self.verificaProdutoRepetido(produto);				
 			}
-	}
-		
-	self.verificaProdutoRepetido = function(){
+		}
 			
-				for(i = 0; i <= self.listaItensNota.length ; i ++){
-				
+		//cria uma lista de Produtos na nota fiscal
+		self.salvaNotaNaLista = function(produto){
+			self.listaItensNota.push({
+				produto 
+			});
+			produto = "";
+			$scope.visialuzarTable = true;
+		}
+			
+	
+	self.verificaProdutoRepetido = function(produto){
+		for(i = 0; i < self.listaItensNota.length ; i ++){
 				var item = self.listaItensNota[i];
 				var produto1 = item.produto.id;
-				console.log( produto1);
-				if(produto1 != $scope.produto.id){
-					self.listaItensNota.push({
-						produto 
-					});
-					produto = "";
-					$scope.visialuzarTable = true;
+			if(produto1 != produto.id){
+					self.existe = true;
 				}else{
-					console.log("iguais");
+					sweetAlert({ timer : 3000,  text :"ja consta este produto na tabela",  type : "info", width: 300, higth: 300, padding: 20});
+					var tamanho = self.listaItensNota[i];
+					i = tamanho[i + 1];
+					self.existe = false;
 				}
-				
-				}
-			
+			}
+		if(self.existe){
+		self.salvaNotaNaLista(produto);
+		}
 	}
 	
 	
-		self.SomaTotal = function(){
-			
+	
+		self.SomaTotal = function(listaItensNota){
 			var totalSoma = 0;
-			for(i =0; i < self.listaItensNota.length ; i ++){
-				var total = self.listaItensNota[i];
+			for(i =0; i < listaItensNota.length ; i ++){
+				var total = listaItensNota[i];
 				totalSoma += parseFloat(total.valorTotal);	
 				$scope.valorTotalNota = totalSoma;
-				
-			}
-		
+					}
 			}
 		
 		$scope.somaUnitario = function(quantidade, valorUnitario){
@@ -95,21 +91,27 @@ app.controller('notaFiscalController', function($scope,notaFiscalService, $route
 		self.ativarExcluirLote = function(listaItensNota){
 			self.listaItensNota.filter(function(f){
 			if(f.selecionado){
-				$scope.ativadoExcluirLote = true;
-			}
+				$scope.ativadoExcluirLote = true; }
 			});
 		}
 			
 
 		//apagar outros empreendimentos, somente da lista de front
 		self.apagarProdutos = function(listaItensNota){
-			
-				
 				self.listaItensNota = self.listaItensNota.filter(function(f){
-					$scope.somaUnitario(f.quantidade, f.valorUnitario );
-					self.SomaTotal();
 				if(!f.selecionado) return f;
+				$scope.valorTotalNota -= f.valorTotal;
 				$scope.ativadoExcluirLote = false;
 			});
+		}
+		
+		self.limpaCampos = function(){
+			
+			$scope.notaFiscalCtrl.notaFiscal = null;
+			$scope.listaItensNota = self.listaItensNota = [];
+			$scope.valorTotalNota = 0;
+			$scope.notaFiscalCtrl.produto = "";
+			$scope.notaFiscalCtrl.notaFiscalProduto.fornecedor = "";
+			$scope.visialuzarTable = false;
 		}
 });

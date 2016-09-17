@@ -82,7 +82,7 @@
 							<td><input class="form-control"  id="quantidadeProduto"  type="text" placeholder="quantidade"
 							ng-model="f.quantidade" ui-number-mask="0" required></td>
 							<td><input class="form-control"  id="valorProduto"  type="text"  placeholder="Preço" ui-money-mask
-							ng-model="f.valorUnitario" ng-blur="notaFiscalCtrl.SomaTotal()" required> </td>
+							ng-model="f.valorUnitario" ng-blur="notaFiscalCtrl.SomaTotal(notaFiscalCtrl.listaItensNota)" required> </td>
 							<td>{{f.valorTotal = somaUnitario(f.quantidade, f.valorUnitario) | currency}}</td>
 							
 						</tr>
