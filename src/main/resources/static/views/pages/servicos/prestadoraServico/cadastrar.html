@@ -32,7 +32,7 @@
 						<div class="col-sm-5" ng-controller="verificaDadosController as verificaCtrl">
 							<input class="form-control" name="iefield"  ng-blur="verificaCtrl.verificaIe(prestadoraCtrl.prestadoraServico.dadoEmpresa.inscricaoEstadual)"
 								ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.inscricaoEstadual"
-								id="inscricaoEstadual" type="text" ui-br-ie-mask='selectedUF'
+								id="inscricaoEstadual" type="text" ui-br-ie-mask='selectedUF' placeholder="Inscrição Estadual"
 								required>
 								<p ng-show="formPrestadora.ieField.$error.ie" class="alert alert-warning ">Digite uma inscrição estadual Válida</p>
 		 				 </div>
@@ -50,7 +50,7 @@
 						<p ng-show="formPrestadora.razaoSocial.$error.maxlength"
 							class="alert alert-warning ">campo Razão Social no maximo 50 caracter</p>
 						</div>
-						<div class="row">
+						
 							<div class="col-sm-6" ng-class="{ 'has-error' : formPrestadora.nomeFantasia.$invalid && !formPrestadora.razaoSocial.$pristine }">
 								<input class="form-control" ng-minlength="5" ng-maxlength="50" placeholder="Nome fantasia"
 									ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.nomeFantasia"
@@ -60,7 +60,7 @@
 							class="alert alert-warning ">campo nome Fantasia no minimo 5 caracter</p>
 							<p ng-show="formPrestadora.nomeFantasia.$error.maxlength"
 							class="alert alert-warning ">campo nome Fantasia no maximo 50 caracter</p>
-						</div>
+						
 					</div>
 					<br>
 					<div class="row">					

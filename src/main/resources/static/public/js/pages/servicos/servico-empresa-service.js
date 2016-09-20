@@ -3,7 +3,7 @@ app.factory('servicoEmpresaService', function($rootScope, toastr, $http,$q){
 	
 	return{
 		salva: function(servicoEmpresa){
-			return $http.post('/rest/servico/vincular/salva', servicoEmpresa)
+			return $http.post('/rest/servico/edificio/vincular/salva', servicoEmpresa)
 			.then(function(response){
 				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;

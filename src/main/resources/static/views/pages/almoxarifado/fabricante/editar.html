@@ -18,24 +18,24 @@
 					
 					<div class="row">
 						<div class="col-sm-5" ng-controller="verificaDadosController as verificaCtrl">
-							<input class="form-control" name="cnpjField" placeholder="CNPJ" ng-blur="verificaCtrl.verificaCnpj(fabricanteCtrl.fabricante.dadoEmpresa.cnpj)"
+							<input class="form-control" name="cnpjField" placeholder="CNPJ" 
 								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.cnpj" id="cnpj"
-								type="text" ui-br-cnpj-mask required>
+								type="text" ui-br-cnpj-mask disabled required>
 								<p ng-show="formFabricante.cnpjField.$error.cnpj"
 								class="alert alert-warning ">Digite um CNPJ válido!!</p>
 						</div>
-						<div  class="col-sm-1">
+						<div  class="col-sm-2">
 							<select class="form-control" ng-init="ufs=['AC','AL','AM','AP','BA','CE','DF','ES','GO','MA',
       						'MG','MS','MT','PA','PB','PE','PI','PR','RJ','RN','RO','RR','RS','SC','SE','SP','TO']" ng-model="selectedUF" ng-options="uf for uf in ufs">
 								<option value="">estado</option>
 							</select>
 						</div>
 					
-						<div class="col-sm-6" ng-controller="verificaDadosController as verificaCtrl">
-							<input class="form-control" name="iefield" ng-blur="verificaCtrl.verificaIe(fabricanteCtrl.fabricante.dadoEmpresa.inscricaoEstadual)"
+						<div class="col-sm-5" ng-controller="verificaDadosController as verificaCtrl">
+							<input class="form-control" name="iefield" 
 								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.inscricaoEstadual"
 								id="inscricaoEstadual" type="text" ui-br-ie-mask='selectedUF'
-								required>
+								disabled required>
 						 <p ng-show="formFabricante.iefield.$error.ie"	class="alert alert-warning ">Digite um Inscrição Estadual Válida</p>
 						</div>
 					</div>
@@ -88,10 +88,7 @@
 						<div class="col-sm-3">
 							<input class="form-control" name="cepField"	ng-model="fabricanteCtrl.fabricante.dadoEmpresa.endereco.cep" id="cep" placeholder="CEP"
 								type="text"  ng-blur="prestadoraCtrl.findCep()"  onkeyup="if(this.value.length > 8) { numeroEmpresa.focus(); }"   ui-br-cep-mask required>
-								
-							<p ng-show="formFabricante.cepField.$error.cep" class="alert alert-warning ">Digite um CEP Válido</p>
-								
-						</div>
+					</div>
 					</div>
 						
 

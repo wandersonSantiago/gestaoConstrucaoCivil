@@ -1,7 +1,7 @@
 <meta charset="UTF-8">
 <br>
 <br>
-<div class="generic-container"	ng-controller="configEmpreendimentoController as configCtrl">
+<div class="generic-container"	ng-controller="servicoEmpresaController as servicoCtrl">
 	<div class="box box-primary">
 		<div class="box-header">
 			<span class="lead"> Vincular Serviços </span>
@@ -10,7 +10,7 @@
 		<br>
 			<div class="container col-sm-12 ">
 				<form role="form-vertical"
-					ng-submit="configCtrl.salvaConfigEmpreendimento()">
+					ng-submit="servicoCtrl.salva()">
 		
 					<div class="row">	
 						<label class="col-sm-1 control-label" for="empreendimento"> Torre</label>	
@@ -55,7 +55,7 @@
 					<br>
 					<div class="row" ng-controller="configEmpreendimentoController as configCtrl" ng-init="configCtrl.quantidadeEdificio()">
 							<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-if="edificioTorre" ng-model="teste"
+							<select class="form-control select2" style=" width: 100%;" ng-if="edificioTorre" ng-model="servicoCtrl.servicoEdifico.torre"
 							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeTorres" 
 							 title="Selecione a torre a qual será atribuido a saida do produto" required>
 								<option value="">---Torre---</option>
@@ -64,7 +64,7 @@
 
 						
 							<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-if="edificioAndar" ng-model="andar"
+							<select class="form-control select2" style=" width: 100%;" ng-if="edificioAndar" ng-model="servicoCtrl.servicoEdifico.andar"
 							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeAndares"
 							 title="Selecione o andar a qual será atribuido a saída do produto" required>
 								<option value="">---Andar---</option>
@@ -72,7 +72,7 @@
 						</div>
 	
 							<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-if="edificioApartamento" ng-model="apartamento"
+							<select class="form-control select2" style=" width: 100%;" ng-if="edificioApartamento" ng-model="servicoCtrl.servicoEdifico.apartamento"
 							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeApartamentos" 
 							 title="Selecione o apartamento a qual será atribuido a saída do produto" required>
 								<option value="">---Apartamento---</option>
@@ -98,7 +98,7 @@
 					<br>
 					<div class="row" ng-controller="pacoteServicoController as pacotesCtrl" ng-init="pacotesCtrl.lista()" >	
 					<div class="col-sm-5">			
-						<select class="form-control " style=" width: 100%;"  ng-model="pacotes"
+						<select class="form-control " style=" width: 100%;"  ng-model="servicoCtrl.servicoEdifico.pacoteServico"
 							 ng-options="lista.descricao for lista in pacotesCtrl.listaPacoteServicos" 
 							 title="Selecione o pacote de serviço a ser atribuido a empresa" required>
 								<option value="">---Pacotes de Serviço---</option>
@@ -108,7 +108,7 @@
 					<br>					
 					<div class="row" ng-controller="prestadoraServicoController as prestadoraCtrl" ng-init="prestadoraCtrl.lista()" >	
 					<div class="col-sm-5">			
-						<select class="form-control "   width: 100%;" ng-model="pacotes"
+						<select class="form-control "   width: 100%;" ng-model="servicoCtrl.servicoEdifico.prestadoraServico"
 							 ng-options="lista.dadoEmpresa.nomeFantasia for lista in prestadoraCtrl.prestadoraServicos" 
 							 title="Selecione o pacote de serviço a ser atribuido a empresa" required>
 								<option value="">---Prestadora de Serviço---</option>

@@ -29,6 +29,9 @@ public class ServicoEmpresaRestController {
 	 @RequestMapping( value="/salva", method = RequestMethod.POST)
 	 public ResponseEntity salva(@RequestBody ServicoEmpresa servico,UriComponentsBuilder ucBuilder)
 	 {
+		 System.out.println(servico.getPacoteServico().getDescricao());
+		 System.out.println(servico.getPrestadoraServico().getDadoEmpresa().getNomeFantasia());
+		
 		 servicoService.salvarOuEditar(servico);
 		 HttpHeaders headers = new HttpHeaders();
 		 headers.setLocation(ucBuilder.path("/rest/servico/vincular/salva/{id}").buildAndExpand(servico.getId()).toUri());

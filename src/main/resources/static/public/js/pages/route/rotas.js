@@ -108,7 +108,7 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 		templateUrl : "views/pages/servicos/prestadoraServico/cadastrar.html",
 	})
 	.when('/servicos/prestadoraServico/editar/:idPrestadoraServico', {
-		templateUrl : "views/pages/servicos/prestadoraServico/cadastrar.html",
+		templateUrl : "views/pages/servicos/prestadoraServico/editar.html",
 	})
 	.when('/servicos/prestadoraServico/lista', {
 		templateUrl : "views/pages/servicos/prestadoraServico/lista.html",

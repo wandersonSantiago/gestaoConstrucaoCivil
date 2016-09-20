@@ -50,7 +50,7 @@
 						<p ng-show="formPrestadora.razaoSocial.$error.maxlength"
 							class="alert alert-warning ">campo Razão Social no maximo 50 caracter</p>
 						</div>
-						<div class="row">
+						
 							<div class="col-sm-6" ng-class="{ 'has-error' : formPrestadora.nomeFantasia.$invalid && !formPrestadora.razaoSocial.$pristine }">
 								<input class="form-control" ng-minlength="5" ng-maxlength="50" placeholder="Nome fantasia"
 									ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.nomeFantasia"
@@ -60,7 +60,7 @@
 							class="alert alert-warning ">campo nome Fantasia no minimo 5 caracter</p>
 							<p ng-show="formPrestadora.nomeFantasia.$error.maxlength"
 							class="alert alert-warning ">campo nome Fantasia no maximo 50 caracter</p>
-						</div>
+						
 					</div>
 					<br>
 					<div class="row">					
@@ -87,9 +87,7 @@
 							<input class="form-control" name="cepField"	ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.endereco.cep" id="cep" placeholder="CEP"
 								type="text"  ng-blur="prestadoraCtrl.findCep()"  onkeyup="if(this.value.length > 8) { numeroEmpresa.focus(); }"   ui-br-cep-mask required>
 								
-							<p ng-show="formPrestadora.cepField.$error.cep" class="alert alert-warning ">Digite um CEP Válido</p>
-								
-						</div>
+					</div>
 					</div>
 						
 

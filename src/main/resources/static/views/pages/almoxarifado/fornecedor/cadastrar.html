@@ -18,23 +18,23 @@
 					
 					
 					<div class="row">
-						<div class="col-sm-3" ng-controller="verificaDadosController as verificaCtrl">
+						<div class="col-sm-5" ng-controller="verificaDadosController as verificaCtrl">
 							<input class="form-control" name="cnpjField" placeholder="CNPJ" ng-blur="verificaCtrl.verificaCnpj(fornecedorCtrl.fornecedor.dadoEmpresa.cnpj)"
 								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.cnpj" id="cnpj"
 								type="text" ui-br-cnpj-mask required>
 								<p ng-show="formFornecedor.cnpjField.$error.cnpj"
 								class="alert alert-warning ">Digite um CNPJ válido!!</p>
 						</div>	
-						<div  class="col-sm-1">
+						<div  class="col-sm-2">
 					<select class="form-control" ng-init="ufs=['AC','AL','AM','AP','BA','CE','DF','ES','GO','MA',
       				'MG','MS','MT','PA','PB','PE','PI','PR','RJ','RN','RO','RR','RS','SC','SE','SP','TO']" ng-model="selectedUF" ng-options="uf for uf in ufs">
 					<option value="">estado</option>
 					</select>
 					</div>
 					
-						<div class="col-sm-3" ng-controller="verificaDadosController as verificaCtrl">
+						<div class="col-sm-5" ng-controller="verificaDadosController as verificaCtrl">
 							<input class="form-control" name="iefield" ng-blur="verificaCtrl.verificaIe(fornecedorCtrl.fornecedor.dadoEmpresa.inscricaoEstadual)"
-								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.inscricaoEstadual"
+								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.inscricaoEstadual" placeholder="Inscrição Estadual"
 								id="inscricaoEstadual" type="text" ui-br-ie-mask='selectedUF'
 								required>
 						 <p ng-show="formFornecedor.iefield.$error.ie"	class="alert alert-warning ">Digite um Inscrição Estadual Válida</p>
