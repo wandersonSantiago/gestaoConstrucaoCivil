@@ -20,6 +20,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.system.gestaoConstrucaoCivil.enuns.EstadoCivilEnum;
+import br.com.system.gestaoConstrucaoCivil.enuns.UfEnum;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -37,6 +38,7 @@ public abstract class Pessoa implements Serializable{
 	@OneToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST})
 	@JoinColumn(name="id_endereco",nullable = false)
 	protected Endereco endereco;
+	
 	@Column(nullable = false,length = 20,unique = true)
 	protected String rg;
 	@Column(nullable = false,length = 20,unique = true)
@@ -122,6 +124,7 @@ public abstract class Pessoa implements Serializable{
 	public void setEstadoCivil(EstadoCivilEnum estadoCivil) {
 		this.estadoCivil = estadoCivil;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

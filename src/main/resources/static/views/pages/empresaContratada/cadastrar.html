@@ -69,17 +69,16 @@
 						</div>
 					
 									
-					<div  class="col-sm-2">
-					<select class="form-control" ng-init="ufs=['AC','AL','AM','AP','BA','CE','DF','ES','GO','MA',
-      'MG','MS','MT','PA','PB','PE','PI','PR','RJ','RN','RO','RR','RS','SC','SE','SP','TO']" ng-model="selectedUF" ng-options="uf for uf in ufs">
-					<option value="">selecione o estado</option>
+					<div  class="col-sm-2" ng-controller="enderecoController as endCtrl" ng-init="endCtrl.lista()">
+					<select class="form-control"  ng-model="adminCtrl.empresa.dadoEmpresa.ufIe" ng-options="uf for uf in ufs">
+					<option value="">Estado</option>
 					</select>
 					</div>
 					
 						<div class="col-sm-2" ng-controller="verificaDadosController as verificaCtrl">
 							<input class="form-control" name="iefield"  placeholder="Inscrição Estadual" 
 								 ng-model="adminCtrl.empresa.dadoEmpresa.inscricaoEstadual" ng-blur="verificaCtrl.verificaIe(adminCtrl.empresa.dadoEmpresa.inscricaoEstadual)"
-								id="inscricaoEstadual" type="text" ui-br-ie-mask='selectedUF'
+								id="inscricaoEstadual" type="text" ui-br-ie-mask='adminCtrl.empresa.dadoEmpresa.ufIe'
 								required>
 						 <p ng-show="formAdminSistema.iefield.$error.ie"	class="alert alert-warning ">Digite um Inscrição Estadual Válida</p>
 						</div>

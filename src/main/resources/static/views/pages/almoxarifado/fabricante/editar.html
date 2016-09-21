@@ -24,17 +24,16 @@
 								<p ng-show="formFabricante.cnpjField.$error.cnpj"
 								class="alert alert-warning ">Digite um CNPJ válido!!</p>
 						</div>
-						<div  class="col-sm-2">
-							<select class="form-control" ng-init="ufs=['AC','AL','AM','AP','BA','CE','DF','ES','GO','MA',
-      						'MG','MS','MT','PA','PB','PE','PI','PR','RJ','RN','RO','RR','RS','SC','SE','SP','TO']" ng-model="selectedUF" ng-options="uf for uf in ufs">
-								<option value="">estado</option>
-							</select>
-						</div>
+							<div  class="col-sm-2" ng-controller="enderecoController as endCtrl" ng-init="endCtrl.lista()">
+								<select class="form-control"  ng-model="fabricanteCtrl.fabricante.dadoEmpresa.ufIe" ng-options="uf for uf in ufs" disabled>
+									<option value="">Estado</option>
+								</select>
+						</div>	
 					
 						<div class="col-sm-5" ng-controller="verificaDadosController as verificaCtrl">
 							<input class="form-control" name="iefield" 
 								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.inscricaoEstadual"
-								id="inscricaoEstadual" type="text" ui-br-ie-mask='selectedUF'
+								id="inscricaoEstadual" type="text" ui-br-ie-mask='fabricanteCtrl.fabricante.dadoEmpresa.ufIe'
 								disabled required>
 						 <p ng-show="formFabricante.iefield.$error.ie"	class="alert alert-warning ">Digite um Inscrição Estadual Válida</p>
 						</div>

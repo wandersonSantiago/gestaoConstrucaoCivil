@@ -4,12 +4,16 @@ package br.com.system.gestaoConstrucaoCivil.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import br.com.system.gestaoConstrucaoCivil.enuns.UfEnum;
 
 @Entity
 @Table(name = "dado_empresa")
@@ -22,6 +26,9 @@ public class DadoEmpresa extends AbstractPersistable<Long>  {
 	private String nomeFantasia;
 	@Column(nullable = false,length = 20, unique = true)
 	private String cnpj;
+	@Column(nullable = true)
+	@Enumerated(EnumType.STRING)
+	protected UfEnum ufIe;
 	@Column(nullable = false,length = 20, unique = true)
 	private String inscricaoEstadual;
 	@OneToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST} )
@@ -75,6 +82,13 @@ public class DadoEmpresa extends AbstractPersistable<Long>  {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public UfEnum getUfIe() {
+		return ufIe;
+	}
+	public void setUfIe(UfEnum ufIe) {
+		this.ufIe = ufIe;
 	}
 	
 }
