@@ -42,7 +42,7 @@
 						<select class="form-control select2" ng-model="protudoCtr.produto.tipoProduto" 
 							ng-options="listaTipoProdutos.descricao for listaTipoProdutos in tipoProdutoCtrl.listaTipoProduto" 
 							  style=" width: 100%;" required >
-								<option value="">---Tipo Produto---</option>
+								<option value="">{{protudoCtr.produto.tipoProduto.descricao}}</option>
 							</select>
 						</div>
 					</div>
@@ -55,14 +55,14 @@
 						<select class="form-control select2" ng-model="protudoCtr.produto.areaProduto" 
 							ng-options="listaAreaProdutos.descricao for listaAreaProdutos in areaProdutoCtrl.listaAreaProduto" 
 							  style=" width: 100%;" required >
-								<option value="">---Area Produto---</option>
+								<option value="">{{protudoCtr.produto.areaProduto.descricao}}</option>
 							</select>
 						</div>	
 						<div class="col-sm-4" ng-controller="unidadeMedidaController as unidadeCtrl" ng-init="unidadeCtrl.lista()">
 						<select class="form-control select2" ng-model="protudoCtr.produto.unidadeMedida" 
 							ng-options="listaunidadeMedidas for listaunidadeMedidas in unidadeCtrl.listaUnidadeMedida" 
 							  style=" width: 100%;" required >
-								<option value="">---Unidade Medida---</option>
+								<option value="">{{protudoCtr.produto.unidadeMedida}}</option>
 							</select>
 						</div>
 				
@@ -70,7 +70,7 @@
 						<select class="form-control select2" ng-model="protudoCtr.produto.categoria" 
 							ng-options="listaCategorias.descricao for listaCategorias in categoriaCtrl.categorias" 
 							  style=" width: 100%;" required >
-								<option value="">---Categoria---</option>
+								<option value="">{{protudoCtr.produto.categoria.descricao}}</option>
 							</select>
 						</div>
 					</div>
@@ -81,7 +81,7 @@
 						<select class="form-control select2" ng-model="protudoCtr.produto.fabricante" 
 							ng-options="listaFabricantes.dadoEmpresa.nomeFantasia for listaFabricantes in fabricanteCtrl.listaFabricante" 
 							  style=" width: 100%;" required >
-								<option value="">---Fabricante---</option>
+								<option value="">{{protudoCtr.produto.fabricante.dadoEmpresa.nomeFantasia}}</option>
 							</select>
 						</div>						
 						<div class="col-sm-4" ng-controller="fornecedorController as forCtrl" ng-init="forCtrl.lista()" >

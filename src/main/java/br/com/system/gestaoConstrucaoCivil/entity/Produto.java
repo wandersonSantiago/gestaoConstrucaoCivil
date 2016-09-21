@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -39,7 +41,14 @@ public class Produto extends AbstractPersistable<Long> {
 	@JoinTable(name = "produtos_fornecedores", joinColumns = @JoinColumn(name = "id_produto"), 
 	inverseJoinColumns = @JoinColumn(name = "id_fornecedor"))
 	private List<Fornecedor> fornecedores;
-
+	
+	@OneToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST} )
+    @JoinColumn(name="id_fabricante",nullable = true)
+	private Fabricante fabricante;
+	
+	@OneToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST} )
+    @JoinColumn(name="id_tipo",nullable = true)
+	private TipoProduto tipoProduto;
 	
 	
 	public String getCodigoBarra() {
@@ -90,6 +99,22 @@ public class Produto extends AbstractPersistable<Long> {
 
 	public void setFornecedores(List<Fornecedor> fornecedores) {
 		this.fornecedores = fornecedores;
+	}
+
+	public Fabricante getFabricante() {
+		return fabricante;
+	}
+
+	public void setFabricante(Fabricante fabricante) {
+		this.fabricante = fabricante;
+	}
+
+	public TipoProduto getTipoProduto() {
+		return tipoProduto;
+	}
+
+	public void setTipoProduto(TipoProduto tipoProduto) {
+		this.tipoProduto = tipoProduto;
 	}
 
 

@@ -99,6 +99,8 @@ app.controller('produtoController', function($scope,produtoService, $routeParams
 			produtoService.buscaPorId(id).
 			then(function(p){
 				self.produto = p;
+				console.log(self.produto);
+				$scope.protudoCtr.listaFornecedores = self.produto.fornecedores;
 				}, function(errResponse){
 			});
 		};
