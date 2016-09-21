@@ -80,7 +80,7 @@
 						</div>
 							<div class="col-sm-3"  ng-init="cadFuncCtrl.estadoCivil()">
 							<select class="form-control select2"  ng-model="cadFuncCtrl.funcionario.estadoCivil" ng-options="estadoCivil for estadoCivil in cadFuncCtrl.listaEstadoCivil"  style="width: 100%;">
-								<option value="">--Estado Civil--</option>
+								<option value="">{{cadFuncCtrl.funcionario.estadoCivil}}</option>
 							</select>
 						</div>
 					</div>
@@ -109,13 +109,13 @@
 
 						<div class="col-sm-3" ng-controller="empreendimentoController as empCtrl" ng-init="empCtrl.lista()">
 							<select class="form-control select2"  ng-model="cadFuncCtrl.funcionario.empreendimento" ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.tipoEmpreendimento for listarEmpreendimentos in empreendimentos"  style="width: 100%;">
-								<option value="">--Empreendimento--</option>
+								<option value="">{{cadFuncCtrl.funcionario.empreendimento.descricao}}</option>
 							</select>
 						</div>
 				
 						<div class="col-sm-3" ng-controller="cargoController as cargoCtrl" ng-init="cargoCtrl.lista()">
 							<select class="form-control select2" ng-model="cadFuncCtrl.funcionario.cargo" ng-options="listarCargos.descricao group by listarCargos.shade for listarCargos in cargos"  style="width: 100%;">
-									<option value="">--Cargo--</option>
+									<option value="">{{cadFuncCtrl.funcionario.cargo.descricao}}</option>
 							</select>
 						</div>
 		
