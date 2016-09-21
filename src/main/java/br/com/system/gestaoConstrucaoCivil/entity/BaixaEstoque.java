@@ -46,6 +46,10 @@ public class BaixaEstoque implements Serializable {
 	@JoinColumn(name="id_produto",nullable = true)
 	private Produto produto;
 
+	@ManyToOne
+	@JoinColumn(name = "id_area_produto")
+	private AreaProduto areaProduto;
+	
 	public Long getId() {
 		return id;
 	}
@@ -93,6 +97,12 @@ public class BaixaEstoque implements Serializable {
 	}
 	public void setProduto(Produto produto) {
 		this.produto = produto;
+	}
+	public AreaProduto getAreaProduto() {
+		return areaProduto;
+	}
+	public void setAreaProduto(AreaProduto areaProduto) {
+		this.areaProduto = areaProduto;
 	}
        
 }
