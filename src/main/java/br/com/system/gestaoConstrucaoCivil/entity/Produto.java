@@ -42,11 +42,11 @@ public class Produto extends AbstractPersistable<Long> {
 	inverseJoinColumns = @JoinColumn(name = "id_fornecedor"))
 	private List<Fornecedor> fornecedores;
 	
-	@OneToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST} )
+	@ManyToOne
     @JoinColumn(name="id_fabricante",nullable = true)
 	private Fabricante fabricante;
 	
-	@OneToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST} )
+	@ManyToOne
     @JoinColumn(name="id_tipo",nullable = true)
 	private TipoProduto tipoProduto;
 	

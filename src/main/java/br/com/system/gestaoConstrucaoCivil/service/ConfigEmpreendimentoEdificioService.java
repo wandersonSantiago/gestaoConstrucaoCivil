@@ -38,8 +38,9 @@ public class ConfigEmpreendimentoEdificioService {
     }
     public ConfigEmpreendimentoEdificioPojo getConfig()
     {
-          ConfigEmpreendimentoEdificio edificio = configEdificioRepository.findByEmpreendimentoId(16L);
-          return new ConfigEmpreendimentoEdificioPojo(edificio);
+    	//Remover depois   edificio = configEdificioRepository.findAll().get(0);
+    	ConfigEmpreendimentoEdificio edificio = configEdificioRepository.findAll().get(0);
+        return new ConfigEmpreendimentoEdificioPojo(edificio);
     
     }
  
