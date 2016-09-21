@@ -13,40 +13,40 @@
 					ng-submit="servicoCtrl.salva()">
 		
 					<div class="row">	
-						<label class="col-sm-1 control-label" for="empreendimento"> Torre</label>	
-						<div class="col-sm-3">
-							<input type="checkbox" ng-model="edificioTorre"  placeholder="outros serviços?">
+						<label class="col-sm-2 control-label" for="empreendimento"> Torre</label>	
+						<div class="col-sm-2">
+							<input type="checkbox" ng-model="torreCheck" ng-click="servicoCtrl.verifica()" placeholder="outros serviços?">
 						</div>		
-						<label class="col-sm-1 control-label" for="empreendimento"> andar</label>	
-						<div class="col-sm-3">
-							<input type="checkbox" ng-model="edificioAndar"  placeholder="outros serviços?">
+						<label class="col-sm-2 control-label" for="empreendimento"> andar</label>	
+						<div class="col-sm-2">
+							<input type="checkbox" ng-model="andarCheck" ng-click="servicoCtrl.verifica()" placeholder="outros serviços?">
 						</div>
-						<label class="col-sm-1 control-label" for="empreendimento"> apartamento</label>	
-						<div class="col-sm-3">
-							<input type="checkbox" ng-model="edificioApartamento"  placeholder="outros serviços?">
-						</div>
-					</div>
-					<br>
-					<div class="row">							
-						<label class="col-sm-1 control-label" for="empreendimento"> Casa</label>	
-						<div class="col-sm-3">
-							<input type="checkbox" ng-model="edificioCasa"  placeholder="outros serviços?">
-						</div>
-						<label class="col-sm-1 control-label" for="empreendimento"> Andar</label>	
-						<div class="col-sm-3">
-							<input type="checkbox" ng-model="edificioAndarCasa"  placeholder="outros serviços?">
+						<label class="col-sm-2 control-label" for="empreendimento"> apartamento</label>	
+						<div class="col-sm-2">
+							<input type="checkbox" ng-model="apartamentoCheck" ng-click="servicoCtrl.verifica()" placeholder="outros serviços?">
 						</div>
 					</div>
 					<br>
-					<div class="row" >
+					<div class="row" ng-if="casa" >							
+						<label class="col-sm-2 control-label" for="empreendimento"> Casa</label>	
+						<div class="col-sm-2">
+							<input type="checkbox" ng-model="torreCheck" ng-click="servicoCtrl.verifica()"  placeholder="outros serviços?">
+						</div>
+						<label class="col-sm-2 control-label" for="empreendimento"> Andar</label>	
+						<div class="col-sm-2">
+							<input type="checkbox" ng-model="andarCheck" ng-click="servicoCtrl.verifica()"  placeholder="outros serviços?">
+						</div>
+					</div>
+					<br>
+					<div class="row" ng-if="casa" >
 						
 						<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-if="edificioCasa" required>
+							<select class="form-control select2" style=" width: 100%;" ng-if="torre" required>
 								<option value="">---Casa---</option>
 							</select>
 						</div>
 							<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-if="edificioAndarCasa" required>
+							<select class="form-control select2" style=" width: 100%;" ng-if="andar" required>
 								<option value="">---Andar---</option>
 							</select>
 						</div>
@@ -54,8 +54,8 @@
 					</div>
 					<br>
 					<div class="row" ng-controller="configEmpreendimentoController as configCtrl" ng-init="configCtrl.quantidadeEdificio()">
-							<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-if="edificioTorre" ng-model="servicoCtrl.servicoEdifico.torre"
+							<div class="col-sm-4"  >
+							<select class="form-control select2" style=" width: 100%;" ng-if="torre" ng-model="servicoCtrl.servicoEdifico.torre"
 							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeTorres" 
 							 title="Selecione a torre a qual será atribuido a saida do produto" required>
 								<option value="">---Torre---</option>
@@ -63,16 +63,16 @@
 						</div>
 
 						
-							<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-if="edificioAndar" ng-model="servicoCtrl.servicoEdifico.andar"
+						<div class="col-sm-6"  >
+							<select class="form-control select2" style=" width: 100%;" ng-if="andar " ng-model="servicoCtrl.servicoEdifico.andar"
 							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeAndares"
 							 title="Selecione o andar a qual será atribuido a saída do produto" required>
 								<option value="">---Andar---</option>
 							</select>
 						</div>
 	
-							<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-if="edificioApartamento" ng-model="servicoCtrl.servicoEdifico.apartamento"
+						<div class="col-sm-6"  >
+							<select class="form-control select2" style=" width: 100%;" ng-if="apartamento" ng-model="servicoCtrl.servicoEdifico.apartamento"
 							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeApartamentos" 
 							 title="Selecione o apartamento a qual será atribuido a saída do produto" required>
 								<option value="">---Apartamento---</option>
@@ -104,10 +104,8 @@
 								<option value="">---Pacotes de Serviço---</option>
 							</select>
 					</div>	
-					</div>					
-					<br>					
-					<div class="row" ng-controller="prestadoraServicoController as prestadoraCtrl" ng-init="prestadoraCtrl.lista()" >	
-					<div class="col-sm-5">			
+						
+					<div class="col-sm-5" ng-controller="prestadoraServicoController as prestadoraCtrl" ng-init="prestadoraCtrl.lista()">			
 						<select class="form-control "   width: 100%;" ng-model="servicoCtrl.servicoEdifico.prestadoraServico"
 							 ng-options="lista.dadoEmpresa.nomeFantasia for lista in prestadoraCtrl.prestadoraServicos" 
 							 title="Selecione o pacote de serviço a ser atribuido a empresa" required>

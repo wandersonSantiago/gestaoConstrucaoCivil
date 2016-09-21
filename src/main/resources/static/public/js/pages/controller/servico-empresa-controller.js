@@ -4,10 +4,11 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 		
 	
 	
-	 self.salva = function(servicoEmpresa){
-		 servicoEmpresaService.salva(self.servicoEmpresa).
+	 self.salva = function(servicoEdifico){
+		 console.log(self.servicoEdifico);
+		 servicoEmpresaService.salva(self.servicoEdifico).
 			then(function(response){
-				self.servicoEmpresa = null;
+				self.servicoEdificio = null;
 				}, function(errResponse){
 			});
 		}
@@ -27,6 +28,32 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 				}, function(errResponse){
 			});
 		};
+		
+		self.verifica = function(verifica){
+			
+			if($scope.torreCheck == true){
+				$scope.torre = true;
+			}
+			if($scope.andarCheck == true){
+				$scope.andar = true;
+				$scope.torre = true;
+			}if($scope.apartamentoCheck == true){
+				$scope.andar = true;
+				$scope.torre = true;
+				$scope.apartamento = true;
+			}
+			if($scope.torreCheck == false && $scope.andarCheck == false
+					&& $scope.apartamentoCheck == false){
+				$scope.torre = false;
+			}
+			if($scope.andarCheck == false && $scope.apartamentoCheck == false){
+				$scope.andar = false;
+				
+			}if($scope.apartamentoCheck == false){
+				
+				$scope.apartamento = false;
+			}
+		}
 	
 		
 });

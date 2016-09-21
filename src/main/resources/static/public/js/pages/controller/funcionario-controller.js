@@ -43,6 +43,13 @@ app.controller('cadastrarFuncionarioController', function($scope, buscaCepServic
 				}, function(errResponse){
 			});
 		};
+		 self.estadoCivil = function(){
+			 cadastrarFuncionarioService.estadoCivil().
+				then(function(f){
+					self.listaEstadoCivil = f;									
+					}, function(errResponse){
+				});
+			};
 		
 		self.buscarFuncionariosEngenheiro = function(){
 			 cadastrarFuncionarioService.buscarFuncionariosEngenheiro().

@@ -31,13 +31,13 @@
 					<br>
 					
 					<div class="row" ng-controller="verificaDadosController as verificaCtrl">
-						<div class="col-sm-5" >
+						<div class="col-sm-4" >
 						<input class="form-control" placeholder="RG" ng-blur="verificaCtrl.verificaRg(cadFuncCtrl.funcionario.rg)"
 								ng-model="cadFuncCtrl.funcionario.rg" id="rg" type="text"
 								required>
 						</div>
 						
-						<div class="col-sm-5">
+						<div class="col-sm-4">
 							<input class="form-control" name="cpfField" placeholder="CPF"
 								ng-model="cadFuncCtrl.funcionario.cpf" id="cpf" ng-blur="verificaCtrl.verificaCpf(cadFuncCtrl.funcionario.cpf)"
 								type="text" ui-br-cpf-mask required>
@@ -49,16 +49,17 @@
 								ng-model="cadFuncCtrl.funcionario.dataNascimento"
 								id="dataNascimento" type="text" ui-date required  >
 						</div>
+							<div class="col-sm-2">
+							<input class="form-control"  placeholder="Idade"
+								ng-model="cadFuncCtrl.funcionario.idade"
+								id="idade" type="text" required  >
+						</div>
 					</div>
 					<br> 
 					
 					<br>
 					<div class="row">
-					<div class="col-sm-2">
-							<input class="form-control"  placeholder="Idade"
-								ng-model="cadFuncCtrl.funcionario.idade"
-								id="idade" type="text" required  >
-						</div>
+				
 						<div class="col-sm-3">
 							<input class="form-control" placeholder="Telefone Fixo"
 								ng-model="cadFuncCtrl.funcionario.telefoneFixo"
@@ -70,11 +71,16 @@
 								ng-model="cadFuncCtrl.funcionario.telefoneCelular" placeholder="Celular"
 								id="telefoneCelular" type="tel" ui-br-phone-number required>
 						</div>
-						<div class="col-sm-4">
+						<div class="col-sm-3">
 							<select class="form-control select2" ng-model="cadFuncCtrl.funcionario.sexo" style="width: 100%;" required>
 									<option value="">--Sexo--</option>
 									<option value="Masculino">Masculino</option>
 									<option value="Feminino">Feminino</option>
+							</select>
+						</div>
+							<div class="col-sm-3"  ng-init="cadFuncCtrl.estadoCivil()">
+							<select class="form-control select2"  ng-model="cadFuncCtrl.funcionario.estadoCivil" ng-options="estadoCivil for estadoCivil in cadFuncCtrl.listaEstadoCivil"  style="width: 100%;">
+								<option value="">--Estado Civil--</option>
 							</select>
 						</div>
 					</div>

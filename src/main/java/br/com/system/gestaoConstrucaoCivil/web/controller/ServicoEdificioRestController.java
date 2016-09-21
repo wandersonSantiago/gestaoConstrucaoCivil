@@ -25,7 +25,7 @@ public class ServicoEdificioRestController {
 		 System.out.println(servico.getPacoteServico().getDescricao());
 		 System.out.println(servico.getPrestadoraServico().getDadoEmpresa().getNomeFantasia());
 		 System.out.println(servico.getTorre());
-		// servicoEdificioService.salvarOuEditar(servico);
+		 servicoEdificioService.salvarOuEditar(servico);
 		 HttpHeaders headers = new HttpHeaders();
 		//headers.setLocation(ucBuilder.path("/rest/servico/vincular/salva/{id}").buildAndExpand(servico.getId()).toUri());
 		 return new ResponseEntity(headers, HttpStatus.CREATED);

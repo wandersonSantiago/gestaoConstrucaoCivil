@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.ServicoEdificio;
-import br.com.system.gestaoConstrucaoCivil.entity.ServicoEmpresa;
 import br.com.system.gestaoConstrucaoCivil.repository.ServicoEdificioRepository;
 
 @Service
@@ -17,7 +17,8 @@ public class ServicoEdificioService  {
 
 	@Autowired
 	private ServicoEdificioRepository servicoEdificioRepository;
-	
+	@Autowired
+	private EmpreendimentoService empreendimentoService;
 	public List<ServicoEdificio> buscarTodos() {
  		
  		return servicoEdificioRepository.findAll();
@@ -26,6 +27,8 @@ public class ServicoEdificioService  {
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(ServicoEdificio servico)
 	{
+		List<Empreendimento> empreendimento = empreendimentoService.buscarTodos();
+		servico.setEmpreendimento(empreendimento.get(0));
 		servicoEdificioRepository.save(servico);
 	}
 }

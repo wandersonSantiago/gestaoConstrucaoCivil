@@ -31,15 +31,15 @@
 					<br>
 					
 					<div class="row">
-						<div class="col-sm-5">
-						<input class="form-control" placeholder="RG"
+						<div class="col-sm-4" >
+						<input class="form-control" placeholder="RG" disabled
 								ng-model="cadFuncCtrl.funcionario.rg" id="rg" type="text"
 								required>
 						</div>
 						
-						<div class="col-sm-5">
+						<div class="col-sm-4">
 							<input class="form-control" name="cpfField" placeholder="CPF"
-								ng-model="cadFuncCtrl.funcionario.cpf" id="cpf"
+								ng-model="cadFuncCtrl.funcionario.cpf" id="cpf" disabled
 								type="text" ui-br-cpf-mask required>
 								<p ng-show="formCadastrarFuncionario.cpfField.$error.cpf"
 								class="alert alert-warning ">Digite um CPF válido!!</p>
@@ -49,16 +49,17 @@
 								ng-model="cadFuncCtrl.funcionario.dataNascimento"
 								id="dataNascimento" type="text" ui-date required  >
 						</div>
+							<div class="col-sm-2">
+							<input class="form-control"  placeholder="Idade"
+								ng-model="cadFuncCtrl.funcionario.idade"
+								id="idade" type="text" required  >
+						</div>
 					</div>
 					<br> 
 					
 					<br>
 					<div class="row">
-					<div class="col-sm-2">
-							<input class="form-control"  placeholder="Idade"
-								ng-model="cadFuncCtrl.funcionario.idade"
-								id="idade" type="text" required  >
-						</div>
+				
 						<div class="col-sm-3">
 							<input class="form-control" placeholder="Telefone Fixo"
 								ng-model="cadFuncCtrl.funcionario.telefoneFixo"
@@ -70,11 +71,16 @@
 								ng-model="cadFuncCtrl.funcionario.telefoneCelular" placeholder="Celular"
 								id="telefoneCelular" type="tel" ui-br-phone-number required>
 						</div>
-						<div class="col-sm-4">
+						<div class="col-sm-3">
 							<select class="form-control select2" ng-model="cadFuncCtrl.funcionario.sexo" style="width: 100%;" required>
 									<option value="">--Sexo--</option>
 									<option value="Masculino">Masculino</option>
 									<option value="Feminino">Feminino</option>
+							</select>
+						</div>
+							<div class="col-sm-3"  ng-init="cadFuncCtrl.estadoCivil()">
+							<select class="form-control select2"  ng-model="cadFuncCtrl.funcionario.estadoCivil" ng-options="estadoCivil for estadoCivil in cadFuncCtrl.listaEstadoCivil"  style="width: 100%;">
+								<option value="">--Estado Civil--</option>
 							</select>
 						</div>
 					</div>
@@ -129,8 +135,7 @@
 							<input class="form-control"	ng-model="cadFuncCtrl.funcionario.endereco.cep" id="cep" name="cepField"
 								type="text" placeholder="CEP"  ng-blur="cadFuncCtrl.findCep()"  onkeyup="if(this.value.length > 8) { numeroEmpresa.focus(); }"   ui-br-cep-mask required>
 								
-							<p ng-show="formCadastrarFuncionario.cepField.$error.cep" class="alert alert-warning ">Digite um CEP Válido</p>
-
+		
 						</div>
 					</div>	
 					<br>

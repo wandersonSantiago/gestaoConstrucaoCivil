@@ -6,17 +6,20 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import br.com.system.gestaoConstrucaoCivil.enuns.EstadoCivilEnum;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -47,7 +50,9 @@ public abstract class Pessoa implements Serializable{
 	protected Date dataNascimento;
 	@Column(nullable = false)
 	protected String sexo;
-   
+	@Column(nullable = true)
+	@Enumerated(EnumType.STRING)
+	protected EstadoCivilEnum estadoCivil;
 	
 	public String getNomeCompleto() {
 		return nomeCompleto;
@@ -109,6 +114,13 @@ public abstract class Pessoa implements Serializable{
 	}
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
+	}
+	
+	public EstadoCivilEnum getEstadoCivil() {
+		return estadoCivil;
+	}
+	public void setEstadoCivil(EstadoCivilEnum estadoCivil) {
+		this.estadoCivil = estadoCivil;
 	}
 	@Override
 	public int hashCode() {
