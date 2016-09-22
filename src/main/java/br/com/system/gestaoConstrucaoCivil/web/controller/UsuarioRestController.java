@@ -33,7 +33,16 @@ public class UsuarioRestController {
 	
 	@RequestMapping(value="/usuario")
 	@ResponseBody
-	public Principal user(Principal user) {
+	public Principal user(Principal user, HttpSession session) {
+		
+		Usuario usuario = (Usuario) session.getAttribute("login");
+		
+		
+		
+		/*if(session == null)
+		{
+			System.out.println("SIM USUARIO == NULL");
+		}*/
 		System.out.println("chamo o login");
 		return user;
 	}
@@ -74,20 +83,21 @@ public class UsuarioRestController {
 			return new ResponseEntity(usuarioService.existeLoginCadastrado(login), HttpStatus.OK);
 		}
 	 
-	/**    @RequestMapping("/usuario")
+	/*    @RequestMapping("/usuario")
 		public ResponseEntity<?> user(Principal user, HttpSession session) {
 			
 	    	Usuario usuario = (Usuario) session.getAttribute("usuario");
 			
+	    	System.out.println(session.getAttribute("usuario"));
 	    	Empreendimento empreendimento = (Empreendimento) session.getAttribute("empreendimento");
 			
-	    	
 			
 	    	if(usuario == null){
-				return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+				System.out.println("Não autorizado");
+	    		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 			}
 			UsuarioView u = new UsuarioView(usuario, empreendimento);
 
 			return new ResponseEntity<>(u, HttpStatus.OK);
-		} **/
+		}*/ 
 }
