@@ -30,8 +30,8 @@ public class UsuarioService {
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(Usuario usuario)
 	{
-		//String hash = new BCryptPasswordEncoder().encode(usuario.getSenha());
-		//usuario.setSenha(hash);
+		String hash = new BCryptPasswordEncoder().encode(usuario.getSenha());
+		usuario.setSenha(hash);
 		usuario.setDataCadastro(LocalDate.now());
 		usuarioRepository.save(usuario);
 	}
