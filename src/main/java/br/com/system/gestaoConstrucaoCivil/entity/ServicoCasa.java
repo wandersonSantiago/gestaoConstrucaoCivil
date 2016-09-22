@@ -1,5 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -22,7 +24,5 @@ public class ServicoCasa extends ServicoEmpresa{
 	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
-	
-	
 	
 }

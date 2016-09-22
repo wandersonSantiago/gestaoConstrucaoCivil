@@ -40,8 +40,8 @@ public class NotaFiscal implements Serializable {
 	@Column(nullable = false)
 	private Long numero;
 
-	@Column(nullable = false)
-	private Long chaveAcesso;
+	@Column(nullable = false,length = 255)
+	private String chaveAcesso;
 
 	@Temporal(TemporalType.DATE)
 	private Date dataNota;
@@ -64,11 +64,11 @@ public class NotaFiscal implements Serializable {
 		this.id = id;
 	}
 
-	public Long getChaveAcesso() {
+	public String getChaveAcesso() {
 		return chaveAcesso;
 	}
 
-	public void setChaveAcesso(Long chaveAcesso) {
+	public void setChaveAcesso(String chaveAcesso) {
 		this.chaveAcesso = chaveAcesso;
 	}
 
