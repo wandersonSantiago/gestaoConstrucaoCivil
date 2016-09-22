@@ -13,22 +13,24 @@ import br.com.system.gestaoConstrucaoCivil.repository.CategoriaRepository;
 
 @Service
 @Transactional(readOnly = true,propagation = Propagation.REQUIRED)
-public class CategoriaService {
+public class CategoriaService implements Servico<Categoria>{
 
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 	
 	public List<Categoria> buscarTodos() {
 		
+		System.out.println("Chamou buscarTodos categoria");
 		return categoriaRepository.findAll();
 	}
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(Categoria categoria)
 	{
+		System.out.println("Chamou salvar categoria");
 		categoriaRepository.save(categoria);
 	}
 	public Categoria buscarPorId(Long id) {
-		
+		System.out.println("Chamou buscarPorId categoria");
 		return categoriaRepository.findOne(id);
 	}
 }
