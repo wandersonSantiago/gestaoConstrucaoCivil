@@ -1,5 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -12,14 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 import br.com.system.gestaoConstrucaoCivil.entity.Cargo;
 import br.com.system.gestaoConstrucaoCivil.service.CargoService;
+import br.com.system.gestaoConstrucaoCivil.service.Servico;
 
 @RestController
 @RequestMapping("/rest/recursosHumanos/cargo")
 public class CargoRestController implements ICargo {
 
 	@Autowired
-	private CargoService cargoService;
-
+	//private CargoService cargoService;
+    private Servico<Cargo> cargoService;
+	
 	public ResponseEntity<Iterable<Cargo>> buscarCargos() {
 		Iterable<Cargo> cargo = cargoService.buscarTodos();
 		return new ResponseEntity<Iterable<Cargo>>(cargo, HttpStatus.OK);
