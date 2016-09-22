@@ -32,7 +32,10 @@ public class EstoqueEmpreendimentoService {
 
 		estoqueRepository.save(produtoEstoque);
 	}
-
+    public List<EstoqueEmpreendimento> buscarTodos(){
+		
+		return estoqueRepository.findAll();
+	}
 	@Transactional(readOnly = false)
 	public void entradaEstoque(NotaFiscalProduto notaProduto) {
 		
