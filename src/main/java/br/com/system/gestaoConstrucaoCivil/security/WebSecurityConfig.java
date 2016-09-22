@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfFilter;
@@ -23,11 +24,12 @@ import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	/*@Autowired
+	@Autowired
 	private UserDetailsService userDetailsService;
-*/
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+	
 	
 		http
 		.httpBasic().and()
@@ -41,17 +43,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 	}
 
-	/*@Autowired
+	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		
-		PasswordEncoder passwordEncoder = new CustomPasswordEncoder();
-		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
-	}*/
-
-	private CsrfTokenRepository csrfTokenRepository() {
-		HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
-		repository.setHeaderName("X-XSRF-TOKEN");
-		return repository;
+		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+		//PasswordEncoder passwordEncoder = new CustomPasswordEncoder();
+	//	auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
 	}
+
+	
 
 }

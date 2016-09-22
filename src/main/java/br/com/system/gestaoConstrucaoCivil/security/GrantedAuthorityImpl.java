@@ -12,7 +12,7 @@ private static final long serialVersionUID = 1L;
 	@Override
 	public String getAuthority() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.name;
 	}
 	public String getName() {
 		return name;
