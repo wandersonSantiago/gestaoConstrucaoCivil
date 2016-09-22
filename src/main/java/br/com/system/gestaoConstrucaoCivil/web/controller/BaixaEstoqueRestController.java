@@ -25,7 +25,11 @@ public class BaixaEstoqueRestController {
 	
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
 	public ResponseEntity salvar(@RequestBody List<BaixaEstoque> baixaEstoque,UriComponentsBuilder ucBuilder)
-	{
+	{ 
+		for(int i = 0 ; i< baixaEstoque.size(); i++){
+			System.out.println(baixaEstoque.get(i).getAreaProduto());
+		}
+		
 		baixaEstoqueService.salvarOuEditar(baixaEstoque);
 		HttpHeaders headers = new HttpHeaders();
 		//	headers.setLocation(ucBuilder.path("rest/almoxarifado/estoque/salva/{id}").buildAndExpand(baixaEstoque().getId()).toUri());

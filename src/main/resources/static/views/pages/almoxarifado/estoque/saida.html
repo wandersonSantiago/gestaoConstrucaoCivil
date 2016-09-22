@@ -13,40 +13,40 @@
 					ng-submit="estoqueCtrl.salva()">
 		
 					<div class="row">	
-						<label class="col-sm-1 control-label" for="empreendimento"> Torre</label>	
-						<div class="col-sm-1">
-							<input type="checkbox" ng-model="edificioTorre"  placeholder="outros serviços?">
+						<label class="col-sm-2 control-label" for="empreendimento"> Torre</label>	
+						<div class="col-sm-2">
+							<input type="checkbox" ng-model="torreCheck" ng-click="estoqueCtrl.verifica()" placeholder="outros serviços?">
 						</div>		
-						<label class="col-sm-1 control-label" for="empreendimento"> andar</label>	
-						<div class="col-sm-1">
-							<input type="checkbox" ng-model="edificioAndar"  placeholder="outros serviços?">
+						<label class="col-sm-2 control-label" for="empreendimento"> andar</label>	
+						<div class="col-sm-2">
+							<input type="checkbox" ng-model="andarCheck" ng-click="estoqueCtrl.verifica()"  placeholder="outros serviços?">
 						</div>
-						<label class="col-sm-1 control-label" for="empreendimento"> apartamento</label>	
-						<div class="col-sm-1">
-							<input type="checkbox" ng-model="edificioApartamento"  placeholder="outros serviços?">
-						</div>
-					</div>
-					<br>
-					<div class="row">							
-						<label class="col-sm-1 control-label" for="empreendimento"> Casa</label>	
-						<div class="col-sm-1">
-							<input type="checkbox" ng-model="edificioCasa"  placeholder="outros serviços?">
-						</div>
-						<label class="col-sm-1 control-label" for="empreendimento"> Andar</label>	
-						<div class="col-sm-1">
-							<input type="checkbox" ng-model="edificioAndarCasa"  placeholder="outros serviços?">
+						<label class="col-sm-2 control-label" for="empreendimento"> apartamento</label>	
+						<div class="col-sm-2">
+							<input type="checkbox" ng-model="apartamentoCheck" ng-click="estoqueCtrl.verifica()" placeholder="outros serviços?">
 						</div>
 					</div>
 					<br>
-					<div class="row" >
+					<div class="row" ng-if="empreendimento">							
+						<label class="col-sm-2 control-label" for="empreendimento"> Casa</label>	
+						<div class="col-sm-2">
+							<input type="checkbox" ng-model="torreCheck" ng-click="estoqueCtrl.verifica()"  placeholder="outros serviços?">
+						</div>
+						<label class="col-sm-2 control-label" for="empreendimento"> Andar</label>	
+						<div class="col-sm-2">
+							<input type="checkbox" ng-model="andarCheck" ng-click="estoqueCtrl.verifica()"  placeholder="outros serviços?">
+						</div>
+					</div>
+					<br>
+					<div class="row" ng-if="empreendimento">
 						
-						<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-model="estoqueCtrl.NumeroCasa" ng-if="edificioCasa" required>
+						<div class="col-sm-4"  >
+							<select class="form-control select2" style=" width: 100%;" ng-model="estoqueCtrl.NumeroCasa" ng-if="torreCheck" required>
 								<option value="">---Casa---</option>
 							</select>
 						</div>
-							<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-model="estoqueCtrl.andar" ng-if="edificioAndarCasa" required>
+							<div class="col-sm-4"  >
+							<select class="form-control select2" style=" width: 100%;" ng-model="estoqueCtrl.andar" ng-if="andarCheck" required>
 								<option value="">---Andar---</option>
 							</select>
 						</div>
@@ -54,8 +54,8 @@
 					</div>
 <br>
 					<div class="row" ng-controller="configEmpreendimentoController as configCtrl" ng-init="configCtrl.quantidadeEdificio()">
-							<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-if="edificioTorre" ng-model="estoqueCtrl.torre"
+							<div class="col-sm-4"  >
+							<select class="form-control select2" style=" width: 100%;" ng-if="torreCheck" ng-model="estoqueCtrl.torre"
 							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeTorres" 
 							 title="Selecione a torre a qual será atribuido a saida do produto" required>
 								<option value="">---Torre---</option>
@@ -63,16 +63,16 @@
 						</div>
 
 						
-							<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-if="edificioAndar" ng-model="estoqueCtrl.andar"
+							<div class="col-sm-4"  >
+							<select class="form-control select2" style=" width: 100%;" ng-if="andarCheck" ng-model="estoqueCtrl.andar"
 							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeAndares"
 							 title="Selecione o andar a qual será atribuido a saída do produto" required>
 								<option value="">---Andar---</option>
 							</select>
 						</div>
 	
-							<div class="col-sm-2"  >
-							<select class="form-control select2" style=" width: 100%;" ng-if="edificioApartamento" ng-model="estoqueCtrl.apartamento"
+							<div class="col-sm-4"  >
+							<select class="form-control select2" style=" width: 100%;" ng-if="apartamentoCheck" ng-model="estoqueCtrl.apartamento"
 							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeApartamentos" 
 							 title="Selecione o apartamento a qual será atribuido a saída do produto" required>
 								<option value="">---Apartamento---</option>
@@ -98,21 +98,27 @@
 					<br> <br>
 					<div class="row" ng-init="estoqueCtrl.lista()">
 						
-						<div class="col-sm-3"  >
+						<div class="col-sm-4"  >
 							<select class="form-control select2" ng-model="produto"  id="descricaoProduto"
 							ng-options="listaProdutos.descricao for listaProdutos in estoqueCtrl.produtos" 
 							  style=" width: 100%;" >
 								<option value="">---Produto---</option>
 							</select>
 						</div>
-							
+						<div class="col-sm-3" ng-controller="areaProdutoController as areaProdutoCtrl" ng-init="areaProdutoCtrl.lista()">						
+							<select class="form-control select2" ng-model="areaProduto" 
+								ng-options="listaAreaProdutos.descricao for listaAreaProdutos in areaProdutoCtrl.listaAreaProduto" 
+							  	style=" width: 100%;" required >
+								<option value="">---Area Produto---</option>
+							</select>
+						</div>	
 						
 						<div class="col-sm-3">
 							<input class="form-control" ng-model="quantidade" type="text" id="quantidadeTeste" placeholder="Quantidade">
 						</div>
 						<div class="col-sm-2">
 							<input class="btn btn-lg btn-primary btn-block btn-signin"
-								ng-click=" estoqueCtrl.adicionarProduto(produto , quantidade, estoqueCtrl.andar, estoqueCtrl.torre , estoqueCtrl.apartamento, estoqueCtrl.NumeroCasa)" value="adicionar"
+								ng-click=" estoqueCtrl.adicionarProduto(produto , areaProduto, quantidade,  estoqueCtrl.andar, estoqueCtrl.torre , estoqueCtrl.apartamento, estoqueCtrl.NumeroCasa)" value="adicionar"
 								title="pressione para adicionar a lista" type="button" ng-disabled="!produto" >
 						</div>
 					</div>
