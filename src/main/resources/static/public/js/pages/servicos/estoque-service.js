@@ -32,8 +32,8 @@ app.factory('estoqueService', function($rootScope, toastr, $http,$q){
 				return $q.reject(errResponse);
 			});
 		},
-		listaProdutosComEstoque: function(){
-			return $http.get('/rest/almoxarifado/estoque/baixa/lista')
+		listaProdutosComEstoque : function(){
+			return $http.get('/rest/produtoEstoque/lista')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){

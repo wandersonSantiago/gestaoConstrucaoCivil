@@ -4,19 +4,34 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 	
 		self.listaProduto =[];
 		self.baixaEstoque = [];
-	
+		self.listaProdutos = [];
+		
 		self.lista = function(){
 			 produtoService.lista().
 				then(function(t){
 					self.produtos = t;
-					console.log(self.produtos);
 					}, function(errResponse){
 				});
 			};
 			self.listaProdutosComEstoque = function(){
-				 produtoService.listaProdutosComEstoque().
+				estoqueService.listaProdutosComEstoque().
 					then(function(t){
-						self.listaProdutosComEstoque = t;
+						self.listaProdutosComEstoques = t;
+						//console.log(t.empreendimento);
+						for(i = 0; i < self.listaProdutosComEstoques.length; i++ ){
+							for(c = 0; c < self.listaProdutosComEstoques[i].produto.length ; c++){
+								self.produto = self.listaProdutosComEstoques[i].produto[c];
+								self.quantidade = self.listaProdutosComEstoques[i];
+								self.listaProdutos.push({
+										produto : self.produto,
+										quantidade : self.quantidade
+									 // self.listaProdutosComEstoques[i].quantidade
+								});
+							}
+						
+						}
+							console.log(self.listaProdutos);
+							console.log(self.listaProduto);
 						}, function(errResponse){
 					});
 				};
