@@ -55,6 +55,7 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 			}
 		//cria uma lista de outros
 		self.adicionarProduto = function(produto, areaProduto, quantidadeSaida, andar, torre , apartamento, NumeroCasa){
+			console.log(areaProduto);
 			self.listaProduto.push({
 				produto : produto,
 				areaProduto : areaProduto,

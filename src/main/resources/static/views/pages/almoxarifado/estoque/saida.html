@@ -106,11 +106,12 @@
 							</select>
 						</div>
 						<div class="col-sm-3" ng-controller="areaProdutoController as areaProdutoCtrl" ng-init="areaProdutoCtrl.lista()">						
-							<select class="form-control select2" ng-model="areaProduto" 
+							<select class="form-control select2" ng-model="estoqueCtrl.areaProduto" id="teste"
 								ng-options="listaAreaProdutos.descricao for listaAreaProdutos in areaProdutoCtrl.listaAreaProduto" 
 							  	style=" width: 100%;" required >
 								<option value="">---Area Produto---</option>
 							</select>
+							
 						</div>	
 						
 						<div class="col-sm-3">
@@ -118,7 +119,7 @@
 						</div>
 						<div class="col-sm-2">
 							<input class="btn btn-lg btn-primary btn-block btn-signin"
-								ng-click=" estoqueCtrl.adicionarProduto(produto , areaProduto, quantidade,  estoqueCtrl.andar, estoqueCtrl.torre , estoqueCtrl.apartamento, estoqueCtrl.NumeroCasa)" value="adicionar"
+								ng-click=" estoqueCtrl.adicionarProduto(produto , estoqueCtrl.areaProduto, quantidade,  estoqueCtrl.andar, estoqueCtrl.torre , estoqueCtrl.apartamento, estoqueCtrl.NumeroCasa)" value="adicionar"
 								title="pressione para adicionar a lista" type="button" ng-disabled="!produto" >
 						</div>
 					</div>
