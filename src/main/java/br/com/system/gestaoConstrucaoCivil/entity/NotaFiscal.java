@@ -40,7 +40,7 @@ public class NotaFiscal implements Serializable {
 	@Column(nullable = false)
 	private Long numero;
 
-	@Column(nullable = false,length = 255)
+	@Column(nullable = true,length = 255)
 	private String chaveAcesso;
 
 	@Temporal(TemporalType.DATE)

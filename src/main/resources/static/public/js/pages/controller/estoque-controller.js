@@ -17,7 +17,7 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 				estoqueService.listaProdutosComEstoque().
 					then(function(t){
 						self.listaProdutosComEstoques = t;
-						//console.log(t.empreendimento);
+						
 						for(i = 0; i < self.listaProdutosComEstoques.length; i++ ){
 							for(c = 0; c < self.listaProdutosComEstoques[i].produto.length ; c++){
 								self.produto = self.listaProdutosComEstoques[i].produto[c];
@@ -25,14 +25,12 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 								self.listaProdutos.push({
 										produto : self.produto,
 										quantidade : self.quantidade
-									 // self.listaProdutosComEstoques[i].quantidade
+									
 								});
 							}
 						
 						}
-							console.log(self.listaProdutos);
-							console.log(self.listaProduto);
-						}, function(errResponse){
+							}, function(errResponse){
 					});
 				};
 			
@@ -48,49 +46,67 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 				self.listaProduto = listaProduto.filter(function(produto){
 				if(!produto.selecionado) return produto;
 				$scope.ativadoExcluirLote = null;
+				if(listaProduto.length == 0){
+					$scope.ativaTabela = false;
+				}
 			});
 		}
 			
-			self.verificaProdutoRepetido = function(produto){
-				for(i = 0; i < self.listaItensNota.length ; i ++){
-						var item = self.listaItensNota[i];
-						var produto1 = item.produto.id;
-					if(produto1 != produto.id){
-							self.existe = true;
-						}else{
-							sweetAlert({ timer : 3000,  text :"ja consta este produto na tabela",  type : "info", width: 300, higth: 300, padding: 20});
-							var tamanho = self.listaItensNota[i];
-							i = tamanho[i + 1];
-							self.existe = false;
-						}
-					}
-				if(self.existe){
-				self.salvaNotaNaLista(produto);
-				}
-			}
-		//cria uma lista de outros
-		self.adicionarProduto = function(produto, areaProduto, quantidadeSaida, andar, torre , apartamento, NumeroCasa){
-			console.log(areaProduto);
-			self.listaProduto.push({
-				produto : produto,
-				areaProduto : areaProduto,
-				quantidadeSaida : quantidadeSaida,
-				andar : andar,
-				torre : torre,
-				apartamento : apartamento,
-				NumeroCasa : NumeroCasa
-				
-			});
-						produto = "";
-						$scope.produto = null;
+			
+			self.funcaoListaProduto = function(quantidadeEstoque, produto, areaProduto, quantidadeSaida, andar, torre , apartamento, NumeroCasa){
+				self.listaProduto.push({
+					quantidadeEstoque : quantidadeEstoque,
+					produto : produto,
+					areaProduto : areaProduto,
+					quantidadeSaida : quantidadeSaida,
+					andar : andar,
+					torre : torre,
+					apartamento : apartamento,
+					NumeroCasa : NumeroCasa
+					
+				});
 			}
 		
+	self.verificaProdutoRepetido = function(quantidadeEstoque, produto, areaProduto, quantidadeSaida, andar, torre , apartamento, NumeroCasa){
+			for(i = 0; i < self.listaProduto.length; i++ ){
+				var produto2 = self.listaProduto[i].produto;
+				var produto1 = produto2.id			
+				if(produto1 != produto.id){
+					self.existe = true;
+					}else{
+						sweetAlert({ timer : 3000,  text :"ja consta este produto na tabela",  type : "info", width: 300, higth: 300, padding: 20});
+						self.existe = false;
+						var tamanho = self.listaProduto[i];
+						i = tamanho[i + 1];
+					}			
+			}
+			if(self.existe == true){
+				self.funcaoListaProduto(quantidadeEstoque, produto, areaProduto, quantidadeSaida, andar, torre , apartamento, NumeroCasa);
+				}
+			}
+		
+		self.adicionarProduto = function(quantidadeEstoque, produto, areaProduto, quantidadeSaida, andar, torre , apartamento, NumeroCasa){
+			
+			if(quantidadeEstoque < quantidadeSaida){
+				sweetAlert({ timer : 3000,  text :"Quantidade Superior ao estoque",  type : "info", width: 300, higth: 300, padding: 20});
+					
+				}else{
+					$scope.ativaTabela = true;
+					if(self.listaProduto.length == 0){				
+						self.funcaoListaProduto(quantidadeEstoque, produto, areaProduto, quantidadeSaida, andar, torre , apartamento, NumeroCasa);				
+					}else{
+						self.verificaProdutoRepetido(quantidadeEstoque, produto, areaProduto, quantidadeSaida, andar, torre , apartamento, NumeroCasa);				
+					}
+				}
+			}
+			
 		self.salva = function(){
 			
 			self.baixaEstoque = self.listaProduto;
 			estoqueService.salva(self.baixaEstoque)
 			.then(function(response){
 					console.log("salvou");
+					self.listaProdutosComEstoque();
 				}, function(errResponse){
 					console.log("não salvou");
 			});

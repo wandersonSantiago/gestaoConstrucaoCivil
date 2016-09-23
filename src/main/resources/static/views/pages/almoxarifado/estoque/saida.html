@@ -12,7 +12,7 @@
 				<form role="form-vertical"
 					ng-submit="estoqueCtrl.salva()">
 		
-					<div class="row">	
+					<!--<div class="row">	
 						<label class="col-sm-2 control-label" for="empreendimento"> Torre</label>	
 						<div class="col-sm-2">
 							<input type="checkbox" ng-model="torreCheck" ng-click="estoqueCtrl.verifica()" placeholder="outros serviços?">
@@ -36,8 +36,8 @@
 						<div class="col-sm-2">
 							<input type="checkbox" ng-model="andarCheck" ng-click="estoqueCtrl.verifica()"  placeholder="outros serviços?">
 						</div>
-					</div>
-					<br>
+					</div>-->
+					
 					<div class="row" ng-if="empreendimento">
 						
 						<div class="col-sm-4"  >
@@ -52,10 +52,10 @@
 						</div>
 
 					</div>
-<br>
-					<div class="row" ng-controller="configEmpreendimentoController as configCtrl" ng-init="configCtrl.quantidadeEdificio()">
+
+					<div ng-if="!empreendimento" class="row" ng-controller="configEmpreendimentoController as configCtrl" ng-init="configCtrl.quantidadeEdificio()">
 							<div class="col-sm-4"  >
-							<select class="form-control select2" style=" width: 100%;" ng-if="torreCheck" ng-model="estoqueCtrl.torre"
+							<select class="form-control select2" style=" width: 100%;"  ng-model="estoqueCtrl.torre"
 							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeTorres" 
 							 title="Selecione a torre a qual será atribuido a saida do produto" required>
 								<option value="">---Torre---</option>
@@ -64,7 +64,7 @@
 
 						
 							<div class="col-sm-4"  >
-							<select class="form-control select2" style=" width: 100%;" ng-if="andarCheck" ng-model="estoqueCtrl.andar"
+							<select class="form-control select2" style=" width: 100%;"  ng-model="estoqueCtrl.andar"
 							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeAndares"
 							 title="Selecione o andar a qual será atribuido a saída do produto" required>
 								<option value="">---Andar---</option>
@@ -72,7 +72,7 @@
 						</div>
 	
 							<div class="col-sm-4"  >
-							<select class="form-control select2" style=" width: 100%;" ng-if="apartamentoCheck" ng-model="estoqueCtrl.apartamento"
+							<select class="form-control select2" style=" width: 100%;"  ng-model="estoqueCtrl.apartamento"
 							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeApartamentos" 
 							 title="Selecione o apartamento a qual será atribuido a saída do produto" required>
 								<option value="">---Apartamento---</option>
@@ -98,14 +98,12 @@
 					<br> <br>
 					<div class="row" ng-init="estoqueCtrl.listaProdutosComEstoque()">
 						
-						<div class="col-sm-4"  >
+						<div class="col-sm-3"  >
 							<select class="form-control select2" ng-model="produto"  id="descricaoProduto"
 							ng-options="listaProduto.produto.descricao for listaProduto in estoqueCtrl.listaProdutos" 
-							  style=" width: 100%;" >
+							  style=" width: 100%;" required>
 								<option value="">---Produto---</option>
 							</select>
-												{{produto.produto}}
-							{{produto.quantidade.quantidade}}
 						</div>
 						<div class="col-sm-3" ng-controller="areaProdutoController as areaProdutoCtrl" ng-init="areaProdutoCtrl.lista()">						
 							<select class="form-control select2" ng-model="estoqueCtrl.areaProduto" id="teste"
@@ -115,29 +113,33 @@
 							</select>
 							
 						</div>	
+						<div class="col-sm-2">
+							<input class="form-control" ng-model="produto.quantidade.quantidade" type="text" id="quantidadeEstoque" disabled placeholder="Estoque">
+						</div>
 						
-						<div class="col-sm-3">
-							<input class="form-control" ng-model="quantidade" type="text" id="quantidadeTeste" placeholder="Quantidade">
+						<div class="col-sm-2">
+							<input class="form-control" ng-model="quantidade" type="text" id="quantidadeTeste" ui-number-mask="0" placeholder="Quantidade" required>
 						</div>
 						<div class="col-sm-2">
 							<input class="btn btn-lg btn-primary btn-block btn-signin"
-								ng-click=" estoqueCtrl.adicionarProduto(produto.produto , estoqueCtrl.areaProduto, quantidade,  estoqueCtrl.andar, estoqueCtrl.torre , estoqueCtrl.apartamento, estoqueCtrl.NumeroCasa)" value="adicionar"
+								ng-click=" estoqueCtrl.adicionarProduto(produto.quantidade.quantidade, produto.produto , estoqueCtrl.areaProduto, quantidade,  estoqueCtrl.andar, estoqueCtrl.torre , estoqueCtrl.apartamento, estoqueCtrl.NumeroCasa)" value="adicionar"
 								title="pressione para adicionar a lista" type="button" ng-disabled="!produto" >
 						</div>
 					</div>
 					
 					<br> <br>
 
-					<div class="panel panel-primary" >
-						<div class="panel-heading">Lista de Produtos</div>
-						<div class="panel-body">
+					
+						<div ng-show="ativaTabela" >
 							<table class="table table-hover ">
 								<thead>
 									<tr>
 										<th>Selecionar</th>
-										
 										<th>Descrição</th>
+										<th>Area Aplicação</th>
+										<th>estoque</th>
 										<th>Quantidade</th>
+										<th>Atual</th>
 										
 
 									</tr>
@@ -145,10 +147,12 @@
 								<tbody ng-repeat="produto in estoqueCtrl.listaProduto" ng-model="selecionado">
 									<tr>
 										<td><input type="checkbox" ng-model="produto.selecionado"
-											ng-click="estoqueCtrl.ativarExcluirLote(listaProduto)"></td>
-										<td>{{produto.produto.descricao}}</td>
+											ng-click="estoqueCtrl.ativarExcluirLote(estoqueCtrl.listaProduto)"></td>
+										<td>{{produto.produto.descricao}}</td>	
+										<td>{{produto.areaProduto.descricao}}</td>									
+										<td>{{produto.quantidadeEstoque}}</td>
 										<td>{{produto.quantidadeSaida}}</td>
-
+										<td>{{produto.quantidadeEstoque - produto.quantidadeSaida}}</td>
 										
 									</tr>
 								</tbody>
@@ -156,12 +160,12 @@
 									<tr>
 										<th><input type="button" class="btn-danger"
 											ng-if="ativadoExcluirLote" value="excluir" name="apagar"
-											ng-click=" estoqueCtrl.apagarProduto(listaProduto)"></th>
+											ng-click=" estoqueCtrl.apagarProduto(estoqueCtrl.listaProduto)"></th>
 									</tr>
 								</tfoot>
 							</table>
 						</div>
-					</div>
+					
 					
 					<br>
 					
