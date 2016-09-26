@@ -30,6 +30,13 @@
 					</div>
 					
 					<br>
+					<div class="modal fade bs-example-modal-lg" id="myTipo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"">
+  						<div class="modal-dialog modal-lg" role="document">
+      						 <div class="modal-body">
+        						<div ng-include="'views/pages/almoxarifado/produto/tipo/cadastrar.html'"></div>
+      						</div>    
+    					</div>
+  					</div>
 										
 					<div class="row">
 						<div class="col-sm-4">
@@ -41,7 +48,7 @@
 							<input class="form-control" ng-model="protudoCtr.produto.codigoProduto" id="codigoProduto"  placeholder="Código do Produto" type="text" required>
 						</div>
 						<div class="col-sm-4" ng-controller="tipoProdutoController as tipoProdutoCtrl" ng-init="tipoProdutoCtrl.lista()">
-						<a href="#/almoxarifado/produto/tipo/cadastrar"><i class="glyphicon glyphicon-plus"></i>novo</a>
+						<a href=""  data-toggle="modal" data-target="#myTipo"><i class="glyphicon glyphicon-plus"></i>novo</a>
 						<select class="form-control select2" ng-model="protudoCtr.produto.tipoProduto" 
 							ng-options="listaTipoProdutos.descricao for listaTipoProdutos in tipoProdutoCtrl.listaTipoProduto" 
 							  style=" width: 100%;" required >
@@ -51,9 +58,16 @@
 					</div>
 					
 					<br>
+					<div class="modal fade bs-example-modal-lg" id="myFabricante" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"">
+  						<div class="modal-dialog modal-lg" role="document">
+      						 <div class="modal-body">
+        						<div ng-include="'views/pages/almoxarifado/fabricante/cadastrar.html'"></div>
+      						</div>    
+    					</div>
+  					</div>
 					<div class="row">
 							<div class="col-sm-4" ng-controller="fabricanteController as fabricanteCtrl" ng-init="fabricanteCtrl.lista()">
-						<a href="#/almoxarifado/fabricante/cadastrar"><i class="glyphicon glyphicon-plus"></i>novo</a>
+						<a href="" data-toggle="modal" data-target="#myFabricante"><i class="glyphicon glyphicon-plus"></i>novo</a>
 						<select class="form-control select2" ng-model="protudoCtr.produto.fabricante" 
 							ng-options="listaFabricantes.dadoEmpresa.nomeFantasia for listaFabricantes in fabricanteCtrl.listaFabricante" 
 							  style=" width: 100%;" required >
@@ -70,9 +84,15 @@
 								<option value="">---Unidade Medida---</option>
 							</select>
 						</div>
-				
+				<div class="modal fade bs-example-modal-lg" id="myCategoria" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"">
+  						<div class="modal-dialog modal-lg" role="document">
+      						 <div class="modal-body">
+        						<div ng-include="'views/pages/almoxarifado/produto/categoria/cadastrar.html'"></div>
+      						</div>    
+    					</div>
+  					</div>
 						<div class="col-sm-4" ng-controller="categoriaController as categoriaCtrl" ng-init="categoriaCtrl.lista()">
-						<a href="#/almoxarifado/produto/categoria/cadastrar"><i class="glyphicon glyphicon-plus"></i>novo</a>
+						<a href="" data-toggle="modal" data-target="#myCategoria"><i class="glyphicon glyphicon-plus"></i>novo</a>
 						<select class="form-control select2" ng-model="protudoCtr.produto.categoria" 
 							ng-options="listaCategorias.descricao for listaCategorias in categoriaCtrl.categorias" 
 							  style=" width: 100%;" required >
@@ -82,10 +102,17 @@
 					</div>
 		
 					<br>
+					<div class="modal fade bs-example-modal-lg" id="myFornecedor" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"">
+  						<div class="modal-dialog modal-lg" role="document">
+      						 <div class="modal-body">
+        						<div ng-include="'views/pages/almoxarifado/fornecedor/cadastrar.html'"></div>
+      						</div>    
+    					</div>
+  					</div>
 					<div class="row">
 									
 						<div class="col-sm-4" ng-controller="fornecedorController as forCtrl" ng-init="forCtrl.lista()" >
-							<a href="#/almoxarifado/fornecedor/cadastrar"><i class="glyphicon glyphicon-plus"></i>novo</a>
+							<a href="" data-toggle="modal" data-target="#myFornecedor"><i class="glyphicon glyphicon-plus"></i>novo</a>
 							<select class="form-control select2" ng-model="protudoCtr.fornecedor" id="fornecedor"
 							ng-options="listaFornecedores.dadoEmpresa.razaoSocial for listaFornecedores in forCtrl.listaFornecedor" 
 							  style=" width: 100%;" >
@@ -138,12 +165,12 @@
 							
 					<div class="row ">
 						
-							<input type="submit" id="submit" value="Salvar" ng-disabled="!protudoCtr.produto.descricao"
+							<input type="button" ng-click="protudoCtr.salva()" id="submit" value="Salvar" data-dismiss="modal" ng-disabled="!protudoCtr.produto.descricao"
 								class="btn btn-lg btn-primary btn-block btn-signin">
 						
 					</div>
-					<a href="javascript:window.history.go(-1)"><i class="glyphicon glyphicon-arrow-left"></i>voltar</a>
-						
+					<!-- <a href="javascript:window.history.go(-1)"><i class="glyphicon glyphicon-arrow-left"></i>voltar</a>
+					 -->	
 				</form>
 			</div>
 

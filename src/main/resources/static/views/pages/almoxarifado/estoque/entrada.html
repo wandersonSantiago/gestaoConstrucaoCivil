@@ -41,10 +41,17 @@
 					</div>
 					
 					<br>
-				
+					<div class="modal fade bs-example-modal-lg" id="myProduto"
+						tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"">
+						<div class="modal-dialog modal-lg" role="document">
+							<div class="modal-body">
+								<div ng-include="'views/pages/almoxarifado/produto/cadastrar.html'"></div>
+							</div>
+						</div>
+					</div>
 					<div class="row" >			
 					<div class="col-sm-4" ng-controller="produtoController as pCtrl" ng-init="pCtrl.lista()" >
-							<a href="#/almoxarifado/produto/cadastrar"><i class="glyphicon glyphicon-plus"></i>novo</a>
+							<a href="" data-toggle="modal" data-target="#myProduto"><i class="glyphicon glyphicon-plus"></i>novo</a>
 							<select class="form-control select2" ng-model="notaFiscalCtrl.produto" id="fornecedor"
 							ng-options="listaProdutos.descricao for listaProdutos in pCtrl.produtos" 
 							  style=" width: 100%;" >
@@ -107,9 +114,17 @@
 					<hr>
 					<h3>Fornecedor</h3>
 					<br>
+						<div class="modal fade bs-example-modal-lg" id="myFornecedor"
+						tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"">
+						<div class="modal-dialog modal-lg" role="document">
+							<div class="modal-body">
+								<div ng-include="'views/pages/almoxarifado/fornecedor/cadastrar.html'"></div>
+							</div>
+						</div>
+					</div>
 					<div class="row">
 							<div class="col-sm-4" ng-controller="fornecedorController as forCtrl" ng-init="forCtrl.lista()" >
-								<a href="#/almoxarifado/fabricante/cadastrar"><i class="glyphicon glyphicon-plus"></i>novo</a>
+								<a href="" data-toggle="modal" data-target="#myFornecedor"><i class="glyphicon glyphicon-plus"></i>novo</a>
 							<select class="form-control select2" ng-model="notaFiscalCtrl.notaFiscalProduto.fornecedor" id="fornecedor"
 							ng-options="listaFornecedores.dadoEmpresa.nomeFantasia for listaFornecedores in forCtrl.listaFornecedor" 
 							  style=" width: 100%;" >

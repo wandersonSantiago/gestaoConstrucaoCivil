@@ -136,7 +136,6 @@
 					<br>
 							  <md-autocomplete 
 							 	md-selected-item="produto" 
-							 	md-search-text-change="estoqueCtrl.searchTextChange(estoqueCtrl.searchText)" 
 							 	md-search-text="estoqueCtrl.searchText" 
 							 	md-selected-item-change="estoqueCtrl.selectedItemChange(listaProduto.produto)" 
 							 	md-items=" listaProduto in estoqueCtrl.listaProdutos | filter : estoqueCtrl.searchText" 
@@ -166,7 +165,7 @@
 						<div class="col-sm-2">
 						<md-input-container>
 							 <label>Estoque</label>
-							<input class="form-control" ng-model="produto.quantidade.quantidade" type="text" id="quantidadeEstoque" disabled placeholder="Estoque">
+							<input class="form-control" ng-model="produto.quantidade.quantidade" type="text" id="quantidadeEstoque" ui-number-mask="0" disabled placeholder="Estoque">
 						</md-input-container>
 						</div>
 						
