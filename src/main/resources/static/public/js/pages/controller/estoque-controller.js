@@ -4,7 +4,7 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 	
 		self.listaProduto =[];
 		self.baixaEstoque = [];
-		$scope.listaProdutos = [];
+		self.listaProdutos = [];
 		
 		self.lista = function(){
 			 produtoService.lista().
@@ -21,10 +21,10 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 						for(i = 0; i < self.listaProdutosComEstoques.length; i++ ){
 							for(c = 0; c < self.listaProdutosComEstoques[i].produto.length ; c++){
 								self.produto = self.listaProdutosComEstoques[i].produto[c];
-								//self.quantidade = self.listaProdutosComEstoques[i];
-							$scope.listaProdutos.push({
-										produto : self.produto
-									//	quantidade : self.quantidade
+								self.quantidade = self.listaProdutosComEstoques[i];
+							self.listaProdutos.push({
+										produto : self.produto,
+										quantidade : self.quantidade
 									
 								});
 							}
@@ -146,7 +146,7 @@ self.verifica = function(verifica){
 //=================================================================================teste=========================
 
 
-  var self = this;
+ /* var self = this;
 
   self.simulateQuery = false;
   self.isDisabled    = false;
@@ -167,10 +167,10 @@ self.verifica = function(verifica){
   // Internal methods
   // ******************************
 
-  /**
+  *//**
    * Search for states... use $timeout to simulate
    * remote dataservice call.
-   */
+   *//*
   function querySearch (query) {
     var results = query ? self.listaProdutos.filter( createFilterFor(query) ) : self.listaProdutos,
         deferred;
@@ -191,12 +191,12 @@ self.verifica = function(verifica){
     $log.info('Item changed to ' + JSON.stringify(item));
   }
 
-  /**
+  *//**
    * Build `states` list of key/value pairs
-   */
-  console.log($scope.listaProdutos);
+   *//*
+  //console.log($scope.listaProdutos);
   function loadAll() {
-    return $scope.listaProdutos.split(/, +/g).map( function (state) {
+    return allStates.split(/, +/g).map( function (state) {
       return {
         value: state.toLowerCase(),
         display: allStates
@@ -204,9 +204,9 @@ self.verifica = function(verifica){
     });
   }
 
-  /**
+  *//**
    * Create filter function for a query string
-   */
+   *//*
   function createFilterFor(query) {
     var lowercaseQuery = angular.lowercase(query);
 
@@ -214,7 +214,7 @@ self.verifica = function(verifica){
       return (state.value.indexOf(lowercaseQuery) === 0);
     };
 
-  }
+  }*/
 
 		
 });

@@ -132,18 +132,22 @@
 							  style=" width: 100%;" required>
 								<option value="">---Produto---</option>
 							</select> -->
-							 <md-autocomplete 
+					
+					<br>
+							  <md-autocomplete 
 							 	md-selected-item="produto" 
-							 	md-search-text-change="estoqueCtrl.searchTextChange(ctrl.searchText)" 
+							 	md-search-text-change="estoqueCtrl.searchTextChange(estoqueCtrl.searchText)" 
 							 	md-search-text="estoqueCtrl.searchText" 
 							 	md-selected-item-change="estoqueCtrl.selectedItemChange(listaProduto.produto)" 
-							 	md-items=" listaProduto in listaProdutos | filter : ctrl.searchText" 
+							 	md-items=" listaProduto in estoqueCtrl.listaProdutos | filter : estoqueCtrl.searchText" 
 							 	md-item-text="listaProduto.produto.descricao" 
 							 	md-min-length="0" placeholder="busca produto">
        							 <md-item-template>
           							<span md-highlight-text="estoqueCtrl.searchText" md-highlight-flags="^i">{{listaProduto.produto.descricao}}</span>
        							 </md-item-template>        								
      						 </md-autocomplete>
+     						
+     					
 						</div>
 						<div class="col-sm-3" ng-controller="areaProdutoController as areaProdutoCtrl" ng-init="areaProdutoCtrl.lista()">						
 							<md-input-container>
@@ -161,14 +165,14 @@
 						</div>	
 						<div class="col-sm-2">
 						<md-input-container>
-							 <label>Area de aplicação</label>
+							 <label>Estoque</label>
 							<input class="form-control" ng-model="produto.quantidade.quantidade" type="text" id="quantidadeEstoque" disabled placeholder="Estoque">
 						</md-input-container>
 						</div>
 						
 						<div class="col-sm-2">
 						<md-input-container>
-							 <label>Area de aplicação</label>
+							 <label>Quantidade</label>
 							<input class="form-control" ng-model="quantidade" type="text" id="quantidadeTeste" ui-number-mask="0" placeholder="Quantidade" required>
 						</md-input-container>
 						</div>
