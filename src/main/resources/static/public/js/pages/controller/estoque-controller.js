@@ -1,10 +1,10 @@
-app.controller('estoqueController', function($scope,estoqueService, produtoService, $routeParams){
+app.controller('estoqueController', function($scope,estoqueService, produtoService, $routeParams, $timeout, $q, $log){
 	
 	var self = this;
 	
 		self.listaProduto =[];
 		self.baixaEstoque = [];
-		self.listaProdutos = [];
+		$scope.listaProdutos = [];
 		
 		self.lista = function(){
 			 produtoService.lista().
@@ -21,10 +21,10 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 						for(i = 0; i < self.listaProdutosComEstoques.length; i++ ){
 							for(c = 0; c < self.listaProdutosComEstoques[i].produto.length ; c++){
 								self.produto = self.listaProdutosComEstoques[i].produto[c];
-								self.quantidade = self.listaProdutosComEstoques[i];
-								self.listaProdutos.push({
-										produto : self.produto,
-										quantidade : self.quantidade
+								//self.quantidade = self.listaProdutosComEstoques[i];
+							$scope.listaProdutos.push({
+										produto : self.produto
+									//	quantidade : self.quantidade
 									
 								});
 							}
@@ -138,6 +138,83 @@ self.verifica = function(verifica){
 				$scope.apartamento = false;
 			}
 		}
-	
+
+
+
+
+
+//=================================================================================teste=========================
+
+
+  var self = this;
+
+  self.simulateQuery = false;
+  self.isDisabled    = false;
+
+  // list of `state` value/display objects
+  self.states        = loadAll();
+  self.querySearch   = querySearch;
+  self.selectedItemChange = selectedItemChange;
+  self.searchTextChange   = searchTextChange;
+
+  self.newState = newState;
+
+  function newState(state) {
+    alert("Sorry! You'll need to create a Constitution for " + state + " first!");
+  }
+
+  // ******************************
+  // Internal methods
+  // ******************************
+
+  /**
+   * Search for states... use $timeout to simulate
+   * remote dataservice call.
+   */
+  function querySearch (query) {
+    var results = query ? self.listaProdutos.filter( createFilterFor(query) ) : self.listaProdutos,
+        deferred;
+    if (self.simulateQuery) {
+      deferred = $q.defer();
+      $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
+      return deferred.promise;
+    } else {
+      return results;
+    }
+  }
+
+  function searchTextChange(text) {
+    $log.info('Text changed to ' + text);
+  }
+
+  function selectedItemChange(item) {
+    $log.info('Item changed to ' + JSON.stringify(item));
+  }
+
+  /**
+   * Build `states` list of key/value pairs
+   */
+  console.log($scope.listaProdutos);
+  function loadAll() {
+    return $scope.listaProdutos.split(/, +/g).map( function (state) {
+      return {
+        value: state.toLowerCase(),
+        display: allStates
+     };
+    });
+  }
+
+  /**
+   * Create filter function for a query string
+   */
+  function createFilterFor(query) {
+    var lowercaseQuery = angular.lowercase(query);
+
+    return function filterFn(state) {
+      return (state.value.indexOf(lowercaseQuery) === 0);
+    };
+
+  }
+
 		
 });
