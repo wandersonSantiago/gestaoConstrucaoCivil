@@ -88,13 +88,17 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 		self.adicionarProduto = function(quantidadeEstoque, produto, areaProduto, quantidadeSaida, andar, torre , apartamento, NumeroCasa){
 			
 			if(quantidadeEstoque < quantidadeSaida){
-				sweetAlert({ timer : 3000,  text :"Quantidade Superior ao estoque",  type : "info", width: 300, higth: 300, padding: 20});
+				sweetAlert({ timer : 6000,  text :"Quantidade Superior ao estoque",  type : "info", width: 300, higth: 300, padding: 20});
+					
+				}if(quantidadeSaida < 1){
+					sweetAlert({ timer : 6000,  text :"Quantidade tem que ser maior que zero",  type : "info", width: 300, higth: 300, padding: 20});
 					
 				}else{
 					$scope.ativaTabela = true;
 					if(self.listaProduto.length == 0){				
 						self.funcaoListaProduto(quantidadeEstoque, produto, areaProduto, quantidadeSaida, andar, torre , apartamento, NumeroCasa);				
-					}else{
+					}
+					else{
 						self.verificaProdutoRepetido(quantidadeEstoque, produto, areaProduto, quantidadeSaida, andar, torre , apartamento, NumeroCasa);				
 					}
 				}
@@ -112,109 +116,6 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 			});
 			
 		};
-		
-self.verifica = function(verifica){
-			
-			if($scope.torreCheck == true){
-				$scope.torre = true;
-			}
-			if($scope.andarCheck == true){
-				$scope.andar = true;
-				$scope.torre = true;
-			}if($scope.apartamentoCheck == true){
-				$scope.andar = true;
-				$scope.torre = true;
-				$scope.apartamento = true;
-			}
-			if($scope.torreCheck == false && $scope.andarCheck == false
-					&& $scope.apartamentoCheck == false){
-				$scope.torre = false;
-			}
-			if($scope.andarCheck == false && $scope.apartamentoCheck == false){
-				$scope.andar = false;
-				
-			}if($scope.apartamentoCheck == false){
-				
-				$scope.apartamento = false;
-			}
-		}
 
 
-
-
-
-//=================================================================================teste=========================
-
-
- /* var self = this;
-
-  self.simulateQuery = false;
-  self.isDisabled    = false;
-
-  // list of `state` value/display objects
-  self.states        = loadAll();
-  self.querySearch   = querySearch;
-  self.selectedItemChange = selectedItemChange;
-  self.searchTextChange   = searchTextChange;
-
-  self.newState = newState;
-
-  function newState(state) {
-    alert("Sorry! You'll need to create a Constitution for " + state + " first!");
-  }
-
-  // ******************************
-  // Internal methods
-  // ******************************
-
-  *//**
-   * Search for states... use $timeout to simulate
-   * remote dataservice call.
-   *//*
-  function querySearch (query) {
-    var results = query ? self.listaProdutos.filter( createFilterFor(query) ) : self.listaProdutos,
-        deferred;
-    if (self.simulateQuery) {
-      deferred = $q.defer();
-      $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
-      return deferred.promise;
-    } else {
-      return results;
-    }
-  }
-
-  function searchTextChange(text) {
-    $log.info('Text changed to ' + text);
-  }
-
-  function selectedItemChange(item) {
-    $log.info('Item changed to ' + JSON.stringify(item));
-  }
-
-  *//**
-   * Build `states` list of key/value pairs
-   *//*
-  //console.log($scope.listaProdutos);
-  function loadAll() {
-    return allStates.split(/, +/g).map( function (state) {
-      return {
-        value: state.toLowerCase(),
-        display: allStates
-     };
-    });
-  }
-
-  *//**
-   * Create filter function for a query string
-   *//*
-  function createFilterFor(query) {
-    var lowercaseQuery = angular.lowercase(query);
-
-    return function filterFn(state) {
-      return (state.value.indexOf(lowercaseQuery) === 0);
-    };
-
-  }*/
-
-		
 });
