@@ -11,117 +11,68 @@
 			<div class="container col-sm-12 ">
 				<form role="form-vertical"
 					ng-submit="estoqueCtrl.salva()">
-		
-					<!--<div class="row">	
-						<label class="col-sm-2 control-label" for="empreendimento"> Torre</label>	
-						<div class="col-sm-2">
-							<input type="checkbox" ng-model="torreCheck" ng-click="estoqueCtrl.verifica()" placeholder="outros serviços?">
-						</div>		
-						<label class="col-sm-2 control-label" for="empreendimento"> andar</label>	
-						<div class="col-sm-2">
-							<input type="checkbox" ng-model="andarCheck" ng-click="estoqueCtrl.verifica()"  placeholder="outros serviços?">
-						</div>
-						<label class="col-sm-2 control-label" for="empreendimento"> apartamento</label>	
-						<div class="col-sm-2">
-							<input type="checkbox" ng-model="apartamentoCheck" ng-click="estoqueCtrl.verifica()" placeholder="outros serviços?">
-						</div>
-					</div>
-					<br>
-					<div class="row" ng-if="empreendimento">							
-						<label class="col-sm-2 control-label" for="empreendimento"> Casa</label>	
-						<div class="col-sm-2">
-							<input type="checkbox" ng-model="torreCheck" ng-click="estoqueCtrl.verifica()"  placeholder="outros serviços?">
-						</div>
-						<label class="col-sm-2 control-label" for="empreendimento"> Andar</label>	
-						<div class="col-sm-2">
-							<input type="checkbox" ng-model="andarCheck" ng-click="estoqueCtrl.verifica()"  placeholder="outros serviços?">
-						</div>
-					</div>-->
+
 					
-					<div class="row" ng-if="empreendimento">
+						<label  class="radio-inline"><input type="radio"  ng-model="tipo.tipo" value="casa" ng-click="estoqueCtrl.tipoConf()" name="optradio">Casa</label>
+						<label  class="radio-inline"><input type="radio"  ng-model="tipo.tipo" value="edificio" ng-click="estoqueCtrl.tipoConf()" name="optradio">Edificio</label>
+						<label class="radio-inline"><input type="radio"   ng-model="tipo.tipo" value="comunitaria" ng-click="estoqueCtrl.tipoConf()" name="optradio">Edificações Comunitaria</label> 
+					<br>
+					<br>
+					
+					<div class="row" ng-if="casa">
 						
 						<div class="col-sm-4"  >
-							<select class="form-control select2" style=" width: 100%;" ng-model="estoqueCtrl.NumeroCasa" ng-if="torreCheck" required>
+							<select class="form-control select2" style=" width: 100%;" ng-model="estoqueCtrl.NumeroCasa"  required>
 								<option value="">---Casa---</option>
 							</select>
 						</div>
 							<div class="col-sm-4"  >
-							<select class="form-control select2" style=" width: 100%;" ng-model="estoqueCtrl.andar" ng-if="andarCheck" required>
+							<select class="form-control select2" style=" width: 100%;" ng-model="estoqueCtrl.andar"  required>
 								<option value="">---Andar---</option>
 							</select>
 						</div>
 
 					</div>
 
-					<div ng-if="!empreendimento" class="row" ng-controller="configEmpreendimentoController as configCtrl" ng-init="configCtrl.quantidadeEdificio()">
+					<div ng-if="edificio" class="row" ng-controller="configEmpreendimentoController as configCtrl" ng-init="configCtrl.quantidadeEdificio()">
 							<div class="col-sm-4"  >
-							 <md-input-container>
-							 <label>Torre</label>
-							<md-select placeholder="Torre" ng-model="estoqueCtrl.torre"  style="min-width: 200px;">
-     							 <md-option ng-value="lista" ng-repeat="lista in configCtrl.qtdeEdificio.quantidadeTorres">{{lista}}</md-option>
-    						</md-select>
-							<md-input-container>
-							 </md-input-container>
-							<!-- <select class="form-control select2" style=" width: 100%;"  ng-model="estoqueCtrl.torre"
+							<select class="form-control select2" style=" width: 100%;"  ng-model="estoqueCtrl.torre"
 							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeTorres" 
 							 title="Selecione a torre a qual será atribuido a saida do produto" required>
 								<option value="">---Torre---</option>
-							</select> -->
-							</md-input-container>
+							</select> 
+							
 						</div>
-
-						
-							<div class="col-sm-4"  >
-							 <md-input-container>
-							 <label>Andar</label>
-							<md-select placeholder="Andar" ng-model="estoqueCtrl.andar"  style="min-width: 200px;">
-     							 <md-option ng-value="lista" ng-repeat="lista in configCtrl.qtdeEdificio.quantidadeAndares">{{lista}}</md-option>
-    						</md-select>
-							<md-input-container>
-							 </md-input-container>
-							<!-- <select class="form-control select2" style=" width: 100%;"  ng-model="estoqueCtrl.andar"
+						<div class="col-sm-4"  >
+								<select class="form-control select2" style=" width: 100%;"  ng-model="estoqueCtrl.andar"
 							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeAndares"
 							 title="Selecione o andar a qual será atribuido a saída do produto" required>
 								<option value="">---Andar---</option>
-							</select> -->
+							</select> 
 						</div>
 	
 							<div class="col-sm-4"  >
-							<md-input-container>
-							 <label>Apartamento</label>
-							<md-select placeholder="Apartamento" ng-model="estoqueCtrl.apartamento"  style="min-width: 200px;">
-     							 <md-option ng-value="lista" ng-repeat="lista in configCtrl.qtdeEdificio.quantidadeApartamentos">{{lista}}</md-option>
-    						</md-select>
-							<md-input-container>
-							 </md-input-container>
-							<!-- <select class="form-control select2" style=" width: 100%;"  ng-model="estoqueCtrl.apartamento"
+							 <select class="form-control select2" style=" width: 100%;"  ng-model="estoqueCtrl.apartamento"
 							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeApartamentos" 
 							 title="Selecione o apartamento a qual será atribuido a saída do produto" required>
 								<option value="">---Apartamento---</option>
-							</select> -->
+							</select> 
 						</div>
 					</div>
-					<br>					
-					<div class="row">	
-						<label class="col-sm-2 control-label" title="Exemplo: pscina, quadra, salão de festas etc..."> Outros imoveis?</label>
-						<div class="col-sm-1">
-							<input type="checkbox" ng-model="outrosAtivo"  placeholder="outros serviços?">
-						</div>		
-					</div>
-					<br>					
-					<div class="row" ng-if="outrosAtivo">					
+								
+					<div class="row" ng-if="comunitaria">					
 						<div class="col-sm-5"  ng-controller="configEmpreendimentoController as configCtrl"  ng-init="configCtrl.listaOutros()">
-							<md-input-container>
-							 <label>Edificações Comunitaria</label>
-							<md-select placeholder="Edificações Comunitaria" ng-model="config"  style="min-width: 200px;">
-     							 <md-option ng-value="lista" ng-repeat="lista in configCtrl.listaOutros">{{lista.descricao}}</md-option>
-    						</md-select>
-							<md-input-container>
-							<!-- <select class="form-control select2" style=" width: 100%;" ng-model="config"
+							<select class="form-control select2" style=" width: 100%;" ng-model="config"
 							 ng-options="lista.descricao for lista in configCtrl.listaOutros" required>
-								<option value="">---Outros imoveis---</option>
-							</select> -->
+								<option value="">---Edificações Comunitaria---</option>
+							</select> 
 						</div>						
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-3">
+							<input type="text" class="form-control" name="leitor" placeholder="Leitor de Código de Barras">
+						</div>
 					</div>
 					<br> <br>
 					<div class="row" ng-init="estoqueCtrl.listaProdutosComEstoque()">
@@ -133,7 +84,7 @@
 								<option value="">---Produto---</option>
 							</select> -->
 					
-					<br>
+					
 							  <md-autocomplete 
 							 	md-selected-item="produto" 
 							 	md-search-text="estoqueCtrl.searchText" 
@@ -149,31 +100,31 @@
      					
 						</div>
 						<div class="col-sm-3" ng-controller="areaProdutoController as areaProdutoCtrl" ng-init="areaProdutoCtrl.lista()">						
-							<md-input-container>
+						<!-- 	<md-input-container>
 							 <label>Area de aplicação</label>
 							<md-select placeholder="Area de aplicação" ng-model="config"  style="min-width: 200px;">
      							 <md-option ng-value="listaAreaProdutos" ng-repeat="listaAreaProdutos in areaProdutoCtrl.listaAreaProduto">{{listaAreaProdutos.descricao}}</md-option>
     						</md-select>
-							<md-input-container>
-							<!-- <select class="form-control select2" ng-model="estoqueCtrl.areaProduto" id="teste"
+							<md-input-container> -->
+							<select class="form-control select2" ng-model="estoqueCtrl.areaProduto" id="teste"
 								ng-options="listaAreaProdutos.descricao for listaAreaProdutos in areaProdutoCtrl.listaAreaProduto" 
 							  	style=" width: 100%;" required >
-								<option value="">---Area Produto---</option>
-							</select> -->
+								<option value="">---Area de aplicação---</option>
+							</select> 
 							
 						</div>	
 						<div class="col-sm-2">
-						<md-input-container>
-							 <label>Estoque</label>
+						
+							
 							<input class="form-control" ng-model="produto.quantidade.quantidade" type="text" id="quantidadeEstoque" ui-number-mask="0" disabled placeholder="Estoque">
-						</md-input-container>
+						
 						</div>
 						
 						<div class="col-sm-2">
-						<md-input-container>
-							 <label>Quantidade</label>
+						
+							
 							<input class="form-control" ng-model="quantidade" type="text" id="quantidadeTeste" ui-number-mask="0" placeholder="Quantidade" required>
-						</md-input-container>
+						
 						</div>
 						<div class="col-sm-2">
 							<input class="btn btn-lg btn-primary btn-block btn-signin"

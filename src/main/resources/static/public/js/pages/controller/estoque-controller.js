@@ -90,7 +90,7 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 			if(quantidadeEstoque < quantidadeSaida){
 				sweetAlert({ timer : 6000,  text :"Quantidade Superior ao estoque",  type : "info", width: 300, higth: 300, padding: 20});
 					
-				}if(quantidadeSaida < 1){
+				}if(quantidadeSaida < 1 || quantidadeSaida == null){
 					sweetAlert({ timer : 6000,  text :"Quantidade tem que ser maior que zero",  type : "info", width: 300, higth: 300, padding: 20});
 					
 				}else{
@@ -109,13 +109,40 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 			self.baixaEstoque = self.listaProduto;
 			estoqueService.salva(self.baixaEstoque)
 			.then(function(response){
-					console.log("salvou");
-					self.listaProdutosComEstoque();
+				self.quantidadeEstoque = quantidadeEstoque;
+				self.produto = produto;
+				self.areaProduto = areaProduto;
+				self.quantidadeSaida = quantidadeSaida;
+				self.andar = andar;
+				self.torre = torre;
+				self.apartamento = apartamento;
+				self.NumeroCasa = NumeroCasa;
 				}, function(errResponse){
-					console.log("não salvou");
+					
 			});
 			
 		};
-
+		
+		$scope.tipo = {
+			tipo : ''	
+		};		
+		self.tipoConf = function(){
+		if($scope.tipo.tipo == "edificio"){
+			$scope.casa = false;
+			$scope.comunitaria = false;
+			$scope.edificio = true;
+	}
+		if($scope.tipo.tipo == "comunitaria"){
+			$scope.casa = false;
+			$scope.edificio = false;
+			$scope.comunitaria = true;
+		}
+		if($scope.tipo.tipo == "casa"){
+			$scope.comunitaria = false;
+			$scope.edificio = false;
+			$scope.casa = true;
+			
+		}
+		}
 
 });
