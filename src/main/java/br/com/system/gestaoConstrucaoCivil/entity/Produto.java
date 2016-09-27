@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -24,6 +25,9 @@ import br.com.system.gestaoConstrucaoCivil.enuns.UnidadeMedidaEnum;
 @Table(name = "produto")
 public class Produto extends AbstractPersistable<Long> {
 
+	@Column(nullable = true,unique = true)
+	private Integer codigo;
+	
 	@Column(nullable = false, length = 50)
 	private String codigoBarra;
 
@@ -50,8 +54,14 @@ public class Produto extends AbstractPersistable<Long> {
     @JoinColumn(name="id_tipo",nullable = true)
 	private TipoProduto tipoProduto;
 	
+	@Transient
+	private boolean geraCodigoBarra;
 	
-	public String getCodigoBarra() {
+	
+	public boolean isGeraCodigoBarra() {
+		return geraCodigoBarra;
+	}
+    public String getCodigoBarra() {
 		return codigoBarra;
 	}
 
@@ -117,6 +127,14 @@ public class Produto extends AbstractPersistable<Long> {
 		this.tipoProduto = tipoProduto;
 	}
 
+	public Integer getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
+	}
+    
 
 
 }
