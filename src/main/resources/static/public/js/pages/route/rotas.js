@@ -234,8 +234,11 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 	})
 	//COMPRAS
 	
-	.when('/almoxarifado/compras/cotacao', {
-		templateUrl:"views/pages/almoxarifado/compras/cotacao.html",
+	.when('/almoxarifado/compras/cadastrarCotacao', {
+		templateUrl:"views/pages/almoxarifado/compras/cadastrarCotacao.html",
+	})
+	.when('/almoxarifado/compras/gerarCotacao', {
+		templateUrl:"views/pages/almoxarifado/compras/gerarCotacao.html",
 	})
 	.when('/almoxarifado/compras/pedidoCompra', {
 		templateUrl:"views/pages/almoxarifado/compras/pedidoCompra.html",

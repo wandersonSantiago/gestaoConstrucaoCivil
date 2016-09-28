@@ -1,0 +1,86 @@
+<meta charset="UTF-8">
+<br>
+<br>
+<div class="generic-container"  ng-controller="cotacaoCompraController as cotacaoCtrl" >
+
+<div class="box box-primary" >
+		<!-- Default panel contents -->
+		<div class="box-header" >
+			<span class="lead">Gerar cotação </span>
+		</div>
+		<div class="panel-body">
+
+			<br>
+			<div class="container col-sm-12 " >
+				<form role="form-vertical" ng-submit="cotacaoCtrl.salva()" >
+					
+				<div class="row" >			
+					<div class="col-sm-4" >
+							<input class="form-control select2" ng-model="cotacaoCtrl.produto" placeholder="descrição do produto" id="descricao"							 
+							 title="descrição do produto" style=" width: 100%;" >
+						
+					</div>
+					<div class="col-sm-4" >
+							<input class="form-control select2" ng-model="cotacaoCtrl.quantidade" placeholder="quantidade do produto" ui-number-mask="0" id="quantidade"							 
+							title="quantidade de produtos para a cotação"  style=" width: 100%;" >
+						
+					</div>
+							<div class="col-sm-2">							
+							<input class="btn btn-lg btn-primary btn-block btn-signin" 
+								ng-click="cotacaoCtrl.adicionarProdutos(cotacaoCtrl.produto, cotacaoCtrl.quantidade)" value="adicionar"
+								title="pressione para adicionar a lista" type="button" ng-disabled="!cotacaoCtrl.produto" >
+						</div>
+					</div>
+					<br>
+					
+				
+					<table class="table table-hover " ng-show="visialuzarTable">
+					<thead>
+						<tr>
+							<th>selecione</th>							
+							<th>Descrição</th>
+							<th>Quantidade</th>
+							
+						</tr>
+					</thead>
+					
+					<tbody
+						ng-repeat=" f in cotacaoCtrl.listaCotacao | filter : busca">
+						<tr>
+						<td><input class="col-sm-1" type="checkbox" ng-model="f.selecionado"	ng-click="cotacaoCtrl.ativarExcluirLote(listaCotacao)"></td>
+							<td><input class="form-control"  id="descricaoProduto"  type="text" placeholder="descrição do Produto" 
+							ng-model="f.produto" ></td>
+							<td><input class="form-control"  id="quantidadeProduto"  type="text" placeholder="quantidade"
+							ng-model="f.quantidade" ui-number-mask="0" required></td>							
+						</tr>
+	
+					</tbody>
+					<tfoot>
+						<tr>
+							<th><input type="button" class="btn-danger" ng-if="ativadoExcluirLote"  value="excluir" name="apagar" ng-click="cotacaoCtrl.apagarProdutos(listaCotacao)"></th>
+							<th></th>
+							<th></th>
+							<th></th>			
+	
+						</tr>
+					</tfoot>
+				</table>
+					
+					<br>
+				
+					<div class="row ">
+						
+						
+							<input type="submit" id="submit" value="Salvar"	class="btn btn-lg btn-primary btn-block btn-signin">
+						
+						
+					</div>
+
+
+				</form>
+			</div>
+
+		</div>
+		<div class="tablecontainer"></div>
+	</div>
+</div>
