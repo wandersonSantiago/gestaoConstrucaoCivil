@@ -4,7 +4,7 @@
 <div class="generic-container"	ng-controller="estoqueController as estoqueCtrl">
 	<div class="box box-primary">
 		<div class="box-header">
-			<span class="lead"> Baixa estoque </span>
+			<span class="lead"> Requisição de mercadorias </span>
 		</div>
 		<div class="panel-body">
 		<br>
@@ -172,7 +172,24 @@
 							</table>
 						</div>
 					
-					
+					<br>
+					<div class="row">
+						<div class="col-sm-5" ng-controller="prestadoraServicoController as prestadoraCtrl" ng-init="prestadoraCtrl.lista()">			
+						<select class="form-control "   width: 100%;" ng-model="servicoCtrl.servicoEdifico.prestadoraServico"
+							 ng-options="lista.dadoEmpresa.nomeFantasia for lista in prestadoraCtrl.prestadoraServicos" 
+							 title="Selecione o pacote de serviço a ser atribuido a empresa" required>
+								<option value="">---Prestadora de Serviço---</option>
+							</select>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<input type="text" class="form-control" name="responsavelRetirar" placeholder="Responsável pela retirada dos produtos">
+						</div>
+					</div>
+					<br> 
+				
 					<br>
 					
 					<div class="row ">

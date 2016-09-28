@@ -109,14 +109,17 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 			self.baixaEstoque = self.listaProduto;
 			estoqueService.salva(self.baixaEstoque)
 			.then(function(response){
-				self.quantidadeEstoque = quantidadeEstoque;
-				self.produto = produto;
-				self.areaProduto = areaProduto;
-				self.quantidadeSaida = quantidadeSaida;
-				self.andar = andar;
-				self.torre = torre;
-				self.apartamento = apartamento;
-				self.NumeroCasa = NumeroCasa;
+				self.quantidadeEstoque = null;
+				self.produto = null;
+				self.areaProduto = null;
+				self.quantidadeSaida = null;
+				self.andar = null;
+				self.torre = null;
+				self.apartamento = null;
+				self.NumeroCasa = null;
+				self.listaProduto = self.listaProduto=[];
+				$scope.quantidade = "";
+				$scope.produto.quantidade.quantidade = "";
 				}, function(errResponse){
 					
 			});

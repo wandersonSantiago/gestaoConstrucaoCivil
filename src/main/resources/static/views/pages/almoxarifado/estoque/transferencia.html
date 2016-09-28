@@ -4,7 +4,7 @@
 <div class="generic-container"	ng-controller="estoqueController as estoqueCtrl">
 	<div class="box box-primary">
 		<div class="box-header">
-			<span class="lead"> Baixa estoque </span>
+			<span class="lead"> Transferencia estoque </span>
 		</div>
 		<div class="panel-body">
 		<br>
@@ -13,61 +13,17 @@
 					ng-submit="estoqueCtrl.salva()">
 
 					
-						<label  class="radio-inline"><input type="radio"  ng-model="tipo.tipo" value="casa" ng-click="estoqueCtrl.tipoConf()" name="optradio">Casa</label>
-						<label  class="radio-inline"><input type="radio"  ng-model="tipo.tipo" value="edificio" ng-click="estoqueCtrl.tipoConf()" name="optradio">Edificio</label>
-						<label class="radio-inline"><input type="radio"   ng-model="tipo.tipo" value="comunitaria" ng-click="estoqueCtrl.tipoConf()" name="optradio">Edificações Comunitaria</label> 
-					<br>
-					<br>
+					<div class="row" >
+						<div class="col-sm-5" ng-controller="empreendimentoController as empCtrl" ng-init="empCtrl.lista()">
+							<select class="form-control select2"
+								ng-model="configCtrl.configEmpreendimento.empreendimento"
+								ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.tipoEmpreendimento for listarEmpreendimentos in empreendimentos"
+								style="width: 100%;">
+								<option  value="">--Empreendimento--</option>
+							</select>
+						</div>
+					</div>
 					
-					<div class="row" ng-if="casa">
-						
-						<div class="col-sm-4"  >
-							<select class="form-control select2" style=" width: 100%;" ng-model="estoqueCtrl.NumeroCasa"  required>
-								<option value="">---Casa---</option>
-							</select>
-						</div>
-							<div class="col-sm-4"  >
-							<select class="form-control select2" style=" width: 100%;" ng-model="estoqueCtrl.andar"  required>
-								<option value="">---Andar---</option>
-							</select>
-						</div>
-
-					</div>
-
-					<div ng-if="edificio" class="row" ng-controller="configEmpreendimentoController as configCtrl" ng-init="configCtrl.quantidadeEdificio()">
-							<div class="col-sm-4"  >
-							<select class="form-control select2" style=" width: 100%;"  ng-model="estoqueCtrl.torre"
-							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeTorres" 
-							 title="Selecione a torre a qual será atribuido a saida do produto" required>
-								<option value="">---Torre---</option>
-							</select> 
-							
-						</div>
-						<div class="col-sm-4"  >
-								<select class="form-control select2" style=" width: 100%;"  ng-model="estoqueCtrl.andar"
-							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeAndares"
-							 title="Selecione o andar a qual será atribuido a saída do produto" required>
-								<option value="">---Andar---</option>
-							</select> 
-						</div>
-	
-							<div class="col-sm-4"  >
-							 <select class="form-control select2" style=" width: 100%;"  ng-model="estoqueCtrl.apartamento"
-							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeApartamentos" 
-							 title="Selecione o apartamento a qual será atribuido a saída do produto" required>
-								<option value="">---Apartamento---</option>
-							</select> 
-						</div>
-					</div>
-								
-					<div class="row" ng-if="comunitaria">					
-						<div class="col-sm-5"  ng-controller="configEmpreendimentoController as configCtrl"  ng-init="configCtrl.listaOutros()">
-							<select class="form-control select2" style=" width: 100%;" ng-model="config"
-							 ng-options="lista.descricao for lista in configCtrl.listaOutros" required>
-								<option value="">---Edificações Comunitaria---</option>
-							</select> 
-						</div>						
-					</div>
 					<br>
 					<div class="row">
 						<div class="col-sm-3">

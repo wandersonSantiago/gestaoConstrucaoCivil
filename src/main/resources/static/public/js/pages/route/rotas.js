@@ -225,7 +225,32 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 	})
 	.when('/almoxarifado/estoque/saida', {
 		templateUrl:"views/pages/almoxarifado/estoque/saida.html",
+	})	
+	.when('/almoxarifado/estoque/requisicao', {
+		templateUrl:"views/pages/almoxarifado/estoque/requisicao.html",
 	})
+	.when('/almoxarifado/estoque/transferencia', {
+		templateUrl:"views/pages/almoxarifado/estoque/transferencia.html",
+	})
+	//COMPRAS
+	
+	.when('/almoxarifado/compras/cotacao', {
+		templateUrl:"views/pages/almoxarifado/compras/cotacao.html",
+	})
+	.when('/almoxarifado/compras/pedidoCompra', {
+		templateUrl:"views/pages/almoxarifado/compras/pedidoCompra.html",
+	})
+	
+	
+	//GERENCIAMENTO
+	
+	.when('/almoxarifado/gerenciamento/cancelamentoNota', {
+		templateUrl:"views/pages/almoxarifado/gerenciamento/cancelamentoNota.html",
+	})
+	.when('/almoxarifado/gerenciamento/iventario', {
+		templateUrl:"views/pages/almoxarifado/gerenciamento/iventario.html",
+	})
+	
 //==============================================================================
 	//ROTAS DE ESCAPE
 	
