@@ -30,21 +30,20 @@ public class ProdutoRestController {
 	  return new ResponseEntity<Iterable<Produto>>(produto, HttpStatus.OK);
 	 }
 	
-	 @RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
-		public ResponseEntity<Produto> buscarProdutoPorId(@PathVariable Long id) {
+	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Produto> buscarProdutoPorId(@PathVariable Long id) {
 
 			return new ResponseEntity<Produto>(produtoService.buscaPorId(id), HttpStatus.OK);
 		}
 
-	 
+	@RequestMapping(value = "/buscaPorCodigo/{codigo}", method = RequestMethod.GET)
+	public ResponseEntity<Produto> buscarPorCodigo(@PathVariable String codigo)
+	{
+		return new ResponseEntity<Produto>(produtoService.buscarPorCodigoOuCodigoBarra(codigo),HttpStatus.OK);
+	}
 	 @RequestMapping(value="/salva", method = RequestMethod.POST)
 	 public ResponseEntity salva(@RequestBody Produto produto,UriComponentsBuilder ucBuilder)
 	 {
-		 for(int i = 0 ; i < produto.getFornecedores().size(); i++ ){
-			 System.out.println(produto.getFornecedores().get(i).getContato());
-			 System.out.println(produto.getDescricao());
-		 }
-		
 		 produtoService.salvarOuEditar(produto);
 		 HttpHeaders headers = new HttpHeaders();
 		 headers.setLocation(ucBuilder.path("/rest/almoxarifado/produto/salva/{id}").buildAndExpand(produto.getId()).toUri());
