@@ -16,40 +16,29 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
+
 import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 import br.com.system.gestaoConstrucaoCivil.service.UsuarioService;
-import br.com.system.gestaoConstrucaoCivil.view.UsuarioView;
-import ch.qos.logback.core.net.SyslogOutputStream;
+
 
 @RestController
 @RequestMapping("/rest/usuario")
 public class UsuarioRestController {
 
 	@Autowired
-	 private UsuarioService usuarioService;
+	private UsuarioService usuarioService;
 
-	
-	
 	@RequestMapping(value="/usuario")
 	@ResponseBody
 	public Principal user(Principal user, HttpSession session) {
 		
-		Usuario usuario = (Usuario) session.getAttribute("login");
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
+			
+	//	System.out.println("Usuario:" + usuario.getLogin());
 		
-		
-		
-		/*if(session == null)
-		{
-			System.out.println("SIM USUARIO == NULL");
-		}*/
-		System.out.println("chamo o login");
 		return user;
 	}
-	
-	
-	
-	 @RequestMapping(method = RequestMethod.GET, value="/lista")
+    @RequestMapping(method = RequestMethod.GET, value="/lista")
 	 public ResponseEntity<Iterable<Usuario>> buscarUsuarios() {	  
 	  System.out.println("lista ok");
 	  Iterable<Usuario> usuario = usuarioService.buscarTodos();
