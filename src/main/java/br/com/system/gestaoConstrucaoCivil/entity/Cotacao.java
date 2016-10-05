@@ -1,33 +1,51 @@
 package br.com.system.gestaoConstrucaoCivil.entity;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
-@SequenceGenerator(name = "gera_contacao_id_seq", sequenceName = "gera_contacao_id_seq", initialValue = 1, allocationSize = 1)
-@Table(name = "gera_contacao")
-public class GeraContacao implements Serializable{
+@SequenceGenerator(name = "cotacao_id_seq", sequenceName = "cotacao_id_seq", initialValue = 1, allocationSize = 1)
+@Table(name = "cotacao")
+public class Cotacao implements Serializable{
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gera_contacao_id_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cotacao_id_seq")
 	private Long id;
 
 	@Column(nullable = false)
 	private String tema;
+	
+	
+	@OneToMany(mappedBy = "cotacao",cascade = CascadeType.ALL)
+	private List<ItemCotacao> itens;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_empreendimento",nullable = false)
+	private Empreendimento empreendimento;
+	
+	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)
-	private String descricao;
+	private Date dataLimite;
+	@Temporal(TemporalType.DATE)
+	@Column(nullable = false)
+	private Date dataCriacao;
 	
-	
-	
-	
-	public Long getId() {
+    public Long getId() {
 		return id;
 	}
 
@@ -51,7 +69,7 @@ public class GeraContacao implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		GeraContacao other = (GeraContacao) obj;
+		Cotacao other = (Cotacao) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
