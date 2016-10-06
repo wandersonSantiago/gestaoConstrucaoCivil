@@ -29,31 +29,28 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 			});
 		};
 		
-		self.verifica = function(verifica){
-			
-			if($scope.torreCheck == true){
-				$scope.torre = true;
-			}
-			if($scope.andarCheck == true){
-				$scope.andar = true;
-				$scope.torre = true;
-			}if($scope.apartamentoCheck == true){
-				$scope.andar = true;
-				$scope.torre = true;
-				$scope.apartamento = true;
-			}
-			if($scope.torreCheck == false && $scope.andarCheck == false
-					&& $scope.apartamentoCheck == false){
-				$scope.torre = false;
-			}
-			if($scope.andarCheck == false && $scope.apartamentoCheck == false){
-				$scope.andar = false;
-				
-			}if($scope.apartamentoCheck == false){
-				
-				$scope.apartamento = false;
-			}
+		$scope.tipo = {
+				tipo : ''	
+			};		
+			self.tipoConf = function(){
+			if($scope.tipo.tipo == "edificio"){
+				$scope.casa = false;
+				$scope.comunitaria = false;
+				$scope.edificio = true;
 		}
+			if($scope.tipo.tipo == "comunitaria"){
+				$scope.casa = false;
+				$scope.edificio = false;
+				$scope.comunitaria = true;
+			}
+			if($scope.tipo.tipo == "casa"){
+				$scope.comunitaria = false;
+				$scope.edificio = false;
+				$scope.casa = true;
+				
+			}
+			}
+
 	
 		
 });
