@@ -12,7 +12,7 @@
 
 			<br>
 			<div class="container col-sm-12 " >
-				<form role="form-vertical" ng-submit="notaFiscalCtrl.salva()" >
+				<form role="form-vertical"  >
 					
 									
 					<h3>Nota fiscal</h3>
@@ -136,7 +136,7 @@
 					<br>
 					<div class="row">
 						
-							<input class="form-control"  id="obs" type="text" placeholder="Observação"
+							<input class="form-control"  id="obs" type="text"  placeholder="Observação"
 							ng-model="notaFiscalCtrl.notaFiscal.observacao">
 												
 					</div>
@@ -144,7 +144,7 @@
 					<div class="row ">
 						
 						
-							<input type="submit" id="submit" value="Salvar"	class="btn btn-lg btn-primary btn-block btn-signin">
+							<input type="button" id="submit" ng-click="notaFiscalCtrl.salva()" value="Salvar"	class="btn btn-lg btn-primary btn-block btn-signin">
 						
 						
 					</div>
