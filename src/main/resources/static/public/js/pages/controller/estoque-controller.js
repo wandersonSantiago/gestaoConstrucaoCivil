@@ -90,10 +90,12 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 			if(quantidadeEstoque < quantidadeSaida){
 				sweetAlert({ timer : 6000,  text :"Quantidade Superior ao estoque",  type : "info", width: 300, higth: 300, padding: 20});
 					
-				}if(quantidadeSaida < 1 || quantidadeSaida == null){
+				}
+			else{if(quantidadeSaida < 1 || quantidadeSaida == null){
 					sweetAlert({ timer : 6000,  text :"Quantidade tem que ser maior que zero",  type : "info", width: 300, higth: 300, padding: 20});
 					
-				}else{
+				}
+			else{
 					$scope.ativaTabela = true;
 					if(self.listaProduto.length == 0){				
 						self.funcaoListaProduto(quantidadeEstoque, produto, areaProduto, quantidadeSaida, andar, torre , apartamento, NumeroCasa);				
@@ -103,6 +105,7 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 					}
 				}
 			}
+		}
 			
 		self.salva = function(){
 			
