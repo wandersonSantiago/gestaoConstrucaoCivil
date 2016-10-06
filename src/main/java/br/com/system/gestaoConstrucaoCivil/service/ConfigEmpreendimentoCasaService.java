@@ -8,6 +8,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.ConfigEmpreendimentoCasa;
+import br.com.system.gestaoConstrucaoCivil.entity.ConfigEmpreendimentoEdificio;
+import br.com.system.gestaoConstrucaoCivil.pojo.ConfigEmpreendimentoCasaPojo;
+import br.com.system.gestaoConstrucaoCivil.pojo.ConfigEmpreendimentoEdificioPojo;
 import br.com.system.gestaoConstrucaoCivil.repository.ConfigEmpreendimentoCasaRepository;
 
 
@@ -34,5 +37,12 @@ public class ConfigEmpreendimentoCasaService {
     public ConfigEmpreendimentoCasa buscarPorId(Long id)
     {
         return configEmpreendimentoCasaRepository.findOne(id);
+    }
+    
+    public ConfigEmpreendimentoCasaPojo getConfig()
+    {
+    	ConfigEmpreendimentoCasa casa = configEmpreendimentoCasaRepository.findAll().get(0);
+        return new ConfigEmpreendimentoCasaPojo(casa);
+    
     }
 }

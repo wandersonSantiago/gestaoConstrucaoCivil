@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Cargo;
 import br.com.system.gestaoConstrucaoCivil.repository.CargoRepository;
+import br.com.system.gestaoConstrucaoCivil.service.servicos.Servico;
 
 @Service
 @EnableCaching(proxyTargetClass = true)

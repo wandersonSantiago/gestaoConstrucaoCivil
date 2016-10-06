@@ -2,7 +2,6 @@
 package br.com.system.gestaoConstrucaoCivil.criarObjecto;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,25 +12,19 @@ import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import br.com.system.gestaoConstrucaoCivil.GestaoConstrucaoCivilApplication;
 import br.com.system.gestaoConstrucaoCivil.entity.EmpresaContratante;
-import br.com.system.gestaoConstrucaoCivil.entity.Funcionario;
-
 import br.com.system.gestaoConstrucaoCivil.repository.CargoRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.CategoriaRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.DadoEmpresaRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.EmpreendimentoRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.EmpresaContratanteRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.EnderecoRepository;
-import br.com.system.gestaoConstrucaoCivil.repository.FornecedorRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.FuncionarioRepository;
-import br.com.system.gestaoConstrucaoCivil.repository.ImovelRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.PessoaRepository;
-import br.com.system.gestaoConstrucaoCivil.repository.PrestadoraServicoRepository;
-import br.com.system.gestaoConstrucaoCivil.repository.ProdutoRepository;
-import br.com.system.gestaoConstrucaoCivil.repository.UnidadeMedidaRepository;
+import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.FornecedorRepository;
+import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.ProdutoRepository;
+import br.com.system.gestaoConstrucaoCivil.repository.servicos.PrestadoraServicoRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = GestaoConstrucaoCivilApplication.class)
@@ -46,8 +39,7 @@ public class ControllerTest {
 	private DadoEmpresaRepository dadosEmpresaRepository;
 	@Autowired
 	private EnderecoRepository enderecoRepository;
-	@Autowired
-	private ImovelRepository imovelRepository;
+
 	@Autowired
 	private FornecedorRepository fornecedorRepository;
 	@Autowired
@@ -61,8 +53,7 @@ public class ControllerTest {
 	private PessoaRepository pessoaRepository;
 	@Autowired
 	private ProdutoRepository protudoRepository;
-	@Autowired
-	private UnidadeMedidaRepository unidadeRepository;
+
 	@Autowired
 	private EmpresaContratanteRepository empresaContratanteRepository; 
 	

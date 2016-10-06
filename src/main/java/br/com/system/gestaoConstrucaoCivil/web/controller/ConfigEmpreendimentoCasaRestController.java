@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-
 import br.com.system.gestaoConstrucaoCivil.entity.ConfigEmpreendimentoCasa;
+import br.com.system.gestaoConstrucaoCivil.pojo.ConfigEmpreendimentoCasaPojo;
 import br.com.system.gestaoConstrucaoCivil.service.ConfigEmpreendimentoCasaService;
 
 
@@ -40,4 +40,10 @@ public class ConfigEmpreendimentoCasaRestController {
         return new ResponseEntity<ConfigEmpreendimentoCasa>(configEmpreeendimentoCasaService.buscarPorId(id), HttpStatus.OK);
     }
      
+
+	@RequestMapping(value = "/quantidadeCasa",method = RequestMethod.GET)
+	public ResponseEntity<ConfigEmpreendimentoCasaPojo> configPojo() {
+        
+        return new ResponseEntity<ConfigEmpreendimentoCasaPojo>(configEmpreeendimentoCasaService.getConfig(),HttpStatus.OK);
+	}
 }

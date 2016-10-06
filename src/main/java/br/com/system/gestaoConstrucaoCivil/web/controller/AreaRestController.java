@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.system.gestaoConstrucaoCivil.entity.AreaProduto;
-import br.com.system.gestaoConstrucaoCivil.entity.Fornecedor;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Fornecedor;
 import br.com.system.gestaoConstrucaoCivil.service.AreaService;
 
 @RestController

@@ -17,6 +17,7 @@ import javax.persistence.TemporalType;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+import br.com.system.gestaoConstrucaoCivil.entity.servicos.PrestadoraServico;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoEmpreendimentoEnum;
 
 @Entity

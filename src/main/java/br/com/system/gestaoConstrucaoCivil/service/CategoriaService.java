@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Categoria;
 import br.com.system.gestaoConstrucaoCivil.repository.CategoriaRepository;
+import br.com.system.gestaoConstrucaoCivil.service.servicos.Servico;
 
 @Service
 @Transactional(readOnly = true,propagation = Propagation.REQUIRED)

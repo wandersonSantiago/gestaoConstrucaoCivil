@@ -98,7 +98,15 @@ $scope.listaOutros =[];
 				configEmpreendimentoService.quantidadeEdificio().
 				then(function(t){
 					self.qtdeEdificio = t;
-					console.log(self.qtdeEdificio.quantidadeTorres);
+					}, function(errResponse){
+					
+				});
+			}
+			
+			self.quantidadeCasa = function(){
+				configEmpreendimentoService.quantidadeCasa().
+				then(function(t){
+					self.qtdeCasa = t;
 					}, function(errResponse){
 					
 				});

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 import br.com.system.gestaoConstrucaoCivil.entity.Cargo;
 import br.com.system.gestaoConstrucaoCivil.service.CargoService;
-import br.com.system.gestaoConstrucaoCivil.service.Servico;
+import br.com.system.gestaoConstrucaoCivil.service.servicos.Servico;
 
 @RestController
 @RequestMapping("/rest/recursosHumanos/cargo")
