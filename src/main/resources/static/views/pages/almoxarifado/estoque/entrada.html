@@ -12,7 +12,7 @@
 
 			<br>
 			<div class="container col-sm-12 " >
-				<form role="form-vertical"  >
+				<form role="form-vertical" ng-submit="notaFiscalCtrl.salva()" >
 					
 									
 					<h3>Nota fiscal</h3>
@@ -23,32 +23,25 @@
 						<!-- <label class="col-sm-2 control-label" for="numeroNota">Numero nota Fiscal</label> -->
 						<div class="col-sm-3">
 							<input class="form-control"  id="numeroNota" type="text" title="informe o numero da nota fiscal" placeholder="Numero nota fiscal" 
-							ng-model="notaFiscalCtrl.notaFiscal.numero">
+							ng-model="notaFiscalCtrl.notaFiscal.numero" required>
 						</div>
 						<!-- <label class="col-sm-2 control-label" for="chave">Chave de Acesso</label> -->
 						<div class="col-sm-3">
 							<input class="form-control"  id="chave"  type="text" title="informe a chave de acesso da nota fiscal" placeholder="chave de acesso nota fiscal" 
-							ng-model="notaFiscalCtrl.notaFiscal.chaveAcesso">
+							ng-model="notaFiscalCtrl.notaFiscal.chaveAcesso" required>
 						</div>
 						<!-- <label class="col-sm-2 control-label" for="dataNota">Data Nota Fiscal</label> -->
 						<div class="col-sm-3">
-							<input class="form-control"  id="dataNota" type="text" ng-model="notaFiscalCtrl.notaFiscal.dataNota" ui-date title="informe a data da nota fiscal"  placeholder="data nota fiscal">
+							<input class="form-control"  id="dataNota" type="text" ng-model="notaFiscalCtrl.notaFiscal.dataNota" ui-date title="informe a data da nota fiscal"  placeholder="data nota fiscal" required>
 						</div>
 						<!-- <label class="col-sm-2 control-label" for="vencimento">Vencimento</label> -->
 						<div class="col-sm-3">
-							<input class="form-control"  id="vencimento"  type="text" ng-model="notaFiscalCtrl.notaFiscal.dataVencimento" ui-date title="informe a data de vencimento da nota fiscal" placeholder="vecimento nota fiscal">
+							<input class="form-control"  id="vencimento"  type="text" ng-model="notaFiscalCtrl.notaFiscal.dataVencimento" ui-date title="informe a data de vencimento da nota fiscal" placeholder="vecimento nota fiscal" required>
 						</div>
 					</div>
 					
 					<br>
-					<div class="modal fade bs-example-modal-lg" id="myProduto"
-						tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"">
-						<div class="modal-dialog modal-lg" role="document">
-							<div class="modal-body">
-								<div ng-include="'views/pages/almoxarifado/produto/cadastrar.html'"></div>
-							</div>
-						</div>
-					</div>
+					
 					<div class="row" >			
 					<div class="col-sm-4" ng-controller="produtoController as pCtrl" ng-init="pCtrl.lista()" >
 							<a href="" data-toggle="modal" data-target="#myProduto"><i class="glyphicon glyphicon-plus"></i>novo</a>
@@ -66,8 +59,6 @@
 						</div>
 					</div>
 					<br>
-					
-				
 					<table class="table table-hover " ng-show="visialuzarTable">
 					<thead>
 						<tr>
@@ -114,20 +105,13 @@
 					<hr>
 					<h3>Fornecedor</h3>
 					<br>
-						<div class="modal fade bs-example-modal-lg" id="myFornecedor"
-						tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"">
-						<div class="modal-dialog modal-lg" role="document">
-							<div class="modal-body">
-								<div ng-include="'views/pages/almoxarifado/fornecedor/cadastrar.html'"></div>
-							</div>
-						</div>
-					</div>
+						
 					<div class="row">
 							<div class="col-sm-4" ng-controller="fornecedorController as forCtrl" ng-init="forCtrl.lista()" >
 								<a href="" data-toggle="modal" data-target="#myFornecedor"><i class="glyphicon glyphicon-plus"></i>novo</a>
 							<select class="form-control select2" ng-model="notaFiscalCtrl.notaFiscalProduto.fornecedor" id="fornecedor"
 							ng-options="listaFornecedores.dadoEmpresa.nomeFantasia for listaFornecedores in forCtrl.listaFornecedor" 
-							  style=" width: 100%;" >
+							  style=" width: 100%;" required>
 								<option value="">---Fornecedor---</option>
 							</select>
 						</div>
@@ -135,22 +119,32 @@
 						
 					<br>
 					<div class="row">
-						
-							<input class="form-control"  id="obs" type="text"  placeholder="Observação"
-							ng-model="notaFiscalCtrl.notaFiscal.observacao">
-												
+							<input class="form-control"  id="obs" type="text"  placeholder="Observação"	ng-model="notaFiscalCtrl.notaFiscal.observacao">
 					</div>
 					<br>
 					<div class="row ">
-						
-						
-							<input type="button" id="submit" ng-click="notaFiscalCtrl.salva()" value="Salvar"	class="btn btn-lg btn-primary btn-block btn-signin">
-						
-						
+							<input type="submit" id="submit"  value="Salvar"	class="btn btn-lg btn-primary btn-block btn-signin">
 					</div>
-
-
-				</form>
+			</form>
+				
+				<!--paginas modal -->
+				
+				<div class="modal fade bs-example-modal-lg" id="myFornecedor"
+						tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"">
+						<div class="modal-dialog modal-lg" role="document">
+							<div class="modal-body">
+								<div ng-include="'views/pages/almoxarifado/fornecedor/cadastrar.html'"></div>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade bs-example-modal-lg" id="myProduto"
+						tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"">
+						<div class="modal-dialog modal-lg" role="document">
+							<div class="modal-body">
+								<div ng-include="'views/pages/almoxarifado/produto/cadastrar.html'"></div>
+							</div>
+						</div>
+					</div>
 			</div>
 
 		</div>

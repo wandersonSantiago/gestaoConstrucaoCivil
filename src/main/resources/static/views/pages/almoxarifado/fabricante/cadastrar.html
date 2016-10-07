@@ -13,8 +13,7 @@
 
 			<br>
 			<div class="container col-sm-12 ">
-				<form role="form-vertical" name="formFabricante"
-					ng-submit="fabricanteCtrl.salva()">
+				<form role="form-vertical" name="formFabricante" ng-submit="fabricanteCtrl.salva()">
 					
 					<div class="row">
 						<div class="col-sm-5" ng-controller="verificaDadosController as verificaCtrl">
@@ -86,16 +85,11 @@
 					<div class="row">
 						<div class="col-sm-3">
 							<input class="form-control" name="cepField"	ng-model="fabricanteCtrl.fabricante.dadoEmpresa.endereco.cep" id="cep" placeholder="CEP"
-								type="text"  ng-blur="prestadoraCtrl.findCep()"  onkeyup="if(this.value.length > 8) { numeroEmpresa.focus(); }"   ui-br-cep-mask required>
-								
-							<p ng-show="formFabricante.cepField.$error.cep" class="alert alert-warning ">Digite um CEP Válido</p>
-								
+								type="text"  ng-blur="fabricanteCtrl.findCep()"  onkeyup="if(this.value.length > 8) { numeroEmpresa.focus(); }"   ui-br-cep-mask required>
+								<p ng-show="formFabricante.cepField.$error.cep" class="alert alert-warning ">Digite um CEP Válido</p>
 						</div>
 					</div>
-						
-
 					<br>
-
 					<div class="row">
 						<div class="col-sm-5">
 							<input class="form-control" placeholder="Rua"
@@ -145,14 +139,10 @@
 					<br>
 					
 					<br>
-
-					<div class="row ">
-							<input type="button" ng-click="fabricanteCtrl.salva()" id="submit" value="Salvar" data-dismiss="modal" ng-disabled="!fabricanteCtrl.fabricante.dadoEmpresa.razaoSocial"
+				<div class="row ">
+							<input type="submit"  id="submit" value="Salvar" ng-disabled="!fabricanteCtrl.fabricante.dadoEmpresa.razaoSocial"
 								class="btn btn-lg btn-primary btn-block btn-signin">
-						
-					</div>
-						<!-- <a href="javascript:window.history.go(-1)"><i class="glyphicon glyphicon-arrow-left"></i>voltar</a>
-						 -->
+				</div>						
 
 				</form>
 			</div>

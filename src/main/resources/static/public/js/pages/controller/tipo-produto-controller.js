@@ -1,4 +1,4 @@
-app.controller('tipoProdutoController', function($scope, tipoProdutoService, buscaCepService, $routeParams){
+app.controller('tipoProdutoController', function($scope, $rootScope,  tipoProdutoService, buscaCepService, $routeParams){
 	
 	var self = this;
   
@@ -29,7 +29,7 @@ app.controller('tipoProdutoController', function($scope, tipoProdutoService, bus
 		});
 }
 	
-//carrega a lista de empresa, quando acessa o controller
+
 	self.lista = function(){
 		tipoProdutoService.lista().
 		then(function(e){
@@ -39,7 +39,7 @@ app.controller('tipoProdutoController', function($scope, tipoProdutoService, bus
 	};
 
 	
-//busca a empresa atraves do id
+
 	self.buscaPorId = function(id){
 		if(!id)return;
 		tipoProdutoService.buscaPorId(id).
@@ -49,7 +49,7 @@ app.controller('tipoProdutoController', function($scope, tipoProdutoService, bus
 		}, function(errResponse){
 		});
 	};
-//verifica se o params esta com o ide executa o metodo de busca 	
+	
 	if(idTipoProduto){
 		self.buscaPorId(idTipoProduto);
 	}
