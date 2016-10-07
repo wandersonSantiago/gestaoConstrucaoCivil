@@ -10,21 +10,27 @@
 			<span class="lead">Estoque </span>
 		</div>
 		<div class="panel-body">
+			<label  class="radio-inline"><input type="radio"  ng-model="busca.busca" value="descricao" ng-click="estroqueCtrl.tipoBusca()" name="optradio">descrição</label>
+			<label  class="radio-inline"><input type="radio"  ng-model="busca.busca" value="categoria" ng-click="estroqueCtrl.tipoBusca()" name="optradio">categoria</label>
+			<label class="radio-inline"><input type="radio"   ng-model="busca.busca" value="tipo" ng-click="estroqueCtrl.tipoBusca()" name="optradio">tipo</label> 
+			<label  class="radio-inline"><input type="radio"  ng-model="busca.busca" value="fabricante" ng-click="estroqueCtrl.tipoBusca()" name="optradio">fabricante</label>
+			<label class="radio-inline"><input type="radio"   ng-model="busca.busca" value="fornecedor" ng-click="estroqueCtrl.tipoBusca()" name="optradio">fornecedor</label> 
+					
 		<div class="row">
-			<div class="col-sm-3">
-				<input type="text" class="form-control" ng-model="descricao" placeholder="buscar por descrição">
+			<div ng-if="descricao">
+				<input type="text" class="form-control"  ng-model="buscaDescricao" placeholder="buscar por descrição">
 			</div>
-			<div class="col-sm-3">
-				<input type="text" class="form-control" ng-model="buscar" placeholder="buscar por categoria">
+			<div ng-if="categoria">
+				<input type="text" class="form-control"  ng-model="buscaCategoria" placeholder="buscar por categoria">
 			</div>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" ng-model="buscar" placeholder="buscar por tipo">
+			<div ng-if="tipo">
+				<input type="text" class="form-control"  ng-model="buscaTipo" placeholder="buscar por tipo">
 			</div>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" ng-model="buscar" placeholder="buscar por fabricante">
+			<div ng-if="fabricante">
+				<input type="text" class="form-control"  ng-model="buscaFabricante" placeholder="buscar por fabricante">
 			</div>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" ng-model="buscar" placeholder="buscar por fornecedor">
+			<div ng-if="fornecedor">
+				<input type="text" class="form-control"  ng-model="buscaFornecedor" placeholder="buscar por fornecedor">
 			</div>
 		</div>
 			<table class="table table-hover table-bordered">

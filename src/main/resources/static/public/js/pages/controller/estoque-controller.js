@@ -163,5 +163,49 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 		if(idProdutoEstoque){
 			self.buscaPorId(idProdutoEstoque);
 		}
+		
+		$scope.busca = {
+				busca : ''	
+			};		
+			self.tipoBusca = function(){
+			if($scope.busca.busca == "descricao"){
+				$scope.fornecedor = false;
+				$scope.fabricante = false;
+				$scope.tipo = false;
+				$scope.categoria = false;
+				$scope.descricao = true;
+		}
+			if($scope.busca.busca == "categoria"){
+				$scope.fornecedor = false;
+				$scope.fabricante = false;
+				$scope.tipo = false;
+				$scope.descricao = false;
+				$scope.categoria = true;
+			}
+			if($scope.busca.busca == "tipo"){
+				$scope.fornecedor = false;
+				$scope.fabricante = false;
+				$scope.categoria = false;
+				$scope.descricao = false;
+				$scope.tipo = true;
+				
+			}
+			if($scope.busca.busca == "fabricante"){
+				$scope.fornecedor = false;
+				$scope.tipo = false;
+				$scope.categoria = false;
+				$scope.descricao = false;
+				$scope.fabricante = true;
+				
+			}
+			if($scope.busca.busca == "fornecedor"){
+				$scope.fabricante = false;
+				$scope.tipo = false;
+				$scope.categoria = false;
+				$scope.descricao = false;
+				$scope.fornecedor = true;
+				
+			}
+			}
 
 });
