@@ -5,12 +5,21 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 		self.listaProduto =[];
 		self.baixaEstoque = [];
 		self.listaProdutos = [];
-		
+		var idProdutoEstoque = $routeParams.idProdutoEstoque;
 		self.lista = function(){
 			 produtoService.lista().
 				then(function(t){
 					self.produtos = t;
 					}, function(errResponse){
+				});
+			};
+			
+			self.buscaPorId = function(id){
+				if(!id)return;
+				estoqueService.buscaPorId(id).
+				then(function(p){
+					self.produtoEstoque = p;
+				}, function(errResponse){
 				});
 			};
 			self.listaProdutosComEstoque = function(){
@@ -30,6 +39,7 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 							}
 						
 						}
+						console.log(self.listaProdutos);
 							}, function(errResponse){
 					});
 				};
@@ -149,6 +159,9 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 			$scope.casa = true;
 			
 		}
+		}
+		if(idProdutoEstoque){
+			self.buscaPorId(idProdutoEstoque);
 		}
 
 });
