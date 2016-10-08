@@ -12,6 +12,7 @@ import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.EstoqueEmpreendim
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.ItemNotaFiscal;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.NotaFiscalProduto;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Produto;
+import br.com.system.gestaoConstrucaoCivil.pojo.InformacaoEntradaProduto;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.EstoqueEmpreendimentoRepository;
 import br.com.system.gestaoConstrucaoCivil.service.EmpreendimentoService;
 
@@ -23,6 +24,8 @@ public class EstoqueEmpreendimentoService {
 	private EstoqueEmpreendimentoRepository estoqueRepository;
 	@Autowired
 	private EmpreendimentoService empreendimento;
+	@Autowired
+	private NotaFiscalProdutoService notaProdutoService;
 	//Remover depois isso
 	@Autowired
     EmpreendimentoService serviceEmpr;
@@ -35,7 +38,15 @@ public class EstoqueEmpreendimentoService {
 	}
     public List<EstoqueEmpreendimento> buscarTodos(){
 		
-		return estoqueRepository.findAll();
+    	 List<EstoqueEmpreendimento> estoques = estoqueRepository.findAll();
+         
+    	 for(int i = 0 ; i < estoques.size(); i++){
+    		 
+    		 InformacaoEntradaProduto info = notaProdutoService.getInfoProduto(estoques.get(i).getProduto().getId());
+    		 estoques.get(i).setInforProduto(info);
+    		 System.out.println("VALOR medio" + estoques.get(i).getCustoMedio());
+    	 }
+    	return estoques;
 	}
 	@Transactional(readOnly = false)
 	public void entradaEstoque(NotaFiscalProduto notaProduto) {
@@ -60,7 +71,7 @@ public class EstoqueEmpreendimentoService {
 
 	private EstoqueEmpreendimento criarNovoEstoque(Produto produto, Integer quantidade) {
 		EstoqueEmpreendimento estoque = new EstoqueEmpreendimento();
-		estoque.adicionarProduto(produto);
+		estoque.setProduto(produto);
 		estoque.setQuantidade(quantidade);
 		List<Empreendimento> empre = empreendimento.buscarTodos();
 		estoque.setEmpreendimento(empre.get(0));
@@ -95,6 +106,5 @@ public class EstoqueEmpreendimentoService {
 	public boolean existeProduto(Long id) {
 		return estoqueRepository.existeProduto(id);
 	}
-
-	
+   
 }

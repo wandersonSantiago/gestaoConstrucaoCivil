@@ -2,7 +2,6 @@ package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,8 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -42,7 +39,7 @@ public class Produto extends AbstractPersistable<Long> {
 	@JoinColumn(name = "id_categoria", nullable = true)
 	private Categoria categoria;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "produtos_fornecedores", joinColumns = @JoinColumn(name = "id_produto"), 
 	inverseJoinColumns = @JoinColumn(name = "id_fornecedor"))
 	private List<Fornecedor> fornecedores;

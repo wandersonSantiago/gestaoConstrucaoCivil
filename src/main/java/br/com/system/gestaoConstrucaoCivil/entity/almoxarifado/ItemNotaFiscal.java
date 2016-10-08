@@ -1,12 +1,18 @@
 package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -14,16 +20,21 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 import br.com.system.gestaoConstrucaoCivil.enuns.UnidadeMedidaEnum;
 
 @Entity
+@SequenceGenerator(name = "item_nota_fiscal_id_seq",
+sequenceName = "item_nota_fiscal_id_seq",
+initialValue = 1,
+allocationSize = 50)
 @Table(name = "item_nota_fiscal")
-public class ItemNotaFiscal extends AbstractPersistable<Long> {
+public class ItemNotaFiscal implements Serializable {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_nota_fiscal_id_seq")
+	private Long id;
+	
 	@ManyToOne
 	@JoinColumn(name = "id_produto", nullable = false)
 	private Produto produto;
-	/*@Column(nullable = true)
-	@Enumerated(EnumType.STRING)
-	private UnidadeMedidaEnum unidadeMedida;*/
-	@Column(nullable = false)
+    @Column(nullable = false)
 	private Integer quantidade;
 	@Column(nullable = false)
 	private Double valorUnitario;
@@ -34,6 +45,17 @@ public class ItemNotaFiscal extends AbstractPersistable<Long> {
 	@JoinColumn(name = "id_nota_fiscal")
 	private NotaFiscalProduto notaFiscalProduto;
 
+	
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Produto getProduto() {
 		return produto;
 	}
@@ -41,16 +63,7 @@ public class ItemNotaFiscal extends AbstractPersistable<Long> {
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
-
-/*	public UnidadeMedidaEnum getUnidadeMedida() {
-		return unidadeMedida;
-	}
-
-	public void setUnidadeMedida(UnidadeMedidaEnum unidadeMedida) {
-		this.unidadeMedida = unidadeMedida;
-	}*/
-
-	public Integer getQuantidade() {
+   public Integer getQuantidade() {
 		return quantidade;
 	}
 
@@ -82,4 +95,29 @@ public class ItemNotaFiscal extends AbstractPersistable<Long> {
 		this.notaFiscalProduto = notaFiscalProduto;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ItemNotaFiscal other = (ItemNotaFiscal) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+   
 }
