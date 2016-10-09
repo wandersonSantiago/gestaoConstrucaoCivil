@@ -2,28 +2,21 @@ package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-import org.springframework.web.bind.annotation.RestController;
-
+import br.com.system.gestaoConstrucaoCivil.enuns.Situacao;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
+
 
 @Entity
 @SequenceGenerator(name = "nota_fiscal_id_seq", sequenceName = "nota_fiscal_id_seq", initialValue = 1, allocationSize = 50)
@@ -34,9 +27,13 @@ public class NotaFiscal implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "nota_fiscal_id_seq")
 	private Long id;
 
+	
 	@Enumerated(EnumType.STRING)
 	private TipoNotaEnum tipoNota;
 
+	@Enumerated(EnumType.STRING)
+	private Situacao situacao;
+	
 	@Column(nullable = false)
 	private Long numero;
 
@@ -126,6 +123,13 @@ public class NotaFiscal implements Serializable {
 
 	public void setTipoNota(TipoNotaEnum tipoNota) {
 		this.tipoNota = tipoNota;
+	}
+    public Situacao getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(Situacao situacao) {
+		this.situacao = situacao;
 	}
 
 	@Override
