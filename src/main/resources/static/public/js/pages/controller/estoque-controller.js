@@ -39,7 +39,7 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 							}
 						
 						}
-						console.log(self.listaProdutos);
+						console.log(self.listaProdutosComEstoques);
 							}, function(errResponse){
 					});
 				};
