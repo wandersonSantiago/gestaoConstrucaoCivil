@@ -36,14 +36,33 @@
 					
 					<br>
 					
-					<div class="row" >			
+					<div class="row" >	
+					
+						<div class="col-sm-3">
+						<br>
+							<input type="text" class="form-control" name="leitor" placeholder="Leitor de Código de Barras">
+						</div>
+					
+						
 					<div class="col-sm-4" ng-controller="produtoController as pCtrl" ng-init="pCtrl.lista()" >
 							<a href="" data-toggle="modal" data-target="#myProduto"><i class="glyphicon glyphicon-plus"></i>novo</a>
-							<select class="form-control select2" ng-model="notaFiscalCtrl.produto" id="fornecedor"
+							
+							<md-autocomplete 
+							 	md-selected-item="notaFiscalCtrl.produto" 
+							 	md-search-text="pCtrl.searchText" 
+							 	md-selected-item-change="pCtrl.selectedItemChange(listaProduto)" 
+							 	md-items=" listaProduto in pCtrl.produtos | filter : pCtrl.searchText" 
+							 	md-item-text="listaProduto.descricao" 
+							 	md-min-length="0" placeholder="busca produto">
+       							 <md-item-template>
+          							<span md-highlight-text="pCtrl.searchText" md-highlight-flags="^i">{{listaProduto.descricao}}</span>
+       							 </md-item-template>        								
+     						 </md-autocomplete>
+							<!-- <select class="form-control select2" ng-model="notaFiscalCtrl.produto" id="fornecedor"
 							ng-options="listaProdutos.descricao for listaProdutos in pCtrl.produtos" 
 							  style=" width: 100%;" >
 								<option value="">---Produto---</option>
-							</select>
+							</select> -->
 							</div>
 							<div class="col-sm-2">
 							<br>
