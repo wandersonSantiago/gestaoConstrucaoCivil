@@ -10,6 +10,6 @@ import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.NotaFiscalProduto
 public interface NotaFiscalProdutoRepository extends JpaRepository<NotaFiscalProduto,Long> {
 
 
-	@Query("FROM NotaFiscalProduto nota")
+	@Query("FROM NotaFiscalProduto")
 	public List<NotaFiscalProduto> buscarNota();
 }

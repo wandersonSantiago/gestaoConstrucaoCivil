@@ -26,7 +26,7 @@ public class Produto extends AbstractPersistable<Long> {
 	@Column(nullable = true,unique = true)
 	private Integer codigo;
 	
-	@Column(nullable = false, length = 50)
+	@Column(nullable = false, length = 50,unique = true)
 	private String codigoBarra;
 
 	@Column(nullable = false, length = 50)

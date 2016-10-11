@@ -53,7 +53,9 @@ public class EstoqueEmpreendimento implements Serializable{
 	
 	public void setInforProduto(InformacaoEntradaProduto inforProduto){
 		
-		custoMedio = (inforProduto.getValorTotal() / inforProduto.getQuantidadeTotalNota()) * getQuantidade();
+		custoMedio = (inforProduto.getValorTotal() / inforProduto.getQuantidadeTotalNota());
+		//custoMedio = (inforProduto.getValorTotal() / inforProduto.getQuantidadeTotalNota()) * getQuantidade();
+		
 		if(custoMedio.isNaN()){
 			custoMedio = 0.0;
 		}

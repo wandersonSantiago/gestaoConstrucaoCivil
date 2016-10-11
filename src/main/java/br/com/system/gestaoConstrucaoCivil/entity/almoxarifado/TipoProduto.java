@@ -26,10 +26,8 @@ public class TipoProduto  implements Serializable  {
 	@Column(nullable = false)
 	private boolean ativo;
 	
-	@Column(nullable = false)
+	@Column(nullable = false,length = 30)
 	private String descricao;
-	
-	
 	
 	public Long getId() {
 		return id;
