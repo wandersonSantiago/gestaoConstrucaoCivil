@@ -42,7 +42,7 @@ public class EstoqueEmpreendimentoService {
          
     	 for(int i = 0 ; i < estoques.size(); i++){
     		 
-    		 InformacaoEntradaProduto info = notaProdutoService.getInfoProduto(estoques.get(i).getProduto().getId());
+    		 InformacaoEntradaProduto info = notaProdutoService.getInformacaoProduto(estoques.get(i).getProduto().getId());
     		 estoques.get(i).setInforProduto(info);
     		 System.out.println("VALOR medio" + estoques.get(i).getCustoMedio());
     	 }
