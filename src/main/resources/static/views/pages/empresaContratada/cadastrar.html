@@ -57,7 +57,7 @@
 						<div class="col-sm-4">
 							<input class="form-control" name="emailPrestadora" placeholder="E-mail"
 								ng-model="adminCtrl.empresa.dadoEmpresa.email" id="email"
-								type="email" required>
+								type="email"  maxlength="40" required>
 								<p ng-show="formAdminSistema.emailPrestadora.$error.email"
 						class="alert alert-warning ">Digite um Email Válido</p>
 						</div>
@@ -106,7 +106,7 @@
 						<div class="col-sm-5">
 							<input class="form-control" placeholder="Rua"
 								ng-model="adminCtrl.empresa.dadoEmpresa.endereco.logradouro" id="rua"
-								type="text" required>
+								type="text" maxlength="50" required>
 						</div>
 						
 						<div class="col-sm-2"
@@ -125,7 +125,7 @@
 						<div class="col-sm-5">
 							<input class="form-control" placeholder="Complemento"
 								ng-model="adminCtrl.empresa.dadoEmpresa.endereco.complemento"
-								id="complemento" type="text">
+								id="complemento"  maxlength="50" type="text">
 						</div>
 					</div>
 						<br>
@@ -134,17 +134,17 @@
 						<div class="col-sm-5">
 							<input class="form-control" placeholder="Bairro"
 								ng-model="adminCtrl.empresa.dadoEmpresa.endereco.bairro"
-								id="bairro" type="text" reuired>
+								id="bairro" type="text"  maxlength="50" required>
 						</div>
 						<div class="col-sm-5">
 							<input class="form-control" placeholder="Cidade"
 								ng-model="adminCtrl.empresa.dadoEmpresa.endereco.localidade"
-								id="cidade" type="text" required>
+								id="cidade" type="text"  maxlength="50" required>
 						</div>
 						<div class="col-sm-2">
 							<input class="form-control" placeholder="Estado"
 								ng-model="adminCtrl.empresa.dadoEmpresa.endereco.uf"
-								id="estado" type="text" required>
+								id="estado" type="text" maxlength="50" required>
 						</div>
 					</div>
 					<br>

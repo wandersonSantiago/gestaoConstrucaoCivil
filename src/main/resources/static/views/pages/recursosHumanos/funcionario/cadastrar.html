@@ -52,7 +52,7 @@
 							<div class="col-sm-2">
 							<input class="form-control"  placeholder="Idade"
 								ng-model="cadFuncCtrl.funcionario.idade"
-								id="idade" type="text" required  >
+								id="idade" type="text" ng-minlength="2" ng-maxlength="2" required  >
 						</div>
 					</div>
 					<br> 
@@ -97,7 +97,7 @@
 						<div class="col-sm-2">
 							<input class="form-control" placeholder="Carteira Trabalho"
 								ng-model="cadFuncCtrl.funcionario.carteiraTrabalho"
-								id="carteiraTrabalho" type="text" required>
+								id="carteiraTrabalho" maxlength="20" type="text" required>
 
 						</div>
 					
@@ -144,7 +144,7 @@
 						<div class="col-sm-5">
 							<input class="form-control" placeholder="Rua"
 								ng-model="cadFuncCtrl.funcionario.endereco.logradouro" id="rua"
-								type="text" required>
+								type="text" maxlength="50" required>
 						</div>
 						<div class="col-sm-2"
 							ng-class="{ 'has-error' : formCadastrarFuncionario.numeroEmpresa.$invalid && !formCadastrarFuncionario.numeroEmpresa.$pristine }">
@@ -159,7 +159,7 @@
 						<div class="col-sm-5">
 							<input class="form-control" placeholder="Complemento"
 								ng-model="cadFuncCtrl.funcionario.endereco.complemento"
-								id="complemento" type="text">
+								id="complemento" maxlength="50" type="text">
 						</div>
 					</div>
 					<br>
@@ -167,18 +167,18 @@
 						<div class="col-sm-5">
 							<input class="form-control" placeholder="Bairro"
 								ng-model="cadFuncCtrl.funcionario.endereco.bairro" id="bairro"
-								type="text" reuired>
+								type="text" maxlength="50" required>
 
 						</div>
 						<div class="col-sm-5">
 							<input class="form-control" placeholder="Cidade"
 								ng-model="cadFuncCtrl.funcionario.endereco.localidade" id="cidade"
-								type="text" required>
+								type="text"  maxlength="50" required>
 						</div>
 						<div class="col-sm-2">
 							<input class="form-control" placeholder="Estado"
 								ng-model="cadFuncCtrl.funcionario.endereco.uf" id="estado"
-								type="text" required>
+								type="text"  maxlength="50" required>
 						</div>
 
 					</div>

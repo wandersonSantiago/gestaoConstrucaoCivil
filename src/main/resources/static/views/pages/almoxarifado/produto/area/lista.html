@@ -7,7 +7,7 @@
 	<div class="box box-primary" ng-init="areaCtrl.lista()">
 	
 		<div class="box-header">
-			<span class="lead">Lista de Areas Produto </span>
+			<span class="lead">Lista das  áreas de aplicação dos Produtos </span>
 		</div>
 		<div class="panel-body">
 		<input type="text" class="form-control" ng-model="buscar" placeholder="buscar">
@@ -15,7 +15,7 @@
 				<thead>
 					<tr>
 					
-						<th>Status</th>
+						
 						<th>Descrição</th>
 						
 						
@@ -25,7 +25,7 @@
 					ng-repeat=" areaProduto in areaCtrl.listaAreaProduto | filter : buscar ">
 					<tr>
 						
-						<td>{{ areaProduto.ativo }}</td>
+						
 						<td>{{ areaProduto.descricao }}</td>
 					
 						<td><a href="#/almoxarifado/produto/area/editar/{{areaProduto.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 

@@ -10,17 +10,16 @@
 			<span class="lead">Lista de Produtos </span>
 		</div>
 		<div class="panel-body">
-		<input type="text" class="form-control" ng-model="buscarProduto" placeholder="buscar">
+		<input type="text" class="form-control" ng-model="buscaProduto" placeholder="buscar">
 			<table class="table table-hover table-bordered">
 				<thead>
 					<tr>
 					
-						<th>Estatus</th>
+						<th>Status</th>
 						<th>Descrição</th>
-						<th>Fornecedor</th>
 						<th>Unidade Medida</th>
 						<th>Categoria</th>
-						<th>Valor</th>
+						<th>Tipo do Produto</th>
 									
 						
 					</tr>
@@ -31,10 +30,9 @@
 						
 						<td>{{ produto.ativo }}</td>
 						<td>{{ produto.descricao }}</td>
-						<td>{{ produto.fornecedor.dadoEmpresa.rezaoSocial }}</td>
 						<td>{{ produto.unidadeMedida }}</td>
 						<td>{{ produto.categoria.descricao }}</td>
-						<td>{{ produto.valorCompra }}</td>
+						<td>{{ produto.tipoProduto.descricao }}</td>
 					
 						<td><a href="#/almoxarifado/produto/editar/{{produto.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						

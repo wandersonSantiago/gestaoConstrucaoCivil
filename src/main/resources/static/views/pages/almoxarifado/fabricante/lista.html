@@ -15,7 +15,7 @@
 				<thead>
 					<tr>
 					
-						<th>Estatus</th>
+						
 						<th>Nome Fantasia</th>
 						<th>Razão Social</th>
 						<th>CNPJ</th>
@@ -29,13 +29,13 @@
 					ng-repeat=" fabricante in fabricanteCtrl.listaFabricante | filter : buscar ">
 					<tr>
 						
-						<td>{{ fabricante.ativo }}</td>
+						
 						<td>{{ fabricante.dadoEmpresa.nomeFantasia }}</td>
 						<td>{{ fabricante.dadoEmpresa.razaoSocial }}</td>
 						<td>{{ fabricante.dadoEmpresa.cnpj }}</td>
 						<td>{{ fabricante.dadoEmpresa.telefone }}</td>
-						<td>{{ fornecedor.dadoEmpresa.endereco.localidade }}</td>
-						<td>{{ fornecedor.dadoEmpresa.endereco.uf }}</td>
+						<td>{{ fabricante.dadoEmpresa.endereco.localidade }}</td>
+						<td>{{ fabricante.dadoEmpresa.endereco.uf }}</td>
 						<td><a href="#/almoxarifado/fabricante/editar/{{fabricante.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						
 					</tr>

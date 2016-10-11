@@ -102,7 +102,8 @@
 					<br>
 					<div class="row">
 						<div class="col-sm-5">
-								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.logradouro" placeholder="Rua" class="form-control" id="rua" type="text" required>
+								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.logradouro" placeholder="Rua" class="form-control" id="rua" type="text" 
+								maxlength="50" required>
 						</div>
 						<div class="col-sm-2"
 							ng-class="{ 'has-error' : empreendimentoForm.numeroEmpresa.$invalid && !empreendimentoForm.numeroEmpresa.$pristine }">
@@ -117,20 +118,24 @@
 									class="alert alert-warning ">campo numero no maximo 7 caracter</p>
 						</div>
 						<div class="col-sm-5">
-							<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.complemento" placeholder="Complemento" class="form-control" id="complemento" type="text">
+							<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.complemento" placeholder="Complemento" class="form-control" id="complemento" 
+							 maxlength="50" type="text">
 						</div>
 					</div>
 					
 					<div class="row">
 							<div class="col-sm-5">
-								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.bairro" placeholder="Bairro" class="form-control" id="bairro" type="text" required>
+								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.bairro" placeholder="Bairro" class="form-control" id="bairro" type="text"
+   								 maxlength="50"required>
 							</div>
 					
 							<div class="col-sm-5">
-								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.localidade" placeholder="Cidade" class="form-control" id="cidade" type="text" required>
+								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.localidade" placeholder="Cidade" class="form-control" id="cidade" type="text" 
+								 maxlength="50" required>
 							</div>
 							<div class="col-sm-2">
-								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.uf" placeholder="Estado" class="form-control" id="estado" type="text" required>
+								<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.uf" placeholder="Estado" class="form-control" id="estado" type="text" 
+								 maxlength="50" required>
 							</div>
 					</div>
 					<br>

@@ -10,7 +10,7 @@ app.controller('verificaDadosController', function($scope, $rootScope, toastr, v
 			then(function(v){
 				self.verificado = v;				
 				if(self.verificado){
-					sweetAlert({ timer : 105000,  text :"CNPJ ja consta cadastrado em nosso banco de dados",  type : "info", width: 300, higth: 300, padding: 20});
+					sweetAlert({ timer : 105000,  text :"Já existe cadastro deste CNPJ!!!",  type : "info", width: 300, higth: 300, padding: 20});
 					self.limpaCampo();
 				}
 				
@@ -22,7 +22,7 @@ app.controller('verificaDadosController', function($scope, $rootScope, toastr, v
 			then(function(v){
 				self.verificado = v;				
 				if(self.verificado){
-					sweetAlert({ timer : 105000,  text :"Inscrição Estadual ja consta cadastrado em nosso banco de dados",  type : "info", width: 300, higth: 300, padding: 20});
+					sweetAlert({ timer : 105000,  text :"Já existe Cadastro desta Inscrição Estadual",  type : "info", width: 300, higth: 300, padding: 20});
 					self.limpaCampo();
 					
 				}

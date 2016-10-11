@@ -6,7 +6,7 @@
 <div class="box box-primary" >
 		<!-- Default panel contents -->
 		<div class="box-header" >
-			<span class="lead">Entrada Estoque Produto </span>
+			<span class="lead">Entrada de Estoque  </span>
 		</div>
 		<div class="panel-body">
 
@@ -14,8 +14,7 @@
 			<div class="container col-sm-12 " >
 				<form role="form-vertical" ng-submit="notaFiscalCtrl.salva()" >
 					
-									
-					<h3>Nota fiscal</h3>
+			
 					
 					<br>
 		
@@ -24,12 +23,7 @@
 						<div class="col-sm-3">
 							<input class="form-control"  id="numeroNota" type="text" title="informe o numero da nota fiscal" placeholder="Numero nota fiscal" 
 							ng-model="notaFiscalCtrl.notaFiscal.numero" required>
-						</div>
-						<!-- <label class="col-sm-2 control-label" for="chave">Chave de Acesso</label> -->
-						<div class="col-sm-3">
-							<input class="form-control"  id="chave"  type="text" title="informe a chave de acesso da nota fiscal" placeholder="chave de acesso nota fiscal" 
-							ng-model="notaFiscalCtrl.notaFiscal.chaveAcesso" required>
-						</div>
+						</div>					
 						<!-- <label class="col-sm-2 control-label" for="dataNota">Data Nota Fiscal</label> -->
 						<div class="col-sm-3">
 							<input class="form-control"  id="dataNota" type="text" ng-model="notaFiscalCtrl.notaFiscal.dataNota" ui-date title="informe a data da nota fiscal"  placeholder="data nota fiscal" required>

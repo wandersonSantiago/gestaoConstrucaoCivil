@@ -65,7 +65,7 @@
 						<div class="col-sm-6">
 							<input class="form-control" name="emailPrestadora" placeholder="E-mail"
 								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.email" id="email"
-								type="email" required>
+								type="email"ng-minlength="5" ng-maxlength="40" required>
 								<p ng-show="formFabricante.emailPrestadora.$error.email"
 						class="alert alert-warning ">Digite um Email Válido</p>
 						</div>
@@ -94,7 +94,7 @@
 						<div class="col-sm-5">
 							<input class="form-control" placeholder="Rua"
 								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.endereco.logradouro" id="rua"
-								type="text" required>
+								type="text"  maxlength="50" required>
 						</div>
 						
 						<div class="col-sm-2"
@@ -114,7 +114,7 @@
 						<div class="col-sm-5">
 							<input class="form-control" placeholder="Complemento"
 								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.endereco.complemento"
-								id="complemento" type="text">
+								id="complemento"  maxlength="50" type="text">
 						</div>
 					</div>
 						<br>
@@ -123,17 +123,17 @@
 						<div class="col-sm-5">
 							<input class="form-control" placeholder="Bairro"
 								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.endereco.bairro"
-								id="bairro" type="text" reuired>
+								id="bairro" type="text"  maxlength="50" reuired>
 						</div>
 						<div class="col-sm-5">
 							<input class="form-control" placeholder="Cidade"
 								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.endereco.localidade"
-								id="cidade" type="text" required>
+								id="cidade" type="text" maxlength="50" required>
 						</div>
 						<div class="col-sm-2">
 							<input class="form-control" placeholder="Estado"
 								ng-model="fabricanteCtrl.fabricante.dadoEmpresa.endereco.uf"
-								id="estado" type="text" required>
+								id="estado" type="text" maxlength="50" required>
 						</div>
 					</div>
 					<br>

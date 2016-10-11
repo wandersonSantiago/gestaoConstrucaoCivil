@@ -7,7 +7,7 @@
 <div class="box box-primary" >
 		<!-- Default panel contents -->
 		<div class="box-header" >
-			<span class="lead">Cadastrar Fornecedor </span>
+			<span class="lead">Cadastro de Fornecedor </span>
 		</div>
 		<div class="panel-body">
 
@@ -109,7 +109,7 @@
 					<div class="col-sm-5">
 								<input class="form-control" placeholder="Rua"
 									ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.endereco.logradouro" id="rua"
-									type="text" required>
+									type="text" maxlength="50" required>
 							</div>
 							
 							<div class="col-sm-2"
@@ -126,7 +126,7 @@
 									caracter</p>
 						   </div>
 						   <div class="col-sm-5">
-							<input class="form-control" placeholder="Complemento"
+							<input class="form-control" placeholder="Complemento" maxlength="50"
 								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.endereco.complemento"
 								id="complemento" type="text">
 						</div>
@@ -136,17 +136,17 @@
 						<div class="col-sm-5">
 							<input class="form-control" placeholder="Bairro"
 								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.endereco.bairro"
-								id="bairro" type="text" required>
+								id="bairro" type="text"  maxlength="50" required>
 
 						</div>
 						<div class="col-sm-5">
-							<input class="form-control" placeholder="Cidade"
+							<input class="form-control" placeholder="Cidade" maxlength="50"
 								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.endereco.localidade"
 								id="cidade" type="text" required>
 						</div>
 				
 						<div class="col-sm-2">
-							<input class="form-control" placeholder="Estado"
+							<input class="form-control" placeholder="Estado"  maxlength="50"
 								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.endereco.uf"
 								id="estado" type="text" required>
 						</div>
@@ -158,21 +158,21 @@
 						<div class="col-sm-4">
 							<input class="form-control" name="emailPrestadora" placeholder="E-mail"
 								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.email" id="email"
-								type="email" required>
+								type="email"  maxlength="40" required>
 								<p ng-show="formFornecedor.emailPrestadora.$error.email"
 							class="alert alert-warning ">Digite um Email Válido</p>
 						</div>
 						<div class="col-sm-4">
 							<input class="form-control" placeholder="Contato"
 								ng-model="fornecedorCtrl.fornecedor.contato"
-								id="contato" type="text">
+								id="contato" maxlength="50" type="text">
 
 						</div>
 			
 						<div class="col-sm-4">
 							<input class="form-control" placeholder="Observação"
 								ng-model="fornecedorCtrl.fornecedor.observacao"
-								id="observacao" type="text">
+								id="observacao" maxlength="50" type="text">
 
 						</div>
 					</div>
