@@ -37,12 +37,13 @@
 			<table class="table table-hover table-bordered">
 				<thead>
 					<tr>
+						 
+						<th>Código</th>
 						<th>Descrição</th>
 						<th>Categoria</th>
 						<th>Tipo</th>
 						<th>Unidade Medida</th>
 						<th>Fabricante</th>
-						<th>Forncedor</th>
 						<th>quantidade Estoque</th>
 						<th>Custo médio</th>
 						<th>Valor Total</th>
@@ -52,12 +53,12 @@
 					ng-repeat=" lista in estroqueCtrl.listaProdutosComEstoques | filter : buscar ">
 					<tr>
 						
+						<td>{{lista.produto.codigo}}</td>
 						<td>{{lista.produto.descricao}}</td>
 						<td>{{lista.produto.categoria.descricao}}</td>
 						<td>{{lista.produto.tipoProduto.descricao}}</td>
 						<td>{{lista.produto.unidadeMedida}}</td>
 						<td>{{lista.produto.fabricante.dadoEmpresa.nomeFantasia}}</td>
-						<td>{{lista.produto.fornecedores.nomeFantasia}}</td>
 						<td>{{lista.quantidade}}</td>
 						<td>{{lista.custoMedio | currency}}</td>
 					    <td>{{lista.valorTotal | currency}}</td>
