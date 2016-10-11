@@ -1,16 +1,16 @@
 <meta charset="UTF-8">
 <br>
 <br>
-<div class="generic-container"	ng-controller="transferenciaEstoqueController as estoqueCtrl">
+<div class="generic-container"	ng-controller="transferenciaEstoqueController as transfCtrl">
 	<div class="box box-primary">
 		<div class="box-header">
-			<span class="lead"> Transferencia estoque </span>
+			<span class="lead"> Transferência estoque </span>
 		</div>
 		<div class="panel-body">
 		<br>
 			<div class="container col-sm-12 ">
 				<form role="form-vertical"
-					ng-submit="estoqueCtrl.salva()">
+					ng-submit="transfCtrl.salva()">
 
 					
 					<div class="row" >
@@ -31,19 +31,19 @@
 						</div>
 					</div>
 					<br> <br>
-					<div class="row" ng-init="estoqueCtrl.listaProdutosComEstoque()">
+					<div class="row" ng-init="transfCtrl.listaProdutosComEstoque()">
 						
 						<div class="col-sm-3"  >
 									
 							  <md-autocomplete 
 							 	md-selected-item="produto" 
-							 	md-search-text="estoqueCtrl.searchText" 
-							 	md-selected-item-change="estoqueCtrl.selectedItemChange(listaProduto.produto)" 
-							 	md-items=" listaProduto in estoqueCtrl.listaProdutos | filter : estoqueCtrl.searchText" 
+							 	md-search-text="transfCtrl.searchText" 
+							 	md-selected-item-change="transfCtrl.selectedItemChange(transfCtrl.produto)" 
+							 	md-items=" listaProduto in transfCtrl.listaProdutos | filter : transfCtrl.searchText" 
 							 	md-item-text="listaProduto.produto.descricao" 
 							 	md-min-length="0" placeholder="busca produto">
        							 <md-item-template>
-          							<span md-highlight-text="estoqueCtrl.searchText" md-highlight-flags="^i">{{listaProduto.produto.descricao}}</span>
+          							<span md-highlight-text="transfCtrl.searchText" md-highlight-flags="^i">{{listaProduto.produto.descricao}}</span>
        							 </md-item-template>        								
      						 </md-autocomplete>
      						
@@ -52,7 +52,7 @@
 						<div class="col-sm-2">
 						
 							
-							<input class="form-control" ng-model="produto.quantidade.quantidade" type="text" id="quantidadeEstoque" ui-number-mask="0" disabled placeholder="Quantidade estoque">
+							<input class="form-control" ng-model="produto.quantidade" type="text" id="quantidadeEstoque" ui-number-mask="0" disabled placeholder="Quantidade estoque">
 						
 						</div>
 						
@@ -64,7 +64,7 @@
 						</div>
 						<div class="col-sm-2">
 							<input class="btn btn-lg btn-primary btn-block btn-signin"
-								ng-click=" estoqueCtrl.adicionarProduto(produto.quantidade.quantidade, produto.produto , quantidade, estoqueCtrl.empreendimento)" value="adicionar"
+								ng-click=" transfCtrl.adicionarProduto(produto.quantidade, produto.produto , quantidade, estoqueCtrl.empreendimento)" value="adicionar"
 								title="pressione para adicionar a lista" type="button" ng-disabled="!produto" >
 						</div>
 					</div>
@@ -85,10 +85,10 @@
 
 									</tr>
 								</thead>
-								<tbody ng-repeat="produto in estoqueCtrl.listaProduto" ng-model="selecionado">
+								<tbody ng-repeat="produto in transfCtrl.listaProduto" ng-model="selecionado">
 									<tr>
 										<td><input type="checkbox" ng-model="produto.selecionado"
-											ng-click="estoqueCtrl.ativarExcluirLote(estoqueCtrl.listaProduto)"></td>
+											ng-click="transfCtrl.ativarExcluirLote(transfCtrl.listaProduto)"></td>
 										<td>{{produto.produto.descricao}}</td>																				
 										<td>{{produto.quantidadeEstoque}}</td>
 										<td>{{produto.quantidadeSaida}}</td>
@@ -100,7 +100,7 @@
 									<tr>
 										<th><input type="button" class="btn-danger"
 											ng-if="ativadoExcluirLote" value="excluir" name="apagar"
-											ng-click=" estoqueCtrl.apagarProduto(estoqueCtrl.listaProduto)"></th>
+											ng-click=" transfCtrl.apagarProduto(transfCtrl.listaProduto)"></th>
 									</tr>
 								</tfoot>
 							</table>

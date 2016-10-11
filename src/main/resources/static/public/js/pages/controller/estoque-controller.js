@@ -28,18 +28,18 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 						self.listaProdutosComEstoques = t;
 						
 						for(i = 0; i < self.listaProdutosComEstoques.length; i++ ){
-							for(c = 0; c < self.listaProdutosComEstoques[i].produto.length ; c++){
-								self.produto = self.listaProdutosComEstoques[i].produto[c];
-								self.quantidade = self.listaProdutosComEstoques[i];
+						
+								self.produto = self.listaProdutosComEstoques[i].produto;
+								self.quantidade = self.listaProdutosComEstoques[i].quantidade;
 							self.listaProdutos.push({
 										produto : self.produto,
 										quantidade : self.quantidade
 									
 								});
-							}
+							
 						
 						}
-						console.log(self.listaProdutosComEstoques);
+						console.log(self.listaProdutos);
 							}, function(errResponse){
 					});
 				};
@@ -84,7 +84,7 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 				if(produto1 != produto.id){
 					self.existe = true;
 					}else{
-						sweetAlert({ timer : 3000,  text :"ja consta este produto na tabela",  type : "info", width: 300, higth: 300, padding: 20});
+						sweetAlert({ timer : 3000,  text :"este produto já esta incluso",  type : "info", width: 300, higth: 300, padding: 20});
 						self.existe = false;
 						var tamanho = self.listaProduto[i];
 						i = tamanho[i + 1];
@@ -120,6 +120,7 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 		self.salva = function(){
 			
 			self.baixaEstoque = self.listaProduto;
+			console.log(self.baixaEstoque);
 			estoqueService.salva(self.baixaEstoque)
 			.then(function(response){
 				self.quantidadeEstoque = null;

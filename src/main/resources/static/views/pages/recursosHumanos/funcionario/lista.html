@@ -17,22 +17,24 @@
 					<tr>
 						<th>Nome</th>
 						<th>CPF</th>
-						<th>CARGO</th>
-						<th>TELEFONE</th>
-						<th>SEXO</th>
-						<th>CIDADE</th>
+						<th>Cargo</th>
+						<th>Telefone</th>
+						<th>Sexo</th>
+						<th>Cidade</th>
+						<th>Editar</th>
 					</tr>
 				</thead>
 				<tbody
 					ng-repeat=" funcionario in funCtrl.listaFuncionarios | filter : buscaFuncionario">
 					<tr>
-					<td><h5><a href="#/recursosHumanos/funcionario/editar/{{funcionario.id}}">{{ funcionario.nomeCompleto }}</a></h5></td>
-						<td><h5><a href="#/recursosHumanos/funcionario/editar/{{funcionario.id}}">{{ funcionario.cpf }}</a></h5></td>
-						<td><h5><a href="#/recursosHumanos/funcionario/editar/{{funcionario.id}}">{{ funcionario.cargo.descricao }}</a></h5></td>
-						<td><h5><a href="#/recursosHumanos/funcionario/editar/{{funcionario.id}}">{{ funcionario.telefoneCelular}}</a></h5></td>
-						<td><h5><a href="#/recursosHumanos/funcionario/editar/{{funcionario.id}}">{{ funcionario.sexo }}</a></h5></td>
-						<td><h5><a href="#/recursosHumanos/funcionario/editar/{{funcionario.id}}">{{ funcionario.endereco.cidade}}</a></h5></td>
-						</tr>
+					<td>{{ funcionario.nomeCompleto }}</td>
+						<td>{{ funcionario.cpf }}</td>
+						<td>{{ funcionario.cargo.descricao }}</td>
+						<td>{{ funcionario.telefoneCelular}}</td>
+						<td>{{ funcionario.sexo }}</td>
+						<td>{{ funcionario.endereco.localidade}}</td>
+						<td><a href="#/recursosHumanos/funcionario/editar/{{funcionario.id}}"><i class="glyphicon glyphicon-pencil"></i></a>
+					</tr>
 
 				</tbody>
 				<tfoot>

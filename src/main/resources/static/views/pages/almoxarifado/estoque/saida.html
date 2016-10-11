@@ -91,7 +91,7 @@
 							 	md-selected-item="produto" 
 							 	md-search-text="estoqueCtrl.searchText" 
 							 	md-selected-item-change="estoqueCtrl.selectedItemChange(listaProduto.produto)" 
-							 	md-items=" listaProduto in estoqueCtrl.listaProdutosComEstoques | filter : estoqueCtrl.searchText" 
+							 	md-items=" listaProduto in estoqueCtrl.listaProdutos | filter : estoqueCtrl.searchText" 
 							 	md-item-text="listaProduto.produto.descricao" 
 							 	md-min-length="0" placeholder="busca produto">
        							 <md-item-template>
@@ -118,7 +118,7 @@
 						<div class="col-sm-2">
 						
 							
-							<input class="form-control" ng-model="produto.quantidade.quantidade" type="text" id="quantidadeEstoque" ui-number-mask="0" disabled placeholder="Quantidade estoque">
+							<input class="form-control" ng-model="produto.quantidade" type="text" id="quantidadeEstoque" ui-number-mask="0" disabled placeholder="Quantidade estoque">
 						
 						</div>
 						
@@ -130,7 +130,7 @@
 						</div>
 						<div class="col-sm-2">
 							<input class="btn btn-lg btn-primary btn-block btn-signin"
-								ng-click=" estoqueCtrl.adicionarProduto(produto.quantidade.quantidade, produto.produto , estoqueCtrl.areaProduto, quantidade,  estoqueCtrl.andar, estoqueCtrl.torre , estoqueCtrl.apartamento, estoqueCtrl.NumeroCasa)" value="adicionar"
+								ng-click=" estoqueCtrl.adicionarProduto(produto.quantidade, produto.produto , estoqueCtrl.areaProduto, quantidade,  estoqueCtrl.andar, estoqueCtrl.torre , estoqueCtrl.apartamento, estoqueCtrl.NumeroCasa)" value="adicionar"
 								title="pressione para adicionar a lista" type="button" ng-disabled="!produto" >
 						</div>
 					</div>
@@ -179,7 +179,7 @@
 					
 					<div class="row ">
 						
-							<button type="submit" name="submit" 
+							<button type="submit" name="submit" ng-disabled="!tipo.tipo"
 								class="btn btn-lg btn-primary btn-block btn-signin">Cadastrar</button>
 						
 					</div>				

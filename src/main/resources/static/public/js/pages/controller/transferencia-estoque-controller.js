@@ -17,18 +17,13 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 				transferenciaEstoqueService.listaProdutosComEstoque().
 					then(function(t){
 						self.listaProdutosComEstoques = t;
-						
 						for(i = 0; i < self.listaProdutosComEstoques.length; i++ ){
-							for(c = 0; c < self.listaProdutosComEstoques[i].produto.length ; c++){
-								self.produto = self.listaProdutosComEstoques[i].produto[c];
-								self.quantidade = self.listaProdutosComEstoques[i];
+								self.produto = self.listaProdutosComEstoques[i].produto;
+								self.quantidade = self.listaProdutosComEstoques[i].quantidade;
 							self.listaProdutos.push({
 										produto : self.produto,
 										quantidade : self.quantidade
-									
 								});
-							}
-						
 						}
 							}, function(errResponse){
 					});
@@ -87,7 +82,8 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 			if(quantidadeEstoque < quantidadeSaida){
 				sweetAlert({ timer : 6000,  text :"Quantidade Superior ao estoque",  type : "info", width: 300, higth: 300, padding: 20});
 					
-				}if(quantidadeSaida < 1 || quantidadeSaida == null){
+				}
+			else{if(quantidadeSaida < 1 || quantidadeSaida == null){
 					sweetAlert({ timer : 6000,  text :"Quantidade tem que ser maior que zero",  type : "info", width: 300, higth: 300, padding: 20});
 					
 				}else{
@@ -100,7 +96,7 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 					}
 				}
 			}
-			
+		}
 		self.salva = function(){
 			
 			self.baixaEstoque = self.listaProduto;
