@@ -20,9 +20,9 @@ public class Endereco extends AbstractPersistable<Long>  {
 	private Integer numero;
 	@Column(nullable = false)
 	private String uf;
-	@Column(nullable = false)
+	@Column(nullable = false,length = 9)
 	private String cep;
-	@Column(nullable = true)
+	@Column(nullable = true,length = 50)
 	private String complemento;
 	
 	public String getLogradouro() {

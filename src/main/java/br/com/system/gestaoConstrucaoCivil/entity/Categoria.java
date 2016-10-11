@@ -24,7 +24,7 @@ public class Categoria implements Serializable {
 	@Column(nullable = false)
 	private boolean ativo;
 	
-	@Column(nullable = false,length = 50)
+	@Column(nullable = false,length = 30)
 	private String descricao;
 	
 	public Long getId() {

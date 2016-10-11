@@ -27,7 +27,7 @@ public class AreaProduto implements Serializable{
 	@Column(nullable = false)
 	private boolean ativo;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, length = 30)
 	public String descricao;
 
 	public Long getId() {

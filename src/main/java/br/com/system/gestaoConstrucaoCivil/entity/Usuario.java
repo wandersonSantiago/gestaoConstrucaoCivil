@@ -1,16 +1,11 @@
-package br.com.system.gestaoConstrucaoCivil.entity;
+ package br.com.system.gestaoConstrucaoCivil.entity;
 
 import java.time.LocalDate;
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -29,9 +24,9 @@ public class Usuario extends AbstractPersistable<Long>{
 	
 	@Column(nullable = false,length = 50)
 	private String nome;
-	@Column(nullable = false,length = 50)
+	@Column(nullable = false,length = 15)
 	private String login;
-	@Column(nullable = false,length = 40)
+	@Column(nullable = true,length = 40)
 	private String email;
 	@Column(nullable = false,length = 256)
 	private String senha;

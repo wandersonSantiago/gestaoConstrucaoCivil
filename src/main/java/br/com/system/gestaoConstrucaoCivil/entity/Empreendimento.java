@@ -40,8 +40,8 @@ public class Empreendimento extends AbstractPersistable<Long> {
 	@Enumerated(EnumType.STRING)
 	private TipoEmpreendimentoEnum tipoEmpreendimento;
     
-	@Column(nullable = false)
-	String descricao;
+	@Column(nullable = false,length = 50)
+	private String descricao;
 	
 	
 	@Column(nullable = false)
@@ -59,9 +59,7 @@ public class Empreendimento extends AbstractPersistable<Long> {
     @Column(nullable = false)
 	private boolean ativo;
 	
-    
-	
-	public Endereco getEnderecoEmpreendimento() {
+    public Endereco getEnderecoEmpreendimento() {
 		return enderecoEmpreendimento;
 	}
 	public void setEnderecoEmpreendimento(Endereco enderecoEmpreendimento) {
