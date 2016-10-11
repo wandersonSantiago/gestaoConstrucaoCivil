@@ -49,12 +49,13 @@ public class EstoqueEmpreendimento implements Serializable{
 	
 	@Transient
 	private Double custoMedio;
-	
+	@Transient
+	private Double valorTotal;
 	
 	public void setInforProduto(InformacaoEntradaProduto inforProduto){
 		
 		custoMedio = (inforProduto.getValorTotal() / inforProduto.getQuantidadeTotalNota());
-		//custoMedio = (inforProduto.getValorTotal() / inforProduto.getQuantidadeTotalNota()) * getQuantidade();
+		valorTotal = (inforProduto.getValorTotal() / inforProduto.getQuantidadeTotalNota()) * getQuantidade();
 		
 		if(custoMedio.isNaN()){
 			custoMedio = 0.0;
@@ -63,6 +64,10 @@ public class EstoqueEmpreendimento implements Serializable{
 	public Double getCustoMedio(){
 		
 		return custoMedio;
+	}
+	
+	public Double getValorTotal() {
+		return valorTotal;
 	}
 	
 	public Long getId() {

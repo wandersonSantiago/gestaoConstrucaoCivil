@@ -44,6 +44,7 @@
 						<th>Forncedor</th>
 						<th>quantidade Estoque</th>
 						<th>Custo médio</th>
+						<th>Valor Total</th>
 					</tr>
 				</thead>
 				<tbody
@@ -58,7 +59,8 @@
 						<td>{{lista.produto.fornecedores.nomeFantasia}}</td>
 						<td>{{lista.quantidade}}</td>
 						<td>{{lista.custoMedio | currency}}</td>
-						
+					    <td>{{lista.valorTotal | currency}}</td>
+					
 						<td><a href="#/almoxarifado/estoque/editar/{{lista.produto.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						
 					</tr>
