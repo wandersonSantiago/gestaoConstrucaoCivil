@@ -12,7 +12,7 @@
 
 			<br>
 			<div class="container col-sm-12 " >
-				<form role="form-vertical" ng-submit="notaFiscalCtrl.salva()" >
+				<form role="form-vertical"  ng-submit="notaFiscalCtrl.salva()" >
 					
 			
 					
@@ -40,8 +40,8 @@
 					
 						<div class="col-sm-3">
 						<br>
-							<input type="text" class="form-control" ng-model="codigo" ng-blur="notaFiscalCtrl.buscaPorCodigoBarras(codigo)" name="leitor" placeholder="Leitor de Código de Barras">
-						{{pCtrl.produtos.descricao}}
+							<input type="text" class="form-control" ng-model="codigo" ng-blur="notaFiscalCtrl.buscaPorCodigoBarras(codigo)" onkeyup="if(this.value.length > 12) { quantidadeProduto.focus(); }" name="leitor" placeholder="Leitor de Código de Barras">
+							
 						</div>				
 						
 					<div class="col-sm-4" ng-controller="produtoController as pCtrl" ng-init="pCtrl.lista()" >
@@ -58,11 +58,7 @@
           							<span md-highlight-text="pCtrl.searchText" md-highlight-flags="^i">{{listaProduto.descricao}}</span>
        							 </md-item-template>        								
      						 </md-autocomplete>
-							<!-- <select class="form-control select2" ng-model="notaFiscalCtrl.produto" id="fornecedor"
-							ng-options="listaProdutos.descricao for listaProdutos in pCtrl.produtos" 
-							  style=" width: 100%;" >
-								<option value="">---Produto---</option>
-							</select> -->
+							
 							</div>
 							<div class="col-sm-2">
 							<br>
@@ -92,7 +88,7 @@
 							ng-model="f.produto.codigoBarra" disabled></td>
 							<td><input class="form-control"  id="descricaoProduto"  type="text" placeholder="descrição do Produto" 
 							ng-model="f.produto.descricao" disabled></td>
-							<td><input class="form-control"  id="quantidadeProduto"  type="text" placeholder="quantidade"
+							<td><input class="form-control"  id="quantidadeProduto" name="quantidadeProduto" type="text" placeholder="quantidade"
 							ng-model="f.quantidade" ui-number-mask="0" required></td>
 							<td><input class="form-control"  id="valorProduto"  type="text"  placeholder="Preço" ui-money-mask
 							ng-model="f.valorUnitario" ng-blur="notaFiscalCtrl.SomaTotal(notaFiscalCtrl.listaItensNota)" required> </td>
