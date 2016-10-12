@@ -93,14 +93,17 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 					edificaComunitaria : objeto.edificaComunitaria
 					
 				});
-				console.log(self.listaProduto);
+				
 			}
 		
 	self.verificaProdutoRepetido = function(objeto){
 			for(i = 0; i < self.listaProduto.length; i++ ){
 				var produto2 = self.listaProduto[i].produto;
-				var produto1 = produto2.id			
-				if(produto1 != produto.id){
+				var produto1 = produto2.id	
+				console.log(objeto);
+				console.log(produto1);
+				console.log(objeto.produto.produto.id);
+				if(produto1 != objeto.produto.produto.id){
 					self.existe = true;
 					}else{
 						sweetAlert({ timer : 3000,  text :"este produto já esta incluso",  type : "info", width: 300, higth: 300, padding: 20});
@@ -115,9 +118,9 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 			}
 		
 		self.adicionarProduto = function(objeto){
-			console.log(objeto);
 			
-			if(objeto.produto.quantidadeEstoque < objeto.quantidadeSaida){
+			
+			if(objeto.produto.quantidade < objeto.quantidadeSaida){
 				sweetAlert({ timer : 6000,  text :"Quantidade Superior ao estoque",  type : "info", width: 300, higth: 300, padding: 20});
 					
 				}
@@ -131,6 +134,7 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 						self.funcaoListaProduto(objeto);				
 					}
 					else{
+					
 						self.verificaProdutoRepetido(objeto);				
 					}
 				}
