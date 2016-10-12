@@ -1,4 +1,4 @@
-app.controller('notaFiscalController', function($scope,notaFiscalService, $routeParams){
+app.controller('notaFiscalController', function($scope,notaFiscalService, produtoService,  $routeParams){
 	
 		var self = this;
 		self.listaItensNota = [];
@@ -32,7 +32,15 @@ app.controller('notaFiscalController', function($scope,notaFiscalService, $route
 			});
 		};
 		
-		
+		self.buscaPorCodigoBarras = function(codigoBarras){
+			produtoService.buscaPorCodigoBarras(codigoBarras).
+			then(function(p){
+				self.produtos = p;
+				self.adicionarProdutos(self.produtos);
+				console.log(self.produtos);
+			},function(errResponse){
+			});
+		};
 		
 		self.adicionarProdutos = function(produto){
 		if(self.listaItensNota.length == 0){				

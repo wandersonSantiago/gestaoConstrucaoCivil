@@ -22,6 +22,23 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 				}, function(errResponse){
 				});
 			};
+			
+			self.buscaPorCodigoBarras = function(codigoBarras){
+				estoqueService.buscaPorCodigoBarras(codigoBarras).
+				then(function(p){
+					self.listaProdutosComEstoques = p;
+					for(i = 0; i < self.listaProdutosComEstoques.length; i++ ){
+						
+						self.produto = self.listaProdutosComEstoques[i].produto;
+						self.quantidade = self.listaProdutosComEstoques[i].quantidade;
+					self.listaProdutos.push({
+								produto : self.produto,
+								quantidade : self.quantidade
+							
+						});
+					}
+				});
+			};
 			self.listaProdutosComEstoque = function(){
 				estoqueService.listaProdutosComEstoque().
 					then(function(t){
@@ -119,6 +136,7 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 			
 		self.salva = function(){
 			
+			self.baixaEstoque.torre = 
 			self.baixaEstoque = self.listaProduto;
 			console.log(self.baixaEstoque);
 			estoqueService.salva(self.baixaEstoque)

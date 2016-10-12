@@ -36,7 +36,7 @@
 							<input class="form-control" ng-model="protudoCtr.produto.codigoBarra" id="codigoBarra" placeholder="Código de Barras" type="text" required>
 						</div>
 						<div class="col-sm-4">
-							<input class="form-control" ng-model="protudoCtr.produto.codigoProduto" id="codigoProduto"  placeholder="Código do Produto" type="text" required>
+							<input class="form-control" ng-model="protudoCtr.produto.codigo" id="codigoProduto"  placeholder="Código do Produto" disabled type="text" required>
 						</div>
 						<div class="col-sm-4" ng-controller="tipoProdutoController as tipoProdutoCtrl" ng-init="tipoProdutoCtrl.lista()">
 						<select class="form-control select2" ng-model="protudoCtr.produto.tipoProduto" 
@@ -49,15 +49,8 @@
 					
 					<br>
 					<div class="row">
+								
 						
-				
-						<div class="col-sm-4" ng-controller="areaProdutoController as areaProdutoCtrl" ng-init="areaProdutoCtrl.lista()">
-						<select class="form-control select2" ng-model="protudoCtr.produto.areaProduto" 
-							ng-options="listaAreaProdutos.descricao for listaAreaProdutos in areaProdutoCtrl.listaAreaProduto" 
-							  style=" width: 100%;" required >
-								<option value="">{{protudoCtr.produto.areaProduto.descricao}}</option>
-							</select>
-						</div>	
 						<div class="col-sm-4" ng-controller="unidadeMedidaController as unidadeCtrl" ng-init="unidadeCtrl.lista()">
 						<select class="form-control select2" ng-model="protudoCtr.produto.unidadeMedida" 
 							ng-options="listaunidadeMedidas for listaunidadeMedidas in unidadeCtrl.listaUnidadeMedida" 
@@ -73,21 +66,22 @@
 								<option value="">{{protudoCtr.produto.categoria.descricao}}</option>
 							</select>
 						</div>
-					</div>
-		
-					<br>
-					<div class="row">
 						<div class="col-sm-4" ng-controller="fabricanteController as fabricanteCtrl" ng-init="fabricanteCtrl.lista()">
 						<select class="form-control select2" ng-model="protudoCtr.produto.fabricante" 
 							ng-options="listaFabricantes.dadoEmpresa.nomeFantasia for listaFabricantes in fabricanteCtrl.listaFabricante" 
 							  style=" width: 100%;" required >
 								<option value="">{{protudoCtr.produto.fabricante.dadoEmpresa.nomeFantasia}}</option>
 							</select>
-						</div>						
+						</div>		
+					</div>
+		
+					<br>
+					<div class="row">
+										
 						<div class="col-sm-4" ng-controller="fornecedorController as forCtrl" ng-init="forCtrl.lista()" >
 							<select class="form-control select2" ng-model="protudoCtr.fornecedor" id="fornecedor"
 							ng-options="listaFornecedores.dadoEmpresa.razaoSocial for listaFornecedores in forCtrl.listaFornecedor" 
-							  style=" width: 100%;" required>
+							  style=" width: 100%;" >
 								<option value="">---Fornecedor---</option>
 							</select>
 						</div>

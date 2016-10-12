@@ -31,7 +31,7 @@ app.controller('produtoController', function($scope,produtoService, $routeParams
 		 produtoService.lista().
 			then(function(t){
 				self.produtos = t;
-				console.log(self.produtos);
+				
 				}, function(errResponse){
 			});
 		};
