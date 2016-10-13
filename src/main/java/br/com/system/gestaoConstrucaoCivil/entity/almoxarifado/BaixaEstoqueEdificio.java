@@ -1,5 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 

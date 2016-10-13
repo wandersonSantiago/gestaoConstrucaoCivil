@@ -1,5 +1,6 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.BaixaEstoque;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.EstoqueEmpreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.ItemNotaFiscal;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.NotaFiscalProduto;
@@ -102,7 +104,19 @@ public class EstoqueEmpreendimentoService {
 		estoque.setQuantidade(estoque.getQuantidade() - quantidade);
 	    salvarOuEditar(estoque);
 	}
-
+	@Transactional(readOnly = false)
+	public void baixarEstoque(BaixaEstoque baixaEstoque){
+		
+		// Pega o primeiro empreenidmento
+	    //remover depois
+		Empreendimento empr = serviceEmpr.buscarTodos().get(0);
+		//
+		EstoqueEmpreendimento estoque = estoqueRepository.estoque(empr.getId() ,baixaEstoque.getProduto().getId());
+		estoque.setQuantidade(estoque.getQuantidade() - baixaEstoque.getQuantidadeSaida());
+	    salvarOuEditar(estoque);
+		    
+		
+	}
 	public boolean existeProduto(Long id) {
 		return estoqueRepository.existeProduto(id);
 	}
