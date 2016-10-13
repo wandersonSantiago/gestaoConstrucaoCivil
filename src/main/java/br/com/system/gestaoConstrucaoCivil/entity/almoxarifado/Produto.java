@@ -53,7 +53,7 @@ public class Produto extends AbstractPersistable<Long> {
 	private TipoProduto tipoProduto;
 	
 	@Transient
-	private boolean geraCodigoBarra;
+	private boolean geraCodigoBarra = true;
 	
 	
 	public boolean isGeraCodigoBarra() {

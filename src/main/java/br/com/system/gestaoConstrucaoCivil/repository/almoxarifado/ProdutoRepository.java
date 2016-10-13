@@ -15,6 +15,9 @@ public interface ProdutoRepository extends JpaRepository<Produto,Long>{
  Produto findByCodigo(Integer codigo);
  Produto findByCodigoBarra(String codigoBarra);
  
+ @Query("FROM Produto prod WHERE prod.ativo = ?1")
+ List<Produto> buscarTodosPorStatus(Boolean status);
+ 
  @Query("SELECT CASE WHEN COUNT(codigo) > 0 THEN true ELSE false END FROM Produto p WHERE p.codigo = :codigo")
  boolean existeCodigo(@Param("codigo") Integer codigo);
  

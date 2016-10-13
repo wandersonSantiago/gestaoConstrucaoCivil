@@ -9,9 +9,7 @@ public class ProdutoUtil {
 	
 	public Integer gerarCodigo()
 	{
-		
 		Random random = new Random();
-			
 		Integer codigo  = random.nextInt((maximo - minimo) + 1) + minimo;
 		return codigo;
 	}

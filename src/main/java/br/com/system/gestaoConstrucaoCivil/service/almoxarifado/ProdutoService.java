@@ -35,12 +35,24 @@ public class ProdutoService {
 	public void salvarOuEditar(Produto produto) {
 		
 		ProdutoUtil gerar = new ProdutoUtil();
-		produto.setCodigo(gerar.gerarCodigo());
+		boolean status = false;
+		Integer codigoTemp = 0;
+		Integer tentativa = 0;
 		
+		while (tentativa < 999999) {
+			
+			codigoTemp = gerar.gerarCodigo();
+			status = produtoRepository.existeCodigo(codigoTemp);
+			if(status == false)
+			{
+				break;
+			}
+		}
 		if(produto.isGeraCodigoBarra())
 		{
-		    produto.setCodigoBarra(gerar.gerarCodigoBarra(produto.getCodigo()));
+		    produto.setCodigoBarra(gerar.gerarCodigoBarra(codigoTemp));
 		}
+		produto.setCodigo(codigoTemp);
 		produtoRepository.save(produto);
 
 	}

@@ -2,17 +2,16 @@ package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -23,13 +22,13 @@ import br.com.system.gestaoConstrucaoCivil.entity.AreaProduto;
 sequenceName = "baixa_estoque_id_seq",
 initialValue = 1,
 allocationSize = 50)
-
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "baixa_estoque")
 public class BaixaEstoque implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "baixa_estoque_id_seq")
-	Long id;
+	protected Long id;
 	
 	@Column(name ="andar", nullable = false)
 	private Integer andar;
@@ -42,15 +41,15 @@ public class BaixaEstoque implements Serializable {
 	@Column(name ="quantidade_saida", nullable = false)
 	private Integer quantidadeSaida;
 	@Column(name ="data_saida", nullable = true)
-	private LocalDate dataSaida;
+	protected LocalDate dataSaida;
 	
 	@ManyToOne
 	@JoinColumn(name="id_produto",nullable = true)
-	private Produto produto;
+	protected Produto produto;
 
 	@ManyToOne
 	@JoinColumn(name = "id_area_produto")
-	private AreaProduto areaProduto;
+	protected AreaProduto areaProduto;
 	
 	public Long getId() {
 		return id;
