@@ -1,12 +1,10 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.BaixaEstoque;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.EstoqueEmpreendimento;
@@ -113,8 +111,6 @@ public class EstoqueEmpreendimentoService {
 		EstoqueEmpreendimento estoque = estoqueRepository.estoque(empr.getId() ,baixaEstoque.getProduto().getId());
 		estoque.setQuantidade(estoque.getQuantidade() - baixaEstoque.getQuantidadeSaida());
 	    salvarOuEditar(estoque);
-		    
-		
 	}
 	public boolean existeProduto(Long id) {
 		return estoqueRepository.existeProduto(id);

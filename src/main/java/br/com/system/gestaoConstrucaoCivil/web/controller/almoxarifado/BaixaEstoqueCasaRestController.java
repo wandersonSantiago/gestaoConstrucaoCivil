@@ -29,5 +29,4 @@ public class BaixaEstoqueCasaRestController {
 		HttpHeaders headers = new HttpHeaders();
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
-	
 }

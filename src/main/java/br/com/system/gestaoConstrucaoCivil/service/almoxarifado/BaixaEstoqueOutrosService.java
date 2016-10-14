@@ -1,12 +1,10 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.BaixaEstoqueOutros;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.BaixaEstoqueOutrosRepository;
 
@@ -19,7 +17,6 @@ public class BaixaEstoqueOutrosService {
 	private BaixaEstoqueOutrosRepository baixaEstoqueOutrosRepository;
 	@Autowired
 	private EstoqueEmpreendimentoService estoque;
-	
 	
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(List<BaixaEstoqueOutros> baixasEstoqueOutros)
