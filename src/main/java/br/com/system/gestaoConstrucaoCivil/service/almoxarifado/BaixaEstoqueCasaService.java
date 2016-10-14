@@ -16,11 +16,17 @@ public class BaixaEstoqueCasaService {
 
 	@Autowired
 	private BaixaEstoqueCasaRepository baixaEstoqueCasaRepository;
+	@Autowired
+	private EstoqueEmpreendimentoService estoque;
+	
 	
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(List<BaixaEstoqueCasa> baixasEstoqueCasa)
 	{
-	   
+		 for(BaixaEstoqueCasa baixa: baixasEstoqueCasa){
+		    	
+		    	estoque.baixarEstoque(baixa);
+		    }
 	    baixaEstoqueCasaRepository.save(baixasEstoqueCasa);
 	}
 	public List<BaixaEstoqueCasa> buscarTodos()

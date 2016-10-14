@@ -3,22 +3,20 @@ package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.BaixaEstoqueOutros;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.BaixaEstoqueOutrosRepository;
-import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.BaixaEstoqueRepository;
 
-
+@Service
+@Transactional(readOnly = true, propagation = Propagation.REQUIRED)
 public class BaixaEstoqueOutrosService {
 
 	
 	@Autowired
 	private BaixaEstoqueOutrosRepository baixaEstoqueOutrosRepository;
-	@Autowired
-	private BaixaEstoqueRepository teste;
-	
-	
 	@Autowired
 	private EstoqueEmpreendimentoService estoque;
 	
@@ -30,8 +28,7 @@ public class BaixaEstoqueOutrosService {
 	    	
 	    	estoque.baixarEstoque(baixa);
 	    }
-		//teste.save(baixasEstoqueOutros);
-	    baixaEstoqueOutrosRepository.save(baixasEstoqueOutros);
+		baixaEstoqueOutrosRepository.save(baixasEstoqueOutros);
 	}
 	public List<BaixaEstoqueOutros> buscarTodos()
 	{

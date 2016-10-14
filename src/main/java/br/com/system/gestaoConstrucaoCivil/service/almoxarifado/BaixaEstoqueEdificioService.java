@@ -10,27 +10,30 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.BaixaEstoqueEdificio;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.BaixaEstoqueEdificioRepository;
 
-
 @Service
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
 public class BaixaEstoqueEdificioService {
 
 	@Autowired
 	private BaixaEstoqueEdificioRepository baixaEstoqueEdificioRepository;
-	
+	@Autowired
+	private EstoqueEmpreendimentoService estoque;
+
 	@Transactional(readOnly = false)
-	public void salvarOuEditar(List<BaixaEstoqueEdificio> baixasEstoqueEdificio)
-	{
-	   
-	    baixaEstoqueEdificioRepository.save(baixasEstoqueEdificio);
+	public void salvarOuEditar(List<BaixaEstoqueEdificio> baixasEstoqueEdificio) {
+
+		for (BaixaEstoqueEdificio baixa : baixasEstoqueEdificio) {
+
+			estoque.baixarEstoque(baixa);
+		}
+		baixaEstoqueEdificioRepository.save(baixasEstoqueEdificio);
 	}
-	
-	public List<BaixaEstoqueEdificio> buscarTodos()
-	{
+
+	public List<BaixaEstoqueEdificio> buscarTodos() {
 		return baixaEstoqueEdificioRepository.findAll();
 	}
-	public BaixaEstoqueEdificio buscarPorId(Long id)
-    {
-    	return baixaEstoqueEdificioRepository.findOne(id);
-    }
+
+	public BaixaEstoqueEdificio buscarPorId(Long id) {
+		return baixaEstoqueEdificioRepository.findOne(id);
+	}
 }
