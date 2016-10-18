@@ -102,11 +102,12 @@
 								
 					<div class="row" ng-if="comunitaria">					
 						<div class="col-sm-5"  ng-controller="configEmpreendimentoController as configCtrl"  ng-init="configCtrl.listaOutros()">
-							<select class="form-control select2" style=" width: 100%;" ng-model="estoqueCtrl.objeto.edificacaoComunitaria"
+							<select class="form-control select2" style=" width: 100%;" ng-model="edificacaoComunitaria"
 							 ng-options="lista.descricao for lista in configCtrl.listaOutros" required>
 								<option value="">---Edificações Comunitaria---</option>
 							</select> 
-						</div>						
+						</div>		
+						{{estoqueCtrl.objeto.edificacaoComunitaria = edificacaoComunitaria.descricao}}				
 					</div>
 					<br>
 					
