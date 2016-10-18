@@ -116,6 +116,7 @@ $scope.listaOutros =[];
 				configEmpreendimentoService.listaOutros().
 				then(function(t){
 					self.listaOutros = t;
+					console.log(self.listaOutros.descricao);
 					}, function(errResponse){
 					
 				});

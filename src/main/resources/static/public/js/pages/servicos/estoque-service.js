@@ -2,8 +2,8 @@ app.factory('estoqueService', function($rootScope, toastr, $http,$q){
 	
 	
 	return{
-		salva: function(baixaEstoque){	
-			return $http.post('/rest/almoxarifado/estoque/baixa/salva', baixaEstoque)
+		salvaEdificio: function(baixaEstoque){	
+			return $http.post('/rest/almoxarifado/estoque/baixaEdificio/salva', baixaEstoque)
 			.then(function(response){
 				sweetAlert({ timer : 10000, text :"Saida realizada com sucesso!!!", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
@@ -13,8 +13,7 @@ app.factory('estoqueService', function($rootScope, toastr, $http,$q){
 			});
 		},	
 		salvaCasa: function(baixaEstoqueCasa){	
-			console.log(baixaEstoqueCasa);
-			return $http.post('/rest/almoxarifado/estoque/baixa/salvaCasa', baixaEstoqueCasa)
+			return $http.post('/rest/almoxarifado/estoque/baixaCasa/salva', baixaEstoqueCasa)
 			.then(function(response){
 				sweetAlert({ timer : 10000, text :"Saida realizada com sucesso!!!", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
@@ -25,7 +24,7 @@ app.factory('estoqueService', function($rootScope, toastr, $http,$q){
 		},
 		salvaOutros: function(baixaEstoqueOutros){	
 			console.log(baixaEstoqueOutros);
-			return $http.post('/rest/almoxarifado/estoque/baixa/salvaOutros', baixaEstoqueOutros)
+			return $http.post('/rest/almoxarifado/estoque/baixaOutros/salva', baixaEstoqueOutros)
 			.then(function(response){
 				sweetAlert({ timer : 10000, text :"Saida realizada com sucesso!!!", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;

@@ -23,6 +23,10 @@ public class BaixaEstoqueOutrosController {
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
 	public ResponseEntity salvar(@RequestBody List<BaixaEstoqueOutros> baixaEstoque,UriComponentsBuilder ucBuilder)
 	{ 
+		for(int i = 0 ; i < baixaEstoque.size(); i++){
+			
+			System.out.println(baixaEstoque.get(i).getDescricao());
+		}
 		baixaEstoqueOutrosService.salvarOuEditar(baixaEstoque);
 		HttpHeaders headers = new HttpHeaders();
 		return new ResponseEntity(headers, HttpStatus.CREATED);

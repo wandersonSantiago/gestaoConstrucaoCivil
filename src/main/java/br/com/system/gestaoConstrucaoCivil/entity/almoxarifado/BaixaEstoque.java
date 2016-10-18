@@ -30,16 +30,9 @@ public class BaixaEstoque implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "baixa_estoque_id_seq")
 	protected Long id;
 	
-	@Column(name ="andar", nullable = false)
-	private Integer andar;
-	@Column(name ="torre", nullable = false)
-	private Integer torre;
-	@Column(name ="apartamento", nullable = true)
-	private Integer apartamento;
-	@Column(name ="Numero_casa", nullable = true)
-	private Integer NumeroCasa;
+	
 	@Column(name ="quantidade_saida", nullable = false)
-	private Integer quantidadeSaida;
+	protected Integer quantidadeSaida;
 	@Column(name ="data_saida", nullable = true)
 	protected LocalDate dataSaida;
 	
@@ -57,31 +50,7 @@ public class BaixaEstoque implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Integer getAndar() {
-		return andar;
-	}
-	public void setAndar(Integer andar) {
-		this.andar = andar;
-	}
-	public Integer getTorre() {
-		return torre;
-	}
-	public void setTorre(Integer torre) {
-		this.torre = torre;
-	}
-	public Integer getApartamento() {
-		return apartamento;
-	}
-	public void setApartamento(Integer apartamento) {
-		this.apartamento = apartamento;
-	}
-	public Integer getNumeroCasa() {
-		return NumeroCasa;
-	}
-	public void setNumeroCasa(Integer numeroCasa) {
-		NumeroCasa = numeroCasa;
-	}
-	public Integer getQuantidadeSaida() {
+		public Integer getQuantidadeSaida() {
 		return quantidadeSaida;
 	}
 	public void setQuantidadeSaida(Integer quantidadeSaida) {

@@ -102,7 +102,7 @@
 								
 					<div class="row" ng-if="comunitaria">					
 						<div class="col-sm-5"  ng-controller="configEmpreendimentoController as configCtrl"  ng-init="configCtrl.listaOutros()">
-							<select class="form-control select2" style=" width: 100%;" ng-model="estoqueCtrl.objeto.edificaComunitaria"
+							<select class="form-control select2" style=" width: 100%;" ng-model="estoqueCtrl.objeto.edificacaoComunitaria"
 							 ng-options="lista.descricao for lista in configCtrl.listaOutros" required>
 								<option value="">---Edificações Comunitaria---</option>
 							</select> 
@@ -149,7 +149,7 @@
 										<td ng-if="edificio">{{produto.torre}}</td>
 										<td ng-if="edificio">{{produto.andar}}</td>
 										<td ng-if="edificio">{{produto.apartamento}}</td>
-										<td ng-if="comunitaria">{{produto.edificaComunitaria.descricao}}</td>							
+										<td ng-if="comunitaria">{{produto.descricao}}</td>							
 										<td>{{produto.quantidadeEstoque}}</td>
 										<td>{{produto.quantidadeSaida}}</td>
 										<td>{{produto.quantidadeEstoque - produto.quantidadeSaida}}</td>

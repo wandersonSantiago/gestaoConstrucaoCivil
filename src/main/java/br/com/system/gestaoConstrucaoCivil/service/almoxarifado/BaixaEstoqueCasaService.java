@@ -1,5 +1,6 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class BaixaEstoqueCasaService {
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(List<BaixaEstoqueCasa> baixasEstoqueCasa) {
 		for (BaixaEstoqueCasa baixa : baixasEstoqueCasa) {
-
+			baixa.setDataSaida(LocalDate.now());
 			estoque.baixarEstoque(baixa);
 		}
 		baixaEstoqueCasaRepository.save(baixasEstoqueCasa);

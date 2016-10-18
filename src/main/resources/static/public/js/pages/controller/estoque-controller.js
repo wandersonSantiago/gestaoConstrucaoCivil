@@ -50,13 +50,9 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 								self.quantidade = self.listaProdutosComEstoques[i].quantidade;
 							self.listaProdutos.push({
 										produto : self.produto,
-										quantidade : self.quantidade
-									
-								});
-							
-						
-						}
-						console.log(self.listaProdutos);
+										quantidade : self.quantidade									
+								});						
+						}						
 							}, function(errResponse){
 					});
 				};
@@ -81,6 +77,7 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 			
 			
 			self.funcaoListaProduto = function(objeto){
+				
 				self.listaProduto.push({
 					quantidadeEstoque : objeto.produto.quantidade,
 					produto : objeto.produto.produto,
@@ -90,7 +87,7 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 					torre : objeto.torre,
 					apartamento : objeto.apartamento,
 					casa : objeto.casa,
-					edificaComunitaria : objeto.edificaComunitaria
+					descricao : objeto.edificacaoComunitaria
 					
 				});
 				
@@ -99,10 +96,7 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 	self.verificaProdutoRepetido = function(objeto){
 			for(i = 0; i < self.listaProduto.length; i++ ){
 				var produto2 = self.listaProduto[i].produto;
-				var produto1 = produto2.id	
-				console.log(objeto);
-				console.log(produto1);
-				console.log(objeto.produto.produto.id);
+				var produto1 = produto2.id					
 				if(produto1 != objeto.produto.produto.id){
 					self.existe = true;
 					}else{
@@ -141,13 +135,13 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 			}
 		}
 			
-		self.salva = function(){
+		self.salva = function(){			
 			
-			if($scope.tipo.tipo == "edificio"){
+			if($scope.tipo.tipo == "edificio"){				
 				self.baixaEstoque = self.listaProduto;
-				estoqueService.salva(self.baixaEstoque)
+				estoqueService.salvaEdificio(self.baixaEstoque)
 				.then(function(response){
-					self.limpaCampo();
+					self.limpaCampo();				
 					}, function(errResponse){
 						
 				});
