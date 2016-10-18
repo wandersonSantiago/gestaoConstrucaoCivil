@@ -109,8 +109,20 @@ public class EstoqueEmpreendimentoService {
 		Empreendimento empr = serviceEmpr.buscarTodos().get(0);
 		//
 		EstoqueEmpreendimento estoque = estoqueRepository.estoque(empr.getId() ,baixaEstoque.getProduto().getId());
+		
 		estoque.setQuantidade(estoque.getQuantidade() - baixaEstoque.getQuantidadeSaida());
-	    salvarOuEditar(estoque);
+	    
+		if(verificarEstoqueNegativo(estoque))
+	    {
+		  salvarOuEditar(estoque);
+	    }
+	}
+	private boolean verificarEstoqueNegativo(EstoqueEmpreendimento estoque)
+	{
+		if(estoque.getQuantidade() >= 0){
+			return true;	
+		}
+		return false;
 	}
 	public boolean existeProduto(Long id) {
 		return estoqueRepository.existeProduto(id);
