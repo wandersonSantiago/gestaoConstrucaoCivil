@@ -21,12 +21,14 @@ public class BaixaEstoqueEdificioService {
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(List<BaixaEstoqueEdificio> baixasEstoqueEdificio) {
 
+		
 		for (BaixaEstoqueEdificio baixa : baixasEstoqueEdificio) {
 
 			baixa.setDataSaida(LocalDate.now());
 			estoque.baixarEstoque(baixa);
 		}
 		baixaEstoqueEdificioRepository.save(baixasEstoqueEdificio);
+		
 	}
 
 	public List<BaixaEstoqueEdificio> buscarTodos() {

@@ -102,7 +102,7 @@ public class EstoqueEmpreendimentoService {
 	    salvarOuEditar(estoque);
 	}
 	@Transactional(readOnly = false)
-	public void baixarEstoque(BaixaEstoque baixaEstoque){
+	public void baixarEstoque(BaixaEstoque baixaEstoque) {
 		
 		// Pega o primeiro empreenidmento
 	    //remover depois
@@ -115,6 +115,9 @@ public class EstoqueEmpreendimentoService {
 		if(verificarEstoqueNegativo(estoque))
 	    {
 		  salvarOuEditar(estoque);
+	    }else
+	    {
+	    	throw new EstoqueEmpreendimentoException("Estoque negativo");
 	    }
 	}
 	private boolean verificarEstoqueNegativo(EstoqueEmpreendimento estoque)
