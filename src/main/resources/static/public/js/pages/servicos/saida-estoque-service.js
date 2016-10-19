@@ -23,7 +23,6 @@ app.factory('saidaEstoqueService', function($rootScope, toastr, $http,$q){
 			});
 		},
 		salvaOutros: function(baixaEstoqueOutros){	
-			console.log(baixaEstoqueOutros);
 			return $http.post('/rest/almoxarifado/estoque/baixaOutros/salva', baixaEstoqueOutros)
 			.then(function(response){
 				sweetAlert({ timer : 10000, text :"Saida realizada com sucesso!!!", type : "success", width: 300, higth: 100, padding: 20});

@@ -35,8 +35,10 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 							self.listaProdutos.push({
 										produto : self.produto,
 										quantidade : self.quantidade									
-								});						
-						}						
+								});	
+							
+						}	
+						console.log(self.listaProdutos);
 							}, function(errResponse){
 					});
 				};
@@ -190,9 +192,11 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 		self.salvaEdificacoesComunitaria = function(){
 			self.baixaEstoqueOutros = self.listaProduto;
 			saidaEstoqueService.salvaOutros(self.baixaEstoqueOutros)
-			.then(function(response){
+			.then( $timeout(function(response){
+				self.listaProdutosComEstoque();
 				self.limpaCampo();
-			}, function(errResponse){		
+											
+			},1000), function(errResponse){		
 			});
 		}
 		
@@ -201,7 +205,8 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 			self.objeto = null;
 			self.listaProduto = self.listaProduto=[];			
 			$scope.ativadoExcluirLote = false;
-			
+			$scope.ativaTabela = false;
+			self.listaProdutos = self.listaProdutos;
 		}
 		
 		$scope.tipo = {
@@ -213,21 +218,21 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 			$scope.comunitaria = false;
 			$scope.edificio = true;
 			self.limpaCampo();
-			$scope.ativaTabela = false;
+			
 	}
 		if($scope.tipo.tipo == "comunitaria"){
 			$scope.casa = false;
 			$scope.edificio = false;
 			$scope.comunitaria = true;
 			self.limpaCampo();
-			$scope.ativaTabela = false;
+			
 		}
 		if($scope.tipo.tipo == "casa"){
 			$scope.comunitaria = false;
 			$scope.edificio = false;
 			$scope.casa = true;
 			self.limpaCampo();
-			$scope.ativaTabela = false;
+			
 			
 		}
 		}
