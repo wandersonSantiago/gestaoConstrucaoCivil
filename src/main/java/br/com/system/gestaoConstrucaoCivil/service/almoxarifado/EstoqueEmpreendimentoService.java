@@ -35,11 +35,11 @@ public class EstoqueEmpreendimentoService {
     public List<EstoqueEmpreendimento> buscarTodos(){
 		
     	 List<EstoqueEmpreendimento> estoques = estoqueRepository.findAll();
-         for(int i = 0 ; i < estoques.size(); i++){
-    		 
-    		 InformacaoEntradaProduto info = notaProdutoService.getInformacaoProduto(estoques.get(i).getProduto().getId());
-    		 estoques.get(i).setInforProduto(info);
-    		 System.out.println("VALOR medio" + estoques.get(i).getCustoMedio());
+         
+    		for(EstoqueEmpreendimento estoque: estoques) {
+    		 InformacaoEntradaProduto info = notaProdutoService.getInformacaoProduto(estoque.getProduto().getId());
+    		 estoque.setInforProduto(info);
+    		
     	 }
     	return estoques;
 	}
