@@ -35,8 +35,7 @@ public class EstoqueEmpreendimentoService {
     public List<EstoqueEmpreendimento> buscarTodos(){
 		
     	 List<EstoqueEmpreendimento> estoques = estoqueRepository.findAll();
-         
-    	 for(int i = 0 ; i < estoques.size(); i++){
+         for(int i = 0 ; i < estoques.size(); i++){
     		 
     		 InformacaoEntradaProduto info = notaProdutoService.getInformacaoProduto(estoques.get(i).getProduto().getId());
     		 estoques.get(i).setInforProduto(info);
