@@ -61,7 +61,7 @@ app.factory('saidaEstoqueService', function($rootScope, toastr, $http,$q){
 			});
 		},
 		buscaPorCodigoBarras : function(codigoBarras){
-			return $http.get('/rest/almoxarifado/estoque/baixa/buscaPorCodigoBarras/'+codigoBarras)
+			return $http.get('/rest/almoxarifado/produto/buscaPorCodigo/'+codigoBarras)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
