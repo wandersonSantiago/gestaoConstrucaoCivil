@@ -6,7 +6,8 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 		self.baixaEstoque = [];
 		self.listaProdutos = [];
 		$scope.listaProdutos = [];
-				
+		var quantidadeMaior = true;
+		var produtoMesmoImovel = true;		
 			self.buscaPorCodigoBarras = function(codigoBarras){
 				saidaEstoqueService.buscaPorCodigoBarras(codigoBarras).
 				then(function(p){
@@ -27,18 +28,16 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 				saidaEstoqueService.listaProdutosComEstoque().
 					then(function(t){
 						self.listaProdutosComEstoques = t;
-						
+						self.listaProdutos = [{produto:"",quantidade:""}];											
 						for(i = 0; i < self.listaProdutosComEstoques.length; i++ ){
 						
 								self.produto = self.listaProdutosComEstoques[i].produto;
 								self.quantidade = self.listaProdutosComEstoques[i].quantidade;
-								$scope.listaProdutos.push({
+								self.listaProdutos.push({
 										produto : self.produto,
 										quantidade : self.quantidade									
 								});	
-							
-						}				self.listaProdutos = $scope.listaProdutos;
-					
+						}	
 							}, function(errResponse){
 					});
 				};
@@ -90,7 +89,7 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 					
 				}
 			self.funcaoListaProdutoEdificacoesComunitaria = function(objeto){
-				console.log(objeto);
+				
 					self.listaProduto.push({
 						quantidadeEstoque : objeto.produto.quantidade,
 						produto : objeto.produto.produto,
@@ -101,71 +100,65 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 			}
 		
 			verificaProdutoRepetido = function(objeto){
-			for(i = 0; i < self.listaProduto.length; i++ ){
-				var produto2 = self.listaProduto[i].produto;
-				var produto1 = produto2.id					
-				if(produto1 != objeto.produto.produto.id){
-					self.existe = true;
-					}else{
-						sweetAlert({ timer : 3000,  text :"este produto já esta incluso",  type : "info", width: 300, higth: 300, padding: 20});
-						self.existe = false;
-						var tamanho = self.listaProduto[i];
-						i = tamanho[i + 1];
+				for(i = 0; i < self.listaProduto.length; i++ ){
+					var produto2 = self.listaProduto[i].produto.id;
+					
+					if(produto2 != objeto.produto.produto.id){					
+					
+						}
+					else{
+						
+						objeto.produto.quantidade = objeto.produto.quantidade - objeto.quantidadeSaida;	
+						i = self.listaProduto.length + 1;
+						
+						}
+						
 					}			
-				}			
 			}
 		
 	
 		self.adicionarProdutoEdificio = function(objeto){
 			
-			veirificaQuantidade(objeto);			
-			$scope.ativaTabela = true;
-			if(self.listaProduto.length == 0){				
-				self.funcaoListaProdutoEdificio(objeto);				
-			}
-			else{			
-				verificaProdutoRepetido(objeto);	
-				if(self.existe == true){
+			verificaQuantidade(objeto);	
+			if(quantidadeMaior){
+				$scope.ativaTabela = true;
+					verificaProdutoRepetido(objeto);
 					self.funcaoListaProdutoEdificio(objeto);
-					}
-			}			
+			}
 		}
 		self.adicionarProdutoCasa = function(objeto){
 					
-			veirificaQuantidade(objeto);			
-			$scope.ativaTabela = true;
-			if(self.listaProduto.length == 0){				
-				self.funcaoListaProdutoCasa(objeto);				
+			verificaQuantidade(objeto);	
+			if(quantidadeMaior){
+				$scope.ativaTabela = true;
+					verificaProdutoRepetido(objeto);
+					self.funcaoListaProdutoCasa(objeto);				
+				
 			}
-			else{			
-				verificaProdutoRepetido(objeto);	
-				if(self.existe == true){
-					self.funcaoListaProdutoCasa(objeto);
-					}
-			}			
 		}
 		self.adicionarProdutoEdificacaoComunitaria = function(objeto){
 			
-			veirificaQuantidade(objeto);			
-			$scope.ativaTabela = true;
-			if(self.listaProduto.length == 0){				
-				self.funcaoListaProdutoEdificacoesComunitaria(objeto);				
-			}
-			else{			
-				verificaProdutoRepetido(objeto);	
-				if(self.existe == true){
+			verificaQuantidade(objeto);			
+			
+			if(quantidadeMaior){
+				$scope.ativaTabela = true;
+					verificaProdutoRepetido(objeto);
+					
 					self.funcaoListaProdutoEdificacoesComunitaria(objeto);
-					}
-			}			
+				
+			}
 		}
+		
 
-		veirificaQuantidade = function(objeto){
+		verificaQuantidade = function(objeto){
 			
 			if(objeto.produto.quantidade < objeto.quantidadeSaida){
 				sweetAlert({ timer : 6000,  text :"Quantidade Superior ao estoque",  type : "info", width: 300, higth: 300, padding: 20});
-				}
+				quantidadeMaior = false;
+			}
 			else if(objeto.quantidadeSaida < 1 || objeto.quantidadeSaida == null){
 					sweetAlert({ timer : 6000,  text :"Quantidade tem que ser maior que zero",  type : "info", width: 300, higth: 300, padding: 20});
+				quantidadeMaior = false;	
 			}
 		}
 			
@@ -174,18 +167,20 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 		self.salvaEdificio = function(){
 			self.baixaEstoque = self.listaProduto;
 			saidaEstoqueService.salvaEdificio(self.baixaEstoque)
-			.then(function(response){
-				self.limpaCampo();				
-				}, function(errResponse){					
+			.then($timeout(function(response){
+				self.listaProdutosComEstoque();
+				self.limpaCampo();
+			},500), function(errResponse){					
 			});			
 		}
 		
 		self.salvaCasa = function(){
 			self.baixaEstoqueCasa = self.listaProduto;
 			saidaEstoqueService.salvaCasa(self.baixaEstoqueCasa)
-			.then(function(response){
+			.then($timeout(function(response){
+				self.listaProdutosComEstoque();
 				self.limpaCampo();
-				}, function(errResponse){					
+			},500), function(errResponse){					
 			});
 		}
 		
@@ -195,9 +190,7 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 			.then( $timeout(function(response){
 				self.listaProdutosComEstoque();
 				self.limpaCampo();
-				$scope.listaProdutos = null;
-				$scope.listaProdutos = self.listaProdutos;
-			},1000), function(errResponse){		
+			},500), function(errResponse){		
 			});
 		}
 		
