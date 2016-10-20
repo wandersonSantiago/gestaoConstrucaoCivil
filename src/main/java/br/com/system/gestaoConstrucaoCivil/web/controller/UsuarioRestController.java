@@ -33,8 +33,8 @@ public class UsuarioRestController {
 	public Principal user(Principal user, HttpSession session) {
 		
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
-			
-	//	System.out.println("Usuario:" + usuario.getLogin());
+		
+	    System.out.println("Usuario NOVO:" + usuario.getLogin());
 		
 		return user;
 	}

@@ -12,6 +12,7 @@ import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.ItemNotaFiscal;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.NotaFiscalProduto;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Produto;
 import br.com.system.gestaoConstrucaoCivil.pojo.InformacaoEntradaProduto;
+import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.EstoqueEmpreendimentoRepository;
 import br.com.system.gestaoConstrucaoCivil.service.EmpreendimentoService;
 
@@ -25,11 +26,7 @@ public class EstoqueEmpreendimentoService {
 	private EmpreendimentoService empreendimento;
 	@Autowired
 	private NotaFiscalProdutoService notaProdutoService;
-	//Remover depois isso
-	@Autowired
-    EmpreendimentoService serviceEmpr;
-	//
-    
+	
     @Transactional(readOnly = false)
 	public void salvarOuEditar(EstoqueEmpreendimento produtoEstoque) {
 
@@ -58,7 +55,6 @@ public class EstoqueEmpreendimentoService {
 
 	private void updateEstoque(ItemNotaFiscal item) {
 		
-		System.out.println("Entrou no update");
 		if (existeProduto(item.getProduto().getId())) {
 			
 			adicionarQuantidade(item.getProduto(), item.getQuantidade());
@@ -80,12 +76,8 @@ public class EstoqueEmpreendimentoService {
 	@Transactional(readOnly = false)
 	private void adicionarQuantidade(Produto produto, Integer quantidade) {
 		
-		// Pega o primeiro empreenidmento
-	    //remover depois
-		Empreendimento empr = serviceEmpr.buscarTodos().get(0);
-		//
-		EstoqueEmpreendimento estoque = estoqueRepository.estoque(empr.getId(), produto.getId());
-		
+		Empreendimento empreendimentoDoUsuario = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
+		EstoqueEmpreendimento estoque = estoqueRepository.estoque(empreendimentoDoUsuario.getId(), produto.getId());
 		estoque.setQuantidade(estoque.getQuantidade() + quantidade);
 		salvarOuEditar(estoque);
 	}
@@ -93,22 +85,17 @@ public class EstoqueEmpreendimentoService {
 	@Transactional(readOnly = false)
 	public void baixarEstoque(Long idProduto, Integer quantidade) {
 		
-		// Pega o primeiro empreenidmento
-	    //remover depois
-		Empreendimento empr = serviceEmpr.buscarTodos().get(0);
-		//
-		EstoqueEmpreendimento estoque = estoqueRepository.estoque(empr.getId() ,idProduto);
+	    Empreendimento empreendimentoDoUsuario = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
+		EstoqueEmpreendimento estoque = estoqueRepository.estoque(empreendimentoDoUsuario.getId() ,idProduto);
 		estoque.setQuantidade(estoque.getQuantidade() - quantidade);
 	    salvarOuEditar(estoque);
+	   
 	}
 	@Transactional(readOnly = false)
 	public void baixarEstoque(BaixaEstoque baixaEstoque) {
+		Empreendimento empreendimentoDoUsuario = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
 		
-		// Pega o primeiro empreenidmento
-	    //remover depois
-		Empreendimento empr = serviceEmpr.buscarTodos().get(0);
-		//
-		EstoqueEmpreendimento estoque = estoqueRepository.estoque(empr.getId() ,baixaEstoque.getProduto().getId());
+		EstoqueEmpreendimento estoque = estoqueRepository.estoque(empreendimentoDoUsuario.getId() ,baixaEstoque.getProduto().getId());
 		
 		estoque.setQuantidade(estoque.getQuantidade() - baixaEstoque.getQuantidadeSaida());
 	    
@@ -130,5 +117,14 @@ public class EstoqueEmpreendimentoService {
 	public boolean existeProduto(Long id) {
 		return estoqueRepository.existeProduto(id);
 	}
+	 public Produto buscarPorCodigoOuCodigoBarra(String codigo) {
+
+			if (codigo.length() == 13) {
+				return estoqueRepository.findByCodigoBarra(codigo);
+			} else {
+				return estoqueRepository.findByCodigo(Integer.valueOf(codigo));
+			}
+		}
+
    
 }

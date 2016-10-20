@@ -1,12 +1,11 @@
 package br.com.system.gestaoConstrucaoCivil.repository.almoxarifado;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.EstoqueEmpreendimento;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Produto;
 
 public interface EstoqueEmpreendimentoRepository extends JpaRepository<EstoqueEmpreendimento,Long>{
 
@@ -17,5 +16,11 @@ public interface EstoqueEmpreendimentoRepository extends JpaRepository<EstoqueEm
 	    
 	 @Query("SELECT CASE WHEN COUNT(e.id) > 0 THEN true ELSE false END FROM EstoqueEmpreendimento e JOIN e.produto p  WHERE p.id = :id")
 	 boolean existeProduto(@Param("id") Long id);
+	 
+	 @Query("FROM EstoqueEmpreendimento estoque JOIN estoque.produto produto WHERE produto.codigoBarra = :codigoBarra")
+	 Produto findByCodigoBarra(@Param("codigoBarra") String codigoBarra);
+	 
+	 @Query("FROM EstoqueEmpreendimento estoque JOIN estoque.produto produto WHERE produto.codigo = :codigo")
+	 Produto findByCodigo(@Param("codigo") Integer codigo);
 
 }

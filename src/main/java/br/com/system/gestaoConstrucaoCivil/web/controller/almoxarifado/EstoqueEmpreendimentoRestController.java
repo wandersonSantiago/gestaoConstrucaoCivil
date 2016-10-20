@@ -3,11 +3,13 @@ package br.com.system.gestaoConstrucaoCivil.web.controller.almoxarifado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.EstoqueEmpreendimento;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Produto;
 import br.com.system.gestaoConstrucaoCivil.service.almoxarifado.EstoqueEmpreendimentoService;
 
 @RestController
@@ -21,5 +23,10 @@ public class EstoqueEmpreendimentoRestController {
 	public ResponseEntity<Iterable<EstoqueEmpreendimento>> buscarTodos() {
 		Iterable<EstoqueEmpreendimento> estoqueEmpreendimento = estoqueService.buscarTodos();
 		return new ResponseEntity<Iterable<EstoqueEmpreendimento>>(estoqueEmpreendimento, HttpStatus.OK);
+	}
+	@RequestMapping(value = "/buscaPorCodigo/{codigo}", method = RequestMethod.GET)
+	public ResponseEntity<Produto> buscarPorCodigo(@PathVariable String codigo)
+	{
+		return new ResponseEntity<Produto>(estoqueService.buscarPorCodigoOuCodigoBarra(codigo),HttpStatus.OK);
 	}
 }
