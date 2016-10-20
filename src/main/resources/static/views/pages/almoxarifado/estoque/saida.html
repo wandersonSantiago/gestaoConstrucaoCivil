@@ -26,7 +26,7 @@
 							 	md-selected-item="estoqueCtrl.objeto.produto" 
 							 	md-search-text="estoqueCtrl.searchText" 
 							 	md-selected-item-change="estoqueCtrl.selectedItemChange(listaProduto.produto)" 
-							 	md-items=" listaProduto in estoqueCtrl.listaProdutos | filter : estoqueCtrl.searchText" 
+							 	md-items=" listaProduto in listaProdutos | filter : estoqueCtrl.searchText" 
 							 	md-item-text="listaProduto.produto.descricao" 
 							 	md-min-length="0" placeholder="busca produto">
        							 <md-item-template>

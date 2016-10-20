@@ -5,7 +5,7 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 		self.listaProduto =[];
 		self.baixaEstoque = [];
 		self.listaProdutos = [];
-		
+		$scope.listaProdutos = [];
 				
 			self.buscaPorCodigoBarras = function(codigoBarras){
 				saidaEstoqueService.buscaPorCodigoBarras(codigoBarras).
@@ -32,13 +32,13 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 						
 								self.produto = self.listaProdutosComEstoques[i].produto;
 								self.quantidade = self.listaProdutosComEstoques[i].quantidade;
-							self.listaProdutos.push({
+								$scope.listaProdutos.push({
 										produto : self.produto,
 										quantidade : self.quantidade									
 								});	
 							
-						}	
-						console.log(self.listaProdutos);
+						}				self.listaProdutos = $scope.listaProdutos;
+					
 							}, function(errResponse){
 					});
 				};
@@ -195,7 +195,8 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 			.then( $timeout(function(response){
 				self.listaProdutosComEstoque();
 				self.limpaCampo();
-											
+				$scope.listaProdutos = null;
+				$scope.listaProdutos = self.listaProdutos;
 			},1000), function(errResponse){		
 			});
 		}
@@ -206,7 +207,9 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 			self.listaProduto = self.listaProduto=[];			
 			$scope.ativadoExcluirLote = false;
 			$scope.ativaTabela = false;
-			self.listaProdutos = self.listaProdutos;
+			
+			
+			
 		}
 		
 		$scope.tipo = {
