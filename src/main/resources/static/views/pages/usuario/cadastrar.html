@@ -1,7 +1,7 @@
 <meta charset="UTF-8">
 <br>
 <br>
-<div class="generic-container"	ng-controller="usuarioController as userCtrl">
+<div class="generic-container"	ng-controller="usuarioController as userCtrl" ng-init="perfil()">
 				
 	<div class="box box-primary">
 		<!-- Default panel contents -->
@@ -75,26 +75,22 @@
 					<br> <br>
 					
 					<br> <br>
-					
-					
-					<div class="panel panel-primary">
+
+					<div class="panel panel-primary" >
 						<div class="panel-heading">Lista de Permissões</div>
 						<div class="panel-body">
-						
-						
-						<table class="table table-hover ">
+							<md-grid-list md-cols="1" md-cols-sm="2" md-cols-md="3"	md-cols-gt-md="5" md-row-height-gt-md="09:1" md-row-height="16:09"
+								md-gutter="8px" md-gutter-gt-sm="4px"> 
+								<md-grid-tile	ng-repeat="user in perfils"  md-colspan-sm="1" md-colspan-xs="1">
 								
-								<tbody  >
-									<tr>
-										
-									</tr>
-
-								</tbody>
-			
-						</table>
-										
+								<label  class="radio-inline"><input type="checkbox"  ng-model="userCtrl.usuario.perfil" value="perfil" name="optradio">{{ user }}</label>
+								
+									</md-grid-tile-footer> 
+								</md-grid-tile> 
+							</md-grid-list>
 						</div>
 					</div>
+									
 
 
 					

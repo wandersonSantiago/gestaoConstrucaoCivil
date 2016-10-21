@@ -1,13 +1,20 @@
  package br.com.system.gestaoConstrucaoCivil.entity;
 
 import java.time.LocalDate;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import br.com.system.gestaoConstrucaoCivil.enuns.PerfilUsuarioEnum;
 
 
 @Entity
@@ -21,6 +28,11 @@ public class Usuario extends AbstractPersistable<Long>{
 	@ManyToOne
 	@JoinColumn(name="id_empreendimento",nullable = true)
 	private Empreendimento empreendimento;
+	
+/*	@OneToMany(mappedBy = "", cascade = CascadeType.ALL)*/
+	@Enumerated(EnumType.STRING)
+	@JoinColumn(name="perfil_permissao",nullable = true)	
+	private Enum<PerfilUsuarioEnum> perfil;
 	
 	@Column(nullable = false,length = 50)
 	private String nome;
@@ -82,6 +94,12 @@ public class Usuario extends AbstractPersistable<Long>{
 	}
 	public void setEmpreendimento(Empreendimento empreendimento) {
 		this.empreendimento = empreendimento;
+	}
+	public Enum<PerfilUsuarioEnum> getPerfil() {
+		return perfil;
+	}
+	public void setPerfil(Enum<PerfilUsuarioEnum> perfil) {
+		this.perfil = perfil;
 	}
 	
 }

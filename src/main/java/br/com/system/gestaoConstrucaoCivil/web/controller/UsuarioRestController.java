@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller;
 
 import java.security.Principal;
+import java.util.Arrays;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
+import br.com.system.gestaoConstrucaoCivil.enuns.PerfilUsuarioEnum;
+import br.com.system.gestaoConstrucaoCivil.enuns.UfEnum;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.service.UsuarioService;
 
@@ -31,13 +34,10 @@ public class UsuarioRestController {
 	@RequestMapping(value="/usuario")
 	@ResponseBody
 	public Principal user(Principal user, HttpSession session) {
-		
-		Usuario usuario = (Usuario) session.getAttribute("usuario");
-		
-	    System.out.println("Usuario NOVO:" + usuario.getLogin());
-		
+
 		return user;
 	}
+	
     @RequestMapping(method = RequestMethod.GET, value="/lista")
 	 public ResponseEntity<Iterable<Usuario>> buscarUsuarios() {	  
 	  System.out.println("lista ok");
@@ -72,21 +72,17 @@ public class UsuarioRestController {
 			return new ResponseEntity(usuarioService.existeLoginCadastrado(login), HttpStatus.OK);
 		}
 	 
+	 
+		@RequestMapping(method = RequestMethod.GET, value = "/perfil")
+		public ResponseEntity<Iterable<PerfilUsuarioEnum>> uf() {
+	
+			Iterable<PerfilUsuarioEnum> perfil = Arrays.asList(PerfilUsuarioEnum.values());
+			return new ResponseEntity<Iterable<PerfilUsuarioEnum>>(perfil, HttpStatus.OK);
+		}
+	 
    @RequestMapping("/usuarios")
 		public ResponseEntity<?> user(SessionUsuario user, HttpSession session) {
-			
-	    	Usuario usuario = (Usuario) session.getAttribute("usuario");
-			
-	    	System.out.println(session.getAttribute("usuario"));
-	    //	Empreendimento empreendimento = (Empreendimento) session.getAttribute("empreendimento");
-			user.getUsuario().getNome();
-			System.out.println(user);
-	    	if(usuario == null){
-				System.out.println("Não autorizado");
-	    		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-			}
-			//UsuarioView u = new UsuarioView(usuario, empreendimento);
-
+		
 			return new ResponseEntity<>(user, HttpStatus.OK);
 		}
 }

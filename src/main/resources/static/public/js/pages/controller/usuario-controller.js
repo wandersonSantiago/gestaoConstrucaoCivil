@@ -6,6 +6,13 @@ app.controller('usuarioController', function($scope, toastr, $rootScope, usuario
 	$rootScope.tipoEmpreendimento = false;
 	$scope.listaUsuario = [];
 	
+	$scope.perfil = function(){
+			usuarioService.perfil().
+				then(function(u){
+					$scope.perfils = u;
+					}, function(errResponse){
+				});
+			};
 	
 	self.user = function(){
 		usuarioService.user().
@@ -51,6 +58,7 @@ app.controller('usuarioController', function($scope, toastr, $rootScope, usuario
 		}
 	}
 	 
+	
 	
 	 self.lista = function(){
 		 usuarioService.lista().
