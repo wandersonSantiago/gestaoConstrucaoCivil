@@ -3,19 +3,25 @@ app.controller('usuarioController', function($scope, toastr, $rootScope, usuario
 	var self = this;
 		
 	var idUsuario = $routeParams.idUsuario;
-	
+	$rootScope.tipoEmpreendimento = false;
 	$scope.listaUsuario = [];
-		
-	$http.get('/rest/usuario/usuarios').then(function(response) {
-		$rootScope.user = response.data;
-		
-		if($rootScope.user.usuario.empreendimento.tipoEmpreendimento = "CONDOMINIO_DE_EDIFICIO_RESIDENCIAL"){
-			$rootScope.tipoEmpreendimento = true;
+	
+	
+	self.user = function(){
+		usuarioService.user().
+			then(function(u){
+				$rootScope.user = u;
+				if($rootScope.user.usuario.empreendimento.tipoEmpreendimento = "CONDOMINIO_DE_EDIFICIO_RESIDENCIAL"){
+					$rootScope.tipoEmpreendimento = true;
+				}
+				}, function(errResponse){
+			});
+		};
+
+		if($rootScope.tipoEmpreendimento == false){
+			self.user();
 		}
-		$rootScope.tipoEmpreendimento = response.data.usuario.empreendimento.tipoEmpreendimento;
 		
-		console.log($rootScope.tipoEmpreendimento);
-	});	
 	
 	self.altera = function(usuario){
 		if(self.senha == self.senhaRepitida){
