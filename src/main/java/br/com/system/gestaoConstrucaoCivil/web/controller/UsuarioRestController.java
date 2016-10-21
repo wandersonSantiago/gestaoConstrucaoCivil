@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-
 import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
+import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.service.UsuarioService;
 
 
@@ -72,21 +72,21 @@ public class UsuarioRestController {
 			return new ResponseEntity(usuarioService.existeLoginCadastrado(login), HttpStatus.OK);
 		}
 	 
-	/*    @RequestMapping("/usuario")
-		public ResponseEntity<?> user(Principal user, HttpSession session) {
+   @RequestMapping("/usuarios")
+		public ResponseEntity<?> user(SessionUsuario user, HttpSession session) {
 			
 	    	Usuario usuario = (Usuario) session.getAttribute("usuario");
 			
 	    	System.out.println(session.getAttribute("usuario"));
-	    	Empreendimento empreendimento = (Empreendimento) session.getAttribute("empreendimento");
-			
-			
+	    //	Empreendimento empreendimento = (Empreendimento) session.getAttribute("empreendimento");
+			user.getUsuario().getNome();
+			System.out.println(user);
 	    	if(usuario == null){
 				System.out.println("Não autorizado");
 	    		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 			}
-			UsuarioView u = new UsuarioView(usuario, empreendimento);
+			//UsuarioView u = new UsuarioView(usuario, empreendimento);
 
-			return new ResponseEntity<>(u, HttpStatus.OK);
-		}*/ 
+			return new ResponseEntity<>(user, HttpStatus.OK);
+		}
 }

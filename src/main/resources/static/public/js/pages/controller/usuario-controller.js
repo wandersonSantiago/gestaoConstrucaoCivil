@@ -1,4 +1,4 @@
-app.controller('usuarioController', function($scope, toastr, usuarioService, $http, $routeParams){
+app.controller('usuarioController', function($scope, toastr, $rootScope, usuarioService, $http, $routeParams){
 	
 	var self = this;
 		
@@ -6,8 +6,15 @@ app.controller('usuarioController', function($scope, toastr, usuarioService, $ht
 	
 	$scope.listaUsuario = [];
 		
-	$http.get('/rest/usuario/usuario/').then(function(response) {
-		self.user = response.data.name;
+	$http.get('/rest/usuario/usuarios').then(function(response) {
+		$rootScope.user = response.data;
+		
+		if($rootScope.user.usuario.empreendimento.tipoEmpreendimento = "CONDOMINIO_DE_EDIFICIO_RESIDENCIAL"){
+			$rootScope.tipoEmpreendimento = true;
+		}
+		$rootScope.tipoEmpreendimento = response.data.usuario.empreendimento.tipoEmpreendimento;
+		
+		console.log($rootScope.tipoEmpreendimento);
 	});	
 	
 	self.altera = function(usuario){
