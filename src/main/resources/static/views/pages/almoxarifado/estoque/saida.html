@@ -15,13 +15,16 @@
 						<label class="radio-inline"><input type="radio"   ng-model="tipo.tipo" value="comunitaria" ng-click="estoqueCtrl.tipoConf()" name="optradio">Edificações Comunitaria</label> 
 									
 					<br> <br>
-					<div class="row" ng-init="estoqueCtrl.listaProdutosComEstoque()">
+						<label class="radio-inline"><input type="checkbox"   ng-model="habilitaBuscaPorDescricao" value="busca" ng-click="estoqueCtrl.listaProdutosComEstoque()" name="optradio">Habilitar busca por descrição </label> 
+					<br>
+					<br>
+					<div class="row">
 						
 						<div class="col-sm-2">
 							<input type="text" class="form-control" ng-model="codigo" ng-blur="estoqueCtrl.buscaPorCodigoBarras(codigo)" onkeyup="if(this.value.length > 12) { quantidadeProduto.focus(); }" name="leitor" placeholder="Leitor de Código de Barras">
 						</div>
 						
-						<div class="col-sm-3"  >
+						<div class="col-sm-3" ng-if="habilitaBuscaPorDescricao" >
 						  <md-autocomplete 
 						 		md-no-cache="estoqueCtrl.noCache"
 							 	md-selected-item="estoqueCtrl.objeto.produto" 
@@ -29,7 +32,7 @@
 							 	md-selected-item-change="estoqueCtrl.selectedItemChange(listaProduto.produto)" 
 							 	md-items=" listaProduto in estoqueCtrl.listaProdutos | filter : estoqueCtrl.searchText" 
 							 	md-item-text="listaProduto.produto.descricao" 
-							 	md-min-length="3" placeholder="busca produto">
+							 	md-min-length="3" placeholder="busca produto por descrição">
        							 <md-item-template>
           							<span md-highlight-text="estoqueCtrl.searchText" md-highlight-flags="^i">{{listaProduto.produto.descricao}}</span>
        							 </md-item-template>        								

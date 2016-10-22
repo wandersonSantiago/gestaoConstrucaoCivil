@@ -32,7 +32,9 @@
 					</div>
 					
 					<br>
-					
+					<div ng-controller="produtoController as pCtrl">
+						<label class="radio-inline"  ><input type="checkbox"   ng-model="habilitaBuscaPorDescricao"  ng-click="pCtrl.lista()" name="optradio">Habilitar busca por descrição </label> 
+					<br>
 					<div class="row" >	
 					
 						<div class="col-sm-3">
@@ -41,7 +43,7 @@
 							
 						</div>				
 						
-					<div class="col-sm-4" ng-controller="produtoController as pCtrl" ng-init="pCtrl.lista()" >
+					<div class="col-sm-4" ng-show="habilitaBuscaPorDescricao"  >
 							<a href="" data-toggle="modal" data-target="#myProduto"><i class="glyphicon glyphicon-plus"></i>novo</a>
 							
 							<md-autocomplete 
@@ -56,12 +58,14 @@
        							 </md-item-template>        								
      						 </md-autocomplete>
 							
+							
 							</div>
-							<div class="col-sm-2">
+							<div class="col-sm-2" ng-show="habilitaBuscaPorDescricao">
 							<br>
-							<input class="btn btn-lg btn-primary btn-block btn-signin" 
+							<input class="btn btn-lg btn-primary btn-block btn-signin" ng-disabled="!notaFiscalCtrl.produto"
 								ng-click="notaFiscalCtrl.adicionarProdutos(notaFiscalCtrl.produto )" value="adicionar"
 								title="pressione para adicionar a lista" type="button"  >
+						</div>
 						</div>
 					</div>
 					<br>

@@ -36,8 +36,7 @@ app.controller('notaFiscalController', function($scope,notaFiscalService, produt
 			produtoService.buscaPorCodigoBarras(codigoBarras).
 			then(function(p){
 				self.produtos = p;
-				self.adicionarProdutos(self.produtos);
-				console.log(self.produtos);
+				self.adicionarProdutos(self.produtos);			
 			},function(errResponse){
 			});
 		};

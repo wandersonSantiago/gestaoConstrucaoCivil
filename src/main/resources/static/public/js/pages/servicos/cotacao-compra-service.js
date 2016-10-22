@@ -3,7 +3,7 @@ app.factory('cotacaoCompraService', function($rootScope, toastr, $http,$q){
 	
 	return{
 		salva: function(cotacao){	
-			return $http.post('/rest/almoxarifado/compra/cotacao/salva', cotacao)
+			return $http.post('/rest/almoxarifado/cotacao/salva', cotacao)
 			.then(function(response){
 				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;

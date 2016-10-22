@@ -24,6 +24,11 @@ public class CotacaoRestController {
 	
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
 	public ResponseEntity<Cotacao> salva(@RequestBody Cotacao cotacao){
+		System.out.println(cotacao.getTema());
+		for(int i = 0; i < cotacao.getItens().size(); i ++){
+			System.out.println(cotacao.getItens().get(i).getDescricao());
+			
+		}
 		cotacaoService.salvaAltera(cotacao);
 		HttpHeaders headers =  new HttpHeaders();
 		return new ResponseEntity(headers, HttpStatus.CREATED);				

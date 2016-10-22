@@ -55,6 +55,46 @@ public class Cotacao implements Serializable{
 		this.id = id;
 	}
 
+	public String getTema() {
+		return tema;
+	}
+
+	public void setTema(String tema) {
+		this.tema = tema;
+	}
+
+	public List<ItemCotacao> getItens() {
+		return itens;
+	}
+
+	public void setItens(List<ItemCotacao> itens) {
+		this.itens = itens;
+	}
+
+	public Empreendimento getEmpreendimento() {
+		return empreendimento;
+	}
+
+	public void setEmpreendimento(Empreendimento empreendimento) {
+		this.empreendimento = empreendimento;
+	}
+
+	public Date getDataLimite() {
+		return dataLimite;
+	}
+
+	public void setDataLimite(Date dataLimite) {
+		this.dataLimite = dataLimite;
+	}
+
+	public Date getDataCriacao() {
+		return dataCriacao;
+	}
+
+	public void setDataCriacao(Date dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
