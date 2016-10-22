@@ -1,12 +1,16 @@
  package br.com.system.gestaoConstrucaoCivil.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -29,14 +33,20 @@ public class Usuario extends AbstractPersistable<Long>{
 	@JoinColumn(name="id_empreendimento",nullable = true)
 	private Empreendimento empreendimento;
 	
-/*	@OneToMany(mappedBy = "", cascade = CascadeType.ALL)*/
+/*	@OneToMany(mappedBy = "", cascade = CascadeType.ALL)
 	@Enumerated(EnumType.STRING)
 	@JoinColumn(name="perfil_permissao",nullable = true)	
-	private Enum<PerfilUsuarioEnum> perfil;
+	private Enum<PerfilUsuarioEnum> perfil;*/
+	
+	@ElementCollection(targetClass=PerfilUsuarioEnum.class,fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name="perfil")
+    @Column(name="perfil_usuario")
+    List<PerfilUsuarioEnum> perfilsUsuario;
 	
 	@Column(nullable = false,length = 50)
 	private String nome;
-	@Column(nullable = false,length = 15)
+	@Column(nullable = false,length = 15,unique = false)
 	private String login;
 	@Column(nullable = true,length = 40)
 	private String email;
@@ -95,11 +105,11 @@ public class Usuario extends AbstractPersistable<Long>{
 	public void setEmpreendimento(Empreendimento empreendimento) {
 		this.empreendimento = empreendimento;
 	}
-	public Enum<PerfilUsuarioEnum> getPerfil() {
-		return perfil;
+	public List<PerfilUsuarioEnum> getPerfilsUsuario() {
+		return perfilsUsuario;
 	}
-	public void setPerfil(Enum<PerfilUsuarioEnum> perfil) {
-		this.perfil = perfil;
+	public void setPerfilsUsuario(List<PerfilUsuarioEnum> perfilsUsuario) {
+		this.perfilsUsuario = perfilsUsuario;
 	}
 	
 }
