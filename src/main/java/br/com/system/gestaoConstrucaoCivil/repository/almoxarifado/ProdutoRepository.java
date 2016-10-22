@@ -23,11 +23,13 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 	@Query("SELECT CASE WHEN COUNT(codigoBarra) > 0 THEN true ELSE false END FROM Produto p WHERE p.codigoBarra = :codigoBarra")
 	boolean existeCodigoBarra(@Param("codigoBarra") String codigoBarra);
 
-	@Query("FROM Produto produto , EstoqueEmpreendimento estoque WHERE produto.codigoBarra = :codigoBarra AND "
-			+ "produto.id = estoque.produto.id")
-	Produto buscarPorCodigoBarraProdutoComEstoque(@Param("codigoBarra") String codigoBarra);
+	
+	@Query("FROM Produto produto WHERE CAST(produto.codigo as string) = :codigoOuCodigoBarra OR produto.codigoBarra = :codigoOuCodigoBarra"
+			+ " AND EXISTS (FROM EstoqueEmpreendimento estoque WHERE estoque.produto.id = produto.id)")
+	Produto findByCodigoOrCodigoBarraEstoque(@Param("codigoOuCodigoBarra") String codigoOuCodigoBarra);
 
-	@Query("FROM Produto produto , EstoqueEmpreendimento estoque WHERE produto.codigo = :codigo AND "
-			+ "produto.id = estoque.produto.id")
-	Produto buscarPorCodigoProdutoComEstoque(@Param("codigo") Integer codigo);
+	
+	@Query("FROM Produto produto WHERE CAST(produto.codigo as string) = :codigoOuCodigoBarra OR produto.codigoBarra = :codigoOuCodigoBarra")
+	Produto findByCodigoOrCodigoBarra(@Param("codigoOuCodigoBarra") String codigoOuCodigoBarra);
+
 }

@@ -24,9 +24,12 @@ public class EstoqueEmpreendimentoRestController {
 		Iterable<EstoqueEmpreendimento> estoqueEmpreendimento = estoqueService.buscarTodos();
 		return new ResponseEntity<Iterable<EstoqueEmpreendimento>>(estoqueEmpreendimento, HttpStatus.OK);
 	}
+	//Não usar mais isso !!!!
+	//Usar o novo método  buscarPorCodigoComEstoque esta no ProdutoController
 	@RequestMapping(value = "/buscaPorCodigo/{codigo}", method = RequestMethod.GET)
 	public ResponseEntity<Produto> buscarPorCodigo(@PathVariable String codigo)
 	{
-		return new ResponseEntity<Produto>(estoqueService.buscarPorCodigoOuCodigoBarra(codigo),HttpStatus.OK);
+	     
+		return new ResponseEntity<Produto>(estoqueService.buscarPorCodigoOuCodigoBarra(codigo),HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

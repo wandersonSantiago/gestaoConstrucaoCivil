@@ -116,14 +116,4 @@ public class EstoqueEmpreendimentoService {
 	public boolean existeProduto(Long id) {
 		return estoqueRepository.existeProduto(id);
 	}
-	 public Produto buscarPorCodigoOuCodigoBarra(String codigo) {
-
-			if (codigo.length() == 13) {
-				return estoqueRepository.findByCodigoBarra(codigo);
-			} else {
-				return estoqueRepository.findByCodigo(Integer.valueOf(codigo));
-			}
-		}
-
-   
 }

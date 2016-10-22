@@ -41,6 +41,11 @@ public class ProdutoRestController {
 	{
 		return new ResponseEntity<Produto>(produtoService.buscarPorCodigoOuCodigoBarra(codigo),HttpStatus.OK);
 	}
+	@RequestMapping(value = "/buscaPorCodigoProdutoComEstoque/{codigo}", method = RequestMethod.GET)
+	public ResponseEntity<Produto> buscarPorCodigoComEstoque(@PathVariable String codigo)
+	{
+		return new ResponseEntity<Produto>(produtoService.buscarPorCodigoOuCodigoBarraEstoque(codigo),HttpStatus.OK);
+	}
 	 @RequestMapping(value="/salva", method = RequestMethod.POST)
 	 public ResponseEntity salva(@RequestBody Produto produto,UriComponentsBuilder ucBuilder)
 	 {

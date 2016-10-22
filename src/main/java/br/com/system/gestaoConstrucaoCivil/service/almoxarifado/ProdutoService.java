@@ -56,16 +56,16 @@ public class ProdutoService {
 		produtoRepository.save(produto);
 
 	}
-   public Produto buscarPorCodigoOuCodigoBarra(String codigo) {
+   public Produto buscarPorCodigoOuCodigoBarra(String codigoOuCodigoBarra) {
 
-		if (codigo.length() == 13) {
-			return produtoRepository.findByCodigoBarra(codigo);
-		} else {
-			return produtoRepository.findByCodigo(Integer.valueOf(codigo));
-		}
-	}
-
-	public boolean existeCodigo(Integer codigo) {
+	   return produtoRepository.findByCodigoOrCodigoBarra(codigoOuCodigoBarra);
+   }
+   public Produto buscarPorCodigoOuCodigoBarraEstoque(String codigoOuCodigoBarra){
+	   
+       return produtoRepository.findByCodigoOrCodigoBarraEstoque(codigoOuCodigoBarra);
+   }
+	
+   public boolean existeCodigo(Integer codigo) {
 		return produtoRepository.existeCodigo(codigo);
 	}
 
