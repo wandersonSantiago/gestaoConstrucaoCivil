@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -41,11 +42,9 @@ public class Cotacao implements Serializable{
 	private Empreendimento empreendimento;
 	
 	@Temporal(TemporalType.DATE)
-	@Column(nullable = false)
 	private Date dataLimite;
-	@Temporal(TemporalType.DATE)
-	@Column(nullable = false)
-	private Date dataCriacao;
+	
+	private LocalDate dataCriacao;
 	
     public Long getId() {
 		return id;
@@ -86,12 +85,13 @@ public class Cotacao implements Serializable{
 	public void setDataLimite(Date dataLimite) {
 		this.dataLimite = dataLimite;
 	}
+   
 
-	public Date getDataCriacao() {
+	public LocalDate getDataCriacao() {
 		return dataCriacao;
 	}
 
-	public void setDataCriacao(Date dataCriacao) {
+	public void setDataCriacao(LocalDate dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
 
