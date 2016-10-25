@@ -17,4 +17,7 @@ public interface EstoqueEmpreendimentoRepository extends JpaRepository<EstoqueEm
 	 @Query("SELECT CASE WHEN COUNT(e.id) > 0 THEN true ELSE false END FROM EstoqueEmpreendimento e JOIN e.produto p  WHERE p.id = :id")
 	 boolean existeProduto(@Param("id") Long id);
 	 
+     @Query("FROM EstoqueEmpreendimento estoque JOIN estoque.produto produto WHERE CAST(produto.codigo as string) = :codigoOuCodigoBarra OR produto.codigoBarra = :codigoOuCodigoBarra")	
+	 EstoqueEmpreendimento findByCodigoOrCodigoBarraEstoque(@Param("codigoOuCodigoBarra") String codigoOuCodigoBarra);
+
 }

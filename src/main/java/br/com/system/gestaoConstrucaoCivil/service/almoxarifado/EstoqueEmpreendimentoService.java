@@ -116,4 +116,8 @@ public class EstoqueEmpreendimentoService {
 	public boolean existeProduto(Long id) {
 		return estoqueRepository.existeProduto(id);
 	}
+	 public EstoqueEmpreendimento buscarPorCodigoOuCodigoBarraEstoque(String codigoOuCodigoBarra){
+		   
+	       return estoqueRepository.findByCodigoOrCodigoBarraEstoque(codigoOuCodigoBarra);
+	   }
 }

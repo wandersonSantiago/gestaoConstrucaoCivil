@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.EstoqueEmpreendimento;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Produto;
 import br.com.system.gestaoConstrucaoCivil.service.almoxarifado.EstoqueEmpreendimentoService;
 
 @RestController
@@ -24,12 +23,10 @@ public class EstoqueEmpreendimentoRestController {
 		Iterable<EstoqueEmpreendimento> estoqueEmpreendimento = estoqueService.buscarTodos();
 		return new ResponseEntity<Iterable<EstoqueEmpreendimento>>(estoqueEmpreendimento, HttpStatus.OK);
 	}
-	//Não usar mais isso !!!!
-	//Usar o novo método  buscarPorCodigoComEstoque esta no ProdutoController
 	@RequestMapping(value = "/buscaPorCodigo/{codigo}", method = RequestMethod.GET)
-	public void buscarPorCodigo(@PathVariable String codigo)
+	public ResponseEntity<EstoqueEmpreendimento> buscarPorCodigo(@PathVariable String codigo)
 	{
-	     
-		System.out.println("Novo método no ProdutoController");
+	    return new ResponseEntity<EstoqueEmpreendimento>(estoqueService.buscarPorCodigoOuCodigoBarraEstoque(codigo),HttpStatus.OK);
+		
 	}
 }
