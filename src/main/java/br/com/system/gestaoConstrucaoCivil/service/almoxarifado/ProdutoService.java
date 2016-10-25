@@ -60,11 +60,6 @@ public class ProdutoService {
 
 	   return produtoRepository.findByCodigoOrCodigoBarra(codigoOuCodigoBarra);
    }
-   public Produto buscarPorCodigoOuCodigoBarraEstoque(String codigoOuCodigoBarra){
-	   
-       return produtoRepository.findByCodigoOrCodigoBarraEstoque(codigoOuCodigoBarra);
-   }
-	
    public boolean existeCodigo(Integer codigo) {
 		return produtoRepository.existeCodigo(codigo);
 	}
