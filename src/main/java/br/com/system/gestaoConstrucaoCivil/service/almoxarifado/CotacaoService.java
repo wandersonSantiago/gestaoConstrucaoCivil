@@ -23,7 +23,7 @@ public class CotacaoService {
 	@Transactional(readOnly = false)
 	public void salvaAltera(Cotacao cotacao){
 		cotacao.setDataCriacao(LocalDate.now());
-		cotacao.setEmpreendimento(SessionUsuario.instance.getUsuario().getEmpreendimento());
+		cotacao.setEmpreendimento(SessionUsuario.getInstance().getUsuario().getEmpreendimento());
 		cotacaoRepository.save(cotacao);
 	}
 	

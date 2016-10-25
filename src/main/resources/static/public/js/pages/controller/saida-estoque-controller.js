@@ -10,18 +10,13 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 		var produtoMesmoImovel = true;		
 			self.buscaPorCodigoBarras = function(codigoBarras){
 				saidaEstoqueService.buscaPorCodigoBarras(codigoBarras).
-				then(function(p){
+				then(function(p){					
 					self.listaProdutosComEstoques = p;
-					for(i = 0; i < self.listaProdutosComEstoques.length; i++ ){
-						
-						self.produto = self.listaProdutosComEstoques[i].produto;
-						self.quantidade = self.listaProdutosComEstoques[i].quantidade;
+				
 					self.listaProdutos.push({
-								produto : self.produto,
-								quantidade : self.quantidade
-							
-						});
-					}
+								produto : self.listaProdutosComEstoques.produto,
+								quantidade : self.listaProdutosComEstoques.quantidade
+					});
 				});
 			};
 			self.listaProdutosComEstoque = function(){

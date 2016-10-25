@@ -20,17 +20,14 @@
 								title="Tema para a cotação"  style=" width: 100%;" >					
 						</div>
 						<div class="col-sm-3">
-							<input type="text" ng-model="cotacaoCtrl.cotacao.dataLimite" placeholder="data limite" ui-date title="escolha uma data limite para o encerramento desta cotação"> 
-						</div>
-						<!-- <div class="col-sm-3">
-							<input type="text" ng-model="cotacaoCtrl.cotacao.dataCriacao" placeholder="data limite" ui-date title="escolha uma data limite para o encerramento desta cotação"> 
-						</div> -->
+							<input class="form-control " type="text" ng-model="cotacaoCtrl.cotacao.dataLimite" placeholder="data limite" ui-date title="escolha uma data limite para o encerramento desta cotação"> 
+						</div>						
 					</div>
 					<br>
 					<br>
 				<div class="row" >			
 					<div class="col-sm-4" >
-							<input class="form-control select2" ng-model="cotacaoCtrl.produto" placeholder="descrição do produto" id="descricao"							 
+							<input class="form-control select2" ng-model="cotacaoCtrl.descricao" placeholder="descrição do produto" id="descricao"							 
 							 title="descrição do produto" style=" width: 100%;" >
 						
 					</div>
@@ -40,8 +37,8 @@
 						
 					</div>
 							<div class="col-sm-2">							
-							<input class="btn btn-lg btn-primary btn-block btn-signin" ng-disabled="!cotacaoCtrl.quantidade || !cotacaoCtrl.produto"
-								ng-click="cotacaoCtrl.adicionarProdutos(cotacaoCtrl.produto, cotacaoCtrl.quantidade)" value="adicionar"
+							<input class="btn btn-lg btn-primary btn-block btn-signin" ng-disabled="!cotacaoCtrl.quantidade || !cotacaoCtrl.descricao"
+								ng-click="cotacaoCtrl.adicionarProdutos(cotacaoCtrl.descricao, cotacaoCtrl.quantidade)" value="adicionar"
 								title="pressione para adicionar a lista" type="button" ng-disabled="!cotacaoCtrl.produto" >
 						</div>
 					</div>
@@ -63,7 +60,7 @@
 						<tr>
 						<td><input class="col-sm-1" type="checkbox" ng-model="f.selecionado"	ng-click="cotacaoCtrl.ativarExcluirLote(listaCotacao)"></td>
 							<td><input class="form-control"  id="descricaoProduto"  type="text" placeholder="descrição do Produto" 
-							ng-model="f.produto" disabled></td>
+							ng-model="f.descricao" disabled></td>
 							<td><input class="form-control"  id="quantidadeProduto"  type="text" placeholder="quantidade"
 							ng-model="f.quantidade" ui-number-mask="0" disabled></td>							
 						</tr>

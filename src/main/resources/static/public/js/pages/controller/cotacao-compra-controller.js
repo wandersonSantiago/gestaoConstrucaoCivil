@@ -6,7 +6,6 @@ app.controller('cotacaoCompraController', function($scope,cotacaoCompraService, 
 	
 	 self.salva = function(cotacao){
 		 self.cotacao.itens = self.listaCotacao;
-		 console.log(self.cotacao);
 		 cotacaoCompraService.salva(self.cotacao).
 				then(function(response){
 					self.limpaCampos();					
@@ -34,12 +33,11 @@ app.controller('cotacaoCompraController', function($scope,cotacaoCompraService, 
 	
 			
 		//cria uma lista de Produtos na nota fiscal
-		self.adicionarProdutos = function(produto, quantidade){
+		self.adicionarProdutos = function(descricao, quantidade){
 			self.listaCotacao.push({
-				produto :  produto,
+				descricao :  descricao,
 				quantidade : quantidade
 			});
-			console.log(produto);
 			$scope.cotacao = null;
 			$scope.visialuzarTable = true;
 		}
