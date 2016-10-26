@@ -46,9 +46,12 @@
 								<option value="">---Area de aplicação---</option>
 							</select> 
 							
-						</div>	
+						</div>
+						<div class="col-sm-2" ng-if="!habilitaBuscaPorDescricao">
+						{{estoqueCtrl.objeto.produto.descricao}}
+						</div>						
 						
-						<div class="col-sm-2">
+						<div class="col-sm-2" >
 							<input class="form-control" ng-model="estoqueCtrl.objeto.produto.quantidade" type="text" id="quantidadeEstoque" ui-number-mask="0" disabled placeholder="Quantidade estoque">
 						</div>
 						

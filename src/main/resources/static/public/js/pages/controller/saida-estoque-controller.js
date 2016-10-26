@@ -6,6 +6,7 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 		self.baixaEstoque = [];
 		self.listaProdutos = [];
 		$scope.listaProdutos = [];
+		$scope.produto = [];
 		var quantidadeMaior = true;
 		var produtoMesmoImovel = true;		
 			self.buscaPorCodigoBarras = function(codigoBarras){
@@ -13,10 +14,11 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 				then(function(p){					
 					self.listaProdutosComEstoques = p;
 				
-					self.listaProdutos.push({
-								produto : self.listaProdutosComEstoques.produto,
-								quantidade : self.listaProdutosComEstoques.quantidade
-					});
+					
+								self.objeto = self.listaProdutosComEstoques;
+								self.objeto.produto.quantidade = self.objeto.quantidade;
+								self.objeto.produto = self.objeto.produto;
+				
 				});
 			};
 			self.listaProdutosComEstoque = function(){
@@ -87,11 +89,12 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 				
 					self.listaProduto.push({
 						quantidadeEstoque : objeto.produto.quantidade,
-						produto : objeto.produto.produto,
+						produto : objeto.produto,
 						areaProduto : objeto.areaProduto,
 						quantidadeSaida : objeto.quantidadeSaida,					
 						descricao : objeto.edificacaoComunitaria.descricao						
 					});		
+					console.log(self.listaProduto);
 			}
 		
 			verificaProdutoRepetido = function(objeto){
