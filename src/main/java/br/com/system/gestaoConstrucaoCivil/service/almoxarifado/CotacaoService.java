@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Cotacao;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.NotaFiscalProduto;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.CotacaoRepository;
 
@@ -24,9 +25,17 @@ public class CotacaoService {
 	public void salvaAltera(Cotacao cotacao){
 		cotacao.setDataCriacao(LocalDate.now());
 		cotacao.setEmpreendimento(SessionUsuario.getInstance().getUsuario().getEmpreendimento());
+		adicionarCotacaoNoItem(cotacao);
 		cotacaoRepository.save(cotacao);
 	}
+	private void adicionarCotacaoNoItem(Cotacao cotacao) {
+		for (int i = 0; i < cotacao.getItens().size(); i++) {
+		
+			cotacao.getItens().get(i).setContacao(cotacao);
+		}
+		
 	
+	}
 	
 	public Collection<Cotacao> buscarTodos(){
 		return cotacaoRepository.findAll();
