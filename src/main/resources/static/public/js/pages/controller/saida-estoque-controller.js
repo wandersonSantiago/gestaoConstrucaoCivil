@@ -17,7 +17,7 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 					
 								self.objeto = self.listaProdutosComEstoques;
 								self.objeto.produto.quantidade = self.objeto.quantidade;
-								self.objeto.produto = self.objeto.produto;
+								self.objeto.produto.produto = self.objeto.produto;
 				
 				});
 			};
@@ -89,7 +89,7 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 				
 					self.listaProduto.push({
 						quantidadeEstoque : objeto.produto.quantidade,
-						produto : objeto.produto,
+						produto : objeto.produto.produto,
 						areaProduto : objeto.areaProduto,
 						quantidadeSaida : objeto.quantidadeSaida,					
 						descricao : objeto.edificacaoComunitaria.descricao						
