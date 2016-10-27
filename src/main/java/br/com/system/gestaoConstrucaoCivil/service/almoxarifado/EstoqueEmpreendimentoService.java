@@ -54,6 +54,7 @@ public class EstoqueEmpreendimentoService {
 
 	private void updateEstoque(ItemNotaFiscal item) {
 		
+		
 		if (existeProduto(item.getProduto().getId())) {
 			
 			adicionarQuantidade(item.getProduto(), item.getQuantidade());
@@ -67,8 +68,8 @@ public class EstoqueEmpreendimentoService {
 		EstoqueEmpreendimento estoque = new EstoqueEmpreendimento();
 		estoque.setProduto(produto);
 		estoque.setQuantidade(quantidade);
-		List<Empreendimento> empre = empreendimento.buscarTodos();
-		estoque.setEmpreendimento(empre.get(0));
+		Empreendimento empreendimentoDoUsuario = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
+		estoque.setEmpreendimento(empreendimentoDoUsuario);
 		return estoque;
 	}
 
@@ -114,7 +115,8 @@ public class EstoqueEmpreendimentoService {
 		return false;
 	}
 	public boolean existeProduto(Long id) {
-		return estoqueRepository.existeProduto(id);
+		Empreendimento empreendimentoDoUsuario = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
+		return estoqueRepository.existeProduto(id,empreendimentoDoUsuario.getId());
 	}
 	 public EstoqueEmpreendimento buscarPorCodigoOuCodigoBarraEstoque(String codigoOuCodigoBarra){
 		   
