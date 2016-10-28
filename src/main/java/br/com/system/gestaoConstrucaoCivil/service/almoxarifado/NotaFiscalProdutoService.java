@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.ItemNotaFiscal;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.NotaFiscalProduto;
 import br.com.system.gestaoConstrucaoCivil.pojo.InformacaoEntradaProduto;
+import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.NotaFiscalProdutoRepository;
 
 @Service
@@ -30,6 +32,8 @@ public class NotaFiscalProdutoService {
 	public void salvarOuEditar(NotaFiscalProduto notaFiscalProduto) {
 
 		adicionarNotaProdutoItens(notaFiscalProduto);
+		Empreendimento empreendimentoDoUsuario = SessionUsuario.getInstance().getUsuario().getEmpreendimento(); 
+		notaFiscalProduto.getNotaFiscal().setEmpreendimento(empreendimentoDoUsuario);
 		notaFiscalProdutoRepository.save(notaFiscalProduto);
 		estoque.entradaEstoque(notaFiscalProduto);
 
@@ -53,7 +57,8 @@ public class NotaFiscalProdutoService {
 
 	private InformacaoEntradaProduto gerarInformacao(Long idProduto) {
 
-		List<NotaFiscalProduto> notas = notaFiscalProdutoRepository.buscarNota();
+		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
+		List<NotaFiscalProduto> notas = notaFiscalProdutoRepository.buscarNotaPorEmpreendimento(idEmpreendimento);
 		Double valorTotal = 0.0;
 		Integer quantidadeTotal = 0;
 		for (NotaFiscalProduto notaFiscal : notas) {

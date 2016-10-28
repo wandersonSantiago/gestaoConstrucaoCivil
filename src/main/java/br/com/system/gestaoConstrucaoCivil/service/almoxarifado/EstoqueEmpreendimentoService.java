@@ -34,13 +34,18 @@ public class EstoqueEmpreendimentoService {
 	}
     public List<EstoqueEmpreendimento> buscarTodos(){
 		
-    	 List<EstoqueEmpreendimento> estoques = estoqueRepository.findAll();
-         
-    		for(EstoqueEmpreendimento estoque: estoques) {
+    	// List<EstoqueEmpreendimento> estoques = estoqueRepository.findAll();
+    	
+    	Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();  
+    	
+    	List<EstoqueEmpreendimento> estoques = estoqueRepository.buscarTodosPorEmpreendimento(idEmpreendimento);
+    	
+    	for(EstoqueEmpreendimento estoque: estoques) {
     		 InformacaoEntradaProduto info = notaProdutoService.getInformacaoProduto(estoque.getProduto().getId());
     		 estoque.setInforProduto(info);
     		
     	 }
+    	
     	return estoques;
 	}
 	@Transactional(readOnly = false)

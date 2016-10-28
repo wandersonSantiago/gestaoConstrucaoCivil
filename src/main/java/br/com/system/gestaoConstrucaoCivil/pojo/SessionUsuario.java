@@ -12,16 +12,17 @@ public class SessionUsuario {
 
 	public static SessionUsuario instance;
 
-	private HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
-			.getRequest();
-
 	private SessionUsuario() {
 
 	}
 
-	public Usuario getUsuario() {
+	public synchronized Usuario getUsuario() {
+		
+		 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
+					.getRequest();
 		HttpSession session = request.getSession();
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
+		
 		return usuario;
 	}
 

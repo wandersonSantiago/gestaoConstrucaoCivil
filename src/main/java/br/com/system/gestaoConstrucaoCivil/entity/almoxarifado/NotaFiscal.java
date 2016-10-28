@@ -2,6 +2,7 @@ package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,11 +10,14 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.enuns.Situacao;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
 
@@ -37,9 +41,10 @@ public class NotaFiscal implements Serializable {
 	@Column(nullable = false)
 	private Long numero;
 
-/*	@Column(nullable = true,length = 255)
-	private String chaveAcesso;
-*/
+    @ManyToOne
+    @JoinColumn(name="id_empreendimento",nullable = true)
+    private Empreendimento empreendimento;
+    
 	@Temporal(TemporalType.DATE)
 	private Date dataNota;
 	@Temporal(TemporalType.DATE)
@@ -60,17 +65,16 @@ public class NotaFiscal implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-/*	public String getChaveAcesso() {
-		return chaveAcesso;
+    public Long getNumero() {
+		return numero;
+	}
+     
+	public Empreendimento getEmpreendimento() {
+		return empreendimento;
 	}
 
-	public void setChaveAcesso(String chaveAcesso) {
-		this.chaveAcesso = chaveAcesso;
-	}*/
-
-	public Long getNumero() {
-		return numero;
+	public void setEmpreendimento(Empreendimento empreendimento) {
+		this.empreendimento = empreendimento;
 	}
 
 	public void setNumero(Long numero) {
