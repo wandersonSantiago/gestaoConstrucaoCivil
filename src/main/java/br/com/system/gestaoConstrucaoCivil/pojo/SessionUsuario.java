@@ -15,8 +15,7 @@ public class SessionUsuario {
 	private SessionUsuario() {
 
 	}
-
-	public synchronized Usuario getUsuario() {
+   public synchronized Usuario getUsuario() {
 		
 		 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
 					.getRequest();
