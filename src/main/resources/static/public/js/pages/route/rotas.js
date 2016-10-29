@@ -101,6 +101,9 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 	.when('/servicos/vincular/vincular', {
 		templateUrl:"views/pages/servicos/vincular/vincularServicos.html",		
 	})
+	.when('/servicos/vincular/lista', {
+		templateUrl:"views/pages/servicos/vincular/lista.html",		
+	})
 	
 	//PRESTADORA DE SERVIÇOS
 	

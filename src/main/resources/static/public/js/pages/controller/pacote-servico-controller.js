@@ -28,6 +28,7 @@ app.controller('pacoteServicoController', function($scope, pacoteServicoService,
 		 pacoteServicoService.lista().
 			then(function(f){
 				self.listaPacoteServicos = f;
+				console.log(self.listaPacoteServicos);
 				}, function(errResponse){
 			});
 		};

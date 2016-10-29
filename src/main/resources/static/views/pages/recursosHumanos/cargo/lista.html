@@ -15,18 +15,21 @@
 				<thead>
 					<tr>
 						<th>Descrição</th>
+						<th>Opções</th>
 					</tr>
 				</thead>
 				<tbody
 					ng-repeat=" cargo in cargos | filter : buscaCargo ">
 					<tr>
-						<td><a href="#/recursosHumanos/cargo/editar/{{cargo.id}}" >{{ cargo.descricao }}</a></td>
+						<td>{{ cargo.descricao }}</td>
+						<td><a href="#/recursosHumanos/cargo/editar/{{cargo.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						
 				</tr>
 				</tbody>
 				<tfoot>
 				
 					<tr>
-						<th>fim</th>
+					
 						</tr>
 				</tfoot>
 			</table>

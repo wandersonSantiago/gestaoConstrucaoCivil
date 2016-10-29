@@ -17,16 +17,18 @@
 					<tr>
 						<th>Codigo</th>
 						<th>nome do pacote</th>
+						<th>categoria</th>
 						<th>valor</th>
 						
 					</tr>
 				</thead>
 				<tbody
-					ng-repeat=" pacoteServico in listaPacoteServicos | filter : buscaPacotes">
+					ng-repeat=" pacoteServico in pacotesCtrl.listaPacoteServicos | filter : buscaPacotes">
 					<tr>
-					<td><h5><a >{{ pacoteServico.codigoPacote }}</a></h5></td>
-						<td><h5><a >{{ pacoteServico.descricao }}</a></h5></td>
-						<td><h5><a >{{ pacoteServico.valor }}</a></h5></td>
+					<td>{{ pacoteServico.codigoPacote }}</td>
+						<td>{{ pacoteServico.descricao }}</td>
+						<td>{{ pacoteServico.categoria }}</td>
+						<td>{{ pacoteServico.valor }}</td>
 						
 						<td><a href="#/servicos/pacotes/editar/{{pacoteServico.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						
@@ -37,9 +39,7 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<th>fim</th>
-						<th>fim</th>
-
+	
 					</tr>
 				</tfoot>
 			</table>

@@ -5,7 +5,6 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 	
 	
 	 self.salva = function(servicoEdifico){
-		 console.log(self.servicoEdifico);
 		 servicoEmpresaService.salva(self.servicoEdifico).
 			then(function(response){
 				self.servicoEdificio = null;
@@ -25,6 +24,7 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 		 servicoEmpresaService.lista().
 			then(function(t){
 				self.listaServicoEmpresa = t;
+				console.log(self.listaServicoEmpresa);
 				}, function(errResponse){
 			});
 		};

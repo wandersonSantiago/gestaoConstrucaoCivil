@@ -14,10 +14,12 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 				then(function(p){					
 					self.listaProdutosComEstoques = p;
 				
-					
+					//console.log(self.listaProdutosComEstoques);
 								self.objeto = self.listaProdutosComEstoques;
 								self.objeto.produto.quantidade = self.objeto.quantidade;
 								self.objeto.produto.produto = self.objeto.produto;
+								
+								console.log(self.objeto);
 				
 				});
 			};
@@ -25,6 +27,7 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 				saidaEstoqueService.listaProdutosComEstoque().
 					then(function(t){
 						self.listaProdutosComEstoques = t;
+						//console.log(self.listaProdutosComEstoques);
 						self.listaProdutos = [{produto:"",quantidade:""}];											
 						for(i = 0; i < self.listaProdutosComEstoques.length; i++ ){
 						

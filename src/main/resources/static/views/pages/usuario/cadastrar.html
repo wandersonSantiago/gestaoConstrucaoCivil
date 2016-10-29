@@ -24,7 +24,7 @@
 							</select>
 						</div>												
 						<div class="col-sm-6"  ng-controller="cadastrarFuncionarioController as funCtrl" ng-init="funCtrl.lista()">
-								<select class="form-control select2" ng-model="userCtrl.usuario.funcionario" ng-options="engenheiros.nomeCompleto  group by engenheiros.shade for engenheiros in listaFuncionario" style="width: 100%;" required>
+								<select class="form-control select2" ng-model="userCtrl.usuario.funcionario" ng-options="engenheiros.nomeCompleto  group by engenheiros.shade for engenheiros in listaFuncionario" style="width: 100%;" >
 									<option value="">---Selecione Funcionario---</option>                                                                                 
 							</select>
 						</div>						

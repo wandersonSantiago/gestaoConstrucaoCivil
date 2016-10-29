@@ -1,0 +1,53 @@
+<meta charset="UTF-8">
+<br>
+<br>
+<div class="generic-container"
+	ng-controller="servicoEmpresaController as servicoCtrl" >
+
+	<div class="box box-primary" ng-init="servicoCtrl.lista()">
+		<!-- Default panel contents -->
+		<div class="box-header">
+			<span class="lead">Lista  </span>
+		</div>
+		<div class="panel-body"  >
+		
+		<input class="form-control" type="text" placeholder="Buscar" ng-model="buscaPacotes" >
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+						<th>Pacote de serviço</th>
+						<th>Prestadora de serviço</th>
+						<th>Categoria</th>
+						<th>Valor</th>
+						
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" servico in servicoCtrl.listaServicoEmpresa | filter : buscaPacotes">
+					<tr>
+					<td>{{ servico.pacoteServico.descricao }}</td>
+						<td>{{ servico.prestadoraServico.dadoEmpresa.nomeFantasia }}</td>
+						<td>{{ servico.pacoteServico.categoria }}</td>
+						<td>{{ servico.pacoteServico.valor | currency}}</td>
+						
+						<td><a href="#/servicos/vncular/visualizar/{{servico.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						
+						
+						
+						</tr>
+
+				</tbody>
+				<tfoot>
+					<tr>
+	
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+		<!-- /.box-body -->
+	</div>
+	<!-- /.box -->
+</div>
+<!-- /.col -->
+</div>
+<!-- /.row -->
