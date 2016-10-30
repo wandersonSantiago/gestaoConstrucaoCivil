@@ -3,6 +3,7 @@ app.controller('cotacaoCompraController', function($scope,cotacaoCompraService, 
 		var self = this;
 		self.listaCotacao = [];
 		self.existe = true;	
+		var idCotacaoAberta = $routeParams.idCotacaoAberta;
 	
 	 self.salva = function(cotacao){
 		 self.cotacao.itens = self.listaCotacao;
@@ -25,6 +26,7 @@ app.controller('cotacaoCompraController', function($scope,cotacaoCompraService, 
 		 cotacaoCompraService.lista().
 			then(function(t){
 				self.cotacoes = t;
+				console.log(self.cotacoes);
 				}, function(errResponse){
 			});
 		};
@@ -40,6 +42,8 @@ app.controller('cotacaoCompraController', function($scope,cotacaoCompraService, 
 			});
 			$scope.cotacao = null;
 			$scope.visialuzarTable = true;
+			$scope.cotacaoCtrl.descricao = null;
+			$scope.cotacaoCtrl.quantidade = null;
 		}
 			
 	
@@ -61,8 +65,32 @@ app.controller('cotacaoCompraController', function($scope,cotacaoCompraService, 
 			});
 		}
 		
+		self.buscaPorCotacaoId = function(id){
+			if(!id)return;
+			cotacaoCompraService.buscaPorCotacaoId(id).
+			then(function(p){
+				self.cotacao = p;
+				self.cotacao.dataLimite = new Date(self.cotacao.dataLimite);
+				
+			
+			}, function(errResponse){
+		});
+		};
+		 function disabled(data) {
+			    var date = data.date,
+			      mode = data.mode;
+			    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+			  }
+	
+	
+		if(idCotacaoAberta){
+			self.buscaPorCotacaoId(idCotacaoAberta);
+		}
+		
 		self.limpaCampos = function(){
 			
-		
+			$scope.cotacaoCtrl = null;
+			self.listaCotacao = self.listaCotacao;
+			$scope.visialuzarTable = false;
 		}
 });

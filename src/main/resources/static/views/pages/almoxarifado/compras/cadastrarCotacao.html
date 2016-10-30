@@ -9,7 +9,31 @@
 			<span class="lead">Cadastrar cotação </span>
 		</div>
 		<div class="panel-body">
-			Empresa {{}}
+		<div class="row">
+			<div class="col-sm-6" >
+			Cotação
+						<input class="form-control" ng-model="cotacaoCtrl.cotacao.tema" type="text" id="temaCotacao"  disabled>
+				</div>	
+			<div class="col-sm-2" >
+				Data de Abertura
+						<input class="form-control" ng-model="cotacaoCtrl.cotacao.dataCriacao" type="text" id="dataCriacaoCotacao"   disabled>
+				</div>
+			<div class="col-sm-2" >
+				Data Limite
+						<input class="form-control" ng-model="cotacaoCtrl.cotacao.dataLimite " type="text" id="dataLimiteCotacao" ui-date  disabled>
+				</div>
+				
+			  <br>
+			  <div class="row">
+							<div class="col-sm-4" ng-controller="fornecedorController as forCtrl" ng-init="forCtrl.lista()" >
+								<a href="" data-toggle="modal" data-target="#myFornecedor"><i class="glyphicon glyphicon-plus"></i>novo</a>
+							<select class="form-control select2" ng-model="cotacaoCtrl.cotacaoEmpresa.fornecedor" id="fornecedor"
+							ng-options="listaFornecedores.dadoEmpresa.nomeFantasia for listaFornecedores in forCtrl.listaFornecedor" 
+							  style=" width: 100%;" required>
+								<option value="">---Fornecedor---</option>
+							</select>
+						</div>
+					</div>
 			<br>
 			<div class="container col-sm-12 " >
 				<form role="form-vertical" ng-submit="cotacaoCtrl.salva()" >

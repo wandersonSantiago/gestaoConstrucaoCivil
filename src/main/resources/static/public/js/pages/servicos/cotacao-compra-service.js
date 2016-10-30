@@ -13,7 +13,7 @@ app.factory('cotacaoCompraService', function($rootScope, toastr, $http,$q){
 			});
 		},
 		altera: function(cotacao){			
-			return $http.put('/rest/almoxarifado/compra/cotacao/salva', cotacao)
+			return $http.put('/rest/almoxarifado/cotacao/salva', cotacao)
 			.then(function(response){
 				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
@@ -23,7 +23,16 @@ app.factory('cotacaoCompraService', function($rootScope, toastr, $http,$q){
 			});
 		},
 		lista: function(){
-			return $http.get('/rest/almoxarifado/compra/cotacao/lista')
+			return $http.get('/rest/almoxarifado/cotacao/lista')
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
+		buscaPorCotacaoId: function(param){
+			return $http.get('rest/almoxarifado/cotacao/buscaPorCotacaoId/'+param)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){

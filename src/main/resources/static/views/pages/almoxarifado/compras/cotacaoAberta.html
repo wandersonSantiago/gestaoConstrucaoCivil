@@ -1,0 +1,50 @@
+<meta charset="UTF-8">
+<br>
+<br>
+<div class="generic-container"
+	ng-controller="cotacaoCompraController as cotacaoCtrl">
+
+	<div class="box box-primary" ng-init="cotacaoCtrl.lista()">
+	
+		<div class="box-header">
+			<span class="lead">Cotação em aberto </span>
+		</div>
+		<div class="panel-body">
+	<div class="row">
+			
+			
+	
+		</div>
+			<input type="text" class="form-control"  ng-model="buscar" placeholder="buscar por descrição">
+			<table class="table table-hover table-bordered table-responsive">
+				<thead>
+					<tr>
+						 
+						<th>Cotação</th>
+						<th>Data Limite</th>
+		
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" cotacao in cotacaoCtrl.cotacoes | filter : buscar ">
+					<tr>
+						
+						<td>{{cotacao.tema}}</td>
+						<td>{{cotacao.dataLimite | date :  "dd.MM.yyyy"}}</td>
+				
+					
+						<td><a href="#/almoxarifado/compras/cadastrarCotacao/{{cotacao.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						
+					</tr>
+
+				</tbody>
+				<tfoot>
+				
+					
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+
+
