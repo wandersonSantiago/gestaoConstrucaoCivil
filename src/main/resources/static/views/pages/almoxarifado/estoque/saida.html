@@ -48,10 +48,13 @@
 							
 						</div>
 						<div class="col-sm-2" ng-if="!habilitaBuscaPorDescricao">
-						{{estoqueCtrl.objeto.produto.descricao}}
-						</div>						
+						<input class="form-control" ng-model="produto.descricao" type="text" id="produto"  disabled placeholder="produto">
 						
-						<div class="col-sm-2" >
+						</div>						
+						<div class="col-sm-2" ng-if="!habilitaBuscaPorDescricao" >
+							<input class="form-control" ng-model="quantidade" type="text" id="quantidadeEstoque" ui-number-mask="0" disabled placeholder="Quantidade estoque">
+						</div>
+						<div class="col-sm-2" ng-if="habilitaBuscaPorDescricao">
 							<input class="form-control" ng-model="estoqueCtrl.objeto.produto.quantidade" type="text" id="quantidadeEstoque" ui-number-mask="0" disabled placeholder="Quantidade estoque">
 						</div>
 						
@@ -121,18 +124,15 @@
 						<div class="col-sm-4">
 							<input ng-if="edificio" class="btn btn-lg btn-primary btn-block btn-signin"	 value="adicionar produtos" 
 								title="pressione para adicionar a lista" type="button"  ng-click="estoqueCtrl.adicionarProdutoEdificio(estoqueCtrl.objeto)" 
-								ng-disabled="!estoqueCtrl.objeto.torre || !estoqueCtrl.objeto.andar || !estoqueCtrl.objeto.apartamento || !estoqueCtrl.objeto.areaProduto || !estoqueCtrl.objeto.quantidadeSaida ||
-								!estoqueCtrl.objeto.produto.quantidade">
+								ng-disabled="!estoqueCtrl.objeto.torre || !estoqueCtrl.objeto.andar || !estoqueCtrl.objeto.apartamento || !estoqueCtrl.objeto.areaProduto || !estoqueCtrl.objeto.quantidadeSaida" >
 								
 								<input ng-if="casa" class="btn btn-lg btn-primary btn-block btn-signin"	 value="adicionar produtos"
 								title="pressione para adicionar a lista" type="button" ng-click="estoqueCtrl.adicionarProdutoCasa(estoqueCtrl.objeto)"
-								ng-disabled="!estoqueCtrl.objeto.casa || !estoqueCtrl.objeto.andar || !estoqueCtrl.objeto.areaProduto || !estoqueCtrl.objeto.quantidadeSaida ||
-								!estoqueCtrl.objeto.produto.quantidade" >
+								ng-disabled="!estoqueCtrl.objeto.casa || !estoqueCtrl.objeto.andar || !estoqueCtrl.objeto.areaProduto || !estoqueCtrl.objeto.quantidadeSaida"  >
 								
 								<input ng-if="comunitaria" class="btn btn-lg btn-primary btn-block btn-signin"	 value="adicionar produtos"
 								title="pressione para adicionar a lista" type="button" ng-click="estoqueCtrl.adicionarProdutoEdificacaoComunitaria(estoqueCtrl.objeto)" 
-								ng-disabled="!estoqueCtrl.objeto.edificacaoComunitaria || !estoqueCtrl.objeto.areaProduto || !estoqueCtrl.objeto.quantidadeSaida ||
-								!estoqueCtrl.objeto.produto.quantidade" >
+								ng-disabled="!estoqueCtrl.objeto.edificacaoComunitaria  || !estoqueCtrl.objeto.areaProduto || !estoqueCtrl.objeto.quantidadeSaida"   >
 						</div>
 					</div>
 					

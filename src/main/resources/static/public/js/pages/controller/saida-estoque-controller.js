@@ -6,21 +6,21 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 		self.baixaEstoque = [];
 		self.listaProdutos = [];
 		$scope.listaProdutos = [];
-		$scope.produto = [];
+		self.produto = [];
+		self.produtos = [];
+		self.objeto = [];
+		$scope.produto = [{produto : "", quantidade :""}];
 		var quantidadeMaior = true;
 		var produtoMesmoImovel = true;		
 			self.buscaPorCodigoBarras = function(codigoBarras){
 				saidaEstoqueService.buscaPorCodigoBarras(codigoBarras).
 				then(function(p){					
 					self.listaProdutosComEstoques = p;
-				
-					//console.log(self.listaProdutosComEstoques);
-								self.objeto = self.listaProdutosComEstoques;
-								self.objeto.produto.quantidade = self.objeto.quantidade;
-								self.objeto.produto.produto = self.objeto.produto;
+					
+								$scope.quantidade = self.listaProdutosComEstoques.quantidade;
+								$scope.produto = self.listaProdutosComEstoques.produto;
+													
 								
-								console.log(self.objeto);
-				
 				});
 			};
 			self.listaProdutosComEstoque = function(){
@@ -96,7 +96,7 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 						areaProduto : objeto.areaProduto,
 						quantidadeSaida : objeto.quantidadeSaida,					
 						descricao : objeto.edificacaoComunitaria.descricao						
-					});		
+					});	
 					console.log(self.listaProduto);
 			}
 		
@@ -119,7 +119,7 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 		
 	
 		self.adicionarProdutoEdificio = function(objeto){
-			
+			if(!$scope.habilitaBuscaPorDescricao){objeto.produto = {produto : $scope.produto, quantidade : $scope.quantidade};}
 			verificaQuantidade(objeto);	
 			if(quantidadeMaior){
 				$scope.ativaTabela = true;
@@ -128,7 +128,7 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 			}
 		}
 		self.adicionarProdutoCasa = function(objeto){
-					
+			if(!$scope.habilitaBuscaPorDescricao){objeto.produto = {produto : $scope.produto, quantidade : $scope.quantidade};}		
 			verificaQuantidade(objeto);	
 			if(quantidadeMaior){
 				$scope.ativaTabela = true;
@@ -137,8 +137,9 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 				
 			}
 		}
-		self.adicionarProdutoEdificacaoComunitaria = function(objeto){
-			
+		self.adicionarProdutoEdificacaoComunitaria = function(objeto){		    
+			if(!$scope.habilitaBuscaPorDescricao){objeto.produto = {produto : $scope.produto, quantidade : $scope.quantidade};}			
+			console.log(objeto);
 			verificaQuantidade(objeto);			
 			
 			if(quantidadeMaior){
@@ -198,6 +199,9 @@ app.controller('saidaEstoqueController', function($scope, saidaEstoqueService, $
 		
 		self.limpaCampo = function(){
 			self.objeto = null;
+			$scope.quantidade = null;
+			$scope.produto = null;
+			$scope.codigo;
 			self.listaProduto = self.listaProduto=[];			
 			$scope.ativadoExcluirLote = false;
 			$scope.ativaTabela = false;
