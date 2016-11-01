@@ -8,6 +8,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,6 +25,7 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
+import br.com.system.gestaoConstrucaoCivil.enuns.StatusCotacao;
 
 @Entity
 @SequenceGenerator(name = "cotacao_id_seq", sequenceName = "cotacao_id_seq", initialValue = 1, allocationSize = 1)
@@ -51,6 +54,10 @@ public class Cotacao implements Serializable{
 	@JsonView(View.Summary.class)
 	@Temporal(TemporalType.DATE)
 	private Date dataLimite;
+	
+	@JsonView(View.Summary.class)
+	@Enumerated(EnumType.STRING)
+	private StatusCotacao statusCotacao;
 	
 	private LocalDate dataCriacao;
 	
