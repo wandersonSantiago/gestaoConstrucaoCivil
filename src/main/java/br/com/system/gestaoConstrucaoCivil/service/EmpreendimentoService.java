@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
+import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.EmpreendimentoRepository;
 
 @Service
@@ -36,6 +37,17 @@ public class EmpreendimentoService {
     public void salvarOuEditar(Empreendimento empreendimento)
     {
     	empreendimentoRepository.save(empreendimento);
+    }
+    @Transactional(readOnly = false)
+    public void adcionarValorGasto(Double valorGasto)
+    {
+         Long idEmpeendimento  = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
+         
+         Empreendimento empreendimento = empreendimentoRepository.findOne(idEmpeendimento);
+         
+         empreendimento.setValoresGastos(empreendimento.getValoresGastos() + valorGasto);
+         empreendimentoRepository.save(empreendimento);
+         
     }
     
 }

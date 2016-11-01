@@ -15,6 +15,7 @@ import br.com.system.gestaoConstrucaoCivil.pojo.EntradaOuBaixa;
 import br.com.system.gestaoConstrucaoCivil.pojo.InformacaoEntradaProduto;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.NotaFiscalProdutoRepository;
+import br.com.system.gestaoConstrucaoCivil.service.EmpreendimentoService;
 
 @Service
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
@@ -24,7 +25,9 @@ public class NotaFiscalProdutoService {
 	private NotaFiscalProdutoRepository notaFiscalProdutoRepository;
 	@Autowired
 	private EstoqueEmpreendimentoService estoque;
-
+    @Autowired
+    private EmpreendimentoService empreendimentoService;
+    
 	public List<NotaFiscalProduto> buscarTodos() {
 
 		return notaFiscalProdutoRepository.findAll();
@@ -44,7 +47,8 @@ public class NotaFiscalProdutoService {
         {
         	entradas.add(new EntradaOuBaixa(itemNota.getProduto(), itemNota.getQuantidade(),empreendimentoDoUsuario));
         }
-	    estoque.entradaEstoque(entradas);
+        empreendimentoService.adcionarValorGasto(notaFiscalProduto.getNotaFiscal().getValorTotal());
+        estoque.entradaEstoque(entradas);
 
 	}
 
