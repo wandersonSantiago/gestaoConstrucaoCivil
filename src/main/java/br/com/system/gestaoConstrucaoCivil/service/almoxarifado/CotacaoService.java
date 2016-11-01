@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Cotacao;
+import br.com.system.gestaoConstrucaoCivil.enuns.StatusCotacao;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.CotacaoRepository;
 
@@ -27,6 +28,7 @@ public class CotacaoService {
 		cotacao.setDataCriacao(LocalDate.now());
 		cotacao.setEmpreendimento(SessionUsuario.getInstance().getUsuario().getEmpreendimento());
 		adicionarCotacaoNoItem(cotacao);
+		cotacao.setStatusCotacao(StatusCotacao.ABERTO);
 		cotacaoRepository.save(cotacao);
 	}
 	private void adicionarCotacaoNoItem(Cotacao cotacao) {

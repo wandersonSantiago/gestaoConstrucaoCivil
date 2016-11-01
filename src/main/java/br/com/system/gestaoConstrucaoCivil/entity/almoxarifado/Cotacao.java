@@ -109,6 +109,14 @@ public class Cotacao implements Serializable{
 	public void setDataCriacao(LocalDate dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
+    
+	public StatusCotacao getStatusCotacao() {
+		return statusCotacao;
+	}
+
+	public void setStatusCotacao(StatusCotacao statusCotacao) {
+		this.statusCotacao = statusCotacao;
+	}
 
 	@Override
 	public int hashCode() {
