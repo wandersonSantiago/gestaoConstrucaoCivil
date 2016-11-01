@@ -1,5 +1,6 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.ItemNotaFiscal;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.NotaFiscalProduto;
+import br.com.system.gestaoConstrucaoCivil.pojo.EntradaOuBaixa;
 import br.com.system.gestaoConstrucaoCivil.pojo.InformacaoEntradaProduto;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.NotaFiscalProdutoRepository;
@@ -35,7 +37,14 @@ public class NotaFiscalProdutoService {
 		Empreendimento empreendimentoDoUsuario = SessionUsuario.getInstance().getUsuario().getEmpreendimento(); 
 		notaFiscalProduto.getNotaFiscal().setEmpreendimento(empreendimentoDoUsuario);
 		notaFiscalProdutoRepository.save(notaFiscalProduto);
-		estoque.entradaEstoque(notaFiscalProduto);
+		
+	    List<EntradaOuBaixa> entradas = new ArrayList<>();
+		
+        for(ItemNotaFiscal itemNota : notaFiscalProduto.getItens())
+        {
+        	entradas.add(new EntradaOuBaixa(itemNota.getProduto(), itemNota.getQuantidade(),empreendimentoDoUsuario));
+        }
+	    estoque.entradaEstoque(entradas);
 
 	}
 

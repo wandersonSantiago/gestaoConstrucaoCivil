@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +18,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
+import br.com.system.gestaoConstrucaoCivil.enuns.StatusTransferencia;
 
 @Entity
 @SequenceGenerator(name = "transferencia_id_seq",
@@ -38,10 +41,27 @@ public class Transferencia implements Serializable {
 	@JoinColumn(name = "id_empreendimento_destino",nullable = false)
 	private Empreendimento empreendimentoDestino;
 	
+	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+	@JoinColumn(name = "id_nota_fiscal", nullable = true)
+	private NotaFiscal notaFiscal;
+	
+	@Enumerated(EnumType.STRING)
+	private StatusTransferencia statusTransferencia;
+
+	
 	@OneToMany(mappedBy = "transferencia", cascade = CascadeType.ALL)
 	private List<ItemTransferencia> itens;
 	
 	
+	
+	public NotaFiscal getNotaFiscal() {
+		return notaFiscal;
+	}
+
+	public void setNotaFiscal(NotaFiscal notaFiscal) {
+		this.notaFiscal = notaFiscal;
+	}
+
 	@Column(nullable = true)
 	private String observacao;
 	
@@ -83,6 +103,16 @@ public class Transferencia implements Serializable {
 
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
+	}
+	
+	
+
+	public StatusTransferencia getStatusTransferencia() {
+		return statusTransferencia;
+	}
+
+	public void setStatusTransferencia(StatusTransferencia statusTransferencia) {
+		this.statusTransferencia = statusTransferencia;
 	}
 
 	public Double total()  {

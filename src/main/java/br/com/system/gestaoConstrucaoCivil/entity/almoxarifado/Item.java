@@ -12,11 +12,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import br.com.system.gestaoConstrucaoCivil.pojo.IEntradaOuBaixa;
+
 @Entity
 @SequenceGenerator(name = "item_id_seq", sequenceName = "item_id_seq", initialValue = 1, allocationSize = 1)
 @Table(name = "item_id_seq")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Item {
+public abstract class Item{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "item_id_seq")

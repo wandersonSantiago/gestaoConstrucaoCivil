@@ -1,20 +1,21 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Description;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.BaixaEstoque;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.EstoqueEmpreendimento;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.ItemNotaFiscal;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.NotaFiscalProduto;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Produto;
+import br.com.system.gestaoConstrucaoCivil.pojo.EntradaOuBaixa;
 import br.com.system.gestaoConstrucaoCivil.pojo.InformacaoEntradaProduto;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.EstoqueEmpreendimentoRepository;
-import br.com.system.gestaoConstrucaoCivil.service.EmpreendimentoService;
 
 @Service
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
@@ -22,8 +23,6 @@ public class EstoqueEmpreendimentoService {
 
 	@Autowired
 	private EstoqueEmpreendimentoRepository estoqueRepository;
-	@Autowired
-	private EmpreendimentoService empreendimento;
 	@Autowired
 	private NotaFiscalProdutoService notaProdutoService;
 	
@@ -34,8 +33,6 @@ public class EstoqueEmpreendimentoService {
 	}
     public List<EstoqueEmpreendimento> buscarTodos(){
 		
-    	// List<EstoqueEmpreendimento> estoques = estoqueRepository.findAll();
-    	
     	Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();  
     	
     	List<EstoqueEmpreendimento> estoques = estoqueRepository.buscarTodosPorEmpreendimento(idEmpreendimento);
@@ -49,27 +46,28 @@ public class EstoqueEmpreendimentoService {
     	return estoques;
 	}
 	@Transactional(readOnly = false)
-	public void entradaEstoque(NotaFiscalProduto notaProduto) {
-		
-		notaProduto.getItens().forEach(item -> {
-
-		updateEstoque(item);
-		});
-	}
-
-	private void updateEstoque(ItemNotaFiscal item) {
-		
-		
-		if (existeProduto(item.getProduto().getId())) {
+    public void entradaEstoque(List<EntradaOuBaixa> entradasOutBaixas)
+    {
+           for(EntradaOuBaixa entraOuBaixa: entradasOutBaixas)
+           {
+        	   updateEstoque(entraOuBaixa);
+           }
+    }
+	private void updateEstoque(EntradaOuBaixa entradaOutBaixa)
+	{
+        if (existeProduto(entradaOutBaixa.getProduto().getId())) {
 			
-			adicionarQuantidade(item.getProduto(), item.getQuantidade());
+			adicionarQuantidade(entradaOutBaixa.getProduto(),entradaOutBaixa.getQuantidade());
 		} else {
-			salvarOuEditar(criarNovoEstoque(item.getProduto(), item.getQuantidade()));
+			salvarOuEditar(criarNovoEstoque(entradaOutBaixa.getProduto(), entradaOutBaixa.getQuantidade()));
 			
 		}
 	}
-
-	private EstoqueEmpreendimento criarNovoEstoque(Produto produto, Integer quantidade) {
+	public boolean existeProduto(Long id) {
+		Empreendimento empreendimentoDoUsuario = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
+		return estoqueRepository.existeProduto(id,empreendimentoDoUsuario.getId());
+	}
+   private EstoqueEmpreendimento criarNovoEstoque(Produto produto, Integer quantidade) {
 		EstoqueEmpreendimento estoque = new EstoqueEmpreendimento();
 		estoque.setProduto(produto);
 		estoque.setQuantidade(quantidade);
@@ -86,8 +84,9 @@ public class EstoqueEmpreendimentoService {
 		estoque.setQuantidade(estoque.getQuantidade() + quantidade);
 		salvarOuEditar(estoque);
 	}
-
+    
 	@Transactional(readOnly = false)
+	@Deprecated
 	public void baixarEstoque(Long idProduto, Integer quantidade) {
 		
 	    Empreendimento empreendimentoDoUsuario = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
@@ -97,6 +96,7 @@ public class EstoqueEmpreendimentoService {
 	   
 	}
 	@Transactional(readOnly = false)
+	@Deprecated
 	public void baixarEstoque(BaixaEstoque baixaEstoque) {
 		Empreendimento empreendimentoDoUsuario = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
 		
@@ -112,6 +112,23 @@ public class EstoqueEmpreendimentoService {
 	    	throw new EstoqueEmpreendimentoException("Estoque negativo");
 	    }
 	}
+	@Transactional(readOnly = false)
+	public void baixar(EntradaOuBaixa baixa) {
+       
+		
+		EstoqueEmpreendimento estoque = estoqueRepository.estoque(baixa.getEmpreendimento().getId(),baixa.getProduto().getId());
+		
+		estoque.setQuantidade(estoque.getQuantidade() - baixa.getQuantidade());
+	    
+		if(verificarEstoqueNegativo(estoque))
+	    {
+		  estoqueRepository.save(estoque);
+	    }else
+	    {
+	    	throw new EstoqueEmpreendimentoException("Estoque negativo");
+	    }
+	}
+	
 	private boolean verificarEstoqueNegativo(EstoqueEmpreendimento estoque)
 	{
 		if(estoque.getQuantidade() >= 0){
@@ -119,10 +136,7 @@ public class EstoqueEmpreendimentoService {
 		}
 		return false;
 	}
-	public boolean existeProduto(Long id) {
-		Empreendimento empreendimentoDoUsuario = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
-		return estoqueRepository.existeProduto(id,empreendimentoDoUsuario.getId());
-	}
+	
 	 public EstoqueEmpreendimento buscarPorCodigoOuCodigoBarraEstoque(String codigoOuCodigoBarra){
 		   
 	       return estoqueRepository.findByCodigoOrCodigoBarraEstoque(codigoOuCodigoBarra);
