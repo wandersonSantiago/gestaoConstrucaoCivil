@@ -2,6 +2,7 @@ package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,24 +13,29 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @SequenceGenerator(name = "item_cotacao_id_seq", sequenceName = "item_cotacao_id_seq", initialValue = 1, allocationSize = 1)
 @Table(name = "item_cotacao")
 public class ItemCotacao implements Serializable {
 
+	@JsonView(View.Summary.class)
     @Id	
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "item_cotacao_id_seq")
     private Long id;
-	
+	@JsonView(View.Summary.class)
 	@Column(nullable = false)
 	private String descricao;
+	@JsonView(View.Summary.class)
 	@Column(nullable = false)
 	private Integer quantidade;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "id_cotacao")
 	private Cotacao cotacao;
-
+    
+	
 	public Long getId() {
 		return id;
 	}
@@ -61,7 +67,5 @@ public class ItemCotacao implements Serializable {
 	public void setContacao(Cotacao cotacao) {
 		this.cotacao = cotacao;
 	}
-	
-	
 	
 }

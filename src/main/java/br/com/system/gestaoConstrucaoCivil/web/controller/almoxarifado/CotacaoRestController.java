@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Cotacao;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.View;
 import br.com.system.gestaoConstrucaoCivil.service.almoxarifado.CotacaoService;
 
 @RestController
@@ -30,6 +33,7 @@ public class CotacaoRestController {
 		return new ResponseEntity(headers, HttpStatus.CREATED);				
 	}
 	
+	@JsonView(View.Summary.class)
 	@RequestMapping(value = "/lista", method = RequestMethod.GET)
 	public ResponseEntity<Collection<Cotacao>> lista(){
 		

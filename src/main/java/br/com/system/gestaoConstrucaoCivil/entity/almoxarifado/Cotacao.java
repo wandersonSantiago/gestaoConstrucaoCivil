@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,6 +20,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 
 @Entity
@@ -26,21 +29,26 @@ import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 @Table(name = "cotacao")
 public class Cotacao implements Serializable{
 
+	@JsonView(View.Summary.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cotacao_id_seq")
 	private Long id;
 
+	@JsonView(View.Summary.class)
 	@Column(nullable = false)
 	private String tema;
 	
-	
-	@OneToMany(mappedBy = "cotacao",cascade = CascadeType.ALL)
+	@JsonView(View.Summary.class)
+	//@JsonIgnore
+	@OneToMany(mappedBy = "cotacao",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private List<ItemCotacao> itens;
 	
+	@JsonView(View.Summary.class)
 	@ManyToOne
 	@JoinColumn(name = "id_empreendimento",nullable = false)
 	private Empreendimento empreendimento;
 	
+	@JsonView(View.Summary.class)
 	@Temporal(TemporalType.DATE)
 	private Date dataLimite;
 	
