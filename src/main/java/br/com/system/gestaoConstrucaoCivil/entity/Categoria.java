@@ -4,12 +4,16 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import br.com.system.gestaoConstrucaoCivil.enuns.TipoCategoriaEnum;
 
 
 @Entity
@@ -26,6 +30,9 @@ public class Categoria implements Serializable {
 	
 	@Column(nullable = false,length = 30)
 	private String descricao;
+	
+	@Enumerated(EnumType.STRING)
+	TipoCategoriaEnum tipoCategoria;
 	
 	public Long getId() {
 		return id;
@@ -45,6 +52,14 @@ public class Categoria implements Serializable {
 	}
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
+	}
+	
+	
+	public TipoCategoriaEnum getTipoCategoria() {
+		return tipoCategoria;
+	}
+	public void setTipoCategoria(TipoCategoriaEnum tipoCategoria) {
+		this.tipoCategoria = tipoCategoria;
 	}
 	@Override
 	public int hashCode() {
