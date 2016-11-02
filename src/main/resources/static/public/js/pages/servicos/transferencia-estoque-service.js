@@ -3,7 +3,7 @@ app.factory('transferenciaEstoqueService', function($rootScope, toastr, $http,$q
 	
 	return{
 		salva: function(trasnferencia){
-			return $http.post('/rest/almoxarifado/estoque/baixa/transferencia', trasnferencia)
+			return $http.post('/rest/almoxarifado/transferencia/salva', trasnferencia)
 			.then(function(response){
 				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;

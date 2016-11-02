@@ -1,16 +1,28 @@
-app.controller('transferenciaEstoqueController', function($scope,transferenciaEstoqueService, produtoService, $routeParams, $timeout, $q, $log){
+app.controller('transferenciaEstoqueController', function($scope,transferenciaEstoqueService, saidaEstoqueService, produtoService, $routeParams, $timeout, $q, $log){
 	
 	var self = this;
 	
 		self.listaProduto =[];
 		self.baixaEstoque = [];
 		self.listaProdutos = [];
+		$scope.produto =[];
+		self.transferencia = [];
 		
 		self.lista = function(){
 			transferenciaEstoqueService.lista().
 				then(function(t){
 					self.produtos = t;
 					}, function(errResponse){
+				});
+			};
+			self.buscaPorCodigoBarras = function(codigoBarras){
+				saidaEstoqueService.buscaPorCodigoBarras(codigoBarras).
+				then(function(p){					
+					self.listaProdutosComEstoques = p;
+								$scope.produto.produto = self.listaProdutosComEstoques.produto;
+								$scope.produto.quantidade = self.listaProdutosComEstoques.quantidade;
+													
+								console.log(self.listaProdutosComEstoques);
 				});
 			};
 			self.listaProdutosComEstoque = function(){
@@ -57,6 +69,7 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 					
 					
 				});
+				self.limpaCampos();
 			}
 		
 	self.verificaProdutoRepetido = function(quantidadeEstoque, produto,  quantidadeSaida, empreendimento){
@@ -98,22 +111,25 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 			}
 		}
 		self.salva = function(){
-			
-			self.baixaEstoque = self.listaProduto;
-			transferenciaEstoqueService.salva(self.baixaEstoque)
+			self.transferencia.itemTransferencia = self.listaProduto;
+			transferenciaEstoqueService.salva(self.transferencia)
 			.then(function(response){
-				self.quantidadeEstoque = null;
-				self.produto = null;				
-				self.quantidadeSaida = null;
-				self.empreendimento = null;
+				self.limpaCampos();
+				self.transferencia = null;
 				self.listaProduto = self.listaProduto=[];
-				$scope.quantidade = "";
-				$scope.produto.quantidade.quantidade = "";
 				}, function(errResponse){
 					
 			});
 			
 		};
+		
+		self.limpaCampos = function(){
+			self.quantidadeEstoque = null;
+			self.produto = null;				
+			self.quantidadeSaida = null;
+			$scope.produto = null;
+			$scope.quantidade = "";
+		}
 		
 		
 

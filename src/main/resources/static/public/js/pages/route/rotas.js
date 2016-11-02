@@ -225,22 +225,33 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 	
 	.when('/almoxarifado/estoque/entrada', {
 		templateUrl:"views/pages/almoxarifado/estoque/entrada.html",
-	})
-	.when('/almoxarifado/estoque/saida', {
-		templateUrl:"views/pages/almoxarifado/estoque/saida.html",
 	})	
-	.when('/almoxarifado/estoque/requisicao', {
-		templateUrl:"views/pages/almoxarifado/estoque/requisicao.html",
-	})
-	.when('/almoxarifado/estoque/transferencia', {
-		templateUrl:"views/pages/almoxarifado/estoque/transferencia.html",
-	})
+	
 		.when('/almoxarifado/estoque/lista', {
 		templateUrl:"views/pages/almoxarifado/estoque/lista.html",
 	})
 			.when('/almoxarifado/estoque/editar/:idProdutoEstoque', {
 		templateUrl:"views/pages/almoxarifado/estoque/editar.html",
 	})
+	//TRANSFERENCIA
+	.when('/almoxarifado/estoque/transferencia/cadastrar', {
+		templateUrl:"views/pages/almoxarifado/estoque/transferencia/salvar.html",
+	})
+		.when('/almoxarifado/estoque/transferencia/enviadas', {
+		templateUrl:"views/pages/almoxarifado/estoque/transferencia/enviadas.html",
+	})
+		.when('/almoxarifado/estoque/transferencia/recebidas', {
+		templateUrl:"views/pages/almoxarifado/estoque/transferencia/recebidas.html",
+	})
+	//REQUISICAO
+	
+	.when('/almoxarifado/estoque/requisicao/cadastrar', {
+		templateUrl:"views/pages/almoxarifado/estoque/requisicao/cadastrar.html",
+	})	
+	.when('/almoxarifado/estoque/requisicao/lista', {
+		templateUrl:"views/pages/almoxarifado/estoque/requisicao/lista.html",
+	})
+	
 	//COMPRAS
 	
 	.when('/almoxarifado/compras/cadastrarCotacao/:idCotacaoAberta', {

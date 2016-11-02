@@ -16,27 +16,30 @@
 					<div class="row" >
 						<div class="col-sm-5" ng-controller="empreendimentoController as empCtrl" ng-init="empCtrl.lista()">
 							<select class="form-control select2"
-								ng-model="estoqueCtrl.empreendimento"
+								ng-model="estoqueCtrl.transferencia.empreendimentoDestino"
 								ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.tipoEmpreendimento for listarEmpreendimentos in empreendimentos"
 								style="width: 100%;">
 								<option  value="">--Empreendimento--</option>
 							</select>
 						</div>
 					</div>
+					<br>
+					<br> <br>
+						<label class="radio-inline"><input type="checkbox"   ng-model="habilitaBuscaPorDescricao" value="busca" ng-click="estoqueCtrl.listaProdutosComEstoque()" name="optradio">Habilitar busca por descrição </label> 
+					<br>
+					<br>
+					
+					
+					
 					
 					<br>
-					<div class="row">
-						<div class="col-sm-3">
-							<input type="text" class="form-control" name="leitor" placeholder="Leitor de Código de Barras">
-						</div>
-					</div>
-					<br> <br>
+					<br> 
 					<div class="row" ng-init="transfCtrl.listaProdutosComEstoque()">
 						
-						<div class="col-sm-3"  >
+						<div class="col-sm-3" ng-if="habilitaBuscaPorDescricao" >
 									
 							  <md-autocomplete 
-							 	md-selected-item="produto" 
+							 	md-selected-item="produto.produto" 
 							 	md-search-text="transfCtrl.searchText" 
 							 	md-selected-item-change="transfCtrl.selectedItemChange(transfCtrl.produto)" 
 							 	md-items=" listaProduto in transfCtrl.listaProdutos | filter : transfCtrl.searchText" 
@@ -47,24 +50,23 @@
        							 </md-item-template>        								
      						 </md-autocomplete>
      						
-     					
+						</div>	
+						<div class="col-sm-2" ng-if="!habilitaBuscaPorDescricao">
+							<input type="text" class="form-control" ng-model="codigo" ng-blur="transfCtrl.buscaPorCodigoBarras(codigo)" onkeyup="if(this.value.length > 12) { quantidadeProduto.focus(); }" name="leitor" placeholder="Leitor de Código de Barras">
+						</div>
+						<div class="col-sm-4" ng-if="!habilitaBuscaPorDescricao">
+							<input class="form-control" ng-model="produto.produto.descricao" type="text" id="produto"  disabled placeholder="produto">
 						</div>						
 						<div class="col-sm-2">
-						
-							
 							<input class="form-control" ng-model="produto.quantidade" type="text" id="quantidadeEstoque" ui-number-mask="0" disabled placeholder="Quantidade estoque">
-						
 						</div>
 						
 						<div class="col-sm-2">
-						
-							
-							<input class="form-control" ng-model="quantidade" type="text" id="quantidadeTeste" ui-number-mask="0" placeholder="Quantidade para transferencia" required>
-						
+							<input class="form-control" ng-model="quantidade" type="text" id="quantidadeTeste" ui-number-mask="0" placeholder="Quantidade para transferencia" >
 						</div>
 						<div class="col-sm-2">
 							<input class="btn btn-lg btn-primary btn-block btn-signin"
-								ng-click=" transfCtrl.adicionarProduto(produto.quantidade, produto.produto , quantidade, estoqueCtrl.empreendimento)" value="adicionar"
+								ng-click=" transfCtrl.adicionarProduto(produto.quantidade,  produto.produto , quantidade, estoqueCtrl.empreendimento)" value="adicionar"
 								title="pressione para adicionar a lista" type="button" ng-disabled="!produto" >
 						</div>
 					</div>

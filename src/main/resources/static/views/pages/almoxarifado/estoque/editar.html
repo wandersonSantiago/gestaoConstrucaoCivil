@@ -18,11 +18,11 @@
 					<div class="row">
 						<div class="col-sm-6">
 						Produto
-							<input class="form-control" type="text" ng-model="estoqueCtr.estoque.produto.descricao" disabled>
+							<input class="form-control" type="text" ng-model="estoqueCtr.produtoEstoque.produto.descricao" disabled>
 						</div>
 						<div class="col-sm-6">
 						Categoria
-							<input class="form-control" type="text" ng-model="estoqueCtr.estoque.produto.categoria.descricao" disabled>
+							<input class="form-control" type="text" ng-model="estoqueCtr.produtoEstoque.produto.categoria.descricao" disabled>
 						</div>
 						
 					</div>
@@ -30,15 +30,15 @@
 					<div class="row">
 						<div class="col-sm-4">
 						Qtd estoque
-							<input class="form-control " type="text" ng-model="estoqueCtr.estoque.quantidade" disabled>
+							<input class="form-control " type="text" ng-model="estoqueCtr.produtoEstoque.quantidade" disabled>
 						</div>
 						<div class="col-sm-4">
 						Qtd mínima
-							<input class="form-control " type="text" ng-model="estoqueCtr.estoque.quantidadeMinima">
+							<input class="form-control " type="text" ng-model="estoqueCtr.produtoEstoque.quantidadeMinima" ui-number-mask="0" required>
 						</div>
 						<div class="col-sm-4">
 						Qtd Máxima
-							<input class="form-control " type="text" ng-model="estoqueCtr.estoque.quantidadeMaxima">
+							<input class="form-control " type="text" ng-model="estoqueCtr.produtoEstoque.quantidadeMaxima" ui-number-mask="0" required>
 						</div>
 						
 					</div>
