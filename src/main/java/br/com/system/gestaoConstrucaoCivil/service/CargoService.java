@@ -2,7 +2,7 @@ package br.com.system.gestaoConstrucaoCivil.service;
 
 import java.util.List;
 
-import javax.websocket.Session;
+
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;

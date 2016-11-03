@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "baixa_estoque_casa")
-public class BaixaEstoqueCasa extends BaixaEstoque implements Serializable{
+public class RequisicaoCasa extends Requisicao implements Serializable{
 
 	@Column(nullable = false)
 	private Integer andar;

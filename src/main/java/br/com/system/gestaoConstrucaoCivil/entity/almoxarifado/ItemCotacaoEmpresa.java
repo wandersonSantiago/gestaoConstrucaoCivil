@@ -13,7 +13,10 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@SequenceGenerator(name = "cotacao_empresa_item_id_seq", sequenceName = "cotacao_empresa_item_id_seq", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "cotacao_empresa_item_id_seq",
+sequenceName = "cotacao_empresa_item_id_seq",
+initialValue = 1,
+allocationSize = 1)
 @Table(name = "item_cotacao_empresa")
 public class ItemCotacaoEmpresa implements Serializable {
 

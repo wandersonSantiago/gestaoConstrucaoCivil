@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "baixa_estoque_edificio")
-public class BaixaEstoqueEdificio extends BaixaEstoque{
+public class RequisicaoEdificio extends Requisicao{
 
 	private Integer andar;
 	private Integer torre;

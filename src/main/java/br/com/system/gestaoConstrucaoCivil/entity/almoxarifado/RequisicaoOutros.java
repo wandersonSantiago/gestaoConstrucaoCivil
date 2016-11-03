@@ -5,7 +5,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "baixa_estoque_outros")
-public class BaixaEstoqueOutros extends BaixaEstoque{
+public class RequisicaoOutros extends Requisicao{
 
 	private String descricao;
 

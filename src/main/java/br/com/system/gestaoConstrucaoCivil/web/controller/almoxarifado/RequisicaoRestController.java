@@ -13,27 +13,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.BaixaEstoque;
-import br.com.system.gestaoConstrucaoCivil.service.almoxarifado.BaixaEstoqueService;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Requisicao;
+import br.com.system.gestaoConstrucaoCivil.service.almoxarifado.RequisicaoService;
 
 @RestController
-@RequestMapping("/rest/almoxarifado/estoque/baixa")
-public class BaixaEstoqueRestController {
+@RequestMapping("/rest/almoxarifado/estoque/requisicao")
+public class RequisicaoRestController {
 
 	@Autowired
-	private BaixaEstoqueService baixaEstoqueService;
+	private RequisicaoService requisicaoService;
 	
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
-	public ResponseEntity salvar(@RequestBody List<BaixaEstoque> baixaEstoque,UriComponentsBuilder ucBuilder)
+	public ResponseEntity salvar(@RequestBody List<Requisicao> requisicao,UriComponentsBuilder ucBuilder)
 	{ 
-		baixaEstoqueService.salvarOuEditar(baixaEstoque);
+		requisicaoService.salvarOuEditar(requisicao);
 		HttpHeaders headers = new HttpHeaders();
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 	@RequestMapping(method = RequestMethod.GET, value = "/lista")
-	public ResponseEntity<Iterable<BaixaEstoque>> buscarTodos()
+	public ResponseEntity<Iterable<Requisicao>> buscarTodos()
 	{
-		Iterable<BaixaEstoque> baixaEstoque = baixaEstoqueService.buscarTodos(); 
-		return new ResponseEntity<Iterable<BaixaEstoque>>(baixaEstoque, HttpStatus.OK);
+		Iterable<Requisicao> baixaEstoque = requisicaoService.buscarTodos(); 
+		return new ResponseEntity<Iterable<Requisicao>>(baixaEstoque, HttpStatus.OK);
 	}
 }

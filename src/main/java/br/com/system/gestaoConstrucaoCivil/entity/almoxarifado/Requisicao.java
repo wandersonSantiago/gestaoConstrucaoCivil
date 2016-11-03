@@ -5,6 +5,8 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +18,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import br.com.system.gestaoConstrucaoCivil.entity.AreaProduto;
+import br.com.system.gestaoConstrucaoCivil.enuns.StatusRequisicao;
 
 @Entity
 @SequenceGenerator(name = "baixa_estoque_id_seq",
@@ -24,7 +27,7 @@ initialValue = 1,
 allocationSize = 50)
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "baixa_estoque")
-public class BaixaEstoque implements Serializable {
+public class Requisicao implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "baixa_estoque_id_seq")
@@ -43,6 +46,9 @@ public class BaixaEstoque implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "id_area_produto")
 	protected AreaProduto areaProduto;
+	
+	@Enumerated(EnumType.STRING)
+	protected StatusRequisicao statusRequisicao;
 	
 	public Long getId() {
 		return id;
@@ -74,5 +80,11 @@ public class BaixaEstoque implements Serializable {
 	public void setAreaProduto(AreaProduto areaProduto) {
 		this.areaProduto = areaProduto;
 	}
-       
+	public StatusRequisicao getStatusRequisicao() {
+		return statusRequisicao;
+	}
+	public void setStatusRequisicao(StatusRequisicao statusRequisicao) {
+		this.statusRequisicao = statusRequisicao;
+	}
+        
 }

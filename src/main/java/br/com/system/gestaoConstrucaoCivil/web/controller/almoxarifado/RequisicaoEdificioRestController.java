@@ -1,7 +1,6 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller.almoxarifado;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -11,21 +10,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.RequisicaoEdificio;
+import br.com.system.gestaoConstrucaoCivil.service.almoxarifado.RequisicaoEdificioService;
 
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.BaixaEstoqueCasa;
-import br.com.system.gestaoConstrucaoCivil.service.almoxarifado.BaixaEstoqueCasaService;
 
 @RestController
-@RequestMapping("/rest/almoxarifado/estoque/baixaCasa")
-public class BaixaEstoqueCasaRestController {
+@RequestMapping("/rest/almoxarifado/estoque/requisicaoEdificio")
+public class RequisicaoEdificioRestController {
 
 	@Autowired
-	private BaixaEstoqueCasaService baixaEstoqueCasaService;
+	private RequisicaoEdificioService requisicaoEdificioService;
 	
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
-	public ResponseEntity salvar(@RequestBody List<BaixaEstoqueCasa> baixaEstoque,UriComponentsBuilder ucBuilder)
+	public ResponseEntity salvar(@RequestBody List<RequisicaoEdificio> requisicaoEdificio,UriComponentsBuilder ucBuilder)
 	{ 
-		baixaEstoqueCasaService.salvarOuEditar(baixaEstoque);
+		requisicaoEdificioService.salvarOuEditar(requisicaoEdificio);
 		HttpHeaders headers = new HttpHeaders();
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
