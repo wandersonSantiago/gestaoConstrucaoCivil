@@ -12,11 +12,24 @@
 				<form role="form-vertical"
 					ng-submit="transfCtrl.salva()">
 
+
+					<div class="row">
+						<div class="col-sm-3">
+							<input class="form-control"  id="numeroNota" type="text" title="informe o numero da nota fiscal" placeholder="Numero nota fiscal" 
+							ng-model="transfCtrl.transferencia.notaFiscal.numero" required>
+						</div>			
+						<div class="col-sm-3">
+							<input class="form-control"  id="dataNota" type="text" ng-model="transfCtrl.transferencia.notaFiscal.dataNota" ui-date title="informe a data da nota fiscal"  placeholder="data nota fiscal" required>
+						</div>						
+						<div class="col-sm-3">
+							<input class="form-control"  id="vencimento"  type="text" ng-model="transfCtrl.transferencia.notaFiscal.dataVencimento" ui-date title="informe a data de vencimento da nota fiscal" placeholder="vecimento nota fiscal" required>
+						</div>
+					</div>
 					
-					<div class="row" >
+					<div class="row" >					
 						<div class="col-sm-5" ng-controller="empreendimentoController as empCtrl" ng-init="empCtrl.lista()">
 							<select class="form-control select2"
-								ng-model="estoqueCtrl.transferencia.empreendimentoDestino"
+								ng-model="transfCtrl.transferencia.empreendimentoDestino"
 								ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.tipoEmpreendimento for listarEmpreendimentos in empreendimentos"
 								style="width: 100%;">
 								<option  value="">--Empreendimento--</option>

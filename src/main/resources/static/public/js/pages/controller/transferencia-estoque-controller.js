@@ -6,7 +6,7 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 		self.baixaEstoque = [];
 		self.listaProdutos = [];
 		$scope.produto =[];
-		self.transferencia = [];
+		//self.transferencia = [];
 		
 		self.lista = function(){
 			transferenciaEstoqueService.lista().
@@ -21,8 +21,7 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 					self.listaProdutosComEstoques = p;
 								$scope.produto.produto = self.listaProdutosComEstoques.produto;
 								$scope.produto.quantidade = self.listaProdutosComEstoques.quantidade;
-													
-								console.log(self.listaProdutosComEstoques);
+								
 				});
 			};
 			self.listaProdutosComEstoque = function(){
@@ -110,12 +109,16 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 				}
 			}
 		}
-		self.salva = function(){
-			self.transferencia.itemTransferencia = self.listaProduto;
+		self.salva = function(){		
+			self.transferencia.notaFiscal.valorTotal = 878;
+			self.transferencia.itens = self.listaProduto;
+			
+			console.log(self.listaProduto);
 			transferenciaEstoqueService.salva(self.transferencia)
 			.then(function(response){
 				self.limpaCampos();
 				self.transferencia = null;
+				self.produto = null;
 				self.listaProduto = self.listaProduto=[];
 				}, function(errResponse){
 					
@@ -125,9 +128,7 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 		
 		self.limpaCampos = function(){
 			self.quantidadeEstoque = null;
-			self.produto = null;				
 			self.quantidadeSaida = null;
-			$scope.produto = null;
 			$scope.quantidade = "";
 		}
 		
