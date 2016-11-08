@@ -6,4 +6,6 @@ import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.RequisicaoEdifici
 
 public interface RequisicaoEdificioRepository extends JpaRepository<RequisicaoEdificio, Long>{
 
+	
+	RequisicaoEdificio findByNumeroRequisicao(Integer numeroRequisicao);
 }

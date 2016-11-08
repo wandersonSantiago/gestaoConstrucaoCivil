@@ -6,8 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+
 @Entity
-@Table(name = "baixa_estoque_casa")
+@Table(name = "requisicao_casa")
 public class RequisicaoCasa extends Requisicao implements Serializable{
 
 	@Column(nullable = false)

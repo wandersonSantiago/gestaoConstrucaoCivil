@@ -21,12 +21,8 @@ public class RequisicaoOutrosController {
 	private RequisicaoOutrosService requisicaoOutrosService;
 	
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
-	public ResponseEntity salvar(@RequestBody List<RequisicaoOutros> requisicaoOutros,UriComponentsBuilder ucBuilder)
+	public ResponseEntity salvar(@RequestBody RequisicaoOutros requisicaoOutros,UriComponentsBuilder ucBuilder)
 	{ 
-		for(int i = 0 ; i < requisicaoOutros.size(); i++){
-			
-			System.out.println(requisicaoOutros.get(i).getDescricao());
-		}
 		requisicaoOutrosService.salvarOuEditar(requisicaoOutros);
 		HttpHeaders headers = new HttpHeaders();
 		return new ResponseEntity(headers, HttpStatus.CREATED);

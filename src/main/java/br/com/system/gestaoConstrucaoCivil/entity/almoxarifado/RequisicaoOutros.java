@@ -3,9 +3,10 @@ package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+
 @Entity
-@Table(name = "baixa_estoque_outros")
-public class RequisicaoOutros extends Requisicao{
+@Table(name = "requisicao_outros")
+public class RequisicaoOutros  extends Requisicao{
 
 	private String descricao;
 

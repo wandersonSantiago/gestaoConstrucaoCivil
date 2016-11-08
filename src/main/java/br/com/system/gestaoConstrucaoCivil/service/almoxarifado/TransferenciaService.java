@@ -1,22 +1,17 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.ItemTransferencia;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Transferencia;
 import br.com.system.gestaoConstrucaoCivil.enuns.Situacao;
 import br.com.system.gestaoConstrucaoCivil.enuns.StatusTransferencia;
 import br.com.system.gestaoConstrucaoCivil.pojo.EntradaOuBaixa;
-import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.TransferenciaRepository;
 
 @Service
@@ -40,14 +35,6 @@ public class TransferenciaService {
 		transferencia.setStatusTransferencia(StatusTransferencia.PENDENTE);
 		transferenciaRepository.save(transferencia);		
 	}
-	
-	public Collection<Transferencia> buscarTodos(){
-		return transferenciaRepository.findAll();
-	}
-
-	public Transferencia buscaPorId(Long id){
-		return transferenciaRepository.findOne(id);
-	}
 	@Transactional(readOnly = false)
 	public void aceitarTransferencia(Long numeroNota)
 	{
@@ -57,7 +44,7 @@ public class TransferenciaService {
 		for(ItemTransferencia item : transferencia.getItens())
 		{
 			EntradaOuBaixa entrada = new EntradaOuBaixa(item.getProduto(),item.getQuantidade(), transferencia.getEmpreendimentoDestino());
-			estoqueService.entradaEstoque(Arrays.asList(entrada));	
+			estoqueService.entradaEstoque(entrada);	
 		}
 	    transferencia.setStatusTransferencia(StatusTransferencia.EFETUADO);
 		
@@ -72,8 +59,17 @@ public class TransferenciaService {
 		for(ItemTransferencia item : transferencia.getItens())
 		{
 			EntradaOuBaixa entrada = new EntradaOuBaixa(item.getProduto(),item.getQuantidade(), transferencia.getEmpreendimentoSaida());
-			estoqueService.entradaEstoque(Arrays.asList(entrada));
+			estoqueService.entradaEstoque(entrada);
 		}
 		transferenciaRepository.save(transferencia);
 	}
+	
+	public Collection<Transferencia> buscarTodos(){
+		return transferenciaRepository.findAll();
+	}
+
+	public Transferencia buscaPorId(Long id){
+		return transferenciaRepository.findOne(id);
+	}
+	
 }

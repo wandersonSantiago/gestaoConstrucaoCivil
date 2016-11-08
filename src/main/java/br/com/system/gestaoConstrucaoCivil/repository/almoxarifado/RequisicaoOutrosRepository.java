@@ -6,4 +6,5 @@ import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.RequisicaoOutros;
 
 public interface RequisicaoOutrosRepository extends JpaRepository<RequisicaoOutros, Long>{
 
+	RequisicaoOutros findByNumeroRequisicao(Integer numeroRequisicao);
 }

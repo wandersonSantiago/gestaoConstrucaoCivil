@@ -22,7 +22,7 @@ public class RequisicaoEdificioRestController {
 	private RequisicaoEdificioService requisicaoEdificioService;
 	
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
-	public ResponseEntity salvar(@RequestBody List<RequisicaoEdificio> requisicaoEdificio,UriComponentsBuilder ucBuilder)
+	public ResponseEntity salvar(@RequestBody RequisicaoEdificio requisicaoEdificio,UriComponentsBuilder ucBuilder)
 	{ 
 		requisicaoEdificioService.salvarOuEditar(requisicaoEdificio);
 		HttpHeaders headers = new HttpHeaders();

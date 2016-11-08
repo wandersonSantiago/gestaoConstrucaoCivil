@@ -41,16 +41,15 @@ public class NotaFiscalProdutoService {
 		notaFiscalProduto.getNotaFiscal().setEmpreendimento(empreendimentoDoUsuario);
 		notaFiscalProdutoRepository.save(notaFiscalProduto);
 		
-	    List<EntradaOuBaixa> entradas = new ArrayList<>();
-		
+	    empreendimentoService.adcionarValorGasto(notaFiscalProduto.getNotaFiscal().getValorTotal());
+       
         for(ItemNotaFiscal itemNota : notaFiscalProduto.getItens())
         {
-        	entradas.add(new EntradaOuBaixa(itemNota.getProduto(), itemNota.getQuantidade(),empreendimentoDoUsuario));
+        	 EntradaOuBaixa entrada = new EntradaOuBaixa(itemNota.getProduto(), itemNota.getQuantidade(),empreendimentoDoUsuario);
+        	estoque.entradaEstoque(entrada); 
         }
-        empreendimentoService.adcionarValorGasto(notaFiscalProduto.getNotaFiscal().getValorTotal());
-        estoque.entradaEstoque(entradas);
-
-	}
+       
+     }
 
 	public NotaFiscalProduto buscarPorId(Long id) {
 
