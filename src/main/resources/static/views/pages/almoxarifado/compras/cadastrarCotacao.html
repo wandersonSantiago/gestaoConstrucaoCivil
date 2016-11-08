@@ -22,7 +22,7 @@
 				Data Limite
 						<input class="form-control" ng-model="cotacaoCtrl.cotacao.dataLimite " type="text" id="dataLimiteCotacao" ui-date  disabled>
 				</div>
-				
+		</div>
 			  <br>
 			  <div class="row">
 							<div class="col-sm-4" ng-controller="fornecedorController as forCtrl" ng-init="forCtrl.lista()" >
@@ -33,10 +33,10 @@
 								<option value="">---Fornecedor---</option>
 							</select>
 						</div>
-					</div>
+				</div>
 			<br>
 			<div class="container col-sm-12 " >
-				<form role="form-vertical" ng-submit="cotacaoCtrl.salva()" >
+				<form role="form-vertical" ng-submit="cotacaoCtrl.salvaCotacaoEmpresa()" >
 				
 				
 				
@@ -54,15 +54,17 @@
 					</thead>
 					
 					<tbody
-						ng-repeat=" f in cotacaoCtrl.cotacoes | filter : busca">
+						ng-repeat=" f in cotacaoCtrl.listaCotacao | filter : busca">
 						<tr>
 						<td><input class="col-sm-1" type="checkbox" ng-model="f.selecionado"	ng-click="cotacaoCtrl.ativarExcluirLote(listaCotacao)"></td>
 							<td><input class="form-control"  id="descricaoProduto"  type="text" placeholder="descrição do Produto" 
-							ng-model="f.produto" ></td>
+							ng-model="f.descricao" disabled ></td>
 							<td><input class="form-control"  id="quantidadeProduto"  type="text" placeholder="quantidade"
-							ng-model="f.quantidade" ui-number-mask="0" required></td>							
+							ng-model="f.quantidade" ui-number-mask="0" disabled required></td>
+							<td><input class="form-control"  id="obs"  type="text" placeholder="Observação do Produto" 
+							ng-model="f.observacao" ></td>							
 							<td><input class="form-control"  id="valorProduto"  type="text"  placeholder="Preço" ui-money-mask
-							ng-model="f.valorUnitario" ng-blur="cotacaoCtrl.SomaTotal(cotacaoCtrl.lista)" required> </td>
+							ng-model="f.valorUnitario" ng-blur="cotacaoCtrl.SomaTotal(cotacaoCtrl.listaCotacao)" required> </td>
 							<td>{{f.valorTotal = somaUnitario(f.quantidade, f.valorUnitario) | currency}}</td>
 							
 						</tr>
@@ -75,7 +77,7 @@
 							<th></th>
 							<th></th>			
 							<th> Valor Total</th>
-							<th>{{valorTotalNota | currency}}</th>
+							<th>{{valorTotalCotacao | currency}}</th>
 						</tr>
 					</tfoot>
 				</table>

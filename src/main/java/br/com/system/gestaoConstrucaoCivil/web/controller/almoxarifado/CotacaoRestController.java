@@ -40,7 +40,7 @@ public class CotacaoRestController {
 		Collection<Cotacao> cotacao = cotacaoService.buscarTodos(); 
 		return new ResponseEntity<Collection<Cotacao>>(cotacao, HttpStatus.OK);
 	}
-	
+	@JsonView(View.Summary.class)
 	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Cotacao> buscarCotacaoPorId(@PathVariable Long id) {
 

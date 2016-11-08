@@ -3,8 +3,20 @@ app.controller('cotacaoCompraController', function($scope,cotacaoCompraService, 
 		var self = this;
 		self.listaCotacao = [];
 		self.existe = true;	
+		self.cotacaoEmpresa = [];
 		var idCotacaoAberta = $routeParams.idCotacaoAberta;
 	
+		self.salvaCotacaoEmpresa = function(){
+			self.cotacaoEmpresa.itens = self.listaCotacao;
+			self.cotacaoEmpresa.cotacao = self.cotacao;
+			self.cotacaoEmpresa.fornecedor = self.cotacaoEmpresa.fornecedor;
+			console.log(self.cotacaoEmpresa);
+			cotacaoCompraService.salvaCotacaoEmpresa(self.cotacao).
+			then(function(response){
+				self.limpaCampos();					
+				}, function(errResponse){
+			});
+		}
 	 self.salva = function(cotacao){
 		 self.cotacao.itens = self.listaCotacao;
 		 cotacaoCompraService.salva(self.cotacao).
@@ -47,6 +59,18 @@ app.controller('cotacaoCompraController', function($scope,cotacaoCompraService, 
 		}
 			
 	
+		self.SomaTotal = function(listaCotacao){
+			var totalSoma = 0;
+			for(i =0; i < listaCotacao.length ; i ++){
+				var total = listaCotacao[i];
+				totalSoma += parseFloat(total.valorTotal);	
+				$scope.valorTotalCotacao = totalSoma;
+					}
+			}
+		
+		$scope.somaUnitario = function(quantidade, valorUnitario){
+			return $scope.valorTotal = quantidade * valorUnitario;
+		}
 		
 		self.ativarExcluirLote = function(listaCotacao){
 			self.listaCotacao.filter(function(f){
@@ -69,19 +93,12 @@ app.controller('cotacaoCompraController', function($scope,cotacaoCompraService, 
 			if(!id)return;
 			cotacaoCompraService.buscaPorCotacaoId(id).
 			then(function(p){
-				self.cotacao = p;
-				self.cotacao.dataLimite = new Date(self.cotacao.dataLimite);
-				
-			
+				self.cotacao = p;				
+				self.listaCotacao = self.cotacao.itens;
 			}, function(errResponse){
 		});
 		};
-		 function disabled(data) {
-			    var date = data.date,
-			      mode = data.mode;
-			    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
-			  }
-	
+
 	
 		if(idCotacaoAberta){
 			self.buscaPorCotacaoId(idCotacaoAberta);
