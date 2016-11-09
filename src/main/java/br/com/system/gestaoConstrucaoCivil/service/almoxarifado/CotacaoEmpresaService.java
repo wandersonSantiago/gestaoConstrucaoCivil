@@ -19,7 +19,7 @@ public class CotacaoEmpresaService {
 
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(CotacaoEmpresa cotacaoEmpresa) {
-
+		cotacaoEmpresaRepository.save(cotacaoEmpresa);
 	}
 
 	public List<CotacaoEmpresa> buscarTodos() {

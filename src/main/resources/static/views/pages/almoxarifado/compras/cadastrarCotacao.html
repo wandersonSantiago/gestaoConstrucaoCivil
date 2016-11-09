@@ -27,7 +27,7 @@
 			  <div class="row">
 							<div class="col-sm-4" ng-controller="fornecedorController as forCtrl" ng-init="forCtrl.lista()" >
 								<a href="" data-toggle="modal" data-target="#myFornecedor"><i class="glyphicon glyphicon-plus"></i>novo</a>
-							<select class="form-control select2" ng-model="cotacaoCtrl.cotacaoEmpresa.fornecedor" id="fornecedor"
+							<select class="form-control select2" ng-model="cotacaoCtrl.fornecedor" id="fornecedor"
 							ng-options="listaFornecedores.dadoEmpresa.nomeFantasia for listaFornecedores in forCtrl.listaFornecedor" 
 							  style=" width: 100%;" required>
 								<option value="">---Fornecedor---</option>
@@ -36,7 +36,7 @@
 				</div>
 			<br>
 			<div class="container col-sm-12 " >
-				<form role="form-vertical" ng-submit="cotacaoCtrl.salvaCotacaoEmpresa()" >
+				<form role="form-vertical" ng-submit="cotacaoCtrl.salvaCotacaoEmpresa(cotacaoCtrl.cotacao, cotacaoCtrl.fornecedor, cotacaoCtrl.listaCotacao )" >
 				
 				
 				
