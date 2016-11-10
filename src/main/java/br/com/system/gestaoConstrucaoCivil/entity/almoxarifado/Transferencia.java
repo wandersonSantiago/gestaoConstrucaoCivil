@@ -34,10 +34,6 @@ public class Transferencia implements Serializable {
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "id_empreendimento_saida",nullable = false)
-	private Empreendimento empreendimentoSaida;
-	
-	@ManyToOne
 	@JoinColumn(name = "id_empreendimento_destino",nullable = false)
 	private Empreendimento empreendimentoDestino;
 	
@@ -62,8 +58,6 @@ public class Transferencia implements Serializable {
 		this.notaFiscal = notaFiscal;
 	}
 
-	@Column(nullable = true)
-	private String observacao;
 	
 	public Long getId() {
 		return id;
@@ -72,16 +66,7 @@ public class Transferencia implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public Empreendimento getEmpreendimentoSaida() {
-		return empreendimentoSaida;
-	}
-
-	public void setEmpreendimentoSaida(Empreendimento empreendimentoSaida) {
-		this.empreendimentoSaida = empreendimentoSaida;
-	}
-
-	public Empreendimento getEmpreendimentoDestino() {
+    public Empreendimento getEmpreendimentoDestino() {
 		return empreendimentoDestino;
 	}
 
@@ -96,18 +81,7 @@ public class Transferencia implements Serializable {
 	public void setItens(List<ItemTransferencia> itens) {
 		this.itens = itens;
 	}
-
-	public String getObservacao() {
-		return observacao;
-	}
-
-	public void setObservacao(String observacao) {
-		this.observacao = observacao;
-	}
-	
-	
-
-	public StatusTransferencia getStatusTransferencia() {
+   public StatusTransferencia getStatusTransferencia() {
 		return statusTransferencia;
 	}
 

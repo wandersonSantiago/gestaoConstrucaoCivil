@@ -23,7 +23,7 @@ import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
 
 
 @Entity
-@SequenceGenerator(name = "nota_fiscal_id_seq", sequenceName = "nota_fiscal_id_seq", initialValue = 1, allocationSize = 50)
+@SequenceGenerator(name = "nota_fiscal_id_seq", sequenceName = "nota_fiscal_id_seq", initialValue = 1, allocationSize = 1)
 @Table(name = "nota_fiscal")
 public class NotaFiscal implements Serializable {
 
@@ -49,8 +49,6 @@ public class NotaFiscal implements Serializable {
 	private Date dataNota;
 	@Temporal(TemporalType.DATE)
 	private Date dataVencimento;
-	@Column(nullable = true)
-	private Long serie;
 
 	@Column(nullable = true)
 	private String observacao;
@@ -112,15 +110,6 @@ public class NotaFiscal implements Serializable {
 	public void setValorTotal(Double valorTotal) {
 		this.valorTotal = valorTotal;
 	}
-
-	public Long getSerie() {
-		return serie;
-	}
-
-	public void setSerie(Long serie) {
-		this.serie = serie;
-	}
-
 	public TipoNotaEnum getTipoNota() {
 		return tipoNota;
 	}
