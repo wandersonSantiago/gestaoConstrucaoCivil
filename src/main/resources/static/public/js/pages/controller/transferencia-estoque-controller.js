@@ -19,11 +19,14 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 				saidaEstoqueService.buscaPorCodigoBarras(codigoBarras).
 				then(function(p){					
 					self.listaProdutosComEstoques = p;
-								$scope.produto.produto = self.listaProdutosComEstoques.produto;
-								$scope.produto.quantidade = self.listaProdutosComEstoques.quantidade;
-								
+					
+								self.produto.produto = self.listaProdutosComEstoques.produto;
+								self.produto.quantidade = self.listaProdutosComEstoques.quantidade;
+								//$scope.produto.custoMedio = self.listaProdutosComEstoques.custoMedio;								
 				});
+				
 			};
+			
 			self.listaProdutosComEstoque = function(){
 				transferenciaEstoqueService.listaProdutosComEstoque().
 					then(function(t){
@@ -31,10 +34,13 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 						for(i = 0; i < self.listaProdutosComEstoques.length; i++ ){
 								self.produto = self.listaProdutosComEstoques[i].produto;
 								self.quantidade = self.listaProdutosComEstoques[i].quantidade;
+								self.custoMedio	=self.listaProdutosComEstoques[i].custoMedio;
 							self.listaProdutos.push({
 										produto : self.produto,
-										quantidade : self.quantidade
+										quantidade : self.quantidade,
+										custoMedio : self.custoMedio
 								});
+							console.log(self.listaProdutos);
 						}
 							}, function(errResponse){
 					});
@@ -59,19 +65,19 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 		}
 			
 			
-			self.funcaoListaProduto = function(quantidadeEstoque, produto,  quantidadeSaida, empreendimento){
+			self.funcaoListaProduto = function(quantidadeEstoque, produto,  quantidadeSaida, empreendimento , custoMedio){
 				self.listaProduto.push({
 					quantidadeEstoque : quantidadeEstoque,
 					produto : produto,
 					quantidadeSaida : quantidadeSaida,
 					empreendimento : empreendimento,
-					
+					custoMedio : custoMedio,
 					
 				});
 				self.limpaCampos();
 			}
 		
-	self.verificaProdutoRepetido = function(quantidadeEstoque, produto,  quantidadeSaida, empreendimento){
+	self.verificaProdutoRepetido = function(quantidadeEstoque, produto,  quantidadeSaida, empreendimento , custoMedio){
 			for(i = 0; i < self.listaProduto.length; i++ ){
 				var produto2 = self.listaProduto[i].produto;
 				var produto1 = produto2.id			
@@ -85,11 +91,11 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 					}			
 			}
 			if(self.existe == true){
-				self.funcaoListaProduto(quantidadeEstoque, produto,  quantidadeSaida, empreendimento);
+				self.funcaoListaProduto(quantidadeEstoque, produto,  quantidadeSaida, empreendimento, custoMedio);
 				}
 			}
 		
-		self.adicionarProduto = function(quantidadeEstoque, produto,  quantidadeSaida, empreendimento){
+		self.adicionarProduto = function(quantidadeEstoque, produto,  quantidadeSaida, empreendimento, custoMedio){
 		
 			if(quantidadeEstoque < quantidadeSaida){
 				sweetAlert({ timer : 6000,  text :"Quantidade Superior ao estoque",  type : "info", width: 300, higth: 300, padding: 20});
@@ -101,10 +107,10 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 				}else{
 					$scope.ativaTabela = true;
 					if(self.listaProduto.length == 0){				
-						self.funcaoListaProduto(quantidadeEstoque, produto,  quantidadeSaida, empreendimento);				
+						self.funcaoListaProduto(quantidadeEstoque, produto,  quantidadeSaida, empreendimento, custoMedio);				
 					}
 					else{
-						self.verificaProdutoRepetido(quantidadeEstoque, produto, quantidadeSaida, empreendimento);				
+						self.verificaProdutoRepetido(quantidadeEstoque, produto, quantidadeSaida, empreendimento, custoMedio);				
 					}
 				}
 			}
@@ -112,8 +118,6 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 		self.salva = function(){		
 			self.transferencia.notaFiscal.valorTotal = 878;
 			self.transferencia.itens = self.listaProduto;
-			
-			console.log(self.listaProduto);
 			transferenciaEstoqueService.salva(self.transferencia)
 			.then(function(response){
 				self.limpaCampos();

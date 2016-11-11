@@ -25,9 +25,9 @@
 							<input class="form-control"  id="vencimento"  type="text" ng-model="transfCtrl.transferencia.notaFiscal.dataVencimento" ui-date title="informe a data de vencimento da nota fiscal" placeholder="vecimento nota fiscal" required>
 						</div>
 					</div>
-					
+					<br>
 					<div class="row" >					
-						<div class="col-sm-5" ng-controller="empreendimentoController as empCtrl" ng-init="empCtrl.lista()">
+						<div class="col-sm-3" ng-controller="empreendimentoController as empCtrl" ng-init="empCtrl.lista()">
 							<select class="form-control select2"
 								ng-model="transfCtrl.transferencia.empreendimentoDestino"
 								ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.tipoEmpreendimento for listarEmpreendimentos in empreendimentos"
@@ -52,9 +52,9 @@
 						<div class="col-sm-3" ng-if="habilitaBuscaPorDescricao" >
 									
 							  <md-autocomplete 
-							 	md-selected-item="produto.produto" 
+							 	md-selected-item="transfCtrl.produto" 
 							 	md-search-text="transfCtrl.searchText" 
-							 	md-selected-item-change="transfCtrl.selectedItemChange(transfCtrl.produto)" 
+							 	md-selected-item-change="transfCtrl.selectedItemChange(listaProduto)" 
 							 	md-items=" listaProduto in transfCtrl.listaProdutos | filter : transfCtrl.searchText" 
 							 	md-item-text="listaProduto.produto.descricao" 
 							 	md-min-length="0" placeholder="busca produto">
@@ -67,19 +67,21 @@
 						<div class="col-sm-2" ng-if="!habilitaBuscaPorDescricao">
 							<input type="text" class="form-control" ng-model="codigo" ng-blur="transfCtrl.buscaPorCodigoBarras(codigo)" onkeyup="if(this.value.length > 12) { quantidadeProduto.focus(); }" name="leitor" placeholder="Leitor de Código de Barras">
 						</div>
-						<div class="col-sm-4" ng-if="!habilitaBuscaPorDescricao">
-							<input class="form-control" ng-model="produto.produto.descricao" type="text" id="produto"  disabled placeholder="produto">
+						<div class="col-sm-2" ng-if="!habilitaBuscaPorDescricao">
+							<input class="form-control" ng-model="transfCtrl.produto.produto.descricao" type="text" id="produto"  disabled placeholder="produto">
 						</div>						
 						<div class="col-sm-2">
-							<input class="form-control" ng-model="produto.quantidade" type="text" id="quantidadeEstoque" ui-number-mask="0" disabled placeholder="Quantidade estoque">
+							<input class="form-control" ng-model="transfCtrl.produto.quantidade" type="text" id="quantidadeEstoque" ui-number-mask="0" disabled placeholder="Quantidade estoque">
 						</div>
-						
+						<div class="col-sm-2">
+							<input class="form-control" ng-model="transfCtrl.produto.custoMedio" type="text" id="custoMedio" ui-money-mask disabled placeholder="Custo Medio">
+						</div>
 						<div class="col-sm-2">
 							<input class="form-control" ng-model="quantidade" type="text" id="quantidadeTeste" ui-number-mask="0" placeholder="Quantidade para transferencia" >
 						</div>
 						<div class="col-sm-2">
 							<input class="btn btn-lg btn-primary btn-block btn-signin"
-								ng-click=" transfCtrl.adicionarProduto(produto.quantidade,  produto.produto , quantidade, estoqueCtrl.empreendimento)" value="adicionar"
+								ng-click=" transfCtrl.adicionarProduto(transfCtrl.produto.quantidade,  transfCtrl.produto.produto , quantidade, transfCtrl.estoqueCtrl.empreendimento, transfCtrl.produto.custoMedio)" value="adicionar"
 								title="pressione para adicionar a lista" type="button" ng-disabled="!produto" >
 						</div>
 					</div>
@@ -93,9 +95,11 @@
 									<tr>
 										<th>Selecionar</th>
 										<th>Descrição</th>
+										<th>Valor Unitário</th>
 										<th>Quantidade estoque</th>
-										<th>Quantidade saida</th>
+										<th>Quantidade saida</th>										
 										<th>Restam</th>
+										<th>Valor Total</th>
 										
 
 									</tr>
@@ -104,10 +108,12 @@
 									<tr>
 										<td><input type="checkbox" ng-model="produto.selecionado"
 											ng-click="transfCtrl.ativarExcluirLote(transfCtrl.listaProduto)"></td>
-										<td>{{produto.produto.descricao}}</td>																				
+										<td>{{produto.produto.descricao}}</td>	
+										<td>{{produto.custoMedio | currency}}</td>																			
 										<td>{{produto.quantidadeEstoque}}</td>
 										<td>{{produto.quantidadeSaida}}</td>
 										<td>{{produto.quantidadeEstoque - produto.quantidadeSaida}}</td>
+										<td>{{produto.quantidadeSaida * produto.custoMedio | currency}}</td>
 										
 									</tr>
 								</tbody>

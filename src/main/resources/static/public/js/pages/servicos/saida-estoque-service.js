@@ -60,7 +60,7 @@ app.factory('saidaEstoqueService', function($rootScope, toastr, $http,$q){
 				return $q.reject(errResponse);
 			});
 		},
-		buscaPorCodigoBarras : function(codigoBarras){
+		buscaPorCodigoBarras : function(codigoBarras){			
 			return $http.get('/rest/produtoEstoque/buscaPorCodigo/'+codigoBarras)
 			.then(function(response){
 				return response.data;
