@@ -1,5 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +19,7 @@ import javax.persistence.Table;
 @SequenceGenerator(name = "item_id_seq", sequenceName = "item_id_seq", initialValue = 1, allocationSize = 1)
 @Table(name = "item_id_seq")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Item{
+public abstract class Item implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "item_id_seq")

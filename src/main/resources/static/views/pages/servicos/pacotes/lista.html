@@ -28,7 +28,7 @@
 					<td>{{ pacoteServico.codigoPacote }}</td>
 						<td>{{ pacoteServico.descricao }}</td>
 						<td>{{ pacoteServico.categoria }}</td>
-						<td>{{ pacoteServico.valor }}</td>
+						<td>{{ pacoteServico.valor | currency }}</td>
 						
 						<td><a href="#/servicos/pacotes/editar/{{pacoteServico.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						

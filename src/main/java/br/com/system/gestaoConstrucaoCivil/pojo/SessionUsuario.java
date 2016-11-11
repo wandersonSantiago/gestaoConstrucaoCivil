@@ -25,7 +25,7 @@ public class SessionUsuario {
 		return usuario;
 	}
 
-	public static SessionUsuario getInstance() {
+	public synchronized static SessionUsuario getInstance() {
 
 		if (instance == null) {
 			instance = new SessionUsuario();
