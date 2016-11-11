@@ -31,8 +31,8 @@
 						<td>{{ empreendimento.descricao }}</td>
 						<td>{{ empreendimento.tipoEmpreendimento}}</td>
 						<td>{{ empreendimento.dataAbertura }}</td>
-						<td>{{ empreendimento.valorMaximoGastar }}</td>
-						<td>{{ empreendimento.valoresGastos }}</td>
+						<td>{{ empreendimento.valorMaximoGastar | currency }}</td>
+						<td>{{ empreendimento.valoresGastos | currency }}</td>
 						<td><a href="#/empreendimento/empreendimento/editar/{{empreendimento.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						<i class="glyphicon glyphicon-minus"></i>
 						<a href="#empreendimento/empreendimento/vizualizar/{{empreendimento.id}}"><i class="glyphicon glyphicon-search"></i></a></td>

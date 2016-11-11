@@ -77,7 +77,7 @@ public class NotaFiscalProdutoService {
 
 			for (ItemNotaFiscal item : notaFiscal.getItens()) {
 				
-				if (item.getProduto().getId() == idProduto) {
+				if (item.getProduto().getId().equals(idProduto)) {
 					
 					valorTotal += item.getValorTotal();
 					quantidadeTotal += item.getQuantidade();
