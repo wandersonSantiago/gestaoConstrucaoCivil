@@ -42,14 +42,14 @@
 						</div>
 					</div>
 					<p ng-show="formAdminSistema.nomeFantasia.$error.minlength"
-						class="alert alert-warning ">campo nome Fantasia no minimo 5 caracter</p>
+						class="alert alert-warning ">Campo nome fantasia no minimo 5 caracter</p>
 					<p ng-show="formAdminSistema.nomeFantasia.$error.maxlength"
-						class="alert alert-warning ">campo nome Fantasia no maximo 50 caracter</p>
+						class="alert alert-warning ">Campo nome Fantasia no máximo 50 caracter</p>
 						
 					<p ng-show="formAdminSistema.razaoSocial.$error.minlength"
-						class="alert alert-warning ">campo Razão Social no minimo 5 caracter</p>
+						class="alert alert-warning ">Campo razão social no minimo 5 caracter</p>
 					<p ng-show="formAdminSistema.razaoSocial.$error.maxlength"
-						class="alert alert-warning ">campo Razão Social no maximo 50 caracter</p>
+						class="alert alert-warning ">Campo razão social no máximo 50 caracter</p>
 					<br>
 					
 					<div class="row">
@@ -59,7 +59,7 @@
 								ng-model="adminCtrl.empresa.dadoEmpresa.email" id="email"
 								type="email" required>
 								<p ng-show="formAdminSistema.emailPrestadora.$error.email"
-						class="alert alert-warning ">Digite um Email Válido</p>
+						class="alert alert-warning ">Digite um e-mail válido</p>
 						</div>
 					
 				<div class="col-sm-4">
@@ -80,7 +80,7 @@
 								 ng-model="adminCtrl.empresa.dadoEmpresa.inscricaoEstadual" 
 								id="inscricaoEstadual" type="text" ui-br-ie-mask='adminCtrl.empresa.dadoEmpresa.ufIe'
 								disabled required>
-						 <p ng-show="formAdminSistema.iefield.$error.ie"	class="alert alert-warning ">Digite um Inscrição Estadual Válida</p>
+						 <p ng-show="formAdminSistema.iefield.$error.ie"	class="alert alert-warning ">Digite um inscrição estadual válida</p>
 						</div>
 							
 					</div>
@@ -108,16 +108,16 @@
 						
 						<div class="col-sm-2"
 							ng-class="{ 'has-error' : formAdminSistema.numeroEmpresa.$invalid && !fromAdminSistema.numeroEmpresa.$pristine }">
-							<input class="form-control" name="numeroEmpresa" placeholder="Numero"
+							<input class="form-control" name="numeroEmpresa" placeholder="Número"
 								ng-model="adminCtrl.empresa.dadoEmpresa.endereco.numero"
 								id="numero" type="text" ng-minlength="1" ng-maxlength="7"
 								required>
 						</div>
 					
 							<p ng-show="formAdminSistema.numeroEmpresa.$error.minlength"
-								class="alert alert-warning ">campo numero no minimo 1 caracter</p>
+								class="alert alert-warning ">Campo número no minimo 1 caracter</p>
 							<p ng-show="formAdminSistema.numeroEmpresa.$error.maxlength"
-								class="alert alert-warning ">campo numero no maximo 7 caracter</p>
+								class="alert alert-warning ">Campo número no maximo 7 caracter</p>
 						
 						<div class="col-sm-5">
 							<input class="form-control" placeholder="Complemento"
