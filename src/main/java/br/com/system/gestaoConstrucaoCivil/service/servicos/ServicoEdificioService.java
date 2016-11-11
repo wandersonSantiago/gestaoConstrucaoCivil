@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import br.com.system.gestaoConstrucaoCivil.entity.servicos.ServicoEdificio;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.servicos.ServicoEdificioRepository;
@@ -22,29 +23,27 @@ public class ServicoEdificioService {
 		return servicoEdificioRepository.findAll();
 	}
 
-	private boolean verificarExistePacoteParaEmpresa(ServicoEdificio servico) {
+	private void verificarExistePacoteParaEmpresa(ServicoEdificio servico) {
+
 		List<ServicoEdificio> servicosEdificios = servicoEdificioRepository.findAll();
 
 		for (ServicoEdificio s : servicosEdificios) {
 
-			if (servico.getTorre() == s.getTorre() && servico.getApartamento() == s.getApartamento()
-					&& s.getPacoteServico().equals(servico.getPacoteServico()))
-
-			{
-
-				return true;
+			if (servico.getTorre().equals(s.getTorre()) && servico.getApartamento().equals(s.getApartamento())
+					&& servico.getPacoteServico().equals(s.getPacoteServico())) {
+				throw new ServicoEdificioException("Pacote já vinculado a prestadora de serviço");
 
 			}
 
 		}
-		return false;
+
 	}
 
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(ServicoEdificio servico) {
 		servico.setEmpreendimento(SessionUsuario.getInstance().getUsuario().getEmpreendimento());
-		if (verificarExistePacoteParaEmpresa(servico) != true) {
-			servicoEdificioRepository.save(servico);
-		}
+		verificarExistePacoteParaEmpresa(servico);
+		servicoEdificioRepository.save(servico);
+
 	}
 }
