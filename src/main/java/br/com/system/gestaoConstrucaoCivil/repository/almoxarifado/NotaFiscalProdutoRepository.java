@@ -15,4 +15,7 @@ public interface NotaFiscalProdutoRepository extends JpaRepository<NotaFiscalPro
 	
 	@Query("FROM NotaFiscalProduto notaProduto  WHERE notaProduto.notaFiscal.empreendimento.id = ?1")
 	public List<NotaFiscalProduto> buscarNotaPorEmpreendimento(Long idEmpreendimento);
+	
+	@Query("FROM NotaFiscalProduto nota WHERE nota.notaFiscal.numero = ?1")
+	public NotaFiscalProduto buscarPorNumero(Long numero);
 }

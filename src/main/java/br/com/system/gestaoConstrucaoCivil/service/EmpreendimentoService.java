@@ -49,5 +49,16 @@ public class EmpreendimentoService {
          empreendimentoRepository.save(empreendimento);
          
     }
+    @Transactional(readOnly = false)
+    public void removerValorGasto(Double valorGasto)
+    {
+         Long idEmpeendimento  = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
+         
+         Empreendimento empreendimento = empreendimentoRepository.findOne(idEmpeendimento);
+         
+         empreendimento.setValoresGastos(empreendimento.getValoresGastos() - valorGasto);
+         empreendimentoRepository.save(empreendimento);
+         
+    }
     
 }

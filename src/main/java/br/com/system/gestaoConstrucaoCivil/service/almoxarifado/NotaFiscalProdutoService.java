@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.ItemNotaFiscal;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.NotaFiscalProduto;
+import br.com.system.gestaoConstrucaoCivil.enuns.Situacao;
 import br.com.system.gestaoConstrucaoCivil.pojo.EntradaOuBaixa;
 import br.com.system.gestaoConstrucaoCivil.pojo.InformacaoEntradaProduto;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
@@ -27,6 +28,7 @@ public class NotaFiscalProdutoService {
 	private EstoqueEmpreendimentoService estoque;
     @Autowired
     private EmpreendimentoService empreendimentoService;
+    
     
 	public List<NotaFiscalProduto> buscarTodos() {
 
@@ -85,5 +87,18 @@ public class NotaFiscalProdutoService {
 			}
 		}
 		return new InformacaoEntradaProduto(valorTotal, quantidadeTotal);
+	}
+	@Transactional(readOnly = false)
+	public void cancelarEntrada(Long numeroEntrada)
+	{
+		NotaFiscalProduto nota = notaFiscalProdutoRepository.buscarPorNumero(numeroEntrada);
+		for(ItemNotaFiscal item : nota.getItens())
+		{
+			EntradaOuBaixa baixa = new EntradaOuBaixa(item.getProduto(), item.getQuantidade(), nota.getNotaFiscal().getEmpreendimento());
+			estoque.baixar(baixa);
+		}
+		empreendimentoService.removerValorGasto(nota.getNotaFiscal().getValorTotal());
+		nota.getNotaFiscal().setSituacao(Situacao.CANCELADA);
+		notaFiscalProdutoRepository.save(nota);
 	}
 }
