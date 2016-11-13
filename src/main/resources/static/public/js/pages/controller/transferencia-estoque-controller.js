@@ -7,11 +7,13 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 		self.listaProdutos = [];
 		$scope.produto =[];
 		//self.transferencia = [];
+		self.totalSoma = 0;
 		
 		self.lista = function(){
 			transferenciaEstoqueService.lista().
 				then(function(t){
-					self.produtos = t;
+					self.transferencias = t;
+					console.log(self.transferencias);
 					}, function(errResponse){
 				});
 			};
@@ -38,7 +40,7 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 							self.listaProdutos.push({
 										produto : self.produto,
 										quantidade : self.quantidade,
-										custoMedio : self.custoMedio
+										valorUnitario: self.custoMedio
 								});
 							console.log(self.listaProdutos);
 						}
@@ -58,26 +60,26 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 				self.listaProduto = listaProduto.filter(function(produto){
 				if(!produto.selecionado) return produto;
 				$scope.ativadoExcluirLote = null;
-				if(listaProduto.length == 0){
+				if(self.listaProduto.length == 0){
 					$scope.ativaTabela = false;
 				}
 			});
 		}
 			
 			
-			self.funcaoListaProduto = function(quantidadeEstoque, produto,  quantidadeSaida, empreendimento , custoMedio){
+			self.funcaoListaProduto = function(quantidadeEstoque, produto,  quantidadeSaida, empreendimento , valorUnitario){
 				self.listaProduto.push({
 					quantidadeEstoque : quantidadeEstoque,
 					produto : produto,
-					quantidadeSaida : quantidadeSaida,
+					quantidade : quantidadeSaida,
 					empreendimento : empreendimento,
-					custoMedio : custoMedio,
+					valorUnitario : valorUnitario,
 					
 				});
 				self.limpaCampos();
 			}
 		
-	self.verificaProdutoRepetido = function(quantidadeEstoque, produto,  quantidadeSaida, empreendimento , custoMedio){
+	self.verificaProdutoRepetido = function(quantidadeEstoque, produto,  quantidadeSaida, empreendimento , valorUnitario){
 			for(i = 0; i < self.listaProduto.length; i++ ){
 				var produto2 = self.listaProduto[i].produto;
 				var produto1 = produto2.id			
@@ -91,11 +93,21 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 					}			
 			}
 			if(self.existe == true){
-				self.funcaoListaProduto(quantidadeEstoque, produto,  quantidadeSaida, empreendimento, custoMedio);
+				self.funcaoListaProduto(quantidadeEstoque, produto,  quantidadeSaida, empreendimento, valorUnitario);
 				}
 			}
+	
+			self.SomaTotal = function(quantidadeEstoque, produto,  quantidadeSaida, empreendimento, valorUnitario){
+								
+				$scope.totaolItem = quantidadeSaida * valorUnitario;
+				self.totalSoma += parseFloat($scope.totaolItem );
+				$scope.valorTotal = self.totalSoma;
+				console.log($scope.valorTotal);
+				}			
+			
+	
 		
-		self.adicionarProduto = function(quantidadeEstoque, produto,  quantidadeSaida, empreendimento, custoMedio){
+		self.adicionarProduto = function(quantidadeEstoque, produto,  quantidadeSaida, empreendimento, valorUnitario){
 		
 			if(quantidadeEstoque < quantidadeSaida){
 				sweetAlert({ timer : 6000,  text :"Quantidade Superior ao estoque",  type : "info", width: 300, higth: 300, padding: 20});
@@ -107,10 +119,12 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 				}else{
 					$scope.ativaTabela = true;
 					if(self.listaProduto.length == 0){				
-						self.funcaoListaProduto(quantidadeEstoque, produto,  quantidadeSaida, empreendimento, custoMedio);				
+						self.funcaoListaProduto(quantidadeEstoque, produto,  quantidadeSaida, empreendimento, valorUnitario);
+						self.SomaTotal(quantidadeEstoque, produto,  quantidadeSaida, empreendimento, valorUnitario);
 					}
 					else{
-						self.verificaProdutoRepetido(quantidadeEstoque, produto, quantidadeSaida, empreendimento, custoMedio);				
+						self.verificaProdutoRepetido(quantidadeEstoque, produto, quantidadeSaida, empreendimento, valorUnitario);
+						self.SomaTotal(quantidadeEstoque, produto,  quantidadeSaida, empreendimento, valorUnitario);
 					}
 				}
 			}
@@ -121,8 +135,10 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 			transferenciaEstoqueService.salva(self.transferencia)
 			.then(function(response){
 				self.limpaCampos();
+				self.listaProdutosComEstoque();
 				self.transferencia = null;
 				self.produto = null;
+				$scope.ativaTabela = false;
 				self.listaProduto = self.listaProduto=[];
 				}, function(errResponse){
 					
