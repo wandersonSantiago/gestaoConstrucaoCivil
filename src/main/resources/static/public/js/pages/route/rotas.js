@@ -233,6 +233,9 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 			.when('/almoxarifado/estoque/editar/:idProdutoEstoque', {
 		templateUrl:"views/pages/almoxarifado/estoque/editar.html",
 	})
+		.when('/almoxarifado/estoque/informacoes', {
+		templateUrl:"views/pages/almoxarifado/estoque/informacoes.html",
+	})
 	//TRANSFERENCIA
 	.when('/almoxarifado/estoque/transferencia/cadastrar', {
 		templateUrl:"views/pages/almoxarifado/estoque/transferencia/salvar.html",

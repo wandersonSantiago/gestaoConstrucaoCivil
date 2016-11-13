@@ -1,0 +1,66 @@
+<meta charset="UTF-8">
+<br>
+<br>
+<div class="generic-container"  ng-controller="notaFiscalController as notaFiscalCtrl" >
+
+<div class="box box-primary" >
+		<!-- Default panel contents -->
+		<div class="box-header" >
+			<span class="lead">Infomações do Estoque  </span>
+		</div>
+		<div class="panel-body">
+
+			<br>
+			<div class="container col-sm-12 " >
+					
+			
+					
+					<br>
+					
+					Valor Total Estoque
+					<br>
+					<hr>
+					<br>
+					Quantidade Total de itens no Estoque
+						
+					
+						
+					<hr>
+					<br>
+					<br>
+					Produtos com Quantidade Mínima
+					<table class="table table-hover " ng-show="visialuzarTable">
+					<thead>
+						<tr>
+							<th>Informações</th>
+							
+						</tr>
+					</thead>
+					
+					<tbody
+						ng-repeat=" f in estoquelCtrl.listaInformacoes| filter : busca">
+						<tr>
+					
+							
+						</tr>
+	
+					</tbody>
+					<tfoot>
+						<tr>
+							<th></th>
+							<th></th>
+							<th></th>
+						</tr>
+					</tfoot>
+				</table>
+					<hr>
+					Produtos Com quantidade Máxima
+					<br>
+					
+					</div>
+			
+				
+			</div>
+		<div class="tablecontainer"></div>
+</div>
+</div>
