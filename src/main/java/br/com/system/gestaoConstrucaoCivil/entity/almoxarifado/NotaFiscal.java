@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.enuns.Situacao;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
@@ -38,21 +40,25 @@ public class NotaFiscal implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Situacao situacao;
 	
+	@JsonView(View.Summary.class)
 	@Column(nullable = false)
 	private Long numero;
 
+	@JsonView(View.Summary.class)
     @ManyToOne
     @JoinColumn(name="id_empreendimento",nullable = true)
     private Empreendimento empreendimento;
     
 	@Temporal(TemporalType.DATE)
 	private Date dataNota;
+	
 	@Temporal(TemporalType.DATE)
 	private Date dataVencimento;
 
 	@Column(nullable = true)
 	private String observacao;
 	
+	@JsonView(View.Summary.class)
 	@Column(nullable = false)
 	private Double valorTotal;
 

@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.enuns.StatusTransferencia;
 
@@ -28,23 +30,26 @@ allocationSize = 1)
 @Table(name = "transferencia")
 public class Transferencia implements Serializable {
 
-	
+	@JsonView(View.Summary.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "transferencia_id_seq")
 	private Long id;
 
+	@JsonView(View.Summary.class)
 	@ManyToOne
 	@JoinColumn(name = "id_empreendimento_destino",nullable = false)
 	private Empreendimento empreendimentoDestino;
 	
+	@JsonView(View.Summary.class)
 	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
 	@JoinColumn(name = "id_nota_fiscal", nullable = true)
 	private NotaFiscal notaFiscal;
 	
+	@JsonView(View.Summary.class)
 	@Enumerated(EnumType.STRING)
 	private StatusTransferencia statusTransferencia;
 
-	
+	@JsonView(View.Summary.class)
 	@OneToMany(mappedBy = "transferencia", cascade = CascadeType.ALL)
 	private List<ItemTransferencia> itens;
 	

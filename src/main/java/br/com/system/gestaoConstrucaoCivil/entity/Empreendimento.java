@@ -17,6 +17,9 @@ import javax.persistence.TemporalType;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.View;
 import br.com.system.gestaoConstrucaoCivil.entity.servicos.PrestadoraServico;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoEmpreendimentoEnum;
 
@@ -40,6 +43,7 @@ public class Empreendimento extends AbstractPersistable<Long> {
 	@Enumerated(EnumType.STRING)
 	private TipoEmpreendimentoEnum tipoEmpreendimento;
     
+	@JsonView(View.Summary.class)
 	@Column(nullable = false,length = 50)
 	private String descricao;
 	
