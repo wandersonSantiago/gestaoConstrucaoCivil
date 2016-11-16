@@ -4,7 +4,7 @@
 <div class="generic-container"
 	ng-controller="transferenciaEstoqueController as transCtrl">
 
-	<div class="box box-primary" ng-init="transCtrl.lista()">
+	<div class="box box-primary" ng-init="transCtrl.listaEnviadas()">
 	
 		<div class="box-header">
 			<span class="lead"> Transferência enviadas </span>
@@ -28,7 +28,7 @@
 					</tr>
 				</thead>
 				<tbody
-					ng-repeat=" lista in transCtrl.transferencias | filter : buscar ">
+					ng-repeat=" lista in transCtrl.transferenciasEnviadas | filter : buscar ">
 					<tr>
 						
 						

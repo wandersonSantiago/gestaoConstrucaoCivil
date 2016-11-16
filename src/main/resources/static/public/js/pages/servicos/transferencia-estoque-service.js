@@ -23,6 +23,24 @@ app.factory('transferenciaEstoqueService', function($rootScope, toastr, $http,$q
 				return $q.reject(errResponse);
 			});
 		},
+		listaEnviadas: function(){
+			return $http.get('/rest/almoxarifado/transferencia/enviada')
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 3000,  text :"Não existe transferencia",  type : "info", width: 300, higth: 300, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
+		listaRecebidas: function(){
+			return $http.get('/rest/almoxarifado/transferencia/recebida')
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 3000,  text :"Não existe transferencia",  type : "info", width: 300, higth: 300, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
 		lista: function(){
 			return $http.get('/rest/almoxarifado/transferencia/lista')
 			.then(function(response){

@@ -18,6 +18,20 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 					}, function(errResponse){
 				});
 			};
+			self.listaEnviadas = function(){
+				transferenciaEstoqueService.listaEnviadas().
+					then(function(t){
+						self.transferenciasEnviadas = t;
+						}, function(errResponse){
+					});
+				};
+				self.listaRecebidas = function(){
+					transferenciaEstoqueService.listaRecebidas().
+						then(function(t){
+							self.transferenciasRecebidas = t;
+							}, function(errResponse){
+						});
+					};
 			self.buscaPorCodigoBarras = function(codigoBarras){
 				saidaEstoqueService.buscaPorCodigoBarras(codigoBarras).
 				then(function(p){					
