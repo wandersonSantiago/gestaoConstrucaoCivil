@@ -6,6 +6,7 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 		self.baixaEstoque = [];
 		self.listaProdutos = [];
 		$scope.listaProdutos = [];
+		self.requisicaoEdificio = [];
 		self.produto = [];
 		self.produtos = [];
 		self.objeto = [];
@@ -68,7 +69,7 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 					quantidadeEstoque : objeto.produto.quantidade,
 					produto : objeto.produto.produto,
 					areaProduto : objeto.areaProduto,
-					quantidadeSaida : objeto.quantidadeSaida,
+					quantidade : objeto.quantidadeSaida,
 					andar : objeto.andar,
 					torre : objeto.torre,
 					apartamento : objeto.apartamento					
@@ -81,7 +82,7 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 						quantidadeEstoque : objeto.produto.quantidade,
 						produto : objeto.produto.produto,
 						areaProduto : objeto.areaProduto,
-						quantidadeSaida : objeto.quantidadeSaida,
+						quantidade : objeto.quantidadeSaida,
 						andar : objeto.andar,						
 						casa : objeto.casa												
 					});
@@ -93,7 +94,7 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 						quantidadeEstoque : objeto.produto.quantidade,
 						produto : objeto.produto.produto,
 						areaProduto : objeto.areaProduto,
-						quantidadeSaida : objeto.quantidadeSaida,					
+						quantidade : objeto.quantidadeSaida,					
 						descricao : objeto.edificacaoComunitaria.descricao						
 					});	
 			}
@@ -154,7 +155,9 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 		
 		
 		self.salvaEdificio = function(){
-			self.requisicaoEdificio = self.listaProduto;
+			self.requisicaoEdificio = self.objeto;
+			self.requisicaoEdificio.item = self.listaProduto;
+			console.log(self.requisicaoEdificio );
 			requisicaoEstoqueService.salvaEdificio(self.requisicaoEdificio)
 			.then($timeout(function(response){
 				self.listaProdutosComEstoque();
@@ -183,6 +186,14 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 			});
 		}
 		
+		self.lista = function(){
+			requisicaoEstoqueService.lista().
+				then(function(t){
+					self.listaRequisicao = t;				
+					console.log(self.listaRequisicao);
+					}, function(errResponse){
+				});
+			};
 		
 		self.limpaCampo = function(){
 			self.objeto = null;

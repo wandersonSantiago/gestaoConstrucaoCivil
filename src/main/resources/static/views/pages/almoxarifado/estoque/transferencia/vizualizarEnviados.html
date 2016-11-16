@@ -16,111 +16,56 @@
 					<div class="row">
 						<div class="col-sm-3">
 							<input class="form-control"  id="numeroNota" type="text" title="informe o numero da nota fiscal" placeholder="Numero nota fiscal" 
-							ng-model="transfCtrl.transferencia.notaFiscal.numero" required>
+							ng-model="transfCtrl.transferencia.notaFiscal.numero" disabled required>
 						</div>			
 						<div class="col-sm-3">
-							<input class="form-control"  id="dataNota" type="text" ng-model="transfCtrl.transferencia.notaFiscal.dataNota" ui-date title="informe a data da nota fiscal"  placeholder="data nota fiscal" required>
+							<input class="form-control"  id="dataNota" type="text" ng-model="transfCtrl.transferencia.statusTransferencia" ui-date title="informe a data da nota fiscal"  placeholder="data nota fiscal" disabled required>
 						</div>						
 						<div class="col-sm-3">
-							<input class="form-control"  id="vencimento"  type="text" ng-model="transfCtrl.transferencia.notaFiscal.dataVencimento" ui-date title="informe a data de vencimento da nota fiscal" placeholder="vecimento nota fiscal" required>
+							<input class="form-control"  id="vencimento"  type="text" ng-model="transfCtrl.transferencia.notaFiscal.dataVencimento" ui-date title="informe a data de vencimento da nota fiscal" placeholder="vecimento nota fiscal" disabled>
+						</div>
+						<div class="col-sm-3">
+							<input class="form-control"  id="empreendimento"  type="text" ng-model="transfCtrl.transferencia.empreendimentoDestino.descricao"  disabled>
 						</div>
 					</div>
 					<br>
-					<div class="row" >					
-						<div class="col-sm-3" ng-controller="empreendimentoController as empCtrl" ng-init="empCtrl.lista()">
-							<select class="form-control select2"
-								ng-model="transfCtrl.transferencia.empreendimentoDestino"
-								ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.tipoEmpreendimento for listarEmpreendimentos in empreendimentos"
-								style="width: 100%;">
-								<option  value="">{{transfCtrl.transferencia.empreendimentoDestino.descricao}}</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<br> <br>
-						<label class="radio-inline"><input type="checkbox"   ng-model="habilitaBuscaPorDescricao" value="busca" ng-click="estoqueCtrl.listaProdutosComEstoque()" name="optradio">Habilitar busca por descrição </label> 
+					
+					
 					<br>
 					<br>
 					<br>
-					<br> 
-					<div class="row" ng-init="transfCtrl.listaProdutosComEstoque()">
-						
-						<div class="col-sm-3" ng-if="habilitaBuscaPorDescricao" >
-									
-							  <md-autocomplete 
-							  md-no-cache="transfCtrl.noCache"
-							 	md-selected-item="transfCtrl.produto" 
-							 	md-search-text="transfCtrl.searchText" 
-							 	md-selected-item-change="transfCtrl.selectedItemChange(listaProduto)" 
-							 	md-items=" listaProduto in transfCtrl.listaProdutos | filter : transfCtrl.searchText" 
-							 	md-item-text="listaProduto.produto.descricao" 
-							 	md-min-length="0" placeholder="busca produto">
-       							 <md-item-template>
-          							<span md-highlight-text="transfCtrl.searchText" md-highlight-flags="^i">{{listaProduto.produto.descricao}}</span>
-       							 </md-item-template>        								
-     						 </md-autocomplete>
-     						
-						</div>	
-						<div class="col-sm-2" ng-if="!habilitaBuscaPorDescricao">
-							<input type="text" class="form-control" ng-model="codigo" ng-blur="transfCtrl.buscaPorCodigoBarras(codigo)" onkeyup="if(this.value.length > 12) { quantidadeProduto.focus(); }" name="leitor" placeholder="Leitor de Código de Barras">
-						</div>
-						<div class="col-sm-2" ng-if="!habilitaBuscaPorDescricao">
-							<input class="form-control" ng-model="transfCtrl.produto.produto.descricao" type="text" id="produto"  disabled placeholder="produto">
-						</div>						
-						<div class="col-sm-2">
-							<input class="form-control" ng-model="transfCtrl.produto.quantidade" type="text" id="quantidadeEstoque" ui-number-mask="0" disabled placeholder="Quantidade estoque">
-						</div>
-						<div class="col-sm-2">
-							<input class="form-control" ng-model="transfCtrl.produto.valorUnitario" type="text" id="custoMedio" ui-money-mask disabled placeholder="Custo Medio">
-						</div>
-						<div class="col-sm-2">
-							<input class="form-control" ng-model="quantidade" type="text" id="quantidadeTeste" ui-number-mask="0" placeholder="Quantidade para transferencia" >
-						</div>
-						<div class="col-sm-2">
-							<input class="btn btn-lg btn-primary btn-block btn-signin"
-								ng-click=" transfCtrl.adicionarProduto(transfCtrl.produto.quantidade,  transfCtrl.produto.produto , quantidade, transfCtrl.estoqueCtrl.empreendimento, transfCtrl.produto.valorUnitario)" value="adicionar"
-								title="pressione para adicionar a lista" type="button" ng-disabled="!produto" >
-						</div>
-					</div>
+					<br>
+					<br> 				
 					
 					<br> <br>
 
 					
-						<div ng-show="ativaTabela" >
+						<div  >
 							<table class="table table-hover ">
 								<thead>
-									<tr>
-										<th>Selecionar</th>
+									<tr>										
 										<th>Código</th>
 										<th>Descrição</th>
 										<th>Valor Unitário</th>
-										<th>Quantidade estoque</th>
 										<th>Quantidade saida</th>										
-										<th>Restam</th>
 										<th>Valor Total</th>
 										
 
 									</tr>
 								</thead>
-								<tbody ng-repeat="produto in transfCtrl.listaProduto" ng-model="selecionado">
+								<tbody ng-repeat="produto in listaProdutos" >
 									<tr>
-										<td><input type="checkbox" ng-model="produto.selecionado" ng-click="transfCtrl.ativarExcluirLote(transfCtrl.listaProduto)"></td>
 										<td><input class="form-control"  id="codigo"  type="text" placeholder="codigo"	ng-model="produto.codigo" ui-mumber-mask disabled></td>
 										<td><input class="form-control"  id="descricao"  type="text" placeholder="Desrciçaõ"	ng-model="produto.produto.descricao" disabled></td>
 										<td><input class="form-control"  id="valorUnitario" type="text" placeholder="valorUnitario"	ng-model="produto.valorUnitario" ui-money-mask disabled></td>	
-										<td><input class="form-control"  id="quantidadeEstoque"  type="text" placeholder="quantidadeEstoque"	ng-model="produto.quantidadeEstoque" ui-mumber-mask disabled></td>																				
 										<td><input class="form-control"  id="quantidade"  type="text" placeholder="quantidade" 	ng-model="produto.quantidade" ui-mumber-mask disabled></td>
-										<td>{{produto.quantidadeEstoque - produto.quantidade}}</td>
 										<td>{{produto.quantidade * produto.valorUnitario | currency}}</td>
 										
 									</tr>
 								</tbody>
 								<tfoot>
 									<tr>
-										<th><input type="button" class="btn-danger"
-											ng-if="ativadoExcluirLote" value="excluir" name="apagar"
-											ng-click=" transfCtrl.apagarProduto(transfCtrl.listaProduto)"></th>
-											
+									<th></th>											
 									<th></th><th></th><th></th><th></th><th></th><th></th><th>{{valorTotal | currency}}</th>
 									</tr>
 									
@@ -128,15 +73,9 @@
 							</table>
 						</div>
 					
-					
 					<br>
 					
-					<div class="row ">
-						
-							<button type="submit" name="submit" 
-								class="btn btn-lg btn-primary btn-block btn-signin">Cadastrar</button>
-						
-					</div>				
+					
 					
 				</form>
 			</div>

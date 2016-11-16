@@ -5,6 +5,7 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 		self.listaProduto =[];
 		self.baixaEstoque = [];
 		self.listaProdutos = [];
+		$scope.listaProdutos =[];
 		$scope.produto =[];
 		self.totalSoma = 0;
 		var idEnviados = $routeParams.idEnviados;
@@ -155,7 +156,17 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 			transferenciaEstoqueService.buscaEnviados(id).
 			then(function(p){
 				self.transferencia = p;
-				console.log(self.transferencia);
+				
+				for(i = 0; i < self.transferencia.itens.length; i++ ){
+					self.produto = self.transferencia.itens[i].produto;
+					self.quantidade = self.transferencia.itens[i].quantidade;
+					self.custoMedio	= self.transferencia.itens[i].custoMedio;
+				$scope.listaProdutos.push({
+							produto : self.produto,
+							quantidade : self.quantidade,
+							valorUnitario: self.custoMedio
+					});console.log($scope.listaProdutos);
+			}
 			}, function(errResponse){
 			});
 		};
