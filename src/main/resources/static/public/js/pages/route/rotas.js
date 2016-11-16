@@ -246,6 +246,12 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 		.when('/almoxarifado/estoque/transferencia/recebidas', {
 		templateUrl:"views/pages/almoxarifado/estoque/transferencia/recebidas.html",
 	})
+		.when('/almoxarifado/estoque/transferencia/vizualizarEnviados/:idEnviados', {
+		templateUrl:"views/pages/almoxarifado/estoque/transferencia/vizualizarEnviados.html",
+	})
+		.when('/almoxarifado/estoque/transferencia/vizualizarRecebidos/:idRecebidos', {
+		templateUrl:"views/pages/almoxarifado/estoque/transferencia/vizualizarRecebidos.html",
+	})
 	//REQUISICAO
 	
 	.when('/almoxarifado/estoque/requisicao/cadastrar', {

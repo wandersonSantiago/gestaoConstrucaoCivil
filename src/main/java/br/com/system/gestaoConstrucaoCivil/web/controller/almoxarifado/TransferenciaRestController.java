@@ -40,6 +40,7 @@ public class TransferenciaRestController {
 		return new ResponseEntity<Collection<Transferencia>>(transferencia, HttpStatus.OK);
 	}
 	
+	@JsonView(View.Summary.class)
 	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Transferencia> buscarCotacaoPorId(@PathVariable Long id) {
 
