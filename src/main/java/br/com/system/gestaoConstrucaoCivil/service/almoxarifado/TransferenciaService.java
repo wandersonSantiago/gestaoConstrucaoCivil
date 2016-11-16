@@ -18,6 +18,7 @@ import br.com.system.gestaoConstrucaoCivil.pojo.EntradaOuBaixa;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.TransferenciaRepository;
 
+
 @Service
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
 public class TransferenciaService {
@@ -89,6 +90,16 @@ public class TransferenciaService {
 
 	public Transferencia buscaPorId(Long id){
 		return transferenciaRepository.findOne(id);
+	}
+	public Collection<Transferencia>  buscarTransferenciaRecebida() {
+		
+		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
+		return transferenciaRepository.buscarTransferenciaRecebidas(idEmpreendimento);
+	}
+	public Collection<Transferencia>  buscarTransferenciaEnviada() {
+		
+		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
+		return transferenciaRepository.buscarTransferenciaEnviada(idEmpreendimento);
 	}
 	
 }

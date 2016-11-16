@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.PedidoCompra;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Transferencia;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.View;
+import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.service.almoxarifado.TransferenciaService;
 
 @RestController
@@ -24,11 +25,11 @@ import br.com.system.gestaoConstrucaoCivil.service.almoxarifado.TransferenciaSer
 public class TransferenciaRestController {
 	
 	@Autowired
-	private TransferenciaService TransferenciaService;
+	private TransferenciaService transferenciaService;
 	
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
 	public ResponseEntity<Collection<Transferencia>> salva(@RequestBody Transferencia transferencia){
-		TransferenciaService.salvaAltera(transferencia);
+		transferenciaService.salvaAltera(transferencia);
 		HttpHeaders headers =  new HttpHeaders();
 		return new ResponseEntity(headers, HttpStatus.CREATED);				
 	}
@@ -36,7 +37,7 @@ public class TransferenciaRestController {
 	@RequestMapping(value = "/lista", method = RequestMethod.GET)
 	public ResponseEntity<Collection<Transferencia>> lista(){
 		
-		Collection<Transferencia> transferencia = TransferenciaService.buscarTodos(); 
+		Collection<Transferencia> transferencia = transferenciaService.buscarTodos(); 
 		return new ResponseEntity<Collection<Transferencia>>(transferencia, HttpStatus.OK);
 	}
 	
@@ -44,8 +45,20 @@ public class TransferenciaRestController {
 	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Transferencia> buscarCotacaoPorId(@PathVariable Long id) {
 
-		return new ResponseEntity<Transferencia>(TransferenciaService.buscaPorId(id), HttpStatus.OK);
+		return new ResponseEntity<Transferencia>(transferenciaService.buscaPorId(id), HttpStatus.OK);
 	}
 
+	@JsonView(View.Summary.class)
+	@RequestMapping(value = "/recebida", method = RequestMethod.GET)
+	public ResponseEntity<Collection<Transferencia>> buscarTransferenciaRecebida() {
+		
+    	return new ResponseEntity<Collection<Transferencia>>(transferenciaService.buscarTransferenciaRecebida(), HttpStatus.OK);
+	}
+	@JsonView(View.Summary.class)
+	@RequestMapping(value = "/enviada", method = RequestMethod.GET)
+	public ResponseEntity<Collection<Transferencia>>  buscarTransferenciaEnviada() {
+		
+		return new ResponseEntity<Collection<Transferencia>>(transferenciaService.buscarTransferenciaEnviada(), HttpStatus.OK);
+	}
 
 }
