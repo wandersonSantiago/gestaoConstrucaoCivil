@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 
 @Entity
 @SequenceGenerator(name = "item_id_seq", sequenceName = "item_id_seq", initialValue = 1, allocationSize = 1)
@@ -21,16 +23,21 @@ import javax.persistence.Table;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Item implements Serializable{
 
+	@JsonView(View.Summary.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "item_id_seq")
 	private Long id;
     
+	@JsonView(View.Summary.class)
 	@ManyToOne
 	@JoinColumn(name = "id_produto", nullable = false)
 	private Produto produto;
 	
+	@JsonView(View.Summary.class)
 	@Column(nullable = false)
 	private Integer quantidade;
+	
+	@JsonView(View.Summary.class)
 	@Column(nullable = false)
 	private Double valorUnitario;
 	
