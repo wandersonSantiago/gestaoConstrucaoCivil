@@ -57,7 +57,7 @@
 					<br>
 					<div class="row" >
 						<div class="col-sm-2">
-							<input type="text" class="form-control" id="nome" ng-model="userCtrl.usuario.login" placeholder="Usuário"
+							<input type="text" class="form-control" id="nome" ng-model="userCtrl.usuario.login" ng-blur="userCtrl.existeLogin(userCtrl.usuario.login)" placeholder="Usuário"
 								title="Nome de usuario" maxlength="15"	required>
 						</div>						
 					

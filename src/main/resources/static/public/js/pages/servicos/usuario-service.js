@@ -41,6 +41,15 @@ app.factory('usuarioService', function($rootScope, toastr, $http,$q){
 				return $q.reject(errResponse);
 			});
 		},
+		existeLogin: function(login){
+			return $http.get('rest/usuario/existeLogin/'+login)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
 		altera: function(usuario){
 			return $http.put('rest/usuario/altera', usuario)
 			.then(function(response){

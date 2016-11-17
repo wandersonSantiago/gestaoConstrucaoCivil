@@ -30,6 +30,14 @@ app.controller('categoriaController', function($scope, categoriaService, $routeP
 			});
 		};
 		
+		self.listaTipoCategoria = function(){
+			 categoriaService.listaTipoCategoria().
+				then(function(t){
+					self.tipoCategoria = t;
+					}, function(errResponse){
+				});
+			};
+			
 		self.buscaPorId = function(id){
 			if(!id)return;
 			categoriaService.buscaPorId(id).

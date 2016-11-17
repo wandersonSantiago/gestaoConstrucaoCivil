@@ -2,9 +2,13 @@ package br.com.system.gestaoConstrucaoCivil.entity.servicos;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import br.com.system.gestaoConstrucaoCivil.entity.Categoria;
 
 
 @Entity
@@ -20,6 +24,9 @@ public class PacoteServico extends AbstractPersistable<Long>{
 	@Column(nullable = false,length = 50)
 	private String descricao;
 	
+	@ManyToOne
+	@JoinColumn(name = "id_categoria", nullable = true)
+	private Categoria categoria;
 	@Column(nullable = false,length = 250)
 	private String servicosAtribuidos;
 	
@@ -32,6 +39,12 @@ public class PacoteServico extends AbstractPersistable<Long>{
 	
 	
 	
+	public Categoria getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
 	public boolean isAtivo() {
 		return ativo;
 	}
@@ -68,4 +81,5 @@ public class PacoteServico extends AbstractPersistable<Long>{
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
+	
 }

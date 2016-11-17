@@ -75,6 +75,20 @@ app.controller('usuarioController', function($scope, toastr, $rootScope, usuario
 				}, function(errResponse){
 			});
 		};
+		self.existeLogin = function(login){			
+			usuarioService.existeLogin(login).
+			then(function(p){
+				self.existe = p;
+				console.log(self.existe );
+				if(self.existe == true){
+					sweetAlert({ timer : 3000,  text :"Usuario já cadastrado",  type : "info", width: 300, higth: 300, padding: 20});
+					$scope.userCtrl.usuario.login = null;
+				}
+				
+				}, function(errResponse){
+			});
+		};
+		
 		//busca a usuario atraves do id
 		self.buscaPorId = function(id){
 			if(!id)return;
