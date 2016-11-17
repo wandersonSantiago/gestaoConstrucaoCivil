@@ -17,6 +17,7 @@ import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
 import br.com.system.gestaoConstrucaoCivil.pojo.EntradaOuBaixa;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.TransferenciaRepository;
+import br.com.system.gestaoConstrucaoCivil.util.GeraCodigo;
 
 
 @Service
@@ -36,10 +37,12 @@ public class TransferenciaService {
 		transferencia.getNotaFiscal().setSituacao(Situacao.OK);
 		transferencia.getNotaFiscal().setTipoNota(TipoNotaEnum.TRANSFERENCIA_ESTOQUE_EMPREENDIMENTO);
 		transferencia.getNotaFiscal().setDataNota(new Date());
+		transferencia.getNotaFiscal().setNumero(new GeraCodigo(100000,9999999).gerarNumeroTransferencia().longValue());
+		
 		Empreendimento empreendimentoSaida = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
 		transferencia.getNotaFiscal().setEmpreendimento(empreendimentoSaida);
 		adicionarTransferenciaItem(transferencia);
-
+        
 		for (ItemTransferencia item : transferencia.getItens()) {
 			EntradaOuBaixa baixa = new EntradaOuBaixa(item.getProduto(), item.getQuantidade(),
 					transferencia.getNotaFiscal().getEmpreendimento());

@@ -49,12 +49,12 @@
 
 									</tr>
 								</thead>
-								<tbody ng-repeat="produto in listaProdutos" >
+								<tbody ng-repeat="produtos in listaProdutos" >
 									<tr>
-										<td><input class="form-control"  id="codigo"  type="text" placeholder="codigo"	ng-model="produto.codigo" ui-mumber-mask disabled></td>
-										<td><input class="form-control"  id="descricao"  type="text" placeholder="Desrciçaõ"	ng-model="produto.produto.descricao" disabled></td>
-										<td><input class="form-control"  id="valorUnitario" type="text" placeholder="valorUnitario"	ng-model="produto.valorUnitario" ui-money-mask disabled></td>	
-										<td><input class="form-control"  id="quantidade"  type="text" placeholder="quantidade" 	ng-model="produto.quantidade" ng-blur="teste()" ui-mumber-mask disabled></td>
+										<td><input class="form-control"  id="codigo"  type="text" placeholder="codigo"	ng-model="produtos.produto.codigo" ui-mumber-mask disabled></td>
+										<td><input class="form-control"  id="descricao"  type="text" placeholder="Desrciçaõ"	ng-model="produtos.produto.descricao" disabled></td>
+										<td><input class="form-control"  id="valorUnitario" type="text" placeholder="valorUnitario"	ng-model="produtos.valorUnitario" ui-money-mask disabled></td>	
+										<td><input class="form-control"  id="quantidade"  type="text" placeholder="quantidade" 	ng-model="produtos.quantidade" ng-blur="teste()" ui-mumber-mask disabled></td>
 										<td>{{produto.quantidade * produto.valorUnitario | currency}}</td>
 										
 									</tr>
