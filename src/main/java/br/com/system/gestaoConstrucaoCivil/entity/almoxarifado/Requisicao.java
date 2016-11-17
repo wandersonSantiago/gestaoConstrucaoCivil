@@ -19,8 +19,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import br.com.system.gestaoConstrucaoCivil.entity.AreaProduto;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.View.Summary;
 import br.com.system.gestaoConstrucaoCivil.enuns.StatusRequisicao;
+import br.com.system.gestaoConstrucaoCivil.util.GeraCodigo;
 
 
 @Entity
@@ -35,14 +39,18 @@ public  abstract class Requisicao implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "requisicao_id_seq")
 	protected Long id;
 	
+	@JsonView(Summary.class)
 	@Column(name = "numero_requisicao")
 	protected Integer numeroRequisicao;
 	
+	@JsonView(Summary.class)
 	@OneToMany(mappedBy = "requisicao", cascade = CascadeType.ALL)
 	protected List<ItemRequisicao> item;
 	
+	@JsonView(Summary.class)
     protected LocalDate dataSaida;
 	
+	@JsonView(Summary.class)
     @Enumerated(EnumType.STRING)
 	protected StatusRequisicao statusRequisicao;
 	
@@ -56,6 +64,8 @@ public  abstract class Requisicao implements Serializable{
     	this.dataSaida = LocalDate.now();
     	this.statusRequisicao = StatusRequisicao.PENDENTE;
     //	this.empreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
+    	GeraCodigo gerar = new GeraCodigo(100000,999999);
+		this.numeroRequisicao = gerar.gerarNumeroRequisicao();
     }
     public Long getId() {
 		return id;

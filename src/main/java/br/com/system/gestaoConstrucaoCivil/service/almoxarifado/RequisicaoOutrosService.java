@@ -28,7 +28,15 @@ public class RequisicaoOutrosService {
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(RequisicaoOutros requisicaoOutros)
 	{
-	   requisicaoOutrosRepository.save(requisicaoOutros);
+		adicionarItemRequisicao(requisicaoOutros);
+		requisicaoOutrosRepository.save(requisicaoOutros);
+	}
+	private void adicionarItemRequisicao(RequisicaoOutros requisicao)
+	{
+		for(ItemRequisicao item : requisicao.getItem())
+		{
+			item.setRequisicao(requisicao);
+		}
 	}
 	public List<RequisicaoOutros> buscarTodos()
 	{

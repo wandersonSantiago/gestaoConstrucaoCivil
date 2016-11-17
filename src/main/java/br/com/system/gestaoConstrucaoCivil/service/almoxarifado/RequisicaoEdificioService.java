@@ -27,9 +27,16 @@ public class RequisicaoEdificioService {
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(RequisicaoEdificio requisicaoEdificio) {
 
-		
+		adicionarItemRequisicao(requisicaoEdificio);
 		requisicaoEdificioRepository.save(requisicaoEdificio);
 		
+	}
+	private void adicionarItemRequisicao(RequisicaoEdificio requisicao)
+	{
+		for(ItemRequisicao item : requisicao.getItem())
+		{
+			item.setRequisicao(requisicao);
+		}
 	}
     public Collection<RequisicaoEdificio> buscarTodos() {
 		return requisicaoEdificioRepository.findAll();

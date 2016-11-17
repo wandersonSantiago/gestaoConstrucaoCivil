@@ -5,7 +5,7 @@
 
 	<groupId>br.com.system</groupId>
 	<artifactId>gestaoConstrucaoCivil</artifactId>
-	<version>0.9.4</version>
+	<version>1.0.1</version>
 	<packaging>jar</packaging>
 
 	<name>gestaoConstrucaoCivil</name>

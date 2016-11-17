@@ -3,10 +3,19 @@ package br.com.system.gestaoConstrucaoCivil.util;
 import java.util.Random;
 
 
-public abstract class GeraCodigo {
+public class GeraCodigo {
 
 	
-	private Integer gerar(Integer minimo ,Integer maximo)
+	private  Integer maximo = 0;
+	private  Integer minimo = 0;
+	
+	public GeraCodigo (Integer minimo,Integer maximo){
+		
+		this.minimo = minimo;
+		this.maximo = maximo;
+	}
+	
+	private Integer gerar()
 	{
 		Random random = new Random();
 		Integer codigo  = random.nextInt((maximo - minimo) + 1) + minimo;
@@ -14,15 +23,15 @@ public abstract class GeraCodigo {
 	}
 	public Integer gerarCodigoProduto()
 	{
-		return gerar(100000,999999);
+		return gerar();
 	}
 	public Integer gerarNumeroTransferencia()
 	{
-		return gerar(100000,999999);
+		return gerar();
 	}
 	public Integer gerarNumeroRequisicao()
 	{
-		return gerar(1000,9999);
+		return gerar();
 	}
 	public String gerarCodigoBarra(Integer codigo)
 	{

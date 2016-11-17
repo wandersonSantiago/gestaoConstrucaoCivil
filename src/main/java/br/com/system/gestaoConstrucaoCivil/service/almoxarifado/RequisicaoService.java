@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Requisicao;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.View.Summary;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.RequisicaoRepository;
 
 @Service
@@ -29,6 +32,7 @@ public class RequisicaoService {
 	    }
 		 requisicaoRepository.save(requisicao);*/
 	}
+	@JsonView(Summary.class)
 	public List<Requisicao> buscarTodos()
 	{
 		return requisicaoRepository.findAll();

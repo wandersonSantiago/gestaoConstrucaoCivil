@@ -125,7 +125,12 @@ public class EstoqueEmpreendimentoService {
 	
 	 public EstoqueEmpreendimento buscarPorCodigoOuCodigoBarraEstoque(String codigoOuCodigoBarra){
 		   
-	     Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
-		 return estoqueRepository.findByCodigoOrCodigoBarraEstoque(codigoOuCodigoBarra,idEmpreendimento);
-	   }
+		 Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
+		 
+		 EstoqueEmpreendimento estoque =  estoqueRepository.findByCodigoOrCodigoBarraEstoque(codigoOuCodigoBarra,idEmpreendimento);
+		 InformacaoEntradaProduto info = notaProdutoService.getInformacaoProduto(estoque.getProduto().getId());
+	     estoque.setInforProduto(info);
+	     return  estoque;
+	 
+	 }
 }

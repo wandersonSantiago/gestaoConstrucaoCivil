@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Requisicao;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.View.Summary;
 import br.com.system.gestaoConstrucaoCivil.service.almoxarifado.RequisicaoService;
 
 @RestController
@@ -30,6 +33,7 @@ public class RequisicaoRestController {
 		HttpHeaders headers = new HttpHeaders();
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
+	@JsonView(Summary.class)
 	@RequestMapping(method = RequestMethod.GET, value = "/lista")
 	public ResponseEntity<Iterable<Requisicao>> buscarTodos()
 	{

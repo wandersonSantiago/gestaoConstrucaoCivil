@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.ItemRequisicao;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.RequisicaoCasa;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.RequisicaoOutros;
 import br.com.system.gestaoConstrucaoCivil.enuns.StatusRequisicao;
 import br.com.system.gestaoConstrucaoCivil.pojo.EntradaOuBaixa;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
@@ -28,8 +29,17 @@ public class RequisicaoCasaService {
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(RequisicaoCasa requisicaoCasa) {
 		
+		adicionarItemRequisicao(requisicaoCasa);
 		requisicaoCasaRepository.save(requisicaoCasa);
 	}
+	private void adicionarItemRequisicao(RequisicaoCasa requisicao)
+	{
+		for(ItemRequisicao item : requisicao.getItem())
+		{
+			item.setRequisicao(requisicao);
+		}
+	}
+	
 	public List<RequisicaoCasa> buscarTodos() {
 		return requisicaoCasaRepository.findAll();
 	}

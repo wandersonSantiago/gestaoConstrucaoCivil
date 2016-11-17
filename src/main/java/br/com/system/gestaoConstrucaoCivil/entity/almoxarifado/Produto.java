@@ -16,19 +16,25 @@ import javax.persistence.Transient;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import br.com.system.gestaoConstrucaoCivil.entity.Categoria;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.View.Summary;
 import br.com.system.gestaoConstrucaoCivil.enuns.UnidadeMedidaEnum;
 
 @Entity
 @Table(name = "produto")
 public class Produto extends AbstractPersistable<Long> {
 
+	@JsonView(Summary.class)
 	@Column(nullable = true,unique = true)
 	private Integer codigo;
 	
+	@JsonView(Summary.class)
 	@Column(nullable = false, length = 50,unique = true)
 	private String codigoBarra;
 
+	@JsonView(Summary.class)
 	@Column(nullable = false, length = 50)
 	private String descricao;
 	@Column(nullable = true)
