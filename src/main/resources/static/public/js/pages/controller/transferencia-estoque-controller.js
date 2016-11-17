@@ -36,10 +36,11 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 				saidaEstoqueService.buscaPorCodigoBarras(codigoBarras).
 				then(function(p){					
 					self.listaProdutosComEstoques = p;
-					console.log(p);
+					console.log(p.produto.codigo);
 								self.produto.produto = self.listaProdutosComEstoques.produto;
 								self.produto.quantidade = self.listaProdutosComEstoques.quantidade;
-								//$scope.produto.custoMedio = self.listaProdutosComEstoques.custoMedio;								
+								$scope.transfCtrl.produto.valorUnitario = self.listaProdutosComEstoques.custoMedio;	
+								
 				});
 				
 			};
@@ -85,6 +86,7 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 				self.listaProduto.push({
 					quantidadeEstoque : quantidadeEstoque,
 					produto : produto,
+					codigo : produto.codigo,
 					quantidade : quantidadeSaida,
 					empreendimento : empreendimento,
 					valorUnitario : valorUnitario,

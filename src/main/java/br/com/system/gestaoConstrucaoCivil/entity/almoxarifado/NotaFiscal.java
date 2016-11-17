@@ -52,6 +52,7 @@ public class NotaFiscal implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dataNota;
 	
+	@JsonView(View.Summary.class)
 	@Temporal(TemporalType.DATE)
 	private Date dataVencimento;
 
