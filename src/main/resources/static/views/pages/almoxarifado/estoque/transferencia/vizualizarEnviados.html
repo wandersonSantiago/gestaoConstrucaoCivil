@@ -33,11 +33,7 @@
 					
 					<br>
 					<br>
-					<br>
-					<br>
-					<br> 				
-					
-					<br> <br>
+				
 
 					
 						<div  >
@@ -58,15 +54,15 @@
 										<td><input class="form-control"  id="codigo"  type="text" placeholder="codigo"	ng-model="produto.codigo" ui-mumber-mask disabled></td>
 										<td><input class="form-control"  id="descricao"  type="text" placeholder="Desrciçaõ"	ng-model="produto.produto.descricao" disabled></td>
 										<td><input class="form-control"  id="valorUnitario" type="text" placeholder="valorUnitario"	ng-model="produto.valorUnitario" ui-money-mask disabled></td>	
-										<td><input class="form-control"  id="quantidade"  type="text" placeholder="quantidade" 	ng-model="produto.quantidade" ui-mumber-mask disabled></td>
+										<td><input class="form-control"  id="quantidade"  type="text" placeholder="quantidade" 	ng-model="produto.quantidade" ng-blur="teste()" ui-mumber-mask disabled></td>
 										<td>{{produto.quantidade * produto.valorUnitario | currency}}</td>
 										
 									</tr>
 								</tbody>
 								<tfoot>
 									<tr>
-									<th></th>											
-									<th></th><th></th><th></th><th></th><th></th><th></th><th>{{valorTotal | currency}}</th>
+																				
+									<th></th><th></th><th></th><th></th><th>{{valorTotal | currency}}</th>
 									</tr>
 									
 								</tfoot>

@@ -17,7 +17,7 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 				requisicaoEstoqueService.buscaPorCodigoBarras(codigoBarras).
 				then(function(p){					
 					self.listaProdutosComEstoques = p;
-					
+					console.log(self.listaProdutosComEstoques);
 								$scope.quantidade = self.listaProdutosComEstoques.quantidade;
 								$scope.produto = self.listaProdutosComEstoques.produto;
 													
@@ -28,14 +28,17 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 				requisicaoEstoqueService.listaProdutosComEstoque().
 					then(function(t){
 						self.listaProdutosComEstoques = t;
-						self.listaProdutos = [{produto:"",quantidade:""}];											
+						console.log(self.listaProdutosComEstoques);
+						self.listaProdutos = [{produto:"",quantidade:"", valorUnitario:""}];											
 						for(i = 0; i < self.listaProdutosComEstoques.length; i++ ){
 						
 								self.produto = self.listaProdutosComEstoques[i].produto;
 								self.quantidade = self.listaProdutosComEstoques[i].quantidade;
+								self.valorUnitario = self.listaProdutosComEstoques[i].custoMedio;
 								self.listaProdutos.push({
 										produto : self.produto,
-										quantidade : self.quantidade									
+										quantidade : self.quantidade,
+										valorUnitario : self.valorUnitario
 								});	
 						}	
 							}, function(errResponse){
@@ -72,7 +75,8 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 					quantidade : objeto.quantidadeSaida,
 					andar : objeto.andar,
 					torre : objeto.torre,
-					apartamento : objeto.apartamento					
+					apartamento : objeto.apartamento,
+					valorUnitario : objeto.produto.valorUnitario
 				});
 				
 			}
@@ -84,7 +88,8 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 						areaProduto : objeto.areaProduto,
 						quantidade : objeto.quantidadeSaida,
 						andar : objeto.andar,						
-						casa : objeto.casa												
+						casa : objeto.casa,
+						valorUnitario : objeto.produto.valorUnitario												
 					});
 					
 				}
@@ -95,7 +100,8 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 						produto : objeto.produto.produto,
 						areaProduto : objeto.areaProduto,
 						quantidade : objeto.quantidadeSaida,					
-						descricao : objeto.edificacaoComunitaria.descricao						
+						descricao : objeto.edificacaoComunitaria.descricao,
+						valorUnitario : objeto.produto.valorUnitario						
 					});	
 			}
 		
@@ -113,7 +119,7 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 		
 	
 		self.adicionarProdutoEdificio = function(objeto){
-			if(!$scope.habilitaBuscaPorDescricao){objeto.produto = {produto : $scope.produto, quantidade : $scope.quantidade};}
+			if(!$scope.habilitaBuscaPorDescricao){objeto.produto = {produto : $scope.produto, quantidade : $scope.quantidade , valorUnitario : $scope.valorUnitario};}
 			verificaQuantidade(objeto);	
 			if(quantidadeMaior){
 				$scope.ativaTabela = true;
@@ -122,7 +128,7 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 			}
 		}
 		self.adicionarProdutoCasa = function(objeto){
-			if(!$scope.habilitaBuscaPorDescricao){objeto.produto = {produto : $scope.produto, quantidade : $scope.quantidade};}		
+			if(!$scope.habilitaBuscaPorDescricao){objeto.produto = {produto : $scope.produto, quantidade : $scope.quantidade, valorUnitario : $scope.valorUnitario};}		
 			verificaQuantidade(objeto);	
 			if(quantidadeMaior){
 				$scope.ativaTabela = true;
@@ -131,7 +137,7 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 			}
 		}
 		self.adicionarProdutoEdificacaoComunitaria = function(objeto){		    
-			if(!$scope.habilitaBuscaPorDescricao){objeto.produto = {produto : $scope.produto, quantidade : $scope.quantidade};}			
+			if(!$scope.habilitaBuscaPorDescricao){objeto.produto = {produto : $scope.produto, quantidade : $scope.quantidade , valorUnitario : $scope.valorUnitario};}			
 			verificaQuantidade(objeto);				
 			if(quantidadeMaior){
 				$scope.ativaTabela = true;

@@ -170,20 +170,29 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 			transferenciaEstoqueService.buscaEnviados(id).
 			then(function(p){
 				self.transferencia = p;
-				
+				console.log(self.transferencia);
 				for(i = 0; i < self.transferencia.itens.length; i++ ){
 					self.produto = self.transferencia.itens[i].produto;
 					self.quantidade = self.transferencia.itens[i].quantidade;
-					self.custoMedio	= self.transferencia.itens[i].custoMedio;
+					self.valorUnitario	= self.transferencia.itens[i].valorUnitario;
+					$scope.somaTotal(); 
 				$scope.listaProdutos.push({
 							produto : self.produto,
 							quantidade : self.quantidade,
-							valorUnitario: self.custoMedio
+							valorUnitario: self.valorUnitario
 					});console.log($scope.listaProdutos);
 			}
 			}, function(errResponse){
 			});
 		};
+		$scope.somaTotal = function(){
+			$scope.totaolItem = self.quantidade * self.valorUnitario;
+			self.totalSoma += parseFloat($scope.totaolItem );
+			$scope.valorTotal = self.totalSoma;
+		}
+		
+		
+		
 		self.buscaRecebidos = function(id){
 			if(!id)return;
 			transferenciaEstoqueService.buscaRecebidos(id).

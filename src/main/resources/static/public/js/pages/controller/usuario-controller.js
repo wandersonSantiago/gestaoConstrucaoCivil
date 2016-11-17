@@ -58,19 +58,20 @@ app.controller('usuarioController', function($scope, toastr, $rootScope, usuario
 		}
 	}
 	 
-	
+	$scope.ativo = "ativo";
+	$scope.inativo = "inativo";
 	
 	 self.lista = function(){
 		 usuarioService.lista().
 			then(function(u){
-				if(u.ativo == true){
-					u.ativo = "ativo";
-					self.usuarios = u;
-				}else{
-					u.ativo = "inativo";
-					self.usuarios = u;
-				}
-				console.log(self.usuarios.ativo);
+				self.usuarios = u;
+				for(i = 0; i < u.length ; i++){
+					if(u[i].ativo == true){
+						self.usuarios[i].ativo = $scope.ativo;
+					}else{
+						self.usuarios[i].ativo = $scope.inativo;					
+					}
+				}				
 				}, function(errResponse){
 			});
 		};
