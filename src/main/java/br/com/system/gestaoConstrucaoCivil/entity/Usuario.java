@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Email;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import br.com.system.gestaoConstrucaoCivil.enuns.PerfilUsuarioEnum;
@@ -32,12 +33,7 @@ public class Usuario extends AbstractPersistable<Long>{
 	@ManyToOne
 	@JoinColumn(name="id_empreendimento",nullable = true)
 	private Empreendimento empreendimento;
-	
-/*	@OneToMany(mappedBy = "", cascade = CascadeType.ALL)
-	@Enumerated(EnumType.STRING)
-	@JoinColumn(name="perfil_permissao",nullable = true)	
-	private Enum<PerfilUsuarioEnum> perfil;*/
-	
+
 	@ElementCollection(targetClass=PerfilUsuarioEnum.class,fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name="perfil")
@@ -49,6 +45,7 @@ public class Usuario extends AbstractPersistable<Long>{
 	@Column(nullable = false,length = 15,unique = false)
 	private String login;
 	@Column(nullable = true,length = 40)
+	@Email
 	private String email;
 	@Column(nullable = false,length = 256)
 	private String senha;
@@ -56,6 +53,10 @@ public class Usuario extends AbstractPersistable<Long>{
 	private boolean ativo;
 	private LocalDate dataCadastro;
 	
+	public Usuario()
+	{
+		dataCadastro = LocalDate.now();
+	}
 	public String getNome() {
 		return nome;
 	}
@@ -93,9 +94,6 @@ public class Usuario extends AbstractPersistable<Long>{
 	public LocalDate getDataCadastro() {
 		return dataCadastro;
 	} 
-	public void setDataCadastro(LocalDate dataCadastro) {
-		this.dataCadastro = dataCadastro;
-	}
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
 	}

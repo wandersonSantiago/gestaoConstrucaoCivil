@@ -7,8 +7,9 @@ public enum PerfilUsuarioEnum {
 	ESTOQUE_CADASTRO("cadastro estoque"),
 	ESTOQUE_CONSULTA("consulta estoque"),
 	COTACAO_CADASTRO("cadastro cotação"),
-	COTACAO_CONSULTA(" consulta cotação"),
-	COMPRAS_CADASTRO(" cadastro de compras"),	
+	COTACAO_CONSULTA("consulta cotação"),
+	COMPRAS_CADASTRO("cadastro de compras"),	
+	CARGO_CONSULTA("consulta de cargo "),
 	GESTOR("gestor");
 	
 	 private String descricao;

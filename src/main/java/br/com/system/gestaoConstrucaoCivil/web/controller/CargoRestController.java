@@ -1,19 +1,17 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
+
 import br.com.system.gestaoConstrucaoCivil.entity.Cargo;
-import br.com.system.gestaoConstrucaoCivil.service.CargoService;
 import br.com.system.gestaoConstrucaoCivil.service.servicos.Servico;
 
 @RestController
@@ -24,6 +22,7 @@ public class CargoRestController implements ICargo {
 	//private CargoService cargoService;
     private Servico<Cargo> cargoService;
 	
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_CARGO_CONSULTA')")
 	public ResponseEntity<Iterable<Cargo>> buscarCargos() {
 		Iterable<Cargo> cargo = cargoService.buscarTodos();
 		return new ResponseEntity<Iterable<Cargo>>(cargo, HttpStatus.OK);

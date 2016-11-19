@@ -1,7 +1,5 @@
 package br.com.system.gestaoConstrucaoCivil.service;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 import br.com.system.gestaoConstrucaoCivil.enuns.PerfilUsuarioEnum;
-import br.com.system.gestaoConstrucaoCivil.repository.UsuarioRepository;
+
 
 @Component
 public class CriaUsuarioAdmin implements ApplicationListener<ContextRefreshedEvent>{
@@ -38,7 +36,6 @@ public class CriaUsuarioAdmin implements ApplicationListener<ContextRefreshedEve
     {
     	Usuario usuario = new Usuario();
 		usuario.setAtivo(true);
-		usuario.setDataCadastro(LocalDate.now());
 		usuario.setLogin("root");
 		usuario.setEmail("root@suporte.com.br");
 	    usuario.setSenha("root951951");

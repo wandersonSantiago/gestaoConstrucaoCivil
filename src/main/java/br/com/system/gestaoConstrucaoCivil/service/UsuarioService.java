@@ -32,7 +32,6 @@ public class UsuarioService {
 	{
 		String hash = new BCryptPasswordEncoder().encode(usuario.getSenha());
 		usuario.setSenha(hash);
-		usuario.setDataCadastro(LocalDate.now());
 		usuarioRepository.save(usuario);
 	}
 	
