@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Produto;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.ProdutoRepository;
-import br.com.system.gestaoConstrucaoCivil.util.ProdutoUtil;
+import br.com.system.gestaoConstrucaoCivil.util.geradorCodigo.GeraCodigoProduto;
 
 @Service
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
@@ -17,8 +17,10 @@ public class ProdutoService {
 
 	@Autowired
 	private ProdutoRepository produtoRepository;
-
-	public List<Produto> buscarTodos() {
+    @Autowired
+    private GeraCodigoProduto gerar;
+	
+    public List<Produto> buscarTodos() {
 
 		return produtoRepository.findAll();
 	}
@@ -34,25 +36,13 @@ public class ProdutoService {
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(Produto produto) {
 		
-		ProdutoUtil gerar = new ProdutoUtil();
-		boolean status = false;
-		Integer codigoTemp = 0;
-		Integer tentativa = 0;
 		
-		while (tentativa < 999999) {
-			
-			codigoTemp = gerar.gerarCodigo();
-			status = produtoRepository.existeCodigo(codigoTemp);
-			if(status == false)
-			{
-				break;
-			}
-		}
+		produto.setCodigo(gerar.gerarCodigoProduto());
+		
 		if(produto.isGeraCodigoBarra())
 		{
-		    produto.setCodigoBarra(gerar.gerarCodigoBarra(codigoTemp));
+		    produto.setCodigoBarra(gerar.gerarCodigoBarra());
 		}
-		produto.setCodigo(codigoTemp);
 		produtoRepository.save(produto);
 
 	}

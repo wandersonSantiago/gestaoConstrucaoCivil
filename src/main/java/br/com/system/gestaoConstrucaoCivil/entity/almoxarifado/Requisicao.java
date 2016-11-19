@@ -21,7 +21,7 @@ import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import br.com.system.gestaoConstrucaoCivil.entity.AreaProduto;
+import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.View.Summary;
 import br.com.system.gestaoConstrucaoCivil.enuns.StatusRequisicao;
 import br.com.system.gestaoConstrucaoCivil.util.GeraCodigo;
@@ -54,18 +54,16 @@ public  abstract class Requisicao implements Serializable{
     @Enumerated(EnumType.STRING)
 	protected StatusRequisicao statusRequisicao;
 	
-   
-    
-  /*  @ManyToOne
+    @ManyToOne
+    @JoinColumn(name="id_empreendimento")
     protected Empreendimento empreendimento;
-  */  
+   	
     public Requisicao()
     {
-    	this.dataSaida = LocalDate.now();
     	this.statusRequisicao = StatusRequisicao.PENDENTE;
-    //	this.empreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
-    	GeraCodigo gerar = new GeraCodigo(100000,999999);
+        GeraCodigo gerar = new GeraCodigo(100000,999999);
 		this.numeroRequisicao = gerar.gerarNumeroRequisicao();
+		
     }
     public Long getId() {
 		return id;
@@ -95,6 +93,13 @@ public  abstract class Requisicao implements Serializable{
 	public void setStatusRequisicao(StatusRequisicao statusRequisicao) {
 		this.statusRequisicao = statusRequisicao;
 	}
+	public Empreendimento getEmpreendimento() {
+		return empreendimento;
+	}
+	public void setEmpreendimento(Empreendimento empreendimento) {
+		this.empreendimento = empreendimento;
+	}
+	
 	
 	@Override
 	public int hashCode() {

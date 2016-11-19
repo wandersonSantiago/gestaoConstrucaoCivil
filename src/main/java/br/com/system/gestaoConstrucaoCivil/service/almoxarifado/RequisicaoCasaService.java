@@ -30,6 +30,8 @@ public class RequisicaoCasaService {
 	public void salvarOuEditar(RequisicaoCasa requisicaoCasa) {
 		
 		adicionarItemRequisicao(requisicaoCasa);
+		Empreendimento empreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
+		requisicaoCasa.setEmpreendimento(empreendimento);
 		requisicaoCasaRepository.save(requisicaoCasa);
 	}
 	private void adicionarItemRequisicao(RequisicaoCasa requisicao)

@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -8,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.ItemRequisicao;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.RequisicaoEdificio;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.RequisicaoOutros;
 import br.com.system.gestaoConstrucaoCivil.enuns.StatusRequisicao;
 import br.com.system.gestaoConstrucaoCivil.pojo.EntradaOuBaixa;
@@ -29,6 +29,8 @@ public class RequisicaoOutrosService {
 	public void salvarOuEditar(RequisicaoOutros requisicaoOutros)
 	{
 		adicionarItemRequisicao(requisicaoOutros);
+		Empreendimento empreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
+		requisicaoOutros.setEmpreendimento(empreendimento);
 		requisicaoOutrosRepository.save(requisicaoOutros);
 	}
 	private void adicionarItemRequisicao(RequisicaoOutros requisicao)

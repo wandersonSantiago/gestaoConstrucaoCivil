@@ -21,10 +21,7 @@ public class GeraCodigo {
 		Integer codigo  = random.nextInt((maximo - minimo) + 1) + minimo;
 		return codigo;
 	}
-	public Integer gerarCodigoProduto()
-	{
-		return gerar();
-	}
+	
 	public Integer gerarNumeroTransferencia()
 	{
 		return gerar();

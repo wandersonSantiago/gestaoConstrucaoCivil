@@ -15,7 +15,7 @@ import br.com.system.gestaoConstrucaoCivil.enuns.PerfilUsuarioEnum;
 public class CriaUsuarioAdmin implements ApplicationListener<ContextRefreshedEvent>{
 
 	@Autowired
-	UsuarioService usuarioService;
+	private UsuarioService usuarioService;
 	
 	
 	private void criarUsuario()

@@ -28,6 +28,8 @@ public class RequisicaoEdificioService {
 	public void salvarOuEditar(RequisicaoEdificio requisicaoEdificio) {
 
 		adicionarItemRequisicao(requisicaoEdificio);
+		Empreendimento empreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
+	    requisicaoEdificio.setEmpreendimento(empreendimento);
 		requisicaoEdificioRepository.save(requisicaoEdificio);
 		
 	}
