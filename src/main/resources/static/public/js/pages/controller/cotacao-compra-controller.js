@@ -9,7 +9,6 @@ app.controller('cotacaoCompraController', function($scope,cotacaoCompraService, 
 	
 		self.salvaCotacaoEmpresa = function(cotacao , fornecedor, listaCotacao){
 			for(i = 0; i < listaCotacao.length ; i ++ ){
-				/*$scope.iten = {descricao : listaCotacao[i].descricao, quantidade : listaCotacao[i].quantidade};*/
 				$scope.itens = [{item : listaCotacao[i], valorUnitario : listaCotacao[i].valorUnitario, observacao : listaCotacao[i].observacao}];
 			} 
 			$scope.cotacaoEmpresa = {cotacao : cotacao, fornecedor : fornecedor, itens : $scope.itens };			

@@ -174,6 +174,8 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 		
 		self.salvaCasa = function(){
 			self.requisicaoCasa = self.listaProduto;
+			self.requisicaoCasa.item = [self.listaProduto]; 
+			console.log(self.listaProduto);
 			requisicaoEstoqueService.salvaCasa(self.requisicaoCasa)
 			.then($timeout(function(response){
 				self.listaProdutosComEstoque();
