@@ -6,7 +6,7 @@
 				<img src="public/img/logo2.png" class="img-circle"
 					alt="User Image">
 			</div> -->
-		<span class="logo-lg"><b>G.C.C</b></span>
+		<span class="logo-lg"><b>Sistema</b>GCC</span>
 	</a>
 
 	<nav class="navbar navbar-fixed-top" role="navigation">
@@ -19,14 +19,70 @@
 		<ul class="nav navbar-nav pull-right" ng-controller="usuarioController as userCtrl" >
 				<li><a>Empreendimento: {{user.usuario.empreendimento.descricao}}
 				</a></li>
-
+			<li class="dropdown user user-menu">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                  <img src="public/img/avatar_2x.png" class="user-image" alt="User Image">
+                  <span class="hidden-xs">{{user.usuario.nome}}</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- User image -->
+                  <li class="user-header">
+                    <img src="public/img/avatar_2x.png" class="img-circle" alt="User Image">
+                    <p>
+                     		{{userCtrl.usuario.nome}}
+                      <small>{{user.usuario.funcionario.cargo.descricao}}</small>
+                    </p>
+                  </li>                 
+                  <li class="user-footer">
+                    <div class="pull-left">
+                      <a href="" ng-click="userCtrl.buscaPorId(user.usuario.id)" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-flat">Alterar senha</a>
+                    </div>
+                    <div class="pull-right">
+                      <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              
 				<li>
 					<a href="" ng-controller="loginController as loginCtrl"  ng-click="loginCtrl.logout()" > Logout <i class="glyphicon glyphicon-log-out"></i>
 					</a>
 				</li>
 
 			</ul>
-
+				
+		
 	</nav>
 	
 </header>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="usuarioController as userCtrl">
+				  <div class="modal-dialog" role="document" >
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">Dados Usúario</h4>
+				      </div>
+				      <div class="modal-body">				      	
+				     		{{user.usuario.nome}}
+				      		<br>
+					      <div class="row">
+					      	<div class="col-sm-4">
+								<input type="password" class="form-control" id="senha" ng-model="userCtrl.senha" placeholder="Senha"
+									title="Digite uma senha" maxlength="12" required>
+							</div>
+							<div class="col-sm-4">
+								<input type="password" class="form-control" id="repitaSenha" ng-model="userCtrl.senhaRepitida" placeholder="Repita a Senha"
+									title="repita a senha" required>
+							</div>
+					      </div>
+					       
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" ng-click="userCtrl.altera()" class="btn btn-primary">Alterar</button>
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+				        
+				      </div>
+				    </div>
+				  </div>
+				</div>

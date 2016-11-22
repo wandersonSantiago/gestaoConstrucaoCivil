@@ -24,11 +24,22 @@
 							</select>
 						</div>												
 						<div class="col-sm-6"  ng-controller="cadastrarFuncionarioController as funCtrl" ng-init="funCtrl.lista()">
-								<select class="form-control select2" ng-model="userCtrl.usuario.funcionario" ng-options="engenheiros.nomeCompleto  group by engenheiros.shade for engenheiros in listaFuncionario" style="width: 100%;" >
-									<option value="">---Selecione Funcionario---</option>                                                                                 
-							</select>
+						<md-autocomplete 
+							  md-no-cache="funCtrl.noCache"
+							 	md-selected-item="userCtrl.usuario.funcionario" 
+							 	md-search-text="busca" 
+							 	md-selected-item-change="funCtrl.selectedItemChange(funcionario)" 
+							 	md-items=" funcionario in listaFuncionario | filter : busca" 
+							 	md-item-text="funcionario.nomeCompleto" 
+							 	md-min-length="0" placeholder="busca Funcionário">
+       							 <md-item-template>
+          							<span md-highlight-text="busca" md-highlight-flags="^i">{{funcionario.nomeCompleto}}</span>
+       							 </md-item-template>        								
+     						 </md-autocomplete>
+								
 						</div>						
 					</div>
+						
 					
 					<br>
 					<br>

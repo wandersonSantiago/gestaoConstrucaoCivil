@@ -1,8 +1,9 @@
 app.controller('usuarioController', function($scope, toastr, $rootScope, usuarioService, $http, $routeParams){
 	
 	var self = this;
-		
 	var idUsuario = $routeParams.idUsuario;
+	$scope.ativo = "ativo";
+	$scope.inativo = "inativo";
 	$rootScope.tipoEmpreendimento = false;
 	$scope.listaUsuario = [];
 	
@@ -14,13 +15,13 @@ app.controller('usuarioController', function($scope, toastr, $rootScope, usuario
 				});
 			};
 	
+		
 	self.user = function(){
 		usuarioService.user().
 			then(function(u){
 				$rootScope.user = u;
 				if($rootScope.user.usuario.empreendimento.tipoEmpreendimento ==  "CONDOMINIO_DE_EDIFICIO_RESIDENCIAL"){
 					$rootScope.tipoEmpreendimento = true;
-					console.log($rootScope.tipoEmpreendimento);
 				}else{
 					$rootScope.tipoEmpreendimento = false;
 				}
@@ -31,7 +32,6 @@ app.controller('usuarioController', function($scope, toastr, $rootScope, usuario
 		if($rootScope.tipoEmpreendimento == false){
 			self.user();
 		}
-		
 	
 	self.altera = function(usuario){
 		if(self.senha == self.senhaRepitida){
@@ -61,8 +61,7 @@ app.controller('usuarioController', function($scope, toastr, $rootScope, usuario
 		}
 	}
 	 
-	$scope.ativo = "ativo";
-	$scope.inativo = "inativo";
+	
 	
 	 self.lista = function(){
 		 usuarioService.lista().
@@ -92,7 +91,7 @@ app.controller('usuarioController', function($scope, toastr, $rootScope, usuario
 			});
 		};
 		
-		//busca a usuario atraves do id
+		
 		self.buscaPorId = function(id){
 			if(!id)return;
 			usuarioService.buscaPorId(id).
@@ -101,7 +100,7 @@ app.controller('usuarioController', function($scope, toastr, $rootScope, usuario
 				}, function(errResponse){
 			});
 		};
-	//verifica se o params esta com o ide executa o metodo de busca 	
+		
 		if(idUsuario){
 			self.buscaPorId(idUsuario);
 			
