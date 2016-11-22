@@ -1,4 +1,4 @@
-app.controller('transferenciaEstoqueController', function($scope,transferenciaEstoqueService, saidaEstoqueService, produtoService, $routeParams, $timeout, $q, $log){
+app.controller('transferenciaEstoqueController', function($scope, $location, transferenciaEstoqueService, saidaEstoqueService, produtoService, $routeParams, $timeout, $q, $log){
 	
 	var self = this;
 	
@@ -10,6 +10,18 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 		self.totalSoma = 0;
 		var idEnviados = $routeParams.idEnviados;
 		var idRecebidos = $routeParams.idRecebidos;
+		
+		
+		
+		self.verificaStatus = function(){
+			console.log("status");
+			if(self.transferencia.statusTransferencia == "PENDENTE"){
+				$scope.status = true;
+			}else{
+				$scope.status = false;
+			}
+			
+		}
 		
 		self.lista = function(){
 			transferenciaEstoqueService.lista().
@@ -161,6 +173,27 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 			
 		};
 		
+		self.aceitaTransferencia = function(numeroNota){					 
+			transferenciaEstoqueService.aceitaTransferencia(numeroNota)
+			.then(function(response){	
+				$location.path("/almoxarifado/estoque/transferencia/recebidas");
+				}, function(errResponse){
+					
+			});
+			
+		};
+		
+		self.rejeitaTransferencia = function(numeroNota){					 
+			transferenciaEstoqueService.rejeitaTransferencia(numeroNota)
+			.then(function(response){		
+				$location.path("/almoxarifado/estoque/transferencia/recebidas");
+				}, function(errResponse){
+					
+			});
+			
+		};
+		
+		
 		self.limpaCampos = function(){
 			self.quantidadeEstoque = null;
 			self.quantidadeSaida = null;
@@ -172,7 +205,6 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 			transferenciaEstoqueService.buscaEnviados(id).
 			then(function(p){
 				self.transferencia = p;
-				console.log(self.transferencia);
 				for(i = 0; i < self.transferencia.itens.length; i++ ){
 					self.produto = self.transferencia.itens[i].produto;
 					self.quantidade = self.transferencia.itens[i].quantidade;
@@ -182,7 +214,8 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 							produto : self.produto,
 							quantidade : self.quantidade,
 							valorUnitario: self.valorUnitario
-					});console.log($scope.listaProdutos);
+					});
+				self.verificaStatus();
 			}
 			}, function(errResponse){
 			});
@@ -200,15 +233,26 @@ app.controller('transferenciaEstoqueController', function($scope,transferenciaEs
 			transferenciaEstoqueService.buscaRecebidos(id).
 			then(function(p){
 				self.transferencia = p;
+				for(i = 0; i < self.transferencia.itens.length; i++ ){
+					self.produto = self.transferencia.itens[i].produto;
+					self.quantidade = self.transferencia.itens[i].quantidade;
+					self.valorUnitario	= self.transferencia.itens[i].valorUnitario;
+					$scope.somaTotal(); 
+				$scope.listaProdutos.push({
+							produto : self.produto,
+							quantidade : self.quantidade,
+							valorUnitario: self.valorUnitario
+					});
+				self.verificaStatus();
+			}
 			}, function(errResponse){
 			});
 		};
-		
 		if(idEnviados){
 			self.buscaEnviados(idEnviados);
 		}
 		if(idRecebidos){
-			self.buscaRecebidosc(idRecebidos);
+			self.buscaRecebidos(idRecebidos);
 		}
 		
 		

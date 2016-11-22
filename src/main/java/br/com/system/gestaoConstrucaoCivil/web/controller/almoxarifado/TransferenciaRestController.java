@@ -60,5 +60,19 @@ public class TransferenciaRestController {
 		
 		return new ResponseEntity<Collection<Transferencia>>(transferenciaService.buscarTransferenciaEnviada(), HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/aceitar", method = RequestMethod.POST)
+	public ResponseEntity<Collection<Transferencia>> aceitar(@RequestBody Long numeroNota){
+		transferenciaService.aceitarTransferencia(numeroNota);
+		HttpHeaders headers =  new HttpHeaders();
+		return new ResponseEntity(headers, HttpStatus.CREATED);				
+	}
+	
+	@RequestMapping(value = "/rejeitar", method = RequestMethod.POST)
+	public ResponseEntity<Collection<Transferencia>> rejeitar(@RequestBody Long numeroNota){
+		transferenciaService.rejeitarTransferencia(numeroNota);
+		HttpHeaders headers =  new HttpHeaders();
+		return new ResponseEntity(headers, HttpStatus.CREATED);				
+	}
 
 }

@@ -18,8 +18,11 @@ app.controller('usuarioController', function($scope, toastr, $rootScope, usuario
 		usuarioService.user().
 			then(function(u){
 				$rootScope.user = u;
-				if($rootScope.user.usuario.empreendimento.tipoEmpreendimento = "CONDOMINIO_DE_EDIFICIO_RESIDENCIAL"){
+				if($rootScope.user.usuario.empreendimento.tipoEmpreendimento ==  "CONDOMINIO_DE_EDIFICIO_RESIDENCIAL"){
 					$rootScope.tipoEmpreendimento = true;
+					console.log($rootScope.tipoEmpreendimento);
+				}else{
+					$rootScope.tipoEmpreendimento = false;
 				}
 				}, function(errResponse){
 			});
