@@ -7,7 +7,11 @@ app.controller('cotacaoCompraController', function($scope,cotacaoCompraService, 
 		var idCotacaoAberta = $routeParams.idCotacaoAberta;
 	
 		self.salvaCotacaoEmpresa = function(cotacao , fornecedor, listaCotacao){
-			$scope.cotacaoEmpresa = {cotacao : cotacao, fornecedor : fornecedor, itens : listaCotacao};			
+			for(i = 0; i < listaCotacao.length ; i ++ ){
+				$scope.iten = {descricao : listaCotacao[i].descricao, quantidade : listaCotacao[i].quantidade};
+				$scope.itens = [{item : listaCotacao[i], valorUnitario : listaCotacao[i].valorUnitario, observacao : listaCotacao[i].observacao}];
+			} 
+			$scope.cotacaoEmpresa = {cotacao : cotacao, fornecedor : fornecedor, itens : $scope.itens };			
 			console.log($scope.cotacaoEmpresa);
 			cotacaoCompraService.salvaCotacaoEmpresa($scope.cotacaoEmpresa).
 			then(function(response){
