@@ -24,14 +24,14 @@ public class ItemCotacaoEmpresa implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cotacao_empresa_item_id_seq")
 	private Long id;
 
-/*	@ManyToOne
+	@ManyToOne
 	@JoinColumn(name = "id_item",nullable = false)
-	private ItemCotacao item;*/
+	private ItemCotacao item;
 	
-	@Column(name="descricao")
+	/*@Column(name="descricao")
 	private String descricao;
 	@Column(name="quantidade")
-	private Integer quantidade;
+	private Integer quantidade;*/
 	@Column(name="observacao")
 	private String observaocao;
 	@Column(nullable = false)
@@ -48,21 +48,21 @@ public class ItemCotacaoEmpresa implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-/*
+
 	public ItemCotacao getItem() {
 		return item;
 	}
 
 	public void setItem(ItemCotacao item) {
 		this.item = item;
-	}*/
+	}
 
 	
 	public Double getValorUnitario() {
 		return valorUnitario;
 	}
 
-	public String getDescricao() {
+	/*public String getDescricao() {
 		return descricao;
 	}
 
@@ -76,7 +76,7 @@ public class ItemCotacaoEmpresa implements Serializable {
 
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
-	}
+	}*/
 
 	public String getObservaocao() {
 		return observaocao;

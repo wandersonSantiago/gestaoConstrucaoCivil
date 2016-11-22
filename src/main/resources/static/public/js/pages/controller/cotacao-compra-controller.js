@@ -3,19 +3,21 @@ app.controller('cotacaoCompraController', function($scope,cotacaoCompraService, 
 		var self = this;
 		self.listaCotacao = [];
 		self.existe = true;	
+		$scope.visialuzarTable = true;
 		$scope.cotacaoEmpresa = [{cotacao : "", forncedeor : "", itens : ""}];
 		var idCotacaoAberta = $routeParams.idCotacaoAberta;
 	
 		self.salvaCotacaoEmpresa = function(cotacao , fornecedor, listaCotacao){
 			for(i = 0; i < listaCotacao.length ; i ++ ){
-				$scope.iten = {descricao : listaCotacao[i].descricao, quantidade : listaCotacao[i].quantidade};
+				/*$scope.iten = {descricao : listaCotacao[i].descricao, quantidade : listaCotacao[i].quantidade};*/
 				$scope.itens = [{item : listaCotacao[i], valorUnitario : listaCotacao[i].valorUnitario, observacao : listaCotacao[i].observacao}];
 			} 
 			$scope.cotacaoEmpresa = {cotacao : cotacao, fornecedor : fornecedor, itens : $scope.itens };			
 			console.log($scope.cotacaoEmpresa);
 			cotacaoCompraService.salvaCotacaoEmpresa($scope.cotacaoEmpresa).
 			then(function(response){
-				self.limpaCampos();					
+				self.limpaCampos();	
+				$scope.valorTotalCotacao = null;
 				}, function(errResponse){
 			});
 		}
