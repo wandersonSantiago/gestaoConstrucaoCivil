@@ -35,10 +35,10 @@
                   </li>                 
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="" ng-click="userCtrl.buscaPorId(user.usuario.id)" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-flat">Alterar senha</a>
+                      <a href="" ng-click="userCtrl.buscaPorId(user.usuario.id)" data-toggle="modal" data-target="#alteraSenha" class="btn btn-default btn-flat">Alterar senha</a>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                      <a href=""  ng-click="userCtrl.buscaPorId(user.usuario.id)" data-toggle="modal" data-target="#alteraEmpreendimento"  class="btn btn-default btn-flat">Alterar Empreend.</a>
                     </div>
                   </li>
                 </ul>
@@ -56,7 +56,7 @@
 	
 </header>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="usuarioController as userCtrl">
+<div class="modal fade" id="alteraSenha" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="usuarioController as userCtrl">
 				  <div class="modal-dialog" role="document" >
 				    <div class="modal-content">
 				      <div class="modal-header">
@@ -75,6 +75,36 @@
 								<input type="password" class="form-control" id="repitaSenha" ng-model="userCtrl.senhaRepitida" placeholder="Repita a Senha"
 									title="repita a senha" required>
 							</div>
+					      </div>
+					       
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" ng-click="userCtrl.altera()" class="btn btn-primary">Alterar</button>
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+				        
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				
+				
+				<div class="modal fade" id="alteraEmpreendimento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="usuarioController as userCtrl">
+				  <div class="modal-dialog" role="document" >
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">Alterar Empreendimento</h4>
+				      </div>
+				      <div class="modal-body">				      	
+				     		
+					      <div class="row">
+					      	<div  class="col-sm-12" ng-controller="empreendimentoController as empCtrl" ng-init="empCtrl.lista()">
+							<select class="form-control " ng-model="userCtrl.usuario.empreendimento" 
+								ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.tipoEmpreendimento for listarEmpreendimentos in empreendimentos"
+								style="width: 100%;" required>
+								<option  value="">--selecione o Empreendimento--</option>
+							</select>
+						</div>		
 					      </div>
 					       
 				      </div>

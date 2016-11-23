@@ -15,17 +15,53 @@
 			
 	
 		</div>
-			<input type="text" class="form-control"  ng-model="buscar" placeholder="buscar por descrição">
-			<table class="table table-hover table-bordered">
+		<div class="table-responsive">
+			<table class="table  table-bordered ">
 				<thead>
 					<tr>
 						 
-						<th>Código</th>
-						<th>Descrição</th>
-						<th>Categoria</th>
-						<th>Tipo</th>
-						<th>Unidade Medida</th>
-						<th>Fabricante</th>
+						<th>
+							<input type="text" class="form-control "  ng-model="buscar" placeholder="Código">
+						</th>
+						<th>
+							<input type="text" class="form-control"  ng-model="buscar" placeholder="Descrição">
+						</th>
+						<th>
+							<div  ng-controller="categoriaController as categoriaCtrl" ng-init="categoriaCtrl.lista()">
+								<select class="form-control " ng-model="buscar" 
+									ng-options="listaCategorias.descricao for listaCategorias in categoriaCtrl.categorias" 
+									  style=" width: 100%;"   required >
+										<option value="">Categoria</option>
+								</select>
+							</div>
+						</th>
+						<th>
+							<div ng-controller="tipoProdutoController as tipoProdutoCtrl" ng-init="tipoProdutoCtrl.lista()">
+								<select class="form-control " ng-model="buscar" 
+									ng-options="listaTipoProdutos.descricao for listaTipoProdutos in tipoProdutoCtrl.listaTipoProduto" 
+									  style=" width: 100%;" required >
+									<option value="">Tipo</option>
+								</select>
+							</div>
+						</th>
+						<th>
+							<div  ng-controller="unidadeMedidaController as unidadeCtrl" ng-init="unidadeCtrl.lista()">
+								<select class="form-control " ng-model="buscar" 
+									ng-options="listaunidadeMedidas for listaunidadeMedidas in unidadeCtrl.listaUnidadeMedida" 
+									  style=" width: 100%;" required >
+										<option value="">Unidade Medida</option>
+								</select>
+							</div>
+						</th>
+						<th>
+							<div  ng-controller="fabricanteController as fabricanteCtrl" ng-init="fabricanteCtrl.lista()">
+								<select class="form-control " ng-model="buscar" 
+									ng-options="listaFabricantes.dadoEmpresa.nomeFantasia for listaFabricantes in fabricanteCtrl.listaFabricante" 
+								 	 style=" width: 100%;" required >
+									<option value="">Fabricante</option>
+								</select>
+							</div>		
+						</th>
 						<th>quantidade Estoque</th>
 						<th>Custo médio</th>
 						<th>Valor Total</th>
@@ -55,6 +91,7 @@
 					
 				</tfoot>
 			</table>
+			</div>
 		</div>
 	</div>
 </div>
