@@ -32,7 +32,7 @@
 						<td>{{ user.nome }}</td>
 						<td>{{ user.email}}</td>
 						<td>{{ user.empreendimento.descricao}}</td>
-						<td>{{ user.dataCadastro.dayOfMonth }} /{{user.dataCadastro.monthValue }}/ {{user.dataCadastro.year }}</td>
+						<td>{{ user.dataCadastro | date : 'dd/MM/yyyy'}}</td>
 						
 						<td><a href="#/usuario/editar/{{user.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						<i class="glyphicon glyphicon-minus"></i>
