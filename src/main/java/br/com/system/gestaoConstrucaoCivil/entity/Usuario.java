@@ -3,7 +3,6 @@
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -13,13 +12,17 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Email;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import br.com.system.gestaoConstrucaoCivil.enuns.PerfilUsuarioEnum;
+import br.com.system.gestaoConstrucaoCivil.util.data.LocalDateDeserializer;
+import br.com.system.gestaoConstrucaoCivil.util.data.LocalDateSerializer;
 
 
 @Entity
@@ -51,6 +54,8 @@ public class Usuario extends AbstractPersistable<Long>{
 	private String senha;
 	@Column(nullable = false)
 	private boolean ativo;
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class)
 	private LocalDate dataCadastro;
 	
 	public Usuario()
