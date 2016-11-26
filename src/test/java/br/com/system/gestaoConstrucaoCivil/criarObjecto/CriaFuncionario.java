@@ -3,6 +3,7 @@ package br.com.system.gestaoConstrucaoCivil.criarObjecto;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class CriaFuncionario {
 	    funcionario.setAtivo(true);
 	    funcionario.setNomeCompleto("Jose da Silva");
 	    funcionario.setCpf("11111111");
-	    funcionario.setDataAdmissao(new Date());
+	    funcionario.setDataAdmissao(LocalDate.now());
 	    funcionario.setEndereco(new CriaEndereco().getEndereco());
 	    funcionario.setCarteiraTrabalho(21231);
 	    funcionario.setCargo(cargoService.buscarPorId(9999L));
@@ -43,15 +44,8 @@ public class CriaFuncionario {
 	    funcionario.setSexo("M");
 	    funcionario.setCrea(54887454);
 	    
-	    String strData = "1989-01-18";
-	    Date data = null;
-		try {
-			data = new SimpleDateFormat("yyyy-MM-dd").parse(strData);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	    funcionario.setDataNascimento(data);
+	    LocalDate data = LocalDate.of(1, 12, 1987);
+		funcionario.setDataNascimento(data);
 	}
     
 	public Funcionario getFuncionario()
