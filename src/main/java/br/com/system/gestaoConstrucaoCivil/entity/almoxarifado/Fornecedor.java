@@ -22,7 +22,7 @@ public class Fornecedor extends AbstractPersistable<Long> {
 	@Column(nullable = false)
 	private boolean ativo;
 	@JsonView(FornecedorFindControll.class)
-	@Column(nullable = false, length = 50)
+	@Column(nullable = true, length = 50)
 	private String contato;
 	@JsonView(FornecedorFindControll.class)
 	@Column(nullable = true, length = 50)
@@ -32,13 +32,7 @@ public class Fornecedor extends AbstractPersistable<Long> {
 	@OneToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST})
 	@JoinColumn(name = "id_dado_empresa", nullable = false)
 	private DadoEmpresa dadoEmpresa;
-
-/*	
-	@ManyToMany(cascade = CascadeType.ALL ,fetch = FetchType.LAZY)
-	@JoinTable(name = "produtos_fornecedores", joinColumns = @JoinColumn(name = "id_fornecedor"), 
-	inverseJoinColumns = @JoinColumn(name = "id_produto"))
-	private List<Produto> produtos;*/
-
+    
 	public String getContato() {
 		return contato;
 	}
@@ -70,13 +64,5 @@ public class Fornecedor extends AbstractPersistable<Long> {
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
 	}
-
-	/*public List<Produto> getProdutos() {
-		return produtos;
-	}
-
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
-	}*/
 
 }
