@@ -30,7 +30,7 @@
 						
 						<td>{{ empreendimento.descricao }}</td>
 						<td>{{ empreendimento.tipoEmpreendimento}}</td>
-						<td>{{ empreendimento.dataAbertura }}</td>
+						<td>{{ empreendimento.dataAbertura | date : 'dd/MM/yyyy'}}</td>
 						<td>{{ empreendimento.valorMaximoGastar | currency }}</td>
 						<td>{{ empreendimento.valoresGastos | currency }}</td>
 						<td><a href="#/empreendimento/empreendimento/editar/{{empreendimento.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 

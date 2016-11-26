@@ -32,7 +32,7 @@
 						
 						<td>{{lista.numeroRequisicao}}</td>
 						<td>{{lista.statusRequisicao}}</td>
-						<td>{{lista.dataSaida.dayOfMonth}}/{{lista.dataSaida.monthValue}}/{{lista.dataSaida.year}}</td>						
+						<td>{{lista.dataSaida | date : 'dd/MM/yyyy'}}</td>						
 					
 						<td><a href="#/almoxarifado/estoque/editar/{{lista.produto.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						

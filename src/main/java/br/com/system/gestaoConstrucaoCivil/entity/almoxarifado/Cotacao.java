@@ -2,7 +2,6 @@ package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -19,13 +18,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.enuns.StatusCotacao;
+import br.com.system.gestaoConstrucaoCivil.util.data.LocalDateDeserializer;
+import br.com.system.gestaoConstrucaoCivil.util.data.LocalDateSerializer;
 
 @Entity
 @SequenceGenerator(name = "cotacao_id_seq", sequenceName = "cotacao_id_seq", initialValue = 1, allocationSize = 1)
@@ -52,13 +53,16 @@ public class Cotacao implements Serializable{
 	private Empreendimento empreendimento;
 	
 	@JsonView(View.Summary.class)
-	@Temporal(TemporalType.DATE)
-	private Date dataLimite;
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class)
+	private LocalDate dataLimite;
 	
 	@JsonView(View.Summary.class)
 	@Enumerated(EnumType.STRING)
 	private StatusCotacao statusCotacao;
 	
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class)
 	private LocalDate dataCriacao;
 	
     public Long getId() {
@@ -93,11 +97,11 @@ public class Cotacao implements Serializable{
 		this.empreendimento = empreendimento;
 	}
 
-	public Date getDataLimite() {
+	public LocalDate getDataLimite() {
 		return dataLimite;
 	}
 
-	public void setDataLimite(Date dataLimite) {
+	public void setDataLimite(LocalDate dataLimite) {
 		this.dataLimite = dataLimite;
 	}
    

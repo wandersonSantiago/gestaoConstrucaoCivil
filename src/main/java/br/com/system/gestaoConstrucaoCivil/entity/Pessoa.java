@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -16,11 +17,13 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import br.com.system.gestaoConstrucaoCivil.enuns.EstadoCivilEnum;
-import br.com.system.gestaoConstrucaoCivil.enuns.UfEnum;
+import br.com.system.gestaoConstrucaoCivil.util.data.LocalDateDeserializer;
+import br.com.system.gestaoConstrucaoCivil.util.data.LocalDateSerializer;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -47,9 +50,10 @@ public abstract class Pessoa implements Serializable{
 	protected String telefoneFixo;
 	@Column(nullable = false,length = 15)
 	protected String telefoneCelular;
-	@Temporal(TemporalType.DATE)
-	@Column(nullable = false)
-	protected Date dataNascimento;
+
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class)
+	protected LocalDate dataNascimento;
 	@Column(nullable = false)
 	protected String sexo;
 	@Column(nullable = true)
@@ -98,10 +102,10 @@ public abstract class Pessoa implements Serializable{
 	public void setTelefoneCelular(String telefoneCelular) {
 		this.telefoneCelular = telefoneCelular;
 	}
-	public Date getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 	public Long getId() {

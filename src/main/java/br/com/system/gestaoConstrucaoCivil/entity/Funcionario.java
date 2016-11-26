@@ -2,15 +2,20 @@ package br.com.system.gestaoConstrucaoCivil.entity;
 
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import br.com.system.gestaoConstrucaoCivil.util.data.LocalDateDeserializer;
+import br.com.system.gestaoConstrucaoCivil.util.data.LocalDateSerializer;
 
 @Entity
 @Table(name = "funcionario")
@@ -19,9 +24,10 @@ public class Funcionario  extends Pessoa implements Serializable{
 
 	@Column(nullable = false)
 	private Integer carteiraTrabalho;
-	@Column(nullable = false)
-	@Temporal(TemporalType.DATE)
-	private Date dataAdmissao;
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class)
+	private LocalDate dataAdmissao;
+	
 	@ManyToOne
 	@JoinColumn(name="id_empreendimento",nullable = true)
 	private Empreendimento empreendimento;
@@ -39,10 +45,10 @@ public class Funcionario  extends Pessoa implements Serializable{
 	public void setCarteiraTrabalho(Integer carteiraTrabalho) {
 		this.carteiraTrabalho = carteiraTrabalho;
 	}
-	public Date getDataAdmissao() {
+	public LocalDate  getDataAdmissao() {
 		return dataAdmissao;
 	}
-	public void setDataAdmissao(Date dataAdmissao) {
+	public void setDataAdmissao(LocalDate dataAdmissao) {
 		this.dataAdmissao = dataAdmissao;
 	}
 	public Empreendimento getEmpreendimento() {

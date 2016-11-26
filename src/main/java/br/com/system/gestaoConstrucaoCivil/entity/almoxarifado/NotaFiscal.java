@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -18,10 +19,14 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.enuns.Situacao;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
+import br.com.system.gestaoConstrucaoCivil.util.data.LocalDateDeserializer;
+import br.com.system.gestaoConstrucaoCivil.util.data.LocalDateSerializer;
 
 
 @Entity
@@ -49,12 +54,14 @@ public class NotaFiscal implements Serializable {
     @JoinColumn(name="id_empreendimento",nullable = true)
     private Empreendimento empreendimento;
     
-	@Temporal(TemporalType.DATE)
-	private Date dataNota;
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class)
+	private LocalDate dataNota;
 	
 	@JsonView(View.Summary.class)
-	@Temporal(TemporalType.DATE)
-	private Date dataVencimento;
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class)
+	private LocalDate dataVencimento;
 
 	@Column(nullable = true)
 	private String observacao;
@@ -86,19 +93,19 @@ public class NotaFiscal implements Serializable {
 		this.numero = numero;
 	}
 
-	public Date getDataNota() {
+	public LocalDate getDataNota() {
 		return dataNota;
 	}
 
-	public void setDataNota(Date dataNota) {
+	public void setDataNota(LocalDate dataNota) {
 		this.dataNota = dataNota;
 	}
 
-	public Date getDataVencimento() {
+	public LocalDate getDataVencimento() {
 		return dataVencimento;
 	}
 
-	public void setDataVencimento(Date dataVencimento) {
+	public void setDataVencimento(LocalDate dataVencimento) {
 		this.dataVencimento = dataVencimento;
 	}
 

@@ -1,7 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
+import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +36,7 @@ public class TransferenciaService {
 		transferencia.setStatusTransferencia(StatusTransferencia.PENDENTE);
 		transferencia.getNotaFiscal().setSituacao(Situacao.OK);
 		transferencia.getNotaFiscal().setTipoNota(TipoNotaEnum.TRANSFERENCIA_ESTOQUE_EMPREENDIMENTO);
-		transferencia.getNotaFiscal().setDataNota(new Date());
+		transferencia.getNotaFiscal().setDataNota(LocalDate.now());
 		transferencia.getNotaFiscal().setNumero(new GeraCodigo(100000,9999999).gerarNumeroTransferencia().longValue());
 		
 		Empreendimento empreendimentoSaida = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
