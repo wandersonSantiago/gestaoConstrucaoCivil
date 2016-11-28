@@ -10,6 +10,7 @@ public enum PerfilUsuarioEnum {
 	COTACAO_CONSULTA("consulta cotação"),
 	COMPRAS_CADASTRO("cadastro de compras"),	
 	CARGO_CONSULTA("consulta de cargo "),
+	CARGO_CADASTRO("Cadastro de cargo"),
 	GESTOR("gestor");
 	
 	 private String descricao;

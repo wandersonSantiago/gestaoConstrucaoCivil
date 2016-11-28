@@ -10,4 +10,6 @@ public interface RequisicaoRepository extends JpaRepository<Requisicao, Long>{
 
 	@Query("SELECT CASE WHEN COUNT(numeroRequisicao) > 0 THEN true ELSE false END FROM Requisicao r WHERE r.numeroRequisicao = :numeroRequisicao")
 	boolean existeNnumeroRequisicao(@Param("numeroRequisicao") Integer numeroRequisicao);
+	
+	Requisicao findByNumeroRequisicao(Integer numeroRequisicao);
 }

@@ -6,10 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name = "requisicao_casa")
-public class RequisicaoCasa extends Requisicao implements Serializable{
+@Table(name = "requisicao_casa_item")
+public class RequisicaoCasaItem extends RequisicaoItem implements Serializable {
+
 
 	@Column(nullable = false)
 	private Integer andar;
@@ -31,7 +31,5 @@ public class RequisicaoCasa extends Requisicao implements Serializable{
 
 	public void setCasa(Integer casa) {
 		this.casa = casa;
-	}
-	
-	
+}
 }

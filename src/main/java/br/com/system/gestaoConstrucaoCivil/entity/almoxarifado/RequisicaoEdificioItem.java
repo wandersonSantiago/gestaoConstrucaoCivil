@@ -3,19 +3,17 @@ package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
-
 import javax.persistence.Table;
 
-
-
 @Entity
-@Table(name = "requisicao_edificio")
-public class RequisicaoEdificio  extends  Requisicao implements Serializable{
+@Table(name = "requisicao_edificio_item")
+public class RequisicaoEdificioItem extends RequisicaoItem  implements Serializable{
 
 	
 	private Integer andar;
 	private Integer torre;
 	private Integer apartamento;
+	
 	
 	public Integer getAndar() {
 		return andar;
@@ -35,5 +33,7 @@ public class RequisicaoEdificio  extends  Requisicao implements Serializable{
 	public void setApartamento(Integer apartamento) {
 		this.apartamento = apartamento;
 	}
+	
+	
 	
 }

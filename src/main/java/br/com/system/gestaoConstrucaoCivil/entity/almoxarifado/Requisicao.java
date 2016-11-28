@@ -12,23 +12,18 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.View.Summary;
 import br.com.system.gestaoConstrucaoCivil.enuns.StatusRequisicao;
 import br.com.system.gestaoConstrucaoCivil.util.GeraCodigo;
-import br.com.system.gestaoConstrucaoCivil.util.data.LocalDateDeserializer;
-import br.com.system.gestaoConstrucaoCivil.util.data.LocalDateSerializer;
 
 
 @Entity
@@ -36,41 +31,40 @@ import br.com.system.gestaoConstrucaoCivil.util.data.LocalDateSerializer;
 sequenceName = "requisicao_id_seq",
 initialValue = 1,
 allocationSize = 1)
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public  abstract class Requisicao implements Serializable{
+@Table(name = "requisicao")
+public class Requisicao implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "requisicao_id_seq")
-	protected Long id;
+	private Long id;
 	
 	@JsonView(Summary.class)
 	@Column(name = "numero_requisicao")
-	protected Integer numeroRequisicao;
+	private Integer numeroRequisicao;
 	
 	@JsonView(Summary.class)
 	@OneToMany(mappedBy = "requisicao", cascade = CascadeType.ALL)
-	protected List<ItemRequisicao> item;
+	protected List<RequisicaoItem> item;
 	
+
 	@JsonView(Summary.class)
-	@JsonDeserialize(using = LocalDateDeserializer.class)  
-	@JsonSerialize(using = LocalDateSerializer.class)
-	protected LocalDate dataSaida;
+	private LocalDate dataSaida;
 	
 	@JsonView(Summary.class)
     @Enumerated(EnumType.STRING)
-	protected StatusRequisicao statusRequisicao;
+	private StatusRequisicao statusRequisicao;
 	
     @ManyToOne
     @JoinColumn(name="id_empreendimento")
-    protected Empreendimento empreendimento;
+    private Empreendimento empreendimento;
+   	
    	
     public Requisicao()
     {
     	this.statusRequisicao = StatusRequisicao.PENDENTE;
         GeraCodigo gerar = new GeraCodigo(100000,999999);
 		this.numeroRequisicao = gerar.gerarNumeroRequisicao();
-		
-    }
+	}
     public Long getId() {
 		return id;
 	}
@@ -84,17 +78,22 @@ public  abstract class Requisicao implements Serializable{
 	public void setNumeroRequisicao(Integer numeroRequisicao) {
 		this.numeroRequisicao = numeroRequisicao;
 	}
-	public List<ItemRequisicao> getItem() {
+	public List<RequisicaoItem> getItem() {
 		return item;
 	}
-	public void setItem(List<ItemRequisicao> item) {
+	public void setItem(List<RequisicaoItem> item) {
 		this.item = item;
 	}
-    public LocalDate getDataSaida() {
-		return dataSaida;
-	}
+    
 	public StatusRequisicao getStatusRequisicao() {
 		return statusRequisicao;
+	}
+	
+	public LocalDate getDataSaida() {
+		return dataSaida;
+	}
+	public void setDataSaida(LocalDate dataSaida) {
+		this.dataSaida = dataSaida;
 	}
 	public void setStatusRequisicao(StatusRequisicao statusRequisicao) {
 		this.statusRequisicao = statusRequisicao;
@@ -105,7 +104,6 @@ public  abstract class Requisicao implements Serializable{
 	public void setEmpreendimento(Empreendimento empreendimento) {
 		this.empreendimento = empreendimento;
 	}
-	
 	
 	@Override
 	public int hashCode() {

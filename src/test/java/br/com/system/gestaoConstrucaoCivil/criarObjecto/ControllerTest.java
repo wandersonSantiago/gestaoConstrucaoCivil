@@ -1,7 +1,9 @@
 
 package br.com.system.gestaoConstrucaoCivil.criarObjecto;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +15,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
 import br.com.system.gestaoConstrucaoCivil.GestaoConstrucaoCivilApplication;
-import br.com.system.gestaoConstrucaoCivil.entity.EmpresaContratante;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.RequisicaoItem;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.RequisicaoEdificioItem;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Requisicao;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.RequisicaoCasaItem;
+import br.com.system.gestaoConstrucaoCivil.enuns.StatusRequisicao;
+import br.com.system.gestaoConstrucaoCivil.repository.AreaRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.CargoRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.CategoriaRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.DadoEmpresaRepository;
@@ -24,6 +31,7 @@ import br.com.system.gestaoConstrucaoCivil.repository.FuncionarioRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.PessoaRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.FornecedorRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.ProdutoRepository;
+import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.RequisicaoRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.servicos.PrestadoraServicoRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -55,22 +63,53 @@ public class ControllerTest {
 	private ProdutoRepository protudoRepository;
 
 	@Autowired
-	private EmpresaContratanteRepository empresaContratanteRepository; 
+	private AreaRepository areaRepository;
+	
+	@Autowired
+	private EmpresaContratanteRepository empresaContratanteRepository;
+	@Autowired
+	private RequisicaoRepository requisicaoRepository;
 	
 	private RestTemplate restTemplate = new TestRestTemplate();
 
 	
 	@Test 
-	public void teste()
+	public void teste2()
 	{
-	    ArrayList<EmpresaContratante> l = new ArrayList<>();
+		Requisicao r = new Requisicao();
+		r.setEmpreendimento(empreendimentoRepository.findAll().get(0));
+	    r.setDataSaida(LocalDate.now());
 		
-	    for(int i = 0; i < 3000 ;i++)
-	    {
-	    	System.out.println(i);
-	    	l.add(new CriaEmpresaContratante().getEmpresaContratante());
-	    }
-	    empresaContratanteRepository.save(l);
+	    /*RequisicaoEdificioItem itemEdificio = new RequisicaoEdificioItem();
+		
+		itemEdificio.setAndar(10);
+		itemEdificio.setApartamento(14);
+		itemEdificio.setTorre(3);
+		
+		itemEdificio.setProduto(protudoRepository.findOne(53L));
+		itemEdificio.setQuantidade(100);
+		itemEdificio.setValorUnitario(10.3);
+		itemEdificio.setAreaProduto(areaRepository.findAll().get(0));
+		itemEdificio.setRequisicao(r);*/
+		
+	    RequisicaoCasaItem itemCasa = new RequisicaoCasaItem();
+	    
+	    itemCasa.setAndar(2);
+	    itemCasa.setCasa(10);
+	    itemCasa.setProduto(protudoRepository.findOne(53L));
+	    itemCasa.setQuantidade(200);
+	    itemCasa.setValorUnitario(20.1);
+	    itemCasa.setAreaProduto(areaRepository.findAll().get(0));
+	    itemCasa.setRequisicao(r);
+	    
+		List<RequisicaoItem> listaItemRequisicao  = new ArrayList<>();
+		
+		//listaItemRequisicao.add(itemEdificio);
+		listaItemRequisicao.add(itemCasa);
+		r.setItem(listaItemRequisicao);
+		
+		requisicaoRepository.save(r);
+      		
 	}
 	/*
 	 * @Test public void testeCriarCategoriaAPI() throws JsonProcessingException
