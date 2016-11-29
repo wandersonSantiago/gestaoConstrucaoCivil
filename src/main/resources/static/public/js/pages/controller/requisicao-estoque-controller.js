@@ -6,7 +6,7 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 		self.baixaEstoque = [];
 		self.listaProdutos = [];
 		$scope.listaProdutos = [];
-		self.requisicaoEdificio = [];
+		self.requisicao = [];
 		self.produto = [];
 		self.produtos = [];
 		self.objeto = [];
@@ -160,11 +160,11 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 			
 		
 		
-		self.salvaEdificio = function(){
-			self.requisicaoEdificio = self.objeto;
-			self.requisicaoEdificio.item = self.listaProduto;
-			console.log(self.requisicaoEdificio );
-			requisicaoEstoqueService.salvaEdificio(self.requisicaoEdificio)
+		self.salvaEdificio = function(){		
+			//var requisicaoEdificioItem = {requisicaoEdificioItem : self.listaProduto};
+			self.requisicao = {requisicaoEdificioItem : self.listaProduto};
+			console.log(self.requisicao);
+			requisicaoEstoqueService.salvaEdificio(self.requisicao)
 			.then($timeout(function(response){
 				self.listaProdutosComEstoque();
 				self.limpaCampo();

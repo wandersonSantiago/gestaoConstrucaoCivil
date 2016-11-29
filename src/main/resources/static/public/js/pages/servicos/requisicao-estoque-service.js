@@ -3,7 +3,7 @@ app.factory('requisicaoEstoqueService', function($rootScope, toastr, $http,$q){
 	
 	return{
 		salvaEdificio: function(requisicaoEstoque){	
-			return $http.post('/rest/almoxarifado/estoque/requisicaoEdificio/salva', requisicaoEstoque)
+			return $http.post('/rest/almoxarifado/estoque/requisicao/salva', requisicaoEstoque)
 			.then(function(response){
 				sweetAlert({ timer : 10000, text :"Saida realizada com sucesso!!!", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
