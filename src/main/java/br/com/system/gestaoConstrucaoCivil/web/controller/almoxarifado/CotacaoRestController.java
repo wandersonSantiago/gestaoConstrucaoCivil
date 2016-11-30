@@ -26,7 +26,7 @@ public class CotacaoRestController {
 	private CotacaoService cotacaoService;
 	
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
-	public ResponseEntity<Cotacao> salva(@RequestBody Cotacao cotacao){
+	public ResponseEntity<Cotacao> salvar(@RequestBody Cotacao cotacao){
 	
 		cotacaoService.salvaAltera(cotacao);
 		HttpHeaders headers =  new HttpHeaders();
@@ -35,14 +35,14 @@ public class CotacaoRestController {
 	
 	@JsonView(View.Summary.class)
 	@RequestMapping(value = "/lista", method = RequestMethod.GET)
-	public ResponseEntity<Collection<Cotacao>> lista(){
+	public ResponseEntity<Collection<Cotacao>> buscarTodos(){
 		
 		Collection<Cotacao> cotacao = cotacaoService.buscarTodos(); 
 		return new ResponseEntity<Collection<Cotacao>>(cotacao, HttpStatus.OK);
 	}
 	@JsonView(View.Summary.class)
 	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Cotacao> buscarCotacaoPorId(@PathVariable Long id) {
+	public ResponseEntity<Cotacao> buscarPorId(@PathVariable Long id) {
 
 		return new ResponseEntity<Cotacao>(cotacaoService.buscaPorId(id), HttpStatus.OK);
 	}

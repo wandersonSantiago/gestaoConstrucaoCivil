@@ -19,10 +19,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 import br.com.system.gestaoConstrucaoCivil.enuns.PerfilUsuarioEnum;
-import br.com.system.gestaoConstrucaoCivil.enuns.UfEnum;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.service.UsuarioService;
-
 
 @RestController
 @RequestMapping("/rest/usuario")
@@ -31,58 +29,56 @@ public class UsuarioRestController {
 	@Autowired
 	private UsuarioService usuarioService;
 
-	@RequestMapping(value="/usuario")
+	@RequestMapping(value = "/usuario")
 	@ResponseBody
 	public Principal user(Principal user, HttpSession session) {
 
 		return user;
 	}
-	
-    @RequestMapping(method = RequestMethod.GET, value="/lista")
-	 public ResponseEntity<Iterable<Usuario>> buscarUsuarios() {	  
-	  System.out.println("lista ok");
-	  Iterable<Usuario> usuario = usuarioService.buscarTodos();
-	  return new ResponseEntity<Iterable<Usuario>>(usuario, HttpStatus.OK);
-	 }
-	 
-	 
-	 @RequestMapping(method = RequestMethod.POST, value="/salva")
-	 public ResponseEntity<Usuario> salva(@RequestBody Usuario usuario,UriComponentsBuilder ucBuilder){
-		 usuarioService.salvarOuEditar(usuario);
-		 HttpHeaders headers =new HttpHeaders();
-		 headers.setLocation(ucBuilder.path("/rest/usuario/salva/{id}").buildAndExpand(usuario.getId()).toUri());
-		 return new ResponseEntity<Usuario>(headers, HttpStatus.CREATED);
-	 }
 
-	 @RequestMapping(method = RequestMethod.PUT, value="/altera")
-	 public ResponseEntity<Usuario> alterarUsuario(@RequestBody Usuario usuario,UriComponentsBuilder ucBuilder){
-		 usuarioService.salvarOuEditar(usuario);
-		 HttpHeaders headers =new HttpHeaders();
-		 headers.setLocation(ucBuilder.path("/rest/usuario/altera/{id}").buildAndExpand(usuario.getId()).toUri());
-		 return new ResponseEntity<Usuario>(headers, HttpStatus.CREATED);
-	 }
+	@RequestMapping(method = RequestMethod.GET, value = "/lista")
+	public ResponseEntity<Iterable<Usuario>> buscarUsuarios() {
 
-	 
-	 @RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
-		public ResponseEntity<Usuario> buscarUsuarioPorId(@PathVariable Long id) {
-			return new ResponseEntity<Usuario>(usuarioService.buscarUsuarioPorId(id), HttpStatus.OK);
-		}
-	 @RequestMapping(value = "/existeLogin/{login}", method = RequestMethod.GET)
-	 public ResponseEntity<Usuario> verificarSeExisteLogin(@PathVariable String login) {
-			return new ResponseEntity(usuarioService.existeLoginCadastrado(login), HttpStatus.OK);
-		}
-	 
-	 
-		@RequestMapping(method = RequestMethod.GET, value = "/perfil")
-		public ResponseEntity<Iterable<PerfilUsuarioEnum>> uf() {
-	
-			Iterable<PerfilUsuarioEnum> perfil = Arrays.asList(PerfilUsuarioEnum.values());
-			return new ResponseEntity<Iterable<PerfilUsuarioEnum>>(perfil, HttpStatus.OK);
-		}
-	 
-   @RequestMapping("/usuarios")
-		public ResponseEntity<?> user(SessionUsuario user, HttpSession session) {
-		
-			return new ResponseEntity<>(user, HttpStatus.OK);
-		}
+		Iterable<Usuario> usuario = usuarioService.buscarTodos();
+		return new ResponseEntity<Iterable<Usuario>>(usuario, HttpStatus.OK);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = "/salva")
+	public ResponseEntity<Usuario> salva(@RequestBody Usuario usuario, UriComponentsBuilder ucBuilder) {
+		usuarioService.salvarOuEditar(usuario);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setLocation(ucBuilder.path("/rest/usuario/salva/{id}").buildAndExpand(usuario.getId()).toUri());
+		return new ResponseEntity<Usuario>(headers, HttpStatus.CREATED);
+	}
+
+	@RequestMapping(method = RequestMethod.PUT, value = "/altera")
+	public ResponseEntity<Usuario> alterar(@RequestBody Usuario usuario, UriComponentsBuilder ucBuilder) {
+		usuarioService.salvarOuEditar(usuario);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setLocation(ucBuilder.path("/rest/usuario/altera/{id}").buildAndExpand(usuario.getId()).toUri());
+		return new ResponseEntity<Usuario>(headers, HttpStatus.CREATED);
+	}
+
+	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Usuario> buscarPorId(@PathVariable Long id) {
+		return new ResponseEntity<Usuario>(usuarioService.buscarUsuarioPorId(id), HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/existeLogin/{login}", method = RequestMethod.GET)
+	public ResponseEntity<Usuario> verificarSeExisteLogin(@PathVariable String login) {
+		return new ResponseEntity(usuarioService.existeLoginCadastrado(login), HttpStatus.OK);
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/perfil")
+	public ResponseEntity<Iterable<PerfilUsuarioEnum>> uf() {
+
+		Iterable<PerfilUsuarioEnum> perfil = Arrays.asList(PerfilUsuarioEnum.values());
+		return new ResponseEntity<Iterable<PerfilUsuarioEnum>>(perfil, HttpStatus.OK);
+	}
+
+	@RequestMapping("/usuarios")
+	public ResponseEntity<?> user(SessionUsuario user, HttpSession session) {
+
+		return new ResponseEntity<>(user, HttpStatus.OK);
+	}
 }

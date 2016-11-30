@@ -23,7 +23,7 @@ public class EstoqueEmpreendimentoRestController {
 	
 	
 	@RequestMapping(value = "/alteraProduto", method = RequestMethod.PUT)
-	public ResponseEntity<CotacaoEmpresa> salva(@RequestBody EstoqueEmpreendimento estoqueEmpreendimento){
+	public ResponseEntity<CotacaoEmpresa> salvar(@RequestBody EstoqueEmpreendimento estoqueEmpreendimento){
 		estoqueService.salvarOuEditar(estoqueEmpreendimento);
 		HttpHeaders headers =  new HttpHeaders();
 		return new ResponseEntity(headers, HttpStatus.CREATED);				

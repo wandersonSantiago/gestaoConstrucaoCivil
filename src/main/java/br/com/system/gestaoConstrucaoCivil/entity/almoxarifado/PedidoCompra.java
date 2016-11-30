@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.util.data.LocalDateDeserializer;
 import br.com.system.gestaoConstrucaoCivil.util.data.LocalDateSerializer;
 
@@ -33,10 +35,16 @@ public class PedidoCompra implements Serializable{
 	private Long id;
 	
 	@OneToMany(mappedBy = "pedidoCompra", cascade = CascadeType.ALL)
-	private List<ItemPedido> itens;
+	private List<PedidoItem> itens;
 	@ManyToOne
 	private Fornecedor fornecedor;
     
+	@Column(name = "numeroPedido")
+	private Integer numeroPedido;
+	
+	@ManyToOne
+	private Empreendimento empreendimento;
+	
 	@JsonDeserialize(using = LocalDateDeserializer.class)  
 	@JsonSerialize(using = LocalDateSerializer.class)
 	private LocalDate previsao;
@@ -48,11 +56,11 @@ public class PedidoCompra implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-    public List<ItemPedido> getItens() {
+    public List<PedidoItem> getItens() {
 		return itens;
 	}
 
-	public void setItens(List<ItemPedido> itens) {
+	public void setItens(List<PedidoItem> itens) {
 		this.itens = itens;
 	}
 
@@ -70,6 +78,22 @@ public class PedidoCompra implements Serializable{
 
 	public void setPrevisao(LocalDate previsao) {
 		this.previsao = previsao;
+	}
+    
+	public Integer getNumeroPedido() {
+		return numeroPedido;
+	}
+
+	public void setNumeroPedido(Integer numeroPedido) {
+		this.numeroPedido = numeroPedido;
+	}
+
+	public Empreendimento getEmpreendimento() {
+		return empreendimento;
+	}
+
+	public void setEmpreendimento(Empreendimento empreendimento) {
+		this.empreendimento = empreendimento;
 	}
 
 	@Override

@@ -21,17 +21,14 @@ public class ServicoEmpresaRestController {
 	 private ServicoEmpresaService servicoService;
 	
 	 @RequestMapping(method = RequestMethod.GET, value="/lista")
-	 public ResponseEntity<Iterable<ServicoEmpresa>> buscarServico() {	  
+	 public ResponseEntity<Iterable<ServicoEmpresa>> buscarTodos() {	  
 	  Iterable<ServicoEmpresa> servico = servicoService.buscarTodos();
 	  return new ResponseEntity<Iterable<ServicoEmpresa>>(servico, HttpStatus.OK);
 	 }
 	 
 	 @RequestMapping( value="/salva", method = RequestMethod.POST)
-	 public ResponseEntity salva(@RequestBody ServicoEmpresa servico,UriComponentsBuilder ucBuilder)
+	 public ResponseEntity salvar(@RequestBody ServicoEmpresa servico,UriComponentsBuilder ucBuilder)
 	 {
-		 System.out.println(servico.getPacoteServico().getDescricao());
-		 System.out.println(servico.getPrestadoraServico().getDadoEmpresa().getNomeFantasia());
-		
 		 servicoService.salvarOuEditar(servico);
 		 HttpHeaders headers = new HttpHeaders();
 		 headers.setLocation(ucBuilder.path("/rest/servico/vincular/salva/{id}").buildAndExpand(servico.getId()).toUri());

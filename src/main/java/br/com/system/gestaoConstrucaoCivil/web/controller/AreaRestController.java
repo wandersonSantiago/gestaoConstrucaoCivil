@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.system.gestaoConstrucaoCivil.entity.AreaProduto;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Fornecedor;
 import br.com.system.gestaoConstrucaoCivil.service.AreaService;
 
 @RestController
@@ -23,7 +22,7 @@ public class AreaRestController  {
 	private AreaService areaService;
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/lista")
-	public ResponseEntity<Iterable<AreaProduto>> buscarAreas()
+	public ResponseEntity<Iterable<AreaProduto>> buscarTodos()
 	{
 		Iterable<AreaProduto> areaProduto = areaService.buscarTodos();
 		return new ResponseEntity<Iterable<AreaProduto>>(areaProduto, HttpStatus.OK);
@@ -36,7 +35,7 @@ public class AreaRestController  {
 	}
 	
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
-	public ResponseEntity salvarArea(@RequestBody AreaProduto areaProduto,UriComponentsBuilder ucBuilder)
+	public ResponseEntity salvar(@RequestBody AreaProduto areaProduto,UriComponentsBuilder ucBuilder)
 	{
 		areaService.salvarOuEditar(areaProduto);
 		HttpHeaders headers = new HttpHeaders();
@@ -45,7 +44,7 @@ public class AreaRestController  {
 	}
 	
 	@RequestMapping(value = "/altera", method = RequestMethod.PUT)
-	public ResponseEntity alterarArea(@RequestBody AreaProduto areaProduto, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity alterar(@RequestBody AreaProduto areaProduto, UriComponentsBuilder ucBuilder) {
 		areaService.salvarOuEditar(areaProduto);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("rest/almoxarifado/area/altera/{area}").buildAndExpand(areaProduto.getId()).toUri());

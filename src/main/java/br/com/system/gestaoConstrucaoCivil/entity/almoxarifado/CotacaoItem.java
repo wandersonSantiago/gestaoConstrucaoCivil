@@ -17,8 +17,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @SequenceGenerator(name = "item_cotacao_id_seq", sequenceName = "item_cotacao_id_seq", initialValue = 1, allocationSize = 1)
-@Table(name = "item_cotacao")
-public class ItemCotacao implements Serializable {
+@Table(name = "cotacao_item")
+public class CotacaoItem implements Serializable {
 
 	@JsonView(View.Summary.class)
     @Id	

@@ -9,8 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "item_nota_fiscal")
-public class ItemNotaFiscal  extends Item implements Serializable  {
+@Table(name = "nota_fiscal_item")
+public class NotaFiscalItem  extends Item implements Serializable  {
 
 	
 	@Column(nullable = false)

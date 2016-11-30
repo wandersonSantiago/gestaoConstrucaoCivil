@@ -20,28 +20,28 @@ import br.com.system.gestaoConstrucaoCivil.service.ConfigEmpreendimentoOutrosSer
 @RequestMapping("/rest/empreendimento/configuracao")
 public class ConfigEmpreendimentoOutrosRestController {
 
-	
-	  
-    @Autowired
-    ConfigEmpreendimentoOutrosService configEmpreeendimentoOutrosService;
-     
-     
-    @RequestMapping(value = "/salvaOutros", method = RequestMethod.POST)
-    public ResponseEntity salvarConfigEmpreendimento(@RequestBody List<ConfigEmpreendimentoOutros> configEmpreendimentoOutros, UriComponentsBuilder ucBuilder) {
-    	configEmpreeendimentoOutrosService.salvarOuEditar(configEmpreendimentoOutros);
-        HttpHeaders headers = new HttpHeaders();
-          return new ResponseEntity(headers, HttpStatus.CREATED);
-    }
-     
-    @RequestMapping(method = RequestMethod.GET, value = "/listaOutros")
-    public ResponseEntity<Iterable<ConfigEmpreendimentoOutros>> buscarConfigEmpreendimento() {
-    	Iterable<ConfigEmpreendimentoOutros> configEmpreendimentoOutros = configEmpreeendimentoOutrosService.buscarTodos();
-        return new ResponseEntity<Iterable<ConfigEmpreendimentoOutros>>(configEmpreendimentoOutros, HttpStatus.OK);
-    }
-     
-    @RequestMapping(value = "/buscaOutrosPorId/{id}", method = RequestMethod.GET)
-    public ResponseEntity<ConfigEmpreendimentoOutros> buscarConfigEmpreendimentoPorId(@PathVariable Long id) {
-        return new ResponseEntity<ConfigEmpreendimentoOutros>(configEmpreeendimentoOutrosService.buscarPorId(id), HttpStatus.OK);
-    }
-    
+	@Autowired
+	private ConfigEmpreendimentoOutrosService configEmpreeendimentoOutrosService;
+
+	@RequestMapping(value = "/salvaOutros", method = RequestMethod.POST)
+	public ResponseEntity salvar(@RequestBody List<ConfigEmpreendimentoOutros> configEmpreendimentoOutros,
+			UriComponentsBuilder ucBuilder) {
+		configEmpreeendimentoOutrosService.salvarOuEditar(configEmpreendimentoOutros);
+		HttpHeaders headers = new HttpHeaders();
+		return new ResponseEntity(headers, HttpStatus.CREATED);
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/listaOutros")
+	public ResponseEntity<Iterable<ConfigEmpreendimentoOutros>> buscarTodos() {
+		Iterable<ConfigEmpreendimentoOutros> configEmpreendimentoOutros = configEmpreeendimentoOutrosService
+				.buscarTodos();
+		return new ResponseEntity<Iterable<ConfigEmpreendimentoOutros>>(configEmpreendimentoOutros, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/buscaOutrosPorId/{id}", method = RequestMethod.GET)
+	public ResponseEntity<ConfigEmpreendimentoOutros> buscarPorId(@PathVariable Long id) {
+		return new ResponseEntity<ConfigEmpreendimentoOutros>(configEmpreeendimentoOutrosService.buscarPorId(id),
+				HttpStatus.OK);
+	}
+
 }

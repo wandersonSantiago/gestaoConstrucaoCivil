@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.CotacaoEmpresa;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.ItemCotacaoEmpresa;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.CotacaoEmpresaItem;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.CotacaoEmpresaRepository;
 
 @Service
@@ -21,7 +21,7 @@ public class CotacaoEmpresaService {
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(CotacaoEmpresa cotacaoEmpresa) {
 		
-		for(ItemCotacaoEmpresa item : cotacaoEmpresa.getItens())
+		for(CotacaoEmpresaItem item : cotacaoEmpresa.getItens())
 		{
 			item.setId(null);
 			item.setCotacaoEmpresa(cotacaoEmpresa);

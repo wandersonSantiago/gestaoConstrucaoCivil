@@ -23,19 +23,19 @@ public class FabricanteRestController {
 	
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/lista")
-	public ResponseEntity<Iterable<Fabricante>> buscarFabricantes() {
+	public ResponseEntity<Iterable<Fabricante>> buscarTodos() {
 		Iterable<Fabricante> fabricantes = fabricanteService.buscarTodos();
 		return new ResponseEntity<Iterable<Fabricante>>(fabricantes, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Fabricante> buscarFabricantePorId(@PathVariable Long id) {
+	public ResponseEntity<Fabricante> buscarPorId(@PathVariable Long id) {
 
 		return new ResponseEntity<Fabricante>(fabricanteService.buscarPorId(id), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
-	public ResponseEntity salvarFabricante(@RequestBody Fabricante fabricante, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity salvar(@RequestBody Fabricante fabricante, UriComponentsBuilder ucBuilder) {
 		fabricanteService.salvarOuEditar(fabricante);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(
@@ -44,7 +44,7 @@ public class FabricanteRestController {
 	}
 
 	@RequestMapping(value = "/altera", method = RequestMethod.PUT)
-	public ResponseEntity alterarFabricante(@RequestBody Fabricante fabricante, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity alterar(@RequestBody Fabricante fabricante, UriComponentsBuilder ucBuilder) {
 		fabricanteService.salvarOuEditar(fabricante);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("rest/almoxarifado/fabricante/altera/{fabricante}")

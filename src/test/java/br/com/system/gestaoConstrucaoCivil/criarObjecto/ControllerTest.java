@@ -92,6 +92,7 @@ public class ControllerTest {
 		itemEdificio.setAreaProduto(areaRepository.findAll().get(0));
 		itemEdificio.setRequisicao(r);*/
 		
+	    
 	    RequisicaoCasaItem itemCasa = new RequisicaoCasaItem();
 	    
 	    itemCasa.setAndar(2);

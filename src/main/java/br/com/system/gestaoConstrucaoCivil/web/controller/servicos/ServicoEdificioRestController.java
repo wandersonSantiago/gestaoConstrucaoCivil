@@ -20,15 +20,12 @@ public class ServicoEdificioRestController {
 	private ServicoEdificioService servicoEdificioService; 
 	
 	 @RequestMapping( value="/salva", method = RequestMethod.POST)
-	 public ResponseEntity salva(@RequestBody ServicoEdificio servico,UriComponentsBuilder ucBuilder)
+	 public ResponseEntity salvar(@RequestBody ServicoEdificio servico,UriComponentsBuilder ucBuilder)
 	 {
-		 System.out.println(servico.getPacoteServico().getDescricao());
-		 System.out.println(servico.getPrestadoraServico().getDadoEmpresa().getNomeFantasia());
-		 System.out.println(servico.getTorre());
 		 servicoEdificioService.salvarOuEditar(servico);
 		 HttpHeaders headers = new HttpHeaders();
-		//headers.setLocation(ucBuilder.path("/rest/servico/vincular/salva/{id}").buildAndExpand(servico.getId()).toUri());
+		 headers.setLocation(ucBuilder.path("/rest/servico/vincular/salva/{id}").buildAndExpand(servico.getId()).toUri());
 		 return new ResponseEntity(headers, HttpStatus.CREATED);
 	 }
-
+	
 }

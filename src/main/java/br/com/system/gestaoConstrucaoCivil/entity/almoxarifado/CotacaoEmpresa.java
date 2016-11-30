@@ -35,7 +35,7 @@ public class CotacaoEmpresa implements Serializable{
 	
 	@OneToMany(mappedBy = "cotacaoEmpresa",cascade = CascadeType.ALL)
 	@Column(nullable = false)
-	private List<ItemCotacaoEmpresa> itens;
+	private List<CotacaoEmpresaItem> itens;
 
 	public Long getId() {
 		return id;
@@ -61,11 +61,11 @@ public class CotacaoEmpresa implements Serializable{
 		this.fornecedor = fornecedor;
 	}
 
-	public List<ItemCotacaoEmpresa> getItens() {
+	public List<CotacaoEmpresaItem> getItens() {
 		return itens;
 	}
 
-	public void setItens(List<ItemCotacaoEmpresa> itens) {
+	public void setItens(List<CotacaoEmpresaItem> itens) {
 		this.itens = itens;
 	}
 	

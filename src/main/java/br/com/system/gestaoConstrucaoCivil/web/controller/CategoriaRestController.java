@@ -17,9 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Categoria;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoCategoriaEnum;
-import br.com.system.gestaoConstrucaoCivil.enuns.UfEnum;
-import br.com.system.gestaoConstrucaoCivil.service.CategoriaService;
-import br.com.system.gestaoConstrucaoCivil.service.servicos.Servico;
+import br.com.system.gestaoConstrucaoCivil.service.interfaceservice.Servico;
 
 @RestController
 @RequestMapping("/rest/almoxarifado/categoria")
@@ -27,26 +25,29 @@ public class CategoriaRestController {
 
 	@Autowired
 	private Servico<Categoria> categoriaService;
+
 	@RequestMapping(method = RequestMethod.GET, value = "/lista")
-	public ResponseEntity<Iterable<Categoria>> buscarCategoria() {
-	Iterable<Categoria> categoria = categoriaService.buscarTodos();
+	public ResponseEntity<Iterable<Categoria>> buscarTodos() {
+		Iterable<Categoria> categoria = categoriaService.buscarTodos();
 		return new ResponseEntity<Iterable<Categoria>>(categoria, HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Categoria> buscarCategoriaPorId(@PathVariable Long id) {
+	public ResponseEntity<Categoria> buscarPorId(@PathVariable Long id) {
 
 		return new ResponseEntity<Categoria>(categoriaService.buscarPorId(id), HttpStatus.OK);
 	}
+
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
-	public ResponseEntity salvar(@RequestBody  @Validated Categoria categoria,BindingResult result, UriComponentsBuilder ucBuilder) {
-		
-		
+	public ResponseEntity salvar(@RequestBody @Validated Categoria categoria, BindingResult result,
+			UriComponentsBuilder ucBuilder) {
+
 		CategoriaValidator v = new CategoriaValidator();
-   	     v.validate(categoria, result);
+		v.validate(categoria, result);
 		categoriaService.salvarOuEditar(categoria);
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("rest/almoxarifado/categoria/salva/{id}").buildAndExpand(categoria.getId()).toUri());
+		headers.setLocation(
+				ucBuilder.path("rest/almoxarifado/categoria/salva/{id}").buildAndExpand(categoria.getId()).toUri());
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 
@@ -58,11 +59,11 @@ public class CategoriaRestController {
 				.buildAndExpand(categoria.getId()).toUri());
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
-	
-	@RequestMapping(method = RequestMethod.GET, value="/tipoCategoria")
-	 public ResponseEntity<Iterable<TipoCategoriaEnum>> tipoCategoria() {
-	Iterable<TipoCategoriaEnum> tipoCategoriaEnum = Arrays.asList(TipoCategoriaEnum.values());
-	return new ResponseEntity<Iterable<TipoCategoriaEnum>>(tipoCategoriaEnum, HttpStatus.OK);
-}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/tipoCategoria")
+	public ResponseEntity<Iterable<TipoCategoriaEnum>> tipoCategoria() {
+		Iterable<TipoCategoriaEnum> tipoCategoriaEnum = Arrays.asList(TipoCategoriaEnum.values());
+		return new ResponseEntity<Iterable<TipoCategoriaEnum>>(tipoCategoriaEnum, HttpStatus.OK);
+	}
 
 }

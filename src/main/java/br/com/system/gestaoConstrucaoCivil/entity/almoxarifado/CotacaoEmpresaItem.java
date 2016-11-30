@@ -17,8 +17,8 @@ import javax.persistence.Table;
 sequenceName = "cotacao_empresa_item_id_seq",
 initialValue = 1,
 allocationSize = 1)
-@Table(name = "item_cotacao_empresa")
-public class ItemCotacaoEmpresa implements Serializable {
+@Table(name = "cotacao_empresa_item")
+public class CotacaoEmpresaItem implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cotacao_empresa_item_id_seq")
@@ -26,12 +26,8 @@ public class ItemCotacaoEmpresa implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "id_item",nullable = false)
-	private ItemCotacao item;
+	private CotacaoItem item;
 	
-	/*@Column(name="descricao")
-	private String descricao;
-	@Column(name="quantidade")
-	private Integer quantidade;*/
 	@Column(name="observacao")
 	private String observaocao;
 	@Column(nullable = false)
@@ -49,11 +45,11 @@ public class ItemCotacaoEmpresa implements Serializable {
 		this.id = id;
 	}
 
-	public ItemCotacao getItem() {
+	public CotacaoItem getItem() {
 		return item;
 	}
 
-	public void setItem(ItemCotacao item) {
+	public void setItem(CotacaoItem item) {
 		this.item = item;
 	}
 
@@ -61,23 +57,6 @@ public class ItemCotacaoEmpresa implements Serializable {
 	public Double getValorUnitario() {
 		return valorUnitario;
 	}
-
-	/*public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public Integer getQuantidade() {
-		return quantidade;
-	}
-
-	public void setQuantidade(Integer quantidade) {
-		this.quantidade = quantidade;
-	}*/
-
 	public String getObservaocao() {
 		return observaocao;
 	}
@@ -97,7 +76,4 @@ public class ItemCotacaoEmpresa implements Serializable {
 	public void setCotacaoEmpresa(CotacaoEmpresa cotacaoEmpresa) {
 		this.cotacaoEmpresa = cotacaoEmpresa;
 	}
-	
-	
-
 }

@@ -1,4 +1,4 @@
-package br.com.system.gestaoConstrucaoCivil.service.servicos;
+package br.com.system.gestaoConstrucaoCivil.service.interfaceservice;
 
 import java.util.List;
 

@@ -23,19 +23,19 @@ public class NotaFiscalRestController {
 	
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/lista")
-	public ResponseEntity<Iterable<NotaFiscal>> buscarFornecedores() {
+	public ResponseEntity<Iterable<NotaFiscal>> buscarTodos() {
 		Iterable<NotaFiscal> fornecedor = notaFiscalService.buscarTodos();
 		return new ResponseEntity<Iterable<NotaFiscal>>(fornecedor, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
-	public ResponseEntity<NotaFiscal> buscarFornecedorPorId(@PathVariable Long id) {
+	public ResponseEntity<NotaFiscal> buscarPorId(@PathVariable Long id) {
 
 		return new ResponseEntity<NotaFiscal>(notaFiscalService.buscarPorId(id), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
-	public ResponseEntity salva(@RequestBody NotaFiscal notaFiscal, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity salvar(@RequestBody NotaFiscal notaFiscal, UriComponentsBuilder ucBuilder) {
 		notaFiscalService.salvarOuEditar(notaFiscal);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(
@@ -44,7 +44,7 @@ public class NotaFiscalRestController {
 	}
 
 	@RequestMapping(value = "/altera", method = RequestMethod.PUT)
-	public ResponseEntity alterarFornecedor(@RequestBody NotaFiscal notaFiscal, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity alterar(@RequestBody NotaFiscal notaFiscal, UriComponentsBuilder ucBuilder) {
 		notaFiscalService.salvarOuEditar(notaFiscal);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("rest/notaFiscal/altera/{notaFiscal}")

@@ -45,7 +45,7 @@ public class Cotacao implements Serializable{
 	@JsonView(View.Summary.class)
 	//@JsonIgnore
 	@OneToMany(mappedBy = "cotacao",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-	private List<ItemCotacao> itens;
+	private List<CotacaoItem> itens;
 	
 	@JsonView(View.Summary.class)
 	@ManyToOne
@@ -81,11 +81,11 @@ public class Cotacao implements Serializable{
 		this.tema = tema;
 	}
 
-	public List<ItemCotacao> getItens() {
+	public List<CotacaoItem> getItens() {
 		return itens;
 	}
 
-	public void setItens(List<ItemCotacao> itens) {
+	public void setItens(List<CotacaoItem> itens) {
 		this.itens = itens;
 	}
 

@@ -51,7 +51,7 @@ public class Transferencia implements Serializable {
 
 	@JsonView(View.Summary.class)
 	@OneToMany(mappedBy = "transferencia", cascade = CascadeType.ALL)
-	private List<ItemTransferencia> itens;
+	private List<TransferenciaItem> itens;
 	
 	
 	
@@ -79,11 +79,11 @@ public class Transferencia implements Serializable {
 		this.empreendimentoDestino = empreendimentoDestino;
 	}
 
-	public List<ItemTransferencia> getItens() {
+	public List<TransferenciaItem> getItens() {
 		return itens;
 	}
 
-	public void setItens(List<ItemTransferencia> itens) {
+	public void setItens(List<TransferenciaItem> itens) {
 		this.itens = itens;
 	}
    public StatusTransferencia getStatusTransferencia() {
@@ -98,7 +98,7 @@ public class Transferencia implements Serializable {
 		
 		Double totalItem = 0.0;
 		Integer quantidadeItem = 0;
-		for(ItemTransferencia item : itens)
+		for(TransferenciaItem item : itens)
 		{
 			totalItem += item.getValorUnitario();
 			quantidadeItem += item.getQuantidade();

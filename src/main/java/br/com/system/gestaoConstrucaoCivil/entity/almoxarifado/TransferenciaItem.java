@@ -6,8 +6,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "item_transferencia")
-public class ItemTransferencia  extends Item {
+@Table(name = "transferencia_item")
+public class TransferenciaItem  extends Item {
 	
 	@ManyToOne
 	@JoinColumn(name = "id_transferencia")

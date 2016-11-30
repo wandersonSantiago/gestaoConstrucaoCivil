@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.ItemTransferencia;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.TransferenciaItem;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Transferencia;
 import br.com.system.gestaoConstrucaoCivil.enuns.Situacao;
 import br.com.system.gestaoConstrucaoCivil.enuns.StatusTransferencia;
@@ -43,7 +43,7 @@ public class TransferenciaService {
 		transferencia.getNotaFiscal().setEmpreendimento(empreendimentoSaida);
 		adicionarTransferenciaItem(transferencia);
         
-		for (ItemTransferencia item : transferencia.getItens()) {
+		for (TransferenciaItem item : transferencia.getItens()) {
 			EntradaOuBaixa baixa = new EntradaOuBaixa(item.getProduto(), item.getQuantidade(),
 					transferencia.getNotaFiscal().getEmpreendimento());
 			estoqueService.baixar(baixa);
@@ -53,7 +53,7 @@ public class TransferenciaService {
 	}
 	private void adicionarTransferenciaItem(Transferencia transferencia)
 	{
-		for(ItemTransferencia item : transferencia.getItens())
+		for(TransferenciaItem item : transferencia.getItens())
 		{
 			item.setTransferencia(transferencia);
 		}
@@ -64,7 +64,7 @@ public class TransferenciaService {
 		
 		Transferencia transferencia =  transferenciaRepository.buscarTransferenciaPorNumeroNota(numeroNota);
 		
-		for(ItemTransferencia item : transferencia.getItens())
+		for(TransferenciaItem item : transferencia.getItens())
 		{
 			EntradaOuBaixa entrada = new EntradaOuBaixa(item.getProduto(),item.getQuantidade(), transferencia.getEmpreendimentoDestino());
 			estoqueService.entradaEstoque(entrada);	
@@ -79,7 +79,7 @@ public class TransferenciaService {
 		Transferencia transferencia =  transferenciaRepository.buscarTransferenciaPorNumeroNota(numeroNota);
 		transferencia.setStatusTransferencia(StatusTransferencia.RECUSADO);
 		transferencia.getNotaFiscal().setSituacao(Situacao.CANCELADA);
-		for(ItemTransferencia item : transferencia.getItens())
+		for(TransferenciaItem item : transferencia.getItens())
 		{
 			EntradaOuBaixa entrada = new EntradaOuBaixa(item.getProduto(),item.getQuantidade(), transferencia.getNotaFiscal().getEmpreendimento());
 			estoqueService.entradaEstoque(entrada);

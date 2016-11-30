@@ -4,25 +4,15 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 
 @Entity
-@SequenceGenerator(name = "area_id_seq",
-sequenceName = "area_id_seq",
-initialValue = 1,
-allocationSize = 50)
+@Table(name = "area_produto")
+public class AreaProduto extends AbstractPersistable<Long> implements Serializable{
 
-@Table(name = "area")
-public class AreaProduto implements Serializable{
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "area_id_seq")
-	private Long id;
 	
 	@Column(nullable = false)
 	private boolean ativo;
@@ -30,14 +20,6 @@ public class AreaProduto implements Serializable{
 	@Column(nullable = false, length = 30)
 	public String descricao;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
 	public boolean isAtivo() {
 		return ativo;
 	}
@@ -54,31 +36,4 @@ public class AreaProduto implements Serializable{
 		this.descricao = descricao;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		AreaProduto other = (AreaProduto) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
-	
-	
-	
 }

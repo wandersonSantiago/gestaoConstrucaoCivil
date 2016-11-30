@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.ItemNotaFiscal;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.NotaFiscalItem;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.NotaFiscalProduto;
 import br.com.system.gestaoConstrucaoCivil.enuns.Situacao;
 import br.com.system.gestaoConstrucaoCivil.pojo.EntradaOuBaixa;
@@ -45,7 +45,7 @@ public class NotaFiscalProdutoService {
 		
 	    empreendimentoService.adcionarValorGasto(notaFiscalProduto.getNotaFiscal().getValorTotal());
        
-        for(ItemNotaFiscal itemNota : notaFiscalProduto.getItens())
+        for(NotaFiscalItem itemNota : notaFiscalProduto.getItens())
         {
         	 EntradaOuBaixa entrada = new EntradaOuBaixa(itemNota.getProduto(), itemNota.getQuantidade(),empreendimentoDoUsuario);
         	estoque.entradaEstoque(entrada); 
@@ -77,7 +77,7 @@ public class NotaFiscalProdutoService {
 		Integer quantidadeTotal = 0;
 		for (NotaFiscalProduto notaFiscal : notas) {
 
-			for (ItemNotaFiscal item : notaFiscal.getItens()) {
+			for (NotaFiscalItem item : notaFiscal.getItens()) {
 				
 				if (item.getProduto().getId().equals(idProduto)) {
 					
@@ -92,7 +92,7 @@ public class NotaFiscalProdutoService {
 	public void cancelarEntrada(Long numeroEntrada)
 	{
 		NotaFiscalProduto nota = notaFiscalProdutoRepository.buscarPorNumero(numeroEntrada);
-		for(ItemNotaFiscal item : nota.getItens())
+		for(NotaFiscalItem item : nota.getItens())
 		{
 			EntradaOuBaixa baixa = new EntradaOuBaixa(item.getProduto(), item.getQuantidade(), nota.getNotaFiscal().getEmpreendimento());
 			estoque.baixar(baixa);

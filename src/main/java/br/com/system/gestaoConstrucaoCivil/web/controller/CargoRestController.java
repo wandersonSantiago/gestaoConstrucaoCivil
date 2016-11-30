@@ -12,26 +12,27 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Cargo;
-import br.com.system.gestaoConstrucaoCivil.service.servicos.Servico;
+import br.com.system.gestaoConstrucaoCivil.service.interfaceservice.ICargoService;
+
+
 
 @RestController
 @RequestMapping("/rest/recursosHumanos/cargo")
 public class CargoRestController implements ICargo {
 
 	@Autowired
-	//private CargoService cargoService;
-    private Servico<Cargo> cargoService;
+	private ICargoService<Cargo> cargoService;
 	
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_CARGO_CONSULTA')")
 	public ResponseEntity<Iterable<Cargo>> buscarCargos() {
 		Iterable<Cargo> cargo = cargoService.buscarTodos();
 		return new ResponseEntity<Iterable<Cargo>>(cargo, HttpStatus.OK);
 	}
-
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_CARGO_CONSULTA')")
 	public ResponseEntity<Cargo> buscarCargoPorId(@PathVariable Long id) {
 		return new ResponseEntity<Cargo>(cargoService.buscarPorId(id), HttpStatus.OK);
 	}
-
+	
 	public ResponseEntity salva(@RequestBody Cargo cargo, UriComponentsBuilder ucBuilder) {
 		cargoService.salvarOuEditar(cargo);
 		HttpHeaders headers = new HttpHeaders();

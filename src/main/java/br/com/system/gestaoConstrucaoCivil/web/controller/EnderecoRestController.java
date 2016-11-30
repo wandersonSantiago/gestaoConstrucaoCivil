@@ -1,6 +1,5 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller;
 
-
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +16,13 @@ import br.com.system.gestaoConstrucaoCivil.service.EnderecoService;
 @RequestMapping("/rest/endereco")
 public class EnderecoRestController {
 
+	@Autowired
+	private EnderecoService enderecoService;
 
-	 
-	 @Autowired
-	 private EnderecoService enderecoService;
-	 
-	 
-		@RequestMapping(method = RequestMethod.GET, value="/uf")
-		 public ResponseEntity<Iterable<UfEnum>> uf() {
+	@RequestMapping(method = RequestMethod.GET, value = "/uf")
+	public ResponseEntity<Iterable<UfEnum>> uf() {
 
 		Iterable<UfEnum> uf = Arrays.asList(UfEnum.values());
 		return new ResponseEntity<Iterable<UfEnum>>(uf, HttpStatus.OK);
-	 }
+	}
 }

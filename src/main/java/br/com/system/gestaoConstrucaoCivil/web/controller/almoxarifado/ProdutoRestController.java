@@ -23,14 +23,14 @@ public class ProdutoRestController {
 	
 	
 	 @RequestMapping(method = RequestMethod.GET, value="/lista")
-	 public ResponseEntity<Iterable<Produto>> buscarProduto() {	  
+	 public ResponseEntity<Iterable<Produto>> buscarTodos() {	  
 	  
 	  Iterable<Produto> produto = produtoService.buscarTodos();
 	  return new ResponseEntity<Iterable<Produto>>(produto, HttpStatus.OK);
 	 }
 	
 	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Produto> buscarProdutoPorId(@PathVariable Long id) {
+	public ResponseEntity<Produto> buscarPorId(@PathVariable Long id) {
 
 			return new ResponseEntity<Produto>(produtoService.buscaPorId(id), HttpStatus.OK);
 		}
@@ -42,7 +42,7 @@ public class ProdutoRestController {
 	}
 	
 	@RequestMapping(value="/salva", method = RequestMethod.POST)
-	 public ResponseEntity salva(@RequestBody Produto produto,UriComponentsBuilder ucBuilder)
+	 public ResponseEntity salvar(@RequestBody Produto produto,UriComponentsBuilder ucBuilder)
 	 {
 		 produtoService.salvarOuEditar(produto);
 		 HttpHeaders headers = new HttpHeaders();
@@ -51,7 +51,7 @@ public class ProdutoRestController {
 	 }
 	 
 	 @RequestMapping(value="/altera", method = RequestMethod.PUT)
-	 public ResponseEntity altera(@RequestBody Produto produto,UriComponentsBuilder ucBuilder)
+	 public ResponseEntity alterar(@RequestBody Produto produto,UriComponentsBuilder ucBuilder)
 	 { produtoService.salvarOuEditar(produto);
 		 HttpHeaders headers = new HttpHeaders();
 		 headers.setLocation(ucBuilder.path("/rest/almoxarifado/produto/altera/{id}").buildAndExpand(produto.getId()).toUri());

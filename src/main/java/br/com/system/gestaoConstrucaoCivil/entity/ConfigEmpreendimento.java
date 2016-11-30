@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoEmpreendimentoEnum;
@@ -24,12 +26,8 @@ import br.com.system.gestaoConstrucaoCivil.enuns.TipoEmpreendimentoEnum;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "config_empreendimento")
 
-public  class ConfigEmpreendimento  implements Serializable {
+public  class ConfigEmpreendimento  extends AbstractPersistable<Long> implements Serializable {
  
-    @Id
-    @Column(unique = true, nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
      
     @ManyToOne
     @JoinColumn(name="id_empreendimento",nullable = true)
@@ -39,14 +37,7 @@ public  class ConfigEmpreendimento  implements Serializable {
     private TipoEmpreendimentoEnum.Tipo tipo;
      
      
-    public Long getId() {
-        return id;
-    }
- 
-    public void setId(Long id) {
-        this.id = id;
-    }
- 
+  
     public Empreendimento getEmpreendimento() {
          
         return empreendimento;

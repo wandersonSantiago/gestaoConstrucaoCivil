@@ -16,7 +16,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoEmpreendimentoEnum;
 import br.com.system.gestaoConstrucaoCivil.service.EmpreendimentoService;
-import br.com.system.gestaoConstrucaoCivil.service.EnderecoService;
 
 @RestController
 @RequestMapping("rest/empreendimento/empreendimento")
@@ -26,7 +25,7 @@ public class EmpreendimentoRestController {
 	private EmpreendimentoService empreendimentoService;
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/lista")
-	public ResponseEntity<Iterable<Empreendimento>> empreendimentos() {
+	public ResponseEntity<Iterable<Empreendimento>> buscarTodos() {
 		Iterable<Empreendimento> empreendimento = empreendimentoService.buscarTodos();
 		return new ResponseEntity<Iterable<Empreendimento>>(empreendimento, HttpStatus.OK);
 	}
@@ -46,12 +45,12 @@ public class EmpreendimentoRestController {
 	}
 
 	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Empreendimento> buscarEmpreendimentoPorId(@PathVariable Long id) {
+	public ResponseEntity<Empreendimento> buscarPorId(@PathVariable Long id) {
 		return new ResponseEntity<Empreendimento>(empreendimentoService.buscarPorId(id), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
-	public ResponseEntity salvarEmpreendimento(@RequestBody Empreendimento empreendimento,
+	public ResponseEntity salvar(@RequestBody Empreendimento empreendimento,
 			UriComponentsBuilder ucBuilder) {
 		empreendimentoService.salvarOuEditar(empreendimento);
 		HttpHeaders headers = new HttpHeaders();
@@ -61,7 +60,7 @@ public class EmpreendimentoRestController {
 	}
 
 	@RequestMapping(value = "/altera", method = RequestMethod.PUT)
-	public ResponseEntity alterarEmpreendimento(@RequestBody Empreendimento empreendimento,
+	public ResponseEntity alterar(@RequestBody Empreendimento empreendimento,
 			UriComponentsBuilder ucBuilder) {
 		empreendimentoService.salvarOuEditar(empreendimento);
 		HttpHeaders headers = new HttpHeaders();

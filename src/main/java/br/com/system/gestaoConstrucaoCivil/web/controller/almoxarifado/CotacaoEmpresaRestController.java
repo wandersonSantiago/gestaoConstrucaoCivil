@@ -23,20 +23,14 @@ public class CotacaoEmpresaRestController {
 	private CotacaoEmpresaService cotacaoEmpresaService;
 	
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
-	public ResponseEntity<CotacaoEmpresa> salva(@RequestBody CotacaoEmpresa cotacaoEmpresa){
-		System.out.println("cotacao  ======== 1" + cotacaoEmpresa.getCotacao().getId());
-		System.out.println("fornecedor  ======== 1" + cotacaoEmpresa.getFornecedor().getDadoEmpresa().getRazaoSocial());
-	/*	for(int i = 0; i < cotacaoEmpresa.getItens().size(); i++){
-			System.out.println("itens ==================================" + cotacaoEmpresa.getItens().get(i).getDescricao());
-		}*/
+	public ResponseEntity<CotacaoEmpresa> salvar(@RequestBody CotacaoEmpresa cotacaoEmpresa){
 		cotacaoEmpresaService.salvarOuEditar(cotacaoEmpresa);
-		System.out.println("teste ==========2");
 		HttpHeaders headers =  new HttpHeaders();
 		return new ResponseEntity(headers, HttpStatus.CREATED);				
 	}
 	
 	@RequestMapping(value = "/lista", method = RequestMethod.GET)
-	public ResponseEntity<List<CotacaoEmpresa>> lista(){
+	public ResponseEntity<List<CotacaoEmpresa>> buscarTodos(){
 		
 		List<CotacaoEmpresa> cotacaoEmpresa = cotacaoEmpresaService.buscarTodos(); 
 		return new ResponseEntity<List<CotacaoEmpresa>>(cotacaoEmpresa, HttpStatus.OK);

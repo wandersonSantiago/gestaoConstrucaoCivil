@@ -38,7 +38,7 @@ public class EmpreendimentoControllerTest  extends TestCase{
 	@Test
 	public void cadastrarEmpreendimento(){
 			
-		ResponseEntity responseEntity =  empreendimentoRestController.salvarEmpreendimento(new CriaEmpreendimento().getEmpreendimento(), ucBuilder);
+		ResponseEntity responseEntity =  empreendimentoRestController.salvar(new CriaEmpreendimento().getEmpreendimento(), ucBuilder);
 		assertEquals(HttpStatus.CREATED,responseEntity.getStatusCode());
 	}
 	//@Test
@@ -60,7 +60,7 @@ public class EmpreendimentoControllerTest  extends TestCase{
 	//@Test
 	public void buscarEmpreendimentoPorId()
 	{
-		ResponseEntity responseEntity = empreendimentoRestController.buscarEmpreendimentoPorId(348L);
+		ResponseEntity responseEntity = empreendimentoRestController.buscarPorId(348L);
 	     assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 	   /*  Empreendimento empreendimento = (Empreendimento) responseEntity.getBody();
 	     assertEquals("Alteração na descrição", empreendimento.getDescricao()); */
@@ -69,12 +69,12 @@ public class EmpreendimentoControllerTest  extends TestCase{
 
 	public void alterarEmpreendimento()
 	{
-		ResponseEntity responseEntity = empreendimentoRestController.buscarEmpreendimentoPorId(348L);
+		ResponseEntity responseEntity = empreendimentoRestController.buscarPorId(348L);
 		Empreendimento empreendimento = (Empreendimento) responseEntity.getBody();
 		empreendimento.setDescricao("Alteração na descrição2");
 		
 		responseEntity = null;
-	    responseEntity	=  empreendimentoRestController.alterarEmpreendimento(empreendimento, ucBuilder);
+	    responseEntity	=  empreendimentoRestController.alterar(empreendimento, ucBuilder);
 		
 		
 		assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());

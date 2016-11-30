@@ -1,8 +1,6 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller.almoxarifado;
 
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -37,7 +35,7 @@ public class RequisicaoRestController {
 	@RequestMapping(method = RequestMethod.GET, value = "/lista")
 	public ResponseEntity<Iterable<Requisicao>> buscarTodos()
 	{
-		Iterable<Requisicao> baixaEstoque = requisicaoService.buscarTodos(); 
-		return new ResponseEntity<Iterable<Requisicao>>(baixaEstoque, HttpStatus.OK);
+		Iterable<Requisicao> requisicao = requisicaoService.buscarTodos(); 
+		return new ResponseEntity<Iterable<Requisicao>>(requisicao, HttpStatus.OK);
 	}
 }

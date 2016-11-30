@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.PedidoCompra;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Transferencia;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.View;
-import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.service.almoxarifado.TransferenciaService;
 
 @RestController
@@ -28,14 +26,14 @@ public class TransferenciaRestController {
 	private TransferenciaService transferenciaService;
 	
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
-	public ResponseEntity<Collection<Transferencia>> salva(@RequestBody Transferencia transferencia){
+	public ResponseEntity<Collection<Transferencia>> salvar(@RequestBody Transferencia transferencia){
 		transferenciaService.salvaAltera(transferencia);
 		HttpHeaders headers =  new HttpHeaders();
 		return new ResponseEntity(headers, HttpStatus.CREATED);				
 	}
 	@JsonView(View.Summary.class)
 	@RequestMapping(value = "/lista", method = RequestMethod.GET)
-	public ResponseEntity<Collection<Transferencia>> lista(){
+	public ResponseEntity<Collection<Transferencia>> buscarTodos(){
 		
 		Collection<Transferencia> transferencia = transferenciaService.buscarTodos(); 
 		return new ResponseEntity<Collection<Transferencia>>(transferencia, HttpStatus.OK);
@@ -43,7 +41,7 @@ public class TransferenciaRestController {
 	
 	@JsonView(View.Summary.class)
 	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Transferencia> buscarCotacaoPorId(@PathVariable Long id) {
+	public ResponseEntity<Transferencia> buscarPorId(@PathVariable Long id) {
 
 		return new ResponseEntity<Transferencia>(transferenciaService.buscaPorId(id), HttpStatus.OK);
 	}
@@ -74,5 +72,4 @@ public class TransferenciaRestController {
 		HttpHeaders headers =  new HttpHeaders();
 		return new ResponseEntity(headers, HttpStatus.CREATED);				
 	}
-
 }

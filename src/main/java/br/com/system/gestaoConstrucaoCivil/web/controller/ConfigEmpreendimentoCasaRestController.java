@@ -22,11 +22,11 @@ import br.com.system.gestaoConstrucaoCivil.service.ConfigEmpreendimentoCasaServi
 public class ConfigEmpreendimentoCasaRestController {
 
 	@Autowired
-    ConfigEmpreendimentoCasaService configEmpreeendimentoCasaService;
+    private ConfigEmpreendimentoCasaService configEmpreeendimentoCasaService;
 	
 	
 	@RequestMapping(value = "/salvaCasa", method = RequestMethod.POST)
-    public ResponseEntity salvarConfigEmpreendimentoCasa(@RequestBody ConfigEmpreendimentoCasa configEmpreendimentoCasa, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity salvar(@RequestBody ConfigEmpreendimentoCasa configEmpreendimentoCasa, UriComponentsBuilder ucBuilder) {
         
 		configEmpreeendimentoCasaService.salvarOuEditar(configEmpreendimentoCasa);
         HttpHeaders headers = new HttpHeaders();
@@ -36,7 +36,7 @@ public class ConfigEmpreendimentoCasaRestController {
     }
 	
 	@RequestMapping(value = "/listaCasa/{id}", method = RequestMethod.GET)
-    public ResponseEntity<ConfigEmpreendimentoCasa> buscarConfigEmpreendimentoCasaPorId(@PathVariable Long id) {
+    public ResponseEntity<ConfigEmpreendimentoCasa> buscarPorId(@PathVariable Long id) {
         return new ResponseEntity<ConfigEmpreendimentoCasa>(configEmpreeendimentoCasaService.buscarPorId(id), HttpStatus.OK);
     }
      

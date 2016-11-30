@@ -2,6 +2,7 @@ package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -64,6 +65,7 @@ public class Requisicao implements Serializable{
     	this.statusRequisicao = StatusRequisicao.PENDENTE;
         GeraCodigo gerar = new GeraCodigo(100000,999999);
 		this.numeroRequisicao = gerar.gerarNumeroRequisicao();
+		item = new ArrayList<RequisicaoItem>();
 	}
     public Long getId() {
 		return id;

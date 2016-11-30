@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,7 +32,7 @@ public class NotaFiscalProduto implements Serializable {
 	private Fornecedor fornecedor;
 
 	@OneToMany(mappedBy = "notaFiscalProduto", cascade = CascadeType.ALL)
-	private List<ItemNotaFiscal> itens;
+	private List<NotaFiscalItem> itens;
 
 	public Long getId() {
 		return id;
@@ -59,11 +58,11 @@ public class NotaFiscalProduto implements Serializable {
 		this.fornecedor = fornecedor;
 	}
 
-	public List<ItemNotaFiscal> getItens() {
+	public List<NotaFiscalItem> getItens() {
 		return itens;
 	}
 
-	public void setItens(List<ItemNotaFiscal> itens) {
+	public void setItens(List<NotaFiscalItem> itens) {
 
 		this.itens = itens;
 	}

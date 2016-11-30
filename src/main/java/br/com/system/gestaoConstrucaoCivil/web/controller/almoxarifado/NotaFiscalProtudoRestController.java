@@ -13,7 +13,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.NotaFiscalProduto;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
-import br.com.system.gestaoConstrucaoCivil.enuns.UnidadeMedidaEnum;
 import br.com.system.gestaoConstrucaoCivil.service.almoxarifado.NotaFiscalProdutoService;
 
 @RestController
@@ -24,7 +23,7 @@ public class NotaFiscalProtudoRestController {
 	private NotaFiscalProdutoService notaFiscalProdutoService;
 
 	@RequestMapping(method = RequestMethod.GET, value = "/lista")
-	public ResponseEntity<Iterable<NotaFiscalProduto>> buscarNotaFiscalProduto() {
+	public ResponseEntity<Iterable<NotaFiscalProduto>> buscarTodos() {
 		Iterable<NotaFiscalProduto> notaFiscalProtudo = notaFiscalProdutoService.buscarTodos();
 		return new ResponseEntity<Iterable<NotaFiscalProduto>>(notaFiscalProtudo, HttpStatus.OK);
 	}
@@ -36,21 +35,8 @@ public class NotaFiscalProtudoRestController {
 	}
 
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
-	public ResponseEntity salva(@RequestBody NotaFiscalProduto notaFiscalProtudo, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity salvar(@RequestBody NotaFiscalProduto notaFiscalProtudo, UriComponentsBuilder ucBuilder) {
 		
-		
-		for(int i = 0 ; i < notaFiscalProtudo.getItens().size(); i ++){
-			
-			
-			System.out.println(notaFiscalProtudo.getItens().get(i).getProduto());
-			System.out.println(notaFiscalProtudo.getItens().get(i).getProduto().getUnidadeMedida());
-			System.out.println(notaFiscalProtudo.getItens().get(i).getQuantidade());
-			System.out.println("valor total item" + notaFiscalProtudo.getItens().get(i).getValorTotal());
-		}
-		
-		System.out.println(notaFiscalProtudo.getNotaFiscal().getDataNota());
-		System.out.println(notaFiscalProtudo.getNotaFiscal().getDataVencimento());
-		System.out.println("valor total nota" + notaFiscalProtudo.getNotaFiscal().getValorTotal());
 		notaFiscalProtudo.getNotaFiscal().setTipoNota(TipoNotaEnum.NOTA_FISCAL_ENTRADA);
 		notaFiscalProdutoService.salvarOuEditar(notaFiscalProtudo);
 		HttpHeaders headers = new HttpHeaders();
@@ -59,7 +45,7 @@ public class NotaFiscalProtudoRestController {
 	}
 
 	@RequestMapping(value = "/altera", method = RequestMethod.PUT)
-	public ResponseEntity alterarFornecedor(@RequestBody NotaFiscalProduto notaFiscalProtudo,
+	public ResponseEntity alterar(@RequestBody NotaFiscalProduto notaFiscalProtudo,
 			UriComponentsBuilder ucBuilder) {
 		notaFiscalProdutoService.salvarOuEditar(notaFiscalProtudo);
 		HttpHeaders headers = new HttpHeaders();
