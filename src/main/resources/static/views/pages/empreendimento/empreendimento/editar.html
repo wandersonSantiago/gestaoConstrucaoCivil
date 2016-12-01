@@ -45,11 +45,11 @@
 						</div>
 					</div>
 						<div class="col-sm-3">
-							<input ng-model="empCtrl.empreendimento.dataAbertura" class="form-control" id="dataAbertura" placeholder="data Abertura" type="text" onkeyup="if(this.value.length > 9) { dataFechamento.focus(); }" ui-date required >
+							<input ng-model="empCtrl.empreendimento.dataAbertura" class="form-control" id="dataAbertura" placeholder="data Abertura" type="date" onkeyup="if(this.value.length > 9) { dataFechamento.focus(); }"  required >
 						</div>
 						
 						<div class="col-sm-3">
-							<input ng-model="empCtrl.empreendimento.datafechamento" class="form-control" id="datafechamento" placeholder="data Fechamento" type="text" name="dataFechamento" ui-date required >
+							<input ng-model="empCtrl.empreendimento.datafechamento" class="form-control" id="datafechamento" placeholder="data Fechamento" type="date" name="dataFechamento"  required >
 						</div>
 					</div>
 					<br>
