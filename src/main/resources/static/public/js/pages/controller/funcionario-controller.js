@@ -20,6 +20,7 @@ app.controller('cadastrarFuncionarioController', function($scope, buscaCepServic
 	
 	
 	self.salva = function(funcionario) {
+		console.log(self.funcionario);
 		cadastrarFuncionarioService.salva(self.funcionario).
 		then(function(response){
 			self.funcionario = null;

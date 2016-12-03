@@ -30,7 +30,7 @@
 <!-- menu admin Sistema -->
 		<ul class="sidebar-menu">
 			<li class="header">MÓDULOS</li>
-			<li class="treeview ">
+			<li class="treeview " ng-if="ROLE_ADMIN">
              		 <a href=""><i class="glyphicon glyphicon-home "></i> <i class="treeview "></i>Administrador<i class="fa fa-angle-left pull-right"></i></a>
              	 <ul class="treeview-menu">
 					<li class="treeview"><a href=""><i class="glyphicon glyphicon-home"></i> <span>Empresa</span>
@@ -47,7 +47,7 @@
 <!-- menu admin Empresa -->		
 		
 
-			<li class="treeview ">
+			<li ng-if="ROLE_GESTOR || ROLE_ADMINISTRADOR_EMPRESA " class="treeview ">
               <a href=""><i class=" glyphicon glyphicon-object-align-bottom"> </i><i class="treeview "></i> Empreendimento<i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">
 				<li class="treeview"><a href=""><i class="glyphicon glyphicon-user"></i> <span>Usuário</span>
@@ -58,7 +58,7 @@
 						<li><a class="top" href="#/usuario/permissao">Permissões</a></li>
 					</ul>
 				</li>			
-				<li class="treeview"><a href=""><i class=" glyphicon glyphicon-object-align-bottom"></i> <span>Empreendimento</span>
+				<li ng-if="ROLE_ADMINISTRADOR_EMPRESA" class="treeview"><a href=""><i class=" glyphicon glyphicon-object-align-bottom"></i> <span>Empreendimento</span>
 					<i class="fa fa-angle-left pull-right"></i></a>
 					<ul class="treeview-menu">
 						<li><a class="top" href="#/empreendimento/empreendimento/cadastrar">Cadastro</a></li>
@@ -131,10 +131,10 @@
               <a href=""><i class="glyphicon glyphicon-shopping-cart"></i><i class="treeview "></i>Financeiro<i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-              <li class="treeview"><a href=""> <span>Compras</span> <i class="fa fa-angle-left pull-right"></i></a>
+              <li ng-if="ROLE_COTACAO_CONSULTA || ROLE_COTACAO_CADASTRO" class="treeview"><a href=""> <span>Compras</span> <i class="fa fa-angle-left pull-right"></i></a>
 						<ul class="treeview-menu">
-							<li><a class="top" href="#/almoxarifado/compras/gerarCotacao">Gerar cotação</a></li>
-							<li><a class="top" href="#/almoxarifado/compras/cotacaoAberta">Cotação em aberto</a></li>
+							<li ng-if="ROLE_COTACAO_CADASTRO"><a class="top" href="#/almoxarifado/compras/gerarCotacao">Gerar cotação</a></li>
+							<li ng-if="ROLE_COTACAO_CONSULTA"><a class="top" href="#/almoxarifado/compras/cotacaoAberta">Cotação em aberto</a></li>
 							<li><a class="top" href="#/almoxarifado/compras/pedidoCompra">Pedido de compra</a></li>
 						</ul>			
                 </li>
@@ -186,11 +186,11 @@
                     </li>
                   </ul>
                 </li>   
-                 <li>
+                 <li ng-if="ROLE_ESTOQUE_CADASTRO || ROLE_ESTOQUE_CONSULTA ">
                   <a href=""><i class="treeview"></i> Estoque<i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
-                 		    <li><a class="top" href="#/almoxarifado/estoque/entrada">Entrada</a></li>
-							<li><a class="top" href="#/almoxarifado/estoque/lista">Consultar</a></li>                              
+                 		    <li ng-if="ROLE_ESTOQUE_CADASTRO"><a class="top" href="#/almoxarifado/estoque/entrada">Entrada</a></li>
+							<li ng-if="ROLE_ESTOQUE_CONSULTA"><a class="top" href="#/almoxarifado/estoque/lista">Consultar</a></li>                              
                  	 <li class="treeview"><a href=""><span>Requisição</span> <i class="fa fa-angle-left pull-right"></i></a>
 						<ul class="treeview-menu">
 							<li><a class="top" href="#/almoxarifado/estoque/requisicao/cadastrar">Cadastrar</a></li>

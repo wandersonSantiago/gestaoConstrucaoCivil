@@ -66,7 +66,6 @@ app.factory('usuarioService', function($rootScope, toastr, $http,$q){
 				return response.data;
 				console.log(response.data);
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"falha de conexão", type : "error", width: 300, higth: 100, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},

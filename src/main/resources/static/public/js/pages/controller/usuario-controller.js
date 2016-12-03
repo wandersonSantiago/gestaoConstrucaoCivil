@@ -1,4 +1,4 @@
-app.controller('usuarioController', function($scope, toastr, $rootScope, usuarioService, $http, $routeParams){
+app.controller('usuarioController', function($scope, toastr, role, $rootScope, usuarioService, $http, $routeParams){
 	
 	var self = this;
 	var idUsuario = $routeParams.idUsuario;
@@ -20,6 +20,7 @@ app.controller('usuarioController', function($scope, toastr, $rootScope, usuario
 		usuarioService.user().
 			then(function(u){
 				$rootScope.user = u;
+				role.permission(u);
 				if($rootScope.user.usuario.empreendimento.tipoEmpreendimento ==  "CONDOMINIO_DE_EDIFICIO_RESIDENCIAL"){
 					$rootScope.tipoEmpreendimento = true;
 				}else{

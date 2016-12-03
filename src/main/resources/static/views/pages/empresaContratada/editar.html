@@ -1,7 +1,8 @@
 <meta charset="UTF-8">
 <br>
 <br>
-<div class="generic-container"
+<div ng-if="!ROLE_ADMIN" ng-include="'views/erros/permissao.html'"></div>
+<div class="generic-container" ng-if="ROLE_ADMIN"
 	ng-controller="adminSistemaController as adminCtrl">
 
 	<div class="box box-primary">

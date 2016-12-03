@@ -15,6 +15,9 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 		.when('/login', {
 		templateUrl : "views/login.html"
 	})
+	.when('/semAcesso', {
+		templateUrl : "views/erros/permissao.html"
+	})
 
 //==================================================================================	
 //ROTAS ADMIN SISTEMA
@@ -302,12 +305,12 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 	
 	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-}]).run(function(auth) {
+}]).run(function(auth, role) {
 
 // Initialize auth module with the home page and login/logout path
 // respectively
 auth.init('/', '/login', '/logout');
-
+role.permission();
 });
 
 
