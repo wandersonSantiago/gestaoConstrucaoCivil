@@ -19,12 +19,18 @@ public class LocalDateDeserializer extends StdDeserializer<LocalDate>{
 	            throws IOException, JsonProcessingException {
 	      
     	String dataFront = jp.readValueAs(String.class).toString();
-    	 
-        Integer posicao = dataFront.indexOf("T"); 
+    	
+        if(dataFront.contains("T"))
+        {
+    	Integer posicao = dataFront.indexOf("T"); 
     	
         String dataFormat = dataFront.substring(0, posicao); 
-    	 
-    	 return LocalDate.parse(dataFormat);
+        return LocalDate.parse(dataFormat);
+        }
+        
+        return LocalDate.parse(jp.readValueAs(String.class));
+        
+        
 	    }
 
 	
