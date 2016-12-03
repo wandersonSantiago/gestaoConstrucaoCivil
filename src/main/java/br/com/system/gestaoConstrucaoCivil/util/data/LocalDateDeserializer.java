@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.util.data;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.core.JsonParser;
@@ -16,7 +17,14 @@ public class LocalDateDeserializer extends StdDeserializer<LocalDate>{
      @Override
 	 public LocalDate deserialize(JsonParser jp, DeserializationContext ctxt)
 	            throws IOException, JsonProcessingException {
-	        return LocalDate.parse(jp.readValueAs(String.class));
+	      
+    	String dataFront = jp.readValueAs(String.class).toString();
+    	 
+        Integer posicao = dataFront.indexOf("T"); 
+    	
+        String dataFormat = dataFront.substring(0, posicao); 
+    	 
+    	 return LocalDate.parse(dataFormat);
 	    }
 
 	
