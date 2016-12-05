@@ -1,6 +1,6 @@
  package br.com.system.gestaoConstrucaoCivil.entity;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CollectionTable;
@@ -13,16 +13,13 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.validator.constraints.Email;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import br.com.system.gestaoConstrucaoCivil.enuns.PerfilUsuarioEnum;
-import br.com.system.gestaoConstrucaoCivil.util.data.LocalDateDeserializer;
-import br.com.system.gestaoConstrucaoCivil.util.data.LocalDateSerializer;
 
 
 @Entity
@@ -54,13 +51,13 @@ public class Usuario extends AbstractPersistable<Long>{
 	private String senha;
 	@Column(nullable = false)
 	private boolean ativo;
-	@JsonDeserialize(using = LocalDateDeserializer.class)  
-	@JsonSerialize(using = LocalDateSerializer.class)
-	private LocalDate dataCadastro;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "data_cadastro")
+	private Date dataCadastro;
 	
 	public Usuario()
 	{
-		dataCadastro = LocalDate.now();
+		dataCadastro = new Date();
 	}
 	public String getNome() {
 		return nome;
@@ -96,7 +93,7 @@ public class Usuario extends AbstractPersistable<Long>{
 	public Funcionario getFuncionario() {
 		return funcionario;
 	}
-	public LocalDate getDataCadastro() {
+	public Date getDataCadastro() {
 		return dataCadastro;
 	} 
 	public void setFuncionario(Funcionario funcionario) {

@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.entity;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,18 +11,17 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.View;
 import br.com.system.gestaoConstrucaoCivil.entity.servicos.PrestadoraServico;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoEmpreendimentoEnum;
-import br.com.system.gestaoConstrucaoCivil.util.data.LocalDateDeserializer;
-import br.com.system.gestaoConstrucaoCivil.util.data.LocalDateSerializer;
+
 
 @Entity
 @Table(name = "empreendimento")
@@ -55,13 +55,13 @@ public class Empreendimento extends AbstractPersistable<Long> {
 	@Column(nullable = false)
 	private Double porcentagem =  0.0;
 	
-	@JsonDeserialize(using = LocalDateDeserializer.class)  
-	@JsonSerialize(using = LocalDateSerializer.class)
-	private LocalDate dataAbertura;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "data_abertura")
+	private Date dataAbertura;
 	
-	@JsonDeserialize(using = LocalDateDeserializer.class)  
-	@JsonSerialize(using = LocalDateSerializer.class)
-	private LocalDate datafechamento;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "data_fechamento")
+	private Date datafechamento;
 	
     @Column(nullable = false)
 	private boolean ativo;
@@ -111,16 +111,16 @@ public class Empreendimento extends AbstractPersistable<Long> {
 	public void setValoresGastos(Double valoresGastos) {
 		this.valoresGastos = valoresGastos;
 	}
-	public LocalDate getDataAbertura() {
+	public Date getDataAbertura() {
 		return dataAbertura;
 	}
-	public void setDataAbertura(LocalDate dataAbertura) {
+	public void setDataAbertura(Date dataAbertura) {
 		this.dataAbertura = dataAbertura;
 	}
-	public LocalDate getDatafechamento() {
+	public Date getDatafechamento() {
 		return datafechamento;
 	}
-	public void setDatafechamento(LocalDate datafechamento) {
+	public void setDatafechamento(Date datafechamento) {
 		this.datafechamento = datafechamento;
 	}
 	public boolean isAtivo() {

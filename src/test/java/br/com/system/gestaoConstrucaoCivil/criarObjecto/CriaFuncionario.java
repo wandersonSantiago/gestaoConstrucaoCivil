@@ -33,7 +33,7 @@ public class CriaFuncionario {
 	    funcionario.setAtivo(true);
 	    funcionario.setNomeCompleto("Jose da Silva");
 	    funcionario.setCpf("11111111");
-	    funcionario.setDataAdmissao(LocalDate.now());
+	   // funcionario.setDataAdmissao(LocalDate.now());
 	    funcionario.setEndereco(new CriaEndereco().getEndereco());
 	    funcionario.setCarteiraTrabalho(21231);
 	    funcionario.setCargo(cargoService.buscarPorId(9999L));
@@ -41,11 +41,11 @@ public class CriaFuncionario {
 	    funcionario.setEmpreendimento(empreendimentoService.buscarPorId(9999L));
 	    funcionario.setTelefoneFixo("1938740076");
 	    funcionario.setTelefoneCelular("199874454");
-	    funcionario.setSexo("M");
+	  /*  funcionario.setSexo("M");*/
 	    funcionario.setCrea(54887454);
 	    
 	    LocalDate data = LocalDate.of(1, 12, 1987);
-		funcionario.setDataNascimento(data);
+		//funcionario.setDataNascimento(data);
 	}
     
 	public Funcionario getFuncionario()

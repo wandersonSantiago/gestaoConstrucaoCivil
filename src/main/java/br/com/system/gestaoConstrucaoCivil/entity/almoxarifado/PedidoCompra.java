@@ -2,6 +2,7 @@ package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,13 +15,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
-import br.com.system.gestaoConstrucaoCivil.util.data.LocalDateDeserializer;
-import br.com.system.gestaoConstrucaoCivil.util.data.LocalDateSerializer;
 
 @Entity
 @SequenceGenerator(name = "pedido_compra_id_seq",
@@ -45,9 +43,8 @@ public class PedidoCompra implements Serializable{
 	@ManyToOne
 	private Empreendimento empreendimento;
 	
-	@JsonDeserialize(using = LocalDateDeserializer.class)  
-	@JsonSerialize(using = LocalDateSerializer.class)
-	private LocalDate previsao;
+	@Temporal(TemporalType.DATE)
+	private Date previsao;
 	
 	public Long getId() {
 		return id;
@@ -72,11 +69,11 @@ public class PedidoCompra implements Serializable{
 		this.fornecedor = fornecedor;
 	}
 
-	public LocalDate getPrevisao() {
+	public Date getPrevisao() {
 		return previsao;
 	}
 
-	public void setPrevisao(LocalDate previsao) {
+	public void setPrevisao(Date previsao) {
 		this.previsao = previsao;
 	}
     

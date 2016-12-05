@@ -3,6 +3,8 @@ package br.com.system.gestaoConstrucaoCivil.criarObjecto;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
@@ -15,11 +17,17 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
 import br.com.system.gestaoConstrucaoCivil.GestaoConstrucaoCivilApplication;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.RequisicaoItem;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.RequisicaoEdificioItem;
+import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
+
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Cotacao;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.CotacaoEmpresa;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.CotacaoEmpresaItem;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.CotacaoItem;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Requisicao;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.RequisicaoCasaItem;
-import br.com.system.gestaoConstrucaoCivil.enuns.StatusRequisicao;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.RequisicaoItem;
+import br.com.system.gestaoConstrucaoCivil.enuns.PerfilUsuarioEnum;
+import br.com.system.gestaoConstrucaoCivil.enuns.StatusCotacao;
 import br.com.system.gestaoConstrucaoCivil.repository.AreaRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.CargoRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.CategoriaRepository;
@@ -29,10 +37,13 @@ import br.com.system.gestaoConstrucaoCivil.repository.EmpresaContratanteReposito
 import br.com.system.gestaoConstrucaoCivil.repository.EnderecoRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.FuncionarioRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.PessoaRepository;
+import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.CotacaoEmpresaRepository;
+import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.CotacaoRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.FornecedorRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.ProdutoRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.RequisicaoRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.servicos.PrestadoraServicoRepository;
+import br.com.system.gestaoConstrucaoCivil.service.UsuarioService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = GestaoConstrucaoCivilApplication.class)
@@ -69,11 +80,125 @@ public class ControllerTest {
 	private EmpresaContratanteRepository empresaContratanteRepository;
 	@Autowired
 	private RequisicaoRepository requisicaoRepository;
-	
+	@Autowired
+	private CotacaoRepository cotacaoRepository;
+	@Autowired
+	private CotacaoEmpresaRepository cotacaoEmpresaRepository;
+	@Autowired
+	private UsuarioService usuarioService;
 	private RestTemplate restTemplate = new TestRestTemplate();
 
+	@Test
+	public void cotacaoVencedora()
+	{
+		List<CotacaoEmpresa> lista = cotacaoEmpresaRepository.findbyId(2L);
+		
+		
+        List<CotacaoEmpresaItem> itens = new ArrayList<CotacaoEmpresaItem>();
+        
+        for(CotacaoEmpresa cEmpresa: lista)
+		{
+			for(CotacaoEmpresaItem item : cEmpresa.getItens())
+			{
+		           itens.add(item);         
+			}
+		}
+		
+       
+        Long idItem ;
+        Double valor = 0.0;
+     	
+        while(itens.size() != 0)
+     	{
+     		idItem = itens.get(0).getItem().getId();
+     		valor = itens.get(0).getValorUnitario();
+     		
+     		for(CotacaoEmpresaItem item : itens)
+     		{
+     		     if(idItem == item.getItem().getId())
+     		     {
+     		    	 if(valor < item.getValorUnitario())
+     		    	 {
+     		    		 item.setGanhou(false);
+     		    	 }else
+     		    	 {
+     		    		 itens.get(0).setGanhou(false);
+     		    		 
+     		    		 
+     		    	 }
+     		     }
+     		}
+     		
+     	}
+		
+		
+		
+	}
 	
-	@Test 
+	public void criarUsuario()
+	{
+		Usuario user = new Usuario();
+		user.setAtivo(true);
+		user.setEmpreendimento(empreendimentoRepository.findAll().get(0));
+		user.setLogin("josesilva");
+		user.setEmail("josesilva@terra.com.br");
+		user.setNome("Jose Silva");
+		user.setSenha("898989");
+		user.setPerfilsUsuario(Arrays.asList(PerfilUsuarioEnum.ADMIN,PerfilUsuarioEnum.ADMINISTRADOR_EMPRESA,PerfilUsuarioEnum.COMPRAS_CADASTRO));
+		
+		usuarioService.salvarOuEditar(user);
+	}
+	public void criarCotacaoEmpresa()
+	{
+		CotacaoEmpresa cotacaoEmpresa = new CotacaoEmpresa();
+		Cotacao cotacao = cotacaoRepository.findOne(2L);
+		cotacaoEmpresa.setCotacao(cotacao);
+		cotacaoEmpresa.setFornecedor(fornecedorRepository.findOne(17L));
+	
+		CotacaoEmpresaItem item = new CotacaoEmpresaItem();
+		item.setCotacaoEmpresa(cotacaoEmpresa);
+		item.setObservaocao("OI2");
+		item.setValorUnitario(8.31);
+		item.setItem(cotacao.getItens().get(0));
+	    
+		
+		CotacaoEmpresaItem item2 = new CotacaoEmpresaItem();
+		item2.setCotacaoEmpresa(cotacaoEmpresa);
+		item2.setObservaocao("hahha2");
+		item2.setValorUnitario(87.1);
+		item2.setItem(cotacao.getItens().get(1));
+		cotacaoEmpresa.setItens(Arrays.asList(item,item2));
+	
+		cotacaoEmpresaRepository.save(cotacaoEmpresa);
+	}
+	
+	public void criarCotacao()
+	{
+		Cotacao cotacao = new Cotacao();
+		cotacao.setTema("Cotacao Teste");
+		/*cotacao.setDataCriacao(LocalDate.now());
+		cotacao.setDataLimite(LocalDate.now());
+		*/cotacao.setEmpreendimento(empreendimentoRepository.findOne(31L));
+		cotacao.setStatusCotacao(StatusCotacao.ABERTO);
+		CotacaoItem item = new CotacaoItem();
+		item.setContacao(cotacao);
+		item.setDescricao("Produto teste");
+		item.setQuantidade(30);
+		
+		
+		CotacaoItem item2 = new CotacaoItem();
+		item2.setContacao(cotacao);
+		item2.setDescricao("Produto teste 2");
+		item2.setQuantidade(10);
+		
+		
+		
+		cotacao.setItens(Arrays.asList(item,item2));
+		cotacaoRepository.save(cotacao);
+		
+		
+	}
+	
 	public void teste2()
 	{
 		Requisicao r = new Requisicao();
@@ -112,143 +237,6 @@ public class ControllerTest {
 		requisicaoRepository.save(r);
       		
 	}
-	/*
-	 * @Test public void testeCriarCategoriaAPI() throws JsonProcessingException
-	 * {
-	 * 
-	 * Categoria categoria = new Categoria(); categoria.setDescricaoCategoria(
-	 * "Descricao Categoria"); categoriaRepository.save(categoria);
-	 * 
-	 * }
-	 */
-  
-	
-	
-	/*
-	public void testeCriarFornecedor() throws JsonProcessingException {
-		
-		
-		Fornecedor fornecedor = new Fornecedor();
-		fornecedor.setAtivo(true);
-		fornecedor.setContato("Jose Silva");
-		
-		DadoEmpresa dadosEmpresa = dadosEmpresaRepository.findOne(61L);
-	    fornecedor.setDadosEmpresa(dadosEmpresa);
-		fornecedor.setObservacao("NAO SEI");
-		fornecedorRepository.save(fornecedor);
-	}
-	*/
-	
-/*	public void testeCriarProduto() throws JsonProcessingException {
-		
-		Produto produto = new Produto();
-		produto.setAtivo(true);
-		Categoria categoria = categoriaRepository.findOne(4L);
-		
-		produto.setCategoria(categoria);
-		produto.setCodigoBarra("99999991");
-		produto.setDescricao("cimento votoran");
-		
-		UnidadeMedida unidadeMedida =  unidadeRepository.findOne(109L);
-		produto.setUnidadeMedida(unidadeMedida);
-	    produto.setValorCompra(30000.0);
-		List <Fornecedor> fornecedores = fornecedorRepository.findAll();
-		produto.setFornecedores(fornecedores);
-		
-		protudoRepository.save(produto);
-    	
-	}*/
-/*	@Test
-	public void testeBuscarProduto() throws JsonProcessingException {
-		
-		Produto produto = protudoRepository.findOne(134L);
-		for(Fornecedor fornecedor: produto.getFornecedores())
-	       {
-	           System.out.println("1 - " + produto.getDescricao());
-	           System.out.println("Teste " + fornecedor.getContato());
-	       }
-	}*/
-	/*@Test
-	public void testeCriarFornecedor() throws JsonProcessingException {
-		
-		Imovel imovel = new Imovel();
-		
-		imovel.setAndar(10);
-		
-		imovelRepository.save(imovel);
-	}*/
-	/*@Test
-	public void testeCriarFuncionario() throws JsonProcessingException {
-	
-		Empreendimento empreendimento = empreendimentoRepository.findOne(83L);
-		
-		System.out.println("Descricao " + empreendimento.getDescricao());
-		System.out.println("Teste " + empreendimento.getEnderecoEmpreendimento().getBairro());
-	}*/
-	/*@Test
-	public void testeCriarFuncionario() throws JsonProcessingException {
-	
-		Funcionario funcionario = new Funcionario();
-	    funcionario.setNomeCompleto("Jose da Silva");
-	    funcionario.setCpf("12111111111");
-	    funcionario.setRg("231231231231");
-	    funcionario.setIdade(69);
-	    funcionario.setAtivo(true);
-		
-	    Endereco endereco = new Endereco(); 
-		endereco.setRua("Rua Pau da Bandeira"); 
-		endereco.setBairro("Bairro Tororó");
-		endereco.setCidade("Campinas"); 
-		endereco.setCep("132000-999");
-		endereco.setNumero(1011); 
-		endereco.setEstado("SP");
-		
-		enderecoRepository.save(endereco); 
-	    funcionario.setEndereco(endereco);
-	    
-	    funcionario.setDataNascimento(new Date());
-	    funcionario.setTelefoneCelular("3888888");
-	    funcionario.setTelefoneFixo("8979878997");
-	    Cargo cargo = new Cargo();
-		cargo.setDescricao("aux");
-		cargoRepository.save(cargo);
-		funcionario.setCargo(cargo);
-		funcionario.setCarteiraTrabalho(4545645);
-		Date dataAdmissao = new Date();
-		funcionario.setDataAdmissao(dataAdmissao);
-		funcionario.setEmpreendimento(null);
-		pessoaRepository.save(funcionario);
-		
-	}*/
-	/*@Test
-	public void testeCriarPrestadoraServico() throws JsonProcessingException {
-	
-		PrestadoraServico prestadoraServico = new PrestadoraServico();
-		DadoEmpresa dadosEmpresa = new DadoEmpresa();
-		dadosEmpresa.setNomeFantasia("Empresa Eng");
-		dadosEmpresa.setCnpj("90.888.111/1003-21");
-		dadosEmpresa.setInscricaoEstadual("9988.122.567.748");
-		dadosEmpresa.setRazaoSocial("Empresa Eng LTDA");
-		dadosEmpresa.setEmail("eng@terra.com");
-		dadosEmpresa.setTelefone("1938710076");
-		Endereco endereco = new Endereco(); 
-		endereco.setRua("Rua 100"); 
-		endereco.setBairro("Bairro da Lua");
-		endereco.setCidade("Campinas"); 
-		endereco.setCep("132110-785");
-		endereco.setNumero(41); 
-		endereco.setEstado("SP");
-		
-		enderecoRepository.save(endereco); 
-        dadosEmpresa.setEndereco(endereco);
-        dadosEmpresaRepository.save(dadosEmpresa);
-	    
-        prestadoraServico.setDadoEmpresa(dadosEmpresa);
-        prestadoraServicoRepository.save(prestadoraServico);
-        
-		
-	}*/
 
-	
 
 }

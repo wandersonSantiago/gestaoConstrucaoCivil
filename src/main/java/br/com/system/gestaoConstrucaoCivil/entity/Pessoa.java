@@ -2,6 +2,7 @@ package br.com.system.gestaoConstrucaoCivil.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,15 +14,12 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import br.com.system.gestaoConstrucaoCivil.enuns.EstadoCivilEnum;
-import br.com.system.gestaoConstrucaoCivil.util.data.LocalDateDeserializer;
-import br.com.system.gestaoConstrucaoCivil.util.data.LocalDateSerializer;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -45,9 +43,9 @@ public abstract class Pessoa extends AbstractPersistable<Long> implements Serial
 	@Column(nullable = false,length = 15)
 	protected String telefoneCelular;
 
-	@JsonDeserialize(using = LocalDateDeserializer.class)  
-	@JsonSerialize(using = LocalDateSerializer.class)
-	protected LocalDate dataNascimento;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "data_nascimento")
+	protected Date dataNascimento;
 	@Column(nullable = false)
 	protected String sexo;
 	@Column(nullable = true)
@@ -96,10 +94,10 @@ public abstract class Pessoa extends AbstractPersistable<Long> implements Serial
 	public void setTelefoneCelular(String telefoneCelular) {
 		this.telefoneCelular = telefoneCelular;
 	}
-	public LocalDate getDataNascimento() {
+	public Date getDataNascimento() {
 		return dataNascimento;
 	}
-	public void setDataNascimento(LocalDate dataNascimento) {
+	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 	public String getSexo() {

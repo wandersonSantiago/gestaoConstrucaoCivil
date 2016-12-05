@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @SequenceGenerator(name = "cotacao_empresa_item_id_seq",
@@ -18,7 +19,7 @@ sequenceName = "cotacao_empresa_item_id_seq",
 initialValue = 1,
 allocationSize = 1)
 @Table(name = "cotacao_empresa_item")
-public class CotacaoEmpresaItem implements Serializable {
+public class CotacaoEmpresaItem implements Serializable,Comparable<CotacaoEmpresaItem> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cotacao_empresa_item_id_seq")
@@ -37,6 +38,9 @@ public class CotacaoEmpresaItem implements Serializable {
 	@JoinColumn(name = "id_cotacao_empresa",nullable = false)
 	private CotacaoEmpresa cotacaoEmpresa;
 
+	@Transient
+	private boolean ganhou  = true;
+	
 	public Long getId() {
 		return id;
 	}
@@ -52,8 +56,16 @@ public class CotacaoEmpresaItem implements Serializable {
 	public void setItem(CotacaoItem item) {
 		this.item = item;
 	}
-
+    
 	
+	public boolean isGanhou() {
+		return ganhou;
+	}
+
+	public void setGanhou(boolean ganhou) {
+		this.ganhou = ganhou;
+	}
+
 	public Double getValorUnitario() {
 		return valorUnitario;
 	}
@@ -75,5 +87,28 @@ public class CotacaoEmpresaItem implements Serializable {
 
 	public void setCotacaoEmpresa(CotacaoEmpresa cotacaoEmpresa) {
 		this.cotacaoEmpresa = cotacaoEmpresa;
+	}
+
+	@Override
+	public int compareTo(CotacaoEmpresaItem outroItem) {
+		
+			
+		if(item.getId() == outroItem.getItem().getId())
+		{
+		
+		if(this.valorUnitario < outroItem.valorUnitario)
+		{
+			
+			return -1;
+		}
+		if(this.valorUnitario > outroItem.valorUnitario)
+		{
+			
+			return 1;
+		}
+		}
+		
+		return 0;
+		
 	}
 }

@@ -15,7 +15,7 @@ public class CriaEmpreendimento {
 		empreendimento.setDescricao("Construcao de Casa");
 		empreendimento.setAtivo(true);
 		//empreendimento.setCrea("45456456456");
-		empreendimento.setDataAbertura(LocalDate.now());
+	//	empreendimento.setDataAbertura(LocalDate.now());
 		empreendimento.setDatafechamento(null);
 		empreendimento.setEnderecoEmpreendimento(new CriaEndereco().getEndereco());
         empreendimento.setTipoEmpreendimento(TipoEmpreendimentoEnum.CONDOMINIO_DE_EDIFICIO_RESIDENCIAL);

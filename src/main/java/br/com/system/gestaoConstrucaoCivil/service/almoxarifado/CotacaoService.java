@@ -1,14 +1,12 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
-import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.fasterxml.jackson.annotation.JsonView;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Cotacao;
 import br.com.system.gestaoConstrucaoCivil.enuns.StatusCotacao;
@@ -25,7 +23,7 @@ public class CotacaoService {
 	
 	@Transactional(readOnly = false)
 	public void salvaAltera(Cotacao cotacao){
-		cotacao.setDataCriacao(LocalDate.now());
+		cotacao.setDataCriacao(new Date());
 		cotacao.setEmpreendimento(SessionUsuario.getInstance().getUsuario().getEmpreendimento());
 		adicionarCotacaoNoItem(cotacao);
 		cotacao.setStatusCotacao(StatusCotacao.ABERTO);

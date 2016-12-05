@@ -1,7 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
-import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.TransferenciaItem;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Transferencia;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.TransferenciaItem;
 import br.com.system.gestaoConstrucaoCivil.enuns.Situacao;
 import br.com.system.gestaoConstrucaoCivil.enuns.StatusTransferencia;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
@@ -31,12 +31,12 @@ public class TransferenciaService {
 	
 	
 	@Transactional(readOnly = false)
-	public void salvaAltera(Transferencia transferencia) {
+	public void salvarAlterar(Transferencia transferencia) {
 
 		transferencia.setStatusTransferencia(StatusTransferencia.PENDENTE);
 		transferencia.getNotaFiscal().setSituacao(Situacao.OK);
 		transferencia.getNotaFiscal().setTipoNota(TipoNotaEnum.TRANSFERENCIA_ESTOQUE_EMPREENDIMENTO);
-		transferencia.getNotaFiscal().setDataNota(LocalDate.now());
+		transferencia.getNotaFiscal().setDataNota(new Date());
 		transferencia.getNotaFiscal().setNumero(new GeraCodigo(100000,9999999).gerarNumeroTransferencia().longValue());
 		
 		Empreendimento empreendimentoSaida = SessionUsuario.getInstance().getUsuario().getEmpreendimento();

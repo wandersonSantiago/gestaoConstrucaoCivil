@@ -1,7 +1,6 @@
 package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -19,14 +18,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.enuns.Situacao;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
-import br.com.system.gestaoConstrucaoCivil.util.data.LocalDateDeserializer;
-import br.com.system.gestaoConstrucaoCivil.util.data.LocalDateSerializer;
 
 
 @Entity
@@ -54,14 +49,14 @@ public class NotaFiscal implements Serializable {
     @JoinColumn(name="id_empreendimento",nullable = true)
     private Empreendimento empreendimento;
     
-	@JsonDeserialize(using = LocalDateDeserializer.class)  
-	@JsonSerialize(using = LocalDateSerializer.class)
-	private LocalDate dataNota;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "data_nota")
+	private Date dataNota;
 	
 	@JsonView(View.Summary.class)
-	@JsonDeserialize(using = LocalDateDeserializer.class)  
-	@JsonSerialize(using = LocalDateSerializer.class)
-	private LocalDate dataVencimento;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "data_vencimento")
+	private Date dataVencimento;
 
 	@Column(nullable = true)
 	private String observacao;
@@ -93,19 +88,19 @@ public class NotaFiscal implements Serializable {
 		this.numero = numero;
 	}
 
-	public LocalDate getDataNota() {
+	public Date getDataNota() {
 		return dataNota;
 	}
 
-	public void setDataNota(LocalDate dataNota) {
+	public void setDataNota(Date dataNota) {
 		this.dataNota = dataNota;
 	}
 
-	public LocalDate getDataVencimento() {
+	public Date getDataVencimento() {
 		return dataVencimento;
 	}
 
-	public void setDataVencimento(LocalDate dataVencimento) {
+	public void setDataVencimento(Date dataVencimento) {
 		this.dataVencimento = dataVencimento;
 	}
 
