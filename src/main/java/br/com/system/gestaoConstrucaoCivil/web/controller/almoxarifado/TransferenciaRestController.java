@@ -27,7 +27,7 @@ public class TransferenciaRestController {
 	
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
 	public ResponseEntity<Collection<Transferencia>> salvar(@RequestBody Transferencia transferencia){
-		transferenciaService.salvaAltera(transferencia);
+		transferenciaService.salvarAlterar(transferencia);
 		HttpHeaders headers =  new HttpHeaders();
 		return new ResponseEntity(headers, HttpStatus.CREATED);				
 	}
