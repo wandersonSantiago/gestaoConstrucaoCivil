@@ -305,12 +305,11 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 	
 	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-}]).run(function(auth, role) {
+}]).run(function(auth ) {
 
 // Initialize auth module with the home page and login/logout path
 // respectively
 auth.init('/', '/login', '/logout');
-role.permission();
 });
 
 

@@ -44,9 +44,28 @@ app.controller('usuarioController', function($scope, toastr, role, $rootScope, u
 			});
 		}else{			
 			sweetAlert({ timer : 3000, text: "senha não coencidem, digite novamente" , type : "error", width: 300, higth: 100, padding: 20});
-		
 		}
-	}
+	};
+	
+	self.alteraSenha = function(usuario){		
+		if(self.senha == self.senhaRepitida){
+			usuario.usuario.senha = self.senha;
+			usuarioService.altera(usuario.usuario).
+			then(function(response){
+				self.usuario = null;
+				}, function(errResponse){
+			});
+		}else{			
+			sweetAlert({ timer : 3000, text: "senha não coencidem, digite novamente" , type : "error", width: 300, higth: 100, padding: 20});
+		}
+	};
+	
+	self.alteraEmpreendimento = function(usuario){		
+			usuarioService.altera(usuario).
+			then(function(response){
+				}, function(errResponse){
+			});		
+	};
 	
 	 self.salva = function(usuario){
 		if(self.senha == self.senhaRepitida){
@@ -58,11 +77,8 @@ app.controller('usuarioController', function($scope, toastr, role, $rootScope, u
 			});
 		}else{			
 			sweetAlert({ timer : 3000, text: "senha não coencidem, digite novamente" , type : "error", width: 300, higth: 100, padding: 20});
-		
 		}
-	}
-	 
-	
+	};	
 	
 	 self.lista = function(){
 		 usuarioService.lista().
@@ -78,6 +94,7 @@ app.controller('usuarioController', function($scope, toastr, role, $rootScope, u
 				}, function(errResponse){
 			});
 		};
+		
 		self.existeLogin = function(login){			
 			usuarioService.existeLogin(login).
 			then(function(p){
@@ -86,8 +103,7 @@ app.controller('usuarioController', function($scope, toastr, role, $rootScope, u
 				if(self.existe == true){
 					sweetAlert({ timer : 3000,  text :"Usuario já cadastrado",  type : "info", width: 300, higth: 300, padding: 20});
 					$scope.userCtrl.usuario.login = null;
-				}
-				
+				  }
 				}, function(errResponse){
 			});
 		};
@@ -101,10 +117,8 @@ app.controller('usuarioController', function($scope, toastr, role, $rootScope, u
 				}, function(errResponse){
 			});
 		};
-		
 		if(idUsuario){
 			self.buscaPorId(idUsuario);
-			
-		}
+	}
 	
 });
