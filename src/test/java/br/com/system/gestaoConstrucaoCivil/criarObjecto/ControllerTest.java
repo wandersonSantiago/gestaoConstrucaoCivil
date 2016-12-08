@@ -203,7 +203,7 @@ public class ControllerTest {
 	{
 		Requisicao r = new Requisicao();
 		r.setEmpreendimento(empreendimentoRepository.findAll().get(0));
-	    r.setDataSaida(LocalDate.now());
+	    
 		
 	    /*RequisicaoEdificioItem itemEdificio = new RequisicaoEdificioItem();
 		

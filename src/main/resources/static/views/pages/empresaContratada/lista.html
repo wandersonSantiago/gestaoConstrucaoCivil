@@ -3,7 +3,7 @@
 <br>
 
 <div ng-if="!ROLE_ADMIN" ng-include="'views/erros/permissao.html'"></div>
-<div class="generic-container" ng-if="ROLE_ADMIN"ler as adminCtrl">
+<div ng-if="ROLE_ADMIN"ler as adminCtrl">
 
 	<div class="box box-primary" ng-init="adminCtrl.lista()">
 		<!-- Default panel contents -->

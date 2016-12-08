@@ -3,6 +3,7 @@ package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -48,8 +49,8 @@ public class Requisicao implements Serializable{
 	protected List<RequisicaoItem> item;
 	
 
-	@JsonView(Summary.class)
-	private LocalDate dataSaida;
+	
+	private Date dataSaida;
 	
 	@JsonView(Summary.class)
     @Enumerated(EnumType.STRING)
@@ -91,10 +92,10 @@ public class Requisicao implements Serializable{
 		return statusRequisicao;
 	}
 	
-	public LocalDate getDataSaida() {
+	public Date getDataSaida() {
 		return dataSaida;
 	}
-	public void setDataSaida(LocalDate dataSaida) {
+	public void setDataSaida(Date dataSaida) {
 		this.dataSaida = dataSaida;
 	}
 	public void setStatusRequisicao(StatusRequisicao statusRequisicao) {

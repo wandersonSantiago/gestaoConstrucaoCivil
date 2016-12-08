@@ -8,23 +8,19 @@
 </div>
 <div id="site">
    	
-	
-		<form class="form-signin" role="form" 
-			ng-controller="loginController as loginCtrl" ng-submit="loginCtrl.login()">
+		<form ng-controller="loginController as loginCtrl" ng-submit="loginCtrl.login()">
 			<center><h2 class="form-signin-heading" contenteditable="false">Gestão Construção Civil</h2></center>
 
 				<p  ng-if="!loginCtrl.falhaLogin" class="alert alert-warning ">Usuário ou senha inválido</p>
 					
 			<input type="text" class="form-control" title="Insira seu usuário"
-				ng-model="loginCtrl.user.username" placeholder="Usuário"
-				required="" autofocus="" contenteditable="false"> 
+				ng-model="loginCtrl.user.username" placeholder="Usuário" required autofocus > 
 				<br>
 				<input	type="password" class="form-control" title="Insira sua senha"
 				ng-model="loginCtrl.user.password" placeholder="Senha"
-				required="" contenteditable="false"> 
+				required > 
 				<br>
 				<br>
-			 <!--   <input type="checkbox" value="relembre-me" class="">Relembre-me -->
 			<button class="btn btn-lg btn-primary btn-block"  type="submit">Entrar</button>
 		</form>
 
