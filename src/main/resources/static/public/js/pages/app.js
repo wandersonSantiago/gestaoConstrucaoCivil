@@ -8,6 +8,11 @@ var app = angular.module('gcc',['ngAnimate','ngRoute','ngMaterial', 'angucomplet
 				usuarioService.user().
 					then(function(u){
 						$rootScope.user = u;
+						if($rootScope.user.usuario.empreendimento.tipoEmpreendimento ==  "CONDOMINIO_DE_EDIFICIO_RESIDENCIAL"){
+							$rootScope.tipoEmpreendimento = true;
+						}else{
+							$rootScope.tipoEmpreendimento = false;
+						}
 						for(i = 0 ; i < $rootScope.user.usuario.perfilsUsuario.length ; i++ ){	
 							
 						var	perfil = $rootScope.user.usuario.perfilsUsuario[i];

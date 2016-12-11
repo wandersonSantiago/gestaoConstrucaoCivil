@@ -4,9 +4,10 @@ app.controller('usuarioController', function($scope, toastr, role, $rootScope, u
 	var idUsuario = $routeParams.idUsuario;
 	$scope.ativo = "ativo";
 	$scope.inativo = "inativo";
-	$rootScope.tipoEmpreendimento = false;
 	$scope.listaUsuario = [];
-	
+	self.listaPerfil = [];
+	$scope.listaPerfil = [];
+	 
 	$scope.perfil = function(){
 			usuarioService.perfil().
 				then(function(u){
@@ -15,24 +16,49 @@ app.controller('usuarioController', function($scope, toastr, role, $rootScope, u
 				});
 			};
 	
+		      $scope.permissao = function (user) {
+		        var idx = self.listaPerfil.indexOf(user);
+		        if (idx > -1) {
+		        	self.listaPerfil.splice(idx, 1);
+		        }
+		        else {
+		        	self.listaPerfil.push(user);
+		        }
+		      };
+		 
+		      $scope.existeExclui = function (user) {
+		          return self.listaPerfil.indexOf(user) > -1;
+		        };
+		     
+		        
+		        self.preencheLista  = function(u){		        	
+		    		for(i = 0; i < u.perfilsUsuario.length ; i ++){
+		    			for(c = 0; c < $scope.perfils.length ; c ++){
+		    				if($scope.perfils[c] == u.perfilsUsuario[i]){
+			    				$scope.ativado = true;
+			    			}
+		    			}		    			
+		    		}
+		    	}
+		       
+		        $scope.verificaPerfilparaSalvar = function(){
+		        	$scope.listaPerfil = [];
+		        	for(c = 0; c < $scope.perfils.length ; c ++){
+	    				if($scope.ativado === true){
+	    					$scope.listaPerfil.push({perfilsUsuario : $scope.perfils[c]});
+		    			}
+	    			}		  
+		        }
 		
 	self.user = function(){
 		usuarioService.user().
 			then(function(u){
-				$rootScope.user = u;
-				role.permission(u);
-				if($rootScope.user.usuario.empreendimento.tipoEmpreendimento ==  "CONDOMINIO_DE_EDIFICIO_RESIDENCIAL"){
-					$rootScope.tipoEmpreendimento = true;
-				}else{
-					$rootScope.tipoEmpreendimento = false;
-				}
+				$rootScope.user = u;				
 				}, function(errResponse){
 			});
 		};
 
-		if($rootScope.tipoEmpreendimento == false){
-			self.user();
-		}
+	
 	
 	self.altera = function(usuario){
 		if(self.senha == self.senhaRepitida){
@@ -70,6 +96,7 @@ app.controller('usuarioController', function($scope, toastr, role, $rootScope, u
 	 self.salva = function(usuario){
 		if(self.senha == self.senhaRepitida){
 			self.usuario.senha = self.senha;
+			self.usuario.perfilsUsuario = self.listaPerfil;
 			usuarioService.salva(self.usuario).
 			then(function(response){
 				self.usuario = null;
@@ -99,7 +126,6 @@ app.controller('usuarioController', function($scope, toastr, role, $rootScope, u
 			usuarioService.existeLogin(login).
 			then(function(p){
 				self.existe = p;
-				console.log(self.existe );
 				if(self.existe == true){
 					sweetAlert({ timer : 3000,  text :"Usuario já cadastrado",  type : "info", width: 300, higth: 300, padding: 20});
 					$scope.userCtrl.usuario.login = null;
@@ -114,6 +140,7 @@ app.controller('usuarioController', function($scope, toastr, role, $rootScope, u
 			usuarioService.buscaPorId(id).
 			then(function(p){
 				self.usuario = p;
+				self.preencheLista(p);
 				}, function(errResponse){
 			});
 		};
