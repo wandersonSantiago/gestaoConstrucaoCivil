@@ -163,21 +163,22 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 		self.salvaEdificio = function(){	
 			var requisicaoEdificioItem = {};
 			var requisicaoItem = [];
+			self.requisicaoItem = [];
 			for(i = 0 ; i < self.listaProduto.length ; i++ ){
-				requisicaoEdificioItem.quantidadeEstoque = self.listaProduto[i].quantidadeEstoque;
-				requisicaoEdificioItem.produto = self.listaProduto[i].produto;
-				requisicaoEdificioItem.areaProduto = self.listaProduto[i].areaProduto;
-				requisicaoEdificioItem.quantidade = self.listaProduto[i].quantidade;
-				requisicaoEdificioItem.andar = self.listaProduto[i].andar;
-				requisicaoEdificioItem.torre = self.listaProduto[i].torre;
-				requisicaoEdificioItem.apartamento = self.listaProduto[i].apartamento;
-				requisicaoEdificioItem.valorUnitario = self.listaProduto[i].valorUnitario;
+				requisicaoItem.quantidadeEstoque = self.listaProduto[i].quantidadeEstoque;
+				requisicaoItem.produto = self.listaProduto[i].produto;
+				requisicaoItem.areaProduto = self.listaProduto[i].areaProduto;
+				requisicaoItem.quantidade = self.listaProduto[i].quantidade;
+				requisicaoItem.andar = self.listaProduto[i].andar;
+				requisicaoItem.torre = self.listaProduto[i].torre;
+				requisicaoItem.apartamento = self.listaProduto[i].apartamento;
+				requisicaoItem.valorUnitario = self.listaProduto[i].valorUnitario;
 				
-				requisicaoItem.push({requisicaoEdificioItem});
+				self.requisicaoItem.push({requisicaoItem});
 			//	console.log(requisicaoItem);
 			}
 		//	var requisicao = {requisicaoEdificioItem};
-			self.requisicao = {requisicaoItem};
+			self.requisicao = {requisicaoEdificilItem : self.requisicaoItem};
 			console.log(self.requisicao);
 			requisicaoEstoqueService.salvaEdificio(self.requisicao)
 			.then($timeout(function(response){
