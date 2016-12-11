@@ -35,11 +35,6 @@ app.factory(
 						if (response.data.name) {
 							auth.authenticated = true;
 							$rootScope.logado = true;
-<<<<<<< HEAD
-=======
-
-							
->>>>>>> branch 'develop' of https://github.com/wandersonSantiago/gestaoConstrucaoCivil.git
 						} else {
 							auth.authenticated = false;
 						}
@@ -73,10 +68,6 @@ app.factory(
 						if (authenticated) {
 							$location.path(auth.path);
 							$rootScope.logado = true;
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'develop' of https://github.com/wandersonSantiago/gestaoConstrucaoCivil.git
 						}
 					})
 
