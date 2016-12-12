@@ -25,8 +25,11 @@ public class NotaFiscalProdutoService {
 	@Autowired
 	private NotaFiscalProdutoRepository notaFiscalProdutoRepository;
 	@Autowired
-	private EstoqueEmpreendimentoService estoque;
-    @Autowired
+	private EntradaEstoqueService entradaEstoque;
+	@Autowired
+	private BaixaEstoqueService baixarEstoque;
+	
+	@Autowired
     private EmpreendimentoService empreendimentoService;
     
     
@@ -48,7 +51,7 @@ public class NotaFiscalProdutoService {
         for(NotaFiscalItem itemNota : notaFiscalProduto.getItens())
         {
         	 EntradaOuBaixa entrada = new EntradaOuBaixa(itemNota.getProduto(), itemNota.getQuantidade(),empreendimentoDoUsuario);
-        	estoque.entradaEstoque(entrada); 
+        	 entradaEstoque.entradaEstoque(entrada); 
         }
        
      }
@@ -95,7 +98,7 @@ public class NotaFiscalProdutoService {
 		for(NotaFiscalItem item : nota.getItens())
 		{
 			EntradaOuBaixa baixa = new EntradaOuBaixa(item.getProduto(), item.getQuantidade(), nota.getNotaFiscal().getEmpreendimento());
-			estoque.baixar(baixa);
+			baixarEstoque.baixar(baixa);
 		}
 		empreendimentoService.removerValorGasto(nota.getNotaFiscal().getValorTotal());
 		nota.getNotaFiscal().setSituacao(Situacao.CANCELADA);

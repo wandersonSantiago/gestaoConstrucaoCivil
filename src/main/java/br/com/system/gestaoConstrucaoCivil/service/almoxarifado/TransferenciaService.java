@@ -13,11 +13,10 @@ import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Transferencia;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.TransferenciaItem;
 import br.com.system.gestaoConstrucaoCivil.enuns.Situacao;
 import br.com.system.gestaoConstrucaoCivil.enuns.StatusTransferencia;
-import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
 import br.com.system.gestaoConstrucaoCivil.pojo.EntradaOuBaixa;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.TransferenciaRepository;
-import br.com.system.gestaoConstrucaoCivil.util.GeraCodigo;
+
 
 
 @Service
@@ -27,17 +26,15 @@ public class TransferenciaService {
 	@Autowired
 	private TransferenciaRepository transferenciaRepository;
 	@Autowired
-	private EstoqueEmpreendimentoService estoqueService;
+	private BaixaEstoqueService baxarEstoque;
+	@Autowired 
+	private EntradaEstoqueService entradaEstoque;
 	
 	
 	@Transactional(readOnly = false)
 	public void salvarAlterar(Transferencia transferencia) {
 
-		transferencia.setStatusTransferencia(StatusTransferencia.PENDENTE);
-		transferencia.getNotaFiscal().setSituacao(Situacao.OK);
-		transferencia.getNotaFiscal().setTipoNota(TipoNotaEnum.TRANSFERENCIA_ESTOQUE_EMPREENDIMENTO);
-		transferencia.getNotaFiscal().setDataNota(new Date());
-		transferencia.getNotaFiscal().setNumero(new GeraCodigo(100000,9999999).gerarNumeroTransferencia().longValue());
+        transferencia.novaTransferencia();
 		
 		Empreendimento empreendimentoSaida = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
 		transferencia.getNotaFiscal().setEmpreendimento(empreendimentoSaida);
@@ -46,7 +43,7 @@ public class TransferenciaService {
 		for (TransferenciaItem item : transferencia.getItens()) {
 			EntradaOuBaixa baixa = new EntradaOuBaixa(item.getProduto(), item.getQuantidade(),
 					transferencia.getNotaFiscal().getEmpreendimento());
-			estoqueService.baixar(baixa);
+			baxarEstoque.baixar(baixa);
 		}
 		transferencia.setStatusTransferencia(StatusTransferencia.PENDENTE);
 		transferenciaRepository.save(transferencia);
@@ -67,7 +64,7 @@ public class TransferenciaService {
 		for(TransferenciaItem item : transferencia.getItens())
 		{
 			EntradaOuBaixa entrada = new EntradaOuBaixa(item.getProduto(),item.getQuantidade(), transferencia.getEmpreendimentoDestino());
-			estoqueService.entradaEstoque(entrada);	
+			entradaEstoque.entradaEstoque(entrada);	
 		}
 	    transferencia.setStatusTransferencia(StatusTransferencia.EFETUADO);
 		
@@ -82,7 +79,7 @@ public class TransferenciaService {
 		for(TransferenciaItem item : transferencia.getItens())
 		{
 			EntradaOuBaixa entrada = new EntradaOuBaixa(item.getProduto(),item.getQuantidade(), transferencia.getNotaFiscal().getEmpreendimento());
-			estoqueService.entradaEstoque(entrada);
+			entradaEstoque.entradaEstoque(entrada);
 		}
 		transferenciaRepository.save(transferencia);
 	}

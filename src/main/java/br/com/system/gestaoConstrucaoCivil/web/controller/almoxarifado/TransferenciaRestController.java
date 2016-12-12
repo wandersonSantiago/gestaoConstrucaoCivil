@@ -31,7 +31,7 @@ public class TransferenciaRestController {
 		HttpHeaders headers =  new HttpHeaders();
 		return new ResponseEntity(headers, HttpStatus.CREATED);				
 	}
-	@JsonView(View.Summary.class)
+	
 	@RequestMapping(value = "/lista", method = RequestMethod.GET)
 	public ResponseEntity<Collection<Transferencia>> buscarTodos(){
 		
@@ -39,20 +39,18 @@ public class TransferenciaRestController {
 		return new ResponseEntity<Collection<Transferencia>>(transferencia, HttpStatus.OK);
 	}
 	
-	@JsonView(View.Summary.class)
 	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Transferencia> buscarPorId(@PathVariable Long id) {
 
 		return new ResponseEntity<Transferencia>(transferenciaService.buscaPorId(id), HttpStatus.OK);
 	}
 
-	@JsonView(View.Summary.class)
 	@RequestMapping(value = "/recebida", method = RequestMethod.GET)
 	public ResponseEntity<Collection<Transferencia>> buscarTransferenciaRecebida() {
 		
     	return new ResponseEntity<Collection<Transferencia>>(transferenciaService.buscarTransferenciaRecebida(), HttpStatus.OK);
 	}
-	@JsonView(View.Summary.class)
+	
 	@RequestMapping(value = "/enviada", method = RequestMethod.GET)
 	public ResponseEntity<Collection<Transferencia>>  buscarTransferenciaEnviada() {
 		

@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -20,17 +21,16 @@ import com.fasterxml.jackson.annotation.JsonView;
 @Table(name = "cotacao_item")
 public class CotacaoItem implements Serializable {
 
-	@JsonView(View.Summary.class)
+	
     @Id	
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "item_cotacao_id_seq")
     private Long id;
-	@JsonView(View.Summary.class)
 	@Column(nullable = false)
 	private String descricao;
-	@JsonView(View.Summary.class)
 	@Column(nullable = false)
 	private Integer quantidade;
 	
+    @JsonIgnore
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "id_cotacao")
 	private Cotacao cotacao;

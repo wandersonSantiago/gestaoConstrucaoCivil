@@ -19,7 +19,8 @@ public class CotacaoService {
 	
 	@Autowired
 	private CotacaoRepository cotacaoRepository;
-	
+	@Autowired
+	private CotacaoEmpresaService cotacaoEmpresa;
 	
 	@Transactional(readOnly = false)
 	public void salvaAltera(Cotacao cotacao){
@@ -44,6 +45,12 @@ public class CotacaoService {
 	
 	public Cotacao buscaPorId(Long id){
 		return cotacaoRepository.findOne(id);
+	}
+	public void fecharCotacao(Long idCotacao)
+	{
+		Cotacao cotacao = cotacaoRepository.findOne(idCotacao);
+		cotacao.setStatusCotacao(StatusCotacao.FECHADO);
+		cotacaoEmpresa.verificarItensGanhadores(cotacao);
 	}
 
 }

@@ -19,7 +19,7 @@ sequenceName = "cotacao_empresa_item_id_seq",
 initialValue = 1,
 allocationSize = 1)
 @Table(name = "cotacao_empresa_item")
-public class CotacaoEmpresaItem implements Serializable,Comparable<CotacaoEmpresaItem> {
+public class CotacaoEmpresaItem implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cotacao_empresa_item_id_seq")
@@ -89,26 +89,7 @@ public class CotacaoEmpresaItem implements Serializable,Comparable<CotacaoEmpres
 		this.cotacaoEmpresa = cotacaoEmpresa;
 	}
 
-	@Override
-	public int compareTo(CotacaoEmpresaItem outroItem) {
+
 		
-			
-		if(item.getId() == outroItem.getItem().getId())
-		{
-		
-		if(this.valorUnitario < outroItem.valorUnitario)
-		{
-			
-			return -1;
-		}
-		if(this.valorUnitario > outroItem.valorUnitario)
-		{
-			
-			return 1;
-		}
-		}
-		
-		return 0;
-		
-	}
+	
 }

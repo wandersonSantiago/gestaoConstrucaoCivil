@@ -1,10 +1,10 @@
 package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -17,10 +17,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
+import br.com.system.gestaoConstrucaoCivil.enuns.Situacao;
 import br.com.system.gestaoConstrucaoCivil.enuns.StatusTransferencia;
+import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
+import br.com.system.gestaoConstrucaoCivil.util.GeraCodigo;
 
 @Entity
 @SequenceGenerator(name = "transferencia_id_seq",
@@ -30,41 +31,28 @@ allocationSize = 1)
 @Table(name = "transferencia")
 public class Transferencia implements Serializable {
 
-	@JsonView(View.Summary.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "transferencia_id_seq")
 	private Long id;
 
-	@JsonView(View.Summary.class)
 	@ManyToOne
 	@JoinColumn(name = "id_empreendimento_destino",nullable = false)
 	private Empreendimento empreendimentoDestino;
 	
-	@JsonView(View.Summary.class)
 	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
 	@JoinColumn(name = "id_nota_fiscal", nullable = true)
 	private NotaFiscal notaFiscal;
 	
-	@JsonView(View.Summary.class)
 	@Enumerated(EnumType.STRING)
 	private StatusTransferencia statusTransferencia;
 
-	@JsonView(View.Summary.class)
 	@OneToMany(mappedBy = "transferencia", cascade = CascadeType.ALL)
 	private List<TransferenciaItem> itens;
-	
-	
 	
 	public NotaFiscal getNotaFiscal() {
 		return notaFiscal;
 	}
-
-	public void setNotaFiscal(NotaFiscal notaFiscal) {
-		this.notaFiscal = notaFiscal;
-	}
-
-	
-	public Long getId() {
+    public Long getId() {
 		return id;
 	}
 
@@ -104,6 +92,14 @@ public class Transferencia implements Serializable {
 			quantidadeItem += item.getQuantidade();
 		}
 		return totalItem * quantidadeItem;
+	}
+	public void novaTransferencia()
+	{
+		statusTransferencia  = StatusTransferencia.PENDENTE;
+		getNotaFiscal().setSituacao(Situacao.OK);
+		getNotaFiscal().setTipoNota(TipoNotaEnum.TRANSFERENCIA_ESTOQUE_EMPREENDIMENTO);
+		getNotaFiscal().setDataNota(new Date());
+		getNotaFiscal().setNumero(new GeraCodigo(100000,9999999).gerarNumeroTransferencia().longValue());
 	}
 	@Override
 	public int hashCode() {

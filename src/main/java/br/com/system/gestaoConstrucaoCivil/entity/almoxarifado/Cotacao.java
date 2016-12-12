@@ -21,8 +21,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.enuns.StatusCotacao;
 
@@ -31,31 +29,25 @@ import br.com.system.gestaoConstrucaoCivil.enuns.StatusCotacao;
 @Table(name = "cotacao")
 public class Cotacao implements Serializable{
 
-	@JsonView(View.Summary.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cotacao_id_seq")
 	private Long id;
 
-	@JsonView(View.Summary.class)
 	@Column(nullable = false)
 	private String tema;
 	
-	@JsonView(View.Summary.class)
-	//@JsonIgnore
+	
 	@OneToMany(mappedBy = "cotacao",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private List<CotacaoItem> itens;
 	
-	@JsonView(View.Summary.class)
 	@ManyToOne
 	@JoinColumn(name = "id_empreendimento",nullable = false)
 	private Empreendimento empreendimento;
 	
-	@JsonView(View.Summary.class)
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_limite")
 	private Date dataLimite;
 	
-	@JsonView(View.Summary.class)
 	@Enumerated(EnumType.STRING)
 	private StatusCotacao statusCotacao;
 	

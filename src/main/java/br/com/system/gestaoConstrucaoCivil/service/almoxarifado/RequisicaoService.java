@@ -7,70 +7,48 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Requisicao;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.RequisicaoItem;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.View.Summary;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.IRequisicao;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Item;
 import br.com.system.gestaoConstrucaoCivil.enuns.StatusRequisicao;
 import br.com.system.gestaoConstrucaoCivil.pojo.EntradaOuBaixa;
-import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
-import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.RequisicaoRepository;
+import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.InformacaoRequisicaoRepository;
 
 @Service
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
 public class RequisicaoService {
 
 	@Autowired
-	private RequisicaoRepository requisicaoRepository;
+	private InformacaoRequisicaoRepository requisicaoRepository;
 	@Autowired
-	private EstoqueEmpreendimentoService estoque;
+	private BaixaEstoqueService baixaEstoque;
 	
 	
 	@Transactional(readOnly = false)
-	public void salvarOuEditar(Requisicao requisicao)
+	public void aceitar(IRequisicao requisicao)
 	{
-		adicionarItemRequisicao(requisicao);
-		Empreendimento empreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
-	    requisicao.setEmpreendimento(empreendimento);
-	    requisicaoRepository.save(requisicao);
-	}
-	public void adicionarItemRequisicao(Requisicao requisicao)
-	{
-		requisicao.getItem().forEach(item -> item.setRequisicao(requisicao));
-	}
-	@JsonView(Summary.class)
-	public List<Requisicao> buscarTodos()
-	{
-		return requisicaoRepository.findAll();
-	}
-	public Requisicao buscarPorId(Long id)
-    {
-    	return requisicaoRepository.findOne(id);
-    }
-	public void aceitarRequisicao(Integer numeroRequisicao)
-	{
-		Empreendimento empreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
-		Requisicao requisicao = requisicaoRepository.findByNumeroRequisicao(numeroRequisicao);
-		if(requisicao.getStatusRequisicao() == StatusRequisicao.PENDENTE)
+		Empreendimento empreendimento = requisicao.getInformacaoRequisicao().getEmpreendimento();
+		if(requisicao.getInformacaoRequisicao().getStatusRequisicao() == StatusRequisicao.PENDENTE)
 		{
-			for(RequisicaoItem item: requisicao.getItem())
+			
+		   List<Item> itens = requisicao.getItens();
+			
+			for(Item item: itens)
 			{
 			    EntradaOuBaixa baixa = new EntradaOuBaixa(item.getProduto(), item.getQuantidade(), empreendimento);
 			
-			    estoque.baixar(baixa);
+			    baixaEstoque.baixar(baixa);
 				
 			}
-		   requisicao.setStatusRequisicao(StatusRequisicao.EFETUADO);	
+		   requisicao.getInformacaoRequisicao().statusAceito();
+		   requisicaoRepository.save(requisicao.getInformacaoRequisicao());
 		}
 		
 	}
- 
-	public void rejeitarRequisicao(Integer numeroRequisicao)
+	@Transactional(readOnly = false)
+	public void rejeitar(IRequisicao requisicao)
 	{
-		Empreendimento empreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
-		Requisicao requisicao = requisicaoRepository.findByNumeroRequisicao(numeroRequisicao);
-		requisicao.setStatusRequisicao(StatusRequisicao.RECUSADO);
-}
+		requisicao.getInformacaoRequisicao().statusRejeitado();
+		requisicaoRepository.save(requisicao.getInformacaoRequisicao());
+	}
 }
