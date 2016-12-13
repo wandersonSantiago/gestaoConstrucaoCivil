@@ -19,6 +19,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.View.Summary;
 import br.com.system.gestaoConstrucaoCivil.enuns.StatusRequisicao;
+import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
+import br.com.system.gestaoConstrucaoCivil.service.UsuarioService;
 import br.com.system.gestaoConstrucaoCivil.util.GeraCodigo;
 
 
@@ -77,6 +79,7 @@ public class InformacaoRequisicao extends AbstractPersistable<Long> implements S
 		this.statusRequisicao = StatusRequisicao.PENDENTE;
         GeraCodigo gerar = new GeraCodigo(100000,999999);
 		this.numeroRequisicao = gerar.gerarNumeroRequisicao();
+		this.empreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
 	}
 	public void statusAceito()
 	{

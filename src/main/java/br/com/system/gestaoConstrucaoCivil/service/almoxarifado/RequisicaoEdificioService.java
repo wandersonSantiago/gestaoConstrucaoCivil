@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.InformacaoRequisicao;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.RequisicaoEdificio;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.RequisicaoEdificioRepository;
 
@@ -22,7 +23,9 @@ public class RequisicaoEdificioService {
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(RequisicaoEdificio requisicaoEdificio){
 		
-		requisicaoEdificio.getInformacaoRequisicao().novaRequisicao();
+		InformacaoRequisicao informacaoRequisicao = new InformacaoRequisicao();
+		informacaoRequisicao.novaRequisicao();
+		requisicaoEdificio.setInformacaoRequisicao(informacaoRequisicao);
 		requisicaoRepository.save(requisicaoEdificio);
 	}
 	public Collection<RequisicaoEdificio> buscarTodos(){
