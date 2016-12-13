@@ -161,51 +161,36 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 		
 		
 		self.salvaEdificio = function(){	
-			var requisicaoEdificioItem = {};
-			var requisicaoItem = [];
-			self.requisicaoItem = [];
-			for(i = 0 ; i < self.listaProduto.length ; i++ ){
-				requisicaoItem.quantidadeEstoque = self.listaProduto[i].quantidadeEstoque;
-				requisicaoItem.produto = self.listaProduto[i].produto;
-				requisicaoItem.areaProduto = self.listaProduto[i].areaProduto;
-				requisicaoItem.quantidade = self.listaProduto[i].quantidade;
-				requisicaoItem.andar = self.listaProduto[i].andar;
-				requisicaoItem.torre = self.listaProduto[i].torre;
-				requisicaoItem.apartamento = self.listaProduto[i].apartamento;
-				requisicaoItem.valorUnitario = self.listaProduto[i].valorUnitario;
-				
-				self.requisicaoItem.push({requisicaoItem});
-			//	console.log(requisicaoItem);
-			}
-		//	var requisicao = {requisicaoEdificioItem};
-			self.requisicao = {requisicaoEdificilItem : self.requisicaoItem};
-			console.log(self.requisicao);
-			requisicaoEstoqueService.salvaEdificio(self.requisicao)
+			self.requisicaoEdificio = {};			
+			self.requisicaoEdificio.itens = self.listaProduto;
+			console.log(self.requisicaoEdificio);
+			requisicaoEstoqueService.salvaEdificio(self.requisicaoEdificio)
 			.then($timeout(function(response){
-				self.listaProdutosComEstoque();
-				self.limpaCampo();
+				//self.listaProdutosComEstoque();
+				//self.limpaCampo();
 			},500), function(errResponse){					
 			});			
 		}
 		
 		self.salvaCasa = function(){
-			self.requisicaoCasa = self.listaProduto;
-			self.requisicaoCasa.item = [self.listaProduto]; 
+			self.requisicaoCasa = {};
+			self.requisicaoCasa.itens = self.listaProduto; 
 			console.log(self.listaProduto);
 			requisicaoEstoqueService.salvaCasa(self.requisicaoCasa)
 			.then($timeout(function(response){
-				self.listaProdutosComEstoque();
-				self.limpaCampo();
+				//self.listaProdutosComEstoque();
+				//self.limpaCampo();
 			},500), function(errResponse){					
 			});
 		}
 		
 		self.salvaEdificacoesComunitaria = function(){
-			self.requisicaoOutros = self.listaProduto;
+			self.requisicaoOutros = {};
+			self.requisicaoOutros.itens = self.listaProduto;
 			requisicaoEstoqueService.salvaOutros(self.requisicaoOutros)
 			.then( $timeout(function(response){
-				self.listaProdutosComEstoque();
-				self.limpaCampo();
+			//	self.listaProdutosComEstoque();
+			//	self.limpaCampo();
 			},500), function(errResponse){		
 			});
 		}

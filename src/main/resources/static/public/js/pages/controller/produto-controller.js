@@ -7,6 +7,7 @@ app.controller('produtoController', function($scope,produtoService, $routeParams
 	
 		self.salva = function(produto){
 		 self.produto.fornecedores = self.listaFornecedores;
+		 console.log(self.produto);
 			 produtoService.salva(self.produto).
 				then(function(response){
 					self.produto = null;
