@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import br.com.system.gestaoConstrucaoCivil.enuns.CotacaoEmpresaItemStatus;
 
 @Entity
 @SequenceGenerator(name = "cotacao_empresa_item_id_seq",
@@ -38,8 +42,9 @@ public class CotacaoEmpresaItem implements Serializable {
 	@JoinColumn(name = "id_cotacao_empresa",nullable = false)
 	private CotacaoEmpresa cotacaoEmpresa;
 
-	@Transient
-	private boolean ganhou  = true;
+	@Enumerated(EnumType.STRING)
+	private CotacaoEmpresaItemStatus status;
+	
 	
 	public Long getId() {
 		return id;
@@ -58,12 +63,12 @@ public class CotacaoEmpresaItem implements Serializable {
 	}
     
 	
-	public boolean isGanhou() {
-		return ganhou;
+	public CotacaoEmpresaItemStatus getStatus() {
+		return status;
 	}
 
-	public void setGanhou(boolean ganhou) {
-		this.ganhou = ganhou;
+	public void setStatus(CotacaoEmpresaItemStatus status) {
+		this.status = status;
 	}
 
 	public Double getValorUnitario() {

@@ -46,11 +46,13 @@ public class CotacaoService {
 	public Cotacao buscaPorId(Long id){
 		return cotacaoRepository.findOne(id);
 	}
+	@Transactional(readOnly = false)
 	public void fecharCotacao(Long idCotacao)
 	{
 		Cotacao cotacao = cotacaoRepository.findOne(idCotacao);
 		cotacao.setStatusCotacao(StatusCotacao.FECHADO);
-		cotacaoEmpresa.verificarItensGanhadores(cotacao);
+		cotacaoEmpresa.verificarGanhadores(cotacao);
+		cotacaoRepository.save(cotacao);
 	}
 
 }
