@@ -195,14 +195,27 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 			});
 		}
 		
-		self.lista = function(){
-			requisicaoEstoqueService.lista().
+		self.listaRequisicaoEdificio = function(){
+			requisicaoEstoqueService.listaRequisicaoEdificio().
 				then(function(t){
-					self.listaRequisicao = t;				
-					console.log(self.listaRequisicao);
+					$scope.listaRequisicaoEdificio = t;			
 					}, function(errResponse){
 				});
 			};
+		self.listaRequisicaoCasa = function(){
+			requisicaoEstoqueService.listaRequisicaoCasa().
+				then(function(t){
+					$scope.listaRequisicaoCasa = t;			
+					}, function(errResponse){
+				});
+			};
+		self.listaRequisicaoOutros = function(){
+				requisicaoEstoqueService.listaRequisicaoOutros().
+					then(function(t){
+						$scope.listaRequisicaoOutros = t;			
+						}, function(errResponse){
+					});
+				};
 		
 		self.limpaCampo = function(){
 			self.objeto = null;
