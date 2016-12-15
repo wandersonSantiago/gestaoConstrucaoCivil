@@ -41,6 +41,11 @@ public class RequisicaoCasa extends AbstractPersistable<Long> implements IRequis
 
 	public void setItens(List<RequisicaoCasaItem> itens) {
 		this.itens = itens;
+		
+		for(RequisicaoCasaItem item: this.itens)
+		{
+			item.setRequisicaoCasa(this);
+		}
 	}
     
 	

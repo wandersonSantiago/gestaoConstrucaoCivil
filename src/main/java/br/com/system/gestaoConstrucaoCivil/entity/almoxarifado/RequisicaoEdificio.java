@@ -32,7 +32,13 @@ public class RequisicaoEdificio extends AbstractPersistable<Long> implements IRe
 	}
 
 	public void setItens(List<RequisicaoEdificioItem> itens) {
+	
 		this.itens = itens;
+		
+		for(RequisicaoEdificioItem item: this.itens)
+		{
+			item.setRequisicaoEdificio(this);
+		}
 	}
 
 	public InformacaoRequisicao getInformacaoRequisicao() {

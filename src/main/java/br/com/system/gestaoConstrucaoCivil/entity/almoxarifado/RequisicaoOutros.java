@@ -40,5 +40,10 @@ public class RequisicaoOutros extends AbstractPersistable<Long> implements IRequ
 
 	public void setItens(List<RequisicaoOutrosItem> itens) {
 		this.itens = itens;
+		
+		for(RequisicaoOutrosItem item: this.itens)
+		{
+			item.setRequisicaoOutros(this);
+		}
 	}
 }
