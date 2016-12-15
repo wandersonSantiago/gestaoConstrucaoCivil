@@ -23,6 +23,7 @@ import javax.persistence.TemporalType;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.enuns.StatusCotacao;
+import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 
 @Entity
 @SequenceGenerator(name = "cotacao_id_seq", sequenceName = "cotacao_id_seq", initialValue = 1, allocationSize = 1)
@@ -32,25 +33,18 @@ public class Cotacao implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cotacao_id_seq")
 	private Long id;
-
 	@Column(nullable = false)
 	private String tema;
-	
-	
 	@OneToMany(mappedBy = "cotacao",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private List<CotacaoItem> itens;
-	
 	@ManyToOne
 	@JoinColumn(name = "id_empreendimento",nullable = false)
 	private Empreendimento empreendimento;
-	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_limite")
 	private Date dataLimite;
-	
 	@Enumerated(EnumType.STRING)
 	private StatusCotacao statusCotacao;
-	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_criacao")
 	private Date dataCriacao;
@@ -94,24 +88,30 @@ public class Cotacao implements Serializable{
 	public void setDataLimite(Date dataLimite) {
 		this.dataLimite = dataLimite;
 	}
-   
-
 	public Date getDataCriacao() {
 		return dataCriacao;
 	}
-
-	public void setDataCriacao(Date dataCriacao) {
-		this.dataCriacao = dataCriacao;
-	}
-    
 	public StatusCotacao getStatusCotacao() {
 		return statusCotacao;
 	}
-
-	public void setStatusCotacao(StatusCotacao statusCotacao) {
-		this.statusCotacao = statusCotacao;
+	public void abrir()
+    {
+    	this.dataCriacao = new Date();
+    	this.statusCotacao = StatusCotacao.ABERTO;
+    	this.empreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
+    	adicionarCotacaoNoItem();
+    }
+	private void adicionarCotacaoNoItem() {
+		
+		for(CotacaoItem item : itens)
+		{
+			item.setContacao(this);
+		}
 	}
-
+    public void fechar()
+    {
+    	this.statusCotacao = StatusCotacao.FECHADO;
+    }
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -7,6 +7,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.system.gestaoConstrucaoCivil.entity.AreaProduto;
 
 @Entity
@@ -15,6 +17,7 @@ public class RequisicaoOutrosItem   extends Item implements Serializable{
 
 	private String descricao;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "id_requisicao_outros")
 	private RequisicaoOutros requisicaoOutros;

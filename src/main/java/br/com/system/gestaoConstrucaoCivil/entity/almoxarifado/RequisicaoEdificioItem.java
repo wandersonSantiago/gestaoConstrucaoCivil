@@ -7,6 +7,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.system.gestaoConstrucaoCivil.entity.AreaProduto;
 
 @Entity
@@ -22,7 +24,7 @@ public class RequisicaoEdificioItem extends Item implements Serializable{
 	@JoinColumn(name = "id_area_produto")
 	private AreaProduto areaProduto;
 	
-	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "id_requisicao_edificio")
 	private RequisicaoEdificio requisicaoEdificio;
