@@ -8,10 +8,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -26,19 +28,19 @@ public class CategoriaRestController {
 	@Autowired
 	private Servico<Categoria> categoriaService;
 
-	@RequestMapping(method = RequestMethod.GET, value = "/lista")
+	@GetMapping(value = "/lista")
 	public ResponseEntity<Iterable<Categoria>> buscarTodos() {
 		Iterable<Categoria> categoria = categoriaService.buscarTodos();
 		return new ResponseEntity<Iterable<Categoria>>(categoria, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
+	@GetMapping(value = "/buscaPorId/{id}")
 	public ResponseEntity<Categoria> buscarPorId(@PathVariable Long id) {
 
 		return new ResponseEntity<Categoria>(categoriaService.buscarPorId(id), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/salva", method = RequestMethod.POST)
+	@PostMapping(value = "/salva")
 	public ResponseEntity salvar(@RequestBody @Validated Categoria categoria, BindingResult result,
 			UriComponentsBuilder ucBuilder) {
 
@@ -51,7 +53,7 @@ public class CategoriaRestController {
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/altera", method = RequestMethod.PUT)
+	@PutMapping(value = "/altera")
 	public ResponseEntity alterar(@RequestBody Categoria categoria, UriComponentsBuilder ucBuilder) {
 		categoriaService.salvarOuEditar(categoria);
 		HttpHeaders headers = new HttpHeaders();
@@ -60,7 +62,7 @@ public class CategoriaRestController {
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/tipoCategoria")
+	@GetMapping(value = "/tipoCategoria")
 	public ResponseEntity<Iterable<TipoCategoriaEnum>> tipoCategoria() {
 		Iterable<TipoCategoriaEnum> tipoCategoriaEnum = Arrays.asList(TipoCategoriaEnum.values());
 		return new ResponseEntity<Iterable<TipoCategoriaEnum>>(tipoCategoriaEnum, HttpStatus.OK);

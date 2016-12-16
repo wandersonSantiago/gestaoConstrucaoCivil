@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,20 +23,20 @@ public class AreaRestController  {
 	@Autowired 
 	private AreaService areaService;
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/lista")
+	@GetMapping(value = "/lista")
 	public ResponseEntity<Iterable<AreaProduto>> buscarTodos()
 	{
 		Iterable<AreaProduto> areaProduto = areaService.buscarTodos();
 		return new ResponseEntity<Iterable<AreaProduto>>(areaProduto, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
+	@GetMapping(value = "/buscaPorId/{id}")
 	public ResponseEntity<AreaProduto> buscarPorId(@PathVariable Long id) {
 
 		return new ResponseEntity<AreaProduto>(areaService.buscarPorId(id), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/salva", method = RequestMethod.POST)
+	@PostMapping(value = "/salva")
 	public ResponseEntity salvar(@RequestBody AreaProduto areaProduto,UriComponentsBuilder ucBuilder)
 	{
 		areaService.salvarOuEditar(areaProduto);
