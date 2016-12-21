@@ -1,0 +1,110 @@
+<meta charset="UTF-8">
+<br>
+<br>
+<div 	ng-controller="requisicaoEstoqueController as requisicaoCtrl">
+
+	<div class="box box-primary" >
+	
+		<div class="box-header">
+			<span class="lead">Requisições </span>
+		</div>
+		<div class="panel-body">
+	<div class="row">
+			
+			
+	
+		</div>
+			<input type="text" class="form-control"  ng-model="buscar" placeholder="buscar por descrição">
+			<div  class="table-responsive">
+			<table ng-if="tipoEmpreendimento" class="table table-hover table-bordered" ng-init="requisicaoCtrl.listaRequisicaoEdificio()">
+				<thead>
+					<tr>
+						 
+						<th>Número</th>
+						<th>Status</th>
+						<th>Data</th>
+					
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" lista in listaRequisicaoEdificio | filter : buscar ">
+					<tr>
+						
+						<td>{{lista.informacaoRequisicao.numeroRequisicao}}</td>
+						<td>{{lista.informacaoRequisicao.statusRequisicao}}</td>
+						<td>{{lista.informacaoRequisicao.dataSaida | date : 'dd/MM/yyyy'}}</td>						
+					
+						<td><a href="#/estoque/alteracao/{{lista.produto.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						
+					</tr>
+
+				</tbody>
+				<tfoot>
+				
+					
+				</tfoot>
+			</table>
+			<table ng-if="!tipoEmpreendimento" class="table table-hover table-bordered" ng-init="requisicaoCtrl.listaRequisicaoCasa()">
+				<thead>
+					<tr>
+						 
+						<th>Número</th>
+						<th>Status</th>
+						<th>Data</th>
+					
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" lista in listaRequisicaoCasa | filter : buscar ">
+					<tr>
+						
+						<td>{{lista.informacaoRequisicao.numeroRequisicao}}</td>
+						<td>{{lista.informacaoRequisicao.statusRequisicao}}</td>
+						<td>{{lista.informacaoRequisicao.dataSaida | date : 'dd/MM/yyyy'}}</td>						
+					
+						<td><a href="#/estoque/requisicao/alteracao/{{lista.produto.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						
+					</tr>
+
+				</tbody>
+				<tfoot>
+				
+					
+				</tfoot>
+			</table>
+			<hr>
+			<h3>Edificações Comunitária</h3>
+			<table class="table table-hover table-bordered" ng-init="requisicaoCtrl.listaRequisicaoOutros()">
+				<thead>
+					<tr>
+						 
+						<th>Número</th>
+						<th>Status</th>
+						<th>Data</th>
+					
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" lista in listaRequisicaoOutros | filter : buscar ">
+					<tr>
+						
+						<td>{{lista.informacaoRequisicao.numeroRequisicao}}</td>
+						<td>{{lista.informacaoRequisicao.statusRequisicao}}</td>
+						<td>{{lista.informacaoRequisicao.dataSaida | date : 'dd/MM/yyyy'}}</td>						
+					
+						<td><a href="#/estoque/alteracao/{{lista.produto.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						
+					</tr>
+
+				</tbody>
+				<tfoot>
+				
+					
+				</tfoot>
+			</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+
