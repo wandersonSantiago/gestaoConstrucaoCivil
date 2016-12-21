@@ -5,14 +5,12 @@ app.controller('cotacaoCompraController', function($scope,cotacaoCompraService, 
 		self.existe = true;	
 		$scope.visialuzarTable = true;
 		$scope.cotacaoEmpresa = [{cotacao : "", forncedeor : "", itens : ""}];
+		$scope.itens = [];
 		var idCotacaoAberta = $routeParams.idCotacaoAberta;
 	
 		self.salvaCotacaoEmpresa = function(cotacao , fornecedor, listaCotacao){
-			for(i = 0; i < listaCotacao.length ; i ++ ){
-				$scope.itens = [{item : listaCotacao[i], valorUnitario : listaCotacao[i].valorUnitario, observacao : listaCotacao[i].observacao}];
-			} 
+			for(i = 0; i < listaCotacao.length ; i ++ ){ $scope.itens.push({	item : listaCotacao[i],	valorUnitario : listaCotacao[i].valorUnitario, observacao : listaCotacao[i].observacao});} 
 			$scope.cotacaoEmpresa = {cotacao : cotacao, fornecedor : fornecedor, itens : $scope.itens };			
-			console.log($scope.cotacaoEmpresa);
 			cotacaoCompraService.salvaCotacaoEmpresa($scope.cotacaoEmpresa).
 			then(function(response){
 				self.limpaCampos();	
@@ -98,6 +96,7 @@ app.controller('cotacaoCompraController', function($scope,cotacaoCompraService, 
 			then(function(p){
 				self.cotacao = p;				
 				self.listaCotacao = self.cotacao.itens;
+				console.log(self.cotacao );
 			}, function(errResponse){
 		});
 		};
