@@ -36,7 +36,9 @@ app.controller('notaFiscalController', function($scope,notaFiscalService, produt
 			produtoService.buscaPorCodigoBarras(codigoBarras).
 			then(function(p){
 				self.produtos = p;
-				self.adicionarProdutos(self.produtos);			
+				if(p){
+					self.adicionarProdutos(self.produtos);						
+				}		
 			},function(errResponse){
 			});
 		};
@@ -56,7 +58,7 @@ app.controller('notaFiscalController', function($scope,notaFiscalService, produt
 				produto 
 			});
 			produto = "";
-			$scope.visialuzarTable = true;
+			$scope.visualizarTable = true;
 		}
 			
 	
@@ -119,6 +121,6 @@ app.controller('notaFiscalController', function($scope,notaFiscalService, produt
 			$scope.valorTotalNota = 0;
 			$scope.notaFiscalCtrl.produto = "";
 			$scope.notaFiscalCtrl.notaFiscalProduto.fornecedor = "";
-			$scope.visialuzarTable = false;
+			$scope.visualizarTable = false;
 		}
 });

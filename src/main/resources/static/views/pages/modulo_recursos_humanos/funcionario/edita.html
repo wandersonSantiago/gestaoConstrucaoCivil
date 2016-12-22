@@ -36,14 +36,14 @@
 								required>
 						</div>
 						
-						<div class="col-sm-4">
+						<div class="col-sm-3">
 							<input class="form-control" name="cpfField" placeholder="CPF"
 								ng-model="cadFuncCtrl.funcionario.cpf" id="cpf" disabled
 								type="text" ui-br-cpf-mask required>
 								<p ng-show="formCadastrarFuncionario.cpfField.$error.cpf"
 								class="alert alert-warning ">Digite um CPF válido!!</p>
 						</div>
-						<div class="col-sm-2">
+						<div class="col-sm-3">
 							<input class="form-control" placeholder="Data Nascimento"
 								ng-model="cadFuncCtrl.funcionario.dataNascimento"
 								id="dataNascimento" type="date"  required  >
@@ -93,17 +93,17 @@
 					<h4>Dados Funcional</h4>
 <br>
 					<div class="row">
-						<div class="col-sm-2">
+						<div class="col-sm-3">
 							<input class="form-control" placeholder="Carteira Trabalho"
 								ng-model="cadFuncCtrl.funcionario.carteiraTrabalho"
 								id="carteiraTrabalho" type="text" required>
 
 						</div>
 					
-						<div class="col-sm-2">
+						<div class="col-sm-3">
 							<input class="form-control" placeholder="Data Adimissão"
 								ng-model="cadFuncCtrl.funcionario.dataAdmissao"
-								id="dataAdmissao" type="text" ui-date required >
+								id="dataAdmissao" type="date" ui-date required >
 						</div>
 
 						<div class="col-sm-3" ng-controller="empreendimentoController as empCtrl" ng-init="empCtrl.lista()">
@@ -117,12 +117,14 @@
 									<option value="">{{cadFuncCtrl.funcionario.cargo.descricao}}</option>
 							</select>
 						</div>
-		
-						<div class="col-sm-2">
-							<input ng-model="cadFuncCtrl.funcionario.crea" placeholder="CREA" class="form-control" id="crea" type="text">
-						</div>
+						<br>						
 					</div>
-
+					<br>
+					<div class="row">
+						<div class="col-sm-3">
+								<input ng-model="cadFuncCtrl.funcionario.crea" placeholder="CREA" class="form-control" id="crea" type="text">
+							</div>
+					</div>
 					<hr>
 					<h4>Endereço</h4>
 

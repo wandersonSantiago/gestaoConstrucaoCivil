@@ -3,11 +3,17 @@ package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.InformacaoRequisicao;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.RequisicaoCasa;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.RequisicaoEdificio;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.RequisicaoEdificioRepository;
 
@@ -32,7 +38,7 @@ public class RequisicaoEdificioService {
 		return requisicaoRepository.findAll();
 	}
 	
-	public RequisicaoEdificio buscaPorId(Long id){
+	public RequisicaoEdificio buscarPorId(Long id){
 		return requisicaoRepository.findOne(id);
 	}
 	@Transactional(readOnly = false)
@@ -47,4 +53,6 @@ public class RequisicaoEdificioService {
 		RequisicaoEdificio requisicao = requisicaoRepository.buscarPorNumeroRequisicao(numeroRequisicao);
 		requisicaoService.rejeitar(requisicao);
 	}
+	
+	
 }

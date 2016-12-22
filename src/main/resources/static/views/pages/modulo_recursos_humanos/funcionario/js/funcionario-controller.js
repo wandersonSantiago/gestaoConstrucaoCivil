@@ -60,17 +60,19 @@ app.controller('cadastrarFuncionarioController', function($scope, buscaCepServic
 				});
 			};
 			
-//busca o funcionario atraves do id
 		
 		self.buscarPorId = function(id){
 			if(!id)return;
 			cadastrarFuncionarioService.buscarPorId(id).
 			then(function(p){
 				self.funcionario = p;
+				console.log(p);
+				self.funcionario.dataNascimento = new Date(self.funcionario.dataNascimento);
+				self.funcionario.dataAdmissao = new Date(self.funcionario.dataAdmissao);
+				
 		}, function(errResponse){
 			});
 		};
-//verifica se o params esta com o ide executa o metodo de busca 	
 		if(idFuncionario){
 			self.buscarPorId(idFuncionario);
 			

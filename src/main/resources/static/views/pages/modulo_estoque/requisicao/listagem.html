@@ -32,9 +32,9 @@
 						
 						<td>{{lista.informacaoRequisicao.numeroRequisicao}}</td>
 						<td>{{lista.informacaoRequisicao.statusRequisicao}}</td>
-						<td>{{lista.informacaoRequisicao.dataSaida | date : 'dd/MM/yyyy'}}</td>						
+						<td>{{lista.informacaoRequisicao.dataSaida | date : 'dd/MM/yyyy' }}</td>						
 					
-						<td><a href="#/estoque/alteracao/{{lista.produto.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						<td><a href="#/estoque/visualizar/edificio/{{lista.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						
 					</tr>
 
@@ -62,7 +62,7 @@
 						<td>{{lista.informacaoRequisicao.statusRequisicao}}</td>
 						<td>{{lista.informacaoRequisicao.dataSaida | date : 'dd/MM/yyyy'}}</td>						
 					
-						<td><a href="#/estoque/requisicao/alteracao/{{lista.produto.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						<td><a href="#/estoque/visualizar/casa/{{lista.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						
 					</tr>
 
@@ -92,7 +92,7 @@
 						<td>{{lista.informacaoRequisicao.statusRequisicao}}</td>
 						<td>{{lista.informacaoRequisicao.dataSaida | date : 'dd/MM/yyyy'}}</td>						
 					
-						<td><a href="#/estoque/alteracao/{{lista.produto.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						<td><a href="#/estoque/visualizar/outros/{{lista.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						
 					</tr>
 

@@ -1,7 +1,10 @@
-app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoqueService, $routeParams, $timeout, $q, $log){
+app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoqueService, $routeParams, $timeout, $location, $q, $log){
 	
-	var self = this;
-	
+	 var self = this;
+	 var idRequisicaoCasa = $routeParams.idRequisicaoCasa;
+	 var idRequisicaoEdificio = $routeParams.idRequisicaoEdificio;
+	 var idRequisicaoOutros = $routeParams.idRequisicaoOutros;
+	 
 		self.listaProduto =[];
 		self.baixaEstoque = [];
 		self.listaProdutos = [];
@@ -17,18 +20,14 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 				requisicaoEstoqueService.buscaPorCodigoBarras(codigoBarras).
 				then(function(p){					
 					self.listaProdutosComEstoques = p;
-					console.log(self.listaProdutosComEstoques);
 								$scope.quantidade = self.listaProdutosComEstoques.quantidade;
-								$scope.produto = self.listaProdutosComEstoques.produto;
-													
-								
+								$scope.produto = self.listaProdutosComEstoques.produto;							
 				});
 			};
 			self.listaProdutosComEstoque = function(){
 				requisicaoEstoqueService.listaProdutosComEstoque().
 					then(function(t){
 						self.listaProdutosComEstoques = t;
-						console.log(self.listaProdutosComEstoques);
 						self.listaProdutos = [{produto:"",quantidade:"", valorUnitario:""}];											
 						for(i = 0; i < self.listaProdutosComEstoques.length; i++ ){
 						
@@ -58,8 +57,7 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 				self.listaProduto = listaProduto.filter(function(produto){
 				if(!produto.selecionado) return produto;
 				$scope.ativadoExcluirLote = null;				
-				});
-				
+				});				
 				if(self.listaProduto.length == 0){					
 					$scope.ativaTabela = false;
 				}
@@ -198,7 +196,7 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 		self.listaRequisicaoEdificio = function(){
 			requisicaoEstoqueService.listaRequisicaoEdificio().
 				then(function(t){
-					$scope.listaRequisicaoEdificio = t;			
+					$scope.listaRequisicaoEdificio = t;	
 					}, function(errResponse){
 				});
 			};
@@ -224,10 +222,51 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 			$scope.codigo;
 			self.listaProduto = self.listaProduto=[];			
 			$scope.ativadoExcluirLote = false;
-			$scope.ativaTabela = false;
+			$scope.ativaTabela = false;		
 			
-			
-			
+		}
+		
+		self.buscaPorIdCasa = function(id){
+			if(!id)return;
+			requisicaoEstoqueService.buscaPorIdCasa(id).
+			then(function(p){
+				self.requisicao = p;
+				self.itensCasa = p.itens;
+				self.requisicao.informacaoRequisicao.dataSaida = new Date(p.informacaoRequisicao.dataSaida);
+				self.verificaStatus(self.requisicao);
+			}, function(errResponse){
+			});
+		};		
+		if(idRequisicaoCasa){
+			self.buscaPorIdCasa(idRequisicaoCasa);
+		}
+		self.buscaPorIdEdificio = function(id){
+			if(!id)return;
+			requisicaoEstoqueService.buscaPorIdEdificio(id).
+			then(function(p){
+				self.requisicao = p;
+				self.itensCasa = p.itens;
+				self.requisicao.informacaoRequisicao.dataSaida = new Date(p.informacaoRequisicao.dataSaida);
+				self.verificaStatus(self.requisicao);
+			}, function(errResponse){
+			});
+		};		
+		if(idRequisicaoEdificio){
+			self.buscaPorIdEdificio(idRequisicaoEdificio);
+		}
+		self.buscaPorIdOutros = function(id){
+			if(!id)return;
+			requisicaoEstoqueService.buscaPorIdOutros(id).
+			then(function(p){
+				self.requisicao = p;
+				self.itensCasa = p.itens;
+				self.requisicao.informacaoRequisicao.dataSaida = new Date(p.informacaoRequisicao.dataSaida);
+				self.verificaStatus(self.requisicao);
+			}, function(errResponse){
+			});
+		};		
+		if(idRequisicaoOutros){
+			self.buscaPorIdOutros(idRequisicaoOutros);
 		}
 		
 		$scope.tipo = {
@@ -256,6 +295,71 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 			
 			
 		}
+	}
+		self.aceitarRequisicaoCasa = function(numero){					 
+			requisicaoEstoqueService.aceitarRequisicaoCasa(numero)
+			.then(function(response){	
+				$location.path("/estoque/requisicao/listagem");
+				}, function(errResponse){
+					
+			});
+			
+		};
+		
+		self.rejeitaRequisicaoCasa = function(numero){					 
+			requisicaoEstoqueService.rejeitaRequisicaoCasa(numero)
+			.then(function(response){		
+				$location.path("/estoque/requisicao/listagem");
+				}, function(errResponse){
+					
+			});
+			
+		};
+		self.aceitarRequisicaoEdificio = function(numero){					 
+			requisicaoEstoqueService.aceitarRequisicaoEdificio(numero)
+			.then(function(response){	
+				$location.path("/estoque/requisicao/listagem");
+				}, function(errResponse){
+					
+			});
+			
+		};
+		
+		self.rejeitaRequisicaoEdificio = function(numero){					 
+			requisicaoEstoqueService.rejeitaRequisicaoEdificio(numero)
+			.then(function(response){		
+				$location.path("/estoque/requisicao/listagem");
+				}, function(errResponse){
+					
+			});
+			
+		};
+		self.aceitarRequisicaoOutros = function(numero){					 
+			requisicaoEstoqueService.aceitarRequisicaoOutros(numero)
+			.then(function(response){	
+				$location.path("/estoque/requisicao/listagem");
+				}, function(errResponse){
+					
+			});
+			
+		};
+		
+		self.rejeitaRequisicaoOutros = function(numero){					 
+			requisicaoEstoqueService.rejeitaRequisicaoOutros(numero)
+			.then(function(response){		
+				$location.path("/estoque/requisicao/listagem");
+				}, function(errResponse){
+					
+			});
+			
+		};
+		self.verificaStatus = function(requisicao){
+			if(requisicao.informacaoRequisicao.statusRequisicao == "PENDENTE"){
+				$scope.status = true;
+			}else{
+				$scope.status = false;
+			}
+			
 		}
 		
 

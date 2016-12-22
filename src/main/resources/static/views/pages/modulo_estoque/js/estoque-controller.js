@@ -82,5 +82,15 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 			self.buscaPorId(idProdutoEstoque);
 		}
 		
+		$scope.buscar = $scope.buscarPorDescricao;
+		
+		self.filtro = function(busca){
+			if(busca.descricao){
+				$scope.buscar = busca.descricao;
+			}else{
+				$scope.buscar = busca;
+			}
+			
+		}
 		
 });

@@ -12,13 +12,8 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 	.when('/fabricante/lista', {
 		templateUrl:"views/pages/modulo_cadastros/fabricante/lista.html",
 	})
-	
-	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-}]).run(function(auth ) {
-
-auth.init('/', '/login', '/logout');
-});
+}]);
 
 
 

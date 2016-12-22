@@ -20,14 +20,14 @@
 					<tr>
 						 
 						<th>
-							<input type="text" class="form-control "  ng-model="buscar" placeholder="Código">
+							<input type="text" class="form-control "  ng-model="buscarPorCodigo" ng-blur="estroqueCtrl.filtro(buscarPorCodigo)" placeholder="Código">
 						</th>
 						<th>
-							<input type="text" class="form-control"  ng-model="buscar" placeholder="Descrição">
+							<input type="text" class="form-control"  ng-model="buscarPorDescricao" ng-blur="estroqueCtrl.filtro(buscarPorDescricao)"  placeholder="Descrição">
 						</th>
 						<th>
 							<div  ng-controller="categoriaController as categoriaCtrl" ng-init="categoriaCtrl.lista()">
-								<select class="form-control " ng-model="buscar" 
+								<select class="form-control " ng-model="buscarPorCategoria"  ng-click="estroqueCtrl.filtro(buscarPorCategoria)"
 									ng-options="listaCategorias.descricao for listaCategorias in categoriaCtrl.categorias" 
 									  style=" width: 100%;"   required >
 										<option value="">Categoria</option>
@@ -36,7 +36,7 @@
 						</th>
 						<th>
 							<div ng-controller="tipoProdutoController as tipoProdutoCtrl" ng-init="tipoProdutoCtrl.lista()">
-								<select class="form-control " ng-model="buscar" 
+								<select class="form-control " ng-model="buscaPorTipo" ng-click="estroqueCtrl.filtro(buscaPorTipo)"
 									ng-options="listaTipoProdutos.descricao for listaTipoProdutos in tipoProdutoCtrl.listaTipoProduto" 
 									  style=" width: 100%;" required >
 									<option value="">Tipo</option>
@@ -45,7 +45,7 @@
 						</th>
 						<th>
 							<div  ng-controller="unidadeMedidaController as unidadeCtrl" ng-init="unidadeCtrl.lista()">
-								<select class="form-control " ng-model="buscar" 
+								<select class="form-control " ng-model="buscaPorMedida" ng-click="estroqueCtrl.filtro(buscaPorMedida)"
 									ng-options="listaunidadeMedidas for listaunidadeMedidas in unidadeCtrl.listaUnidadeMedida" 
 									  style=" width: 100%;" required >
 										<option value="">Unidade Medida</option>
@@ -54,7 +54,7 @@
 						</th>
 						<th>
 							<div  ng-controller="fabricanteController as fabricanteCtrl" ng-init="fabricanteCtrl.lista()">
-								<select class="form-control " ng-model="buscar" 
+								<select class="form-control " ng-model="buscaPorFabricante"  ng-click="estroqueCtrl.filtro(buscaPorFabricante)"
 									ng-options="listaFabricantes.dadoEmpresa.nomeFantasia for listaFabricantes in fabricanteCtrl.listaFabricante" 
 								 	 style=" width: 100%;" required >
 									<option value="">Fabricante</option>
@@ -74,8 +74,8 @@
 						<td>{{lista.produto.descricao}}</td>
 						<td>{{lista.produto.categoria.descricao}}</td>
 						<td>{{lista.produto.tipoProduto.descricao}}</td>
-						<td>{{lista.produto.unidadeMedida}}</td>
-						<td>{{lista.produto.fabricante.dadoEmpresa.nomeFantasia}}</td>
+						<td>{{lista.produto.unidadeMedida}}</td><!-- 
+						<td>{{lista.produto.fabricante.dadoEmpresa.nomeFantasia}}</td> -->
 						<td>{{lista.quantidade}}</td>
 						<td>{{lista.custoMedio | currency}}</td>
 					    <td>{{lista.valorTotal | currency}}</td>

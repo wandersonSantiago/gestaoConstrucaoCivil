@@ -32,7 +32,7 @@
 							 	md-selected-item-change="estoqueCtrl.selectedItemChange(listaProduto.produto)" 
 							 	md-items=" listaProduto in estoqueCtrl.listaProdutos | filter : estoqueCtrl.searchText" 
 							 	md-item-text="listaProduto.produto.descricao" 
-							 	md-min-length="3" placeholder="busca produto por descrição">
+							 	md-min-length="0" placeholder="busca produto por descrição">
        							 <md-item-template>
           							<span md-highlight-text="estoqueCtrl.searchText" md-highlight-flags="^i">{{listaProduto.produto.descricao}}</span>
        							 </md-item-template>        								

@@ -33,7 +33,7 @@ public class RequisicaoOutrosService {
 		return requisicaoRepository.findAll();
 	}
 	
-	public RequisicaoOutros buscaPorId(Long id){
+	public RequisicaoOutros buscarPorId(Long id){
 		return requisicaoRepository.findOne(id);
 	}
 	@Transactional(readOnly = false)

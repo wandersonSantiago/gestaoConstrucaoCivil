@@ -13,12 +13,8 @@ $routeProvider
 		templateUrl:"views/pages/modulo_recursos_humanos/funcionario/lista.html",		
 	})
 
-	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-}]).run(function(auth ) {
-
-auth.init('/', '/login', '/logout');
-});
+	
+}]);
 
 
 

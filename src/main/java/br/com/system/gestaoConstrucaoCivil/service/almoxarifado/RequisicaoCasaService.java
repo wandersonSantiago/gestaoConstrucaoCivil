@@ -37,7 +37,7 @@ public class RequisicaoCasaService {
 		return requisicaoRepository.findAll();
 	}
 	
-	public RequisicaoCasa buscaPorId(Long id){
+	public RequisicaoCasa buscarPorId(Long id){
 		return requisicaoRepository.findOne(id);
 	}
 	@Transactional(readOnly = false)

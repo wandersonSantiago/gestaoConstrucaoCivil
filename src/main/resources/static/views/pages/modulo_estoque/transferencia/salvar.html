@@ -11,8 +11,6 @@
 			<div class="container col-sm-12 ">
 				<form role="form-vertical"
 					ng-submit="transfCtrl.salva()">
-
-
 					<div class="row">
 						<div class="col-sm-3">
 							<input class="form-control"  id="vencimento"  type="date" ng-model="transfCtrl.transferencia.notaFiscal.dataVencimento"  title="informe a data de vencimento da Transferencia" placeholder="vecimento Transferencia" required>
@@ -34,10 +32,6 @@
 						<label class="radio-inline"><input type="checkbox"   ng-model="habilitaBuscaPorDescricao" value="busca" ng-click="estoqueCtrl.listaProdutosComEstoque()" name="optradio">Habilitar busca por descrição </label> 
 					<br>
 					<br>
-					
-					
-					
-					
 					<br>
 					<br> 
 					<div class="row" ng-init="transfCtrl.listaProdutosComEstoque()">
@@ -45,13 +39,13 @@
 						<div class="col-sm-3" ng-if="habilitaBuscaPorDescricao" >
 									
 							  <md-autocomplete 
-							  md-no-cache="transfCtrl.noCache"
+							    md-no-cache="transfCtrl.noCache"
 							 	md-selected-item="transfCtrl.produto" 
 							 	md-search-text="transfCtrl.searchText" 
 							 	md-selected-item-change="transfCtrl.selectedItemChange(listaProduto)" 
 							 	md-items=" listaProduto in transfCtrl.listaProdutos | filter : transfCtrl.searchText" 
 							 	md-item-text="listaProduto.produto.descricao" 
-							 	md-min-length="0" placeholder="busca produto">
+							 	md-min-length="1" placeholder="busca produto">
        							 <md-item-template>
           							<span md-highlight-text="transfCtrl.searchText" md-highlight-flags="^i">{{listaProduto.produto.descricao}}</span>
        							 </md-item-template>        								
@@ -130,7 +124,7 @@
 					
 					<div class="row ">
 						
-							<button type="submit" name="submit" 
+							<button type="submit" name="submit" ng-show="ativaTabela"
 								class="btn btn-lg btn-primary btn-block btn-signin">Cadastrar</button>
 						
 					</div>				

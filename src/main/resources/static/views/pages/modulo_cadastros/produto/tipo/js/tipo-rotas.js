@@ -13,11 +13,7 @@ $routeProvider
 		templateUrl:"views/pages/modulo_cadastros/produto/tipo/lista.html",
 	})
 	
-	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-}]).run(function(auth ) {
-
-auth.init('/', '/login', '/logout');
-});
+	
+}]);
 
 

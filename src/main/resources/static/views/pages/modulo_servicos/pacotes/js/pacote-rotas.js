@@ -15,12 +15,8 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 		templateUrl:"views/pages/modulo_servicos/pacotes/lista.html",		
 	})
 	
-	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-}]).run(function(auth ) {
-
-auth.init('/', '/login', '/logout');
-});
+	
+}]);
 
 
 

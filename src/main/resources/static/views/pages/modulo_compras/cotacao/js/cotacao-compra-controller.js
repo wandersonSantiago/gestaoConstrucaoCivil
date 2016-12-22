@@ -96,9 +96,9 @@ app.controller('cotacaoCompraController', function($scope,cotacaoCompraService, 
 			then(function(p){
 				self.cotacao = p;				
 				self.listaCotacao = self.cotacao.itens;
-				console.log(self.cotacao );
-			}, function(errResponse){
-		});
+				self.cotacao.dataLimite = new Date(self.cotacao.dataLimite);
+				self.cotacao.dataCriacao = new Date(self.cotacao.dataCriacao);
+			});
 		};
 
 	

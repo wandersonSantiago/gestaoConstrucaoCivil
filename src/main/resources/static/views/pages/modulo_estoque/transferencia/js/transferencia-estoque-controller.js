@@ -14,7 +14,6 @@ app.controller('transferenciaEstoqueController', function($scope, $location, tra
 		
 		
 		self.verificaStatus = function(){
-			console.log("status");
 			if(self.transferencia.statusTransferencia == "PENDENTE"){
 				$scope.status = true;
 			}else{
@@ -176,7 +175,7 @@ app.controller('transferenciaEstoqueController', function($scope, $location, tra
 		self.aceitaTransferencia = function(numeroNota){					 
 			transferenciaEstoqueService.aceitaTransferencia(numeroNota)
 			.then(function(response){	
-				$location.path("/almoxarifado/estoque/transferencia/recebidas");
+				$location.path("/estoque/transferencia/recebidas");
 				}, function(errResponse){
 					
 			});
@@ -186,7 +185,7 @@ app.controller('transferenciaEstoqueController', function($scope, $location, tra
 		self.rejeitaTransferencia = function(numeroNota){					 
 			transferenciaEstoqueService.rejeitaTransferencia(numeroNota)
 			.then(function(response){		
-				$location.path("/almoxarifado/estoque/transferencia/recebidas");
+				$location.path("/estoque/transferencia/recebidas");
 				}, function(errResponse){
 					
 			});
@@ -209,6 +208,8 @@ app.controller('transferenciaEstoqueController', function($scope, $location, tra
 					self.produto = self.transferencia.itens[i].produto;
 					self.quantidade = self.transferencia.itens[i].quantidade;
 					self.valorUnitario	= self.transferencia.itens[i].valorUnitario;
+					self.transferencia.notaFiscal.dataVencimento = new Date(self.transferencia.notaFiscal.dataVencimento);
+					self.transferencia.notaFiscal.dataNota = new Date(self.transferencia.notaFiscal.dataNota);
 					$scope.somaTotal(); 
 				$scope.listaProdutos.push({
 							produto : self.produto,
@@ -237,6 +238,8 @@ app.controller('transferenciaEstoqueController', function($scope, $location, tra
 					self.produto = self.transferencia.itens[i].produto;
 					self.quantidade = self.transferencia.itens[i].quantidade;
 					self.valorUnitario	= self.transferencia.itens[i].valorUnitario;
+					self.transferencia.notaFiscal.dataVencimento = new Date(self.transferencia.notaFiscal.dataVencimento);
+					self.transferencia.notaFiscal.dataNota = new Date(self.transferencia.notaFiscal.dataNota);
 					$scope.somaTotal(); 
 				$scope.listaProdutos.push({
 							produto : self.produto,

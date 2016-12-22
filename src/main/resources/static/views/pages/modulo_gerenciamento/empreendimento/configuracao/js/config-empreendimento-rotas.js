@@ -19,12 +19,8 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 	})
 	
 	
-	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-}]).run(function(auth ) {
-
-auth.init('/', '/login', '/logout');
-});
+	
+}]);
 
 
 
