@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,10 +19,10 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
-import br.com.system.gestaoConstrucaoCivil.enuns.Situacao;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.EntradaOuSaida;
 import br.com.system.gestaoConstrucaoCivil.enuns.StatusTransferencia;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
-import br.com.system.gestaoConstrucaoCivil.util.GeraCodigo;
+import br.com.system.gestaoConstrucaoCivil.pojo.EntradaOuBaixa;
 
 @Entity
 @SequenceGenerator(name = "transferencia_id_seq",
@@ -29,7 +30,7 @@ sequenceName = "transferencia_id_seq",
 initialValue = 1,
 allocationSize = 1)
 @Table(name = "transferencia")
-public class Transferencia implements Serializable {
+public class Transferencia implements Serializable,EntradaOuSaida {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "transferencia_id_seq")
@@ -48,6 +49,7 @@ public class Transferencia implements Serializable {
 
 	@OneToMany(mappedBy = "transferencia", cascade = CascadeType.ALL)
 	private List<TransferenciaItem> itens;
+	
 	
 	public NotaFiscal getNotaFiscal() {
 		return notaFiscal;
@@ -73,16 +75,16 @@ public class Transferencia implements Serializable {
 
 	public void setItens(List<TransferenciaItem> itens) {
 		this.itens = itens;
+		
+		for(TransferenciaItem item: this.itens)
+		{
+			item.setTransferencia(this);
+		}
 	}
    public StatusTransferencia getStatusTransferencia() {
 		return statusTransferencia;
 	}
-
-	public void setStatusTransferencia(StatusTransferencia statusTransferencia) {
-		this.statusTransferencia = statusTransferencia;
-	}
-
-	public Double total()  {
+   public Double total()  {
 		
 		Double totalItem = 0.0;
 		Integer quantidadeItem = 0;
@@ -96,11 +98,35 @@ public class Transferencia implements Serializable {
 	public void novaTransferencia()
 	{
 		statusTransferencia  = StatusTransferencia.PENDENTE;
-		getNotaFiscal().setSituacao(Situacao.OK);
 		getNotaFiscal().setTipoNota(TipoNotaEnum.TRANSFERENCIA_ESTOQUE_EMPREENDIMENTO);
+		getNotaFiscal().novaNota();
 		getNotaFiscal().setDataNota(new Date());
-		getNotaFiscal().setNumero(new GeraCodigo(100000,9999999).gerarNumeroTransferencia().longValue());
 	}
+	public void aceitarTransferencia()
+	{
+		statusTransferencia = StatusTransferencia.EFETUADO;
+	}
+	public void rejeitarTransferencia()
+	{
+		statusTransferencia  = StatusTransferencia.RECUSADO;
+		getNotaFiscal().cancelarNota();
+	}
+	
+	
+	@Override
+	public List<EntradaOuBaixa> itens() {
+		
+		List<EntradaOuBaixa> itens = new ArrayList<EntradaOuBaixa>();
+		
+		this.itens.forEach(p ->{
+			
+			EntradaOuBaixa item = new EntradaOuBaixa(p.getProduto(), p.getQuantidade(),notaFiscal.getEmpreendimento());
+			itens.add(item);
+		});
+		return itens;
+	}
+
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -125,6 +151,7 @@ public class Transferencia implements Serializable {
 			return false;
 		return true;
 	}
+	
 	
 	
 	

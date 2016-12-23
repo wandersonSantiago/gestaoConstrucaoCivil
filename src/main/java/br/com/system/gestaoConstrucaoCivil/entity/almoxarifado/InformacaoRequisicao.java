@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -20,7 +22,6 @@ import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.View.Summary;
 import br.com.system.gestaoConstrucaoCivil.enuns.StatusRequisicao;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
-import br.com.system.gestaoConstrucaoCivil.service.UsuarioService;
 import br.com.system.gestaoConstrucaoCivil.util.GeraCodigo;
 
 
@@ -37,7 +38,13 @@ public class InformacaoRequisicao extends AbstractPersistable<Long> implements S
 	@Column(name = "numero_requisicao")
 	private Integer numeroRequisicao;
 
+	@Temporal(TemporalType.DATE)
+	@Column(name = "data_saida")
 	private Date dataSaida;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "data_criacao")
+	private Date dataCriacao;
 	
 	@JsonView(Summary.class)
     @Enumerated(EnumType.STRING)
@@ -80,6 +87,7 @@ public class InformacaoRequisicao extends AbstractPersistable<Long> implements S
         GeraCodigo gerar = new GeraCodigo(100000,999999);
 		this.numeroRequisicao = gerar.gerarNumeroRequisicao();
 		this.empreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
+		this.dataCriacao = new Date();
 	}
 	public void statusAceito()
 	{

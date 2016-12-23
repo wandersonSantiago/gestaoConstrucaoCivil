@@ -18,7 +18,7 @@ public class AreaProduto extends AbstractPersistable<Long> implements Serializab
 	private boolean ativo;
 	
 	@Column(nullable = false, length = 30)
-	public String descricao;
+	private String descricao;
 
 	public boolean isAtivo() {
 		return ativo;

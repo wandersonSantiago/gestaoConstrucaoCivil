@@ -5,4 +5,5 @@ public enum CotacaoEmpresaItemStatus {
 	GANHOU,
 	PERDEU,
 	PENDENTE,
+	EMPATE,
 }

@@ -12,11 +12,15 @@ import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.EntradaOuSaida;
+import br.com.system.gestaoConstrucaoCivil.pojo.CriaListaEntradaOuBaixa;
+import br.com.system.gestaoConstrucaoCivil.pojo.EntradaOuBaixa;
+
 
 
 @Entity
 @Table(name ="requisicao_casa")
-public class RequisicaoCasa extends AbstractPersistable<Long> implements IRequisicao<RequisicaoCasaItem>{
+public class RequisicaoCasa extends AbstractPersistable<Long> implements IRequisicao<RequisicaoCasaItem> ,EntradaOuSaida{
 	
 	
 	   
@@ -46,6 +50,12 @@ public class RequisicaoCasa extends AbstractPersistable<Long> implements IRequis
 		{
 			item.setRequisicaoCasa(this);
 		}
+	}
+	@Override
+	public List<EntradaOuBaixa> itens() {
+		
+		CriaListaEntradaOuBaixa<RequisicaoCasaItem> criar = new CriaListaEntradaOuBaixa<RequisicaoCasaItem>();
+		return criar.criarListaDeEntradaOuBaixa(itens, informacaoRequisicao.getEmpreendimento());
 	}
     
 	

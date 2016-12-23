@@ -25,8 +25,10 @@ public class CotacaoEmpresaService {
 	private CotacaoEmpresaRepository cotacaoEmpresaRepository;
 	@Autowired
 	private CotacaoEmpresaItemRepository cotaEmpresaItemReposi;
+	private List<CotacaoEmpresaItem> itensGanhadores = new ArrayList<CotacaoEmpresaItem>(); 
 
-
+	private Integer chamada = 0;
+	
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(CotacaoEmpresa cotacaoEmpresa) {
 
@@ -47,34 +49,69 @@ public class CotacaoEmpresaService {
 
 		return cotacaoEmpresaRepository.findOne(id);
 	}
+	public List<CotacaoEmpresa> ganhadores(Long idCotacao)
+	{
+		return cotacaoEmpresaRepository.buscarGanhadores(idCotacao);
+	}
 	
 	@Transactional(readOnly = false)
 	public void verificarGanhadores(Cotacao cotacao) {
 		List<CotacaoEmpresaItem> itens = cotaEmpresaItemReposi.buscarItensPorIdCotacao(cotacao.getId());
 
-		Collections.sort(itens, new Comparator<CotacaoEmpresaItem>() {
 
-			@Override
-			public int compare(CotacaoEmpresaItem item1, CotacaoEmpresaItem item2) {
-
-			    if(item1.getItem().getId() == item2.getItem().getId())
-			    {
-				if(item1.getValorUnitario() > item2.getValorUnitario())
-				{
-					item1.setStatus(CotacaoEmpresaItemStatus.PERDEU);
-					item2.setStatus(CotacaoEmpresaItemStatus.GANHOU);
-					return 1;
-				}else
-				{
-					item2.setStatus(CotacaoEmpresaItemStatus.PERDEU);
-					item1.setStatus(CotacaoEmpresaItemStatus.GANHOU);
-					return -1;
-				}
-			    }
-			    return 0;
-				
-			}
-		});
-		cotaEmpresaItemReposi.save(itens);
+        
+ 	    Integer cont = 0;
+ 	    List<CotacaoEmpresaItem> itensVerifica = new ArrayList<CotacaoEmpresaItem>(); 
+ 	    
+ 	    
+        while(cotacao.getItens().size() > chamada)
+      	{
+     	   CotacaoEmpresaItem itemASerVerificado = itens.get(cont);
+     	   
+     	   for(CotacaoEmpresaItem item : itens)
+      		{
+      		     if(itemASerVerificado.getItem().getId() == item.getItem().getId())
+      		     {
+      		    	 
+      		    	 itensVerifica.add(item);
+      		     }
+      		}
+      		cont++;
+      		verificar(itensVerifica);
+      		itensVerifica.clear();
+      	}
+		
 	}
+	
+	@Transactional(readOnly = false)
+	 private void verificar( List<CotacaoEmpresaItem> itensVerifica)
+		{
+   
+			CotacaoEmpresaItem itemGanhador = itensVerifica.get(0);
+			itemGanhador.setStatus(CotacaoEmpresaItemStatus.GANHOU);
+		
+		for(CotacaoEmpresaItem item: itensVerifica)
+		{
+			if(itemGanhador.equals(item) == false)
+			{
+			if(itemGanhador.getValorUnitario() > item.getValorUnitario())
+			{
+				itemGanhador.setStatus(CotacaoEmpresaItemStatus.PERDEU);
+				item.setStatus(CotacaoEmpresaItemStatus.GANHOU);
+				itemGanhador = item;
+			}else if(itemGanhador.getValorUnitario().equals(item.getValorUnitario()))
+			{
+				item.setStatus(CotacaoEmpresaItemStatus.EMPATE);
+				itemGanhador.setStatus(CotacaoEmpresaItemStatus.EMPATE);
+			
+			}
+			else
+			{
+			item.setStatus(CotacaoEmpresaItemStatus.PERDEU);
+			}
+			}
+		}
+			chamada ++;
+		
+		}
 }

@@ -22,6 +22,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.enuns.Situacao;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
+import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
+import br.com.system.gestaoConstrucaoCivil.util.GeraCodigo;
 
 
 @Entity
@@ -129,11 +131,17 @@ public class NotaFiscal implements Serializable {
     public Situacao getSituacao() {
 		return situacao;
 	}
+    public void cancelarNota()
+    {
+    	this.situacao = Situacao.CANCELADA;
+    }
 
-	public void setSituacao(Situacao situacao) {
-		this.situacao = situacao;
+	public void novaNota()
+	{
+		this.situacao = Situacao.OK;
+		this.numero = new GeraCodigo(100000,9999999).gerarNumeroTransferencia().longValue();
+	    this.empreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;

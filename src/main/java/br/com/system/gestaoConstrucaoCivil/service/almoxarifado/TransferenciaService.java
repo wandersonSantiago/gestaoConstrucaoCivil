@@ -1,19 +1,13 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
 import java.util.Collection;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Transferencia;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.TransferenciaItem;
-import br.com.system.gestaoConstrucaoCivil.enuns.Situacao;
-import br.com.system.gestaoConstrucaoCivil.enuns.StatusTransferencia;
-import br.com.system.gestaoConstrucaoCivil.pojo.EntradaOuBaixa;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.TransferenciaRepository;
 
@@ -26,7 +20,7 @@ public class TransferenciaService {
 	@Autowired
 	private TransferenciaRepository transferenciaRepository;
 	@Autowired
-	private BaixaEstoqueService baxarEstoque;
+	private BaixaEstoqueService baixarEstoque;
 	@Autowired 
 	private EntradaEstoqueService entradaEstoque;
 	
@@ -35,52 +29,24 @@ public class TransferenciaService {
 	public void salvarAlterar(Transferencia transferencia) {
 
         transferencia.novaTransferencia();
-		
-		Empreendimento empreendimentoSaida = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
-		transferencia.getNotaFiscal().setEmpreendimento(empreendimentoSaida);
-		adicionarTransferenciaItem(transferencia);
-        
-		for (TransferenciaItem item : transferencia.getItens()) {
-			EntradaOuBaixa baixa = new EntradaOuBaixa(item.getProduto(), item.getQuantidade(),
-					transferencia.getNotaFiscal().getEmpreendimento());
-			baxarEstoque.baixar(baixa);
-		}
-		transferencia.setStatusTransferencia(StatusTransferencia.PENDENTE);
+        baixarEstoque.baixar(transferencia);
 		transferenciaRepository.save(transferencia);
-	}
-	private void adicionarTransferenciaItem(Transferencia transferencia)
-	{
-		for(TransferenciaItem item : transferencia.getItens())
-		{
-			item.setTransferencia(transferencia);
-		}
 	}
 	@Transactional(readOnly = false)
 	public void aceitarTransferencia(Long numeroNota)
 	{
 		
 		Transferencia transferencia =  transferenciaRepository.buscarTransferenciaPorNumeroNota(numeroNota);
-		
-		for(TransferenciaItem item : transferencia.getItens())
-		{
-			EntradaOuBaixa entrada = new EntradaOuBaixa(item.getProduto(),item.getQuantidade(), transferencia.getEmpreendimentoDestino());
-			entradaEstoque.entradaEstoque(entrada);	
-		}
-	    transferencia.setStatusTransferencia(StatusTransferencia.EFETUADO);
-		
+		transferencia.aceitarTransferencia();
+		entradaEstoque.entradaEstoque(transferencia);
 	    transferenciaRepository.save(transferencia);
 	}
 	@Transactional(readOnly = false)
 	public void rejeitarTransferencia(Long numeroNota)
 	{
 		Transferencia transferencia =  transferenciaRepository.buscarTransferenciaPorNumeroNota(numeroNota);
-		transferencia.setStatusTransferencia(StatusTransferencia.RECUSADO);
-		transferencia.getNotaFiscal().setSituacao(Situacao.CANCELADA);
-		for(TransferenciaItem item : transferencia.getItens())
-		{
-			EntradaOuBaixa entrada = new EntradaOuBaixa(item.getProduto(),item.getQuantidade(), transferencia.getNotaFiscal().getEmpreendimento());
-			entradaEstoque.entradaEstoque(entrada);
-		}
+		transferencia.rejeitarTransferencia();
+		entradaEstoque.entradaEstoque(transferencia);
 		transferenciaRepository.save(transferencia);
 	}
 	

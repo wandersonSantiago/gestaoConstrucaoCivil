@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.EstoqueEmpreendimento;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.EntradaOuSaida;
 import br.com.system.gestaoConstrucaoCivil.pojo.EntradaOuBaixa;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.EstoqueEmpreendimentoRepository;
 
@@ -16,30 +17,34 @@ public class BaixaEstoqueService {
 	@Autowired
 	private EstoqueEmpreendimentoRepository estoqueRepository;
 	
-	
 	@Transactional(readOnly = false)
-	public void baixar(EntradaOuBaixa baixa) {
+	public void baixar(EntradaOuSaida baixa) {
        
 		
-		EstoqueEmpreendimento estoque = estoqueRepository.estoque(baixa.getEmpreendimento().getId(),baixa.getProduto().getId());
-		
-		if(estoque != null)
+		for(EntradaOuBaixa item : baixa.itens())
 		{
-		 estoque.setQuantidade(estoque.getQuantidade() - baixa.getQuantidade());
-	    
-		if(estoque.isNegativo())
-	    {
-		  estoqueRepository.save(estoque);
-	    }else
-	    {
-	    	throw new EstoqueEmpreendimentoException("Estoque negativo");
-	    }
-		
-		}else
-		{
-			throw new EstoqueEmpreendimentoException("Produto não encontrado no estoque do empreendimento");
+			EstoqueEmpreendimento estoque = estoqueRepository.estoque(item.getEmpreendimento().getId(),item.getProduto().getId());
+			if(estoque != null)
+			{
+			 estoque.setQuantidade(estoque.getQuantidade() - item.getQuantidade());
+		    
+			if(estoque.isNegativo())
+		    {
+			  estoqueRepository.save(estoque);
+		    }else
+		    {
+		    	throw new EstoqueEmpreendimentoException("Estoque negativo");
+		    }
 			
+			}else
+			{
+				throw new EstoqueEmpreendimentoException("Produto não encontrado no estoque do empreendimento");
+				
+			}
+				
 		}
-	
+		
 	}
+	
+	
 }

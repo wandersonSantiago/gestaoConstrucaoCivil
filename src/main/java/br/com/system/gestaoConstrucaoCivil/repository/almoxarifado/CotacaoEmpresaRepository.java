@@ -9,6 +9,10 @@ import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.CotacaoEmpresa;
 
 public interface CotacaoEmpresaRepository extends JpaRepository<CotacaoEmpresa, Long> {
 
-	@Query("FROM CotacaoEmpresa cotacaoEmpresa WHERE cotacaoEmpresa.cotacao.id = ?1")
-	List<CotacaoEmpresa> findbyId(Long idCotacao);
+	@Query("FROM CotacaoEmpresa c WHERE c.cotacao.id = ?1")
+	List<CotacaoEmpresa> buscarPorCotacao(Long idCotacoa);
+	
+	@Query("SELECT c FROM CotacaoEmpresa c JOIN c.itens i WHERE c.cotacao.id = ?1 AND i.status = 'GANHOU'")
+	List<CotacaoEmpresa> buscarGanhadores(Long idCotacao);
+	
 }

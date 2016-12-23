@@ -48,6 +48,9 @@ public class Cotacao implements Serializable{
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_criacao")
 	private Date dataCriacao;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "data_fechamento")
+	private Date dataFechamento;
 	
     public Long getId() {
 		return id;
@@ -94,6 +97,10 @@ public class Cotacao implements Serializable{
 	public StatusCotacao getStatusCotacao() {
 		return statusCotacao;
 	}
+	public Date getDataFechamento() {
+		return dataFechamento;
+	}
+
 	public void abrir()
     {
     	this.dataCriacao = new Date();
@@ -111,6 +118,7 @@ public class Cotacao implements Serializable{
     public void fechar()
     {
     	this.statusCotacao = StatusCotacao.FECHADO;
+    	this.dataFechamento = new Date();
     }
 	@Override
 	public int hashCode() {
