@@ -20,6 +20,7 @@ public class RequisicaoEdificioService {
 	@Autowired
 	private RequisicaoService requisicaoService; 
 	
+	
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(RequisicaoEdificio requisicaoEdificio){
 		
@@ -29,6 +30,7 @@ public class RequisicaoEdificioService {
 		requisicaoRepository.save(requisicaoEdificio);
 	}
 	public Collection<RequisicaoEdificio> buscarTodos(){
+		
 		return requisicaoRepository.findAll();
 	}
 	
@@ -38,14 +40,12 @@ public class RequisicaoEdificioService {
 	@Transactional(readOnly = false)
 	public void aceitar(Integer numeroRequisicao)
 	{
-		RequisicaoEdificio requisicao = requisicaoRepository.buscarPorNumeroRequisicao(numeroRequisicao);
-	    requisicaoService.aceitar(requisicao);
+		requisicaoService.aceitar(requisicaoRepository.buscarPorNumeroRequisicao(numeroRequisicao));
 	}
 	@Transactional(readOnly = false)
 	public void rejeitar(Integer numeroRequisicao)
 	{
-		RequisicaoEdificio requisicao = requisicaoRepository.buscarPorNumeroRequisicao(numeroRequisicao);
-		requisicaoService.rejeitar(requisicao);
+		requisicaoService.rejeitar(requisicaoRepository.buscarPorNumeroRequisicao(numeroRequisicao));
 	}
 	
 	

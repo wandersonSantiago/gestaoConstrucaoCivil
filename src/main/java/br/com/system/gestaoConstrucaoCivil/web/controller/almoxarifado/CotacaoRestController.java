@@ -6,10 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Cotacao;
@@ -22,7 +23,7 @@ public class CotacaoRestController {
 	@Autowired
 	private CotacaoService cotacaoService;
 	
-	@RequestMapping(value = "/salva", method = RequestMethod.POST)
+	@PostMapping(value = "/salva")
 	public ResponseEntity<Cotacao> salvar(@RequestBody Cotacao cotacao){
 	
 		cotacaoService.salvaAltera(cotacao);
@@ -30,24 +31,21 @@ public class CotacaoRestController {
 		return new ResponseEntity(headers, HttpStatus.CREATED);				
 	}
 	
-	@RequestMapping(value = "/lista", method = RequestMethod.GET)
+	@GetMapping(value = "/lista")
 	public ResponseEntity<Collection<Cotacao>> buscarTodos(){
 		
-		Collection<Cotacao> cotacao = cotacaoService.buscarTodos(); 
-		return new ResponseEntity<Collection<Cotacao>>(cotacao, HttpStatus.OK);
+		return new ResponseEntity<Collection<Cotacao>>(cotacaoService.buscarTodos(), HttpStatus.OK);
 	}
-	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
+	@GetMapping(value = "/buscaPorId/{id}")
 	public ResponseEntity<Cotacao> buscarPorId(@PathVariable Long id) {
 
 		return new ResponseEntity<Cotacao>(cotacaoService.buscaPorId(id), HttpStatus.OK);
 	}
-	
-	@RequestMapping(value = "/fecharCotacao", method = RequestMethod.GET)
+	@GetMapping(value = "/fecharCotacao")
 	public ResponseEntity<Cotacao> fecharCotacao(Long idCotacao){
 		
 	    cotacaoService.fecharCotacao(idCotacao);
-		HttpHeaders headers =  new HttpHeaders();
-	    return new ResponseEntity(headers, HttpStatus.CREATED);	
+		return new ResponseEntity(new HttpHeaders(), HttpStatus.CREATED);	
 	}
 
 }

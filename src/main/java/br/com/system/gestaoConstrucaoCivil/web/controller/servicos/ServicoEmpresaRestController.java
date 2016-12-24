@@ -4,9 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -20,14 +21,13 @@ public class ServicoEmpresaRestController {
 	@Autowired
 	 private ServicoEmpresaService servicoService;
 	
-	 @RequestMapping(method = RequestMethod.GET, value="/lista")
+	 @GetMapping(value="/lista")
 	 public ResponseEntity<Iterable<ServicoEmpresa>> buscarTodos() {	  
-	  Iterable<ServicoEmpresa> servico = servicoService.buscarTodos();
-	  return new ResponseEntity<Iterable<ServicoEmpresa>>(servico, HttpStatus.OK);
+	  return new ResponseEntity<Iterable<ServicoEmpresa>>(servicoService.buscarTodos(), HttpStatus.OK);
 	 }
 	 
-	 @RequestMapping( value="/salva", method = RequestMethod.POST)
-	 public ResponseEntity salvar(@RequestBody ServicoEmpresa servico,UriComponentsBuilder ucBuilder)
+	 @PostMapping( value="/salva")
+	 public ResponseEntity<ServicoEmpresa> salvar(@RequestBody ServicoEmpresa servico,UriComponentsBuilder ucBuilder)
 	 {
 		 servicoService.salvarOuEditar(servico);
 		 HttpHeaders headers = new HttpHeaders();

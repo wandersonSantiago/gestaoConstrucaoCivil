@@ -1,6 +1,5 @@
 package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,8 +12,7 @@ import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import br.com.system.gestaoConstrucaoCivil.pojo.CriaListaEntradaOuBaixa;
-import br.com.system.gestaoConstrucaoCivil.pojo.EntradaOuBaixa;
+import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 
 @Entity
 @Table(name ="requisicao_edificio")
@@ -54,8 +52,15 @@ public class RequisicaoEdificio extends AbstractPersistable<Long> implements IRe
 	}
 
 	@Override
-	public List<EntradaOuBaixa> itens() {
+	public Empreendimento empreendimentoSaida() {
 		
-		CriaListaEntradaOuBaixa<RequisicaoEdificioItem> criar = new CriaListaEntradaOuBaixa<RequisicaoEdificioItem>();
-		return criar.criarListaDeEntradaOuBaixa(itens, informacaoRequisicao.getEmpreendimento());
-	}}
+		return informacaoRequisicao.getEmpreendimento();
+	}
+
+	@Override
+	public Empreendimento empreendimentoEntrada() {
+		
+		return informacaoRequisicao.getEmpreendimento();
+	}
+	
+}

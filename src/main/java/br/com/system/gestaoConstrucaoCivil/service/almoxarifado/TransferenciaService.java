@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Transferencia;
+import br.com.system.gestaoConstrucaoCivil.pojo.CancelamentoTransferencia;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.TransferenciaRepository;
 
@@ -35,7 +36,6 @@ public class TransferenciaService {
 	@Transactional(readOnly = false)
 	public void aceitarTransferencia(Long numeroNota)
 	{
-		
 		Transferencia transferencia =  transferenciaRepository.buscarTransferenciaPorNumeroNota(numeroNota);
 		transferencia.aceitarTransferencia();
 		entradaEstoque.entradaEstoque(transferencia);
@@ -46,7 +46,8 @@ public class TransferenciaService {
 	{
 		Transferencia transferencia =  transferenciaRepository.buscarTransferenciaPorNumeroNota(numeroNota);
 		transferencia.rejeitarTransferencia();
-		entradaEstoque.entradaEstoque(transferencia);
+		CancelamentoTransferencia cancelamento = new CancelamentoTransferencia(transferencia);
+		entradaEstoque.entradaEstoque(cancelamento);
 		transferenciaRepository.save(transferencia);
 	}
 	
@@ -59,13 +60,13 @@ public class TransferenciaService {
 	}
 	public Collection<Transferencia>  buscarTransferenciaRecebida() {
 		
-		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
-		return transferenciaRepository.buscarTransferenciaRecebidas(idEmpreendimento);
+		return transferenciaRepository
+				.buscarTransferenciaRecebidas(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId());
 	}
 	public Collection<Transferencia>  buscarTransferenciaEnviada() {
 		
-		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
-		return transferenciaRepository.buscarTransferenciaEnviada(idEmpreendimento);
+		return transferenciaRepository
+				.buscarTransferenciaEnviada(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId());
 	}
 	
 }

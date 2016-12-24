@@ -21,17 +21,14 @@ public class CategoriaService implements Servico<Categoria>{
 	
 	public List<Categoria> buscarTodos() {
 		
-		System.out.println("Chamou buscarTodos categoria");
 		return categoriaRepository.findAll();
 	}
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(Categoria categoria)
 	{
-		System.out.println("Chamou salvar categoria");
 		categoriaRepository.save(categoria);
 	}
 	public Categoria buscarPorId(Long id) {
-		System.out.println("Chamou buscarPorId categoria");
 		return categoriaRepository.findOne(id);
 	}
 }

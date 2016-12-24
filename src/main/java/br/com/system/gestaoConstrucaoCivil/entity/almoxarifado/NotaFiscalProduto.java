@@ -14,14 +14,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.EntradaOuSaida;
-import br.com.system.gestaoConstrucaoCivil.pojo.CriaListaEntradaOuBaixa;
-import br.com.system.gestaoConstrucaoCivil.pojo.EntradaOuBaixa;
+import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.EntradaOuBaixa;
+
 
 @Entity
 @SequenceGenerator(name = "nota_fiscal_produto_id_seq", sequenceName = "nota_fiscal_produto_id_seq", initialValue = 1, allocationSize = 50)
 @Table(name = "nota_fiscal_produto")
-public class NotaFiscalProduto implements Serializable,EntradaOuSaida {
+public class NotaFiscalProduto implements Serializable,EntradaOuBaixa<NotaFiscalItem> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "nota_fiscal_produto_id_seq")
@@ -73,16 +73,20 @@ public class NotaFiscalProduto implements Serializable,EntradaOuSaida {
 		item.setNotaFiscalProduto(this);
 		});
 	}
+	@Override
+	public Empreendimento empreendimentoSaida() {
+		
+		return getNotaFiscal().getEmpreendimento();
+	}
+	@Override
+	public Empreendimento empreendimentoEntrada() {
+	
+		return getNotaFiscal().getEmpreendimento();
+	}
+	
 	public void notaNotaProduto()
 	{
 		getNotaFiscal().novaNota();
-	}
-	@Override
-	public List<EntradaOuBaixa> itens() {
-		
-		CriaListaEntradaOuBaixa<NotaFiscalItem> criar = new CriaListaEntradaOuBaixa<NotaFiscalItem>();
-		return criar.criarListaDeEntradaOuBaixa(itens, notaFiscal.getEmpreendimento());
-		
 	}
 	@Override
 	public int hashCode() {
@@ -108,6 +112,11 @@ public class NotaFiscalProduto implements Serializable,EntradaOuSaida {
 			return false;
 		return true;
 	}
+
+	
+
+	
+
 
 
 }

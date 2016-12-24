@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -21,20 +23,19 @@ public class PrestadoraRestServicoController {
 	@Autowired
 	private PrestadoraServicoService prestadoraServicoService;
 
-	@RequestMapping(method = RequestMethod.GET, value = "/lista")
+	@GetMapping(value = "/lista")
 	public ResponseEntity<Iterable<PrestadoraServico>> buscarTodos() {
 
-		Iterable<PrestadoraServico> prestadoraServico = prestadoraServicoService.buscarTodos();
-		return new ResponseEntity<Iterable<PrestadoraServico>>(prestadoraServico, HttpStatus.OK);
+		return new ResponseEntity<Iterable<PrestadoraServico>>(prestadoraServicoService.buscarTodos(), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
+	@GetMapping(value = "/buscaPorId/{id}")
 	public ResponseEntity<PrestadoraServico> buscarPorId(@PathVariable Long id) {
 		return new ResponseEntity<PrestadoraServico>(prestadoraServicoService.buscarPorId(id), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/salva", method = RequestMethod.POST)
-	public ResponseEntity salvar(@RequestBody PrestadoraServico prestadoraServico, UriComponentsBuilder ucBuilder) {
+	@PostMapping(value = "/salva")
+	public ResponseEntity<PrestadoraServico> salvar(@RequestBody PrestadoraServico prestadoraServico, UriComponentsBuilder ucBuilder) {
 		System.out.println(prestadoraServico);
 
 		prestadoraServicoService.salvarOuEditar(prestadoraServico);
@@ -44,8 +45,8 @@ public class PrestadoraRestServicoController {
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/altera", method = RequestMethod.PUT)
-	public ResponseEntity alterar(@RequestBody PrestadoraServico prestadoraServico, UriComponentsBuilder ucBuilder) {
+	@PutMapping(value = "/altera")
+	public ResponseEntity<PrestadoraServico> alterar(@RequestBody PrestadoraServico prestadoraServico, UriComponentsBuilder ucBuilder) {
 
 		prestadoraServicoService.salvarOuEditar(prestadoraServico);
 		HttpHeaders headers = new HttpHeaders();

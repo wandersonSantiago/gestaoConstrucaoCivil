@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.RequisicaoEdificio;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.RequisicaoOutros;
 import br.com.system.gestaoConstrucaoCivil.service.almoxarifado.RequisicaoOutrosService;
 
@@ -39,23 +38,19 @@ public class RequisicaoOutrosRestController {
 	@GetMapping(value = "/lista")
 	public ResponseEntity<Collection<RequisicaoOutros>> buscarTodos()
 	{
-		Collection<RequisicaoOutros> requisicao = requisicaoOutrosService.buscarTodos(); 
-		HttpHeaders headers = new HttpHeaders();
-		return new ResponseEntity<Collection<RequisicaoOutros>>(requisicao, HttpStatus.OK);
+		return new ResponseEntity<Collection<RequisicaoOutros>>(requisicaoOutrosService.buscarTodos(), HttpStatus.OK);
 	}
 	@PostMapping(value = "/aceitar")
 	public ResponseEntity<RequisicaoOutros> aceitar(@RequestBody Integer numeroRequisicao)
 	{
 		requisicaoOutrosService.aceitar(numeroRequisicao);
-		HttpHeaders headers = new HttpHeaders();
-		return new ResponseEntity(headers, HttpStatus.OK);
+		return new ResponseEntity(new HttpHeaders(), HttpStatus.OK);
 	}
 	@PostMapping(value = "/rejeitar")
 	public ResponseEntity<RequisicaoOutros> rejeitar(@RequestBody Integer numeroRequisicao)
 	{
 		requisicaoOutrosService.rejeitar(numeroRequisicao);
-		HttpHeaders headers = new HttpHeaders();
-		return new ResponseEntity(headers, HttpStatus.OK);
+		return new ResponseEntity(new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)

@@ -1,7 +1,6 @@
 package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,10 +18,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.EntradaOuSaida;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.EntradaOuBaixa;
 import br.com.system.gestaoConstrucaoCivil.enuns.StatusTransferencia;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
-import br.com.system.gestaoConstrucaoCivil.pojo.EntradaOuBaixa;
 
 @Entity
 @SequenceGenerator(name = "transferencia_id_seq",
@@ -30,7 +28,7 @@ sequenceName = "transferencia_id_seq",
 initialValue = 1,
 allocationSize = 1)
 @Table(name = "transferencia")
-public class Transferencia implements Serializable,EntradaOuSaida {
+public class Transferencia implements Serializable,EntradaOuBaixa {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "transferencia_id_seq")
@@ -84,18 +82,7 @@ public class Transferencia implements Serializable,EntradaOuSaida {
    public StatusTransferencia getStatusTransferencia() {
 		return statusTransferencia;
 	}
-   public Double total()  {
-		
-		Double totalItem = 0.0;
-		Integer quantidadeItem = 0;
-		for(TransferenciaItem item : itens)
-		{
-			totalItem += item.getValorUnitario();
-			quantidadeItem += item.getQuantidade();
-		}
-		return totalItem * quantidadeItem;
-	}
-	public void novaTransferencia()
+   public void novaTransferencia()
 	{
 		statusTransferencia  = StatusTransferencia.PENDENTE;
 		getNotaFiscal().setTipoNota(TipoNotaEnum.TRANSFERENCIA_ESTOQUE_EMPREENDIMENTO);
@@ -111,21 +98,18 @@ public class Transferencia implements Serializable,EntradaOuSaida {
 		statusTransferencia  = StatusTransferencia.RECUSADO;
 		getNotaFiscal().cancelarNota();
 	}
-	
-	
 	@Override
-	public List<EntradaOuBaixa> itens() {
-		
-		List<EntradaOuBaixa> itens = new ArrayList<EntradaOuBaixa>();
-		
-		this.itens.forEach(p ->{
-			
-			EntradaOuBaixa item = new EntradaOuBaixa(p.getProduto(), p.getQuantidade(),notaFiscal.getEmpreendimento());
-			itens.add(item);
-		});
-		return itens;
+	public Empreendimento empreendimentoSaida() {
+		// TODO Auto-generated method stub
+		return notaFiscal.getEmpreendimento();
 	}
-
+	@Override
+	public Empreendimento empreendimentoEntrada() {
+		// TODO Auto-generated method stub
+		return empreendimentoDestino;
+	}
+	
+	
 	
 	@Override
 	public int hashCode() {
@@ -151,6 +135,9 @@ public class Transferencia implements Serializable,EntradaOuSaida {
 			return false;
 		return true;
 	}
+	
+	
+	
 	
 	
 	

@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -22,27 +24,26 @@ public class ProdutoRestController {
 	 private ProdutoService produtoService;
 	
 	
-	 @RequestMapping(method = RequestMethod.GET, value="/lista")
+	 @GetMapping(value="/lista")
 	 public ResponseEntity<Iterable<Produto>> buscarTodos() {	  
 	  
-	  Iterable<Produto> produto = produtoService.buscarTodos();
-	  return new ResponseEntity<Iterable<Produto>>(produto, HttpStatus.OK);
+	  return new ResponseEntity<Iterable<Produto>>(produtoService.buscarTodos(), HttpStatus.OK);
 	 }
 	
-	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
+	@GetMapping(value = "/buscaPorId/{id}")
 	public ResponseEntity<Produto> buscarPorId(@PathVariable Long id) {
 
 			return new ResponseEntity<Produto>(produtoService.buscaPorId(id), HttpStatus.OK);
 		}
 
-	@RequestMapping(value = "/buscaPorCodigo/{codigo}", method = RequestMethod.GET)
+	@GetMapping(value = "/buscaPorCodigo/{codigo}")
 	public ResponseEntity<Produto> buscarPorCodigo(@PathVariable String codigo)
 	{
 		return new ResponseEntity<Produto>(produtoService.buscarPorCodigoOuCodigoBarra(codigo),HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/salva", method = RequestMethod.POST)
-	 public ResponseEntity salvar(@RequestBody Produto produto,UriComponentsBuilder ucBuilder)
+	@PostMapping(value="/salva")
+	 public ResponseEntity<Produto> salvar(@RequestBody Produto produto,UriComponentsBuilder ucBuilder)
 	 {
 		 produtoService.salvarOuEditar(produto);
 		 HttpHeaders headers = new HttpHeaders();
@@ -50,8 +51,8 @@ public class ProdutoRestController {
 		 return new ResponseEntity(headers, HttpStatus.CREATED);
 	 }
 	 
-	 @RequestMapping(value="/altera", method = RequestMethod.PUT)
-	 public ResponseEntity alterar(@RequestBody Produto produto,UriComponentsBuilder ucBuilder)
+	 @PutMapping(value="/altera")
+	 public ResponseEntity<Produto> alterar(@RequestBody Produto produto,UriComponentsBuilder ucBuilder)
 	 { produtoService.salvarOuEditar(produto);
 		 HttpHeaders headers = new HttpHeaders();
 		 headers.setLocation(ucBuilder.path("/rest/almoxarifado/produto/altera/{id}").buildAndExpand(produto.getId()).toUri());

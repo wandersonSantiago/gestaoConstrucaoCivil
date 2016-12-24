@@ -1,13 +1,17 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.EstoqueEmpreendimento;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.EntradaOuSaida;
-import br.com.system.gestaoConstrucaoCivil.pojo.EntradaOuBaixa;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.EntradaOuBaixa;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.IItem;
+
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.EstoqueEmpreendimentoRepository;
 
 @Service
@@ -18,12 +22,13 @@ public class BaixaEstoqueService {
 	private EstoqueEmpreendimentoRepository estoqueRepository;
 	
 	@Transactional(readOnly = false)
-	public void baixar(EntradaOuSaida baixa) {
+	public void baixar(EntradaOuBaixa baixa) {
        
+		Collection<IItem> t = baixa.getItens();
 		
-		for(EntradaOuBaixa item : baixa.itens())
+		for(IItem item : t)
 		{
-			EstoqueEmpreendimento estoque = estoqueRepository.estoque(item.getEmpreendimento().getId(),item.getProduto().getId());
+			EstoqueEmpreendimento estoque = estoqueRepository.estoque(baixa.empreendimentoSaida().getId(),item.getProduto().getId());
 			if(estoque != null)
 			{
 			 estoque.setQuantidade(estoque.getQuantidade() - item.getQuantidade());
@@ -45,6 +50,5 @@ public class BaixaEstoqueService {
 		}
 		
 	}
-	
 	
 }

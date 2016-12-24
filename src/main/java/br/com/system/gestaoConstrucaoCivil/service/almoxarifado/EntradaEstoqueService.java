@@ -1,5 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -8,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.EstoqueEmpreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Produto;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.EntradaOuSaida;
-import br.com.system.gestaoConstrucaoCivil.pojo.EntradaOuBaixa;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.EntradaOuBaixa;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.IItem;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.EstoqueEmpreendimentoRepository;
 
@@ -21,13 +23,15 @@ public class EntradaEstoqueService {
 	private EstoqueEmpreendimentoRepository estoqueRepository;
 	
 	@Transactional(readOnly = false)
-    public void entradaEstoque(EntradaOuSaida entrada)
+    public void entradaEstoque(EntradaOuBaixa entrada)
     {
-		for(EntradaOuBaixa item :  entrada.itens())
+	    Collection<IItem> t = entrada.getItens();
+		
+		for(IItem item : t)
 		{
-			if (estoqueRepository.existeProduto(item.getProduto().getId(),item.getEmpreendimento().getId())) {
+			if (estoqueRepository.existeProduto(item.getProduto().getId(),entrada.empreendimentoEntrada().getId())) {
 				
-				adicionarQuantidade(item.getProduto(),item.getQuantidade());
+				adicionarQuantidade(item.getProduto(),item.getQuantidade(),entrada.empreendimentoEntrada().getId());
 			} else {
 				estoqueRepository.save(criarNovoEstoque(item.getProduto(), item.getQuantidade()));
 				
@@ -35,10 +39,10 @@ public class EntradaEstoqueService {
 		}
 	}
 	@Transactional(readOnly = false)
-	private void adicionarQuantidade(Produto produto, Integer quantidade) {
+	private void adicionarQuantidade(Produto produto, Integer quantidade,Long idEmpreendimento) {
 		
-		Empreendimento empreendimentoDoUsuario = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
-		EstoqueEmpreendimento estoque = estoqueRepository.estoque(empreendimentoDoUsuario.getId(), produto.getId());
+		//Empreendimento empreendimentoDoUsuario = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
+		EstoqueEmpreendimento estoque = estoqueRepository.estoque(idEmpreendimento, produto.getId());
 		estoque.setQuantidade(estoque.getQuantidade() + quantidade);
 		estoqueRepository.save(estoque);
 	}

@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,21 +32,21 @@ public class UsuarioRestController {
 	@Autowired
 	private UsuarioService usuarioService;
 
-	@RequestMapping(value = "/usuario")
+	@GetMapping(value = "/usuario")
 	@ResponseBody
 	public Principal user(Principal user, HttpSession session) {
 
 		return user;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/lista")
+	@GetMapping(value = "/lista")
 	public ResponseEntity<Iterable<Usuario>> buscarUsuarios() {
 
 		Iterable<Usuario> usuario = usuarioService.buscarTodos();
 		return new ResponseEntity<Iterable<Usuario>>(usuario, HttpStatus.OK);
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = "/salva")
+	@PostMapping(value = "/salva")
 	public ResponseEntity<Usuario> salva(@RequestBody Usuario usuario, UriComponentsBuilder ucBuilder) {
 		usuarioService.salvarOuEditar(usuario);
 		HttpHeaders headers = new HttpHeaders();
@@ -51,7 +54,7 @@ public class UsuarioRestController {
 		return new ResponseEntity<Usuario>(headers, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, value = "/altera")
+	@PutMapping(value = "/altera")
 	public ResponseEntity<Usuario> alterar(@RequestBody Usuario usuario, UriComponentsBuilder ucBuilder) {
 		usuarioService.salvarOuEditar(usuario);
 		HttpHeaders headers = new HttpHeaders();
@@ -59,24 +62,24 @@ public class UsuarioRestController {
 		return new ResponseEntity<Usuario>(headers, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
+	@GetMapping(value = "/buscaPorId/{id}")
 	public ResponseEntity<Usuario> buscarPorId(@PathVariable Long id) {
 		return new ResponseEntity<Usuario>(usuarioService.buscarUsuarioPorId(id), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/existeLogin/{login}", method = RequestMethod.GET)
+	@GetMapping(value = "/existeLogin/{login}")
 	public ResponseEntity<Usuario> verificarSeExisteLogin(@PathVariable String login) {
 		return new ResponseEntity(usuarioService.existeLoginCadastrado(login), HttpStatus.OK);
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/perfil")
+	@GetMapping(value = "/perfil")
 	public ResponseEntity<Iterable<PerfilUsuarioEnum>> uf() {
 
-		Iterable<PerfilUsuarioEnum> perfil = Arrays.asList(PerfilUsuarioEnum.values());
-		return new ResponseEntity<Iterable<PerfilUsuarioEnum>>(perfil, HttpStatus.OK);
+		return new ResponseEntity<Iterable<PerfilUsuarioEnum>>(Arrays.asList(PerfilUsuarioEnum.values()),
+				HttpStatus.OK);
 	}
 
-	@RequestMapping("/usuarios")
+	@GetMapping("/usuarios")
 	public ResponseEntity<?> user(SessionUsuario user, HttpSession session) {
 
 		return new ResponseEntity<>(user, HttpStatus.OK);

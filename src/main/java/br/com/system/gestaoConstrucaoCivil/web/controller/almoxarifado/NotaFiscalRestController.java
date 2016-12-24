@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -22,20 +24,19 @@ public class NotaFiscalRestController {
 	 private NotaFiscalService notaFiscalService;
 	
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/lista")
+	@GetMapping(value = "/lista")
 	public ResponseEntity<Iterable<NotaFiscal>> buscarTodos() {
-		Iterable<NotaFiscal> fornecedor = notaFiscalService.buscarTodos();
-		return new ResponseEntity<Iterable<NotaFiscal>>(fornecedor, HttpStatus.OK);
+		return new ResponseEntity<Iterable<NotaFiscal>>(notaFiscalService.buscarTodos(), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
+	@GetMapping(value = "/buscaPorId/{id}")
 	public ResponseEntity<NotaFiscal> buscarPorId(@PathVariable Long id) {
 
 		return new ResponseEntity<NotaFiscal>(notaFiscalService.buscarPorId(id), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/salva", method = RequestMethod.POST)
-	public ResponseEntity salvar(@RequestBody NotaFiscal notaFiscal, UriComponentsBuilder ucBuilder) {
+	@PostMapping(value = "/salva")
+	public ResponseEntity<NotaFiscal> salvar(@RequestBody NotaFiscal notaFiscal, UriComponentsBuilder ucBuilder) {
 		notaFiscalService.salvarOuEditar(notaFiscal);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(
@@ -43,7 +44,7 @@ public class NotaFiscalRestController {
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/altera", method = RequestMethod.PUT)
+	@PutMapping(value = "/altera")
 	public ResponseEntity alterar(@RequestBody NotaFiscal notaFiscal, UriComponentsBuilder ucBuilder) {
 		notaFiscalService.salvarOuEditar(notaFiscal);
 		HttpHeaders headers = new HttpHeaders();

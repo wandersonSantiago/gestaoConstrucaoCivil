@@ -25,22 +25,21 @@ public class CargoRestController implements ICargo {
 	
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_CARGO_CONSULTA')")
 	public ResponseEntity<Iterable<Cargo>> buscarCargos() {
-		Iterable<Cargo> cargo = cargoService.buscarTodos();
-		return new ResponseEntity<Iterable<Cargo>>(cargo, HttpStatus.OK);
+		return new ResponseEntity<Iterable<Cargo>>(cargoService.buscarTodos(), HttpStatus.OK);
 	}
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_CARGO_CONSULTA')")
 	public ResponseEntity<Cargo> buscarCargoPorId(@PathVariable Long id) {
 		return new ResponseEntity<Cargo>(cargoService.buscarPorId(id), HttpStatus.OK);
 	}
 	
-	public ResponseEntity salva(@RequestBody Cargo cargo, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<Cargo> salva(@RequestBody Cargo cargo, UriComponentsBuilder ucBuilder) {
 		cargoService.salvarOuEditar(cargo);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("/rest/recursosHumanos/salva/{id}").buildAndExpand(cargo.getId()).toUri());
 		return new ResponseEntity(HttpStatus.CREATED);
 	}
 
-	public ResponseEntity updateCargo(@RequestBody Cargo cargo, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<Cargo> updateCargo(@RequestBody Cargo cargo, UriComponentsBuilder ucBuilder) {
 		cargoService.salvarOuEditar(cargo);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("/rest/recursosHumanos/altera/{id}").buildAndExpand(cargo.getId()).toUri());

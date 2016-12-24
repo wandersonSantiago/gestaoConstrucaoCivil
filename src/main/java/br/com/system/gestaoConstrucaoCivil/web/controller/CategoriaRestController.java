@@ -30,8 +30,7 @@ public class CategoriaRestController {
 
 	@GetMapping(value = "/lista")
 	public ResponseEntity<Iterable<Categoria>> buscarTodos() {
-		Iterable<Categoria> categoria = categoriaService.buscarTodos();
-		return new ResponseEntity<Iterable<Categoria>>(categoria, HttpStatus.OK);
+		return new ResponseEntity<Iterable<Categoria>>(categoriaService.buscarTodos(), HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/buscaPorId/{id}")
@@ -41,7 +40,7 @@ public class CategoriaRestController {
 	}
 
 	@PostMapping(value = "/salva")
-	public ResponseEntity salvar(@RequestBody @Validated Categoria categoria, BindingResult result,
+	public ResponseEntity<Categoria> salvar(@RequestBody @Validated Categoria categoria, BindingResult result,
 			UriComponentsBuilder ucBuilder) {
 
 		CategoriaValidator v = new CategoriaValidator();
@@ -54,7 +53,7 @@ public class CategoriaRestController {
 	}
 
 	@PutMapping(value = "/altera")
-	public ResponseEntity alterar(@RequestBody Categoria categoria, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<Categoria> alterar(@RequestBody Categoria categoria, UriComponentsBuilder ucBuilder) {
 		categoriaService.salvarOuEditar(categoria);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("rest/almoxarifado/categoria/altera/{categoria}")
@@ -64,8 +63,7 @@ public class CategoriaRestController {
 
 	@GetMapping(value = "/tipoCategoria")
 	public ResponseEntity<Iterable<TipoCategoriaEnum>> tipoCategoria() {
-		Iterable<TipoCategoriaEnum> tipoCategoriaEnum = Arrays.asList(TipoCategoriaEnum.values());
-		return new ResponseEntity<Iterable<TipoCategoriaEnum>>(tipoCategoriaEnum, HttpStatus.OK);
+		return new ResponseEntity<Iterable<TipoCategoriaEnum>>(Arrays.asList(TipoCategoriaEnum.values()), HttpStatus.OK);
 	}
 
 }

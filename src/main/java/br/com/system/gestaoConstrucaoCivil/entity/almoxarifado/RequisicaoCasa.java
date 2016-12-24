@@ -1,5 +1,8 @@
 package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
+import static org.assertj.core.api.Assertions.in;
+import static org.hamcrest.CoreMatchers.instanceOf;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,15 +15,13 @@ import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.EntradaOuSaida;
-import br.com.system.gestaoConstrucaoCivil.pojo.CriaListaEntradaOuBaixa;
-import br.com.system.gestaoConstrucaoCivil.pojo.EntradaOuBaixa;
+import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 
 
 
 @Entity
 @Table(name ="requisicao_casa")
-public class RequisicaoCasa extends AbstractPersistable<Long> implements IRequisicao<RequisicaoCasaItem> ,EntradaOuSaida{
+public class RequisicaoCasa extends AbstractPersistable<Long> implements IRequisicao<RequisicaoCasaItem> {
 	
 	
 	   
@@ -51,12 +52,20 @@ public class RequisicaoCasa extends AbstractPersistable<Long> implements IRequis
 			item.setRequisicaoCasa(this);
 		}
 	}
+
 	@Override
-	public List<EntradaOuBaixa> itens() {
+	public Empreendimento empreendimentoSaida() {
 		
-		CriaListaEntradaOuBaixa<RequisicaoCasaItem> criar = new CriaListaEntradaOuBaixa<RequisicaoCasaItem>();
-		return criar.criarListaDeEntradaOuBaixa(itens, informacaoRequisicao.getEmpreendimento());
+	     return informacaoRequisicao.getEmpreendimento();
 	}
+
+	@Override
+	public Empreendimento empreendimentoEntrada() {
+		
+		 return informacaoRequisicao.getEmpreendimento();
+			
+	}
+	
     
 	
 	

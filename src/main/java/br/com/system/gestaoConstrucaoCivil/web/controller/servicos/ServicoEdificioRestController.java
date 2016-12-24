@@ -3,9 +3,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -19,8 +19,8 @@ public class ServicoEdificioRestController {
 	@Autowired
 	private ServicoEdificioService servicoEdificioService; 
 	
-	 @RequestMapping( value="/salva", method = RequestMethod.POST)
-	 public ResponseEntity salvar(@RequestBody ServicoEdificio servico,UriComponentsBuilder ucBuilder)
+	 @PostMapping( value="/salva")
+	 public ResponseEntity<ServicoEdificio> salvar(@RequestBody ServicoEdificio servico,UriComponentsBuilder ucBuilder)
 	 {
 		 servicoEdificioService.salvarOuEditar(servico);
 		 HttpHeaders headers = new HttpHeaders();
