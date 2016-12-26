@@ -52,15 +52,7 @@
 								</select>
 							</div>
 						</th>
-						<th>
-							<div  ng-controller="fabricanteController as fabricanteCtrl" ng-init="fabricanteCtrl.lista()">
-								<select class="form-control " ng-model="buscaPorFabricante"  ng-click="estroqueCtrl.filtro(buscaPorFabricante)"
-									ng-options="listaFabricantes.dadoEmpresa.nomeFantasia for listaFabricantes in fabricanteCtrl.listaFabricante" 
-								 	 style=" width: 100%;" required >
-									<option value="">Fabricante</option>
-								</select>
-							</div>		
-						</th>
+						
 						<th>quantidade Estoque</th>
 						<th>Custo médio</th>
 						<th>Valor Total</th>
@@ -74,8 +66,7 @@
 						<td>{{lista.produto.descricao}}</td>
 						<td>{{lista.produto.categoria.descricao}}</td>
 						<td>{{lista.produto.tipoProduto.descricao}}</td>
-						<td>{{lista.produto.unidadeMedida}}</td><!-- 
-						<td>{{lista.produto.fabricante.dadoEmpresa.nomeFantasia}}</td> -->
+						<td>{{lista.produto.unidadeMedida}}</td>
 						<td>{{lista.quantidade}}</td>
 						<td>{{lista.custoMedio | currency}}</td>
 					    <td>{{lista.valorTotal | currency}}</td>
