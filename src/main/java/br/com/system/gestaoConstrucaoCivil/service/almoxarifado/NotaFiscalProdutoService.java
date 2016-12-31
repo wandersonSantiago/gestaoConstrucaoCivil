@@ -37,7 +37,7 @@ public class NotaFiscalProdutoService {
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(NotaFiscalProduto notaFiscalProduto) {
 
-		notaFiscalProduto.notaNotaProduto();
+		notaFiscalProduto.novaNotaProduto();
 		notaFiscalProdutoRepository.save(notaFiscalProduto);
 		empreendimentoService.adcionarValorGasto(notaFiscalProduto.getNotaFiscal().getValorTotal());
 	    entradaEstoque.entradaEstoque(notaFiscalProduto);

@@ -23,7 +23,8 @@ import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.enuns.Situacao;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
-import br.com.system.gestaoConstrucaoCivil.util.GeraCodigo;
+import br.com.system.gestaoConstrucaoCivil.util.geradorCodigo.GeraNumeroNota;
+
 
 
 @Entity
@@ -139,8 +140,7 @@ public class NotaFiscal implements Serializable {
 	public void novaNota()
 	{
 		this.situacao = Situacao.OK;
-		this.numero = new GeraCodigo(100000,9999999).gerarNumeroTransferencia().longValue();
-	    this.empreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
+		this.empreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
 	}
 	@Override
 	public int hashCode() {

@@ -1,11 +1,11 @@
 package br.com.system.gestaoConstrucaoCivil.util.geradorCodigo;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.InformacaoRequisicaoRepository;
 
-@Component
+@Service
 public class GeraNumeroRequisicao extends GeraCodigo{
 
 	@Autowired
@@ -15,16 +15,17 @@ public class GeraNumeroRequisicao extends GeraCodigo{
 		super(100000,999999);
 	
 	}
-    public Integer gerar()
+    public Integer gerarNumeroRequisicao()
     {
     	for(Integer tentativa = 0 ; tentativa <= 99999; tentativa++)
     	{
-    		numeroRequisicao  =   gerar();
+    		numeroRequisicao  =   gerarNumero();
     		/*if(requisicaoRepository.existeNnumeroRequisicao(numeroRequisicao) == false ){
     		   
     			  return numeroRequisicao;
     		}*/
     	}
-    	return 1;
+    	
+    	return numeroRequisicao;
     }
 }

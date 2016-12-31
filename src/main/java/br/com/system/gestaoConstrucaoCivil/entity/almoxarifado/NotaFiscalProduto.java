@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.EntradaOuBaixa;
+import br.com.system.gestaoConstrucaoCivil.util.geradorCodigo.GeraNumeroNota;
 
 
 @Entity
@@ -84,7 +85,7 @@ public class NotaFiscalProduto implements Serializable,EntradaOuBaixa<NotaFiscal
 		return getNotaFiscal().getEmpreendimento();
 	}
 	
-	public void notaNotaProduto()
+	public void novaNotaProduto()
 	{
 		getNotaFiscal().novaNota();
 	}

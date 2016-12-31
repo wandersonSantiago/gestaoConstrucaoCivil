@@ -21,6 +21,7 @@ import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.EntradaOuBaixa;
 import br.com.system.gestaoConstrucaoCivil.enuns.StatusTransferencia;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
+import br.com.system.gestaoConstrucaoCivil.util.geradorCodigo.GeraNumeroNota;
 
 @Entity
 @SequenceGenerator(name = "transferencia_id_seq",
@@ -84,8 +85,10 @@ public class Transferencia implements Serializable,EntradaOuBaixa {
 	}
    public void novaTransferencia()
 	{
-		statusTransferencia  = StatusTransferencia.PENDENTE;
+		
+	   	statusTransferencia  = StatusTransferencia.PENDENTE;
 		getNotaFiscal().setTipoNota(TipoNotaEnum.TRANSFERENCIA_ESTOQUE_EMPREENDIMENTO);
+		getNotaFiscal().setNumero(new GeraNumeroNota().gerarNumeroNota().longValue());
 		getNotaFiscal().novaNota();
 		getNotaFiscal().setDataNota(new Date());
 	}

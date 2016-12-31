@@ -19,7 +19,7 @@ public class PacoteServico extends AbstractPersistable<Long>{
 	private boolean ativo;
 	
 	@Column(nullable = false)
-	private String codigoPacote;
+	private Integer codigo;
 	
 	@Column(nullable = false,length = 50)
 	private String descricao;
@@ -51,11 +51,11 @@ public class PacoteServico extends AbstractPersistable<Long>{
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
 	}
-	public String getCodigoPacote() {
-		return codigoPacote;
+	public Integer getCodigoPacote() {
+		return codigo;
 	}
-	public void setCodigoPacote(String codigoPacote) {
-		this.codigoPacote = codigoPacote;
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
 	}
 	public String getServicosAtribuidos() {
 		return servicosAtribuidos;

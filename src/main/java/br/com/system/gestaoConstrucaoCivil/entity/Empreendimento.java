@@ -32,10 +32,12 @@ public class Empreendimento extends AbstractPersistable<Long> {
 	@JoinColumn(name="id_endereco_empreendimento",nullable = false)
 	private Endereco enderecoEmpreendimento;
 	
+	@JsonView(View.Summary.class)
 	@ManyToOne
 	@JoinColumn(name="id_engenheiro_responsavel_funcionario",nullable = true)
 	private Funcionario engenheiroResponsavelFuncionario;
 	
+	@JsonView(View.Summary.class)
 	@ManyToOne
 	@JoinColumn(name="id_engenheiro_responsavel_terceiro",nullable = true)
 	private PrestadoraServico engenheiroResponsavelTerceiro;

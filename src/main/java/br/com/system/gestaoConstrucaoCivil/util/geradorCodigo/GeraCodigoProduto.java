@@ -1,12 +1,12 @@
 package br.com.system.gestaoConstrucaoCivil.util.geradorCodigo;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.ProdutoRepository;
 
 
-@Component
+@Service
 public class GeraCodigoProduto extends GeraCodigo{
 
 	@Autowired
@@ -22,10 +22,11 @@ public class GeraCodigoProduto extends GeraCodigo{
     {
      	for(Integer tentativa = 0 ; tentativa <= 99999; tentativa++)
     	{
-    		 codigo  =   gerar();
+    		 codigo  =  gerarNumero();
     		if(produtoRepository.existeCodigo(codigo) == false ){
     		   
-    			  return codigo;
+    			
+    			return codigo;
     		}
     	}
     	throw new GeraCodigoProdutoException("Não é possivel gerar um código para produto");
