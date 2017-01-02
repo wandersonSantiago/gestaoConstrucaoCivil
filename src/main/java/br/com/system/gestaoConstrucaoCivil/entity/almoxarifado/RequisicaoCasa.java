@@ -1,8 +1,5 @@
 package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
-import static org.assertj.core.api.Assertions.in;
-import static org.hamcrest.CoreMatchers.instanceOf;
-
 import java.util.List;
 
 import javax.persistence.CascadeType;
