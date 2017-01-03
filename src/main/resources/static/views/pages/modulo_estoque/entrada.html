@@ -18,7 +18,7 @@
 					
 					<br>
 		
-					 <div layout-gt-sm="row">
+					<!--  <div layout-gt-sm="row">
 				          <md-input-container class="md-block" flex-gt-sm>
 					            <label>Numero nota fiscal</label>
 					            <input ng-model="notaFiscalCtrl.notaFiscal.numero">
@@ -33,8 +33,8 @@
 					            <label>vecimento nota fiscal</label>
 					            <input ng-model="notaFiscalCtrl.notaFiscal.dataVencimento">
 				          </md-input-container>
-					</div>
-					<!-- <div class="row">
+					</div> -->
+				<div class="row">
 						<div class="col-sm-3">
 							<input class="form-control"  id="numeroNota" type="text" title="informe o numero da nota fiscal" placeholder="Numero nota fiscal" 
 							ng-model="notaFiscalCtrl.notaFiscal.numero" required>
@@ -45,17 +45,17 @@
 						<div class="col-sm-3">
 							<input class="form-control"  id="vencimento"  type="date" ng-model="notaFiscalCtrl.notaFiscal.dataVencimento"  title="informe a data de vencimento da nota fiscal" placeholder="vecimento nota fiscal" required>
 						</div>
-					</div> -->
+					</div> 
 					
 					<br>
 					<div ng-controller="produtoController as pCtrl">
 						<label class="radio-inline"  ><input type="checkbox"   ng-model="habilitaBuscaPorDescricao"  ng-click="pCtrl.lista()" name="optradio">Habilitar busca por descrição </label> 
 					<br>
+					<br>
 					<div class="row">
-				          <md-input-container class="col-sm-4"  ng-show="!habilitaBuscaPorDescricao">
-					            <label>Leitor de Código de Barras</label>
-					            <input ng-model="codigo" ng-blur="notaFiscalCtrl.buscaPorCodigoBarras(codigo)" onkeyup="if(this.value.length > 12) { quantidadeProduto.focus(); }">
-				          </md-input-container>						
+				          <div class="col-sm-4"  ng-show="!habilitaBuscaPorDescricao">
+					            <input class="form-control" ng-model="notaFiscalCtrl.produto" ng-blur="notaFiscalCtrl.buscaPorCodigoBarras(notaFiscalCtrl.produto)" onkeyup="if(this.value.length > 11) { quantidadeProduto.focus(); }" placeholder="Busca por código">
+				          </div>						
 							
 						
 						<div class="col-sm-4" ng-show="habilitaBuscaPorDescricao"  >
@@ -143,13 +143,13 @@
 						
 					<br>
 					<div class="row">
-					 <md-input-container class="md-block" flex-gt-sm>
+					<!--  <md-input-container class="md-block" flex-gt-sm>
 					            <label>Observação</label>
 					            <input ng-model="notaFiscalCtrl.notaFiscal.observacao">
-				          </md-input-container>
-						<!-- <div class="col-sm-12">
-							<input class="form-control"  id="obs" type="text"  placeholder="Observação"	ng-model="notaFiscalCtrl.notaFiscal.observacao">
-						</div> -->
+				          </md-input-container> -->
+						<div class="col-sm-12">
+								<input class="form-control"  id="obs" type="text"  placeholder="Observação"	ng-model="notaFiscalCtrl.notaFiscal.observacao">
+						</div> 
 					</div>
 					<br>
 					<div class="row ">

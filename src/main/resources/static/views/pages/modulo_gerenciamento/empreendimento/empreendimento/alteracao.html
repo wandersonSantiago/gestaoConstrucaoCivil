@@ -92,10 +92,7 @@
 						<div class="col-sm-3">
 							<input ng-model="empCtrl.empreendimento.enderecoEmpreendimento.cep" ng-blur="empCtrl.findCep()"  onkeyup="if(this.value.length > 8) { numeroEmpresa.focus(); }" name="cepField" class="form-control" id="cep" type="search"
 								placeholder="CEP"  ui-br-cep-mask required>
-								<!-- <button type="button" class="btn-primary" >Buscar CEP</button> -->
-			
-								<p ng-show="empreendimentoForm.cepField.$error.cep"
-						class="alert alert-warning ">Digite um CEP Válido</p>
+							
 						</div>
 						
 					</div>	

@@ -27,7 +27,7 @@
 					<tr>
 					<td>{{ servico.pacoteServico.descricao }}</td>
 						<td>{{ servico.prestadoraServico.dadoEmpresa.nomeFantasia }}</td>
-						<td>{{ servico.pacoteServico.categoria }}</td>
+						<td>{{ servico.pacoteServico.categoria.descricao }}</td>
 						<td>{{ servico.pacoteServico.valor | currency}}</td>
 						
 						<td><a href="#/servicos/vincular/visualizar/{{servico.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 

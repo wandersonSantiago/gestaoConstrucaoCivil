@@ -20,13 +20,13 @@
 							<div class="row" ng-if="casa" ng-controller="configEmpreendimentoController as configCtrl" ng-init="configCtrl.quantidadeCasa()">
 						
 						<div class="col-sm-4"  >
-							<select class="form-control select2" style=" width: 100%;" ng-model="estoqueCtrl.NumeroCasa" 
+							<select class="form-control select2" style=" width: 100%;" ng-model="servicoCtrl.servicoCasa.NumeroCasa" 
 							ng-options="lista for lista in configCtrl.qtdeCasa.quantidadeCasa" required>
 								<option value="">---Casa---</option>
 							</select>
 						</div>
 							<div class="col-sm-4"  >
-							<select class="form-control select2" style=" width: 100%;" ng-model="estoqueCtrl.andar"  
+							<select class="form-control select2" style=" width: 100%;" ng-model="servicoCtrl.servicoCasa.andar"  
 							ng-options="lista for lista in configCtrl.qtdeCasa.quantidadeAndarCasa" required>
 								<option value="">---Andar---</option>
 							</select>

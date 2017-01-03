@@ -51,6 +51,8 @@ app.controller('empreendimentoController', function($scope, buscaCepService, emp
 			empreendimentoService.buscaPorId(id).
 			then(function(p){
 				self.empreendimento = p;
+				self.empreendimento.dataAbertura = new Date(p.dataAbertura);
+				self.empreendimento.atafechamento = new Date(p.atafechamento);
 				}, function(errResponse){
 			});
 		};

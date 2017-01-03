@@ -134,7 +134,9 @@ app.controller('transferenciaEstoqueController', function($scope, $location, tra
 	
 		
 		self.adicionarProduto = function(quantidadeEstoque, produto,  quantidadeSaida, empreendimento, valorUnitario){
-		
+			$scope.produto = $scope.produto = [] ;
+			$scope.transfCtrl.produto = null;
+			$scope.transfCtrl.codigo = null;
 			if(quantidadeEstoque < quantidadeSaida){
 				sweetAlert({ timer : 6000,  text :"Quantidade Superior ao estoque",  type : "info", width: 300, higth: 300, padding: 20});
 					

@@ -42,7 +42,7 @@
 						<select class="form-control select2" ng-model="protudoCtr.produto.tipoProduto" 
 							ng-options="listaTipoProdutos.descricao for listaTipoProdutos in tipoProdutoCtrl.listaTipoProduto" 
 							  style=" width: 100%;" required >
-								<option value="">{{protudoCtr.produto.tipoProduto.descricao}}</option>
+								<option ng-value="protudoCtr.produto.tipoProduto" value="">{{protudoCtr.produto.tipoProduto.descricao}}</option>
 							</select>
 						</div>
 					</div>
@@ -55,7 +55,7 @@
 						<select class="form-control select2" ng-model="protudoCtr.produto.unidadeMedida" 
 							ng-options="listaunidadeMedidas for listaunidadeMedidas in unidadeCtrl.listaUnidadeMedida" 
 							  style=" width: 100%;" required >
-								<option value="">{{protudoCtr.produto.unidadeMedida}}</option>
+								<option ng-value="protudoCtr.produto.unidadeMedida" value="">{{protudoCtr.produto.unidadeMedida}}</option>
 							</select>
 						</div>
 				
@@ -63,14 +63,14 @@
 						<select class="form-control select2" ng-model="protudoCtr.produto.categoria" 
 							ng-options="listaCategorias.descricao for listaCategorias in categoriaCtrl.categorias" 
 							  style=" width: 100%;" required >
-								<option value="">{{protudoCtr.produto.categoria.descricao}}</option>
+								<option ng-value="protudoCtr.produto.categoria" value="">{{protudoCtr.produto.categoria.descricao}}</option>
 							</select>
 						</div>
 						<div class="col-sm-4" ng-controller="fabricanteController as fabricanteCtrl" ng-init="fabricanteCtrl.lista()">
 						<select class="form-control select2" ng-model="protudoCtr.produto.fabricante" 
 							ng-options="listaFabricantes.dadoEmpresa.nomeFantasia for listaFabricantes in fabricanteCtrl.listaFabricante" 
 							  style=" width: 100%;" required >
-								<option value="">{{protudoCtr.produto.fabricante.dadoEmpresa.nomeFantasia}}</option>
+								<option ng-value="protudoCtr.produto.fabricante" value="">{{protudoCtr.produto.fabricante.dadoEmpresa.nomeFantasia}}</option>
 							</select>
 						</div>		
 					</div>

@@ -37,23 +37,28 @@
 					<div class="row" ng-init="transfCtrl.listaProdutosComEstoque()">
 						
 						<div class="col-sm-3" ng-if="habilitaBuscaPorDescricao" >
-									
+									   						 
 							  <md-autocomplete 
-							    md-no-cache="transfCtrl.noCache"
-							 	md-selected-item="transfCtrl.produto" 
-							 	md-search-text="transfCtrl.searchText" 
-							 	md-selected-item-change="transfCtrl.selectedItemChange(listaProduto)" 
-							 	md-items=" listaProduto in transfCtrl.listaProdutos | filter : transfCtrl.searchText" 
+							    md-no-cache="noCache"
+							 	md-selected-item="produto.produto" 
+							 	md-search-text="searchText" 
+							 	md-selected-item-change="selectedItemChange(listaProduto.produto)" 
+							 	md-items=" listaProduto in transfCtrl.listaProdutos | filter : searchText" 
 							 	md-item-text="listaProduto.produto.descricao" 
-							 	md-min-length="1" placeholder="busca produto">
+							 	md-min-length="0" placeholder="busca produto por descrição">
        							 <md-item-template>
-          							<span md-highlight-text="transfCtrl.searchText" md-highlight-flags="^i">{{listaProduto.produto.descricao}}</span>
+          							<span md-highlight-text="searchText" md-highlight-flags="^i">{{listaProduto.produto.descricao}}</span>
        							 </md-item-template>        								
      						 </md-autocomplete>
+     						 <div ng-show="teste">
+     							 {{transfCtrl.produto = produto.produto}}
+     						 </div>
+     						 
      						
 						</div>	
+						
 						<div class="col-sm-2" ng-if="!habilitaBuscaPorDescricao">
-							<input type="text" class="form-control" ng-model="codigo" ng-blur="transfCtrl.buscaPorCodigoBarras(codigo)" onkeyup="if(this.value.length > 12) { quantidadeProduto.focus(); }" name="leitor" placeholder="Leitor de Código de Barras">
+							<input type="text" class="form-control" ng-model="transfCtrl.codigo" ng-blur="transfCtrl.buscaPorCodigoBarras(transfCtrl.codigo)" onkeyup="if(this.value.length > 12) { quantidadeProduto.focus(); }" name="leitor" placeholder="Leitor de Código de Barras">
 						</div>
 						<div class="col-sm-2" ng-if="!habilitaBuscaPorDescricao">
 							<input class="form-control" ng-model="transfCtrl.produto.produto.descricao" type="text" id="produto"  disabled placeholder="produto">

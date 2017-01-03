@@ -1,4 +1,4 @@
-app.controller('pacoteServicoController', function($scope, pacoteServicoService, $routeParams){
+app.controller('pacoteServicoController', function($scope, pacoteServicoService, $location,  $routeParams){
 	
 	var self = this;
 	
@@ -19,6 +19,7 @@ app.controller('pacoteServicoController', function($scope, pacoteServicoService,
 		 pacoteServicoService.altera(self.pacoteServico).
 			then(function(response){
 				self.pacoteServico = null;
+				$location.path('/servicos/pacotes/lista');
 				}, function(errResponse){
 			});
 		 

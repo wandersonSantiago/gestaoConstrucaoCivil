@@ -24,7 +24,7 @@
 							<input type="text" class="form-control" ng-model="codigo" ng-blur="estoqueCtrl.buscaPorCodigoBarras(codigo)" onkeyup="if(this.value.length > 12) { quantidadeProduto.focus(); }" name="leitor" placeholder="Leitor de Código de Barras">
 						</div>
 						
-						<div class="col-sm-3" ng-if="habilitaBuscaPorDescricao" >
+						<div class="col-sm-4" ng-if="habilitaBuscaPorDescricao" >
 						  <md-autocomplete 
 						 		md-no-cache="estoqueCtrl.noCache"
 							 	md-selected-item="estoqueCtrl.objeto.produto" 

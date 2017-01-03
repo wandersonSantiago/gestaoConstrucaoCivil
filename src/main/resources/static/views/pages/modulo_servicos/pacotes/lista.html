@@ -25,7 +25,7 @@
 				<tbody
 					ng-repeat=" pacoteServico in pacotesCtrl.listaPacoteServicos | filter : buscaPacotes">
 					<tr>
-					<td>{{ pacoteServico.codigoPacote }}</td>
+						<td>{{ pacoteServico.codigo }}</td>
 						<td>{{ pacoteServico.descricao }}</td>
 						<td>{{ pacoteServico.categoria.descricao }}</td>
 						<td>{{ pacoteServico.valor | currency }}</td>

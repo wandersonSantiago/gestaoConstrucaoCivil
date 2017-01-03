@@ -33,10 +33,13 @@ app.controller('notaFiscalController', function($scope,notaFiscalService, produt
 		};
 		
 		self.buscaPorCodigoBarras = function(codigoBarras){
+			
+			console.log("teste");
 			produtoService.buscaPorCodigoBarras(codigoBarras).
 			then(function(p){
 				self.produtos = p;
 				if(p){
+					$scope.notaFiscalCtrl.produto = null;
 					self.adicionarProdutos(self.produtos);						
 				}		
 			},function(errResponse){
@@ -44,6 +47,7 @@ app.controller('notaFiscalController', function($scope,notaFiscalService, produt
 		};
 		
 		self.adicionarProdutos = function(produto){
+			$scope.notaFiscalCtrl.produto = null;
 		if(self.listaItensNota.length == 0){				
 				self.salvaNotaNaLista(produto);				
 			}

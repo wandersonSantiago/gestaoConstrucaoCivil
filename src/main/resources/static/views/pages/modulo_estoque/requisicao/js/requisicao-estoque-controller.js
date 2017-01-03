@@ -21,7 +21,8 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 				then(function(p){					
 					self.listaProdutosComEstoques = p;
 								$scope.quantidade = self.listaProdutosComEstoques.quantidade;
-								$scope.produto = self.listaProdutosComEstoques.produto;							
+								$scope.produto = self.listaProdutosComEstoques.produto;
+								$scope.valorUnitario = self.listaProdutosComEstoques.custoMedio;
 				});
 			};
 			self.listaProdutosComEstoque = function(){
@@ -124,6 +125,7 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 					verificaProdutoRepetido(objeto);
 					self.funcaoListaProdutoEdificio(objeto);
 			}
+			self.limpaCampoProdutos();
 		}
 		self.adicionarProdutoCasa = function(objeto){
 			if(!$scope.habilitaBuscaPorDescricao){objeto.produto = {produto : $scope.produto, quantidade : $scope.quantidade, valorUnitario : $scope.valorUnitario};}		
@@ -133,6 +135,7 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 					verificaProdutoRepetido(objeto);
 					self.funcaoListaProdutoCasa(objeto);					
 			}
+			self.limpaCampoProdutos();
 		}
 		self.adicionarProdutoEdificacaoComunitaria = function(objeto){		    
 			if(!$scope.habilitaBuscaPorDescricao){objeto.produto = {produto : $scope.produto, quantidade : $scope.quantidade , valorUnitario : $scope.valorUnitario};}			
@@ -142,6 +145,7 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 					verificaProdutoRepetido(objeto);					
 					self.funcaoListaProdutoEdificacoesComunitaria(objeto);				
 			}
+			self.limpaCampoProdutos();
 		}
 		
 
@@ -223,7 +227,17 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 			self.listaProduto = self.listaProduto=[];			
 			$scope.ativadoExcluirLote = false;
 			$scope.ativaTabela = false;		
+			$scope.valorUnitario = null;
 			
+		}
+		
+		self.limpaCampoProdutos = function(){
+			
+			self.objeto = null;
+			$scope.quantidade = null;
+			$scope.produto = null;
+			$scope.codigo;			
+			$scope.valorUnitario = null;
 		}
 		
 		self.buscaPorIdCasa = function(id){

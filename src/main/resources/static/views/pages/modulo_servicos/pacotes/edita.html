@@ -25,7 +25,7 @@
 					
 					<div class="row">					
 					<div class="col-sm-2">
-							<input  class="form-control" ng-model="pacotesCtrl.pacoteServico.codigoPacote" id="codigo" placeholder="Código" type="text"  required >
+							<input  class="form-control" ng-model="pacotesCtrl.pacoteServico.codigo" id="codigo" placeholder="Código" type="text"  required >
 						</div>
 						<div class="col-sm-4">
 							<input  class="form-control" id="nome" type="text" ng-model="pacotesCtrl.pacoteServico.descricao" placeholder="Nome" required >
@@ -34,7 +34,7 @@
 						<select class="form-control select2" ng-model="pacotesCtrl.pacoteServico.categoria" 
 							ng-options="listaCategorias.descricao for listaCategorias in categoriaCtrl.categorias" 
 							  style=" width: 100%;" required >
-								<option value="">---Categoria---</option>
+								<option ng-value="pacotesCtrl.pacoteServico.categoria" value="">{{pacotesCtrl.pacoteServico.categoria.descricao}}</option>
 							</select>
 						</div>
 					</div>
