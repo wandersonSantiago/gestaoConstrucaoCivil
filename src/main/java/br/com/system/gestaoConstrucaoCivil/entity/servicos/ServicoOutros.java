@@ -5,11 +5,9 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 @Entity
 @Table(name = "servico_outros")
-public class ServicoOutros  extends AbstractPersistable<Long> implements Serializable{
+public class ServicoOutros extends ServicoEmpresa implements Serializable{
 
 	private String descricao;
 
