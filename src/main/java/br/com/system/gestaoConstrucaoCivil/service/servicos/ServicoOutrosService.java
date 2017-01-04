@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.servicos.ServicoOutros;
+import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.servicos.ServicoOutrosRepository;
 
 @Service
@@ -25,6 +26,7 @@ public class ServicoOutrosService {
 	@Transactional(readOnly = false)
 	public void  salvarOuEditar(ServicoOutros servico)
 	{
+		servico.setEmpreendimento(SessionUsuario.getInstance().getUsuario().getEmpreendimento());
 		servicoOutrosRepository.save(servico);
 	}
 	public ServicoOutros buscarPorId(Long id) {
