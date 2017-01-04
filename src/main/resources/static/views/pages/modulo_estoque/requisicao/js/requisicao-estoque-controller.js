@@ -121,31 +121,34 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 			if(!$scope.habilitaBuscaPorDescricao){objeto.produto = {produto : $scope.produto, quantidade : $scope.quantidade , valorUnitario : $scope.valorUnitario};}
 			verificaQuantidade(objeto);	
 			if(quantidadeMaior){
+				self.limpaCampoProdutos();
 				$scope.ativaTabela = true;
 					verificaProdutoRepetido(objeto);
 					self.funcaoListaProdutoEdificio(objeto);
 			}
-			self.limpaCampoProdutos();
+			
 		}
 		self.adicionarProdutoCasa = function(objeto){
 			if(!$scope.habilitaBuscaPorDescricao){objeto.produto = {produto : $scope.produto, quantidade : $scope.quantidade, valorUnitario : $scope.valorUnitario};}		
 			verificaQuantidade(objeto);	
 			if(quantidadeMaior){
+				self.limpaCampoProdutos();
 				$scope.ativaTabela = true;
 					verificaProdutoRepetido(objeto);
 					self.funcaoListaProdutoCasa(objeto);					
 			}
-			self.limpaCampoProdutos();
+			
 		}
 		self.adicionarProdutoEdificacaoComunitaria = function(objeto){		    
 			if(!$scope.habilitaBuscaPorDescricao){objeto.produto = {produto : $scope.produto, quantidade : $scope.quantidade , valorUnitario : $scope.valorUnitario};}			
 			verificaQuantidade(objeto);				
 			if(quantidadeMaior){
+				self.limpaCampoProdutos();
 				$scope.ativaTabela = true;
 					verificaProdutoRepetido(objeto);					
 					self.funcaoListaProdutoEdificacoesComunitaria(objeto);				
 			}
-			self.limpaCampoProdutos();
+			
 		}
 		
 
@@ -168,8 +171,8 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 			console.log(self.requisicaoEdificio);
 			requisicaoEstoqueService.salvaEdificio(self.requisicaoEdificio)
 			.then($timeout(function(response){
-				//self.listaProdutosComEstoque();
-				//self.limpaCampo();
+				self.listaProdutosComEstoque();
+				self.limpaCampo();
 			},500), function(errResponse){					
 			});			
 		}
@@ -180,8 +183,8 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 			console.log(self.listaProduto);
 			requisicaoEstoqueService.salvaCasa(self.requisicaoCasa)
 			.then($timeout(function(response){
-				//self.listaProdutosComEstoque();
-				//self.limpaCampo();
+				self.listaProdutosComEstoque();
+				self.limpaCampo();
 			},500), function(errResponse){					
 			});
 		}
@@ -191,8 +194,8 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 			self.requisicaoOutros.itens = self.listaProduto;
 			requisicaoEstoqueService.salvaOutros(self.requisicaoOutros)
 			.then( $timeout(function(response){
-			//	self.listaProdutosComEstoque();
-			//	self.limpaCampo();
+				self.listaProdutosComEstoque();
+				self.limpaCampo();
 			},500), function(errResponse){		
 			});
 		}
@@ -233,7 +236,7 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 		
 		self.limpaCampoProdutos = function(){
 			
-			self.objeto = null;
+			self.objeto = self.objeto = {};
 			$scope.quantidade = null;
 			$scope.produto = null;
 			$scope.codigo;			

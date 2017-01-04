@@ -25,12 +25,15 @@
 					
 					<div class="row">					
 					<div class="col-sm-2">
+							Código
 							<input  class="form-control" ng-model="pacotesCtrl.pacoteServico.codigo" id="codigo" placeholder="Código" type="text"  required >
 						</div>
 						<div class="col-sm-4">
+							Descrição do Pacote
 							<input  class="form-control" id="nome" type="text" ng-model="pacotesCtrl.pacoteServico.descricao" placeholder="Nome" required >
 						</div>
 						<div class="col-sm-4" ng-controller="categoriaController as categoriaCtrl" ng-init="categoriaCtrl.lista()">
+						Categoria
 						<select class="form-control select2" ng-model="pacotesCtrl.pacoteServico.categoria" 
 							ng-options="listaCategorias.descricao for listaCategorias in categoriaCtrl.categorias" 
 							  style=" width: 100%;" required >
@@ -44,18 +47,21 @@
 			
 					<div class="row">
 						<div class="col-sm-6">
+						Serviços Atribuidos
 					      <textarea class="textarea form-control" ng-model="pacotesCtrl.pacoteServico.servicosAtribuidos"  placeholder="Serviços Atribuidos" required ></textarea>
             	   	</div>										
 					</div>
 					<br>
 					<div class="row">
 							<div class="col-sm-6">
+							Critérios
 					      <textarea class="textarea form-control"  ng-model="pacotesCtrl.pacoteServico.criterioServico" placeholder="Critérios" ></textarea>
             	   	</div>	
 					</div>
 					<br>
 					<div class="row">
 						<div class="col-sm-4">
+						Valor
 							<input  class="form-control" id="valor" type="text" ng-model="pacotesCtrl.pacoteServico.valor" placeholder="Valor" ui-money-mask="2"  required >
 						</div>
 					</div>

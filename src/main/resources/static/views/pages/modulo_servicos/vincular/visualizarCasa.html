@@ -36,7 +36,7 @@
 						<select class="form-control " style=" width: 100%;"  ng-model="servicoCtrl.pacoteServico"
 							 ng-options="lista.descricao for lista in pacotesCtrl.listaPacoteServicos" 
 							 title="Selecione o pacote de serviço a ser atribuido a empresa" required>
-								<option ng-value="servicoCtrl.pacoteServico" value="">{{servicoCtrl.pacoteServico}}</option>
+								<option ng-value="servicoCtrl.pacoteServico" value="">{{servicoCtrl.pacoteServico.descricao}}</option>
 							</select>
 					</div>	
 						
@@ -45,7 +45,7 @@
 						<select class="form-control "   width: 100%;" ng-model="servicoCtrl.prestadoraServico"
 							 ng-options="lista.dadoEmpresa.nomeFantasia for lista in prestadoraCtrl.prestadoraServicos" 
 							 title="Selecione o pacote de serviço a ser atribuido a empresa" required>
-								<option ng-value="servicoCtrl.prestadoraServico" value="">{{servicoCtrl.prestadoraServico}}</option>
+								<option ng-value="servicoCtrl.prestadoraServico" value="">{{servicoCtrl.prestadoraServico.dadoEmpresa.nomeFantasia }}</option>
 							</select>
 						</div>
 					</div>

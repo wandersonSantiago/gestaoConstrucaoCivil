@@ -7,11 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.com.system.gestaoConstrucaoCivil.entity.servicos.ServicoEdificio;
 import br.com.system.gestaoConstrucaoCivil.entity.servicos.ServicoOutros;
 import br.com.system.gestaoConstrucaoCivil.service.servicos.ServicoOutrosService;
 
@@ -28,12 +30,18 @@ public class ServicoOutrosRestController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(
 				ucBuilder.path("/rest/servico/vincular/salva/{id}").buildAndExpand(servico.getId()).toUri());
-		return new ResponseEntity(headers, HttpStatus.CREATED);
+		return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	}
 
+	@PutMapping
+	public ResponseEntity<ServicoOutros> altera(@RequestBody ServicoOutros servico, UriComponentsBuilder ucBuilder) {
+		servicoOutrosService.salvarOuEditar(servico);
+		HttpHeaders headers = new HttpHeaders();		
+		return new ResponseEntity<>(headers, HttpStatus.CREATED);
+	}
+	
 	@GetMapping(value = "/lista")
 	public ResponseEntity<Iterable<ServicoOutros>> buscarTodos() {
-
 		return new ResponseEntity<Iterable<ServicoOutros>>(servicoOutrosService.buscarTodos(), HttpStatus.OK);
 	}
 	@GetMapping(value = "/buscaPorId/{id}")

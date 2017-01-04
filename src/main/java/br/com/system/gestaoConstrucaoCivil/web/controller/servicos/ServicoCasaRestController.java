@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,9 +29,16 @@ public class ServicoCasaRestController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(
 				ucBuilder.path("/rest/servico/vincular/salva/{id}").buildAndExpand(servico.getId()).toUri());
-		return new ResponseEntity(headers, HttpStatus.CREATED);
+		return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	}
 
+	@PutMapping
+	public ResponseEntity<ServicoCasa> altera(@RequestBody ServicoCasa servico, UriComponentsBuilder ucBuilder) {
+		servicoCasaService.salvarOuEditar(servico);
+		HttpHeaders headers = new HttpHeaders();		
+		return new ResponseEntity<>(headers, HttpStatus.CREATED);
+	}
+	
 	@GetMapping(value = "/lista")
 	public ResponseEntity<Iterable<ServicoCasa>> buscarTodos() {
 

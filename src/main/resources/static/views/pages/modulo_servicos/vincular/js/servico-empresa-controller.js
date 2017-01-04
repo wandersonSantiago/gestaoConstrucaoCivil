@@ -2,6 +2,9 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 	
 	var self = this;
 		
+	var  idServicoComunitario = $routeParams.idServicoComunitario;
+	var  idServicoEdificio = $routeParams.idServicoEdificio;
+	var  idServicoCasa = $routeParams.idServicoCasa;
 	
 	
 	 self.salvaEdificio = function(servicoEdifico , pacoteServico , prestadoraServico){
@@ -14,7 +17,7 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 			});
 		}
 	 
-	 self.alteraEdificio = function(servicoEdifico , pacoteServico , prestadoraServico){
+	 self.alteraEdificio = function(servicoEdifico , pacoteServico , prestadoraServico){		
 		 servicoEdifico.pacoteServico = pacoteServico;
 		 servicoEdifico.prestadoraServico = prestadoraServico;
 		 servicoEmpresaService.alteraEdificio(servicoEdifico).
@@ -65,7 +68,6 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 				 servicoOutros.descricao = descricao.descricao;
 				 servicoOutros.pacoteServico = pacoteServico;
 				 servicoOutros.prestadoraServico = prestadoraServico;
-				 console.log(servicoOutros);
 				 servicoEmpresaService.salvaEdificacoesComunitaria(servicoOutros).
 					then(function(response){
 						self.servicoEdificio = null;
@@ -73,7 +75,9 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 					});
 				}
 			 
-			 self.alteraEdificacoesComunitaria = function(servicoOutros , pacoteServico , prestadoraServico){
+			 self.alteraEdificacoesComunitaria =  function(descricao , pacoteServico , prestadoraServico){
+				 servicoOutros = {};
+				 servicoOutros.descricao = descricao.descricao;
 				 servicoOutros.pacoteServico = pacoteServico;
 				 servicoOutros.prestadoraServico = prestadoraServico;
 				 servicoEmpresaService.alteraEdificacoesComunitaria(servicoOutros).
@@ -91,6 +95,56 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 					});
 				};
 		
+				self.buscaServicoEdificioPorId = function(id){
+					if(!id)return;
+					servicoEmpresaService.buscaServicoEdificioPorId(id).
+					then(function(p){
+						self.servicoEdifico = p;
+						self.pacoteServico = p.pacoteServico;
+						self.prestadoraServico = p.prestadoraServico;
+						}, function(errResponse){
+					});
+				};
+				
+			
+				if(idServicoEdificio){
+					
+					self.buscaServicoEdificioPorId(idServicoEdificio);
+				}
+				
+				self.buscaServicoCasaPorId = function(id){
+					if(!id)return;
+					servicoEmpresaService.buscaServicoCasaPorId(id).
+					then(function(p){
+						self.servicoCasa = p;
+						self.pacoteServico = p.pacoteServico;
+						self.prestadoraServico = p.prestadoraServico;
+						}, function(errResponse){
+					});
+				};
+				
+			
+				if(idServicoCasa){
+					
+					self.buscaServicoCasaPorId(idServicoECasa);
+				}
+				
+				self.buscaServicoComunitarioPorId = function(id){
+					if(!id)return;
+					servicoEmpresaService.buscaServicoComunitarioPorId(id).
+					then(function(p){
+						self.descricao = p.descricao;
+						self.pacoteServico = p.pacoteServico;
+						self.prestadoraServico = p.prestadoraServico;
+						}, function(errResponse){
+					});
+				};				
+			
+				if(idServicoComunitario){
+					
+					self.buscaServicoComunitarioPorId(idServicoComunitario);
+				}
+				
 		$scope.tipo = {
 				tipo : ''	
 			};		

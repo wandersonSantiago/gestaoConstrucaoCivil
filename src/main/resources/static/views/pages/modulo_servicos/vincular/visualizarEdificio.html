@@ -50,7 +50,7 @@
 						<select class="form-control " style=" width: 100%;"  ng-model="servicoCtrl.pacoteServico"
 							 ng-options="lista.descricao for lista in pacotesCtrl.listaPacoteServicos" 
 							 title="Selecione o pacote de serviço a ser atribuido a empresa" required>
-								<option value="">---Pacotes de Serviço---</option>
+								<option ng-value="servicoCtrl.pacoteServico" value="">{{servicoCtrl.pacoteServico.descricao}}</option>
 							</select>
 					</div>	
 						
@@ -59,7 +59,7 @@
 						<select class="form-control "   width: 100%;" ng-model="servicoCtrl.prestadoraServico"
 							 ng-options="lista.dadoEmpresa.nomeFantasia for lista in prestadoraCtrl.prestadoraServicos" 
 							 title="Selecione o pacote de serviço a ser atribuido a empresa" required>
-								<option value="">---Prestadora de Serviço---</option>
+								<option ng-value="servicoCtrl.prestadoraServico" value="">{{servicoCtrl.prestadoraServico.dadoEmpresa.nomeFantasia}}</option>
 							</select>
 						</div>
 					</div>
@@ -68,7 +68,7 @@
 					<div class="row ">
 						
 							<button  type="button" name="salvar" ng-disabled="!servicoCtrl.servicoEdifico.apartamento ||!servicoCtrl.servicoEdifico.apartamento || !servicoCtrl.servicoEdifico.torre || !servicoCtrl.pacoteServico || !servicoCtrl.prestadoraServico"  
-							ng-click="servicoCtrl.salvaEdificio(servicoCtrl.servicoEdifico , servicoCtrl.pacoteServico,  servicoCtrl.prestadoraServico)" class="btn btn-lg btn-primary btn-block btn-signin">Cadastrar</button>
+							ng-click="servicoCtrl.alteraEdificio(servicoCtrl.servicoEdifico , servicoCtrl.pacoteServico,  servicoCtrl.prestadoraServico)" class="btn btn-lg btn-primary btn-block btn-signin">Cadastrar</button>
 					</div>
 				</form>
 			</div>

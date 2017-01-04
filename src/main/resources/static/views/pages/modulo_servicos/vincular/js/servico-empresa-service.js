@@ -14,7 +14,7 @@ app.factory('servicoEmpresaService', function($rootScope, toastr, $http,$q){
 		},
 		
 		alteraEdificio: function(objeto){
-			return $http.post('/rest/servico/vincular/altera', objeto)
+			return $http.put('/rest/servico/edificio/vincular', objeto)
 			.then(function(response){
 				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
@@ -25,11 +25,21 @@ app.factory('servicoEmpresaService', function($rootScope, toastr, $http,$q){
 		},
 		
 		listaEdificio: function(){
-			return $http.get('rest/servico/vincular/lista')
+			return $http.get('/rest/servico/edificio/vincular/lista')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
+		
+		buscaServicoEdificioPorId: function(param){
+			return $http.get('/rest/servico/edificio/vincular/buscaPorId/'+param)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 3000,  type : "error", width: 200, higth: 100, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
@@ -46,7 +56,7 @@ app.factory('servicoEmpresaService', function($rootScope, toastr, $http,$q){
 		},
 		
 		alteraCasa: function(objeto){
-			return $http.post('/rest/servico/casa/vincular/altera', objeto)
+			return $http.put('/rest/servico/casa/vincular', objeto)
 			.then(function(response){
 				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
@@ -66,6 +76,17 @@ app.factory('servicoEmpresaService', function($rootScope, toastr, $http,$q){
 			});
 		},
 		
+		buscaServicoCasaPorId: function(param){
+			return $http.get('/rest/servico/casa/vincular/buscaPorId/'+param)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 3000,  type : "error", width: 200, higth: 100, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
+		
+		
 		salvaEdificacoesComunitaria: function(objeto){
 			return $http.post('/rest/servico/outros/vincular/salva', objeto)
 			.then(function(response){
@@ -78,7 +99,7 @@ app.factory('servicoEmpresaService', function($rootScope, toastr, $http,$q){
 		},
 		
 		alteraEdificacoesComunitaria: function(objeto){
-			return $http.post('/rest/servico/outros/vincular/altera', objeto)
+			return $http.put('/rest/servico/outros/vincular', objeto)
 			.then(function(response){
 				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
@@ -97,5 +118,17 @@ app.factory('servicoEmpresaService', function($rootScope, toastr, $http,$q){
 				return $q.reject(errResponse);
 			});
 		},
+		
+		buscaServicoComunitarioPorId: function(param){
+			return $http.get('/rest/servico/outros/vincular/buscaPorId/'+param)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 3000,  type : "error", width: 200, higth: 100, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
+		
+		
 	}
 });

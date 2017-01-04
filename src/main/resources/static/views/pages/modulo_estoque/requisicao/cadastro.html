@@ -21,10 +21,12 @@
 					<div class="row">
 						
 						<div class="col-sm-2" ng-if="!habilitaBuscaPorDescricao">
+						Busca por código
 							<input type="text" class="form-control" ng-model="codigo" ng-blur="estoqueCtrl.buscaPorCodigoBarras(codigo)" onkeyup="if(this.value.length > 12) { quantidadeProduto.focus(); }" name="leitor" placeholder="Leitor de Código de Barras">
 						</div>
 						
 						<div class="col-sm-4" ng-if="habilitaBuscaPorDescricao" >
+						Busca por descrição
 						  <md-autocomplete 
 						 		md-no-cache="estoqueCtrl.noCache"
 							 	md-selected-item="estoqueCtrl.objeto.produto" 
@@ -39,7 +41,8 @@
      						 </md-autocomplete>
      					</div>
 						
-						<div class="col-sm-2" ng-controller="areaProdutoController as areaProdutoCtrl" ng-init="areaProdutoCtrl.lista()">						
+						<div class="col-sm-2" ng-controller="areaProdutoController as areaProdutoCtrl" ng-init="areaProdutoCtrl.lista()">	
+						Area de aplicação					
 							<select class="form-control select2" ng-model="estoqueCtrl.objeto.areaProduto" id="teste"
 								ng-options="listaAreaProdutos.descricao for listaAreaProdutos in areaProdutoCtrl.listaAreaProduto" 
 							  	style=" width: 100%;" required >
@@ -48,22 +51,28 @@
 							
 						</div>
 						<div class="col-sm-2" ng-if="!habilitaBuscaPorDescricao">
+						Valor
 							<input class="form-control" ng-model="valorUnitario" type="text" id="valorUnitario" ui-money-mask  disabled placeholder="Valor">						
 						</div>	
 						<div class="col-sm-2" ng-if="habilitaBuscaPorDescricao">
+						valor
 							<input class="form-control" ng-model="estoqueCtrl.objeto.produto.valorUnitario" type="text" id="valor"  ui-money-mask disabled placeholder="Valor">						
 						</div>
 						<div class="col-sm-2" ng-if="!habilitaBuscaPorDescricao">
+						produto
 							<input class="form-control" ng-model="produto.descricao" type="text" id="produto"  disabled placeholder="produto">						
 						</div>						
 						<div class="col-sm-2" ng-if="!habilitaBuscaPorDescricao" >
+						Quantidade estoque
 							<input class="form-control" ng-model="quantidade" type="text" id="quantidadeEstoque" ui-number-mask="0" disabled placeholder="Quantidade estoque">
 						</div>
 						<div class="col-sm-2" ng-if="habilitaBuscaPorDescricao">
+						Quantidade estoque
 							<input class="form-control" ng-model="estoqueCtrl.objeto.produto.quantidade" type="text" id="quantidadeEstoque" ui-number-mask="0" disabled placeholder="Quantidade estoque">
 						</div>
 						
 						<div class="col-sm-2">
+						Quantidade saida
 							<input class="form-control" ng-model="estoqueCtrl.objeto.quantidadeSaida" type="text" id="quantidadeTeste" ui-number-mask="0" placeholder="Quantidade saida" required>
 						</div>
 						
@@ -74,12 +83,14 @@
 					<div class="row" ng-if="casa" ng-controller="configEmpreendimentoController as configCtrl" ng-init="configCtrl.quantidadeCasa()">
 						
 						<div class="col-sm-4"  >
+							Casa
 							<select class="form-control select2" style=" width: 100%;" ng-model="estoqueCtrl.objeto.casa" 
 							ng-options="lista for lista in configCtrl.qtdeCasa.quantidadeCasa" required>
 								<option value="">---Casa---</option>
 							</select>
 						</div>
 							<div class="col-sm-4"  >
+							Andar
 							<select class="form-control select2" style=" width: 100%;" ng-model="estoqueCtrl.objeto.andar"  
 							ng-options="lista for lista in configCtrl.qtdeCasa.quantidadeAndarCasa" required>
 								<option value="">---Andar---</option>
@@ -90,6 +101,7 @@
 
 					<div ng-if="edificio" class="row" ng-controller="configEmpreendimentoController as configCtrl" ng-init="configCtrl.quantidadeEdificio()">
 							<div class="col-sm-4"  >
+							Torre
 							<select class="form-control select2" style=" width: 100%;"  ng-model="estoqueCtrl.objeto.torre"
 							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeTorres" 
 							 title="Selecione a torre a qual será atribuido a saida do produto" required>
@@ -98,7 +110,8 @@
 							
 						</div>
 						<div class="col-sm-4"  >
-								<select class="form-control select2" style=" width: 100%;"  ng-model="estoqueCtrl.objeto.andar"
+							Andar
+							<select class="form-control select2" style=" width: 100%;"  ng-model="estoqueCtrl.objeto.andar"
 							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeAndares"
 							 title="Selecione o andar a qual será atribuido a saída do produto" required>
 								<option value="">---Andar---</option>
@@ -106,6 +119,7 @@
 						</div>
 	
 							<div class="col-sm-4"  >
+							Apartamento
 							 <select class="form-control select2" style=" width: 100%;"  ng-model="estoqueCtrl.objeto.apartamento"
 							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeApartamentos" 
 							 title="Selecione o apartamento a qual será atribuido a saída do produto" required>
@@ -114,8 +128,9 @@
 						</div>
 					</div>
 								
-					<div class="row" ng-if="comunitaria">					
+					<div class="row" ng-if="comunitaria">										
 						<div class="col-sm-5"  ng-controller="configEmpreendimentoController as configCtrl"  ng-init="configCtrl.listaOutros()">
+						Edificações Comunitaria
 							<select class="form-control select2" style=" width: 100%;" ng-model="estoqueCtrl.objeto.edificacaoComunitaria"
 							 ng-options="lista.descricao for lista in configCtrl.listaOutros" required>
 								<option value="">---Edificações Comunitaria---</option>
@@ -176,7 +191,7 @@
 										<td ng-if="comunitaria">{{produto.descricao}}</td>							
 										<td>{{produto.quantidadeEstoque}}</td>
 										<td>{{produto.quantidade}}</td>
-										<td>{{produto.quantidadeEstoque - produto.quantidadeSaida}}</td>
+										<td>{{produto.quantidadeEstoque - produto.quantidade}}</td>
 										<td>{{produto.valorUnitario | currency}}</td>
 										
 									</tr>
