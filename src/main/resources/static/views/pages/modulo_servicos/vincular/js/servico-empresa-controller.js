@@ -4,30 +4,93 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 		
 	
 	
-	 self.salva = function(servicoEdifico){
-		 servicoEmpresaService.salva(self.servicoEdifico).
+	 self.salvaEdificio = function(servicoEdifico , pacoteServico , prestadoraServico){
+		 servicoEdifico.pacoteServico = pacoteServico;
+		 servicoEdifico.prestadoraServico = prestadoraServico;
+		 servicoEmpresaService.salvaEdificio(servicoEdifico).
 			then(function(response){
 				self.servicoEdificio = null;
 				}, function(errResponse){
 			});
 		}
 	 
-	 self.altera = function(servicoEmpresa){
-		 servicoEmpresaService.altera(self.servicoEmpresa).
+	 self.alteraEdificio = function(servicoEdifico , pacoteServico , prestadoraServico){
+		 servicoEdifico.pacoteServico = pacoteServico;
+		 servicoEdifico.prestadoraServico = prestadoraServico;
+		 servicoEmpresaService.alteraEdificio(servicoEdifico).
 			then(function(response){
 				self.servicoEmpresa = null;
 				}, function(errResponse){
 			});
 		}
 	 
-	 self.lista = function(){
-		 servicoEmpresaService.lista().
+	 self.listaEdificio = function(){
+		 servicoEmpresaService.listaEdificio().
 			then(function(t){
 				self.listaServicoEmpresa = t;
-				console.log(self.listaServicoEmpresa);
 				}, function(errResponse){
 			});
 		};
+		
+		 self.salvaCasa = function(servicoCasa , pacoteServico , prestadoraServico){
+			 servicoCasa.pacoteServico = pacoteServico;
+			 servicoCasa.prestadoraServico = prestadoraServico;
+			 servicoEmpresaService.salvaCasa(servicoCasa).
+				then(function(response){
+					self.servicoEdificio = null;
+					}, function(errResponse){
+				});
+			}
+		 
+		 self.alteraCasa = function(servicoCasa , pacoteServico , prestadoraServico){
+			 servicoCasa.pacoteServico = pacoteServico;
+			 servicoCasa.prestadoraServico = prestadoraServico;
+			 servicoEmpresaService.alteraCasa(servicoCasa).
+				then(function(response){
+					self.servicoEmpresa = null;
+					}, function(errResponse){
+				});
+			}
+		 
+		 self.listaCasa = function(){
+			 servicoEmpresaService.listaCasa().
+				then(function(t){
+					self.listaServicoEmpresa = t;
+					}, function(errResponse){
+				});
+			};
+			
+			 self.salvaEdificacoesComunitaria = function(descricao , pacoteServico , prestadoraServico){
+				 servicoOutros = {};
+				 servicoOutros.descricao = descricao.descricao;
+				 servicoOutros.pacoteServico = pacoteServico;
+				 servicoOutros.prestadoraServico = prestadoraServico;
+				 console.log(servicoOutros);
+				 servicoEmpresaService.salvaEdificacoesComunitaria(servicoOutros).
+					then(function(response){
+						self.servicoEdificio = null;
+						}, function(errResponse){
+					});
+				}
+			 
+			 self.alteraEdificacoesComunitaria = function(servicoOutros , pacoteServico , prestadoraServico){
+				 servicoOutros.pacoteServico = pacoteServico;
+				 servicoOutros.prestadoraServico = prestadoraServico;
+				 servicoEmpresaService.alteraEdificacoesComunitaria(servicoOutros).
+					then(function(response){
+						self.servicoEmpresa = null;
+						}, function(errResponse){
+					});
+				}
+			 
+			 self.listaEdificacoesComunitaria = function(){
+				 servicoEmpresaService.listaEdificacoesComunitaria().
+					then(function(t){
+						self.listaServicoEmpresa = t;
+						console.log(self.listaServicoEmpresa);
+						}, function(errResponse){
+					});
+				};
 		
 		$scope.tipo = {
 				tipo : ''	
