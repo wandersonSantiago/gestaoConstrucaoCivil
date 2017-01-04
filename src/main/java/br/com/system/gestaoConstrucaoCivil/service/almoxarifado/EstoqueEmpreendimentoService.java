@@ -31,6 +31,9 @@ public class EstoqueEmpreendimentoService {
 		
     	Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();  
     	
+    	System.out.println("INICIO");
+    	long tempoInicio = System.currentTimeMillis();
+    	
     	List<EstoqueEmpreendimento> estoques = estoqueRepository.buscarTodosPorEmpreendimento(idEmpreendimento);
     	
     	for(EstoqueEmpreendimento estoque: estoques) {
@@ -38,7 +41,7 @@ public class EstoqueEmpreendimentoService {
     		 estoque.setInforProduto(info);
     		
     	 }
-    	
+    	System.out.println("Tempo Total: "+(System.currentTimeMillis()-tempoInicio));
     	return estoques;
 	}
 	

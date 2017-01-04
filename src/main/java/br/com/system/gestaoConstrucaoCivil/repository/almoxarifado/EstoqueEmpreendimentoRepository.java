@@ -2,14 +2,17 @@ package br.com.system.gestaoConstrucaoCivil.repository.almoxarifado;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.EntityGraph.EntityGraphType;
 import org.springframework.data.repository.query.Param;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.EstoqueEmpreendimento;
 
 public interface EstoqueEmpreendimentoRepository extends JpaRepository<EstoqueEmpreendimento, Long> {
 
+	@EntityGraph(value = "EstoqueEmpreendimento.detail", type = EntityGraphType.LOAD)
 	@Query("FROM EstoqueEmpreendimento estoque WHERE estoque.empreendimento.id = ?1")
 	List<EstoqueEmpreendimento> buscarTodosPorEmpreendimento(Long id_empreendimento);
 

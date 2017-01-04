@@ -10,16 +10,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.EntradaOuBaixa;
-import br.com.system.gestaoConstrucaoCivil.util.geradorCodigo.GeraNumeroNota;
 
 
 @Entity
+@NamedEntityGraph(name = "NotaFiscalProduto.detail",
+attributeNodes = {@NamedAttributeNode("notaFiscal"),@NamedAttributeNode("fornecedor")})
+
 @SequenceGenerator(name = "nota_fiscal_produto_id_seq", sequenceName = "nota_fiscal_produto_id_seq", initialValue = 1, allocationSize = 50)
 @Table(name = "nota_fiscal_produto")
 public class NotaFiscalProduto implements Serializable,EntradaOuBaixa<NotaFiscalItem> {
@@ -37,6 +44,7 @@ public class NotaFiscalProduto implements Serializable,EntradaOuBaixa<NotaFiscal
 	private Fornecedor fornecedor;
 
 	@OneToMany(mappedBy = "notaFiscalProduto", cascade = CascadeType.ALL)
+	@Fetch(FetchMode.SUBSELECT)
 	private List<NotaFiscalItem> itens;
 
 	public Long getId() {

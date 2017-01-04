@@ -46,4 +46,8 @@ public class ServicoEdificioService {
 		servicoEdificioRepository.save(servico);
 
 	}
+	public ServicoEdificio buscarPorId(Long id) {
+		
+		return servicoEdificioRepository.findOne(id);
+	}
 }

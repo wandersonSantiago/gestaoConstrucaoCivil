@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -48,6 +50,7 @@ public class Produto extends AbstractPersistable<Long> {
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "produtos_fornecedores", joinColumns = @JoinColumn(name = "id_produto"), 
 	inverseJoinColumns = @JoinColumn(name = "id_fornecedor"))
+	@Fetch(FetchMode.SUBSELECT)
 	private List<Fornecedor> fornecedores;
 	
 	@ManyToOne

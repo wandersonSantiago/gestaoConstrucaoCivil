@@ -8,6 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -15,6 +18,8 @@ import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.pojo.InformacaoEntradaProduto;
 
 @Entity
+@NamedEntityGraph(name = "EstoqueEmpreendimento.detail",
+attributeNodes = {@NamedAttributeNode("produto"),@NamedAttributeNode("empreendimento")})
 @Table(name = "estoque_empreendimento")
 public class EstoqueEmpreendimento implements Serializable {
 
