@@ -3,34 +3,37 @@
 <br>
 <div ng-controller="servicoEmpresaController as servicoCtrl" >
 
-	<div class="box box-primary" ng-init="servicoCtrl.lista()">
-		<!-- Default panel contents -->
-		<div class="box-header">
-			<span class="lead">Lista  </span>
-		</div>
+	<div class="box box-primary" >
 		<div class="panel-body"  >
 		
-		<input class="form-control" type="text" placeholder="Buscar" ng-model="buscaPacotes" >
-			<div class="table-responsive">
-			<table class="table table-hover table-bordered">
+			<div ng-if="tipoEmpreendimento" class="table-responsive">
+			<h3>Lista dos serviços nos Edifícos</h3>
+			<input class="form-control" type="text" placeholder="Buscar" ng-model="buscaPacotes" >
+			<table class="table table-hover table-bordered" ng-init="servicoCtrl.listaEdificio()">
 				<thead>
 					<tr>
 						<th>Pacote de serviço</th>
 						<th>Prestadora de serviço</th>
 						<th>Categoria</th>
+						<th>Torre</th>
+						<th>Andar</th>
+						<th>Apartamento</th>
 						<th>Valor</th>
 						
 					</tr>
 				</thead>
 				<tbody
-					ng-repeat=" servico in servicoCtrl.listaServicoEmpresa | filter : buscaPacotes">
+					ng-repeat=" edificio in listaEdificio | filter : buscaPacotes">
 					<tr>
-					<td>{{ servico.pacoteServico.descricao }}</td>
-						<td>{{ servico.prestadoraServico.dadoEmpresa.nomeFantasia }}</td>
-						<td>{{ servico.pacoteServico.categoria.descricao }}</td>
-						<td>{{ servico.pacoteServico.valor | currency}}</td>
+					<td>{{ edificio.pacoteServico.descricao }}</td>
+						<td>{{ edificio.prestadoraServico.dadoEmpresa.nomeFantasia }}</td>
+						<td>{{ edificio.pacoteServico.categoria.descricao }}</td>
+						<td>{{ edificio.torre }}</td>
+						<td>{{ edificio.andar}}</td>
+						<td>{{ edificio.apartamento}}</td>
+						<td>{{ edificio.pacoteServico.valor | currency}}</td>
 						
-						<td><a href="#/servicos/vincular/visualizar/{{servico.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						<td><a href="#/servicos/vincular/visualizar/edificio/{{edificio.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						
 						
 						
@@ -44,11 +47,88 @@
 				</tfoot>
 			</table>
 		</div>
+		
+		<div ng-if="!tipoEmpreendimento" class="table-responsive">
+			<h3>Lista dos serviços nas Casas</h3>
+			<input class="form-control" type="text" placeholder="Buscar" ng-model="buscaPacotes" >
+			<table class="table table-hover table-bordered" ng-init="servicoCtrl.listaCasa()">
+				<thead>
+					<tr>
+						<th>Pacote de serviço</th>
+						<th>Prestadora de serviço</th>
+						<th>Categoria</th>
+						<th>Número</th>
+						<th>Andar</th>
+						<th>Valor</th>
+						
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" casa in listaCasa | filter : buscaPacotes">
+					<tr>
+						<td>{{ casa.pacoteServico.descricao }}</td>
+						<td>{{ casa.prestadoraServico.dadoEmpresa.nomeFantasia }}</td>
+						<td>{{ casa.pacoteServico.categoria.descricao }}</td>
+						<td>{{ casa.numero }}</td>
+						<td>{{ casa.andar}}</td>
+						<td>{{ casa.pacoteServico.valor | currency}}</td>
+						
+						<td><a href="#/servicos/vincular/visualizar/casa/{{casa.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						
+						
+						
+						</tr>
+
+				</tbody>
+				<tfoot>
+					<tr>
+	
+					</tr>
+				</tfoot>
+			</table>
 		</div>
-		<!-- /.box-body -->
+		<br>
+		<hr>
+		<br>	
+		
+		<div class="table-responsive">
+			<h3>Lista dos serviços nas Edificações Comunitarias</h3>
+			<input class="form-control" type="text" placeholder="Buscar" ng-model="buscaPacotes" >
+			<table class="table table-hover table-bordered" ng-init="servicoCtrl.listaEdificacoesComunitaria()">
+				<thead>
+					<tr>
+						<th>Pacote de serviço</th>
+						<th>Prestadora de serviço</th>
+						<th>Categoria</th>
+						<th>Edif. Comunitária</th>
+						<th>Valor</th>
+						
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" comunitario in listaEdificacoesComunitaria | filter : buscaPacotes">
+					<tr>
+						<td>{{ comunitario.pacoteServico.descricao }}</td>
+						<td>{{ comunitario.prestadoraServico.dadoEmpresa.nomeFantasia }}</td>
+						<td>{{ comunitario.pacoteServico.categoria.descricao }}</td>
+						<td>{{ comunitario.descricao }}</td>
+						<td>{{ comunitario.pacoteServico.valor | currency}}</td>
+						
+						<td><a href="#/servicos/vincular/visualizar/comunitario/{{comunitario.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						</tr>
+
+				</tbody>
+				<tfoot>
+					<tr>
+	
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+		</div>
+	
 	</div>
-	<!-- /.box -->
+	
 </div>
-<!-- /.col -->
-</div>
-<!-- /.row -->
+
+

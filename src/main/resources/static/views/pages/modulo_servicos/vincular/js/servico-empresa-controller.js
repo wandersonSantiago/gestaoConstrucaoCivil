@@ -27,7 +27,7 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 	 self.listaEdificio = function(){
 		 servicoEmpresaService.listaEdificio().
 			then(function(t){
-				self.listaServicoEmpresa = t;
+				$scope.listaEdificio = t;
 				}, function(errResponse){
 			});
 		};
@@ -55,7 +55,7 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 		 self.listaCasa = function(){
 			 servicoEmpresaService.listaCasa().
 				then(function(t){
-					self.listaServicoEmpresa = t;
+					$scope.listaCasa = t;
 					}, function(errResponse){
 				});
 			};
@@ -86,8 +86,7 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 			 self.listaEdificacoesComunitaria = function(){
 				 servicoEmpresaService.listaEdificacoesComunitaria().
 					then(function(t){
-						self.listaServicoEmpresa = t;
-						console.log(self.listaServicoEmpresa);
+						$scope.listaEdificacoesComunitaria = t;
 						}, function(errResponse){
 					});
 				};
