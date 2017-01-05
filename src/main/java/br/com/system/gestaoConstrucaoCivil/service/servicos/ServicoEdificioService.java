@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.system.gestaoConstrucaoCivil.entity.servicos.ServicoEdificio;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.servicos.ServicoEdificioRepository;
-import br.com.system.gestaoConstrucaoCivil.service.servicos.validar.ValidacaoServico;
+import br.com.system.gestaoConstrucaoCivil.regras.servicos.ValidacaoServico;
 
 @Service
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)

@@ -1,4 +1,4 @@
-package br.com.system.gestaoConstrucaoCivil.service.servicos.validar;
+package br.com.system.gestaoConstrucaoCivil.regras.servicos;
 
 public interface ValidacaoServico<E> {
 

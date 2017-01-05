@@ -6,6 +6,15 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 	.when('/cotacao/cadastro/:idCotacaoAberta', {
 		templateUrl:"views/pages/modulo_compras/cotacao/cadastro.html",
 	})
+	.when('/cotacao/vencedores/:idVencedores', {
+		templateUrl:"views/pages/modulo_compras/cotacao/vencedores.html",
+	})
+	.when('/cotacao/concorrentes/:idConcorrentes', {
+		templateUrl:"views/pages/modulo_compras/cotacao/concorrentes.html",
+	})
+	.when('/cotacao/concorrente', {
+		templateUrl:"views/pages/modulo_compras/cotacao/visualizarConcorretes.html",
+	})
 	.when('/cotacao/em_aberto', {
 		templateUrl:"views/pages/modulo_compras/cotacao/em_aberto.html",
 	})

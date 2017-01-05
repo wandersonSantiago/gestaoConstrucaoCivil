@@ -3,10 +3,10 @@
 <br>
 <div 	ng-controller="cotacaoCompraController as cotacaoCtrl">
 
-	<div class="box box-primary" ng-init="cotacaoCtrl.lista()">
+	<div class="box box-primary" >
 	
 		<div class="box-header">
-			<span class="lead">Cotação em aberto </span>
+			<span class="lead">Vencedores</span>
 		</div>
 		<div class="panel-body">
 	<div class="row">
@@ -19,22 +19,27 @@
 				<thead>
 					<tr>
 						 
-						<th>Cotação</th>
-						<th>Data Limite</th>
-						<th ng-if="fechado">Data encerramento</th>
+						<th>Nome Fantasia</th>
+						<th>Razão Social</th>
+						<th>CNPJ</th>
+						<th>Telefone</th>
+						<th>Cidade</th>
+						<th>Estado</th>
 		
 					</tr>
 				</thead>
 				<tbody
-					ng-repeat=" cotacao in cotacaoCtrl.cotacoes | filter : buscar ">
+					ng-repeat=" fornecedor in vencedor | filter : buscar ">
 					<tr>
 						
-						<td>{{cotacao.tema}}</td>
-						<td>{{cotacao.dataLimite | date : 'dd/MM/yyyy'}}</td>
-						<td ng-if="fechado">{{cotacao.dataFechamento | date : 'dd/MM/yyyy'}}</td>
+						<td>{{ fornecedor.dadoEmpresa.nomeFantasia }}</td>
+						<td>{{ fornecedor.dadoEmpresa.razaoSocial }}</td>
+						<td>{{ fornecedor.dadoEmpresa.cnpj }}</td>
+						<td>{{ fornecedor.dadoEmpresa.telefone }}</td>
+						<td>{{ fornecedor.dadoEmpresa.endereco.localidade }}</td>
+						<td>{{ fornecedor.dadoEmpresa.endereco.uf }}</td>
 					
-						<td class="col-sm-1"><a  ng-href="#/cotacao/concorrentes/{{cotacao.id}}" class="btn btn-lg btn-info">Concorrentes</a></td>
-						<td ng-if="fechado" class="col-sm-1"><a  ng-href="#/cotacao/vencedores/{{cotacao.id}}" class="btn btn-lg btn-success">Vencedores</a></td>
+						<td class="col-sm-1"><a  ng-href="#/cotacao/cadastro/{{cotacao.id}}" class="btn btn-lg btn-info">vizualizar</a></td>
 						<td ng-if="!fechado" class="col-sm-1"><a  ng-href="#/cotacao/cadastro/{{cotacao.id}}" class="btn btn-lg btn-primary">Cadastrar</a></td>
 						<td ng-if="!fechado" class="col-sm-1"><a  ng-click="cotacaoCtrl.fecharCotacao(cotacao.id)" class="btn btn-lg btn-success">Encerrar</a></td> 
 						

@@ -1,0 +1,102 @@
+<meta charset="UTF-8">
+<br>
+<br>
+<div  ng-controller="cotacaoCompraController as cotacaoCtrl" >
+
+<div class="box box-primary" >
+		<div class="box-header" >
+			<span class="lead"></span>
+		</div>
+		<div class="panel-body">
+		<div class="row">
+		{{cotacao}}
+			<div class="col-sm-6" >
+			Cotação
+						<input class="form-control" ng-model="cotacaoCtrl.cotacao.tema" type="text" id="temaCotacao"  disabled>
+				</div>	
+			<div class="col-sm-2" >
+				Data de Abertura
+						<input class="form-control" ng-model="cotacaoCtrl.cotacao.dataCriacao" type="date" id="dataCriacaoCotacao"   disabled>
+				</div>
+			<div class="col-sm-2" >
+				Data Limite
+						<input class="form-control" ng-model="cotacaoCtrl.cotacao.dataLimite " type="date" id="dataLimiteCotacao"   disabled>
+				</div>
+		</div>
+			  <br>
+			  <div class="row">
+							<div class="col-sm-4" ng-controller="fornecedorController as forCtrl" ng-init="forCtrl.lista()" >
+								<a href="" data-toggle="modal" data-target="#myFornecedor"><i class="glyphicon glyphicon-plus"></i>novo</a>
+							<select class="form-control select2" ng-model="cotacaoCtrl.fornecedor" id="fornecedor"
+							ng-options="listaFornecedores.dadoEmpresa.nomeFantasia for listaFornecedores in forCtrl.listaFornecedor" 
+							  style=" width: 100%;" required>
+								<option value="">---Fornecedor---</option>
+							</select>
+						</div>
+				</div>
+			<br>
+			<div class="container col-sm-12 " >
+				<form role="form-vertical" ng-submit="cotacaoCtrl.salvaCotacaoEmpresa(cotacaoCtrl.cotacao, cotacaoCtrl.fornecedor, cotacaoCtrl.listaCotacao )" >
+				
+				
+				
+					<table class="table table-hover " ng-if="visialuzarTable">
+					<thead>
+						<tr>
+							<th>selecione</th>							
+							<th>Descrição</th>
+							<th>Quantidade</th>
+							<th>Observação</th>
+							<th>Valor unitário</th>
+							<th>Valor total produto</th>
+							
+						</tr>
+					</thead>
+					
+					<tbody
+						ng-repeat=" f in cotacaoCtrl.listaCotacao | filter : busca">
+						<tr>
+						<td><input class="col-sm-1" type="checkbox" ng-model="f.selecionado"	ng-click="cotacaoCtrl.ativarExcluirLote(listaCotacao)"></td>
+							<td><input class="form-control"  id="descricaoProduto"  type="text" placeholder="descrição do Produto" 
+							ng-model="f.descricao" disabled ></td>
+							<td><input class="form-control"  id="quantidadeProduto"  type="text" placeholder="quantidade"
+							ng-model="f.quantidade" ui-number-mask="0" disabled required></td>
+							<td><input class="form-control"  id="obs"  type="text" placeholder="Observação do Produto" 
+							ng-model="f.observacao" ></td>							
+							<td><input class="form-control"  id="valorProduto"  type="text"  placeholder="Preço" ui-money-mask
+							ng-model="f.valorUnitario" ng-blur="cotacaoCtrl.SomaTotal(cotacaoCtrl.listaCotacao)" required> </td>
+							<td>{{f.valorTotal = somaUnitario(f.quantidade, f.valorUnitario) | currency}}</td>
+							
+						</tr>
+	
+					</tbody>
+					<tfoot>
+						<tr>
+							<th><input type="button" class="btn-danger" ng-if="ativadoExcluirLote"  value="excluir" name="apagar" ng-click="cotacaoCtrl.apagarProdutos(listaCotacao)"></th>
+							<th></th>
+							<th></th>
+							<th></th>			
+							<th> Valor Total</th>
+							<th>{{valorTotalCotacao | currency}}</th>
+						</tr>
+					</tfoot>
+				</table>
+					
+					<br>
+				
+					<div class="row ">
+						
+						
+							<input type="submit" id="submit" value="Salvar"	class="btn btn-lg btn-primary btn-block btn-signin">
+						
+						
+					</div>
+
+
+				</form>
+			</div>
+
+		</div>
+		<div class="tablecontainer"></div>
+	</div>
+</div>

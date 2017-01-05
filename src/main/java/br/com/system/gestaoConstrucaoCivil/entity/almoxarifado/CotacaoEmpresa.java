@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @SequenceGenerator(name = "cotacao_empresa_id_seq", sequenceName = "cotacao_empresa_id_seq", initialValue = 1, allocationSize = 1)
 @Table(name = "cotacao_empresa")
@@ -25,6 +27,7 @@ public class CotacaoEmpresa implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cotacao_empresa_id_seq")
 	private Long id;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="id_cotacao",nullable = false)

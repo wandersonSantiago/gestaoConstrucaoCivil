@@ -1,4 +1,4 @@
-app.controller('cotacaoCompraController', function($scope,cotacaoCompraService, $routeParams){
+app.controller('cotacaoCompraController', function($scope, $rootScope, cotacaoCompraService, $location, $routeParams){
 	
 		var self = this;
 		self.listaCotacao = [];
@@ -7,6 +7,9 @@ app.controller('cotacaoCompraController', function($scope,cotacaoCompraService, 
 		$scope.cotacaoEmpresa = [{cotacao : "", forncedeor : "", itens : ""}];
 		$scope.itens = [];
 		var idCotacaoAberta = $routeParams.idCotacaoAberta;
+		var idVencedores = $routeParams.idVencedores;
+		var idConcorrentes = $routeParams.idConcorrentes;
+		
 	
 		self.salvaCotacaoEmpresa = function(cotacao , fornecedor, listaCotacao){
 			for(i = 0; i < listaCotacao.length ; i ++ ){ $scope.itens.push({	item : listaCotacao[i],	valorUnitario : listaCotacao[i].valorUnitario, observacao : listaCotacao[i].observacao});} 
@@ -18,6 +21,7 @@ app.controller('cotacaoCompraController', function($scope,cotacaoCompraService, 
 				}, function(errResponse){
 			});
 		}
+		
 	 self.salva = function(cotacao){
 		 self.cotacao.itens = self.listaCotacao;
 		 cotacaoCompraService.salva(self.cotacao).
@@ -40,14 +44,75 @@ app.controller('cotacaoCompraController', function($scope,cotacaoCompraService, 
 			then(function(t){
 				$scope.cotacao = t;
 				self.cotacoes = t;
+				for(i = 0 ; i < t.length ; i++){					
+					if(t[i].statusCotacao === "FECHADO"){
+						$scope.fechado = true;
+					}
+				}
 				}, function(errResponse){
 			});
 		};
 		
-		
+		self.listaConcorrentes = function(id){
+			 cotacaoCompraService.listaConcorrentes(id).
+				then(function(t){
+					$scope.concorrentes = t;					
+					for(i = 0 ; i < t.length ; i++){						
+						$scope.concorrentes[i].cotacao.dataCriacao = new Date(t[i].cotacao.dataCriacao);
+						$scope.concorrentes[i].cotacao.dataFechamento = new Date(t[i].cotacao.dataFechamento);
+						$scope.concorrentes[i].cotacao.dataLimite = new Date(t[i].cotacao.dataLimite);							
+					}
+					}, function(errResponse){
+				});
+			};
+			if(idConcorrentes){
+				self.listaConcorrentes(idConcorrentes);
+			}	
+			
+			self.buscaConcorrentePorId = function(id){
+				var t = $scope.concorrentes;					
+				for(i = 0 ; i < t.length ; i++){
+					if(id == t[i].id){
+						$location.path('/cotacao/concorrente');
+						$rootScope.cotacao = t[i].cotacao;
+						console.log($rootScope.cotacao);
+						
+					}
+									
+				}
+			}
+			
+			self.listaVencedores = function(id){
+				 cotacaoCompraService.listaVencedores(id).
+					then(function(t){
+						$scope.vencedores = t;
+						
+						}, function(errResponse){
+					});
+				};
+				if(idVencedores){
+					self.listaVencedores(idVencedores);
+				}
+				
+		self.fecharCotacao = function(id) {
+			swal({ 
+				  title: 'Encerrar!!!',
+				  text: "Tem que certeza que deseja encerrar esta cotação ?",
+				  type: 'info',
+				  showCancelButton: true,
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: 'Encerrar!'
+				}).then(function () {
+					cotacaoCompraService.fecharCotacao(id).
+			then(function(response){				
+				
+			});
+		})
+	}
 	
 			
-		//cria uma lista de Produtos na nota fiscal
+		
 		self.adicionarProdutos = function(descricao, quantidade){
 			self.listaCotacao.push({
 				descricao :  descricao,

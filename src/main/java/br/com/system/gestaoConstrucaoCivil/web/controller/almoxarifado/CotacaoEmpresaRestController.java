@@ -47,4 +47,10 @@ public class CotacaoEmpresaRestController {
 
 		return new ResponseEntity<List<CotacaoEmpresa>>(cotacaoEmpresaService.ganhadores(idCotacao), HttpStatus.OK);
 	} 
+	
+	@GetMapping(value = "/concorrentes/{idCotacao}")
+	public ResponseEntity<List<CotacaoEmpresa>> buscarConcorrentes(@PathVariable Long idCotacao) {
+
+		return new ResponseEntity<List<CotacaoEmpresa>>(cotacaoEmpresaService.concorrentes(idCotacao) , HttpStatus.OK);
+	} 
 }

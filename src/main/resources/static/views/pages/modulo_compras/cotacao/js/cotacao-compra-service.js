@@ -42,6 +42,38 @@ app.factory('cotacaoCompraService', function($rootScope, toastr, $http,$q){
 				return $q.reject(errResponse);
 			});
 		},
+		
+		listaConcorrentes: function(id){
+			return $http.get('/rest/almoxarifado/estoque/cotacao/concorrentes/' +id)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
+		
+		listaVencedores: function(id){
+			return $http.get('/rest/almoxarifado/estoque/cotacao/buscaGanhdores/' +id)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
+		fecharCotacao: function(idCotacao){
+			console.log(idCotacao);
+			return $http.put('/rest/almoxarifado/cotacao/fecharCotacao/'+idCotacao)
+			.then(function(response){
+				sweetAlert({ timer : 3000, text :"Cotação encerrada", type : "success", width: 300, higth: 100, padding: 20});
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 3000,  text :"Não foi possivel encerrar esta cotação",  type : "error", width: 300, higth: 300, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
+		
 		buscaPorCotacaoId: function(param){
 			return $http.get('rest/almoxarifado/cotacao/buscaPorId/'+param)
 			.then(function(response){

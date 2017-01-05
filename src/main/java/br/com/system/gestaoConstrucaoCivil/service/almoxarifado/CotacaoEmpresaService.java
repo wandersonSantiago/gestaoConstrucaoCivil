@@ -54,6 +54,11 @@ public class CotacaoEmpresaService {
 		return cotacaoEmpresaRepository.buscarGanhadores(idCotacao);
 	}
 	
+	public List<CotacaoEmpresa> concorrentes(Long idCotacao)
+	{
+		return cotacaoEmpresaRepository.buscarPorCotacao(idCotacao);
+	}
+	
 	@Transactional(readOnly = false)
 	public void verificarGanhadores(Cotacao cotacao) {
 		List<CotacaoEmpresaItem> itens = cotaEmpresaItemReposi.buscarItensPorIdCotacao(cotacao.getId());
