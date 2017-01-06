@@ -67,6 +67,7 @@
 	
 			
 	<script src="public/js/pages/controller/tipo-empreendimento-controller.js" type="text/javascript"></script>
+	<script src="public/js/pages/controller/controla-tempo-login.js" type="text/javascript"></script>
 	<script src="public/js/pages/controller/unidade-medida-controller.js" type="text/javascript"></script>				
 	<script src="public/js/pages/controller/verifica-dados-controller.js" type="text/javascript"></script>		
 	<script src="public/js/pages/controller/endereco-controller.js" type="text/javascript"></script>		
@@ -210,6 +211,7 @@
 		                  </li>
 		                </ul>
 		              </li>
+		              <li ng-if="logado" ><a>Expira em,  {{horaImprimivel}}</a></li>
 		              <li><a>Empreendimento: {{user.usuario.empreendimento.descricao}}</a></li>          
          			<li>
 						<a href="" ng-controller="loginController as loginCtrl"  ng-click="loginCtrl.logout()"> Logout <i class="glyphicon glyphicon-log-out"></i>

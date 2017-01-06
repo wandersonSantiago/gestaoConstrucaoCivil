@@ -46,7 +46,8 @@ app.controller('cotacaoCompraController', function($scope, $rootScope, cotacaoCo
 				self.cotacoes = t;
 				for(i = 0 ; i < t.length ; i++){					
 					if(t[i].statusCotacao === "FECHADO"){
-						$scope.fechado = true;
+						$rootScope.fechado = true;
+						self.cotacoes[i].fechado = true;
 					}
 				}
 				}, function(errResponse){
@@ -74,9 +75,7 @@ app.controller('cotacaoCompraController', function($scope, $rootScope, cotacaoCo
 				for(i = 0 ; i < t.length ; i++){
 					if(id == t[i].id){
 						$location.path('/cotacao/concorrente');
-						$rootScope.cotacao = t[i].cotacao;
-						console.log($rootScope.cotacao);
-						
+						$rootScope.cotacao = t[i];
 					}
 									
 				}
@@ -85,14 +84,28 @@ app.controller('cotacaoCompraController', function($scope, $rootScope, cotacaoCo
 			self.listaVencedores = function(id){
 				 cotacaoCompraService.listaVencedores(id).
 					then(function(t){
-						$scope.vencedores = t;
-						
+						$scope.vencedores = t;					
+						for(i = 0 ; i < t.length ; i++){						
+							$scope.vencedores[i].cotacao.dataCriacao = new Date(t[i].cotacao.dataCriacao);
+							$scope.vencedores[i].cotacao.dataFechamento = new Date(t[i].cotacao.dataFechamento);
+							$scope.vencedores[i].cotacao.dataLimite = new Date(t[i].cotacao.dataLimite);							
+						}
 						}, function(errResponse){
 					});
 				};
 				if(idVencedores){
 					self.listaVencedores(idVencedores);
 				}
+				
+			self.buscaVencedorPorId = function(id){
+				var t = $scope.vencedores;					
+				for(i = 0 ; i < t.length ; i++){
+					if(id == t[i].id){
+						$location.path('/cotacao/vencedor');
+						$rootScope.cotacao = t[i];
+					}									
+				}
+			}
 				
 		self.fecharCotacao = function(id) {
 			swal({ 

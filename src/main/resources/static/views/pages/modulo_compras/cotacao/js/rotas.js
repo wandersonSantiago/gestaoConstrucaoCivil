@@ -9,6 +9,9 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 	.when('/cotacao/vencedores/:idVencedores', {
 		templateUrl:"views/pages/modulo_compras/cotacao/vencedores.html",
 	})
+	.when('/cotacao/vencedor', {
+		templateUrl:"views/pages/modulo_compras/cotacao/visualizarVencedores.html",
+	})
 	.when('/cotacao/concorrentes/:idConcorrentes', {
 		templateUrl:"views/pages/modulo_compras/cotacao/concorrentes.html",
 	})

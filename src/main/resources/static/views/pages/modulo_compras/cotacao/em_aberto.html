@@ -15,13 +15,15 @@
 	
 		</div>
 			<input type="text" class="form-control"  ng-model="buscar" placeholder="buscar por descrição">
-			<table class="table table-hover table-bordered table-responsive">
+			<div class="table-responsive">
+			<table class="table table-hover table-bordered ">
 				<thead>
 					<tr>
 						 
 						<th>Cotação</th>
 						<th>Data Limite</th>
-						<th ng-if="fechado">Data encerramento</th>
+						<th>Data encerramento</th>
+						
 		
 					</tr>
 				</thead>
@@ -34,9 +36,9 @@
 						<td ng-if="fechado">{{cotacao.dataFechamento | date : 'dd/MM/yyyy'}}</td>
 					
 						<td class="col-sm-1"><a  ng-href="#/cotacao/concorrentes/{{cotacao.id}}" class="btn btn-lg btn-info">Concorrentes</a></td>
-						<td ng-if="fechado" class="col-sm-1"><a  ng-href="#/cotacao/vencedores/{{cotacao.id}}" class="btn btn-lg btn-success">Vencedores</a></td>
-						<td ng-if="!fechado" class="col-sm-1"><a  ng-href="#/cotacao/cadastro/{{cotacao.id}}" class="btn btn-lg btn-primary">Cadastrar</a></td>
-						<td ng-if="!fechado" class="col-sm-1"><a  ng-click="cotacaoCtrl.fecharCotacao(cotacao.id)" class="btn btn-lg btn-success">Encerrar</a></td> 
+						<td ng-if="cotacao.fechado" class="col-sm-1"><a  ng-href="#/cotacao/vencedores/{{cotacao.id}}" class="btn btn-lg btn-success">Vencedores</a></td>
+						<td ng-if="!cotacao.fechado" class="col-sm-1"><a  ng-href="#/cotacao/cadastro/{{cotacao.id}}" class="btn btn-lg btn-primary">Cadastrar</a></td>
+						<td ng-if="!cotacao.fechado" class="col-sm-1"><a  ng-click="cotacaoCtrl.fecharCotacao(cotacao.id)" class="btn btn-lg btn-success">Encerrar</a></td> 
 						
 					</tr>
 
@@ -46,6 +48,7 @@
 					
 				</tfoot>
 			</table>
+			</div>
 		</div>
 	</div>
 </div>

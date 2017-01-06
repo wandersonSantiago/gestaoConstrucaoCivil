@@ -19,30 +19,24 @@
 				<thead>
 					<tr>
 						 
-						<th>Nome Fantasia</th>
-						<th>Razão Social</th>
+						<th>Empresa</th>
 						<th>CNPJ</th>
-						<th>Telefone</th>
-						<th>Cidade</th>
-						<th>Estado</th>
+						<th>Data Limite</th>
+						<th>Data encerramento</th>
 		
 					</tr>
 				</thead>
 				<tbody
-					ng-repeat=" fornecedor in vencedor | filter : buscar ">
+					ng-repeat=" cotacao in vencedores | filter : buscar ">
 					<tr>
 						
-						<td>{{ fornecedor.dadoEmpresa.nomeFantasia }}</td>
-						<td>{{ fornecedor.dadoEmpresa.razaoSocial }}</td>
-						<td>{{ fornecedor.dadoEmpresa.cnpj }}</td>
-						<td>{{ fornecedor.dadoEmpresa.telefone }}</td>
-						<td>{{ fornecedor.dadoEmpresa.endereco.localidade }}</td>
-						<td>{{ fornecedor.dadoEmpresa.endereco.uf }}</td>
+						<td>{{cotacao.fornecedor.dadoEmpresa.nomeFantasia}}</td>
+						<td>{{cotacao.fornecedor.dadoEmpresa.cnpj}}</td>
+						<td>{{cotacao.cotacao.dataLimite | date : 'dd/MM/yyyy'}}</td>
+						<td>{{cotacao.cotacao.dataFechamento | date : 'dd/MM/yyyy'}}</td>
 					
-						<td class="col-sm-1"><a  ng-href="#/cotacao/cadastro/{{cotacao.id}}" class="btn btn-lg btn-info">vizualizar</a></td>
-						<td ng-if="!fechado" class="col-sm-1"><a  ng-href="#/cotacao/cadastro/{{cotacao.id}}" class="btn btn-lg btn-primary">Cadastrar</a></td>
-						<td ng-if="!fechado" class="col-sm-1"><a  ng-click="cotacaoCtrl.fecharCotacao(cotacao.id)" class="btn btn-lg btn-success">Encerrar</a></td> 
-						
+					<td class="col-sm-1"><a  ng-click="cotacaoCtrl.buscaVencedorPorId(cotacao.id)" class="btn btn-lg btn-info">vizualizar</a></td>
+								
 					</tr>
 
 				</tbody>

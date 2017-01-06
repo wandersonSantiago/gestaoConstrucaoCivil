@@ -1,8 +1,7 @@
 var app = angular.module('gcc',['ngAnimate','ngRoute','ngMaterial', 'angucomplete-alt','ngResource','toastr','ui.bootstrap','blockUI', 'ngStorage','ui.utils.masks', 'ui.mask'])
-.run(function ($rootScope, $location, usuarioService) {
+.run(function ($rootScope, $location, usuarioService, auth) {
 	 
 	var self = this;
-		  
 	  $rootScope.$on('$locationChangeStart', function () { 
 		self.role = function(){
 				usuarioService.user().
@@ -76,5 +75,47 @@ var app = angular.module('gcc',['ngAnimate','ngRoute','ngMaterial', 'angucomplet
 				
 				
 				 self.role();
+				 
+				 var tempo = new Number();
+					
+				 tempo = 1800;
+				
+		 startCountdown = function(){		     
+		 
+		     if((tempo - 1) >= 0){		    	 	
+		
+		         var min = parseInt(tempo/60);	         
+		 
+		         var seg = tempo%60;	  
+		
+		         if(min < 10){
+		
+		             min = "0"+min;
+		
+		             min = min.substr(0, 2);
+		 
+		         }
+		 
+		         if(seg <=9){
+		 
+		             seg = "0"+seg;		 
+		         }		  
+		 
+		         $rootScope.horaImprimivel = '00:' + min + ':' + seg;
+		 			         	
+		        
+		         $rootScope.teste =  setTimeout('startCountdown()',1000); 
+		         
+		         tempo--;		
+		 
+		     } else {
+		 
+		    	 auth.clear();
+		    	 clearTimeout($rootScope.teste);
+		     }
+		 }					
+		 clearTimeout($rootScope.teste);
+				 startCountdown();
+				 
 	  });
 	});
