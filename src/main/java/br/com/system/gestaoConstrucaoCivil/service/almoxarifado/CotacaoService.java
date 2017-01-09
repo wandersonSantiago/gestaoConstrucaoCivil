@@ -17,7 +17,7 @@ public class CotacaoService {
 	@Autowired
 	private CotacaoRepository cotacaoRepository;
 	@Autowired
-	private CotacaoEmpresaService cotacaoEmpresa;
+	private VerificaItensGanhadores verificarItens;
 	
 	@Transactional(readOnly = false)
 	public void salvaAltera(Cotacao cotacao){
@@ -36,7 +36,7 @@ public class CotacaoService {
 	{
 		Cotacao cotacao = cotacaoRepository.findOne(idCotacao);
 		cotacao.fechar();
-		cotacaoEmpresa.verificarGanhadores(cotacao);
+		verificarItens.verificarGanhadores(cotacao);
 		cotacaoRepository.save(cotacao);
 	}
 

@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -25,6 +27,10 @@ import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.View.Summary;
 import br.com.system.gestaoConstrucaoCivil.enuns.UnidadeMedidaEnum;
 
 @Entity
+
+@NamedEntityGraph(name = "Produto.detail",
+attributeNodes = {@NamedAttributeNode("categoria"),@NamedAttributeNode("fabricante"),@NamedAttributeNode("tipoProduto")})
+
 @Table(name = "produto")
 public class Produto extends AbstractPersistable<Long> {
 

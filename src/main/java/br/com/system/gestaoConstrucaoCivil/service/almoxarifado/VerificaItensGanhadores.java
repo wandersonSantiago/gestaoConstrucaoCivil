@@ -1,0 +1,85 @@
+package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Cotacao;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.CotacaoEmpresaItem;
+import br.com.system.gestaoConstrucaoCivil.enuns.CotacaoEmpresaItemStatus;
+import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.CotacaoEmpresaItemRepository;
+
+@Service
+public class VerificaItensGanhadores {
+
+	private List<CotacaoEmpresaItem> itensVerifica = new ArrayList<CotacaoEmpresaItem>();
+	
+	private Integer chamada = 0;
+	
+	@Autowired
+	private CotacaoEmpresaItemRepository cotaEmpresaItemReposi;
+
+	@Transactional(readOnly = false)
+	public void verificarGanhadores(Cotacao cotacao) {
+		List<CotacaoEmpresaItem> itens = cotaEmpresaItemReposi.buscarItensPorIdCotacao(cotacao.getId());
+
+		Integer cont = 0;
+		
+		
+		while (cotacao.getItens().size() > this.chamada) {
+			CotacaoEmpresaItem itemASerVerificado = itens.get(cont);
+
+			for (CotacaoEmpresaItem item : itens) {
+				if (itemASerVerificado.getItem().getId() == item.getItem().getId()) {
+
+					itensVerifica.add(item);
+				}
+			}
+			cont++;
+			verificar();
+			itensVerifica.clear();
+		}
+		
+	}
+
+	@Transactional(readOnly = false)
+	private void verificar() {
+
+		CotacaoEmpresaItem itemGanhador = itensVerifica.get(0);
+		itemGanhador.setStatus(CotacaoEmpresaItemStatus.GANHOU);
+
+		for (CotacaoEmpresaItem item : itensVerifica) {
+			
+			if (itemGanhador.equals(item) == false) {
+				
+				if (itemGanhador.getValorUnitario() > item.getValorUnitario()) {
+					
+					itemGanhador.setStatus(CotacaoEmpresaItemStatus.PERDEU);
+					item.setStatus(CotacaoEmpresaItemStatus.GANHOU);
+					itemGanhador = item;
+				
+				} else if (itemGanhador.getValorUnitario().equals(item.getValorUnitario())) {
+					
+					if(itemGanhador.getCotacaoEmpresa().getQuantidadeItensGanhos() >= item.getCotacaoEmpresa().getQuantidadeItensGanhos())
+					{
+						item.setStatus(CotacaoEmpresaItemStatus.PERDEU);
+					}else
+					{
+						item.setStatus(CotacaoEmpresaItemStatus.PERDEU);
+					}
+					
+				} else {
+					item.setStatus(CotacaoEmpresaItemStatus.PERDEU);
+				}
+			}
+		}
+		
+		
+		chamada++;
+
+	}
+	
+}

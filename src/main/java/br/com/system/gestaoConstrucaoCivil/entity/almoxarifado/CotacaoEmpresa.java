@@ -1,12 +1,12 @@
 package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,8 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import br.com.system.gestaoConstrucaoCivil.enuns.CotacaoEmpresaItemStatus;
 
 @Entity
 @SequenceGenerator(name = "cotacao_empresa_id_seq", sequenceName = "cotacao_empresa_id_seq", initialValue = 1, allocationSize = 1)
@@ -37,10 +38,12 @@ public class CotacaoEmpresa implements Serializable{
 	@JoinColumn(name="id_fornecedor",nullable = false)
 	private Fornecedor fornecedor;
 	
-	@OneToMany(mappedBy = "cotacaoEmpresa",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "cotacaoEmpresa",cascade = CascadeType.ALL)
 	@Column(nullable = false)
 	private List<CotacaoEmpresaItem> itens;
 
+	@Transient
+	private Integer quantidade = 0;
 	public Long getId() {
 		return id;
 	}
@@ -72,7 +75,29 @@ public class CotacaoEmpresa implements Serializable{
 	public void setItens(List<CotacaoEmpresaItem> itens) {
 		this.itens = itens;
 	}
-	
-	
+	public void removerItensPerdedores()
+	{
+		List<CotacaoEmpresaItem> itensParaRemover = new ArrayList<CotacaoEmpresaItem>();
+		itens.forEach(item ->{
+			
+			if(item.getStatus().equals(CotacaoEmpresaItemStatus.PERDEU))
+			{
+			    itensParaRemover.add(item);
+			}
+		});
+	    itens.removeAll(itensParaRemover);
+	}
+	public Integer getQuantidadeItensGanhos()
+	{
+		
+		itens.forEach(item -> {
+			
+			if(item.getStatus().equals(CotacaoEmpresaItemStatus.GANHOU))
+			{
+				this.quantidade++;
+			}
+		});
+		return quantidade;
+	}
 	
 }

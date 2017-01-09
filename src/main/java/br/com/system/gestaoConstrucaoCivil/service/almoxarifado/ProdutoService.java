@@ -22,7 +22,8 @@ public class ProdutoService {
 	
     public List<Produto> buscarTodos() {
 
-		return produtoRepository.findAll();
+	 //	return produtoRepository.findAll();
+    	return produtoRepository.buscarTodos();
 	}
     public List<Produto> buscarPorDescricao(String descricao)
     {
