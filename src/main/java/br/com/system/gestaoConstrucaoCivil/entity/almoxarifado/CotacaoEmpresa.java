@@ -44,6 +44,9 @@ public class CotacaoEmpresa implements Serializable{
 
 	@Transient
 	private Integer quantidade = 0;
+	
+	private Boolean ganhou;
+	
 	public Long getId() {
 		return id;
 	}
@@ -99,5 +102,18 @@ public class CotacaoEmpresa implements Serializable{
 		});
 		return quantidade;
 	}
+	public void perdeu()
+	{
+		this.ganhou = false;
+		
+	}
+	public void ganhou(){
+		this.ganhou = true;
+	}
+	public Boolean getGanhou()
+	{
+		return this.ganhou;
+	}
+	
 	
 }

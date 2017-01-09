@@ -39,14 +39,29 @@ public class VerificaItensGanhadores {
 				}
 			}
 			cont++;
-			verificar();
+			verificarItens();
+			verficarCotacaoEmpresa();
 			itensVerifica.clear();
 		}
 		
 	}
 
 	@Transactional(readOnly = false)
-	private void verificar() {
+	private void verficarCotacaoEmpresa()
+	{
+		for(CotacaoEmpresaItem item: itensVerifica)
+		{
+			if(item.getCotacaoEmpresa().getQuantidadeItensGanhos() <= 0)
+			{
+				item.getCotacaoEmpresa().perdeu();
+			}else
+			{
+				item.getCotacaoEmpresa().ganhou();
+			}
+		}
+	}
+	@Transactional(readOnly = false)
+	private void verificarItens() {
 
 		CotacaoEmpresaItem itemGanhador = itensVerifica.get(0);
 		itemGanhador.setStatus(CotacaoEmpresaItemStatus.GANHOU);

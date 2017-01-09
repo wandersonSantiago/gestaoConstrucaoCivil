@@ -12,7 +12,7 @@ public interface CotacaoEmpresaRepository extends JpaRepository<CotacaoEmpresa, 
 	@Query("SELECT c FROM CotacaoEmpresa c WHERE c.cotacao.id = ?1")
 	List<CotacaoEmpresa> buscarPorCotacao(Long idCotacoa);
 	
-	@Query("SELECT c FROM CotacaoEmpresa c JOIN c.itens i WHERE c.cotacao.id = ?1 AND i.status = 'GANHOU'")
+	@Query("SELECT c FROM CotacaoEmpresa c WHERE c.cotacao.id = ?1 AND c.ganhou = true")
 	List<CotacaoEmpresa> buscarGanhadores(Long idCotacao);
 	
 }
