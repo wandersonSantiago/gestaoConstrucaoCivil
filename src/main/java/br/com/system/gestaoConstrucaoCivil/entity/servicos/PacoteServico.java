@@ -9,6 +9,7 @@ import javax.persistence.Table;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Categoria;
+import br.com.system.gestaoConstrucaoCivil.util.geradorCodigo.GereCodigoPacoteServico;
 
 
 @Entity
@@ -37,7 +38,11 @@ public class PacoteServico extends AbstractPersistable<Long>{
 	private Double valor;
 	
 	
-	
+	public void novoPacote()
+	{
+		this.codigo = new GereCodigoPacoteServico().gerarNumeroPacote();
+	   
+	}
 	
 	public Categoria getCategoria() {
 		return categoria;

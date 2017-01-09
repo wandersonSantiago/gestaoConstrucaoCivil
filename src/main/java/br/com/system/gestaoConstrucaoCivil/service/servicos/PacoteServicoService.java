@@ -24,6 +24,7 @@ public class PacoteServicoService {
 
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(PacoteServico pacoteServico) {
+		pacoteServico.novoPacote();
 		pacoteServicoRepository.save(pacoteServico);
 	}
 
