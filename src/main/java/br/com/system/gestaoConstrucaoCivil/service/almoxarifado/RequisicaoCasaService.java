@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.InformacaoRequisicao;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.RequisicaoCasa;
+import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.RequisicaoCasaRepository;
 
 @Service
@@ -34,7 +35,7 @@ public class RequisicaoCasaService {
 	
 	
 	public Collection<RequisicaoCasa> buscarTodos(){
-		return requisicaoRepository.findAll();
+		return requisicaoRepository.buscarTodasRequisicoes(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId());
 	}
 	
 	public RequisicaoCasa buscarPorId(Long id){

@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.InformacaoRequisicao;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.RequisicaoEdificio;
+import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.RequisicaoEdificioRepository;
 
 @Service
@@ -31,7 +33,7 @@ public class RequisicaoEdificioService {
 	}
 	public Collection<RequisicaoEdificio> buscarTodos(){
 		
-		return requisicaoRepository.findAll();
+		return requisicaoRepository.buscarTodasRequisicoes(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId());
 	}
 	
 	public RequisicaoEdificio buscarPorId(Long id){
