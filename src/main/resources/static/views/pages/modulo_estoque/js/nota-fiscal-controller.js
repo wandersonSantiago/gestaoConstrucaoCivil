@@ -33,8 +33,6 @@ app.controller('notaFiscalController', function($scope,notaFiscalService, produt
 		};
 		
 		self.buscaPorCodigoBarras = function(codigoBarras){
-			
-			console.log("teste");
 			produtoService.buscaPorCodigoBarras(codigoBarras).
 			then(function(p){
 				self.produtos = p;

@@ -4,7 +4,7 @@
 <div ng-controller="pedidoCompraController as pedidoCompraCtrl">
     <div class="box box-primary" ng-init="pedidoCompraCtrl.lista()">
         <div class="box-header">
-            <span class="lead"> Lista dos Pedidos de Comra</span>
+            <span class="lead"> Lista dos Pedidos de Compra</span>
         </div>
         <div class="panel-body">
             <input type="text" class="form-control" ng-model="buscar" placeholder="buscar">
@@ -13,13 +13,18 @@
                     <thead>
                         <tr>
                             <th>Número do Pedido</th>
+                            <th>Fornecedor</th>
                             <th>Data previsão</th>
+                            <th>Visualizar</th>
                         </tr>
                     </thead>
-                    <tbody ng-repeat=" pedidoCompra in pedidoCompraCtrl.lista() | filter buscar">
+                    <tbody ng-repeat=" pedidoCompra in pedidoCompraCtrl.pedidoCompras | filter : buscar">
                         <tr>
                             <td>{{pedidoCompra.numeroPedido}}</td>
-                            <td>{{pedidoCompra.previsao}}</td>
+                            <td>{{pedidoCompra.fornecedor.dadoEmpresa.nomeFantasia}}</td>
+                            <td>{{pedidoCompra.previsao}}</td>      
+                            <td class="col-sm-1"><a  ng-href="#/compras/visualizar/{{pedidoCompra.id}}" class="btn  btn-info">visualizar</a></td>
+						                      
                         </tr>
                     </tbody>
                     <tfoot>

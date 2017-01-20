@@ -3,13 +3,15 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpPro
 
     $routeProvider
 
-        .when('/compras/pedido', {
-            templateUrl: "views/pages/modulo_compras/compras/pedidos.html",
+        .when('/compras/lista', {
+            templateUrl:"views/pages/modulo_compras/compras/lista.html",
         })
         .when('/compras/cadastro/', {
-            templateUrl: "view/pages/modulo_compras/compras/cadastro.html",
+            templateUrl:"views/pages/modulo_compras/compras/cadastro.html",
         })
 
-
+        .when('/compras/visualizar/:idVisualizarCompras', {
+            templateUrl:"views/pages/modulo_compras/compras/visualizar.html",
+        })
 
 }]);

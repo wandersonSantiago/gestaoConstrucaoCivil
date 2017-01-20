@@ -27,7 +27,7 @@ public class PedidoCompraRestController {
 	public ResponseEntity<PedidoCompra> salvar(@RequestBody PedidoCompra pedidoCompra){
 		pedidoCompraService.salvaAltera(pedidoCompra);
 		HttpHeaders headers =  new HttpHeaders();
-		return new ResponseEntity(headers, HttpStatus.CREATED);				
+		return new ResponseEntity<>(headers, HttpStatus.CREATED);				
 	}
 	
 	@GetMapping(value = "/lista")
@@ -36,7 +36,7 @@ public class PedidoCompraRestController {
 		return new ResponseEntity<Collection<PedidoCompra>>(pedidoCompraService.buscarTodos(), HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/buscaPorId/{id}")
+	@GetMapping(value = "/{id}")
 	public ResponseEntity<PedidoCompra> buscarPorId(@PathVariable Long id) {
 
 		return new ResponseEntity<PedidoCompra>(pedidoCompraService.buscaPorId(id), HttpStatus.OK);

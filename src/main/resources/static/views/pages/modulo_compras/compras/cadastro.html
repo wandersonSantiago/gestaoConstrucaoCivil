@@ -1,34 +1,138 @@
 <meta charset="UTF-8">
 <br>
 <br>
-<div ng-controller="pedidoCompraController as pedidoCompraCtrl">
+<div  ng-controller="pedidoCompraController as pedidoCompraCtrl" >
 
-    <div class="box box-primary">
-        <!-- Default panel contents -->
-        <div class="box-header">
-            <span class="lead">Lançamento de pedido </span>
-        </div>
-        <div class="panel-body">
+<div class="box box-primary" >
+		<div class="box-header" >
+			<span class="lead">Pedido de Compra</span>
+		</div>
+		<div class="panel-body">
+			<br>
+			<div class="container col-sm-12 " >
+				<form role="form-vertical"  ng-submit="pedidoCompraCtrl.salva()" >
+					<br>
+				<div class="row">
+						<div class="col-sm-3">
+							<input class="form-control"  id="numeroPedido" type="text" title="informe o numero do pedido" placeholder="Numero do pedido" 
+							ng-model="pedidoCompraCtrl.pedidoCompra.numeroPedido" required>
+						</div>			
+						<div class="col-sm-3">
+							<input class="form-control"  id="dataNota" type="date" ng-model="pedidoCompraCtrl.pedidoCompra.previsao"  title="informe a previsão de entrega"  placeholder="data prevista para entrega" required>
+						</div>					
+					</div> 					
+					<br>
+					<div ng-controller="produtoController as pCtrl">
+						<label class="radio-inline"  ><input type="checkbox"   ng-model="habilitaBuscaPorDescricao"  ng-click="pCtrl.lista()" name="optradio">Habilitar busca por descrição </label> 
+					<br>
+					<br>
+					<div class="row">
+				          <div class="col-sm-4"  ng-show="!habilitaBuscaPorDescricao">
+					            <input class="form-control" ng-model="pedidoCompraCtrl.produto" ng-blur="pedidoCompraCtrl.buscaPorCodigoBarras(notaFiscalCtrl.produto)" onkeyup="if(this.value.length > 11) { quantidadeProduto.focus(); }" placeholder="Busca por código">
+				          </div>						
+							
+						
+						<div class="col-sm-4" ng-show="habilitaBuscaPorDescricao"  >
+							<br>
+							<md-autocomplete 
+							 	md-selected-item="pedidoCompraCtrl.produto" 
+							 	md-search-text="pCtrl.searchText" 
+							 	md-selected-item-change="pCtrl.selectedItemChange(listaProduto)" 
+							 	md-items=" listaProduto in pCtrl.produtos | filter : pCtrl.searchText" 
+							 	md-item-text="listaProduto.descricao" 
+							 	md-min-length="0" placeholder="busca produto">
+       							 <md-item-template>
+          							<span md-highlight-text="pCtrl.searchText" md-highlight-flags="^i">{{listaProduto.descricao}}</span>
+       							 </md-item-template>        								
+     						 </md-autocomplete>
+							
+							
+						</div>
+							<div class="col-sm-2" ng-show="habilitaBuscaPorDescricao">
+							<br>
+							<input class="btn btn-lg btn-primary btn-block btn-signin" ng-disabled="!pedidoCompraCtrl.produto"
+								ng-click="pedidoCompraCtrl.adicionarProdutos(pedidoCompraCtrl.produto )" value="adicionar"
+								title="pressione para adicionar a lista" type="button"  >
+						</div>
+						</div>
+					</div>
+					<br>
+					<div class="table-responsive">
+					<table class="table table-hover " ng-show="visualizarTable">
+					<thead>
+						<tr>
+							<th>selecione</th>
+							<th>Codigo de barras</th>
+							<th>Descrição</th>
+							<th>Quantidade</th>
+							<th>Preço unitario</th>
+							<th>Preço total item</th>
+						</tr>
+					</thead>
+					
+					<tbody
+						ng-repeat=" f in pedidoCompraCtrl.listaItensProduto | filter : busca">
+						<tr>
+						<td><input type="checkbox" ng-model="f.selecionado"	ng-click="pedidoCompraCtrl.ativarExcluirLote(pedidoCompraCtrl.listaItensProduto)"></td>
+							<td><input class="form-control"  id="codigoBarras"  type="text" placeholder="Código de barras"
+							ng-model="f.produto.codigoBarra" disabled></td>
+							<td><input class="form-control"  id="descricaoProduto"  type="text" placeholder="descrição do Produto" 
+							ng-model="f.produto.descricao" disabled></td>
+							<td><input class="form-control"  id="quantidadeProduto" name="quantidadeProduto" type="text" placeholder="quantidade"
+							ng-model="f.quantidade" ui-number-mask="0" ng-blur="pedidoCompraCtrl.SomaTotal(pedidoCompraCtrl.listaItensProduto)" required></td>
+							<td><input class="form-control"  id="valorProduto"  type="text"  placeholder="Preço" ui-money-mask
+							ng-model="f.valorUnitario" ng-blur="pedidoCompraCtrl.SomaTotal(pedidoCompraCtrl.listaItensProduto)" required> </td>
+							<td>{{f.valorTotal = somaUnitario(f.quantidade, f.valorUnitario) | currency}}</td>
+							
+						</tr>
+	
+					</tbody>
+					<tfoot>
+						<tr>
+							<th><input type="button" class="btn-danger" ng-if="ativadoExcluirLote"  value="excluir" name="apagar" ng-click="pedidoCompraCtrl.apagarProdutos(pedidoCompraCtrl.listaItensProduto)"></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th> Valor Total</th>
+							<th>{{valorTotalNota | currency}}</th>
+	
+						</tr>
+					</tfoot>
+				</table>
+					</div>
+					<br>
+					<hr>
+					<h3>Fornecedor</h3>
+					<br>
+						
+					<div class="row">
+							<div class="col-sm-4" ng-controller="fornecedorController as forCtrl" ng-init="forCtrl.lista()" >
+							<select class="form-control select2" ng-model="pedidoCompraCtrl.pedidoCompra.fornecedor" id="fornecedor"
+							ng-options="listaFornecedores.dadoEmpresa.nomeFantasia for listaFornecedores in forCtrl.listaFornecedor" 
+							  style=" width: 100%;" required>
+								<option value="">---Fornecedor---</option>
+							</select>
+						</div>
+					</div>
+						
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+								<input class="form-control"  id="obs" type="text"  placeholder="Observação"	ng-model="pedidoCompraCtrl.pedidoCompra.observacao">
+						</div> 
+					</div>
+					<br>
+					<div class="row ">
+					<div class="col-sm-4"></div>
+						<div class="col-sm-4">
+							<input type="submit" id="submit"  value="Salvar"	class="btn btn-lg btn-primary btn-block btn-signin">
+						</div>
+					</div>
+			</form>
+				
+			</div>
 
-            <br>
-            <div class="container col-sm-12 ">
-                <form role="form-vertical" ng-submit="pedidoCompraCtrl.salva()">
-                    <div class="row">
-
-                        <div class="col-sm-8">
-                            <input class="form-control" ng-model="pedidoCompraCtrl.pedidoCompra.numero" id="numero" type="text" title="Pedido" placeholder="Lançamento Pedido" maxlength="30" required>
-                        </div>
-                    </div>
-                    <br>
-                    <br>
-                    <div class="row ">
-                        <input type="submit" id="submit" value="Salvar" class="btn btn-lg btn-primary btn-block btn-signin">
-                    </div>
-
-                </form>
-            </div>
-
-        </div>
-        <div class="tablecontainer"></div>
-    </div>
+		</div>
+		<div class="tablecontainer"></div>
+	</div>
 </div>

@@ -1,7 +1,6 @@
 package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -11,14 +10,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
+import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 
 @Entity
 @SequenceGenerator(name = "pedido_compra_id_seq",
@@ -46,6 +48,13 @@ public class PedidoCompra implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date previsao;
 	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataCadastro;
+	
+	@OneToOne
+	@JoinColumn(name="usuario_cadastro")
+	private Usuario usuarioCadastro;
+			
 	public Long getId() {
 		return id;
 	}
@@ -91,6 +100,22 @@ public class PedidoCompra implements Serializable{
 
 	public void setEmpreendimento(Empreendimento empreendimento) {
 		this.empreendimento = empreendimento;
+	}
+	
+	public Date getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
+	public Usuario getUsuarioCadastro() {
+		return usuarioCadastro;
+	}
+
+	public void setUsuarioCadastro(Usuario usuarioCadastro) {
+		this.usuarioCadastro = usuarioCadastro;
 	}
 
 	@Override
