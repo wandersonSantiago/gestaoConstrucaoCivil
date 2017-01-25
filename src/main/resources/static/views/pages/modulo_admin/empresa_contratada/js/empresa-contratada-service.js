@@ -23,6 +23,14 @@ app.factory('adminSistemaService', function($rootScope, toastr, $http, $q){
 				return $q.reject(errResponse);
 			});
 		},
+		buscarPorTexto: function(param,texto){
+			var config = {params: {page: param, q:texto}};
+			return $http.get('rest/empresaContratada/buscarPorTexto/',config)
+			.then(function(response){
+				return response.data;
+			});
+		
+		},
 		buscaTodosComPaginacao: function(page , maxResults){
 			var config = {params: {page: page , maxResults : maxResults}};
 			return $http.get('rest/empresaContratada/', config)

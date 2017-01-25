@@ -5,7 +5,7 @@
 <div ng-if="!ROLE_ADMIN" ng-include="'views/erros/permissao.html'"></div>
 <div ng-if="ROLE_ADMIN" ng-controller="adminSistemaController as adminCtrl">
 
-	<div class="box box-primary" ng-init="adminCtrl.lista(0 , 1)">
+	<div class="box box-primary" ng-init="adminCtrl.lista(0 , 15)">
 		<!-- Default panel contents -->
 		<div class="box-header">
 			<span class="lead">Lista de Empresa </span>
@@ -18,7 +18,7 @@
 						<option value="50">50</option>
 						<option value="100">100</option>
 					</select>
-			<input type="text" class="form-control" ng-model="buscaEmpresa"
+			<input type="text" class="form-control" ng-model="texto" ng-blur="adminCtrl.buscarPorTexto(adminCtrl.getPage)" ng-model-options="{ debounce: 100  }"
 				placeholder="Buscar">
 				<div class="table-responsive">
 			<table class="table  table-hover table-bordered">

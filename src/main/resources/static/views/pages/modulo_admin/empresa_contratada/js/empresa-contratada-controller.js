@@ -6,7 +6,8 @@ app.controller('adminSistemaController', function($scope, adminSistemaService, b
 	self.getPage=0;
 	self.totalPages = 0;
 	self.totalElements = 0;
-	$scope.maxResults = 1;
+	$scope.maxResults = 15;
+	$scope.texto = "";
 	var idEmpresa =  $routeParams.idEmpresa;
 	
 
@@ -60,6 +61,23 @@ app.controller('adminSistemaController', function($scope, adminSistemaService, b
 		});
 	};
 
+	self.buscarPorTexto = function(pages){
+		self.getPage=pages;
+		adminSistemaService.buscarPorTexto(pages, $scope.texto).
+		then(function(p){
+			self.listaEmpresa = e.content;
+			self.totalPages = p.totalPages;
+			self.totalElements = p.totalElements;
+		}, function(errResponse){
+			if(errResponse.status == 404){
+				self.totalPages = 0;
+				self.totalElements = 0;
+				toastr.warning("Nenhum resultado encontrado!");
+			}else{
+				toastr.error("Erro no servidor!");
+			}
+		});
+	};
 	
 	self.buscaPorId = function(id){
 		if(!id)return;
