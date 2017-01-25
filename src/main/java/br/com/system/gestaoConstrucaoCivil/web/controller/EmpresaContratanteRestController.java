@@ -1,6 +1,8 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -29,6 +32,13 @@ public class EmpresaContratanteRestController {
 		return new ResponseEntity<Iterable<EmpresaContratante>>(empresaContratanteService.buscarTodos(), HttpStatus.OK);
 	}
 
+	@GetMapping
+	public ResponseEntity<Page<EmpresaContratante>> lista(@RequestParam(defaultValue="0", required=false) int page
+			,@RequestParam(defaultValue="0", required=false) int maxResults) {
+		Page<EmpresaContratante> empresa = empresaContratanteService.findAll(new PageRequest(page, maxResults));
+		return new ResponseEntity<Page<EmpresaContratante>>(empresa, HttpStatus.OK);
+	}
+	
 	@GetMapping(value = "/buscaPorId/{id}")
 	public ResponseEntity<EmpresaContratante> buscarPorId(@PathVariable Long id) {
 

@@ -3,7 +3,10 @@ app.controller('adminSistemaController', function($scope, adminSistemaService, b
 	var self = this;
   
 	self.empresa = null;
-	
+	self.getPage=0;
+	self.totalPages = 0;
+	self.totalElements = 0;
+	$scope.maxResults = 1;
 	var idEmpresa =  $routeParams.idEmpresa;
 	
 
@@ -40,17 +43,24 @@ app.controller('adminSistemaController', function($scope, adminSistemaService, b
 		});
 }
 	
-//carrega a lista de empresa, quando acessa o controller
-	self.lista = function(){
-		adminSistemaService.lista().
-		then(function(e){
-			self.listaEmpresa = e;
+	
+	self.lista = function(pages, maxResults){
+		self.totalPages = [];
+		self.getPage=pages;
+		
+		adminSistemaService.buscaTodosComPaginacao(pages, maxResults).
+		then(function(e){			
+			self.listaEmpresa = e.content;
+			$scope.totalPages = e.totalPages;
+			self.totalElements = e.totalElements;
+			for(i = 0; i < $scope.totalPages ; i++){
+				self.totalPages.push(i);
+			}
 		}, function(errResponse){
 		});
 	};
 
 	
-//busca a empresa atraves do id
 	self.buscaPorId = function(id){
 		if(!id)return;
 		adminSistemaService.buscaPorId(id).
@@ -58,8 +68,7 @@ app.controller('adminSistemaController', function($scope, adminSistemaService, b
 			self.empresa = p;
 		}, function(errResponse){
 		});
-	};
-//verifica se o params esta com o ide executa o metodo de busca 	
+	};	
 	if(idEmpresa){
 		self.buscaPorId(idEmpresa);
 	}

@@ -23,6 +23,16 @@ app.factory('adminSistemaService', function($rootScope, toastr, $http, $q){
 				return $q.reject(errResponse);
 			});
 		},
+		buscaTodosComPaginacao: function(page , maxResults){
+			var config = {params: {page: page , maxResults : maxResults}};
+			return $http.get('rest/empresaContratada/', config)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 3000,  text :"falha de conexão", type : "error", width: 300, higth: 100, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
 				
 		salva: function(empresa){
 			return $http.post('rest/empresaContratada/salva', empresa)
