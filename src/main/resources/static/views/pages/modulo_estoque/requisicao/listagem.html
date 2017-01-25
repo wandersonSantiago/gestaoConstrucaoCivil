@@ -46,7 +46,7 @@
 				</tfoot>
 			</table>
 			</div>
-			<div class="row">
+			<div class="row" ng-if="tipoEmpreendimento">
 				<div class="col-sm-5"></div>
 				<div class="3">			
 				<nav aria-label="Page navigation">
@@ -100,7 +100,7 @@
 				</tfoot>
 			</table>
 			</div>
-			<div class="row">
+			<div class="row" ng-if="!tipoEmpreendimento" >
 				<div class="col-sm-5"></div>
 				<div class="3">			
 				<nav aria-label="Page navigation">
