@@ -63,8 +63,9 @@ app.factory('estoqueService', function($rootScope, toastr, $http,$q){
 				return $q.reject(errResponse);
 			});
 		},
-		listaProdutosComEstoque : function(){
-			return $http.get('/rest/produtoEstoque/lista')
+		listaProdutosComEstoque : function(page , maxResults){
+			var config = {params: {page: page , maxResults : maxResults}};
+			return $http.get('/rest/produtoEstoque/lista/' , config)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){

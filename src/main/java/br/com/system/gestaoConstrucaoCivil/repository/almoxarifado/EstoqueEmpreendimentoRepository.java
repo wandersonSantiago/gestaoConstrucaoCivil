@@ -1,11 +1,11 @@
 package br.com.system.gestaoConstrucaoCivil.repository.almoxarifado;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.EntityGraph.EntityGraphType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.jpa.repository.EntityGraph.EntityGraphType;
 import org.springframework.data.repository.query.Param;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.EstoqueEmpreendimento;
@@ -13,8 +13,8 @@ import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.EstoqueEmpreendim
 public interface EstoqueEmpreendimentoRepository extends JpaRepository<EstoqueEmpreendimento, Long> {
 
 	@EntityGraph(value = "EstoqueEmpreendimento.detail", type = EntityGraphType.LOAD)
-	@Query("FROM EstoqueEmpreendimento estoque WHERE estoque.empreendimento.id = ?1")
-	List<EstoqueEmpreendimento> buscarTodosPorEmpreendimento(Long id_empreendimento);
+	@Query("FROM EstoqueEmpreendimento estoque WHERE estoque.empreendimento.id = ?1 ")
+	Page<EstoqueEmpreendimento> buscarTodosPorEmpreendimento(Long id_empreendimento , Pageable pageable);
 
 	@Query("SELECT e FROM EstoqueEmpreendimento e JOIN e.produto p  WHERE e.empreendimento.id  = ?1 AND p.id = ?2")
 	EstoqueEmpreendimento estoque(Long id_empreendimento, Long id);

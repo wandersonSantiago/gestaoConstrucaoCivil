@@ -5,6 +5,10 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 		self.listaProduto =[];
 		self.baixaEstoque = [];
 		self.listaProdutos = [];
+		self.getPage=0;
+		self.totalPages = 0;
+		self.totalElements = 0;
+		$scope.maxResults = 15;
 		$scope.verificado = false;
 		var idProdutoEstoque = $routeParams.idProdutoEstoque;
 		
@@ -58,13 +62,19 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 					}
 				});
 			};
-			self.listaProdutosComEstoque = function(){
-				estoqueService.listaProdutosComEstoque().
+			self.listaProdutosComEstoque = function(pages, maxResults){
+				self.totalPages = [];
+				self.getPage=pages;				
+				console.log(pages);
+				estoqueService.listaProdutosComEstoque(pages, maxResults).
 					then(function(t){
-						self.listaProdutosComEstoques = t;
-						
-						for(i = 0; i < self.listaProdutosComEstoques.length; i++ ){
-						
+						self.listaProdutosComEstoques = t.content;
+						$scope.totalPages = t.totalPages;
+						self.totalElements = t.totalElements;
+						for(i = 0; i < $scope.totalPages ; i++){
+							self.totalPages.push(i);
+						}						
+						for(i = 0; i < self.listaProdutosComEstoques.length; i++ ){						
 								self.produto = self.listaProdutosComEstoques[i].produto;
 								self.quantidade = self.listaProdutosComEstoques[i].quantidade;
 							self.listaProdutos.push({
@@ -76,7 +86,7 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 					});
 				};
 			
-	
+				
 		
 		if(idProdutoEstoque){
 			self.buscaPorId(idProdutoEstoque);

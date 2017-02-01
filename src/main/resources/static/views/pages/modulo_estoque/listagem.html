@@ -3,65 +3,34 @@
 <br>
 <div 	ng-controller="estoqueController as estroqueCtrl">
 
-	<div class="box box-primary" ng-init="estroqueCtrl.listaProdutosComEstoque()">
-	
+	<div class="box box-primary" ng-init="estroqueCtrl.listaProdutosComEstoque(0 , 15)">
 		<div class="box-header">
 			<span class="lead">Estoque </span>
 		</div>
 		<div class="panel-body">
 	<div class="row">
 			
-			
+			<input class="form-control" type="text" ng-model="buscar" >
 	
 		</div>
 		<div class="table-responsive">
 			<table class="table  table-bordered ">
 				<thead>
-					<tr>
-						 
-						<th>
-							<input type="text" class="form-control "  ng-model="buscarPorCodigo" ng-blur="estroqueCtrl.filtro(buscarPorCodigo)" placeholder="Código">
-						</th>
-						<th>
-							<input type="text" class="form-control"  ng-model="buscarPorDescricao" ng-blur="estroqueCtrl.filtro(buscarPorDescricao)"  placeholder="Descrição">
-						</th>
-						<th>
-							<div  ng-controller="categoriaController as categoriaCtrl" ng-init="categoriaCtrl.lista()">
-								<select class="form-control " ng-model="buscarPorCategoria"  ng-click="estroqueCtrl.filtro(buscarPorCategoria)"
-									ng-options="listaCategorias.descricao for listaCategorias in categoriaCtrl.categorias" 
-									  style=" width: 100%;"   required >
-										<option value="">Categoria</option>
-								</select>
-							</div>
-						</th>
-						<th>
-							<div ng-controller="tipoProdutoController as tipoProdutoCtrl" ng-init="tipoProdutoCtrl.lista()">
-								<select class="form-control " ng-model="buscaPorTipo" ng-click="estroqueCtrl.filtro(buscaPorTipo)"
-									ng-options="listaTipoProdutos.descricao for listaTipoProdutos in tipoProdutoCtrl.listaTipoProduto" 
-									  style=" width: 100%;" required >
-									<option value="">Tipo</option>
-								</select>
-							</div>
-						</th>
-						<th>
-							<div  ng-controller="unidadeMedidaController as unidadeCtrl" ng-init="unidadeCtrl.lista()">
-								<select class="form-control " ng-model="buscaPorMedida" ng-click="estroqueCtrl.filtro(buscaPorMedida)"
-									ng-options="listaunidadeMedidas for listaunidadeMedidas in unidadeCtrl.listaUnidadeMedida" 
-									  style=" width: 100%;" required >
-										<option value="">Unidade Medida</option>
-								</select>
-							</div>
-						</th>
-						
+					<tr>						 
+						<th>Código</th>
+						<th>Descrição</th>
+						<th>Categoria</th>
+						<th>Tipo</th>
+						<th>Unidade Medida</th>						
 						<th>quantidade Estoque</th>
 						<th>Custo médio</th>
 						<th>Valor Total</th>
 					</tr>
 				</thead>
 				<tbody
-					ng-repeat=" lista in estroqueCtrl.listaProdutosComEstoques | filter : buscar ">
+					ng-repeat=" lista in estroqueCtrl.listaProdutosComEstoques | filter : buscar | orderBy : 'id' ">
 					<tr>
-						
+						<td>{{lista.id}}</td>
 						<td>{{lista.produto.codigo}}</td>
 						<td>{{lista.produto.descricao}}</td>
 						<td>{{lista.produto.categoria.descricao}}</td>
@@ -83,27 +52,29 @@
 			</table>
 			</div>
 			<div class="row">
-				<div class="col-sm-5"></div>
-				<div class="3">			
-				<nav aria-label="Page navigation">
-					  <ul class="pagination">
-					    <li>
-					      <a href="#" aria-label="Previous">
-					        <span aria-hidden="true">&laquo;</span>
-					      </a>
-							    </li>
-							    <li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>
-							    <li><a href="#">2</a></li>
-							    <li><a href="#">3</a></li>
-							    <li><a href="#">4</a></li>
-							    <li><a href="#">5</a></li>
-							    <li>
-					      <a href="#" aria-label="Next">
-					        <span aria-hidden="true">&raquo;</span>
-					      </a>
-					    </li>
-					  </ul>
-				</nav>
+				<div class="col-sm-5"></div>				
+				<div class="2">				
+					<nav>
+						<ul class="pagination">
+						
+							<li class="{{0==estroqueCtrl.getPage ?'disabled':''}}"><a
+								ng-if="0!=estroqueCtrl.getPage" ng-click="estroqueCtrl.listaProdutosComEstoque(estroqueCtrl.getPage -1, maxResults)"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a> <a ng-if="0==estroqueCtrl.getPage" aria-label="Previous"> <span
+									aria-hidden="true">&laquo;</span></a></li>
+							<li ng-repeat="page in estroqueCtrl.totalPages"
+								class="{{page==estroqueCtrl.getPage ?'active':''}}"><a
+								ng-click="estroqueCtrl.listaProdutosComEstoque(page , maxResults)">{{page + 1}}</a></li>
+							<li class="{{estroqueCtrl.getPage+1 == totalPages ?'disabled':''}}"><a
+								ng-if="estroqueCtrl.getPage+1 != totalPages"
+								ng-click="estroqueCtrl.listaProdutosComEstoque(estroqueCtrl.getPage+1, maxResults)" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a> <a ng-if="estroqueCtrl.getPage+1==totalPages" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a></li>
+							
+						</ul>
+					</nav>
 				</div>
 			</div>
 			
