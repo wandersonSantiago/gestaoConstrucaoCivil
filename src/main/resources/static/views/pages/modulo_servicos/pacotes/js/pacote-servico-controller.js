@@ -1,7 +1,10 @@
 app.controller('pacoteServicoController', function($scope, pacoteServicoService, $location,  $routeParams){
 	
 	var self = this;
-	
+	self.getPage=0;
+	self.totalPages = 0;
+	self.totalElements = 0;
+	$scope.maxResults = 15;	
 	var idPacoteServico = $routeParams.idPacoteServico;
 	
 	
@@ -23,13 +26,20 @@ app.controller('pacoteServicoController', function($scope, pacoteServicoService,
 				}, function(errResponse){
 			});
 		 
-	}
+	}	 
 	 
-	 self.lista = function(){
-		 pacoteServicoService.lista().
-			then(function(f){
-				self.listaPacoteServicos = f;
-				}, function(errResponse){
+		self.lista = function(pages, maxResults){
+			self.totalPages = [];
+			self.getPage=pages;			
+			pacoteServicoService.buscaTodosComPaginacao(pages, maxResults).
+			then(function(e){			
+				self.listaPacoteServicos = e.content;
+				$scope.totalPages = e.totalPages;
+				self.totalElements = e.totalElements;
+				for(i = 0; i < $scope.totalPages ; i++){
+					self.totalPages.push(i);
+				}
+			}, function(errResponse){
 			});
 		};
 		
