@@ -1,7 +1,10 @@
 app.controller('cadastrarFuncionarioController', function($scope, buscaCepService, cadastrarFuncionarioService, cargoService, $routeParams) {
 
 	var self = this;
-	
+	self.getPage=0;
+	self.totalPages = 0;
+	self.totalElements = 0;
+	$scope.maxResults = 15;	
 	var idFuncionario = $routeParams.idFuncionario;
 	
 	
@@ -44,6 +47,21 @@ app.controller('cadastrarFuncionarioController', function($scope, buscaCepServic
 				}, function(errResponse){
 			});
 		};
+		
+		 self.listaComPaginacao = function(pages, maxResults){
+				self.totalPages = [];
+				self.getPage=pages;	
+			 cadastrarFuncionarioService.listaComPaginacao(pages, maxResults).
+				then(function(t){
+					self.listaFuncionarios = t.content;
+					$scope.totalPages = t.totalPages;
+					self.totalElements = t.totalElements;
+					for(i = 0; i < $scope.totalPages ; i++){
+						self.totalPages.push(i);
+					}			
+					}, function(errResponse){
+				});
+			};
 		 self.estadoCivil = function(){
 			 cadastrarFuncionarioService.estadoCivil().
 				then(function(f){

@@ -63,9 +63,21 @@ app.factory('estoqueService', function($rootScope, toastr, $http,$q){
 				return $q.reject(errResponse);
 			});
 		},
-		listaProdutosComEstoque : function(page , maxResults){
+		
+		listaProdutosComEstoqueComPaginacao: function(page , maxResults){
 			var config = {params: {page: page , maxResults : maxResults}};
-			return $http.get('/rest/produtoEstoque/lista/' , config)
+			return $http.get('/rest/produtoEstoque/lista/paginacao/' , config)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 10000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
+		
+		listaProdutosComEstoque : function(){
+			console.log("teste");
+			return $http.get('/rest/produtoEstoque')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){

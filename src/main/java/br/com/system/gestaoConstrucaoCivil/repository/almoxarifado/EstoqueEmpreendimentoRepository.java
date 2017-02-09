@@ -1,5 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.repository.almoxarifado;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -14,7 +16,12 @@ public interface EstoqueEmpreendimentoRepository extends JpaRepository<EstoqueEm
 
 	@EntityGraph(value = "EstoqueEmpreendimento.detail", type = EntityGraphType.LOAD)
 	@Query("FROM EstoqueEmpreendimento estoque WHERE estoque.empreendimento.id = ?1 ")
-	Page<EstoqueEmpreendimento> buscarTodosPorEmpreendimento(Long id_empreendimento , Pageable pageable);
+	List<EstoqueEmpreendimento> buscarTodosPorEmpreendimento(Long id_empreendimento);
+	
+	@EntityGraph(value = "EstoqueEmpreendimento.detail", type = EntityGraphType.LOAD)
+	@Query("FROM EstoqueEmpreendimento estoque WHERE estoque.empreendimento.id = ?1 ")
+	Page<EstoqueEmpreendimento> buscarTodosPorEmpreendimentoComPaginacao(Long id_empreendimento , Pageable pageable);
+	
 
 	@Query("SELECT e FROM EstoqueEmpreendimento e JOIN e.produto p  WHERE e.empreendimento.id  = ?1 AND p.id = ?2")
 	EstoqueEmpreendimento estoque(Long id_empreendimento, Long id);

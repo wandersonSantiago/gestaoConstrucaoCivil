@@ -3,7 +3,7 @@
 <br>
 <div 	ng-controller="estoqueController as estroqueCtrl">
 
-	<div class="box box-primary" ng-init="estroqueCtrl.listaProdutosComEstoque(0 , 15)">
+	<div class="box box-primary" ng-init="estroqueCtrl.listaProdutosComEstoqueComPaginacao(0 , 15)">
 		<div class="box-header">
 			<span class="lead">Estoque </span>
 		</div>
@@ -58,16 +58,16 @@
 						<ul class="pagination">
 						
 							<li class="{{0==estroqueCtrl.getPage ?'disabled':''}}"><a
-								ng-if="0!=estroqueCtrl.getPage" ng-click="estroqueCtrl.listaProdutosComEstoque(estroqueCtrl.getPage -1, maxResults)"
+								ng-if="0!=estroqueCtrl.getPage" ng-click="estroqueCtrl.listaProdutosComEstoqueComPaginacao(estroqueCtrl.getPage -1, maxResults)"
 								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 							</a> <a ng-if="0==estroqueCtrl.getPage" aria-label="Previous"> <span
 									aria-hidden="true">&laquo;</span></a></li>
 							<li ng-repeat="page in estroqueCtrl.totalPages"
 								class="{{page==estroqueCtrl.getPage ?'active':''}}"><a
-								ng-click="estroqueCtrl.listaProdutosComEstoque(page , maxResults)">{{page + 1}}</a></li>
+								ng-click="estroqueCtrl.listaProdutosComEstoqueComPaginacao(page , maxResults)">{{page + 1}}</a></li>
 							<li class="{{estroqueCtrl.getPage+1 == totalPages ?'disabled':''}}"><a
 								ng-if="estroqueCtrl.getPage+1 != totalPages"
-								ng-click="estroqueCtrl.listaProdutosComEstoque(estroqueCtrl.getPage+1, maxResults)" aria-label="Next"> <span
+								ng-click="estroqueCtrl.listaProdutosComEstoqueComPaginacao(estroqueCtrl.getPage+1, maxResults)" aria-label="Next"> <span
 									aria-hidden="true">&raquo;</span>
 							</a> <a ng-if="estroqueCtrl.getPage+1==totalPages" aria-label="Next"> <span
 									aria-hidden="true">&raquo;</span>

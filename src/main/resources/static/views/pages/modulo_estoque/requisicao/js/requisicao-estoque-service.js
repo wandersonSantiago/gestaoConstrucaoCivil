@@ -42,6 +42,7 @@ app.factory('requisicaoEstoqueService', function($rootScope, toastr, $http,$q){
 				return $q.reject(errResponse);
 			});
 		},
+				
 		listaRequisicaoEdificio: function(){
 			return $http.get('/rest/almoxarifado/estoque/requisicaoEdificio/lista')
 			.then(function(response){
@@ -51,8 +52,31 @@ app.factory('requisicaoEstoqueService', function($rootScope, toastr, $http,$q){
 				return $q.reject(errResponse);
 			});
 		},
+		
+		listaRequisicaoEdificioComPaginacao: function(page , maxResults){
+			var config = {params: {page: page , maxResults : maxResults}};
+			return $http.get('/rest/almoxarifado/estoque/requisicaoEdificio/lista/paginacao/', config)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 10000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
+		
 		listaRequisicaoCasa: function(){
 			return $http.get('/rest/almoxarifado/estoque/requisicaoCasa/lista')
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 10000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
+		
+		listaRequisicaoCasaComPaginacao: function(page , maxResults){
+			var config = {params: {page: page , maxResults : maxResults}};
+			return $http.get('/rest/almoxarifado/estoque/requisicaoCasa/lista/paginacao/' , config)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
@@ -69,8 +93,19 @@ app.factory('requisicaoEstoqueService', function($rootScope, toastr, $http,$q){
 				return $q.reject(errResponse);
 			});
 		},
+		
+		listaRequisicaoOutrosComPaginacao: function(page , maxResults){
+			var config = {params: {page: page , maxResults : maxResults}};
+			return $http.get('/rest/almoxarifado/estoque/requisicaoOutros/lista/paginacao/' , config)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 10000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
 		listaProdutosComEstoque : function(){
-			return $http.get('/rest/produtoEstoque/lista')
+			return $http.get('/rest/produtoEstoque')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){

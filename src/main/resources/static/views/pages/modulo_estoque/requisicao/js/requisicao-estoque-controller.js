@@ -13,17 +13,29 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 		self.produto = [];
 		self.produtos = [];
 		self.objeto = [];
+		self.getPageCasa = 0;
+		self.getPageEdificio = 0;
+		self.getPageOutros = 0;
+		self.totalPagesCasa = 0;
+		self.totalPagesEdificio = 0;
+		self.totalPagesOutros = 0;
+		self.totalElementsCasa = 0;
+		self.totalElementsEdificio = 0;
+		self.totalElementsOutros = 0;
+		$scope.maxResults = 15;
 		$scope.produto = [{produto : "", quantidade :""}];
 		var quantidadeMaior = true;
 		var produtoMesmoImovel = true;		
-			self.buscaPorCodigoBarras = function(codigoBarras){
-				requisicaoEstoqueService.buscaPorCodigoBarras(codigoBarras).
-				then(function(p){					
-					self.listaProdutosComEstoques = p;
-								$scope.quantidade = self.listaProdutosComEstoques.quantidade;
-								$scope.produto = self.listaProdutosComEstoques.produto;
-								$scope.valorUnitario = self.listaProdutosComEstoques.custoMedio;
-				});
+		
+		
+		self.buscaPorCodigoBarras = function(codigoBarras){
+			requisicaoEstoqueService.buscaPorCodigoBarras(codigoBarras).
+			then(function(p){					
+				self.listaProdutosComEstoques = p;
+							$scope.quantidade = self.listaProdutosComEstoques.quantidade;
+							$scope.produto = self.listaProdutosComEstoques.produto;
+							$scope.valorUnitario = self.listaProdutosComEstoques.custoMedio;
+			});
 			};
 			self.listaProdutosComEstoque = function(){
 				requisicaoEstoqueService.listaProdutosComEstoque().
@@ -207,6 +219,22 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 					}, function(errResponse){
 				});
 			};
+			
+		self.listaRequisicaoEdificioComPaginacao = function(pages, maxResults){
+			self.totalPagesEdificio = [];
+			self.getPageEdificio=pages;	
+			requisicaoEstoqueService.listaRequisicaoEdificioComPaginacao(pages, maxResults).
+				then(function(t){
+					$scope.listaRequisicaoEdificio = t.content;	
+					$scope.totalPagesEdificio = t.totalPages;
+					self.totalElementsEdificio = t.totalElements;
+					for(i = 0; i < $scope.totalPagesEdificio ; i++){
+						self.totalPagesEdificio.push(i);
+					}	
+					}, function(errResponse){
+				});
+			};
+			
 		self.listaRequisicaoCasa = function(){
 			requisicaoEstoqueService.listaRequisicaoCasa().
 				then(function(t){
@@ -214,6 +242,21 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 					}, function(errResponse){
 				});
 			};
+			
+		self.listaRequisicaoCasaComPaginacao = function(pages, maxResults){
+			self.totalPagesCasa = [];
+			self.getPageCasa=pages;	
+			requisicaoEstoqueService.listaRequisicaoCasaComPaginacao(pages, maxResults).
+				then(function(t){
+					$scope.listaRequisicaoCasa = t.content;	
+					$scope.totalPagesCasa = t.totalPages;
+					self.totalElementsCasa = t.totalElements;
+					for(i = 0; i < $scope.totalPagesCasa ; i++){
+						self.totalPagesCasa.push(i);
+					}	
+					}, function(errResponse){
+				});
+			};	
 		self.listaRequisicaoOutros = function(){
 				requisicaoEstoqueService.listaRequisicaoOutros().
 					then(function(t){
@@ -221,7 +264,22 @@ app.controller('requisicaoEstoqueController', function($scope, requisicaoEstoque
 						}, function(errResponse){
 					});
 				};
-		
+				
+		self.listaRequisicaoOutrosComPaginacao = function(pages, maxResults){
+			self.totalPagesOutros = [];
+			self.getPageOutros=pages;	
+			requisicaoEstoqueService.listaRequisicaoOutrosComPaginacao(pages, maxResults).
+				then(function(t){
+					$scope.listaRequisicaoOutros = t.content;	
+					$scope.totalPagesOutros = t.totalPages;
+					self.totalElementsOutros = t.totalElements;
+					for(i = 0; i < $scope.totalPagesOutros ; i++){
+						self.totalPagesOutros.push(i);
+					}	
+					}, function(errResponse){
+				});
+			};
+			
 		self.limpaCampo = function(){
 			self.objeto = null;
 			$scope.quantidade = null;

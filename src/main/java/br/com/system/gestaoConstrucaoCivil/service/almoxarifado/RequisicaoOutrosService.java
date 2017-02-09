@@ -3,6 +3,8 @@ package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,6 +50,10 @@ public class RequisicaoOutrosService {
 	{
 		RequisicaoOutros requisicao = requisicaoRepository.buscarPorNumeroRequisicao(numeroRequisicao);
 		requisicaoService.rejeitar(requisicao);
+	}
+	public Page<RequisicaoOutros> buscarTodosComPaginacao(PageRequest pageRequest) {
+		return requisicaoRepository.buscarTodasRequisicoesComPaginacao(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId(), pageRequest);
+		
 	}
 	
 }

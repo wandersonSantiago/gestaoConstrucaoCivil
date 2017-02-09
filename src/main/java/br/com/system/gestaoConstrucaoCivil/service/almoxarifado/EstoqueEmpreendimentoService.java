@@ -29,14 +29,28 @@ public class EstoqueEmpreendimentoService {
 
 		estoqueRepository.save(produtoEstoque);
 	}
-    public Page<EstoqueEmpreendimento> buscarTodos(PageRequest pageRequest){
+    public List<EstoqueEmpreendimento> buscarTodos(){
+		
+    	Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();  
+    	    	
+    	List<EstoqueEmpreendimento> estoques = estoqueRepository.buscarTodosPorEmpreendimento(idEmpreendimento);
+    	
+    	for(EstoqueEmpreendimento estoque: estoques) {
+    		 InformacaoEntradaProduto info = notaProdutoService.getInformacaoProduto(estoque.getProduto().getId());
+    		 estoque.setInforProduto(info);
+    		
+    	 }
+    	return estoques;
+	}
+    
+    public Page<EstoqueEmpreendimento> buscarTodosComPaginacao(PageRequest pageRequest){
 		
     	Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();  
     	
     	System.out.println("INICIO");
     	long tempoInicio = System.currentTimeMillis();
     	
-    	Page<EstoqueEmpreendimento> estoques = estoqueRepository.buscarTodosPorEmpreendimento(idEmpreendimento , pageRequest);
+    	Page<EstoqueEmpreendimento> estoques = estoqueRepository.buscarTodosPorEmpreendimentoComPaginacao(idEmpreendimento , pageRequest);
     	
     	for(EstoqueEmpreendimento estoque: estoques) {
     		 InformacaoEntradaProduto info = notaProdutoService.getInformacaoProduto(estoque.getProduto().getId());

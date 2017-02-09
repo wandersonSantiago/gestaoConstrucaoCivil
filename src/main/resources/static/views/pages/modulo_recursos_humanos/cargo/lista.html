@@ -3,7 +3,7 @@
 <br>
 <div ng-controller="cargoController as cargoCtr">
 
-	<div class="box box-primary" ng-init="cargoCtr.lista()">
+	<div class="box box-primary" ng-init="cargoCtr.listaComPaginacao(0 , 15)">
 	
 		<div class="box-header">
 			<span class="lead">Lista de Empreendimento </span>
@@ -35,27 +35,29 @@
 			</table>
 			</div>
 			<div class="row">
-				<div class="col-sm-5"></div>
-				<div class="3">			
-				<nav aria-label="Page navigation">
-					  <ul class="pagination">
-					    <li>
-					      <a href="#" aria-label="Previous">
-					        <span aria-hidden="true">&laquo;</span>
-					      </a>
-							    </li>
-							    <li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>
-							    <li><a href="#">2</a></li>
-							    <li><a href="#">3</a></li>
-							    <li><a href="#">4</a></li>
-							    <li><a href="#">5</a></li>
-							    <li>
-					      <a href="#" aria-label="Next">
-					        <span aria-hidden="true">&raquo;</span>
-					      </a>
-					    </li>
-					  </ul>
-				</nav>
+				<div class="col-sm-5"></div>				
+				<div class="2">				
+					<nav>
+						<ul class="pagination">
+						
+							<li class="{{0==cargoCtr.getPage ?'disabled':''}}"><a
+								ng-if="0!=cargoCtr.getPage" ng-click="cargoCtr.listaComPaginacao(cargoCtr.getPage -1, maxResults)"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a> <a ng-if="0==cargoCtr.getPage" aria-label="Previous"> <span
+									aria-hidden="true">&laquo;</span></a></li>
+							<li ng-repeat="page in cargoCtr.totalPages"
+								class="{{page==cargoCtr.getPage ?'active':''}}"><a
+								ng-click="cargoCtr.listaComPaginacao(page , maxResults)">{{page + 1}}</a></li>
+							<li class="{{cargoCtr.getPage+1 == totalPages ?'disabled':''}}"><a
+								ng-if="cargoCtr.getPage+1 != totalPages"
+								ng-click="cargoCtr.listaComPaginacao(cargoCtr.getPage+1, maxResults)" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a> <a ng-if="cargoCtr.getPage+1==totalPages" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a></li>
+							
+						</ul>
+					</nav>
 				</div>
 			</div>
 		

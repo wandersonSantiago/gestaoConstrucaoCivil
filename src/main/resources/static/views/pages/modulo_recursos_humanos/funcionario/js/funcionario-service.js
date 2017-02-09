@@ -56,6 +56,18 @@ app.factory('cadastrarFuncionarioService', function($rootScope, toastr, $http){
 				return $q.reject(errResponse);
 			});
 		},
+		
+		listaComPaginacao: function(page , maxResults){
+			var config = {params: {page: page , maxResults : maxResults}};
+			return $http.get('/rest/recursosHumanos/funcionario/', config)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 3000,  type : "error", width: 200, higth: 100, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
+		
 		estadoCivil: function(){
 			return $http.get('/rest/pessoa/estadoCivil')
 			.then(function(response){

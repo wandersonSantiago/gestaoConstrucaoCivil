@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.system.gestaoConstrucaoCivil.entity.EmpresaContratante;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.CotacaoEmpresa;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.EstoqueEmpreendimento;
 import br.com.system.gestaoConstrucaoCivil.service.almoxarifado.EstoqueEmpreendimentoService;
@@ -33,15 +32,15 @@ public class EstoqueEmpreendimentoRestController {
 		HttpHeaders headers =  new HttpHeaders();
 		return new ResponseEntity<>(headers, HttpStatus.CREATED);				
 	}
-	/*@GetMapping
+	@GetMapping
 	public ResponseEntity<Iterable<EstoqueEmpreendimento>> buscarTodos() {
 		return new ResponseEntity<Iterable<EstoqueEmpreendimento>>(estoqueService.buscarTodos(), HttpStatus.OK);
-	}*/
+	}
 	
-	@GetMapping(value = "/lista")
+	@GetMapping(value = "/lista/paginacao")
 	public ResponseEntity<Page<EstoqueEmpreendimento>> lista(@RequestParam(defaultValue="0", required=false) int page
 			,@RequestParam(defaultValue="0", required=false) int maxResults) {
-		Page<EstoqueEmpreendimento> empresa = estoqueService.buscarTodos(new PageRequest(page, maxResults));
+		Page<EstoqueEmpreendimento> empresa = estoqueService.buscarTodosComPaginacao(new PageRequest(page, maxResults));
 		return new ResponseEntity<Page<EstoqueEmpreendimento>>(empresa, HttpStatus.OK);
 	}
 	@GetMapping(value = "/buscaPorCodigo/{codigo}")

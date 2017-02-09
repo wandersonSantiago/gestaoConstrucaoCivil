@@ -27,7 +27,7 @@ public class CotacaoEmpresaRestController {
 	public ResponseEntity<CotacaoEmpresa> salvar(@RequestBody CotacaoEmpresa cotacaoEmpresa){
 		cotacaoEmpresaService.salvarOuEditar(cotacaoEmpresa);
 		HttpHeaders headers =  new HttpHeaders();
-		return new ResponseEntity(headers, HttpStatus.CREATED);				
+		return new ResponseEntity<>(headers, HttpStatus.CREATED);				
 	}
 	
 	@GetMapping(value = "/lista")

@@ -1,7 +1,10 @@
 app.controller('cargoController', function($scope, cargoService, $routeParams){
 	
 	var self = this;
-		
+	self.getPage=0;
+	self.totalPages = 0;
+	self.totalElements = 0;
+	$scope.maxResults = 15;	
 	var idCargo = $routeParams.idCargo;
 	
 	
@@ -30,6 +33,23 @@ app.controller('cargoController', function($scope, cargoService, $routeParams){
 			
 			});
 		};
+		
+		self.listaComPaginacao = function(pages, maxResults){
+			self.totalPages = [];
+			self.getPage=pages;	
+			 cargoService.listaComPaginacao(pages, maxResults).
+				then(function(c){
+					$scope.cargos = c.content;
+					$scope.totalPages = c.totalPages;
+					self.totalElements = c.totalElements;
+					for(i = 0; i < $scope.totalPages ; i++){
+						self.totalPages.push(i);
+					}
+					}, function(errResponse){
+				
+				});
+			};
+			
 		self.buscaPorId = function(id){
 			if(!id)return;
 			 cargoService.buscaPorId(id).

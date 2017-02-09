@@ -22,6 +22,15 @@ app.factory('cargoService', function($http,$q , $rootScope, toastr)
 					sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "error", width: 300, higth: 100, padding: 20});	return $q.reject(errResponse);
 				});
 			},
+			listaComPaginacao: function(page , maxResults){
+				var config = {params: {page: page , maxResults : maxResults}};
+				return $http.get('rest/recursosHumanos/cargo/lista/paginacao/' , config)
+				.then(function(response){
+					return response.data;
+				},function(errResponse){
+					sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "error", width: 300, higth: 100, padding: 20});	return $q.reject(errResponse);
+				});
+			},
 			
 			buscaPorId: function(param){
 				return $http.get('rest/recursosHumanos/cargo/buscaPorId/'+param)

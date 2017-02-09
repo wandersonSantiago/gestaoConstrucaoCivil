@@ -6,6 +6,10 @@ app.controller('transferenciaEstoqueController', function($scope, $location, tra
 		self.baixaEstoque = [];
 		self.listaProdutos = [];
 		$scope.listaProdutos =[];
+		self.getPage=0;
+		self.totalPages = 0;
+		self.totalElements = 0;
+		$scope.maxResults = 15;
 		$scope.produto =[];
 		self.totalSoma = 0;
 		var idEnviados = $routeParams.idEnviados;
@@ -29,6 +33,7 @@ app.controller('transferenciaEstoqueController', function($scope, $location, tra
 					}, function(errResponse){
 				});
 			};
+			
 			self.listaEnviadas = function(){
 				transferenciaEstoqueService.listaEnviadas().
 					then(function(t){
@@ -36,13 +41,45 @@ app.controller('transferenciaEstoqueController', function($scope, $location, tra
 						}, function(errResponse){
 					});
 				};
-				self.listaRecebidas = function(){
-					transferenciaEstoqueService.listaRecebidas().
-						then(function(t){
-							self.transferenciasRecebidas = t;
-							}, function(errResponse){
-						});
-					};
+				
+			self.listaEnviadasComPaginacao = function(pages, maxResults){
+				self.totalPages = [];
+				self.getPage=pages;	
+				transferenciaEstoqueService.listaEnviadasComPaginacao(pages, maxResults).
+					then(function(t){
+						self.transferenciasEnviadas = t.content;	
+						$scope.totalPages = t.totalPages;
+						self.totalElements = t.totalElements;
+						for(i = 0; i < $scope.totalPages ; i++){
+							self.totalPages.push(i);
+						}	
+						}, function(errResponse){
+					});
+				};	
+				
+			self.listaRecebidas = function(){
+				transferenciaEstoqueService.listaRecebidas().
+					then(function(t){
+						self.transferenciasRecebidas = t;
+						}, function(errResponse){
+					});
+				};
+				
+			self.listaRecebidasComPaginacao = function(pages, maxResults){
+				self.totalPages = [];
+				self.getPage=pages;	
+				transferenciaEstoqueService.listaRecebidasComPaginacao(pages, maxResults).
+					then(function(t){
+						self.transferenciasRecebidas  = t.content;	
+						$scope.totalPages = t.totalPages;
+						self.totalElements = t.totalElements;
+						for(i = 0; i < $scope.totalPages ; i++){
+							self.totalPages.push(i);
+						}	
+						}, function(errResponse){
+					});
+				};		
+				
 			self.buscaPorCodigoBarras = function(codigoBarras){
 				saidaEstoqueService.buscaPorCodigoBarras(codigoBarras).
 				then(function(p){					

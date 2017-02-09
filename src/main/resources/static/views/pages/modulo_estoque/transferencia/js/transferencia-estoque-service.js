@@ -52,8 +52,28 @@ app.factory('transferenciaEstoqueService', function($rootScope, toastr, $http,$q
 				return $q.reject(errResponse);
 			});
 		},
+		listaEnviadasComPaginacao: function(page , maxResults){
+			var config = {params: {page: page , maxResults : maxResults}};
+			return $http.get('/rest/almoxarifado/transferencia/enviada/paginacao/' , config)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 3000,  text :"Não existe transferencia",  type : "info", width: 300, higth: 300, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
 		listaRecebidas: function(){
 			return $http.get('/rest/almoxarifado/transferencia/recebida')
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 3000,  text :"Não existe transferencia",  type : "info", width: 300, higth: 300, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
+		listaRecebidasComPaginacao: function(page , maxResults){
+			var config = {params: {page: page , maxResults : maxResults}};
+			return $http.get('/rest/almoxarifado/transferencia/recebida/paginacao/' , config)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
@@ -71,7 +91,7 @@ app.factory('transferenciaEstoqueService', function($rootScope, toastr, $http,$q
 			});
 		},
 		listaProdutosComEstoque : function(){
-			return $http.get('/rest/produtoEstoque/lista')
+			return $http.get('/rest/produtoEstoque')
 			.then(function(response){
 				return response.data;
 			},function(errResponse){

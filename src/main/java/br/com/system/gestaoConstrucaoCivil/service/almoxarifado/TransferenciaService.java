@@ -3,6 +3,8 @@ package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,15 +60,27 @@ public class TransferenciaService {
 	public Transferencia buscaPorId(Long id){
 		return transferenciaRepository.findOne(id);
 	}
+	
 	public Collection<Transferencia>  buscarTransferenciaRecebida() {
 		
 		return transferenciaRepository
 				.buscarTransferenciaRecebidas(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId());
 	}
+	
 	public Collection<Transferencia>  buscarTransferenciaEnviada() {
 		
 		return transferenciaRepository
 				.buscarTransferenciaEnviada(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId());
+	}
+	
+	public Page<Transferencia> buscarRecebidaComPaginacao(PageRequest pageRequest) {
+		return transferenciaRepository
+				.buscarTransferenciaRecebidasComPaginacao(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId(), pageRequest);
+	}
+	
+	public Page<Transferencia> buscarEnviadaComPaginacao(PageRequest pageRequest) {
+		return transferenciaRepository
+				.buscarTransferenciaEnviadaComPaginacao(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId(), pageRequest);
 	}
 	
 }
