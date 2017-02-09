@@ -1,0 +1,133 @@
+<meta charset="UTF-8">
+<br>
+<div  ng-controller="chamadoTiController as chamadoCtrl">
+		
+	        <br>
+	    <section layout="row" layout-align="right center">
+		  <md-button href="#/" class="groupX left">Menu</md-button>
+		  <md-button href="#/chamado/informatica/cadastrar" class="groupX middle">Abrir</md-button>
+		  <md-button href="#/chamado/informatica/lista" class="groupX middle">Lista</md-button>
+		  <md-button href="#/chamado/informatica/suporte/lista" class="groupX middle">Suporte</md-button>		  
+		</section>
+	<div class="box box-primary">
+
+		<div class="box-header">
+			<span class="lead">Chamado Tecnologia da Infomação</span>
+		</div>
+		<div class="panel-body">
+
+			<br>
+			<div class="container col-sm-12 " >
+				<form role="form-vertical" name="formSecretaria" ng-submit="chamadoCtrl.salvaMensagem()">
+									
+					<div class="row">
+						<div class="col-sm-3" >
+								Prioridade
+								<input class="form-control" ng-model="chamadoCtrl.chamadoTi.prioridade" id="prioridade" name="prioridade" type="text"  disabled required>						
+						</div>	
+						<div class="col-sm-3" >
+							Status
+							<input class="form-control" ng-model="chamadoCtrl.chamadoTi.status" type="text"  disabled required>						
+						</div>						
+					</div>
+					<br>
+					<br>
+					<div class="row">		
+						<div class="col-sm-6" >
+						Solicitante
+							<input class="form-control"  ng-model="chamadoCtrl.chamadoTi.usuarioSolicitante.nome"  type="text"  disabled required>						
+						</div>
+						<div class="col-sm-6" ng-if="chamadoCtrl.chamadoTi.usuarioAtendente" >
+						Técnico
+							<input class="form-control"  ng-model="chamadoCtrl.chamadoTi.usuarioAtendente.nome"  type="text"  disabled required>						
+						</div>
+					</div>		
+					<div class="row">										
+						<div class="col-sm-6" >
+						Titulo
+							<input class="form-control" placeholder="Titulo" ng-model="chamadoCtrl.chamadoTi.titulo" id="titulo" name="titulo" type="text"  disabled required>						
+						</div>								
+					</div>					
+					<br>
+					<div ng-show="habilitaTexto">
+					<div class="box">
+						<div class="box-header">
+							<h3 class="box-title">
+								Escreva o Problema 
+							</h3>							
+						</div>
+						<div class="box-body pad">							
+								<textarea class="textarea" placeholder="Texto" ng-model="texto" id="texto"
+									style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+						</div>
+					</div>			
+					
+					<br>
+					<br>
+					<div class="row ">
+						<div class="col-sm-4"></div>
+						<div class="col-sm-4">
+							<input type="submit" id="submit" value="Enviar" ng-disabled="!texto"	class="btn btn-lg btn-primary btn-block btn-signin">
+						</div>
+					</div>
+					</div>
+						<br>
+						<br>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="box box-primary direct-chat direct-chat-primary">
+								<div class="box-header with-border">
+									<h2 class="box-title">Mensagens</h2>
+									<div class="box-tools pull-right">
+										<span data-toggle="tooltip" title="quantidade de mensagens"
+											class="badge bg-light-blue">{{quantidadeMensagem}}</span>
+									</div>
+								</div>
+								<br>
+								<div class="box-body">
+									
+										<div ng-repeat=" mensagem in chamadoCtrl.chamadoTi.mensagens | orderBy:'-id' ">
+											<div class="direct-chat-msg" ng-if="!mensagem.usuario.id">
+												<div class="direct-chat-info clearfix">
+													<span class="direct-chat-name pull-left">{{mensagem.usuario.nome}}</span>
+													<span class="direct-chat-timestamp pull-right">
+														Data : {{ mensagem.data | date : 'dd/MM/yyyy'}} 
+														Horas : {{ mensagem.data | date : 'HH:mm:ss'}} 
+													</span>
+													</div>
+												<img class="direct-chat-img" src="public/img/avatar_2x.png"
+													alt="message user image">
+												<div class="direct-chat-text">{{ mensagem.texto }}</div>
+											</div>
+											<br>
+											<div class="direct-chat-msg right" ng-if="mensagem.usuario.id">
+												<div class="direct-chat-info clearfix">
+													<span class="direct-chat-name pull-right">{{mensagem.usuario.nome}}</span>
+													<span class="direct-chat-timestamp pull-left">
+														Data : {{ mensagem.data | date : 'dd/MM/yyyy'}} 
+														Horas : {{ mensagem.data | date : 'HH:mm:ss'}} 
+													</span>													
+												</div>
+												<img class="direct-chat-img" src="public/img/avatar_2x.png"
+													alt="message user image">
+												<div class="direct-chat-text">{{ mensagem.texto }}</div>
+											</div>
+											<br>
+										</div>
+									
+								</div>
+							</div>
+						</div>
+					</div></div>
+					<br>
+					
+		          
+
+				</form>
+			</div>
+
+		</div>
+		<div class="tablecontainer"></div>
+	</div>
+</div>
+

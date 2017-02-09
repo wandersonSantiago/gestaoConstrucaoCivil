@@ -15,8 +15,24 @@
 			role="button"> <span class="sr-only">Toggle navigation</span>
 		</a>
 		
-		<!-- <h4 class="logo-lg"><b>Gestao Construção Civil</b></h4> -->
-		
+		<div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+		 <li class="dropdown messages-menu">
+                <a href="#/chamado/manutencao/suporte/lista" title="Quantidade de Chamados Abertos para Manutenção" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-envelope-o"></i>
+                  <span class="label label-success">{{quantidadeChamadoAberto}}</span>
+                </a>	
+		 		 
+          </li>              
+          <li class="dropdown messages-menu">
+                <a href="#/chamado/informatica/suporte/lista" title="Quantidade de Chamados Abertos para Informática" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-envelope-o"></i>
+                  <span class="label label-success">{{quantidadeChamadoAbertoTi}}</span>
+                </a>	
+		 		 
+          </li>
+          </ul>
+          </div>
 		<ul class="nav navbar-nav pull-right" ng-controller="usuarioController as userCtrl" >
 			
 				<li><a>Empreendimento: {{user.usuario.empreendimento.descricao}}

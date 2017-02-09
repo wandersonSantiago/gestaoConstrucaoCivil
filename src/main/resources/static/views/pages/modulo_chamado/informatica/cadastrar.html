@@ -1,0 +1,80 @@
+<meta charset="UTF-8">
+<br>
+<div 	ng-controller="chamadoTiController as chamadoCtrl">
+   <br>
+	    <section layout="row" layout-align="right center">
+		  <md-button href="#/" class="groupX left">Menu</md-button>
+		  <md-button href="#/chamado/informatica/lista" class="groupX middle">Lista</md-button>
+		  <md-button href="#/chamado/informatica/suporte/lista" class="groupX middle">Suporte</md-button>		  
+		</section>
+	<div class="box box-primary">
+
+		<div class="box-header">
+			<span class="lead">Abrir Chamado Técnologia da Informação</span>
+		</div>
+		<div class="panel-body">
+
+			<br>
+			<div class="container col-sm-12 ">
+				<form role="form-vertical" name="formSecretaria" ng-submit="chamadoCtrl.salva()">
+									
+					<div class="row">
+					<div class="col-sm-4"  ng-init="chamadoCtrl.prioridade()" >
+							<select class="form-control " ng-model="chamadoCtrl.chamadoTi.prioridade" id="prioridadeId"
+							ng-options="prioridade for prioridade in chamadoCtrl.prioridades" >
+								<option value="">Prioridade</option>
+							</select>
+					</div>
+					<div class="col-sm-4"  ng-init="chamadoCtrl.tipoEquipamento()" >
+							<select class="form-control " ng-model="equipamento" id="tipo" ng-click="chamadoCtrl.verificaEquipamento(equipamento)"
+							ng-options="tipoEquipamento for tipoEquipamento in chamadoCtrl.tipoEquipamentos" >
+								<option  value="">Tipo Equipamento</option>
+					</select>
+					</div>
+					</div>
+					<br>
+					<br>
+					<div class="row">	
+						<div ng-if="computador" class="col-sm-4"  ng-init="chamadoCtrl.titulo()" >
+							<select class="form-control select2" ng-model="chamadoCtrl.chamadoTi.titulo" id="titulo"
+							ng-options="titulo for titulo in chamadoCtrl.titulos" >
+								<option value="">Titulo</option>
+							</select>
+						</div>						
+						<div ng-if="impressora" class="col-sm-4"  ng-init="chamadoCtrl.tituloImpressora()" >
+							<select class="form-control " ng-model="chamadoCtrl.chamadoTi.titulo" id="tituloImpressora"
+							ng-options="tituloImpressora for tituloImpressora in chamadoCtrl.tituloImpressoras" >
+								<option value="">Titulo</option>
+							</select>
+						</div>							
+					</div>					
+					<br>
+					<div class="box">
+						<div class="box-header">
+							<h3 class="box-title">
+								Escreva o Problema 
+							</h3>							
+						</div>
+						<div class="box-body pad">							
+								<textarea class="textarea" placeholder="Texto" ng-model="texto" id="texto"
+									style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+						</div>
+					</div>					
+					
+					<br>
+					<br>
+			<div class="row ">
+					
+							<input type="submit" id="submit" ng-disabled="!texto || !chamadoCtrl.chamadoTi.titulo ||  !chamadoCtrl.chamadoTi.prioridade" value="Enviar"	class="btn btn-lg btn-primary btn-block btn-signin">
+						
+					</div>
+					
+
+				</form>
+			</div>
+
+		</div>
+		<div class="tablecontainer"></div>
+	</div>
+</div>
+ 

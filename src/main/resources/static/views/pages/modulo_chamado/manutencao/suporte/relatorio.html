@@ -1,0 +1,157 @@
+<meta charset="UTF-8">
+<br>
+<div  ng-controller="chamadoManutencaoController as chamadoCtr">
+	
+	    <br>
+	    
+	    <section layout="row" layout-align="right center">
+		  <a  href="javascript:window.history.go(-1)">Voltar</a>
+		  <md-button href="#/" class="groupX left">Menu</md-button>
+		  <md-button href="#/chamado/manutencao/cadastrar" class="groupX middle">Abrir</md-button>
+		  <md-button href="#/chamado/manutencao/lista" class="groupX middle">Lista</md-button>
+		  <md-button href="#/chamado/manutencao/suporte/relatorio" class="groupX right">relatório</md-button>	  
+		</section>
+	<div class="panel panel-default"></div>
+	<div class="panel panel-default" ng-init="chamadoCtr.relatorioChamadoSuporte(0 , 10)">
+		<div class="panel-heading">
+			<span class="lead">Relátorio Chamado Manutenção </span>
+		</div>
+			<div>			
+				<br>
+				<div class="row">
+				<div class="col-sm-1"></div>	
+				<div class="col-sm-2">
+						<input class="form-control" ng-model="dataInicial" id="dataInicial" type="date" 
+						title="Data pesquisa inicial" required>
+				</div>
+				<div class="col-sm-2">
+						<input class="form-control" ng-model="dataFinal"  id="dataFinal" type="date" 
+						title="Data pesquisa final">
+					</div>											
+					<div class="col-sm-2">
+						<input type="button" id="buscar" value="Buscar" ng-click="chamadoCtr.relatorioPorData(dataInicial, dataFinal)"	class="btn btn-lg btn-primary btn-block btn-signin">
+					</div>				
+				</div>
+				<br>
+				<br>
+		</div>	
+	</div>						
+			<div class="row">
+				<div  ng-if="ativaTabela" class="col-sm-2">
+					<input type="button" id="buscar" value="Gráfico" ng-click="chamadoCtr.ativaBotaoTabelaGrafico(ativaTabela)"	class="btn btn-lg btn-success btn-block btn-signin">
+				</div>
+				<div  ng-if="ativaGrafico" class="col-sm-2">
+					<input type="button" id="buscar" value="Lista" ng-click="chamadoCtr.ativaBotaoTabelaGrafico(ativaTabela)"	class="btn btn-lg btn-success btn-block btn-signin">
+				</div>
+			</div>	
+				<br>
+				<br>
+				
+			<div ng-if="ativaTabela" class="panel panel-default">
+				<div class="panel-heading">
+					<span class="lead">Lista </span>
+				</div>															
+					<input class="form-control" autofocus="autofocus" name="criterioBusca" type="text" ng-model="criterioDeBusca"	placeholder="Busca..." />
+					<div class="panel-body table-responsive" >		
+			<table class="table table-hover table-bordered" ng-init="chamadoCtr.atualizaListaChamadoSuporte()">
+				<thead>
+					<tr>
+						<th>
+							<div  ng-init="chamadoCtr.titulo()" >
+								<select class="form-control" ng-model="titulo"  ng-click="chamadoCtr.buscaDinamicaTitulo(titulo)"
+								ng-options="titulo for titulo in chamadoCtr.titulos" 
+								  style=" width: 100%;" required >
+									<option value="">Titulo</option>
+								</select>
+							</div>	
+				  		</th>
+				  		
+						<th>
+							<div  ng-init="chamadoCtr.usuarioLista()" >
+								<select class="form-control" ng-model="usuario"  ng-click="chamadoCtr.buscaDinamicaUsuario(usuario)"
+								ng-options="usuario.nome for usuario in chamadoCtr.usuarios" 
+								  style=" width: 100%;" required >
+									<option value="">Solicitante</option>
+								</select>
+							</div>	
+						</th>
+						
+						
+						
+						<th>
+							<div  ng-init="chamadoCtr.status()" >
+								<select class="form-control" ng-model="status"  ng-click="chamadoCtr.buscaDinamicaStatus(status)"
+								ng-options="status for status in chamadoCtr.listaStatus" 
+								  style=" width: 100%;" required >
+									<option value="">Status</option>
+								</select>
+							</div>	
+						</th>						
+						<th>Data de abertura
+							<input class="form-control" type="date"  ng-model="data" ng-blur="chamadoCtr.buscaDinamicaData(data)" placeholder="Data">
+						</th>							
+						<th>Horário</th>					
+						<th>Opções</th>
+					</tr>
+				</thead>
+				<tbody	ng-repeat=" chamado in relatorioChamadoSuporte | filter : buscaChamado | orderBy : '-id'  ">
+					<tr>
+						<td>{{ chamado.titulo }}</td>
+						<td>{{ chamado.usuarioSolicitante.nome }}</td>
+						<td>{{ chamado.status }}</td>	
+						<td>{{ chamado.dataAbertura | date : 'dd/MM/yyyy'}}</td>
+						<td>{{ chamado.dataAbertura | date : 'HH:mm:ss' }}</td>										
+						<td><a href="#/chamado/manutencao/suporte/atendimento/{{chamado.id}}"><i class="glyphicon glyphicon-search"></i></a></td> 
+						<td ng-if="!chamado.silenciar"><a href="" ng-click="chamadoCtr.silenciarChamadoTrue(chamado)"><i class="glyphicon glyphicon-volume-up"></i></a></td>
+						<td ng-if="chamado.silenciar"><a href="" ng-click="chamadoCtr.silenciarChamadoFalse(chamado)"><i class="glyphicon glyphicon-volume-off"></i></a></td>					
+					</tr>
+				</tbody>
+				<tfoot>
+				</tfoot>
+			</table>
+		</div>
+					<div class="row">
+						<div class="col-sm-5"></div>				
+						<div class="2">				
+							<nav>
+								<ul class="pagination">
+								
+									<li class="{{0==chamadoCtr.getPage ?'disabled':''}}"><a
+										ng-if="0!=chamadoCtr.getPage" ng-click="chamadoCtr.relatorioChamadoSuporte(chamadoCtr.getPage -1, maxResults)"
+										aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+									</a> <a ng-if="0==chamadoCtr.getPage" aria-label="Previous"> <span
+											aria-hidden="true">&laquo;</span></a></li>
+									<li ng-repeat="page in chamadoCtr.totalPages"
+										class="{{page==chamadoCtr.getPage ?'active':''}}"><a
+										ng-click="chamadoCtr.relatorioChamadoSuporte(page , maxResults)">{{page + 1}}</a></li>
+									<li class="{{chamadoCtr.getPage+1 == totalPages ?'disabled':''}}"><a
+										ng-if="chamadoCtr.getPage+1 != totalPages"
+										ng-click="chamadoCtr.relatorioChamadoSuporte(chamadoCtr.getPage+1, maxResults)" aria-label="Next"> <span
+											aria-hidden="true">&raquo;</span>
+									</a> <a ng-if="chamadoCtr.getPage+1==totalPages" aria-label="Next"> <span
+											aria-hidden="true">&raquo;</span>
+									</a></li>
+									
+								</ul>
+							</nav>
+						</div>
+					</div>					
+			</div>						
+			<div ng-if="ativaGrafico" class="panel panel-default">
+				<div class="panel-heading">
+					<span class="lead">Gráfico </span>
+				</div>			
+						
+					<div class="row">
+						<div class="col-sm-3"></div>
+						<div class="col-sm-6">
+							<canvas class="chart chart-line" chart-data="data" chart-labels="labels" 
+								chart-series="series" chart-click="onClick"></canvas>
+						</div>
+					</div>	
+							
+			</div>
+
+			
+</div>
+					
