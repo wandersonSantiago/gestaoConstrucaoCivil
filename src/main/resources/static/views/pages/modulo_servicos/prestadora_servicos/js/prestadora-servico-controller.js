@@ -1,7 +1,10 @@
 app.controller('prestadoraServicoController', function($scope, buscaCepService, prestadoraServicoService, $routeParams){
 	
 	var self = this;
-		
+	self.getPage=0;
+	self.totalPages = 0;
+	self.totalElements = 0;
+	$scope.maxResults = 15;		
 	var idPrestadoraServico = $routeParams.idPrestadoraServico;
 	
 	
@@ -43,15 +46,29 @@ app.controller('prestadoraServicoController', function($scope, buscaCepService, 
 		}
 	 	
 
-//BUSCAR
-		 self.lista = function(){
-			 prestadoraServicoService.lista().
-				then(function(p){
-					self.prestadoraServicos = p;
-					}, function(errResponse){
+//BUSCAR		 
+			self.buscaTodosComPaginacao = function(pages, maxResults){
+				self.totalPages = [];
+				self.getPage=pages;			
+				prestadoraServicoService.buscaTodosComPaginacao(pages, maxResults).
+				then(function(e){			
+					self.prestadoraServicos = e.content;
+					$scope.totalPages = e.totalPages;
+					self.totalElements = e.totalElements;
+					for(i = 0; i < $scope.totalPages ; i++){
+						self.totalPages.push(i);
+					}
+				}, function(errResponse){
 				});
 			};
 			
+			self.lista = function(){	
+				prestadoraServicoService.lista().
+				then(function(e){			
+					self.prestadoraServicos = e;					
+				}, function(errResponse){
+				});
+			};
 			
 			self.buscaPorId = function(id){
 				if(!id)return;

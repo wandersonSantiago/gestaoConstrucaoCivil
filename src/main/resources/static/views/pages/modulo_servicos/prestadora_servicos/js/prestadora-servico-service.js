@@ -27,6 +27,17 @@ app.factory('prestadoraServicoService', function($rootScope, toastr, $http,$q){
 			});
 		},
 		
+		buscaTodosComPaginacao: function(page , maxResults){			
+			var config = {params: {page: page , maxResults : maxResults}};
+			return $http.get('rest/servicos/prestadoraServico/', config)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 3000,  text :"falha de conexão", type : "error", width: 300, higth: 100, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
+		
 		buscaPorId: function(param){
 			return $http.get('rest/servicos/prestadoraServico/buscaPorId/'+param)
 			.then(function(response){

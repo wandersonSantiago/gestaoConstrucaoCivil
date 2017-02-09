@@ -28,7 +28,7 @@ app.controller('pacoteServicoController', function($scope, pacoteServicoService,
 		 
 	}	 
 	 
-		self.lista = function(pages, maxResults){
+		self.buscaTodosComPaginacao = function(pages, maxResults){
 			self.totalPages = [];
 			self.getPage=pages;			
 			pacoteServicoService.buscaTodosComPaginacao(pages, maxResults).
@@ -43,6 +43,13 @@ app.controller('pacoteServicoController', function($scope, pacoteServicoService,
 			});
 		};
 		
+		self.lista = function(){					
+			pacoteServicoService.lista().
+			then(function(e){			
+				self.listaPacoteServicos = e;				
+			}, function(errResponse){
+			});
+		};
 		self.buscaPorId = function(id){
 			if(!id)return;
 			pacoteServicoService.buscaPorId(id).

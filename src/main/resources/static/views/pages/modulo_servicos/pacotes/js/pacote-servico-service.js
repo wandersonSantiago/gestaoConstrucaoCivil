@@ -38,7 +38,7 @@ app.factory('pacoteServicoService', function($rootScope, toastr, $http,$q){
 		
 		buscaTodosComPaginacao: function(page , maxResults){
 			var config = {params: {page: page , maxResults : maxResults}};
-			return $http.get('rest/servicos/pacotes/buscaTodosComPaginacao/', config)
+			return $http.get('rest/servicos/pacotes/', config)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){

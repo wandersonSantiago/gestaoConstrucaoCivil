@@ -23,7 +23,7 @@ public class ValidacaoServicoEdificio implements ValidacaoServico<ServicoEdifici
 
 			if (servico.getTorre().equals(s.getTorre()) && servico.getApartamento().equals(s.getApartamento())
 					&& servico.getPacoteServico().equals(s.getPacoteServico())) {
-				throw new ServicoException("Pacote já vinculado a prestadora de serviço");
+				throw new ServicoException("Este serviço ja esta cadastrado neste local");
 
 			}
 

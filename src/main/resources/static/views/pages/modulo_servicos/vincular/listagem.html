@@ -5,12 +5,19 @@
 
 	<div class="box box-primary" >
 		<div class="panel-body"  >
-		
-			<div ng-if="tipoEmpreendimento" >
+		<div ng-if="tipoEmpreendimento" >
+		<select   ng-click="servicoCtrl.buscaTodosComPaginacaoEdificio(servicoCtrl.getPage , maxResults)" ng-model="maxResults" title="escolha a quantidade de itens por página" >
+						<option value="5">5</option>
+						<option value="15">15</option>
+						<option value="20">20</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select>
+			
 			<div class="table-responsive">
 			<h3>Lista dos serviços nos Edifícos</h3>
 			<input class="form-control" type="text" placeholder="Buscar" ng-model="buscaPacotes" >
-			<table class="table table-hover table-bordered" ng-init="servicoCtrl.listaEdificio()">
+			<table class="table table-hover table-bordered" ng-init="servicoCtrl.buscaTodosComPaginacaoEdificio(0 , 10)">
 				<thead>
 					<tr>
 						<th>Pacote de serviço</th>
@@ -50,35 +57,44 @@
 			
 		</div>
 		<div class="row">
-				<div class="col-sm-5"></div>
-				<div class="3">			
-				<nav aria-label="Page navigation">
-					  <ul class="pagination">
-					    <li>
-					      <a href="#" aria-label="Previous">
-					        <span aria-hidden="true">&laquo;</span>
-					      </a>
-							    </li>
-							    <li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>
-							    <li><a href="#">2</a></li>
-							    <li><a href="#">3</a></li>
-							    <li><a href="#">4</a></li>
-							    <li><a href="#">5</a></li>
-							    <li>
-					      <a href="#" aria-label="Next">
-					        <span aria-hidden="true">&raquo;</span>
-					      </a>
-					    </li>
-					  </ul>
-				</nav>
+				<div class="col-sm-5"></div>				
+				<div class="2">				
+					<nav>
+						<ul class="pagination">
+						
+							<li class="{{0==servicoCtrl.getPage ?'disabled':''}}"><a
+								ng-if="0!=servicoCtrl.getPage" ng-click="servicoCtrl.buscaTodosComPaginacaoEdificio(servicoCtrl.getPage -1, maxResults)"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a> <a ng-if="0==servicoCtrl.getPage" aria-label="Previous"> <span
+									aria-hidden="true">&laquo;</span></a></li>
+							<li ng-repeat="page in servicoCtrl.totalPages"
+								class="{{page==servicoCtrl.getPage ?'active':''}}"><a
+								ng-click="servicoCtrl.buscaTodosComPaginacaoEdificio(page , maxResults)">{{page + 1}}</a></li>
+							<li class="{{servicoCtrl.getPage+1 == totalPages ?'disabled':''}}"><a
+								ng-if="servicoCtrl.getPage+1 != totalPages"
+								ng-click="servicoCtrl.buscaTodosComPaginacaoEdificio(servicoCtrl.getPage+1, maxResults)" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a> <a ng-if="servicoCtrl.getPage+1==totalPages" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a></li>
+							
+						</ul>
+					</nav>
 				</div>
 			</div>
 		</div>
 		<div ng-if="!tipoEmpreendimento" >
 		<div class="table-responsive">
 			<h3>Lista dos serviços nas Casas</h3>
+			<select   ng-click="servicoCtrl.buscaTodosComPaginacaoCasa(servicoCtrl.getPage , maxResults)" ng-model="maxResults" title="escolha a quantidade de itens por página" >
+						<option value="5">5</option>
+						<option value="15">15</option>
+						<option value="20">20</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select>
 			<input class="form-control" type="text" placeholder="Buscar" ng-model="buscaPacotes" >
-			<table class="table table-hover table-bordered" ng-init="servicoCtrl.listaCasa()">
+			<table class="table table-hover table-bordered" ng-init="servicoCtrl.buscaTodosComPaginacaoCasa(0 , 10)">
 				<thead>
 					<tr>
 						<th>Pacote de serviço</th>
@@ -116,27 +132,29 @@
 			
 		</div>
 		<div class="row">
-				<div class="col-sm-5"></div>
-				<div class="3">			
-				<nav aria-label="Page navigation">
-					  <ul class="pagination">
-					    <li>
-					      <a href="#" aria-label="Previous">
-					        <span aria-hidden="true">&laquo;</span>
-					      </a>
-							    </li>
-							    <li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>
-							    <li><a href="#">2</a></li>
-							    <li><a href="#">3</a></li>
-							    <li><a href="#">4</a></li>
-							    <li><a href="#">5</a></li>
-							    <li>
-					      <a href="#" aria-label="Next">
-					        <span aria-hidden="true">&raquo;</span>
-					      </a>
-					    </li>
-					  </ul>
-				</nav>
+				<div class="col-sm-5"></div>				
+				<div class="2">				
+					<nav>
+						<ul class="pagination">
+						
+							<li class="{{0==servicoCtrl.getPage ?'disabled':''}}"><a
+								ng-if="0!=servicoCtrl.getPage" ng-click="servicoCtrl.buscaTodosComPaginacaoCasa(servicoCtrl.getPage -1, maxResults)"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a> <a ng-if="0==servicoCtrl.getPage" aria-label="Previous"> <span
+									aria-hidden="true">&laquo;</span></a></li>
+							<li ng-repeat="page in servicoCtrl.totalPages"
+								class="{{page==servicoCtrl.getPage ?'active':''}}"><a
+								ng-click="servicoCtrl.buscaTodosComPaginacaoCasa(page , maxResults)">{{page + 1}}</a></li>
+							<li class="{{servicoCtrl.getPage+1 == totalPages ?'disabled':''}}"><a
+								ng-if="servicoCtrl.getPage+1 != totalPages"
+								ng-click="servicoCtrl.buscaTodosComPaginacaoCasa(servicoCtrl.getPage+1, maxResults)" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a> <a ng-if="servicoCtrl.getPage+1==totalPages" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a></li>
+							
+						</ul>
+					</nav>
 				</div>
 			</div>
 			</div>
@@ -145,9 +163,16 @@
 		<br>	
 		
 		<div class="table-responsive">
+		<select   ng-click="servicoCtrl.buscaTodosComPaginacaoEdificacoesComunitaria(servicoCtrl.getPage , maxResults)" ng-model="maxResults" title="escolha a quantidade de itens por página" >
+						<option value="5">5</option>
+						<option value="15">15</option>
+						<option value="20">20</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select>
 			<h3>Lista dos serviços nas Edificações Comunitarias</h3>
 			<input class="form-control" type="text" placeholder="Buscar" ng-model="buscaPacotes" >
-			<table class="table table-hover table-bordered" ng-init="servicoCtrl.listaEdificacoesComunitaria()">
+			<table class="table table-hover table-bordered" ng-init="servicoCtrl.buscaTodosComPaginacaoEdificacoesComunitaria(0 , 10)">
 				<thead>
 					<tr>
 						<th>Pacote de serviço</th>
@@ -180,27 +205,29 @@
 			
 		</div>
 		<div class="row">
-				<div class="col-sm-5"></div>
-				<div class="3">			
-				<nav aria-label="Page navigation">
-					  <ul class="pagination">
-					    <li>
-					      <a href="#" aria-label="Previous">
-					        <span aria-hidden="true">&laquo;</span>
-					      </a>
-							    </li>
-							    <li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>
-							    <li><a href="#">2</a></li>
-							    <li><a href="#">3</a></li>
-							    <li><a href="#">4</a></li>
-							    <li><a href="#">5</a></li>
-							    <li>
-					      <a href="#" aria-label="Next">
-					        <span aria-hidden="true">&raquo;</span>
-					      </a>
-					    </li>
-					  </ul>
-				</nav>
+				<div class="col-sm-5"></div>				
+				<div class="2">				
+					<nav>
+						<ul class="pagination">
+						
+							<li class="{{0==servicoCtrl.getPage ?'disabled':''}}"><a
+								ng-if="0!=servicoCtrl.getPage" ng-click="servicoCtrl.buscaTodosComPaginacaoEdificacoesComunitaria(servicoCtrl.getPage -1, maxResults)"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a> <a ng-if="0==servicoCtrl.getPage" aria-label="Previous"> <span
+									aria-hidden="true">&laquo;</span></a></li>
+							<li ng-repeat="page in servicoCtrl.totalPages"
+								class="{{page==servicoCtrl.getPage ?'active':''}}"><a
+								ng-click="servicoCtrl.buscaTodosComPaginacaoEdificacoesComunitaria(page , maxResults)">{{page + 1}}</a></li>
+							<li class="{{servicoCtrl.getPage+1 == totalPages ?'disabled':''}}"><a
+								ng-if="servicoCtrl.getPage+1 != totalPages"
+								ng-click="servicoCtrl.buscaTodosComPaginacaoEdificacoesComunitaria(servicoCtrl.getPage+1, maxResults)" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a> <a ng-if="servicoCtrl.getPage+1==totalPages" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a></li>
+							
+						</ul>
+					</nav>
 				</div>
 			</div>
 		</div>

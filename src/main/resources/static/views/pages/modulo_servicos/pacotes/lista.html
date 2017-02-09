@@ -3,13 +3,13 @@
 <br>
 <div ng-controller="pacoteServicoController as pacotesCtrl" >
 
-	<div class="box box-primary" ng-init="pacotesCtrl.lista(0 , 15)">
+	<div class="box box-primary" ng-init="pacotesCtrl.buscaTodosComPaginacao(0 , 15)">
 		<!-- Default panel contents -->
 		<div class="box-header">
 			<span class="lead">Lista pacotes serviços </span>
 		</div>
 		<div class="panel-body"  >
-		<select   ng-click="pacotesCtrl.lista(pacotesCtrl.getPage , maxResults)" ng-model="maxResults" title="escolha a quantidade de itens por página" >
+		<select   ng-click="pacotesCtrl.buscaTodosComPaginacao(pacotesCtrl.getPage , maxResults)" ng-model="maxResults" title="escolha a quantidade de itens por página" >
 						<option value="5">5</option>
 						<option value="15">15</option>
 						<option value="20">20</option>
@@ -58,16 +58,16 @@
 						<ul class="pagination">
 						
 							<li class="{{0==pacotesCtrl.getPage ?'disabled':''}}"><a
-								ng-if="0!=pacotesCtrl.getPage" ng-click="pacotesCtrl.lista(pacotesCtrl.getPage -1, maxResults)"
+								ng-if="0!=pacotesCtrl.getPage" ng-click="pacotesCtrl.buscaTodosComPaginacao(pacotesCtrl.getPage -1, maxResults)"
 								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 							</a> <a ng-if="0==pacotesCtrl.getPage" aria-label="Previous"> <span
 									aria-hidden="true">&laquo;</span></a></li>
 							<li ng-repeat="page in pacotesCtrl.totalPages"
 								class="{{page==pacotesCtrl.getPage ?'active':''}}"><a
-								ng-click="pacotesCtrl.lista(page , maxResults)">{{page + 1}}</a></li>
+								ng-click="pacotesCtrl.buscaTodosComPaginacao(page , maxResults)">{{page + 1}}</a></li>
 							<li class="{{pacotesCtrl.getPage+1 == totalPages ?'disabled':''}}"><a
 								ng-if="pacotesCtrl.getPage+1 != totalPages"
-								ng-click="pacotesCtrl.lista(pacotesCtrl.getPage+1, maxResults)" aria-label="Next"> <span
+								ng-click="pacotesCtrl.buscaTodosComPaginacao(pacotesCtrl.getPage+1, maxResults)" aria-label="Next"> <span
 									aria-hidden="true">&raquo;</span>
 							</a> <a ng-if="pacotesCtrl.getPage+1==totalPages" aria-label="Next"> <span
 									aria-hidden="true">&raquo;</span>

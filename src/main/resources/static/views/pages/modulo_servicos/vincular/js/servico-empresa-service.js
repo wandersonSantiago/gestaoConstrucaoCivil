@@ -8,7 +8,7 @@ app.factory('servicoEmpresaService', function($rootScope, toastr, $http,$q){
 				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
+				sweetAlert({ timer : 3000,  text : errResponse.data.message ,  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
@@ -33,6 +33,16 @@ app.factory('servicoEmpresaService', function($rootScope, toastr, $http,$q){
 				return $q.reject(errResponse);
 			});
 		},
+		buscaTodosComPaginacaoEdificio: function(page , maxResults){
+			var config = {params: {page: page , maxResults : maxResults}};
+			return $http.get('/rest/servico/edificio/vincular/', config)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 3000,  text :"falha de conexão", type : "error", width: 300, higth: 100, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
 		
 		buscaServicoEdificioPorId: function(param){
 			return $http.get('/rest/servico/edificio/vincular/buscaPorId/'+param)
@@ -50,7 +60,7 @@ app.factory('servicoEmpresaService', function($rootScope, toastr, $http,$q){
 				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
+				sweetAlert({ timer : 3000,  text :errResponse.data.message ,  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
@@ -75,6 +85,16 @@ app.factory('servicoEmpresaService', function($rootScope, toastr, $http,$q){
 				return $q.reject(errResponse);
 			});
 		},
+		buscaTodosComPaginacaoCasa: function(page , maxResults){
+			var config = {params: {page: page , maxResults : maxResults}};
+			return $http.get('/rest/servico/casa/vincular/', config)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 3000,  text :"falha de conexão", type : "error", width: 300, higth: 100, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
 		
 		buscaServicoCasaPorId: function(param){
 			return $http.get('/rest/servico/casa/vincular/buscaPorId/'+param)
@@ -93,7 +113,7 @@ app.factory('servicoEmpresaService', function($rootScope, toastr, $http,$q){
 				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
+				sweetAlert({ timer : 3000,  text : errResponse.data.message ,  type : "error", width: 300, higth: 300, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
@@ -118,7 +138,16 @@ app.factory('servicoEmpresaService', function($rootScope, toastr, $http,$q){
 				return $q.reject(errResponse);
 			});
 		},
-		
+		buscaTodosComPaginacaoEdificacoesComunitaria: function(page , maxResults){
+			var config = {params: {page: page , maxResults : maxResults}};
+			return $http.get('/rest/servico/outros/vincular/', config)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 3000,  text :"falha de conexão", type : "error", width: 300, higth: 100, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
 		buscaServicoComunitarioPorId: function(param){
 			return $http.get('/rest/servico/outros/vincular/buscaPorId/'+param)
 			.then(function(response){

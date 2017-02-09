@@ -1,6 +1,8 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller.servicos;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -38,12 +41,18 @@ public class ServicoEdificioRestController {
 		servicoEdificioService.salvarOuEditar(servico);		
 	}
 	
-
 	@GetMapping(value = "/lista")
 	public ResponseEntity<Iterable<ServicoEdificio>> buscarTodos() {
-		return new ResponseEntity<Iterable<ServicoEdificio>>(servicoEdificioService.buscarTodos(), HttpStatus.OK);
+		return new ResponseEntity<Iterable<ServicoEdificio>>(servicoEdificioService.lista(), HttpStatus.OK);
 	}
-
+	
+	@GetMapping
+	public ResponseEntity<Page<ServicoEdificio>> lista(@RequestParam(defaultValue="0", required=false) int page
+			,@RequestParam(defaultValue="0", required=false) int maxResults) {
+		Page<ServicoEdificio> objeto = servicoEdificioService.buscarTodos(new PageRequest(page, maxResults));
+		return new ResponseEntity<Page<ServicoEdificio>>(objeto, HttpStatus.OK);
+	}
+	
 	@GetMapping(value = "/buscaPorId/{id}")
 	public ResponseEntity<ServicoEdificio> buscarPorId(@PathVariable Long id) {
 		return new ResponseEntity<ServicoEdificio>(servicoEdificioService.buscarPorId(id), HttpStatus.OK);

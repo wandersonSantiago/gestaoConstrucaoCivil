@@ -1,6 +1,8 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller.servicos;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -23,11 +26,21 @@ public class PacoteServicoRestController {
 	@Autowired
 	private PacoteServicoService pacoteServicoService;
 
+	
+
 	@GetMapping(value = "/lista")
 	public ResponseEntity<Iterable<PacoteServico>> buscarTodos() {
-
-		return new ResponseEntity<Iterable<PacoteServico>>(pacoteServicoService.buscarTodos(), HttpStatus.OK);
+		return new ResponseEntity<Iterable<PacoteServico>>(pacoteServicoService.lista(), HttpStatus.OK);
 	}
+	
+	
+	@GetMapping
+	public ResponseEntity<Page<PacoteServico>> lista(@RequestParam(defaultValue="0", required=false) int page
+			,@RequestParam(defaultValue="0", required=false) int maxResults) {
+		Page<PacoteServico> objeto = pacoteServicoService.buscarTodos(new PageRequest(page, maxResults));
+		return new ResponseEntity<Page<PacoteServico>>(objeto, HttpStatus.OK);
+	}
+	
 
 	@PostMapping(value = "/salva")
 	public ResponseEntity<PacoteServico> salvar(@RequestBody PacoteServico pacoteServico, UriComponentsBuilder ucBuilder) {
@@ -35,7 +48,7 @@ public class PacoteServicoRestController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(
 				ucBuilder.path("/rest/servicos/pacotes/salva/{id}").buildAndExpand(pacoteServico.getId()).toUri());
-		return new ResponseEntity(headers, HttpStatus.CREATED);
+		return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	}
 
 	@PutMapping(value = "/altera")
@@ -44,7 +57,7 @@ public class PacoteServicoRestController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(
 				ucBuilder.path("/rest/servicos/pacotes/altera/{id}").buildAndExpand(pacoteServico.getId()).toUri());
-		return new ResponseEntity(headers, HttpStatus.CREATED);
+		return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	}
 
 	@GetMapping(value = "/buscaPorId/{id}")

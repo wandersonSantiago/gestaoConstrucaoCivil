@@ -1,12 +1,14 @@
 package br.com.system.gestaoConstrucaoCivil.service.servicos;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.servicos.ServicoCasa;
+import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
+import br.com.system.gestaoConstrucaoCivil.regras.servicos.ValidacaoServico;
 import br.com.system.gestaoConstrucaoCivil.repository.servicos.ServicoCasaRepository;
 
 @Service
@@ -16,17 +18,25 @@ public class ServicoCasaService {
 	@Autowired
 	private ServicoCasaRepository servicoCasaRepository;
 	
-	public List<ServicoCasa> buscarTodos() {
+	//@Autowired
+	//private ValidacaoServico<ServicoCasa> validacao;
+	
+	
+	public Page<ServicoCasa> buscarTodos(PageRequest pages) {
 		
-		return servicoCasaRepository.findAll();
+		return servicoCasaRepository.findAll(pages);
 	}
 	@Transactional(readOnly = false)
-	public void  salvarOuEditar(ServicoCasa servico)
-	{
+	public void  salvarOuEditar(ServicoCasa servico){
+		servico.setEmpreendimento(SessionUsuario.getInstance().getUsuario().getEmpreendimento());
+		//validacao.verificarExistePacoteParaEmpresa(servico);
 		servicoCasaRepository.save(servico);
 	}
 	public ServicoCasa buscarPorId(Long id) {
 		return servicoCasaRepository.findOne(id);
+	}
+	public Iterable<ServicoCasa> lista() {
+		return servicoCasaRepository.findAll();
 	}
 	
 }

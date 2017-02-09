@@ -1,7 +1,10 @@
 app.controller('servicoEmpresaController', function($scope,servicoEmpresaService, $routeParams){
 	
 	var self = this;
-		
+	self.getPage=0;
+	self.totalPages = 0;
+	self.totalElements = 0;
+	$scope.maxResults = 15;		
 	var  idServicoComunitario = $routeParams.idServicoComunitario;
 	var  idServicoEdificio = $routeParams.idServicoEdificio;
 	var  idServicoCasa = $routeParams.idServicoCasa;
@@ -27,14 +30,30 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 			});
 		}
 	 
-	 self.listaEdificio = function(){
-		 servicoEmpresaService.listaEdificio().
-			then(function(t){
-				$scope.listaEdificio = t;
-				}, function(errResponse){
+	
+		
+		self.buscaTodosComPaginacaoEdificio = function(pages, maxResults){
+			self.totalPages = [];
+			self.getPage=pages;			
+			servicoEmpresaService.buscaTodosComPaginacaoEdificio(pages, maxResults).
+			then(function(e){			
+				$scope.listaEdificio  = e.content;
+				$scope.totalPages = e.totalPages;
+				self.totalElements = e.totalElements;
+				for(i = 0; i < $scope.totalPages ; i++){
+					self.totalPages.push(i);
+				}
+			}, function(errResponse){
 			});
 		};
 		
+		self.listaEdificio = function(){		
+			servicoEmpresaService.listaEdificio().
+			then(function(e){			
+				$scope.listaEdificio  = e;
+			}, function(errResponse){
+			});
+		};
 		 self.salvaCasa = function(servicoCasa , pacoteServico , prestadoraServico){
 			 servicoCasa.pacoteServico = pacoteServico;
 			 servicoCasa.prestadoraServico = prestadoraServico;
@@ -55,11 +74,27 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 				});
 			}
 		 
-		 self.listaCasa = function(){
-			 servicoEmpresaService.listaCasa().
-				then(function(t){
-					$scope.listaCasa = t;
-					}, function(errResponse){
+		
+			self.buscaTodosComPaginacaoCasa = function(pages, maxResults){
+				self.totalPages = [];
+				self.getPage=pages;			
+				servicoEmpresaService.buscaTodosComPaginacaoCasa(pages, maxResults).
+				then(function(e){			
+					$scope.listaCasa  = e.content;
+					$scope.totalPages = e.totalPages;
+					self.totalElements = e.totalElements;
+					for(i = 0; i < $scope.totalPages ; i++){
+						self.totalPages.push(i);
+					}
+				}, function(errResponse){
+				});
+			};
+			
+			self.listaCasa = function(){						
+				servicoEmpresaService.listaCasa().
+				then(function(e){			
+					$scope.listaCasa  = e;					
+				}, function(errResponse){
 				});
 			};
 			
@@ -86,12 +121,26 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 						}, function(errResponse){
 					});
 				}
-			 
-			 self.listaEdificacoesComunitaria = function(){
-				 servicoEmpresaService.listaEdificacoesComunitaria().
-					then(function(t){
-						$scope.listaEdificacoesComunitaria = t;
-						}, function(errResponse){
+			 			
+				self.buscaTodosComPaginacaoEdificacoesComunitaria = function(pages, maxResults){
+					self.totalPages = [];
+					self.getPage=pages;			
+					servicoEmpresaService.buscaTodosComPaginacaoEdificacoesComunitaria(pages, maxResults).
+					then(function(e){			
+						$scope.listaEdificacoesComunitaria  = e.content;
+						$scope.totalPages = e.totalPages;
+						self.totalElements = e.totalElements;
+						for(i = 0; i < $scope.totalPages ; i++){
+							self.totalPages.push(i);
+						}
+					}, function(errResponse){
+					});
+				};
+				self.listaEdificacoesComunitaria = function(){	
+					servicoEmpresaService.listaEdificacoesComunitaria().
+					then(function(e){			
+						$scope.listaEdificacoesComunitaria  = e;					
+					}, function(errResponse){
 					});
 				};
 		

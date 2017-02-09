@@ -1,6 +1,8 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller.servicos;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -25,8 +28,14 @@ public class PrestadoraRestServicoController {
 
 	@GetMapping(value = "/lista")
 	public ResponseEntity<Iterable<PrestadoraServico>> buscarTodos() {
-
-		return new ResponseEntity<Iterable<PrestadoraServico>>(prestadoraServicoService.buscarTodos(), HttpStatus.OK);
+		return new ResponseEntity<Iterable<PrestadoraServico>>(prestadoraServicoService.lista(), HttpStatus.OK);
+	}
+	
+	@GetMapping
+	public ResponseEntity<Page<PrestadoraServico>> lista(@RequestParam(defaultValue="0", required=false) int page
+			,@RequestParam(defaultValue="0", required=false) int maxResults) {
+		Page<PrestadoraServico> objeto = prestadoraServicoService.buscarTodos(new PageRequest(page, maxResults));
+		return new ResponseEntity<Page<PrestadoraServico>>(objeto, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/buscaPorId/{id}")
@@ -42,7 +51,7 @@ public class PrestadoraRestServicoController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("/rest/prestadoraServico/salva/{prestadoraServico}")
 				.buildAndExpand(prestadoraServico.getId()).toUri());
-		return new ResponseEntity(headers, HttpStatus.CREATED);
+		return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	}
 
 	@PutMapping(value = "/altera")
@@ -53,6 +62,6 @@ public class PrestadoraRestServicoController {
 		headers.setLocation(ucBuilder.path("/rest/prestadoraServico/altera/{prestadoraServico}")
 				.buildAndExpand(prestadoraServico.getId()).toUri());
 
-		return new ResponseEntity(headers, HttpStatus.CREATED);
+		return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	}
 }

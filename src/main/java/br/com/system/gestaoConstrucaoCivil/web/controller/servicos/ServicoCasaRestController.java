@@ -1,6 +1,8 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller.servicos;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -41,8 +44,14 @@ public class ServicoCasaRestController {
 	
 	@GetMapping(value = "/lista")
 	public ResponseEntity<Iterable<ServicoCasa>> buscarTodos() {
-
-		return new ResponseEntity<Iterable<ServicoCasa>>(servicoCasaService.buscarTodos(), HttpStatus.OK);
+		return new ResponseEntity<Iterable<ServicoCasa>>(servicoCasaService.lista(), HttpStatus.OK);
+	}
+	
+	@GetMapping
+	public ResponseEntity<Page<ServicoCasa>> lista(@RequestParam(defaultValue="0", required=false) int page
+			,@RequestParam(defaultValue="0", required=false) int maxResults) {
+		Page<ServicoCasa> objeto = servicoCasaService.buscarTodos(new PageRequest(page, maxResults));
+		return new ResponseEntity<Page<ServicoCasa>>(objeto, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/buscaPorId/{id}")
