@@ -15,7 +15,7 @@ app.factory(
 			var auth = {
 
 				authenticated : false,
-			
+				
 				loginPath : '/login',
 				logoutPath : '/logout',
 				homePath : '/',
@@ -33,6 +33,7 @@ app.factory(
 						headers : headers
 					}).then(function(response) {
 						if (response.data.name) {
+							$rootScope.userData = response.data;							
 							auth.authenticated = true;
 							$rootScope.logado = true;
 						} else {

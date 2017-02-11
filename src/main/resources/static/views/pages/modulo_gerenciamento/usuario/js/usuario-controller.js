@@ -1,4 +1,4 @@
-app.controller('usuarioController', function($scope, toastr,  $rootScope, usuarioService, $http, $routeParams){
+app.controller('usuarioController', function($scope, toastr, permissaoService,  $rootScope, usuarioService, $http, $routeParams){
 	
 	var self = this;
 	var idUsuario = $routeParams.idUsuario;
@@ -7,15 +7,16 @@ app.controller('usuarioController', function($scope, toastr,  $rootScope, usuari
 	$scope.listaUsuario = [];
 	self.listaPerfil = [];
 	$scope.listaPerfil = [];
+	$scope.moduloAdmin = [];
+	$scope.moduloCadastros = [];
+	$scope.moduloChamado =[];
+	$scope.moduloCompras = [];
+	$scope.moduloEstoque = []
+	$scope.moduloGerenciamento = [];
+	$scope.moduloRecursosHumanos = [];
+	$scope.moduloServicos = [];
 	 
-	$scope.perfil = function(){
-			usuarioService.perfil().
-				then(function(u){
-					$scope.perfils = u;
-					}, function(errResponse){
-				});
-			};
-	
+				
 		      $scope.permissao = function (user) {
 		        var idx = self.listaPerfil.indexOf(user);
 		        if (idx > -1) {
@@ -96,7 +97,7 @@ app.controller('usuarioController', function($scope, toastr,  $rootScope, usuari
 	 self.salva = function(usuario){
 		if(self.senha == self.senhaRepitida){
 			self.usuario.senha = self.senha;
-			self.usuario.perfilsUsuario = self.listaPerfil;
+			self.usuario.permissoes = self.listaPerfil;
 			usuarioService.salva(self.usuario).
 			then(function(response){
 				self.usuario = null;
@@ -147,5 +148,53 @@ app.controller('usuarioController', function($scope, toastr,  $rootScope, usuari
 		if(idUsuario){
 			self.buscaPorId(idUsuario);
 	}
+		
+		$scope.perfil = function(){
+			 permissaoService.lista().
+				then(function(u){
+					$scope.permissoes = u;
+					verificaTipoPermissao($scope.permissoes);
+					}, function(errResponse){
+				});
+			};
+			
+		verificaTipoPermissao = function(permissoes){
+			
+			for(i = 0 ; i < permissoes.length ; i++){
+			
+			if(permissoes[i].tipoModulo == "ADMIN"){				
+				$scope.moduloAdmin.push(permissoes[i]);
+				$scope.visualizaAdmin = true;
+			}
+			if(permissoes[i].tipoModulo == "CADASTROS"){
+				$scope.moduloCadastros.push(permissoes[i]);
+				$scope.visualizaCadastros = true;
+			}
+			if(permissoes[i].tipoModulo == "CHAMADO"){
+				$scope.moduloChamado.push(permissoes[i]);
+				$scope.visualizaChamado = true;
+			}
+			if(permissoes[i].tipoModulo == "COMPRAS"){
+				$scope.moduloCompras.push(permissoes[i]);
+				$scope.visualizaCompras = true;
+			}
+			if(permissoes[i].tipoModulo == "ESTOQUE"){
+				$scope.moduloEstoque.push(permissoes[i]);
+				$scope.visualizaEstoque = true;
+			}
+			if(permissoes[i].tipoModulo == "GERENCIAMENTO"){
+				$scope.moduloGerenciamento.push(permissoes[i]);
+				$scope.visualizaGerenciamento = true;
+			}
+			if(permissoes[i].tipoModulo == "RECURSOS_HUMANOS"){
+				$scope.moduloRecursosHumanos.push(permissoes[i]);
+				$scope.visualizaRecursosHumanos = true;
+			}
+			if(permissoes[i].tipoModulo == "SERVICOS"){
+				$scope.moduloServicos.push(permissoes[i]);
+				$scope.visualizaServicos = true;
+			}
+			}
+		};
 	
 });

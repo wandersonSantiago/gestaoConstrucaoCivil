@@ -80,7 +80,13 @@
 					<ul class="treeview-menu">
 						<li><a class="top" href="#/usuario/cadastro">Cadastro</a></li>
 						<li><a class="top" href="#/usuario/listagem">Listagem</a></li>
-						<li><a class="top" href="#/usuario/permissao">Permissões</a></li>
+					<li class="treeview"><a href=""><i class="glyphicon glyphicon-user"></i> <span>Permissão</span>
+						<i class="fa fa-angle-left pull-right"></i></a>
+						<ul class="treeview-menu">
+							<li><a class="top" href="#/usuario/permissao/cadastro">Cadastro</a></li>
+							<li><a class="top" href="#/usuario/permissao/listagem">Listagem</a></li>
+						</ul>
+					</li>
 					</ul>
 				</li>			
 				<li ng-if="ROLE_ADMINISTRADOR_EMPRESA" class="treeview"><a href=""><i class=" glyphicon glyphicon-object-align-bottom"></i> <span>Empreendimento</span>

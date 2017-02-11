@@ -3,7 +3,7 @@ var app = angular.module('gcc',['ngAnimate','ngRoute','ngMaterial', 'angucomplet
 	 
 	var self = this;
 	  $rootScope.$on('$locationChangeStart', function () { 
-		self.role = function(){
+		role = function(){
 				usuarioService.user().
 					then(function(u){
 						$rootScope.user = u;
@@ -12,17 +12,18 @@ var app = angular.module('gcc',['ngAnimate','ngRoute','ngMaterial', 'angucomplet
 						}else{
 							$rootScope.tipoEmpreendimento = false;
 						}
-						for(i = 0 ; i < $rootScope.user.usuario.perfilsUsuario.length ; i++ ){	
-							
-						var	perfil = $rootScope.user.usuario.perfilsUsuario[i];
 						
-							self.role_admin(perfil);
-							self.role_administrador_empresa(perfil);
-							self.role_gestor(perfil);
-							self.role_estoque_cadastro(perfil);
-							self.role_estoque_consulta(perfil);
-							self.role_cotacao_consulta(perfil);
-							self.role_cotacao_cadastro(perfil);
+						for(i = 0 ; i < $rootScope.userData.authorities.length ; i++ ){	
+							
+						var	perfil = $rootScope.userData.authorities[i].authority;
+						
+							role_admin(perfil);
+							role_administrador_empresa(perfil);
+							role_gestor(perfil);
+							role_estoque_cadastro(perfil);
+							role_estoque_consulta(perfil);
+							role_cotacao_consulta(perfil);
+							role_cotacao_cadastro(perfil);
 							
 						}
 						}, function(errResponse){
@@ -30,51 +31,51 @@ var app = angular.module('gcc',['ngAnimate','ngRoute','ngMaterial', 'angucomplet
 				};
 							
 				
-				self.role_admin = function(perfil){
-					if(perfil == "ADMIN" ){
+				role_admin = function(perfil){	
+					if(perfil == "ROLE_ADMIN" ){						
 						$rootScope.ROLE_ADMIN = true;						
 					}
 				}
 				
-				self.role_administrador_empresa = function(perfil){
-					if(perfil == "ADMINISTRADOR_EMPRESA" ){
+				role_administrador_empresa = function(perfil){
+					if(perfil == "ROLE_ADMINISTRADOR_EMPRESA" ){
 						$rootScope.ROLE_ADMINISTRADOR_EMPRESA = true;						
 					}
 				}
 				
-				self.role_gestor = function(perfil){					
-					if(perfil == "GESTOR" ){
+				role_gestor = function(perfil){					
+					if(perfil == "ROLE_GESTOR" ){
 						$rootScope.ROLE_GESTOR = true;
 					}
 				}
 				
-				self.role_estoque_cadastro = function(perfil){
-					if(perfil == "ESTOQUE_CADASTRO"){
+				role_estoque_cadastro = function(perfil){
+					if(perfil == "ROLE_ESTOQUE_CADASTRO"){
 						$rootScope.ROLE_ESTOQUE_CADASTRO = true;
 					}
 				}	
 				
-				self.role_estoque_consulta = function(perfil){
-					if(perfil == "ESTOQUE_CONSULTA"){
+				role_estoque_consulta = function(perfil){
+					if(perfil == "ROLE_ESTOQUE_CONSULTA"){
 						$rootScope.ROLE_ESTOQUE_CONSULTA = true;
 					}					
 				}
 				
-				self.role_cotacao_consulta = function(perfil){
-					if(perfil == "COTACAO_CONSULTA"){
+				role_cotacao_consulta = function(perfil){
+					if(perfil == "ROLE_COTACAO_CONSULTA"){
 						$rootScope.ROLE_COTACAO_CONSULTA = true;
 					}
 				}
 				
-				self.role_cotacao_cadastro = function(perfil){
-					if(perfil == "COTACAO_CADASTRO"){
+				role_cotacao_cadastro = function(perfil){
+					if(perfil == "ROLE_COTACAO_CADASTRO"){
 						$rootScope.ROLE_COTACAO_CADASTRO = true;
 					}
 				}
 				
 				
 				
-				 self.role();
+				 role();
 				 
 				 var tempo = new Number();
 					

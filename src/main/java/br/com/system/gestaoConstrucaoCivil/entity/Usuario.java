@@ -3,23 +3,22 @@
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CollectionTable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.data.jpa.domain.AbstractPersistable;
-
-import br.com.system.gestaoConstrucaoCivil.enuns.PerfilUsuarioEnum;
 
 
 @Entity
@@ -34,11 +33,11 @@ public class Usuario extends AbstractPersistable<Long>{
 	@JoinColumn(name="id_empreendimento",nullable = true)
 	private Empreendimento empreendimento;
 
-	@ElementCollection(targetClass=PerfilUsuarioEnum.class,fetch = FetchType.EAGER)
-    @Enumerated(EnumType.STRING)
-    @CollectionTable(name="perfil")
-    @Column(name="perfil_usuario")
-    List<PerfilUsuarioEnum> perfilsUsuario;
+	@ManyToMany(fetch = FetchType.EAGER , cascade = {CascadeType.MERGE })
+	@JoinTable(name = "permissao_usuarios", joinColumns = @JoinColumn(name = "id_usuario"), 
+	inverseJoinColumns = @JoinColumn(name = "id_permissao"))
+	@Fetch(FetchMode.SUBSELECT)
+	private List<Permissao> permissoes;
 	
 	@Column(nullable = false,length = 50)
 	private String nome;
@@ -105,11 +104,15 @@ public class Usuario extends AbstractPersistable<Long>{
 	public void setEmpreendimento(Empreendimento empreendimento) {
 		this.empreendimento = empreendimento;
 	}
-	public List<PerfilUsuarioEnum> getPerfilsUsuario() {
-		return perfilsUsuario;
+	public List<Permissao> getPermissoes() {
+		return permissoes;
 	}
-	public void setPerfilsUsuario(List<PerfilUsuarioEnum> perfilsUsuario) {
-		this.perfilsUsuario = perfilsUsuario;
+	public void setPermissoes(List<Permissao> permissoes) {
+		this.permissoes = permissoes;
 	}
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+	
 	
 }

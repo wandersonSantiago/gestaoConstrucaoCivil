@@ -1,0 +1,48 @@
+<meta charset="UTF-8">
+<br>
+<br>
+<div class="generic-container"	ng-controller="permissaoController as permissaoCtrl" ng-init="permissaoCtrl.modulo()">
+				
+	<div class="box box-primary">
+		<!-- Default panel contents -->
+		<div class="box-header">
+			<span class="lead"> Cadastro de permissões </span>
+		</div>
+		<div class="panel-body">
+
+			<br>
+			<div class="container col-sm-12 ">
+				<form role="form-vertical"	ng-submit="permissaoCtrl.salva()">				
+
+					<br>
+					<div class="row" >
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="nome" ng-model="permissaoCtrl.permissao.descricao" placeholder="descrição"
+								title="descrição da permissão" maxlength="50"	required>
+						</div>	
+						
+						<div class="col-sm-6" >
+							<select class="form-control select2" ng-model="permissaoCtrl.permissao.tipoModulo" 
+								ng-options=" modulo for modulo in modulos" required>
+								<option  value="">--selecione o modulo--</option>
+							</select>
+						</div>			
+											
+					</div>				
+					
+					<br> 
+												
+									
+					
+					<div class="row ">
+						
+							<button type="submit" name="submit" class="btn btn-lg btn-primary btn-block btn-signin">Cadastrar</button>
+						</div>						
+					
+				</form>
+				
+			</div>
+			<div class="tablecontainer"></div>
+		</div>
+	</div>
+	</div>

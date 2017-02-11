@@ -4,13 +4,13 @@ import javax.persistence.Entity;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
+import br.com.system.gestaoConstrucaoCivil.enuns.TipoModulo;
 
 @Entity(name = "permissao")
 public class Permissao extends AbstractPersistable<Long>{
 
 	private String descricao;
-	private TipoNotaEnum tipoModulo;
+	private TipoModulo tipoModulo;
 	
 	
 	public String getDescricao() {
@@ -19,12 +19,13 @@ public class Permissao extends AbstractPersistable<Long>{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public TipoNotaEnum getTipoModulo() {
+	public TipoModulo getTipoModulo() {
 		return tipoModulo;
 	}
-	public void setTipoModulo(TipoNotaEnum tipoModulo) {
+	public void setTipoModulo(TipoModulo tipoModulo) {
 		this.tipoModulo = tipoModulo;
 	}
+	
 	
 	
 	
