@@ -35,8 +35,25 @@ public class EmpresaContratanteService {
 		
 		return empresaContratanteRepository.findAll();
 	}
+	public List<EmpresaContratante> buscarPorDescricaoDoCampo(String descricao)
+	{
 	
-	public Page<EmpresaContratante> findAll(PageRequest pageRequest) {
+		List<EmpresaContratante> empresas = empresaContratanteRepository.buscarPorDescricao(descricao.trim());
+		System.out.println("TAMANHO:" + empresas.size());
+		
+		for(EmpresaContratante e : empresas){
+			
+			System.out.println(e.getDadoEmpresa().getRazaoSocial());
+		}
+		return empresas;
+		
+	}
+	public Page<EmpresaContratante> buscarTodos(PageRequest pageRequest) {
+		
+		//buscarPorDescricaoDoCampo(" Sophia e Gabriel Eletrônica Ltda                  ");
+		buscarPorDescricaoDoCampo("Sophia");
+		
+		
 		return empresaContratanteRepository.findAll(pageRequest);
 	}
 	

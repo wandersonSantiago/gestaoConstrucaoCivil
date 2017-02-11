@@ -35,7 +35,7 @@ public class EmpresaContratanteRestController {
 	@GetMapping
 	public ResponseEntity<Page<EmpresaContratante>> lista(@RequestParam(defaultValue="0", required=false) int page
 			,@RequestParam(defaultValue="0", required=false) int maxResults) {
-		Page<EmpresaContratante> empresa = empresaContratanteService.findAll(new PageRequest(page, maxResults));
+		Page<EmpresaContratante> empresa = empresaContratanteService.buscarTodos(new PageRequest(page, maxResults));
 		return new ResponseEntity<Page<EmpresaContratante>>(empresa, HttpStatus.OK);
 	}
 	

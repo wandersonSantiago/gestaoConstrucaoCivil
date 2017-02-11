@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Permissao;
+import br.com.system.gestaoConstrucaoCivil.entity.PermissaoUsuario;
 import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
+import br.com.system.gestaoConstrucaoCivil.service.PermissaoUsuarioService;
 import br.com.system.gestaoConstrucaoCivil.service.UsuarioService;
 
 @Service
@@ -17,7 +19,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
 	private UsuarioService usuarioService;
-
+	
+	@Autowired
+	private PermissaoUsuarioService permissaoUsuarioService;
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -27,10 +32,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 			user.setUsername(usuario.getLogin());
 			user.setPassword(usuario.getSenha());
-
-			for(Permissao perl : usuario.getPermissoes())
+			
+			for(PermissaoUsuario permissao :  permissaoUsuarioService.buscarPorIdUsuario(usuario.getId()))
 			{
-				user.addAuthority("ROLE_"+perl.getDescricao());
+				user.addAuthority("ROLE_"+permissao.getPermissao().getRol());
 				
 			}
 			

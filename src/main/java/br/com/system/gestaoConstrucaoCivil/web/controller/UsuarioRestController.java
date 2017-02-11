@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.com.system.gestaoConstrucaoCivil.entity.PermissaoUsuario;
 import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 import br.com.system.gestaoConstrucaoCivil.enuns.PerfilUsuarioEnum;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
+import br.com.system.gestaoConstrucaoCivil.service.PermissaoUsuarioService;
 import br.com.system.gestaoConstrucaoCivil.service.UsuarioService;
 
 @RestController
@@ -31,7 +33,9 @@ public class UsuarioRestController {
 
 	@Autowired
 	private UsuarioService usuarioService;
-
+	@Autowired
+	private PermissaoUsuarioService servicoTeste;
+	
 	@GetMapping(value = "/usuario")
 	@ResponseBody
 	public Principal user(Principal user, HttpSession session) {
@@ -64,6 +68,10 @@ public class UsuarioRestController {
 
 	@GetMapping(value = "/buscaPorId/{id}")
 	public ResponseEntity<Usuario> buscarPorId(@PathVariable Long id) {
+		
+		PermissaoUsuario p = servicoTeste.buscarPorIdUsuario(id).get(0);
+		servicoTeste.removerPermissao(p);
+		
 		return new ResponseEntity<Usuario>(usuarioService.buscarUsuarioPorId(id), HttpStatus.OK);
 	}
 

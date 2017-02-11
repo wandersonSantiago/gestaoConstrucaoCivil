@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.Email;
@@ -32,12 +33,6 @@ public class Usuario extends AbstractPersistable<Long>{
 	@ManyToOne
 	@JoinColumn(name="id_empreendimento",nullable = true)
 	private Empreendimento empreendimento;
-
-	@ManyToMany(fetch = FetchType.EAGER , cascade = {CascadeType.MERGE })
-	@JoinTable(name = "permissao_usuarios", joinColumns = @JoinColumn(name = "id_usuario"), 
-	inverseJoinColumns = @JoinColumn(name = "id_permissao"))
-	@Fetch(FetchMode.SUBSELECT)
-	private List<Permissao> permissoes;
 	
 	@Column(nullable = false,length = 50)
 	private String nome;
@@ -103,12 +98,6 @@ public class Usuario extends AbstractPersistable<Long>{
 	}
 	public void setEmpreendimento(Empreendimento empreendimento) {
 		this.empreendimento = empreendimento;
-	}
-	public List<Permissao> getPermissoes() {
-		return permissoes;
-	}
-	public void setPermissoes(List<Permissao> permissoes) {
-		this.permissoes = permissoes;
 	}
 	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
