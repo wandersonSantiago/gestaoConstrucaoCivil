@@ -12,14 +12,14 @@
 
 			<br>
 			<div class="container col-sm-12 ">
-				<form role="form-vertical"	ng-submit="userCtrl.altera()">
+				<form role="form-vertical"	ng-submit="userCtrl.salvaPermissaoUsuario()">
 
 					
 					<div class="row" ng-controller="empreendimentoController as empCtrl">
 					
 						<label class="col-sm-2 control-label" for="empreendimento">Empreendimento</label>
 						<div class="col-sm-8" >
-						{{userCtrl.usuario.empreendimento}}
+						{{userCtrl.usuario.empreendimento.descricao}}
 							
 						</div>
 					</div>
@@ -29,7 +29,7 @@
 					
 					<div class="row">								
 						<label class="col-sm-2 control-label" for="funcionario">Funcionario</label>
-						{{userCtrl.usuario.funcionario}}											
+						{{userCtrl.usuario.funcionario.nomeCompleto}}											
 					</div>
 					
 					<br>
@@ -74,25 +74,136 @@
 					<br> <br>
 					
 					
-					<div class="panel panel-primary">
-						<div class="panel-heading">Lista de Permissões</div>
-						<div class="panel-body">
-						
-						
-						<table class="table table-hover ">
-								
-								<tbody  >
-									<tr>
-										
-									</tr>
-
-								</tbody>
-			
-						</table>
-										
-						</div>
-					</div>
-
+					<br> <br>		<div ng-show="visualizaAdmin">
+									<h3>Modulo Administrador</h3>
+									 <div flex="100" flex-gt-sm="100" layout="column"  ng-init="perfil()">
+									      <div>        
+									        <fieldset class="standard" >         
+									          <div layout="row" layout-wrap flex>
+									            <div flex="25" ng-repeat="admin in moduloAdmin">
+									              <md-checkbox ng-checked="existeExclui(admin)" ng-click="userCtrl.salvaPermissaoUsuario(admin)">
+									                {{ admin.descricao }} 
+									              </md-checkbox>
+									            </div>
+									          </div>
+									        </fieldset>
+									      </div>
+									    </div>
+									</div>
+									 <br>		
+									 <div ng-show="visualizaCadastros">
+									<h3>Modulo Cadastros</h3>
+									 <div flex="100" flex-gt-sm="100" layout="column"  >
+									      <div>        
+									        <fieldset class="standard" >         
+									          <div layout="row" layout-wrap flex>
+									            <div flex="25" ng-repeat="cadastros in moduloCadastros">
+									              <md-checkbox ng-checked="existeExclui(cadastros)" ng-click="permissao(cadastros)">
+									                {{ cadastros.descricao }} 
+									              </md-checkbox>
+									            </div>
+									          </div>
+									        </fieldset>
+									      </div>
+									    </div>
+									    </div>
+									     <br>	
+									<div ng-show="visualizaChamado">	
+									<h3>Modulo Chamado</h3>
+									 <div flex="100" flex-gt-sm="100" layout="column"  >
+									      <div>        
+									        <fieldset class="standard" >         
+									          <div layout="row" layout-wrap flex>
+									            <div flex="25" ng-repeat="chamado in moduloChamado">
+									              <md-checkbox ng-checked="existeExclui(chamado)" ng-click="permissao(chamado)">
+									                {{ chamado.descricao }} 
+									              </md-checkbox>
+									            </div>
+									          </div>
+									        </fieldset>
+									      </div>
+									    </div>
+									   </div>
+									  <div ng-show="visualizaCompras"> 
+									    <h3>Modulo Compras</h3>
+									 <div flex="100" flex-gt-sm="100" layout="column"  >
+									      <div>        
+									        <fieldset class="standard" >         
+									          <div layout="row" layout-wrap flex>
+									            <div flex="25" ng-repeat="compras in moduloCompras">
+									              <md-checkbox ng-checked="existeExclui(compras)" ng-click="permissao(compras)">
+									                {{ compras.descricao }} 
+									              </md-checkbox>
+									            </div>
+									          </div>
+									        </fieldset>
+									      </div>
+									    </div>
+									    </div>
+									   <div ng-show="visualizaEstoque">
+									    <h3>Modulo Estoque</h3>
+									 <div flex="100" flex-gt-sm="100" layout="column"  >
+									      <div>        
+									        <fieldset class="standard" >         
+									          <div layout="row" layout-wrap flex>
+									            <div flex="25" ng-repeat="estoque in moduloEstoque">
+									              <md-checkbox ng-checked="existeExclui(estoque)" ng-click="permissao(estoque)">
+									                {{ estoque.descricao }} 
+									              </md-checkbox>
+									            </div>
+									          </div>
+									        </fieldset>
+									      </div>
+									    </div>
+									    </div>
+									    <div ng-show="visualizaGerenciamento">
+									     <h3>Modulo Gerenciamento</h3>
+									 <div flex="100" flex-gt-sm="100" layout="column"  >
+									      <div>        
+									        <fieldset class="standard" >         
+									          <div layout="row" layout-wrap flex>
+									            <div flex="25" ng-repeat="gerenciamento in moduloGerenciamento">
+									              <md-checkbox ng-checked="existeExclui(gerenciamento)" ng-click="permissao(gerenciamento)">
+									                {{ gerenciamento.descricao }} 
+									              </md-checkbox>
+									            </div>
+									          </div>
+									        </fieldset>
+									      </div>
+									    </div>
+									    </div>
+									<div ng-show="visualizaRecursosHumanos">
+									    <h3>Modulo Recursos Humanos</h3>
+									 <div flex="100" flex-gt-sm="100" layout="column"  >
+									      <div>        
+									        <fieldset class="standard" >         
+									          <div layout="row" layout-wrap flex>
+									            <div flex="25" ng-repeat="rh in moduloRecursosHumanos">
+									              <md-checkbox ng-checked="existeExclui(rh)" ng-click="permissao(rh)">
+									                {{ rh.descricao }} 
+									              </md-checkbox>
+									            </div>
+									          </div>
+									        </fieldset>
+									      </div>
+									    </div>
+									    </div>
+									 <div ng-show="visualizaServicos">
+									     <h3>Modulo Servicos</h3>
+									 <div flex="100" flex-gt-sm="100" layout="column"  >
+									      <div>        
+									        <fieldset class="standard" >         
+									          <div layout="row" layout-wrap flex>
+									            <div flex="25" ng-repeat="servicos in moduloServicos">
+									              <md-checkbox ng-checked="existeExclui(servicos)" ng-click="permissao(servicos)">
+									                {{ servicos.descricao }} 
+									              </md-checkbox>
+									            </div>
+									          </div>
+									        </fieldset>
+									      </div>
+									    </div>
+									</div>
 
 					
 					<div class="row ">

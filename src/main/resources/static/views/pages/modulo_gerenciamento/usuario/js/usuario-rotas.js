@@ -16,9 +16,11 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 	.when('/usuario/listagem', {
 		templateUrl : "views/pages/modulo_gerenciamento/usuario/listagem.html",
 	})
-	.when('/usuario/permissao', {
+	.when('/usuario/permissao/editar/:idUsuario', {
 		templateUrl : "views/pages/modulo_gerenciamento/usuario/permissao.html",
 	})
+	
+	
 	
 	
 }]);

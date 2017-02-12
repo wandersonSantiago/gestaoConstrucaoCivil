@@ -45,7 +45,7 @@ public class Empreendimento extends AbstractPersistable<Long> {
 	@Enumerated(EnumType.STRING)
 	private TipoEmpreendimentoEnum tipoEmpreendimento;
     
-	@JsonView(View.Summary.class)
+	//@JsonView(View.Summary.class)
 	@Column(nullable = false,length = 50)
 	private String descricao;
 	

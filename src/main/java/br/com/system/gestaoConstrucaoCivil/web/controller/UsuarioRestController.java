@@ -69,8 +69,8 @@ public class UsuarioRestController {
 	@GetMapping(value = "/buscaPorId/{id}")
 	public ResponseEntity<Usuario> buscarPorId(@PathVariable Long id) {
 		
-		PermissaoUsuario p = servicoTeste.buscarPorIdUsuario(id).get(0);
-		servicoTeste.removerPermissao(p);
+	//	PermissaoUsuario p = servicoTeste.buscarPorIdUsuario(id).get(0);
+	//	servicoTeste.removerPermissao(p);
 		
 		return new ResponseEntity<Usuario>(usuarioService.buscarUsuarioPorId(id), HttpStatus.OK);
 	}

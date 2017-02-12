@@ -15,6 +15,8 @@ app.controller('usuarioController', function($scope, toastr, permissaoService,  
 	$scope.moduloGerenciamento = [];
 	$scope.moduloRecursosHumanos = [];
 	$scope.moduloServicos = [];
+	self.usuario = {};
+	self.permissaoUsuario = {};
 	 
 				
 		      $scope.permissao = function (user) {
@@ -141,7 +143,7 @@ app.controller('usuarioController', function($scope, toastr, permissaoService,  
 			usuarioService.buscaPorId(id).
 			then(function(p){
 				self.usuario = p;
-				self.preencheLista(p);
+			//	self.preencheLista(p);
 				}, function(errResponse){
 			});
 		};
@@ -196,5 +198,17 @@ app.controller('usuarioController', function($scope, toastr, permissaoService,  
 			}
 			}
 		};
+	
+		//======permissao
+		
+		 self.salvaPermissaoUsuario = function(permissao){		
+			 self.permissaoUsuario.usuario = self.usuario;
+			 self.permissaoUsuario.permissao = permissao;
+			 console.log(self.permissaoUsuario);
+			 permissaoService.salvaPermissaoUsuario(self.permissaoUsuario).
+				then(function(response){
+					}, function(errResponse){
+				});
+		};	
 	
 });

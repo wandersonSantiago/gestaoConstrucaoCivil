@@ -16,12 +16,15 @@
 
 					<br>
 					<div class="row" >
-						<div class="col-sm-6">
+						<div class="col-sm-4">
 							<input type="text" class="form-control" id="nome" ng-model="permissaoCtrl.permissao.descricao" placeholder="descrição"
 								title="descrição da permissão" maxlength="50"	required>
 						</div>	
-						
-						<div class="col-sm-6" >
+						<div class="col-sm-4">
+							<input type="text" class="form-control" id="nome" ng-model="permissaoCtrl.permissao.rol" placeholder="Rol"
+								title="descrição da permissão" maxlength="50"	required>
+						</div>
+						<div class="col-sm-4" >
 							<select class="form-control select2" ng-model="permissaoCtrl.permissao.tipoModulo" 
 								ng-options=" modulo for modulo in modulos" required>
 								<option  value="">--selecione o modulo--</option>
@@ -35,8 +38,10 @@
 									
 					
 					<div class="row ">
-						
-							<button type="submit" name="submit" class="btn btn-lg btn-primary btn-block btn-signin">Cadastrar</button>
+					<div class="col-sm-4"></div>
+							<div class="col-sm-4">
+								<button type="submit" name="submit" class="btn btn-lg btn-primary btn-block btn-signin">Cadastrar</button>						
+							</div>
 						</div>						
 					
 				</form>
