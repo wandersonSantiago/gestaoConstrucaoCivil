@@ -16,7 +16,6 @@ app.factory('permissaoService', function($rootScope, toastr, $http,$q){
 		salvaPermissaoUsuario: function(permissao){
 			return $http.post('/rest/permissao/permissaoUsuario/salva', permissao)
 			.then(function(response){
-				sweetAlert({ timer : 3000, text :"Salvo com sucesso",  type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});

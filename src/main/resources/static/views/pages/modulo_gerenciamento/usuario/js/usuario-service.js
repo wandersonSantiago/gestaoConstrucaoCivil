@@ -38,6 +38,16 @@ app.factory('usuarioService', function($rootScope, toastr, $http,$q){
 				return $q.reject(errResponse);
 			});
 		},
+		
+		buscaPermissaoPorIdUsuario: function(param){
+			return $http.get('/rest/permissao/permissaoUsuario/buscaPorUsuario/'+param)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				return $q.reject(errResponse);
+			});
+		},
+		
 		existeLogin: function(login){
 			return $http.get('rest/usuario/existeLogin/'+login)
 			.then(function(response){

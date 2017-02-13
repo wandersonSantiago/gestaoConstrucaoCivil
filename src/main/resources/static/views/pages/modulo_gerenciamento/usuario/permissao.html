@@ -76,14 +76,13 @@
 					
 					<br> <br>		<div ng-show="visualizaAdmin">
 									<h3>Modulo Administrador</h3>
-									 <div flex="100" flex-gt-sm="100" layout="column"  ng-init="perfil()">
+									 <div flex="100" flex-gt-sm="100" layout="column"  >
 									      <div>        
 									        <fieldset class="standard" >         
 									          <div layout="row" layout-wrap flex>
 									            <div flex="25" ng-repeat="admin in moduloAdmin">
-									              <md-checkbox ng-checked="existeExclui(admin)" ng-click="userCtrl.salvaPermissaoUsuario(admin)">
-									                {{ admin.descricao }} 
-									              </md-checkbox>
+									            <button type="button"  class="btn  btn-primary" ng-show="!ativo" ng-click="userCtrl.salvaPermissaoUsuario(admin)" > {{ admin.descricao }}</button>
+									            <button type="button"  class="btn  btn-success" ng-show="ativo" ng-click="userCtrl.salvaPermissaoUsuario(admin)" > {{ admin.descricao }}</button>  
 									            </div>
 									          </div>
 									        </fieldset>
@@ -206,13 +205,7 @@
 									</div>
 
 					
-					<div class="row ">
-						<div class="col-sm-3"></div>
-						<div >
-							<button type="submit" name="submit" class="btn btn-lg btn-primary btn-block btn-signin">Cadastrar</button>
-						</div>
-						
-					</div>
+					
 				</form>
 				
 			</div>

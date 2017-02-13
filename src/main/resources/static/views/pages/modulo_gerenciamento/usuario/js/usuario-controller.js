@@ -15,6 +15,7 @@ app.controller('usuarioController', function($scope, toastr, permissaoService,  
 	$scope.moduloGerenciamento = [];
 	$scope.moduloRecursosHumanos = [];
 	$scope.moduloServicos = [];
+	$scope.listaPermisaoUsuario = [];
 	self.usuario = {};
 	self.permissaoUsuario = {};
 	 
@@ -143,10 +144,22 @@ app.controller('usuarioController', function($scope, toastr, permissaoService,  
 			usuarioService.buscaPorId(id).
 			then(function(p){
 				self.usuario = p;
-			//	self.preencheLista(p);
+				self.buscaPermissaoPorIdUsuario(p.id);
 				}, function(errResponse){
 			});
 		};
+		
+		self.buscaPermissaoPorIdUsuario = function(id){
+			if(!id)return;
+			usuarioService.buscaPermissaoPorIdUsuario(id).
+			then(function(p){
+				$scope.listaPermisaoUsuario = p;
+				$scope.perfil();
+				
+				}, function(errResponse){
+			});
+		};
+		
 		if(idUsuario){
 			self.buscaPorId(idUsuario);
 	}
@@ -163,10 +176,15 @@ app.controller('usuarioController', function($scope, toastr, permissaoService,  
 		verificaTipoPermissao = function(permissoes){
 			
 			for(i = 0 ; i < permissoes.length ; i++){
-			
-			if(permissoes[i].tipoModulo == "ADMIN"){				
+				
+			if(permissoes[i].id == $scope.listaPermisaoUsuario[i].permissao.id ){
+				$scope.ativo = true;
+				console.log($scope.ativo);
+			}
+			if(permissoes[i].tipoModulo == "ADMIN"){	
 				$scope.moduloAdmin.push(permissoes[i]);
 				$scope.visualizaAdmin = true;
+				
 			}
 			if(permissoes[i].tipoModulo == "CADASTROS"){
 				$scope.moduloCadastros.push(permissoes[i]);
