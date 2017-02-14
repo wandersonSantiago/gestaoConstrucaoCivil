@@ -57,7 +57,12 @@ app.controller('usuarioController', function($scope, toastr, permissaoService,  
 	self.user = function(){
 		usuarioService.user().
 			then(function(u){
-				$rootScope.user = u;				
+				$rootScope.user = u;
+				if($rootScope.user.usuario.empreendimento.tipoEmpreendimento ==  "CONDOMINIO_DE_EDIFICIO_RESIDENCIAL"){
+					$rootScope.tipoEmpreendimento = true;
+				}else{
+					$rootScope.tipoEmpreendimento = false;
+				}
 				}, function(errResponse){
 			});
 		};
@@ -139,7 +144,7 @@ app.controller('usuarioController', function($scope, toastr, permissaoService,  
 		};
 		
 		
-		self.buscaPorId = function(id){
+		self.buscaPorId = function(id){			
 			if(!id)return;
 			usuarioService.buscaPorId(id).
 			then(function(p){
@@ -150,10 +155,11 @@ app.controller('usuarioController', function($scope, toastr, permissaoService,  
 		};
 		
 		self.buscaPermissaoPorIdUsuario = function(id){
+			
 			if(!id)return;
 			usuarioService.buscaPermissaoPorIdUsuario(id).
 			then(function(p){
-				$scope.listaPermisaoUsuario = p;
+				$scope.listaPermisaoUsuario = p;				
 				$scope.perfil();
 				
 				}, function(errResponse){
@@ -168,19 +174,22 @@ app.controller('usuarioController', function($scope, toastr, permissaoService,  
 			 permissaoService.lista().
 				then(function(u){
 					$scope.permissoes = u;
-					verificaTipoPermissao($scope.permissoes);
+					verificaTipoPermissao( $scope.permissoes);
 					}, function(errResponse){
 				});
 			};
 			
 		verificaTipoPermissao = function(permissoes){
+			$scope.ativo = true;
+			permissoes.push( $scope.ativo );
 			
-			for(i = 0 ; i < permissoes.length ; i++){
-				
-			if(permissoes[i].id == $scope.listaPermisaoUsuario[i].permissao.id ){
-				$scope.ativo = true;
-				console.log($scope.ativo);
-			}
+			for(i = 0 ; i < permissoes.length ; i++){					
+				for(e = 0; e < $scope.listaPermisaoUsuario.length ; e ++){	    			
+	    				if( permissoes[i].id == $scope.listaPermisaoUsuario[e].permissao.id){
+	    					permissoes[i].ativo = true;
+	    					}	    				    			
+	    		}
+			
 			if(permissoes[i].tipoModulo == "ADMIN"){	
 				$scope.moduloAdmin.push(permissoes[i]);
 				$scope.visualizaAdmin = true;
@@ -222,11 +231,37 @@ app.controller('usuarioController', function($scope, toastr, permissaoService,  
 		 self.salvaPermissaoUsuario = function(permissao){		
 			 self.permissaoUsuario.usuario = self.usuario;
 			 self.permissaoUsuario.permissao = permissao;
-			 console.log(self.permissaoUsuario);
 			 permissaoService.salvaPermissaoUsuario(self.permissaoUsuario).
 				then(function(response){
+					limpaPermissao();
+					self.buscaPorId(self.usuario.id);
 					}, function(errResponse){
 				});
 		};	
+		
+		self.excluiPermissaoUsuario = function(permissao){
+								
+				for(i = 0; i < $scope.listaPermisaoUsuario.length ; i++){	    			
+	    				if( permissao.id == $scope.listaPermisaoUsuario[i].permissao.id){
+	    					permissaoService.excluiPermissaoUsuario($scope.listaPermisaoUsuario[i].id).
+	    					then(function(response){
+	    						limpaPermissao();
+	    						self.buscaPorId(self.usuario.id);
+	    						}, function(errResponse){
+	    					});
+	    			}	    				    			
+				}	 
+		};	
+		
+		limpaPermissao = function(){
+			$scope.moduloAdmin = $scope.moduloAdmin = [];
+			$scope.moduloCadastros = $scope.moduloCadastros = [];
+			$scope.moduloChamado = $scope.moduloChamado = [];
+			$scope.moduloCompras = $scope.moduloCompras = [];
+			$scope.moduloEstoque = $scope.moduloEstoque = [];
+			$scope.moduloGerenciamento = $scope.moduloGerenciamento = [];
+			$scope.moduloRecursosHumanos = $scope.moduloRecursosHumanos = [];
+			$scope.moduloServicos = $scope.moduloServicos = [];
+		};
 	
 });

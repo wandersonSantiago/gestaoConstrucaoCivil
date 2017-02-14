@@ -35,10 +35,10 @@ public class PermissaoUsuarioRestController {
 	{
 		return new ResponseEntity<Iterable<PermissaoUsuario>>(permissaoService.buscarPorIdUsuario(id), HttpStatus.OK);
 	}
-	@DeleteMapping(value = "/removerPermissao")
-	public ResponseEntity<PermissaoUsuario> removerPermissao(@RequestBody PermissaoUsuario permissao)
+	@DeleteMapping(value = "/removerPermissao/{id}")
+	public ResponseEntity<PermissaoUsuario> removerPermissao(@PathVariable Long id)
 	{
-		permissaoService.removerPermissao(permissao);
+		permissaoService.removerPermissao(id);
 		return new ResponseEntity<PermissaoUsuario>(HttpStatus.OK);
 	}
 }

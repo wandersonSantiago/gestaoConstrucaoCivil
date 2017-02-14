@@ -3,15 +3,8 @@ var app = angular.module('gcc',['ngAnimate','ngRoute','ngMaterial', 'angucomplet
 	 
 	var self = this;
 	  $rootScope.$on('$locationChangeStart', function () { 
-		role = function(){
-				usuarioService.user().
-					then(function(u){
-						$rootScope.user = u;
-						if($rootScope.user.usuario.empreendimento.tipoEmpreendimento ==  "CONDOMINIO_DE_EDIFICIO_RESIDENCIAL"){
-							$rootScope.tipoEmpreendimento = true;
-						}else{
-							$rootScope.tipoEmpreendimento = false;
-						}
+		  $rootScope.ROLE_ADMIN = false;
+		role = function(){					
 						
 						for(i = 0 ; i < $rootScope.userData.authorities.length ; i++ ){	
 							
@@ -26,8 +19,7 @@ var app = angular.module('gcc',['ngAnimate','ngRoute','ngMaterial', 'angucomplet
 							role_cotacao_cadastro(perfil);
 							
 						}
-						}, function(errResponse){
-					});
+					
 				};
 							
 				
@@ -35,8 +27,7 @@ var app = angular.module('gcc',['ngAnimate','ngRoute','ngMaterial', 'angucomplet
 					if(perfil == "ROLE_ADMIN" ){						
 						$rootScope.ROLE_ADMIN = true;						
 					}
-				}
-				
+				}				
 				role_administrador_empresa = function(perfil){
 					if(perfil == "ROLE_ADMINISTRADOR_EMPRESA" ){
 						$rootScope.ROLE_ADMINISTRADOR_EMPRESA = true;						

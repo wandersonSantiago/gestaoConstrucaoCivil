@@ -32,9 +32,9 @@ public class PermissaoUsuarioService {
     	return permissaoUsuarioRepository.findByUsuario_id(id);
     }
     @Transactional(readOnly = false)
-	public void removerPermissao(PermissaoUsuario permissao)
+	public void removerPermissao(Long  permissao)
 	{
-    	permissaoUsuarioRepository.delete(permissao);
+    	permissaoUsuarioRepository.delete(permissaoUsuarioRepository.findOne(permissao));
 	}
     
    

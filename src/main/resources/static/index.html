@@ -213,7 +213,7 @@
 		                  <span class="label label-success">{{quantidadeChamadoAbertoTi}}</span>
 		                </a>					 		 
 		          </li>
-		       <li class="dropdown user user-menu">
+		       <li class="dropdown user user-menu" ng-controller="usuarioController as userCtrl" ng-init="userCtrl.user()">
 		                <a href="" class="dropdown-toggle" data-toggle="dropdown">
 		                  <i class="glyphicon glyphicon-user"></i>
 		                </a>

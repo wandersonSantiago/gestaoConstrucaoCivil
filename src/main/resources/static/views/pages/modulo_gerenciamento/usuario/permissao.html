@@ -6,7 +6,7 @@
 	<div class="box box-primary">
 		<!-- Default panel contents -->
 		<div class="box-header">
-			<span class="lead"> Cadastro Usuario </span>
+			<span class="lead"> Permissão de  Usuario </span>
 		</div>
 		<div class="panel-body">
 
@@ -14,75 +14,39 @@
 			<div class="container col-sm-12 ">
 				<form role="form-vertical"	ng-submit="userCtrl.salvaPermissaoUsuario()">
 
-					
-					<div class="row" ng-controller="empreendimentoController as empCtrl">
-					
-						<label class="col-sm-2 control-label" for="empreendimento">Empreendimento</label>
-						<div class="col-sm-8" >
-						{{userCtrl.usuario.empreendimento.descricao}}
-							
-						</div>
-					</div>
-					<br>
-					
-					
-					
-					<div class="row">								
-						<label class="col-sm-2 control-label" for="funcionario">Funcionario</label>
-						{{userCtrl.usuario.funcionario.nomeCompleto}}											
-					</div>
-					
-					<br>
-					<br>
 
-					<div class="row">
-						<label class="col-sm-2 control-label" for="ativo">Usuario Ativo</label>
-						<div class="col-sm-2">
-							<input type="checkbox" ng-model="userCtrl.usuario.ativo">
-						</div>
-						<label class="col-sm-1 control-label" for="dataAbertura">Data cadastro</label>
-						{{userCtrl.usuario.dataCadastro}}
-						
-					</div>
-
-					<br>
-					<div class="row" >
-						<label class="col-sm-2 control-label" for="nome">Nome Usuario</label>
-						<div class="col-sm-8">
-						{{userCtrl.usuario.nome}}							
-						</div>						
-					</div>
-					<br>
-					<div class="row" >
-						<label class="col-sm-2 control-label" for="usuario">Email Usuario</label>
-						<div class="col-sm-8">
-						{{userCtrl.usuario.email}}							
-						</div>
-					</div>
+					<div class="row" >					
+						  <div class="col-xs-12"><h3>Dados Pessoais do Usuario</h3></div>
+						  <div class="col-xs-2"><img src="../../../../public/img/avatar_2x.png"  class="img-thumbnail"><br></div>
+						  <div class="col-xs-4">
+						  		<div class="row" >
+						  		
+									Funcionario:		{{userCtrl.usuario.funcionario.nomeCompleto}}<br><br>
+									Nome Usuario:		{{userCtrl.usuario.nome}}<br><br>	
+									Email Usuario:   	{{userCtrl.usuario.email}}<br><br>
+									Login:				{{userCtrl.usuario.login}}<br><br>
+									Data de Cadastro:	{{userCtrl.usuario.dataCadastro | date :'dd/MM/yyyy'}}<br><br>
+									Empreendimento:		{{userCtrl.usuario.empreendimento.descricao}}
+								</div>
+						  <br></div>
+				</div>
 					
-					
-					<br>
-					<div class="row" >
-						<label class="col-sm-2 control-label" for="nome">Login</label>
-						<div class="col-sm-2">
-						{{userCtrl.usuario.login}}
-						</div>					
-						
-					</div>
-					<br> <br>
 					
 					<br> <br>
 					
 					
 					<br> <br>		<div ng-show="visualizaAdmin">
-									<h3>Modulo Administrador</h3>
+								<div class="row">
+									<h3><span class=" col-sm-12 form-control label label-success">Módulo Administrador</span></h3>
+								</div>									
+									<br>
 									 <div flex="100" flex-gt-sm="100" layout="column"  >
 									      <div>        
 									        <fieldset class="standard" >         
 									          <div layout="row" layout-wrap flex>
 									            <div flex="25" ng-repeat="admin in moduloAdmin">
-									            <button type="button"  class="btn  btn-primary" ng-show="!ativo" ng-click="userCtrl.salvaPermissaoUsuario(admin)" > {{ admin.descricao }}</button>
-									            <button type="button"  class="btn  btn-success" ng-show="ativo" ng-click="userCtrl.salvaPermissaoUsuario(admin)" > {{ admin.descricao }}</button>  
+									            <div ng-show="!admin.ativo"><button type="button"  class="btn  btn-default"  ng-click="userCtrl.salvaPermissaoUsuario(admin)" > </button>{{ admin.descricao }}</div>
+									            <div ng-show="admin.ativo"><button type="button"  class="btn  btn-primary"  ng-click="userCtrl.excluiPermissaoUsuario(admin)" > </button> {{ admin.descricao }}</div> 
 									            </div>
 									          </div>
 									        </fieldset>
@@ -91,15 +55,19 @@
 									</div>
 									 <br>		
 									 <div ng-show="visualizaCadastros">
-									<h3>Modulo Cadastros</h3>
+
+									<div class="row">
+										<h3><span class=" col-sm-12 form-control label label-success">Módulo Cadastros</span></h3>
+									</div>	
+									<br>
 									 <div flex="100" flex-gt-sm="100" layout="column"  >
 									      <div>        
 									        <fieldset class="standard" >         
 									          <div layout="row" layout-wrap flex>
 									            <div flex="25" ng-repeat="cadastros in moduloCadastros">
-									              <md-checkbox ng-checked="existeExclui(cadastros)" ng-click="permissao(cadastros)">
-									                {{ cadastros.descricao }} 
-									              </md-checkbox>
+									               <div ng-show="!cadastros.ativo"><button type="button"  class="btn  btn-default"  ng-click="userCtrl.salvaPermissaoUsuario(cadastros)" > </button>{{ cadastros.descricao }}</div>
+									               <div ng-show="cadastros.ativo"><button type="button"  class="btn  btn-primary"  ng-click="userCtrl.excluiPermissaoUsuario(cadastros)" > </button> {{ cadastros.descricao }}</div> 
+									            
 									            </div>
 									          </div>
 									        </fieldset>
@@ -108,15 +76,18 @@
 									    </div>
 									     <br>	
 									<div ng-show="visualizaChamado">	
-									<h3>Modulo Chamado</h3>
+									<div class="row">
+										<h3><span class=" col-sm-12 form-control label label-success">Módulo Chamado</span></h3>
+									</div>	
+									<br>
 									 <div flex="100" flex-gt-sm="100" layout="column"  >
 									      <div>        
 									        <fieldset class="standard" >         
 									          <div layout="row" layout-wrap flex>
 									            <div flex="25" ng-repeat="chamado in moduloChamado">
-									              <md-checkbox ng-checked="existeExclui(chamado)" ng-click="permissao(chamado)">
-									                {{ chamado.descricao }} 
-									              </md-checkbox>
+									               <div ng-show="!chamado.ativo"><button type="button"  class="btn  btn-default"  ng-click="userCtrl.salvaPermissaoUsuario(chamado)" > </button>{{ chamado.descricao }}</div>
+									               <div ng-show="chamado.ativo"><button type="button"  class="btn  btn-primary"  ng-click="userCtrl.excluiPermissaoUsuario(chamado)" > </button> {{ chamado.descricao }}</div>  
+									            
 									            </div>
 									          </div>
 									        </fieldset>
@@ -124,15 +95,18 @@
 									    </div>
 									   </div>
 									  <div ng-show="visualizaCompras"> 
-									    <h3>Modulo Compras</h3>
+									  <div class="row">
+										<h3><span class=" col-sm-12 form-control label label-success">Módulo Compras</span></h3>
+									  </div>
+									  <br>
 									 <div flex="100" flex-gt-sm="100" layout="column"  >
 									      <div>        
 									        <fieldset class="standard" >         
 									          <div layout="row" layout-wrap flex>
 									            <div flex="25" ng-repeat="compras in moduloCompras">
-									              <md-checkbox ng-checked="existeExclui(compras)" ng-click="permissao(compras)">
-									                {{ compras.descricao }} 
-									              </md-checkbox>
+									              <div ng-show="!compras.ativo"><button type="button"  class="btn  btn-default"  ng-click="userCtrl.salvaPermissaoUsuario(compras)" > </button>{{ compras.descricao }}</div>
+									              <div ng-show="compras.ativo"><button type="button"  class="btn  btn-primary"  ng-click="userCtrl.excluiPermissaoUsuario(compras)" > </button> {{ compras.descricao }}</div>  
+									            
 									            </div>
 									          </div>
 									        </fieldset>
@@ -140,15 +114,18 @@
 									    </div>
 									    </div>
 									   <div ng-show="visualizaEstoque">
-									    <h3>Modulo Estoque</h3>
+									   <div class="row">
+										<h3><span class=" col-sm-12 form-control label label-success">Módulo Estoque</span></h3>
+									  </div>
+									  <br>
 									 <div flex="100" flex-gt-sm="100" layout="column"  >
 									      <div>        
 									        <fieldset class="standard" >         
 									          <div layout="row" layout-wrap flex>
 									            <div flex="25" ng-repeat="estoque in moduloEstoque">
-									              <md-checkbox ng-checked="existeExclui(estoque)" ng-click="permissao(estoque)">
-									                {{ estoque.descricao }} 
-									              </md-checkbox>
+									               <div ng-show="!estoque.ativo"><button type="button"  class="btn  btn-default"  ng-click="userCtrl.salvaPermissaoUsuario(estoque)" > </button>{{ estoque.descricao }}</div>
+									               <div ng-show="estoque.ativo"><button type="button"  class="btn  btn-primary"  ng-click="userCtrl.excluiPermissaoUsuario(estoque)" > </button> {{ estoque.descricao }}</div>  
+									            
 									            </div>
 									          </div>
 									        </fieldset>
@@ -156,15 +133,18 @@
 									    </div>
 									    </div>
 									    <div ng-show="visualizaGerenciamento">
-									     <h3>Modulo Gerenciamento</h3>
+									    <div class="row">
+											<h3><span class=" col-sm-12 form-control label label-success">Módulo Gerenciamento</span></h3>
+										  </div>
+										  <br>
 									 <div flex="100" flex-gt-sm="100" layout="column"  >
 									      <div>        
 									        <fieldset class="standard" >         
 									          <div layout="row" layout-wrap flex>
 									            <div flex="25" ng-repeat="gerenciamento in moduloGerenciamento">
-									              <md-checkbox ng-checked="existeExclui(gerenciamento)" ng-click="permissao(gerenciamento)">
-									                {{ gerenciamento.descricao }} 
-									              </md-checkbox>
+									              <div ng-show="!gerenciamento.ativo"><button type="button"  class="btn  btn-default"  ng-click="userCtrl.salvaPermissaoUsuario(gerenciamento)" > </button>{{ gerenciamento.descricao }}</div>
+									              <div ng-show="gerenciamento.ativo"><button type="button"  class="btn  btn-primary"  ng-click="userCtrl.excluiPermissaoUsuario(gerenciamento)" > </button> {{ gerenciamento.descricao }}</div>  
+									            
 									            </div>
 									          </div>
 									        </fieldset>
@@ -172,15 +152,18 @@
 									    </div>
 									    </div>
 									<div ng-show="visualizaRecursosHumanos">
-									    <h3>Modulo Recursos Humanos</h3>
+									 	<div class="row">
+											<h3><span class=" col-sm-12 form-control label label-success">Módulo Recursos Humanos</span></h3>
+										  </div>
+										  <br>
 									 <div flex="100" flex-gt-sm="100" layout="column"  >
 									      <div>        
 									        <fieldset class="standard" >         
 									          <div layout="row" layout-wrap flex>
 									            <div flex="25" ng-repeat="rh in moduloRecursosHumanos">
-									              <md-checkbox ng-checked="existeExclui(rh)" ng-click="permissao(rh)">
-									                {{ rh.descricao }} 
-									              </md-checkbox>
+									               <div ng-show="!rh.ativo"><button type="button"  class="btn  btn-default"  ng-click="userCtrl.salvaPermissaoUsuario(rh)" > </button>{{ rh.descricao }}</div>
+									               <div ng-show="rh.ativo"><button type="button"  class="btn  btn-primary"  ng-click="userCtrl.excluiPermissaoUsuario(rh)" > </button> {{ rh.descricao }}</div>  
+									            
 									            </div>
 									          </div>
 									        </fieldset>
@@ -188,15 +171,18 @@
 									    </div>
 									    </div>
 									 <div ng-show="visualizaServicos">
-									     <h3>Modulo Servicos</h3>
+									 	<div class="row">
+											<h3><span class=" col-sm-12 form-control label label-success">Módulo Servicos</span></h3>
+										  </div>
+										  <br>
 									 <div flex="100" flex-gt-sm="100" layout="column"  >
 									      <div>        
 									        <fieldset class="standard" >         
 									          <div layout="row" layout-wrap flex>
 									            <div flex="25" ng-repeat="servicos in moduloServicos">
-									              <md-checkbox ng-checked="existeExclui(servicos)" ng-click="permissao(servicos)">
-									                {{ servicos.descricao }} 
-									              </md-checkbox>
+									                <div ng-show="!servicos.ativo"><button type="button"  class="btn  btn-default"  ng-click="userCtrl.salvaPermissaoUsuario(servicos)" > </button>{{ servicos.descricao }}</div>
+									                <div ng-show="servicos.ativo"><button type="button"  class="btn  btn-primary"  ng-click="userCtrl.excluiPermissaoUsuario(servicos)" > </button> {{ servicos.descricao }}</div> 
+									            
 									            </div>
 									          </div>
 									        </fieldset>
