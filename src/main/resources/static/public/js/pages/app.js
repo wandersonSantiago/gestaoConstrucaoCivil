@@ -285,7 +285,7 @@ var app = angular.module('gcc',['ngAnimate','ngRoute','ngMaterial', 'angucomplet
 				 	if(!$rootScope.ROLE_VINCULAR_CONSULTAR_EDIFICIO && $location.path() == paginaVincularConsultarEdificio ){	$location.path("/semAcesso");}
 				 	if(!$rootScope.ROLE_VINCULAR_CONSULTAR_EDIFICACOES_COMUNITARIA && $location.path() == paginaVincularConsultarComunitario ){	$location.path("/semAcesso");}
 				 	
-				 	
+				 
 				 var tempo = new Number();
 					
 				 tempo = 1800;
