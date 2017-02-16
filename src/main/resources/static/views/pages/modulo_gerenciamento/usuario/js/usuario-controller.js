@@ -190,36 +190,36 @@ app.controller('usuarioController', function($scope, toastr, permissaoService,  
 	    					}	    				    			
 	    		}
 			
-			if(permissoes[i].tipoModulo == "ADMIN"){	
+			if(permissoes[i].tipoModulo == "MODULO_ADMIN"){	
 				$scope.moduloAdmin.push(permissoes[i]);
 				$scope.visualizaAdmin = true;
 				
 			}
-			if(permissoes[i].tipoModulo == "CADASTROS"){
+			if(permissoes[i].tipoModulo == "MODULO_CADASTROS"){
 				$scope.moduloCadastros.push(permissoes[i]);
 				$scope.visualizaCadastros = true;
 			}
-			if(permissoes[i].tipoModulo == "CHAMADO"){
+			if(permissoes[i].tipoModulo == "MODULO_CHAMADO"){
 				$scope.moduloChamado.push(permissoes[i]);
 				$scope.visualizaChamado = true;
 			}
-			if(permissoes[i].tipoModulo == "COMPRAS"){
+			if(permissoes[i].tipoModulo == "MODULO_COMPRAS"){
 				$scope.moduloCompras.push(permissoes[i]);
 				$scope.visualizaCompras = true;
 			}
-			if(permissoes[i].tipoModulo == "ESTOQUE"){
+			if(permissoes[i].tipoModulo == "MODULO_ESTOQUE"){
 				$scope.moduloEstoque.push(permissoes[i]);
 				$scope.visualizaEstoque = true;
 			}
-			if(permissoes[i].tipoModulo == "GERENCIAMENTO"){
+			if(permissoes[i].tipoModulo == "MODULO_GERENCIAMENTO"){
 				$scope.moduloGerenciamento.push(permissoes[i]);
 				$scope.visualizaGerenciamento = true;
 			}
-			if(permissoes[i].tipoModulo == "RECURSOS_HUMANOS"){
+			if(permissoes[i].tipoModulo == "MODULO_RECURSOS_HUMANOS"){
 				$scope.moduloRecursosHumanos.push(permissoes[i]);
 				$scope.visualizaRecursosHumanos = true;
 			}
-			if(permissoes[i].tipoModulo == "SERVICOS"){
+			if(permissoes[i].tipoModulo == "MODULO_SERVICOS"){
 				$scope.moduloServicos.push(permissoes[i]);
 				$scope.visualizaServicos = true;
 			}

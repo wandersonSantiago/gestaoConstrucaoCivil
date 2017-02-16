@@ -17,14 +17,14 @@
 		
 		<div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-		 <li class="dropdown messages-menu">
+		 <li class="dropdown messages-menu" ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_SUPORTE">
                 <a href="#/chamado/manutencao/suporte/lista" title="Quantidade de Chamados Abertos para Manutenção" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-envelope-o"></i>
                   <span class="label label-success">{{quantidadeChamadoAberto}}</span>
                 </a>	
 		 		 
           </li>              
-          <li class="dropdown messages-menu">
+          <li class="dropdown messages-menu" ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_SUPORTE">
                 <a href="#/chamado/informatica/suporte/lista" title="Quantidade de Chamados Abertos para Informática" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-envelope-o"></i>
                   <span class="label label-success">{{quantidadeChamadoAbertoTi}}</span>

@@ -2,8 +2,7 @@
 <br>
 <br>
 
-<div ng-if="!ROLE_ADMIN" ng-include="'views/erros/permissao.html'"></div>
-<div ng-if="ROLE_ADMIN" ng-controller="adminSistemaController as adminCtrl">
+<div ng-controller="adminSistemaController as adminCtrl">
 
 	<div class="box box-primary" ng-init="adminCtrl.lista(0 , 15)">
 		<!-- Default panel contents -->
@@ -30,6 +29,7 @@
 						<th>Telefone</th>
 						<th>Inscrição Estadual</th>
 						<th>Estado</th>
+						<th ng-if="ROLE_EMPRESA_CONTRATADA_ALTERAR">Editar</th>
 					</tr>
 				</thead>
 				<tbody
@@ -41,7 +41,7 @@
 						<td>{{empresa.dadoEmpresa.telefone }}</td>
 						<td>{{empresa.dadoEmpresa.inscricaoEstadual}}</td>
 						<td>{{empresa.dadoEmpresa.endereco.uf }}</td>
-						<td><a href="#/empresa_contratada/alteracao/{{empresa.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						<td ng-if="ROLE_EMPRESA_CONTRATADA_ALTERAR"><a href="#/empresa_contratada/alteracao/{{empresa.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 					
 					</tr>
 

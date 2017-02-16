@@ -36,7 +36,7 @@
 						<td>{{lista.informacaoRequisicao.statusRequisicao}}</td>
 						<td>{{lista.informacaoRequisicao.dataSaida | date : 'dd/MM/yyyy' }}</td>						
 					
-						<td><a href="#/estoque/visualizar/edificio/{{lista.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						<td ng-if="ROLE_MODULO_REQUISICAO_CONSULTA_EDIFICIO"><a href="#/estoque/visualizar/edificio/{{lista.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						
 					</tr>
 
@@ -94,7 +94,7 @@
 						<td>{{lista.informacaoRequisicao.statusRequisicao}}</td>
 						<td>{{lista.informacaoRequisicao.dataSaida | date : 'dd/MM/yyyy'}}</td>						
 					
-						<td><a href="#/estoque/visualizar/casa/{{lista.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						<td ng-if="ROLE_MODULO_REQUISICAO_CONSULTA_CASA"><a href="#/estoque/visualizar/casa/{{lista.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						
 					</tr>
 
@@ -153,7 +153,7 @@
 						<td>{{lista.informacaoRequisicao.statusRequisicao}}</td>
 						<td>{{lista.informacaoRequisicao.dataSaida | date : 'dd/MM/yyyy'}}</td>						
 					
-						<td><a href="#/estoque/visualizar/outros/{{lista.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						<td ng-if="ROLE_MODULO_REQUISICAO_CONSULTA_OUTROS"><a href="#/estoque/visualizar/outros/{{lista.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						
 					</tr>
 

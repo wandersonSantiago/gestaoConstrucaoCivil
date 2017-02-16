@@ -20,7 +20,7 @@
 						<th>Data Inicio</th>
 						<th>Valor Total</th>
 						<th>Valor Gasto</th>
-						<th>Serviços</th>
+						<th ng-if="ROLE_MODULO_GERENCIAMENTO_EMPREENDIMENTO_ALTERAR || ROLE_MODULO_GERENCIAMENTO_EMPREENDIMENTO_INFORMACOES ">Serviços</th>
 						
 					</tr>
 				</thead>
@@ -33,9 +33,9 @@
 						<td>{{ empreendimento.dataAbertura | date : 'dd/MM/yyyy'}}</td>
 						<td>{{ empreendimento.valorMaximoGastar | currency }}</td>
 						<td>{{ empreendimento.valoresGastos | currency }}</td>
-						<td><a href="#/empreendimento/alteracao/{{empreendimento.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						<td ng-if="ROLE_MODULO_GERENCIAMENTO_EMPREENDIMENTO_ALTERAR"><a href="#/empreendimento/alteracao/{{empreendimento.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						<i class="glyphicon glyphicon-minus"></i>
-						<a href="#/empreendimento/visualizacao/{{empreendimento.id}}"><i class="glyphicon glyphicon-search"></i></a></td>
+						<a ng-if="ROLE_MODULO_GERENCIAMENTO_EMPREENDIMENTO_INFORMACOES" href="#/empreendimento/visualizacao/{{empreendimento.id}}"><i class="glyphicon glyphicon-search"></i></a></td>
 					</tr>
 				</tbody>
 				<tfoot>

@@ -5,8 +5,8 @@
 	     <br>
 	    <section layout="row" layout-align="right center">
 		  <md-button href="#/" class="groupX left">Menu</md-button>
-		  <md-button href="#/chamado/manutencao/lista" class="groupX middle">Lista</md-button>	  
-		  <md-button href="#/chamado/manutencao/suporte/lista" class="groupX middle">Suporte</md-button>
+		  <md-button ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_USUARIO" href="#/chamado/manutencao/lista" class="groupX middle">Lista</md-button>	  
+		  <md-button ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_SUPORTE" href="#/chamado/manutencao/suporte/lista" class="groupX middle">Suporte</md-button>
 		</section>
 	<div class="box box-primary">
 

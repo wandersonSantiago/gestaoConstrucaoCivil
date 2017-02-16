@@ -76,7 +76,7 @@
 	
 	<script src="views/pages/modulo_admin/empresa_contratada/js/empresa-contratada-service.js" type="text/javascript"></script>	
 	<script src="views/pages/modulo_admin/empresa_contratada/js/empresa-contratada-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_admin/empresa_contratada/js/empresa-contratada-rotas.js" type="text/javascript"></script>	
+	<script src="views/pages/modulo_admin/empresa_contratada/js/empresa-contratada-rotas.js" type="text/javascript"></script>
 	
 	<script src="views/pages/modulo_gerenciamento/usuario/js/usuario-service.js" type="text/javascript"></script>	
 	<script src="views/pages/modulo_gerenciamento/usuario/js/usuario-controller.js" type="text/javascript"></script>
@@ -171,8 +171,7 @@
 	<script src="views/pages/modulo_chamado/informatica/js/chamado-ti-service.js"></script>
 	<script src="views/pages/modulo_chamado/informatica/js/rotas.js"></script>
 	
-	<script src="views/pages/modulo_estoque/gerenciamento/js/gerenciamento-estoque-rotas.js" type="text/javascript"></script>
-	
+
 	
 	
 	
@@ -201,19 +200,19 @@
 		       <div class="navbar-custom-menu">
 		        <ul class="nav navbar-nav">		     
 					          
-				 <li  class="dropdown messages-menu">
+				 <li  class="dropdown messages-menu" ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_SUPORTE">
 		                <a href="#/chamado/manutencao/suporte/lista" title="Quantidade de Chamados Abertos para Manutenção" class="dropdown-toggle" data-toggle="dropdown">
 		                  <i class="fa fa-envelope-o"></i>
 		                  <span class="label label-success">{{quantidadeChamadoAberto}}</span>
 		                </a>					 		 
 		          </li>
-		          <li  class="dropdown messages-menu">
+		          <li  class="dropdown messages-menu" ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_SUPORTE">
 		                <a href="#/chamado/informatica/suporte/lista" title="Quantidade de Chamados Abertos para Informática" class="dropdown-toggle" data-toggle="dropdown">
 		                  <i class="fa fa-envelope-o"></i>
 		                  <span class="label label-success">{{quantidadeChamadoAbertoTi}}</span>
 		                </a>					 		 
 		          </li>
-		       <li class="dropdown user user-menu" ng-controller="usuarioController as userCtrl" ng-init="userCtrl.user()">
+		       <li class="dropdown user user-menu" ">
 		                <a href="" class="dropdown-toggle" data-toggle="dropdown">
 		                  <i class="glyphicon glyphicon-user"></i>
 		                </a>
@@ -247,7 +246,7 @@
 		    </nav>
 		  </header>
 
-		<div ng-if="logado" ng-include="'views/templates/menu.html'"></div>
+		<div ng-if="logado" ng-controller="usuarioController as userCtrl" ng-init="userCtrl.user()" ng-include="'views/templates/menu.html'" ></div>
 
 		<div ng-if="logado"  class="content-wrapper">
 

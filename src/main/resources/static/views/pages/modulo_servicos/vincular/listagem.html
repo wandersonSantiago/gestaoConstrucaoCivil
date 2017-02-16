@@ -41,7 +41,7 @@
 						<td>{{ edificio.apartamento}}</td>
 						<td>{{ edificio.pacoteServico.valor | currency}}</td>
 						
-						<td><a href="#/servicos/vincular/visualizar/edificio/{{edificio.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						<td ng-if="ROLE_VINCULAR_CONSULTAR_EDIFICIO"><a href="#/servicos/vincular/visualizar/edificio/{{edificio.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						
 						
 						
@@ -116,7 +116,7 @@
 						<td>{{ casa.andar}}</td>
 						<td>{{ casa.pacoteServico.valor | currency}}</td>
 						
-						<td><a href="#/servicos/vincular/visualizar/casa/{{casa.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						<td ng-if="ROLE_VINCULAR_CONSULTAR_CASA"><a href="#/servicos/vincular/visualizar/casa/{{casa.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						
 						
 						
@@ -192,7 +192,7 @@
 						<td>{{ comunitario.descricao }}</td>
 						<td>{{ comunitario.pacoteServico.valor | currency}}</td>
 						
-						<td><a href="#/servicos/vincular/visualizar/comunitario/{{comunitario.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						<td ng-if="ROLE_VINCULAR_CONSULTAR_EDIFICACOES_COMUNITARIA"><a href="#/servicos/vincular/visualizar/comunitario/{{comunitario.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						</tr>
 
 				</tbody>

@@ -20,6 +20,7 @@
 						<th>Unidade Medida</th>
 						<th>Categoria</th>
 						<th>Tipo do Produto</th>
+						<th ng-if="ROLE_MODULO_CADASTROS_PRODUTO_ALTERAR">Editar</th>
 									
 						
 					</tr>
@@ -34,7 +35,7 @@
 						<td>{{ produto.categoria.descricao }}</td>
 						<td>{{ produto.tipoProduto.descricao }}</td>
 					
-						<td><a href="#/produto/edita/{{produto.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						<td ng-if="ROLE_MODULO_CADASTROS_PRODUTO_ALTERAR"><a href="#/produto/edita/{{produto.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						
 					</tr>
 

@@ -17,6 +17,7 @@
 					
 						
 						<th>Descrição</th>
+						<th ng-if="ROLE_MODULO_CADASTROS_AREA_ALTERAR">Editar</th>
 						
 						
 					</tr>
@@ -28,7 +29,7 @@
 						
 						<td>{{ areaProduto.descricao }}</td>
 					
-						<td><a href="#/area/edita/{{areaProduto.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						<td ng-if="ROLE_MODULO_CADASTROS_AREA_ALTERAR"><a href="#/area/edita/{{areaProduto.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						
 					</tr>
 

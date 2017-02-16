@@ -38,7 +38,7 @@
 						<td>{{lista.notaFiscal.dataVencimento | date : 'dd/MM/yyyy' }}</td>
 						<td>{{lista.notaFiscal.valorTotal | currency}}</td>
 					
-						<td><a href="#/estoque/transferencia/vizualizarRecebidos/{{lista.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						<td ng-if="ROLE_MODULO_ESTOQUE_TRANSFERENCIA_CONSULTA_RECEBIDAS"><a href="#/estoque/transferencia/vizualizarRecebidos/{{lista.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						
 					</tr>
 

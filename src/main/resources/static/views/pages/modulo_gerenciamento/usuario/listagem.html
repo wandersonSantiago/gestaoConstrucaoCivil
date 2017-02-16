@@ -20,7 +20,7 @@
 						<th>Usuário</th>
 						<th>Empreendimento</th>
 						<th>Data de Cadastro</th>
-						<th>Serviços</th>
+						<th ng-if="ROLE_USUARIO_EMPREENDIMENTO_ALTERAR || ROLE_USUARIO_EMPREENDIMENTO_PERMISSSAO || ROLE_MODULO_ADMIN">Serviços</th>
 						
 					</tr>
 				</thead>
@@ -34,9 +34,9 @@
 						<td>{{ user.empreendimento.descricao}}</td>
 						<td>{{ user.dataCadastro | date : 'dd/MM/yyyy'}}</td>
 						
-						<td><a href="#/usuario/alteracao/{{user.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						<td ng-if="ROLE_USUARIO_EMPREENDIMENTO_ALTERAR || ROLE_MODULO_ADMIN"><a href="#/usuario/alteracao/{{user.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						<i class="glyphicon glyphicon-minus"></i>
-						<a href="#/usuario/permissao/editar/{{user.id}}"><i class="glyphicon glyphicon-search"></i></a></td>
+						<a ng-if="ROLE_USUARIO_EMPREENDIMENTO_PERMISSSAO || ROLE_MODULO_ADMIN" href="#/usuario/permissao/editar/{{user.id}}"><i class="glyphicon glyphicon-search"></i></a></td>
 						
 						
 					</tr>

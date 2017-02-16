@@ -15,14 +15,14 @@
 				<thead>
 					<tr>
 						<th>Descrição</th>
-						<th>Opções</th>
+						<th ng-if="ROLE_MODULO_RECURSOS_HUMANOS_CARGO_ALTERAR">Opções</th>
 					</tr>
 				</thead>
 				<tbody
 					ng-repeat=" cargo in cargos | filter : buscaCargo ">
 					<tr>
 						<td>{{ cargo.descricao }}</td>
-						<td><a href="#/cargo/edita/{{cargo.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						<td ng-if="ROLE_MODULO_RECURSOS_HUMANOS_CARGO_ALTERAR"><a href="#/cargo/edita/{{cargo.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						
 				</tr>
 				</tbody>

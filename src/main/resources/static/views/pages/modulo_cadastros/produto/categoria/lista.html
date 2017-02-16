@@ -18,7 +18,7 @@
 						
 						<th>Descrição</th>
 						<th>Categoria</th>
-						
+						<th ng-if="ROLE_MODULO_CADASTROS_PRODUTO_CATEGORIA_ALTERAR">Editar</th>
 						
 					</tr>
 				</thead>
@@ -30,7 +30,7 @@
 						<td>{{ categoria.descricao }}</td>
 						<td>{{ categoria.tipoCategoria }}</td>
 					
-						<td><a href="#/produto/categoria/edita/{{categoria.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						<td ng-if="ROLE_MODULO_CADASTROS_PRODUTO_CATEGORIA_ALTERAR"><a href="#/produto/categoria/edita/{{categoria.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						
 					</tr>
 

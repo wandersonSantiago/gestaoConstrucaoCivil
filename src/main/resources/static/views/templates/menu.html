@@ -30,71 +30,131 @@
 <!-- menu admin Sistema -->
 		<ul class="sidebar-menu">
 			<li class="header">MÓDULOS</li>
-			<li class="treeview " ng-if="ROLE_ADMIN">
+			<li class="treeview " ng-if="ROLE_MODULO_ADMIN">
              		 <a href=""><i class="glyphicon glyphicon-home "></i> <i class="treeview "></i>Administrador<i class="fa fa-angle-left pull-right"></i></a>
              	 <ul class="treeview-menu">
 					<li class="treeview"><a href=""><i class="glyphicon glyphicon-home"></i> <span>Empresa</span>
 						<i class="fa fa-angle-left pull-right"></i></a>
 						<ul class="treeview-menu">
-							<li><a href="#/empresa_contratada/cadastro">Cadastro</a></li>
-							<li><a href="#/empresa_contratada/listagem" > Listagem</a></li>
+							<li ng-if="ROLE_EMPRESA_CONTRATADA_CADASTRAR"><a href="#/empresa_contratada/cadastro">Cadastro</a></li>
+							<li ng-if="ROLE_EMPRESA_CONTRATADA_CONSULTAR"><a href="#/empresa_contratada/listagem" > Listagem</a></li>
 						</ul>
 					</li>
 				</ul>
 			</li>
+			
+			
+                           
+                <li ng-if="ROLE_MODULO_CADASTROS">
+                  <a href=""><i class="treeview"></i> Cadastros<i class="fa fa-angle-left pull-right"></i></a>
+                  <ul class="treeview-menu">                    
+                    <li>
+                      <a  ng-if="ROLE_MODULO_CADASTROS_FORNECEDOR_CADASTRAR || ROLE_MODULO_CADASTROS_FORNECEDOR_CONSULTAR" href=""><i class="glyphicon glyphicon-shopping-cart"></i>Fornecedor<i class="fa fa-angle-left pull-right"></i></a>
+                      <ul class="treeview-menu">
+                        	<li ng-if="ROLE_MODULO_CADASTROS_FORNECEDOR_CADASTRAR"><a class="top" href="#/fornecedor/cadastro">Cadastro</a></li>
+							<li ng-if="ROLE_MODULO_CADASTROS_FORNECEDOR_CONSULTAR"><a class="top" href="#/fornecedor/lista">Lista</a></li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a ng-if="ROLE_MODULO_CADASTROS_FABRICANTE_CADASTRAR || ROLE_MODULO_CADASTROS_FABRICANTE_CONSULTAR"  href=""><i class="glyphicon glyphicon-home"></i>Fabricante<i class="fa fa-angle-left pull-right"></i></a>
+                      <ul class="treeview-menu">
+                        	<li ng-if="ROLE_MODULO_CADASTROS_FABRICANTE_CADASTRAR" ><a class="top" href="#/fabricante/cadastro">Cadastro</a></li>
+							<li ng-if="ROLE_MODULO_CADASTROS_FABRICANTE_CONSULTAR"><a class="top" href="#/fabricante/lista">Lista</a></li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a ng-if="ROLE_MODULO_CADASTROS_AREA_CADASTRAR || ROLE_MODULO_CADASTROS_AREA_CONSULTAR" href=""><i class="glyphicon glyphicon-globe"></i>Local de aplicação<i class="fa fa-angle-left pull-right"></i></a>
+                      <ul class="treeview-menu">
+                        	<li ng-if="ROLE_MODULO_CADASTROS_AREA_CADASTRAR"><a class="top" href="#/area/cadastro">Cadastro</a></li>
+							<li ng-if="ROLE_MODULO_CADASTROS_AREA_CONSULTAR"><a class="top" href="#/area/lista">Lista</a></li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a ng-if="ROLE_MODULO_CADASTROS_PRODUTO_CATEGORIA_CADASTRAR || ROLE_MODULO_CADASTROS_PRODUTO_CATEGORIA_CONSULTAR" href=""><i class="glyphicon glyphicon-screenshot"></i>Categoria Produto<i class="fa fa-angle-left pull-right"></i></a>
+                      <ul class="treeview-menu">
+                        	<li ng-if="ROLE_MODULO_CADASTROS_PRODUTO_CATEGORIA_CADASTRAR"><a class="top" href="#/produto/categoria/cadastro">Cadastro</a></li>
+							<li ng-if="ROLE_MODULO_CADASTROS_PRODUTO_CATEGORIA_CONSULTAR"><a class="top" href="#/produto/categoria/lista">Lista</a></li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a ng-if="ROLE_MODULO_CADASTROS_PRODUTO_TIPO_CADASTRAR || ROLE_MODULO_CADASTROS_PRODUTO_TIPO_CONSULTAR" href=""><i class="glyphicon glyphicon-screenshot"></i>Tipo Produto<i class="fa fa-angle-left pull-right"></i></a>
+                      <ul class="treeview-menu">
+                        	<li ng-if="ROLE_MODULO_CADASTROS_PRODUTO_TIPO_CADASTRAR"><a class="top" href="#/produto/tipo/cadastro">Cadastro</a></li>
+							<li ng-if="ROLE_MODULO_CADASTROS_PRODUTO_TIPO_CONSULTAR"><a class="top" href="#/produto/tipo/lista">Lista</a></li>
+                      </ul>
+                    </li>
+                     <li>
+                      <a NG-IF="ROLE_MODULO_CADASTROS_PRODUTO_CADASTRAR || ROLE_MODULO_CADASTROS_PRODUTO_ALTERAR || ROLE_MODULO_CADASTROS_PRODUTO_CONSULTAR" href=""><i class="glyphicon glyphicon-apple"></i>Produto<i class="fa fa-angle-left pull-right"></i></a>
+                      <ul class="treeview-menu">
+                        	<li ng-if="ROLE_MODULO_CADASTROS_PRODUTO_CADASTRAR"><a class="top" href="#/produto/cadastro">Cadastro</a></li>
+							<li ng-if="ROLE_MODULO_CADASTROS_PRODUTO_CONSULTAR"><a class="top" href="#/produto/lista">Lista</a></li>
+					 </ul>
+                    </li>
+                  </ul>
+                </li>   
+                               
+           
+            
 				
-				<li class="treeview ">
-              <a href=""><i class="glyphicon glyphicon-envelope"> </i><i class="treeview "></i> Chamado<i class="fa fa-angle-left pull-right"></i></a>
-              <ul class="treeview-menu">
-				<li class="treeview"><a href=""><i class="glyphicon glyphicon-globe"></i> <span>Informática</span>
-					<i class="fa fa-angle-left pull-right"></i></a>
-					<ul class="treeview-menu">
-						<li><a class="top" href="#/chamado/informatica/cadastrar">cadastrar</a></li>
-						<li><a class="top" href="#/chamado/informatica/lista">Meus Chamados</a></li>
-						<li ><a class="top" href="#/chamado/informatica/suporte/lista">Suporte Chamado</a></li>
-						<li ><a class="top" href="#/chamado/informatica/suporte/relatorio">Relatório</a></li>
-					</ul>
-				</li>			
-				
-				<li class="treeview"><a href=""><i class="glyphicon glyphicon-wrench"></i> <span>Manutenção</span>
-					<i class="fa fa-angle-left pull-right"></i></a>
-					<ul class="treeview-menu">
-						<li><a class="top" href="#/chamado/manutencao/cadastrar">cadastro</a></li>
-						<li><a class="top" href="#/chamado/manutencao/lista">Meus Chamados</a></li>
-						<li ><a class="top" href="#/chamado/manutencao/suporte/lista">Suporte Chamado</a></li>
-						<li ><a class="top" href="#/chamado/manutencao/suporte/relatorio">Relatório</a></li>
-					</ul>
-				</li>				
-				
-			</ul>
-		</li>	
+				<li class="treeview " ng-if="ROLE_MODULO_CHAMADO">
+	              <a href=""><i class="glyphicon glyphicon-envelope"> </i><i class="treeview "></i> Chamado<i class="fa fa-angle-left pull-right"></i></a>
+	              <ul class="treeview-menu">
+					<li ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_USUARIO || ROLE_MODULO_CHAMADO_INFORMATICA_SUPORTE || ROLE_MODULO_CHAMADO_INFORMATICA_SUPORTE_RELATORIO" class="treeview"><a href=""><i class="glyphicon glyphicon-globe"></i> <span>Informática</span>
+						<i class="fa fa-angle-left pull-right"></i></a>
+						<ul class="treeview-menu">
+							<li ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_USUARIO"><a class="top" href="#/chamado/informatica/cadastrar">cadastrar</a></li>
+							<li ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_USUARIO"><a class="top" href="#/chamado/informatica/lista">Meus Chamados</a></li>
+							<li ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_SUPORTE" ><a class="top" href="#/chamado/informatica/suporte/lista">Suporte Chamado</a></li>
+							<li ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_SUPORTE_RELATORIO" ><a class="top" href="#/chamado/informatica/suporte/relatorio">Relatório</a></li>
+						</ul>
+					</li>			
+					
+					<li ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_USUARIO || ROLE_MODULO_CHAMADO_MANUTENCAO_SUPORTE || ROLE_MODULO_CHAMADO_MANUTENCAO_SUPORTE_RELATORIO" class="treeview"><a href=""><i class="glyphicon glyphicon-wrench"></i> <span>Manutenção</span>
+						<i class="fa fa-angle-left pull-right"></i></a>
+						<ul class="treeview-menu">
+							<li ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_USUARIO"><a class="top" href="#/chamado/manutencao/cadastrar">cadastro</a></li>
+							<li ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_USUARIO"><a class="top" href="#/chamado/manutencao/lista">Meus Chamados</a></li>
+							<li ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_SUPORTE"><a class="top" href="#/chamado/manutencao/suporte/lista">Suporte Chamado</a></li>
+							<li ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_SUPORTE_RELATORIO"><a class="top" href="#/chamado/manutencao/suporte/relatorio">Relatório</a></li>
+						</ul>
+					</li>				
+					
+				</ul>
+			</li>	
 	
 <!-- menu admin Empresa -->		
 		
 
-			<li  class="treeview ">
+			<li ng-if="ROLE_MODULO_GERENCIAMENTO || ROLE_MODULO_ADMIN" class="treeview ">
               <a href=""><i class=" glyphicon glyphicon-object-align-bottom"> </i><i class="treeview "></i> Gerenciamento<i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">
-				<li class="treeview"><a href=""><i class="glyphicon glyphicon-user"></i> <span>Usuário</span>
+				<li ng-class=" ROLE_USUARIO_CADASTRAR || ROLE_USUARIO_EMPREENDIMENTO_CONSULTAR" class="treeview"><a href=""><i class="glyphicon glyphicon-user"></i> <span>Usuário</span>
 					<i class="fa fa-angle-left pull-right"></i></a>
 					<ul class="treeview-menu">
-						<li><a class="top" href="#/usuario/cadastro">Cadastro</a></li>
-						<li><a class="top" href="#/usuario/listagem">Listagem</a></li>
-					<li class="treeview"><a href=""><i class="glyphicon glyphicon-user"></i> <span>Permissão</span>
+						<li ng-if="ROLE_USUARIO_CADASTRAR "><a class="top" href="#/usuario/cadastro">Cadastro</a></li>
+						<li ng-if=" ROLE_USUARIO_EMPREENDIMENTO_CONSULTAR "><a class="top" href="#/usuario/listagem">Listagem</a></li>
+					<li  class="treeview"><a href=""><i class="glyphicon glyphicon-user"></i> <span>Permissão</span>
 						<i class="fa fa-angle-left pull-right"></i></a>
 						<ul class="treeview-menu">
-							<li><a class="top" href="#/usuario/permissao/cadastro">Cadastro</a></li>
-							<li><a class="top" href="#/usuario/permissao/listagem">Listagem</a></li>
+							<li ><a class="top" href="#/usuario/permissao/cadastro">Cadastro</a></li>
+							<li ><a class="top" href="#/usuario/permissao/listagem">Listagem</a></li>
 						</ul>
 					</li>
 					</ul>
 				</li>			
-				<li ng-if="ROLE_ADMINISTRADOR_EMPRESA" class="treeview"><a href=""><i class=" glyphicon glyphicon-object-align-bottom"></i> <span>Empreendimento</span>
+				<li ng-if="ROLE_MODULO_GERENCIAMENTO_EMPREENDIMENTO_CADASTRAR || ROLE_MODULO_GERENCIAMENTO_EMPREENDIMENTO_CONSULTAR " class="treeview"><a href=""><i class=" glyphicon glyphicon-object-align-bottom"></i> <span>Empreendimento</span>
 					<i class="fa fa-angle-left pull-right"></i></a>
 					<ul class="treeview-menu">
-						<li><a class="top" href="#/empreendimento/cadastro">Cadastro</a></li>
-						<li><a class="top" href="#/empreendimento/listagem">Listagem</a></li>
-						<li><a class="top" href="#/empreendimento/configuracao/cadastro">Configuração</a></li>
+						<li ng-if="ROLE_MODULO_GERENCIAMENTO_EMPREENDIMENTO_CADASTRAR "><a class="top" href="#/empreendimento/cadastro">Cadastro</a></li>
+						<li ng-if="ROLE_MODULO_GERENCIAMENTO_EMPREENDIMENTO_CONSULTAR "><a class="top" href="#/empreendimento/listagem">Listagem</a></li>
+						
+				<li ng-if="ROLE_EMPREENDIMENTO_CONFIGURACAO_CADASTRAR || ROLE_EMPREENDIMENTO_CONFIGURACAO_CONSULTAR || ROLE_MODULO_ADMIN" class="treeview"><a href=""><i class=" glyphicon glyphicon-object-align-bottom"></i> <span>Configuração</span>
+					<i class="fa fa-angle-left pull-right"></i></a>
+					<ul class="treeview-menu">
+						<li ng-if="ROLE_EMPREENDIMENTO_CONFIGURACAO_CADASTRAR "><a class="top" href="#/empreendimento/configuracao/cadastro">Cadastro</a></li>
+						<li ng-if="ROLE_EMPREENDIMENTO_CONFIGURACAO_CONSULTAR "><a class="top" href="#/empreendimento/configuracao/listagem">Listagem</a></li>
+					</ul>
+				</li>
 					</ul>
 				</li>
 				
@@ -103,29 +163,29 @@
 		
 		<!-- menu Serviços -->		
 		
-			<li class="treeview ">
+			<li class="treeview " ng-if="ROLE_MODULO_SERVICOS">
               <a href=""><i class=" glyphicon glyphicon-wrench"></i><i class="treeview "></i>Serviços<i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">
-			<li class="treeview"><a href=""><i class=" glyphicon glyphicon-wrench"></i> <span>Prestadora de Serviços</span>
+			<li ng-if="ROLE_PRESTADORA_SERVICOS_CADASTRAR || ROLE_PRESTADORA_SERVICOS_CONSULTAR" class="treeview"><a href=""><i class=" glyphicon glyphicon-wrench"></i> <span>Prestadora de Serviços</span>
 					<i class="fa fa-angle-left pull-right"></i></a>
 					<ul class="treeview-menu">
-						<li><a class="top" href="#/servicos/prestadora/cadastro">Cadastro</a></li>
-				    	<li><a class="top" href="#/servicos/prestadora/listagem">Lista</a></li>
+						<li ng-if="ROLE_PRESTADORA_SERVICOS_CADASTRAR"><a class="top" href="#/servicos/prestadora/cadastro">Cadastro</a></li>
+				    	<li ng-if="ROLE_PRESTADORA_SERVICOS_CONSULTAR"><a class="top" href="#/servicos/prestadora/listagem">Lista</a></li>
 					</ul>
 				</li>
-			<li class="treeview"><a href=""><i class="glyphicon glyphicon-wrench"></i> <span>Pacotes</span>
+			<li ng-if="ROLE_PACOTES_CADASTRAR || ROLE_PACOTES_CONSULTAR" class="treeview"><a href=""><i class="glyphicon glyphicon-wrench"></i> <span>Pacotes</span>
 				<i class="fa fa-angle-left pull-right"></i></a>
 				<ul class="treeview-menu">
-					<li><a class="top" href="#/servicos/pacotes/cadastro">Cadastro</a></li>
-					<li><a class="top" href="#/servicos/pacotes/lista">Lista</a></li>
+					<li ng-if="ROLE_PACOTES_CADASTRAR"><a class="top" href="#/servicos/pacotes/cadastro">Cadastro</a></li>
+					<li ng-if="ROLE_PACOTES_CONSULTAR"><a class="top" href="#/servicos/pacotes/lista">Lista</a></li>
 			
 				</ul>
 			</li>
-			<li class="treeview"><a href=""><i class="glyphicon glyphicon-wrench"></i> <span>Vincular</span>
+			<li ng-if="ROLE_VINCULAR_CADASTRAR || ROLE_VINCULAR_CONSULTAR" class="treeview"><a href=""><i class="glyphicon glyphicon-wrench"></i> <span>Vincular</span>
 				<i class="fa fa-angle-left pull-right"></i></a>
 				<ul class="treeview-menu">
-					<li><a class="top" href="#/servicos/vincular/cadastro">Cadastro</a></li>
-					<li><a class="top" href="#/servicos/vincular/listagem">Lista</a></li>
+					<li ng-if="ROLE_VINCULAR_CADASTRAR"><a class="top" href="#/servicos/vincular/cadastro">Cadastro</a></li>
+					<li ng-if="ROLE_VINCULAR_CONSULTAR"><a class="top" href="#/servicos/vincular/listagem">Lista</a></li>
 			
 				</ul>
 			</li>
@@ -134,42 +194,42 @@
 		
 		<!-- menu recursos humanos -->
 				
-		<li class="treeview ">
+		<li ng-if="ROLE_MODULO_RECURSOS_HUMANOS " class="treeview ">
               <a href=""><i class="glyphicon glyphicon-user"></i><i class="treeview "></i>Recursos Humanos<i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">
                 
                 <li class="treeview"><a href=""><i class="glyphicon glyphicon-user"></i> <span>Funcionário</span>
 					<i class="fa fa-angle-left pull-right"></i></a>
 				<ul class="treeview-menu">
-					<li><a class="top" href="#/funcionario/cadastro">Cadastro</a></li>
-					<li><a class="top" href="#/funcionario/lista">Lista</a></li>
+					<li ng-if="ROLE_MODULO_RECURSOS_HUMANOS_FUNCIONARIO_CADASTRAR "><a class="top" href="#/funcionario/cadastro">Cadastro</a></li>
+					<li ng-if="ROLE_MODULO_RECURSOS_HUMANOS_FUNCIONARIO_CONSULTAR "><a class="top" href="#/funcionario/lista">Lista</a></li>
 					
 				</ul></li>                    
                                             
-                <li class="treeview"><a href=""><i class="glyphicon glyphicon-briefcase"></i> <span>Cargo</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <li ng-if="ROLE_MODULO_RECURSOS_HUMANOS_CARGO_CADASTRAR || ROLE_MODULO_RECURSOS_HUMANOS_CARGO_CONSULTAR" class="treeview"><a href=""><i class="glyphicon glyphicon-briefcase"></i> <span>Cargo</span> <i class="fa fa-angle-left pull-right"></i></a>
 					<ul class="treeview-menu">
-						<li><a class="top" href="#/cargo/cadastro">Cadastro</a></li>
-					<li><a class="top" href="#/cargo/lista">Lista</a></li>
+						<li ng-if="ROLE_MODULO_RECURSOS_HUMANOS_CARGO_CADASTRAR"><a class="top" href="#/cargo/cadastro">Cadastro</a></li>
+						<li ng-if="ROLE_MODULO_RECURSOS_HUMANOS_CARGO_CONSULTAR"><a class="top" href="#/cargo/lista">Lista</a></li>
 					</ul>			
                 </li>
                
               </ul>
             </li>
 		
-		<li class="treeview ">
+		<li class="treeview " ng-if="ROLE_MODULO_COMPRAS">
               <a href=""><i class="glyphicon glyphicon-shopping-cart"></i><i class="treeview "></i>Compras<i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-	              <li ng-if="ROLE_COTACAO_CONSULTA || ROLE_COTACAO_CADASTRO" class="treeview"><a href=""> <span>Cotação</span> <i class="fa fa-angle-left pull-right"></i></a>
+	              <li ng-if="ROLE_MODULO_COMPRAS_COTACAO_GERAR || ROLE_MODULO_COMPRAS_COTACAO_ABERTO" class="treeview"><a href=""> <span>Cotação</span> <i class="fa fa-angle-left pull-right"></i></a>
 							<ul class="treeview-menu">
-								<li ng-if="ROLE_COTACAO_CADASTRO"><a class="top" href="#/cotacao/gerar">Gerar </a></li>
-								<li ng-if="ROLE_COTACAO_CONSULTA"><a class="top" href="#/cotacao/em_aberto">em aberto</a></li>
+								<li ng-if="ROLE_MODULO_COMPRAS_COTACAO_GERAR"><a class="top" href="#/cotacao/gerar">Gerar </a></li>
+								<li ng-if="ROLE_MODULO_COMPRAS_COTACAO_ABERTO"><a class="top" href="#/cotacao/em_aberto">em aberto</a></li>
 							</ul>			
 	                </li>
-	                <li  class="treeview"><a href=""> <span>Lançar Compras</span> <i class="fa fa-angle-left pull-right"></i></a>
+	                <li  ng-if="ROLE_MODULO_COMPRAS_CADASTRAR || ROLE_MODULO_COMPRAS_CONSULTAR" class="treeview"><a href=""> <span>Lançar Compras</span> <i class="fa fa-angle-left pull-right"></i></a>
 							<ul class="treeview-menu">
-								<li><a class="top" href="#/compras/cadastro">Pedido de compra</a></li>
-								<li><a class="top" href="#/compras/lista">Lista de compra</a></li>								
+								<li ng-if="ROLE_MODULO_COMPRAS_CADASTRAR"><a class="top" href="#/compras/cadastro">Pedido de compra</a></li>
+								<li ng-if="ROLE_MODULO_COMPRAS_CONSULTAR"><a class="top" href="#/compras/lista">Lista de compra</a></li>								
 							</ul>			
 	                </li>
                 </ul>
@@ -177,90 +237,29 @@
                
 		<!-- menu Almoxarifado  -->		
 			
-			<li class="treeview ">
-              <a href=""><i class="glyphicon glyphicon-shopping-cart"></i><i class="treeview "></i>Cadastros<i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">              
-                <li>
-                  <a href=""><i class="treeview"></i> Cadastros<i class="fa fa-angle-left pull-right"></i></a>
-                  <ul class="treeview-menu">                    
-                    <li>
-                      <a href=""><i class="glyphicon glyphicon-shopping-cart"></i>Fornecedor<i class="fa fa-angle-left pull-right"></i></a>
-                      <ul class="treeview-menu">
-                        	<li><a class="top" href="#/fornecedor/cadastro">Cadastro</a></li>
-							<li><a class="top" href="#/fornecedor/lista">Lista</a></li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a href=""><i class="glyphicon glyphicon-home"></i>Fabricante<i class="fa fa-angle-left pull-right"></i></a>
-                      <ul class="treeview-menu">
-                        	<li><a class="top" href="#/fabricante/cadastro">Cadastro</a></li>
-							<li><a class="top" href="#/fabricante/lista">Lista</a></li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a href=""><i class="glyphicon glyphicon-globe"></i>Local de aplicação<i class="fa fa-angle-left pull-right"></i></a>
-                      <ul class="treeview-menu">
-                        	<li><a class="top" href="#/area/cadastro">Cadastro</a></li>
-							<li><a class="top" href="#/area/lista">Lista</a></li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a href=""><i class="glyphicon glyphicon-screenshot"></i>Categoria Produto<i class="fa fa-angle-left pull-right"></i></a>
-                      <ul class="treeview-menu">
-                        	<li><a class="top" href="#/produto/categoria/cadastro">Cadastro</a></li>
-							<li><a class="top" href="#/produto/categoria/lista">Lista</a></li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a href=""><i class="glyphicon glyphicon-screenshot"></i>Tipo Produto<i class="fa fa-angle-left pull-right"></i></a>
-                      <ul class="treeview-menu">
-                        	<li><a class="top" href="#/produto/tipo/cadastro">Cadastro</a></li>
-							<li><a class="top" href="#/produto/tipo/lista">Lista</a></li>
-                      </ul>
-                    </li>
-                     <li>
-                      <a href=""><i class="glyphicon glyphicon-apple"></i>Produto<i class="fa fa-angle-left pull-right"></i></a>
-                      <ul class="treeview-menu">
-                        	<li><a class="top" href="#/produto/cadastro">Cadastro</a></li>
-							<li><a class="top" href="#/produto/lista">Lista</a></li>
-					 </ul>
-                    </li>
-                  </ul>
-                </li>   
-                 
-                 
-               
-              </ul>
-            </li>
+			
             
             
-            <li ng-if="ROLE_ESTOQUE_CADASTRO || ROLE_ESTOQUE_CONSULTA ">
+            <li ng-if="ROLE_MODULO_ESTOQUE ">
                   <a href=""><i class="treeview"></i> Estoque<i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
-                 		    <li ng-if="ROLE_ESTOQUE_CADASTRO"><a class="top" href="#/estoque/entrada">Entrada</a></li>
-							<li ng-if="ROLE_ESTOQUE_CONSULTA"><a class="top" href="#/estoque/listagem">Consultar</a></li>
+                 		    <li ng-if="ROLE_MODULO_ESTOQUE_ENTRADA"><a class="top" href="#/estoque/entrada">Entrada</a></li>
+							<li ng-if="ROLE_MODULO_ESTOQUE_CONSULTA"><a class="top" href="#/estoque/listagem">Consultar</a></li>
 							                              
-                 	 <li class="treeview"><a href=""><span>Requisição</span> <i class="fa fa-angle-left pull-right"></i></a>
+                 	 <li ng-if="ROLE_MODULO_ESTOQUE_REQUISICAO_CADASTRAR || ROLE_MODULO_ESTOQUE_REQUISICAO_CONSULTA" class="treeview"><a href=""><span>Requisição</span> <i class="fa fa-angle-left pull-right"></i></a>
 						<ul class="treeview-menu">
-							<li><a class="top" href="#/estoque/requisicao/cadastro">Cadastrar</a></li>
-							<li><a class="top" href="#/estoque/requisicao/listagem">Consulta</a></li>
+							<li ng-if="ROLE_MODULO_ESTOQUE_REQUISICAO_CADASTRAR"><a class="top" href="#/estoque/requisicao/cadastro">Cadastrar</a></li>
+							<li ng-if="ROLE_MODULO_ESTOQUE_REQUISICAO_CONSULTA"><a class="top" href="#/estoque/requisicao/listagem">Consulta</a></li>
 						</ul>			
                		 </li>
                		 
-                <li class="treeview"><a href=""><span>Transferência</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <li ng-if="ROLE_MODULO_ESTOQUE_TRANSFERENCIA_CADASTRAR || ROLE_MODULO_ESTOQUE_TRANSFERENCIA_ENVIADAS ||  ROLE_MODULO_ESTOQUE_TRANSFERENCIA_RECEBIDAS" class="treeview"><a href=""><span>Transferência</span> <i class="fa fa-angle-left pull-right"></i></a>
 						<ul class="treeview-menu">
-							<li><a class="top" href="#/estoque/transferencia/cadastro">Nova</a></li>
-							<li><a class="top" href="#/estoque/transferencia/enviadas">Enviadas</a></li>
-							<li><a class="top" href="#/estoque/transferencia/recebidas">Recebidas</a></li>
+							<li ng-if="ROLE_MODULO_ESTOQUE_TRANSFERENCIA_CADASTRAR"><a class="top" href="#/estoque/transferencia/cadastro">Nova</a></li>
+							<li ng-if="ROLE_MODULO_ESTOQUE_TRANSFERENCIA_ENVIADAS"><a class="top" href="#/estoque/transferencia/enviadas">Enviadas</a></li>
+							<li ng-if="ROLE_MODULO_ESTOQUE_TRANSFERENCIA_RECEBIDAS"><a class="top" href="#/estoque/transferencia/recebidas">Recebidas</a></li>
 						</ul>			
-                </li>
-                <li class="treeview"><a href=""><span>Gerenciamento</span> <i class="fa fa-angle-left pull-right"></i></a>
-						<ul class="treeview-menu">
-							<li><a class="top" href="#/estoque/gerenciamento/cancelamentoNota">Cancelamento de nota</a></li>
-							<li><a class="top" href="#/estoque/gerenciamento/iventario">Iventário</a></li>
-						</ul>			
-                </li>     
+                </li>                  
                 </ul>
                 </li>
    
@@ -276,8 +275,8 @@
 	</script>
 	</section>
 
-			<div ng-show="false">
-			<div  ng-controller="chamadoManutencaoController as manuctrl" ng-init="manuctrl.verificaMensagemLida()">
+			<div ng-show="false" >
+			<div ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_SUPORTE"  ng-controller="chamadoManutencaoController as manuctrl" ng-init="manuctrl.verificaMensagemLida()">
 				<audio  id="myVideo" ng-show="teste" controls="controls" height="5px" width="10px">
 				  <source src="/public/img/som.mp3" type="audio/mpeg" />
 					<embed height="5px" width="10px" src="/public/img/som.mp3" />
@@ -285,7 +284,7 @@
 			</div>	
 			</div>
 			<div ng-show="false">
-			<div  ng-controller="chamadoTiController as ctrl" ng-init="ctrl.verificaMensagemLida()">
+			<div ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_SUPORTE" ng-controller="chamadoTiController as ctrl" ng-init="ctrl.verificaMensagemLida()">
 				<audio id="myAudio"  ng-show="teste" controls="controls"	height="5px" width="10px">
 					<source src="/public/img/som.mp3" type="audio/mpeg" />
 					<embed height="5px" width="10px" src="/public/img/som.mp3" />

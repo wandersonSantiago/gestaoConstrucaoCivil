@@ -21,7 +21,7 @@
 						<th>Telefone</th>
 						<th>Sexo</th>
 						<th>Cidade</th>
-						<th>Editar</th>
+						<th ng-if="ROLE_MODULO_RECURSOS_HUMANOS_FUNCIONARIO_ALTERAR">Editar</th>
 					</tr>
 				</thead>
 				<tbody
@@ -33,7 +33,7 @@
 						<td>{{ funcionario.telefoneCelular}}</td>
 						<td>{{ funcionario.sexo }}</td>
 						<td>{{ funcionario.endereco.localidade}}</td>
-						<td><a href="#/funcionario/edita/{{funcionario.id}}"><i class="glyphicon glyphicon-pencil"></i></a>
+						<td ng-if="ROLE_MODULO_RECURSOS_HUMANOS_FUNCIONARIO_ALTERAR"><a href="#/funcionario/edita/{{funcionario.id}}"><i class="glyphicon glyphicon-pencil"></i></a>
 					</tr>
 
 				</tbody>

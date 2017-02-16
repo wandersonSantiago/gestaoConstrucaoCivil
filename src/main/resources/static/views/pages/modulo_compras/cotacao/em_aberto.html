@@ -35,9 +35,9 @@
 						<td>{{cotacao.dataLimite | date : 'dd/MM/yyyy'}}</td>
 						<td ng-if="fechado">{{cotacao.dataFechamento | date : 'dd/MM/yyyy'}}</td>
 					
-						<td class="col-sm-1"><a  ng-href="#/cotacao/concorrentes/{{cotacao.id}}" class="btn  btn-info">Concorrentes</a></td>
+						<td  class="col-sm-1"><a  ng-href="#/cotacao/concorrentes/{{cotacao.id}}" class="btn  btn-info">Concorrentes</a></td>
 						<td ng-if="cotacao.fechado" class="col-sm-1"><a  ng-href="#/cotacao/vencedores/{{cotacao.id}}" class="btn  btn-success">Vencedores</a></td>
-						<td ng-if="!cotacao.fechado" class="col-sm-1"><a  ng-href="#/cotacao/cadastro/{{cotacao.id}}" class="btn  btn-primary">Cadastrar</a></td>
+						<td ng-if="ROLE_MODULO_COMPRAS_COTACAO_CADASTRAR" ng-show="!cotacao.fechado" class="col-sm-1"><a  ng-href="#/cotacao/cadastro/{{cotacao.id}}" class="btn  btn-primary">Cadastrar</a></td>
 						<td ng-if="!cotacao.fechado" class="col-sm-1"><a  ng-click="cotacaoCtrl.fecharCotacao(cotacao.id)" class="btn  btn-success">Encerrar</a></td> 
 						
 					</tr>

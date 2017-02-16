@@ -40,7 +40,7 @@
 						<td>{{lista.custoMedio | currency}}</td>
 					    <td>{{lista.valorTotal | currency}}</td>
 					
-						<td><a href="#/estoque/alteracao/{{lista.produto.codigo}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						<td ng-if="ROLE_MODULO_ESTOQUE_ALTERA_LIMITE"><a href="#/estoque/alteracao/{{lista.produto.codigo}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						
 					</tr>
 

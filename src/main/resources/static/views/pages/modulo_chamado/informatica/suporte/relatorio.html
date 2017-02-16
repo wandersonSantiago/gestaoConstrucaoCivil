@@ -7,8 +7,8 @@
 	    <section layout="row" layout-align="right center">
 		  <a  href="javascript:window.history.go(-1)">Voltar</a>
 		  <md-button href="#/" class="groupX left">Menu</md-button>
-		  <md-button href="#/chamado/informatica/cadastrar" class="groupX middle">Abrir</md-button>
-		  <md-button href="#/chamado/informatica/lista" class="groupX middle">Lista</md-button>	
+		  <md-button ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_USUARIO" href="#/chamado/informatica/cadastrar" class="groupX middle">Abrir</md-button>
+		  <md-button ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_USUARIO" href="#/chamado/informatica/lista" class="groupX middle">Lista</md-button>	
 		  <md-button href="#/chamado/informatica/suporte/relatorio" class="groupX right">relatório</md-button>  
 		</section>
 	<div class="panel panel-default"></div>

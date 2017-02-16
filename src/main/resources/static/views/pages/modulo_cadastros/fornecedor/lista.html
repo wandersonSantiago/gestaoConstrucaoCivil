@@ -22,6 +22,7 @@
 						<th>Telefone</th>
 						<th>Cidade</th>
 						<th>Estado</th>
+						<th ng-if="ROLE_MODULO_CADASTROS_FORNECEDOR_ALTERAR">Editar</th>
 						
 					</tr>
 				</thead>
@@ -36,7 +37,7 @@
 						<td>{{ fornecedor.dadoEmpresa.telefone }}</td>
 						<td>{{ fornecedor.dadoEmpresa.endereco.localidade }}</td>
 						<td>{{ fornecedor.dadoEmpresa.endereco.uf }}</td>
-						<td><a href="#/fornecedor/edita/{{fornecedor.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						<td ng-if="ROLE_MODULO_CADASTROS_FORNECEDOR_ALTERAR"><a href="#/fornecedor/edita/{{fornecedor.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 						
 					</tr>
 
