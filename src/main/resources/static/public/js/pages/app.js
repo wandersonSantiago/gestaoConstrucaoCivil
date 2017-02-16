@@ -251,10 +251,10 @@ var app = angular.module('gcc',['ngAnimate','ngRoute','ngMaterial', 'angucomplet
 				 
 				 	
 			 	var  paginaUsuarioCadastrar = "/usuario/cadastro", paginaUsuarioAlterar = "/usuario/alteracao/:idUsuario", paginaUsuarioConsulta = "/usuario/listagem", paginaUsuarioPermissao = "/usuario/permissao/editar/:idUsuario";
-				 	if(!$rootScope.ROLE_MODULO_ADMIN || !$rootScope.ROLE_USUARIO_CADASTRAR && $location.path() == paginaUsuarioCadastrar ){	$location.path("/semAcesso");}	
-				 	if(!$rootScope.ROLE_MODULO_ADMIN && $location.path() == paginaUsuarioConsulta ){	$location.path("/semAcesso");}
-				 	if(!$rootScope.ROLE_MODULO_ADMIN || !$rootScope.ROLE_USUARIO_EMPREENDIMENTO_ALTERAR && $location.path() == paginaUsuarioAlterar ){	$location.path("/semAcesso");}	
-				 	if(!$rootScope.ROLE_MODULO_ADMIN && $location.path() == paginaUsuarioPermissao ){	$location.path("/semAcesso");}
+				 	if(!$rootScope.ROLE_USUARIO_CADASTRAR && $location.path() == paginaUsuarioCadastrar ){	$location.path("/semAcesso");}	
+				 	if(!$rootScope.ROLE_USUARIO_EMPREENDIMENTO_CONSULTAR && $location.path() == paginaUsuarioConsulta ){	$location.path("/semAcesso");}
+				 	if(!$rootScope.ROLE_USUARIO_EMPREENDIMENTO_ALTERAR && $location.path() == paginaUsuarioAlterar ){	$location.path("/semAcesso");}	
+				 	if(!$rootScope.ROLE_USUARIO_EMPREENDIMENTO_PERMISSSAO && $location.path() == paginaUsuarioPermissao ){	$location.path("/semAcesso");}
 				 
 				//MODULO RECURSOS HUMANOS
 				var  paginaCargoCadastrar = "/cargo/cadastro", paginaCargoAlterar = "/cargo/edita/:idCargo" , paginaCargoConsultar = "/cargo/lista";
