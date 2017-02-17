@@ -88,14 +88,21 @@ app.factory('chamadoManutencaoService', function($rootScope, toastr, $http){
 		
 		relatorioChamadoSuporte: function(pages, maxResults){
 			var config = {params: {page: pages , maxResults : maxResults}};
-			return $http.get('/rest/chamado/chamadoTi/suporte/relatorio/', config)
+			return $http.get('/rest/chamado/chamadoManutencao/suporte/relatorio/', config)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
 				return $q.reject(errResponse);
 			});
 		},
-		
+		relatorioPorData: function(dataInicial, dataFinal){
+			return $http.get('/rest/chamado/chamadoManutencao/suporte/relatorio/data/' +dataInicial , +dataFinal)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				return $q.reject(errResponse);
+			});
+		},
 		buscarPorId: function(chamado){
 			return $http.get('/rest/chamado/chamadoManutencao/buscaPorId/'+chamado)
 			.then(function(response){

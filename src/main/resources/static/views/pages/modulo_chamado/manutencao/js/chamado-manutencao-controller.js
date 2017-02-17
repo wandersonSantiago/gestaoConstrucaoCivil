@@ -294,6 +294,15 @@ app.controller('chamadoManutencaoController', function($scope, $rootScope, $time
 				});
 	     };
 	     
+	     self.relatorioPorData = function(dataInicial , dataFinal){
+	    	 chamadoManutencaoService.relatorioPorData(dataInicial, dataFinal).
+				then(function(f){
+					$scope.ativaTabela = true;
+					$scope.relatorioChamadoSuporte = f;					
+					}, function(errResponse){
+				});
+	     };
+	     
 	     $scope.labels = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho"];
 	     $scope.series = ['Series A', 'Series B'];
 	     $scope.data = [

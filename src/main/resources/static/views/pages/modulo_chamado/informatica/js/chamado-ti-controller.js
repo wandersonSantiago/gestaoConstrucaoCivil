@@ -332,6 +332,15 @@ app.controller('chamadoTiController', function($scope, $timeout, $rootScope, cha
 				});
 	     };
 	     
+	     self.relatorioPorData = function(dataInicial , dataFinal){
+	    	 chamadoTiService.relatorioPorData(dataInicial, dataFinal).
+				then(function(f){
+					$scope.ativaTabela = true;
+					$scope.relatorioChamadoSuporte = f;					
+					}, function(errResponse){
+				});
+	     };
+	     
 	     $scope.labels = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho"];
 	     $scope.series = ['Series A', 'Series B'];
 	     $scope.data = [

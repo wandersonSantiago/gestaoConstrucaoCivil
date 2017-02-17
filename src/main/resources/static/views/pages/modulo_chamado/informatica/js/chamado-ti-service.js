@@ -112,6 +112,14 @@ app.factory('chamadoTiService', function($rootScope, toastr, $http){
 				return $q.reject(errResponse);
 			});
 		},
+		relatorioPorData: function(dataInicial, dataFinal){
+			return $http.get('/rest/chamado/chamadoTi/suporte/relatorio/data/' +dataInicial , +dataFinal)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				return $q.reject(errResponse);
+			});
+		},
 		listaUsuario: function(){
 			return $http.get('/rest/chamado/chamadoTi/usuario/lista')
 			.then(function(response){
