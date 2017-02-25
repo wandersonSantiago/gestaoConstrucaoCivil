@@ -38,14 +38,9 @@ public class ChamadoManutencaoRestController {
 	}
 
 	@GetMapping(value = "/suporte/relatorio/data/{dataInicial,dataFinal}")
-	public ResponseEntity<Page<ChamadoManutencao>> relatorio(
-			@RequestParam(defaultValue = "0", required = false) int page,
-			@RequestParam(defaultValue = "0", required = false) int maxResults, 
-			Date dataInicial,
-			Date dataFinal) {
-		Page<ChamadoManutencao> chamadoManutencao = chamadoManutencaoService
-				.relatorio(new PageRequest(page, maxResults));
-		return new ResponseEntity<Page<ChamadoManutencao>>(chamadoManutencao, HttpStatus.OK);
+	public ResponseEntity<Iterable<ChamadoManutencao>> relatorio(Date dataInicial,Date dataFinal) {
+		
+		return new ResponseEntity<Iterable<ChamadoManutencao>>(chamadoManutencaoService.relatorio(dataInicial, dataFinal), HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/usuario/lista")

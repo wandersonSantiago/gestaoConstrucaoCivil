@@ -5,14 +5,13 @@ import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.chamado.ChamadoManutencao;
 import br.com.system.gestaoConstrucaoCivil.enuns.chamado.StatusChamado;
+import br.com.system.gestaoConstrucaoCivil.pojo.ConverteData;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.chamado.ChamadoManutencaoRepository;
 
@@ -98,8 +97,9 @@ public class ChamadoManutencaoService {
 		return chamadoManutencao;
 	}
 	
-	public Page<ChamadoManutencao> relatorio(PageRequest page) {
-		return chamadoManutencaoRepository.findAll(page);
+	public Collection<ChamadoManutencao> relatorio(Date dataInicial,Date dataFinal) {
+		
+		return chamadoManutencaoRepository.relatorio(new ConverteData(dataInicial).getString(),new ConverteData(dataFinal).getString());
 	}
 
 }

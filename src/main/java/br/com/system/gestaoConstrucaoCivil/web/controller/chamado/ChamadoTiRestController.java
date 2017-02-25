@@ -1,11 +1,11 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller.chamado;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -40,12 +39,10 @@ public class ChamadoTiRestController {
 	}
 
 	@GetMapping(value = "/suporte/relatorio/data/{dataInicial,dataFinal}")
-	public ResponseEntity<Page<ChamadoTi>> relatorio(@RequestParam(defaultValue = "0", required = false) int page,
-			@RequestParam(defaultValue = "0", required = false) int maxResults, Date dataInicial, Date dataFinal) {
+	public ResponseEntity<Iterable<ChamadoTi>>relatorio(Date dataInicial, Date dataFinal) {
 		
-		System.out.println("Page QT:" + page + " Max results:" + maxResults);
-		Page<ChamadoTi> chamadoTi = chamadoTiService.relatorio(new PageRequest(page, 3));
-		return new ResponseEntity<Page<ChamadoTi>>(chamadoTi, HttpStatus.OK);
+			Iterable<ChamadoTi> chamadoTi = chamadoTiService.relatorio(dataInicial,dataFinal);
+			return new ResponseEntity<Iterable<ChamadoTi>>(chamadoTi, HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/usuario/lista")

@@ -4,14 +4,13 @@ import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.chamado.ChamadoTi;
 import br.com.system.gestaoConstrucaoCivil.enuns.chamado.StatusChamado;
+import br.com.system.gestaoConstrucaoCivil.pojo.ConverteData;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.chamado.ChamadoTiRepository;
 
@@ -97,7 +96,8 @@ public class ChamadoTiService {
 		}
 	}
 
-	public Page<ChamadoTi> relatorio(PageRequest page) {
-		return chamadoTiRepository.findAll(page);
+	public Collection<ChamadoTi> relatorio(Date dataInicial, Date dataFinal) {
+		
+		return chamadoTiRepository.relatorio(new ConverteData(dataInicial).getString(),new ConverteData(dataFinal).getString());
 	}
 }
