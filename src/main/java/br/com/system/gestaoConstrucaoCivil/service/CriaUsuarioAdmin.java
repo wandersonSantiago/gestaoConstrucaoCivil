@@ -1,26 +1,24 @@
 package br.com.system.gestaoConstrucaoCivil.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 import java.util.Scanner;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Permissao;
 import br.com.system.gestaoConstrucaoCivil.entity.PermissaoUsuario;
 import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
-import br.com.system.gestaoConstrucaoCivil.enuns.TipoModulo;
 import br.com.system.gestaoConstrucaoCivil.repository.PermissaoRepository;
 
 
 @Component
-public class CriaUsuarioAdmin implements ApplicationListener<ContextRefreshedEvent>{
+public class CriaUsuarioAdmin {
 
 	@Autowired
 	private UsuarioService usuarioService;
@@ -30,10 +28,14 @@ public class CriaUsuarioAdmin implements ApplicationListener<ContextRefreshedEve
 	@Autowired
 	private PermissaoUsuarioService permissaoUsuarioService;
 	
+	
+	@EventListener(ContextRefreshedEvent.class)
+    void contextRefreshedEvent() {
+       
+		criarUsuario();
+    }
 	private void criarUsuario()
 	{
-		
-		//permissaoRepository.save(criarPermissao());
 		
 		if(usuarioService.existeLoginCadastrado("root") == false)
 		{
@@ -77,15 +79,12 @@ public class CriaUsuarioAdmin implements ApplicationListener<ContextRefreshedEve
     }
     private String pedirSenha()
     {
-    	 Scanner lerSenha = new Scanner(System.in);
+    	 
+    	Scanner lerSenha = new Scanner(System.in);
     	 System.out.println("Digite uma senha para o usuário root:");
-    	 String senha = lerSenha.nextLine();
+    	  String senha = lerSenha.nextLine();
     	 return senha;
+    	
+    	
     }
-   
-	@Override
-	public void onApplicationEvent(ContextRefreshedEvent event) {
-		criarUsuario();
-		
-	}
 }

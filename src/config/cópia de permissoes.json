@@ -1,0 +1,8 @@
+[{"id":2938,"descricao":"módulo de cadastros","rol":"MODULO_CHAMADO","tipoModulo":"MODULO_CHAMADO"},
+	{"id":2939,"descricao":"módulo de cadastros","rol":"MODULO_CHAMADO_INFORMATICA_USUARIO","tipoModulo":"MODULO_CHAMADO"},
+	{"id":2940,"descricao":"módulo de cadastros","rol":"MODULO_CHAMADO_INFORMATICA_SUPORTE","tipoModulo":"MODULO_CHAMADO"},
+	{"id":2941,"descricao":"módulo de cadastros","rol":"MODULO_CHAMADO_INFORMATICA_SUPORTE_RELATORIO","tipoModulo":"MODULO_CHAMADO"},
+	{"id":2942,"descricao":"módulo de cadastros","rol":"MODULO_CHAMADO_MANUTENCAO_USUARIO","tipoModulo":"MODULO_CHAMADO"},
+	{"id":2943,"descricao":"módulo de cadastros","rol":"MODULO_CHAMADO_MANUTENCAO_SUPORTE","tipoModulo":"MODULO_CHAMADO"},
+	{"id":2944,"descricao":"módulo de cadastros","rol":"MODULO_CHAMADO_MANUTENCAO_SUPORTE_RELATORIO","tipoModulo":"MODULO_CHAMADO"},
+	{"id":99999999,"descricao":"MODULO GERENCIAMENTO","rol":"USUARIO_EMPREENDIMENTO_PERMISSSAO","tipoModulo":"MODULO_GERENCIAMENTO"}]
