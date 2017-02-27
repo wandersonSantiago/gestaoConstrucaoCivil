@@ -336,27 +336,46 @@ app.controller('chamadoTiController', function($scope, $timeout, $rootScope, cha
 	    	 chamadoTiService.relatorioPorData(dataInicial, dataFinal).
 				then(function(f){
 					$scope.ativaTabela = true;
-					$scope.relatorioChamadoSuporte = f;					
+					$scope.relatorioChamadoSuporte = f;		
+					chart(f);
 					}, function(errResponse){
 				});
-	     };
-	     
-	     $scope.labels = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho"];
-	     $scope.series = ['Series A', 'Series B'];
-	     $scope.data = [
-	       [65, 59, 80, 81, 56, 55, 40],
-	       [28, 48, 40, 19, 86, 27, 90]
-	     ];
-	     $scope.onClick = function (points, evt) {
-	       console.log(points, evt);
-	     };
-	     
-	     // Simulate async data update 
-	     $timeout(function () {
-	       $scope.data = [
-	         [28, 48, 40, 19, 86, 27, 90],
-	         [65, 59, 80, 81, 56, 55, 40]
-	       ];
-	     }, 3000);
+	  	     };
+	    
+	  	     function chart(chamado){
+	  	    	for(i = 0 ; i < chamado.length ; i++){
+			    	 console.log(chamado[i]);
+			    	 
+			    	 $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+			    	  $scope.series = ['Series A', 'Series B'];
+			    	  $scope.data = [
+			    	    [65, 59, 80, 81, 56, 55, 40],
+			    	    [28, 48, 40, 19, 86, 27, 90]
+			    	  ];
+			    	  $scope.onClick = function (points, evt) {
+			    	    console.log(points, evt);
+			    	  };
+			    	  $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
+			    	  $scope.options = {
+			    	    scales: {
+			    	      yAxes: [
+			    	        {
+			    	          id: 'y-axis-1',
+			    	          type: 'linear',
+			    	          display: true,
+			    	          position: 'left'
+			    	        },
+			    	        {
+			    	          id: 'y-axis-2',
+			    	          type: 'linear',
+			    	          display: true,
+			    	          position: 'right'
+			    	        }
+			    	      ]
+			    	    }
+			    	  };
+			     }
+	  	     }
+	    
 
 });

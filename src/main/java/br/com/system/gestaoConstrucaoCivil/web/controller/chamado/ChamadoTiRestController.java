@@ -1,9 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller.chamado;
 
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -14,8 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.system.gestaoConstrucaoCivil.entity.chamado.ChamadoTi;
 import br.com.system.gestaoConstrucaoCivil.enuns.chamado.PrioridadeChamado;
@@ -38,9 +39,8 @@ public class ChamadoTiRestController {
 		return new ResponseEntity<Iterable<ChamadoTi>>(chamadoTi, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/suporte/relatorio/data/{dataInicial,dataFinal}")
-	public ResponseEntity<Iterable<ChamadoTi>>relatorio(Date dataInicial, Date dataFinal) {
-		
+	@GetMapping(value = "/suporte/relatorio/dataInicial/{dataInicial}/dataFinal/{dataFinal}")
+	public ResponseEntity<Iterable<ChamadoTi>>relatorio(@PathVariable Date dataInicial, @PathVariable Date dataFinal) {		
 			Iterable<ChamadoTi> chamadoTi = chamadoTiService.relatorio(dataInicial,dataFinal);
 			return new ResponseEntity<Iterable<ChamadoTi>>(chamadoTi, HttpStatus.OK);
 	}

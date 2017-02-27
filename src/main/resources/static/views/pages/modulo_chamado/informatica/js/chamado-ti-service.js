@@ -1,4 +1,4 @@
-app.factory('chamadoTiService', function($rootScope, toastr, $http){
+app.factory('chamadoTiService', function($rootScope, toastr, $http, $q){
 	
 	
 	return{
@@ -113,7 +113,7 @@ app.factory('chamadoTiService', function($rootScope, toastr, $http){
 			});
 		},
 		relatorioPorData: function(dataInicial, dataFinal){
-			return $http.get('/rest/chamado/chamadoTi/suporte/relatorio/data/' +dataInicial , +dataFinal)
+			return $http.get('/rest/chamado/chamadoTi/suporte/relatorio/dataInicial/' +dataInicial +'/dataFinal/' +dataFinal)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){

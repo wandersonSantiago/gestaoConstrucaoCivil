@@ -1,10 +1,10 @@
-var app = angular.module('gcc',['ngAnimate','ngRoute','ngMaterial', 'angucomplete-alt','ngResource','toastr','ui.bootstrap','blockUI', 'ngStorage','ui.utils.masks', 'ui.mask'])
+var app = angular.module('gcc',['ngAnimate','ngRoute','ngMaterial', 'angucomplete-alt','ngResource','toastr','ui.bootstrap','blockUI', 'ngStorage','ui.utils.masks', 'ui.mask', 'chart.js'])
 .run(function ($rootScope, $location, usuarioService, auth) {
 	 
 	var self = this;
 	  $rootScope.$on('$locationChangeStart', function () { 
 	  role = function(){					
-			for(i = 0 ; i < $rootScope.userData.authorities.length ; i++ ){								
+			for(i = 0 ; i < $rootScope.userData.authorities.length ; i++ ){	
 				var	perfil = $rootScope.userData.authorities[i].authority;
 				
 				//MODULO ADMIN SISTEMA
