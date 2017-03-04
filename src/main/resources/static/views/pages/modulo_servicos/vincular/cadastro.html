@@ -1,6 +1,11 @@
 <meta charset="UTF-8">
 <br>
 <br>
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item" ><a href="#/servicos/vincular/listagem">listar</a></li>
+   <li class="breadcrumb-item active">cadastro</li>
+  </ol>
 <div ng-controller="servicoEmpresaController as servicoCtrl">
 	<div class="box box-primary">
 		<div class="box-header">
@@ -16,7 +21,7 @@
 					<br>
 					<br>
 					<br>
-							<div class="row" ng-if="casa" ng-controller="configEmpreendimentoController as configCtrl" ng-init="configCtrl.quantidadeCasa()">
+					<div class="row" ng-if="casa" ng-controller="configEmpreendimentoController as configCtrl" ng-init="configCtrl.quantidadeCasa()">
 						
 						<div class="col-sm-4"  >
 							<select class="form-control select2" style=" width: 100%;" ng-model="servicoCtrl.servicoCasa.NumeroCasa" 

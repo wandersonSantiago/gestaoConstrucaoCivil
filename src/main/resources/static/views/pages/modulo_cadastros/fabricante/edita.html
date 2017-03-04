@@ -1,6 +1,12 @@
 <meta charset="UTF-8">
 <br>
 <br>
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/fabricante/cadastro">Cadastro fabricante</a></li>
+   <li class="breadcrumb-item"><a href="#/fabricante/lista">Lista de fabricantes</a></li>
+   <li class="breadcrumb-item active">Editar</li>
+ </ol>
 <div 	ng-controller="fabricanteController as fabricanteCtrl">
 
 <div class="box box-primary" >
@@ -9,8 +15,6 @@
 			<span class="lead">Editar Fabricante</span>
 		</div>
 		<div class="panel-body">
-
-			<br>
 			<div class="container col-sm-12 ">
 				<form role="form-vertical" name="formFabricante"
 					ng-submit="fabricanteCtrl.altera()">

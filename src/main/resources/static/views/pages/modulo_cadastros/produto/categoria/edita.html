@@ -1,6 +1,12 @@
 <meta charset="UTF-8">
 <br>
 <br>
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/produto/categoria/cadastro">Cadastro Categoria</a></li>
+   <li class="breadcrumb-item"><a href="#/produto/categoria/lista">Lista de Categoria</a></li>
+   <li class="breadcrumb-item active">Editar</li>
+ </ol>
 <div ng-controller="categoriaController as categoriaCtr" >
 
 	<div class="box box-primary" >
@@ -9,8 +15,6 @@
 			<span class="lead">Editar de  Categoria </span>
 		</div>
 		<div class="panel-body">
-
-			<br>
 			<div class="container col-sm-12 ">
 				<form role="form-vertical" ng-submit="categoriaCtr.altera()" >
 					<div class="row">

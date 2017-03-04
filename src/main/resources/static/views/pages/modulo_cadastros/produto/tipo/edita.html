@@ -1,6 +1,12 @@
 <meta charset="UTF-8">
 <br>
 <br>
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/produto/tipo/cadastro">Cadastro Tipo Produto</a></li>
+   <li class="breadcrumb-item"><a href="#/produto/tipo/lista">Lista de Tipo Produto</a></li>
+   <li class="breadcrumb-item active">Editar</li>
+ </ol>
 <div  ng-controller="tipoProdutoController as tipoCtrl" >
 
 	<div class="box box-primary" >
@@ -9,8 +15,6 @@
 			<span class="lead">Cadastrar Tipo do Produto </span>
 		</div>
 		<div class="panel-body">
-
-			<br>
 			<div class="container col-sm-12 ">
 				<form role="form-vertical" ng-submit="tipoCtrl.altera()" >
 					<div class="row">

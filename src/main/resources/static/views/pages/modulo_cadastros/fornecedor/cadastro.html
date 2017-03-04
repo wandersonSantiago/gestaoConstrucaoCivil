@@ -1,6 +1,11 @@
 <meta charset="UTF-8">
 <br>
 <br>
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/fornecedor/lista">Lista de Fornecedor</a></li>
+   <li class="breadcrumb-item active">Cadastro Fornecedor</li>
+ </ol>
 <div ng-controller="fornecedorController as fornecedorCtrl">
 
 <div class="box box-primary" >
@@ -9,9 +14,7 @@
 			<span class="lead">Cadastro de Fornecedor </span>
 		</div>
 		<div class="panel-body">
-
-			<br>
-			<div class="container col-sm-12 ">
+		<div class="container col-sm-12 ">
 				<form role="form-vertical" name="formFornecedor"
 					ng-submit="fornecedorCtrl.salva()">
 					

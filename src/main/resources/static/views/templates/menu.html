@@ -47,7 +47,14 @@
                            
                 <li ng-if="ROLE_MODULO_CADASTROS">
                   <a href=""><i class="treeview"></i> Cadastros<i class="fa fa-angle-left pull-right"></i></a>
-                  <ul class="treeview-menu">                    
+                  <ul class="treeview-menu">    
+                   <li>
+                      <a   href=""><i class="glyphicon glyphicon-shopping-cart"></i>Cliente Morador<i class="fa fa-angle-left pull-right"></i></a>
+                      <ul class="treeview-menu">
+                        	<li ><a class="top" href="#/morador/cadastrar">Cadastro</a></li>
+							<li ><a class="top" href="#/morador/listar">Lista</a></li>
+                      </ul>
+                    </li>                
                     <li>
                       <a  ng-if="ROLE_MODULO_CADASTROS_FORNECEDOR_CADASTRAR || ROLE_MODULO_CADASTROS_FORNECEDOR_CONSULTAR" href=""><i class="glyphicon glyphicon-shopping-cart"></i>Fornecedor<i class="fa fa-angle-left pull-right"></i></a>
                       <ul class="treeview-menu">

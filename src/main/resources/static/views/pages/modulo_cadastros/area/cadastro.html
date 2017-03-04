@@ -1,6 +1,11 @@
 <meta charset="UTF-8">
 <br>
 <br>
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/area/lista">Lista de areas</a></li>
+   <li class="breadcrumb-item active">Cadastro da area</li>
+ </ol>  
 <div  ng-controller="areaProdutoController as areaCtrl" >
 
 	<div class="box box-primary" >
@@ -9,8 +14,6 @@
 			<span class="lead">Cadastro da  área de aplicação do Produto </span>
 		</div>
 		<div class="panel-body">
-
-			<br>
 			<div class="container col-sm-12 ">
 				<form role="form-vertical" ng-submit="areaCtrl.salva()" >
 					<div class="row">		

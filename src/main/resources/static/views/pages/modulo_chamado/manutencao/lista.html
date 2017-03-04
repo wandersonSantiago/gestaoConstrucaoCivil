@@ -4,11 +4,12 @@
 
 	
 	     <br>
-	    <section layout="row" layout-align="right center">
-		  <md-button href="#/" class="groupX left">Menu</md-button>
-		  <md-button ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_USUARIO" href="#/chamado/manutencao/cadastrar" class="groupX middle">Abrir</md-button>
-		  <md-button ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_SUPORTE" href="#/chamado/manutencao/suporte/lista" class="groupX middle">Suporte</md-button>
-		</section>
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item" ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_USUARIO"><a href="#/chamado/manutencao/cadastrar">Abrir</a></li>
+   <li class="breadcrumb-item" ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_SUPORTE"><a href="#/chamado/manutencao/suporte/lista">Suporte</a></li>
+   <li class="breadcrumb-item active">Meus chamados</li>
+  </ol>	 	  
 	    <div class="box box-primary" ng-init="chamadoCtr.listaUsuario()">
 		<div class="box-header">
 			<span class="lead">Lista de Chamados Manutenção</span>

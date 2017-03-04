@@ -1,7 +1,11 @@
 <meta charset="UTF-8">
 <br>
 <br>
-
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/empresa_contratada/listagem">Lista de empresas</a></li>
+   <li class="breadcrumb-item active">Cadastro de empresas</li>
+ </ol>  
 
 <div  ng-controller="adminSistemaController as adminCtrl">
 
@@ -10,9 +14,7 @@
 		<div class="box-header">
 			<span class="lead">Empresa Contratante </span>
 		</div>
-		<div class="panel-body">
-
-			<br>
+		<div class="panel-body">			
 			<div class="container col-sm-12 ">
 				<form role="form-vertical" name="formAdminSistema"
 					ng-submit="adminCtrl.salva()">
@@ -153,8 +155,10 @@
 					<br>
 			<div class="row ">
 					
-							<input type="submit" id="submit" value="Salvar"
-								class="btn btn-lg btn-primary btn-block btn-signin">
+							<div class="col-sm-4"></div>
+								<div class="col-sm-4">
+									<input type="submit" id="submit" value="Salvar"		class="btn btn-lg btn-primary btn-block btn-signin">
+								</div>
 						
 					</div>
 					

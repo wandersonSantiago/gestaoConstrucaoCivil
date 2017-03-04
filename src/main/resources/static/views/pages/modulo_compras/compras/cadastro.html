@@ -2,13 +2,16 @@
 <br>
 <br>
 <div  ng-controller="pedidoCompraController as pedidoCompraCtrl" >
-
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item" ><a href="#/compras/lista">Lista</a></li>
+   <li class="breadcrumb-item active">Cadastro</li>
+  </ol>	
 <div class="box box-primary" >
 		<div class="box-header" >
 			<span class="lead">Pedido de Compra</span>
 		</div>
 		<div class="panel-body">
-			<br>
 			<div class="container col-sm-12 " >
 				<form role="form-vertical"  ng-submit="pedidoCompraCtrl.salva()" >
 					<br>

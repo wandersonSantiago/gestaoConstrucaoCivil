@@ -3,13 +3,14 @@
 <div 	ng-controller="chamadoTiController as chamadoCtrl">
 
 	   <br>
-	    <section layout="row" layout-align="right center">
-		  <md-button href="#/" class="groupX left">Menu</md-button>
-		  <md-button ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_USUARIO" href="#/chamado/informatica/cadastrar" class="groupX middle">Abrir</md-button>
-		  <md-button ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_USUARIO" href="#/chamado/informatica/lista" class="groupX middle">Lista</md-button>
-		  <md-button href="#/chamado/informatica/suporte/lista" class="groupX middle">Suporte</md-button>	
-		  <md-button href="#/chamado/informatica/suporte/relatorio" class="groupX right">relatório</md-button>  	  
-		</section>
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item" ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_USUARIO"><a href="#/chamado/informatica/cadastrar">Abrir</a></li>
+   <li class="breadcrumb-item" ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_USUARIO"><a href="#/chamado/informatica/lista">Lista</a></li>
+   <li class="breadcrumb-item" ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_SUPORTE"><a href="#/chamado/informatica/suporte/lista">Suporte</a></li>
+   <li class="breadcrumb-item" ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_SUPORTE"><a href="#/chamado/informatica/suporte/relatorio">relatório</a></li>
+   <li class="breadcrumb-item active">Atendimento Suporte</li>
+ </ol>	 	  
 	<div class="box box-primary">
 
 		<div class="box-header">

@@ -3,11 +3,13 @@
 <div	ng-controller="chamadoTiController as chamadoCtr">
 
 	     <br>
-	    <section layout="row" layout-align="right center">
-		  <md-button href="#/" class="groupX left">Menu</md-button>
-		  <md-button ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_USUARIO"href="#/chamado/informatica/cadastrar" class="groupX middle">Abrir</md-button>
-		  <md-button ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_SUPORTE"  href="#/chamado/informatica/suporte/lista" class="groupX middle">Suporte</md-button>		  
-		</section>
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item" ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_USUARIO"><a href="#/chamado/informatica/cadastrar">Abrir</a></li>
+   <li class="breadcrumb-item" ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_SUPORTE"><a href="#/chamado/informatica/suporte/lista">Suporte</a></li>
+   <li class="breadcrumb-item active">Meus chamados</li>
+ </ol>	 
+	    
 	<div class="box box-primary" ng-init="chamadoCtr.listaUsuario()">
 	
 		<div class="box-header">
