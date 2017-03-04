@@ -6,4 +6,6 @@ import br.com.system.gestaoConstrucaoCivil.entity.ClienteMorador;
 
 public interface ClienteMoradorRepository extends JpaRepository<ClienteMorador, Long>{
 
+	ClienteMorador findByCpf(String cpf);
+
 }

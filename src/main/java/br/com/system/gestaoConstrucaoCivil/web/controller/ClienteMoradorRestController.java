@@ -78,5 +78,11 @@ public class ClienteMoradorRestController {
 	public ResponseEntity<ClienteMorador> buscarPorId(@PathVariable Long id) {
 		return new ResponseEntity<ClienteMorador>(clienteMoradorService.buscarPorId(id), HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/{cpf}/cpf")
+	public ResponseEntity<ClienteMorador> buscarPorCpf(@PathVariable String cpf) {
+		return new ResponseEntity<ClienteMorador>(clienteMoradorService.buscarPorCpf(cpf), HttpStatus.OK);
+	}
+
 
 }

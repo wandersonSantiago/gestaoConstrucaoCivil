@@ -96,7 +96,15 @@ app.factory('chamadoManutencaoService', function($rootScope, toastr, $http){
 			});
 		},
 		relatorioPorData: function(dataInicial, dataFinal){
-			return $http.get('/rest/chamado/chamadoManutencao/suporte/relatorio/data/' +dataInicial , +dataFinal)
+			return $http.get('/rest/chamado/chamadoManutencao/suporte/relatorio/dataInicial/' +dataInicial +'/dataFinal/' +dataFinal)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				return $q.reject(errResponse);
+			});
+		},
+		relatorioPorDataPorTitulo: function(dataInicial, dataFinal ,titulo){
+			return $http.get('/rest/chamado/chamadoManutencao/suporte/relatorio/dataInicial/' +dataInicial +'/dataFinal/' +dataFinal + '/titulo/' +titulo)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){

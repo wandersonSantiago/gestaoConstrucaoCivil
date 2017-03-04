@@ -56,6 +56,15 @@ app.factory('moradorService', function($rootScope, toastr, $http){
 			});
 		},
 		
+		buscarClientePorCpf: function(param){
+			return $http.get('/rest/morador/'+ param +'/cpf')
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				return $q.reject(errResponse);
+			});
+		},
+		
 		listar: function(){
 			return $http.get('/rest/morador')
 			.then(function(response){

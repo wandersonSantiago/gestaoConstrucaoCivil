@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -100,4 +102,13 @@ public class ChamadoTiService {
 		
 		return chamadoTiRepository.relatorio(new ConverteData(dataInicial).getString(),new ConverteData(dataFinal).getString());
 	}
+
+	public Page<ChamadoTi> buscarPoEmpreendimentoComPaginacao(PageRequest pageRequest) {		
+		return chamadoTiRepository.buscarPoEmpreendimentoComPaginacao(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId() , pageRequest);
+	}
+	
+	public Iterable<ChamadoTi> relatorioPorDataETitulo(Date dataInicial, Date dataFinal, String titulo) {
+		return chamadoTiRepository.relatorioPorDataETitulo(new ConverteData(dataInicial).getString(),new ConverteData(dataFinal).getString(), titulo);
+	}
+
 }

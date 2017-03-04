@@ -19,19 +19,55 @@
 			<div>			
 				<br>
 				<div class="row">
-				<div class="col-sm-1"></div>	
+					<div class="col-sm-1"></div>
+					<div class="btn-group" role="group" aria-label="...">
+					  <button type="button" ng-click="ativaBuscaRelatorio('titulo')" class="btn btn-default">Titulo</button>
+					  <button type="button" ng-click="ativaBuscaRelatorio('periodo')"  class="btn btn-default">Peridodo</button>
+					</div>				
+				</div>
+				<br>
+				<div ng-show="porTitulo" class="row">
+						<div class="col-sm-1"></div>											
+						<div class="col-sm-4" >
+						Titulo:
+							<select class="form-control select2" ng-model="titulo" id="titulo"
+							ng-options="titulo for titulo in titulos"
+							  style=" width: 100%;" >
+								<option value="">Titulo</option>
+							</select>
+						</div>								
+						
 				<div class="col-sm-2">
+				Data inicial:
 						<input class="form-control" ng-model="dataInicial" id="dataInicial" type="date" 
 						title="Data pesquisa inicial" required>
 				</div>
 				<div class="col-sm-2">
+				Data final:
 						<input class="form-control" ng-model="dataFinal"  id="dataFinal" type="date" 
 						title="Data pesquisa final">
 					</div>											
 					<div class="col-sm-2">
-						<input type="button" id="buscar" value="Buscar" ng-click="chamadoCtr.relatorioPorData(dataInicial, dataFinal)"	class="btn btn-lg btn-primary btn-block btn-signin">
+						<input type="button" id="buscar" value="Buscar" ng-click="chamadoCtr.relatorioPorDataPorTitulo(dataInicial, dataFinal, titulo)"	class="btn btn-lg btn-primary btn-block btn-signin">
 					</div>				
 				</div>
+				
+				<div ng-show="porPeriodo" class="row">
+					<div class="col-sm-1"></div>	
+					<div class="col-sm-2">
+					Data inicial:
+							<input class="form-control" ng-model="dataInicial" id="dataInicial" type="date" 
+							title="Data pesquisa inicial" required>
+					</div>
+					<div class="col-sm-2">
+					Data final:
+							<input class="form-control" ng-model="dataFinal"  id="dataFinal" type="date" 
+							title="Data pesquisa final">
+						</div>											
+						<div class="col-sm-2">
+							<input type="button" id="buscar" value="Buscar" ng-click="chamadoCtr.relatorioPorData(dataInicial, dataFinal)"	class="btn btn-lg btn-primary btn-block btn-signin">
+						</div>				
+					</div>
 				<br>
 				<br>
 		</div>	
@@ -102,9 +138,7 @@
 						<td>{{ chamado.dataAbertura | date : 'dd/MM/yyyy'}}</td>
 						<td>{{ chamado.dataAbertura | date : 'HH:mm:ss' }}</td>										
 						<td><a href="#/chamado/manutencao/suporte/atendimento/{{chamado.id}}"><i class="glyphicon glyphicon-search"></i></a></td> 
-						<td ng-if="!chamado.silenciar"><a href="" ng-click="chamadoCtr.silenciarChamadoTrue(chamado)"><i class="glyphicon glyphicon-volume-up"></i></a></td>
-						<td ng-if="chamado.silenciar"><a href="" ng-click="chamadoCtr.silenciarChamadoFalse(chamado)"><i class="glyphicon glyphicon-volume-off"></i></a></td>					
-					</tr>
+						</tr>
 				</tbody>
 				<tfoot>
 				</tfoot>

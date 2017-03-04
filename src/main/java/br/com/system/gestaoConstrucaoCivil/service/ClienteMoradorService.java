@@ -30,6 +30,9 @@ public class ClienteMoradorService {
 	public ClienteMorador buscarPorId(Long id) {
 		return clienteMoradorRepository.findOne(id);
 	}
+	public ClienteMorador buscarPorCpf(String cpf) {
+		return clienteMoradorRepository.findByCpf(cpf);
+	}
 	public Iterable<ClienteMorador> lista() {		
 		return clienteMoradorRepository.findAll();
 	}

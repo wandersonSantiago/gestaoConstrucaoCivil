@@ -39,7 +39,7 @@
 					
 					
 					<div class="row" ng-controller="verificaDadosController as verificaCtrl">
-						<div class="col-sm-4" >
+						<div class="col-sm-3" >
 						RG:
 						<input class="form-control" placeholder="RG" ng-blur="verificaCtrl.verificaRg(moradorCtrl.clienteMorador.rg)"
 								ng-model="moradorCtrl.clienteMorador.rg" id="rg" type="text"
@@ -81,6 +81,7 @@
 								id="telefoneCelular" type="tel" ui-br-phone-number required>
 						</div>
 						<div class="col-sm-9">
+						E-mail:
 							<input class="form-control"
 								ng-model="moradorCtrl.clienteMorador.email" placeholder="Email"
 								id="email" type="email"  required>

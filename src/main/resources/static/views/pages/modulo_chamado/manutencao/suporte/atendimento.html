@@ -24,11 +24,11 @@
 									
 					<div class="row">
 						<div class="col-sm-3" >
-								Prioridade
+								Prioridade:
 								<input class="form-control" ng-model="chamadoCtrl.chamadoManutencao.prioridade" id="prioridade" name="prioridade" type="text"  disabled required>						
 						</div>	
 						<div class="col-sm-3" >
-							Status
+							Status:
 							<input class="form-control" ng-model="chamadoCtrl.chamadoManutencao.status" type="text"  disabled required>						
 						</div>
 						<div class="col-sm-3" ng-if="habilitaBotaoAtenderChamado">
@@ -48,14 +48,58 @@
 					<br>
 					<div class="row">		
 						<div class="col-sm-6" >
-						Solicitante
+						Solicitante:
 							<input class="form-control"  ng-model="chamadoCtrl.chamadoManutencao.usuarioSolicitante.nome"  type="text"  disabled required>						
 						</div>
 						<div class="col-sm-6" ng-if="chamadoCtrl.chamadoManutencao.usuarioAtendente" >
-						Técnico
+						Atendente:
 							<input class="form-control"  ng-model="chamadoCtrl.chamadoManutencao.usuarioAtendente.nome"  type="text"  disabled required>						
 						</div>
-					</div>		
+					</div>
+					<br>	
+					<div ng-show="!cliente" class="alert alert-info" role="alert">
+					  <a href="#" class="alert-link">O(A) Senhor(a), {{chamadoCtrl.chamadoManutencao.usuarioSolicitante.nome}}, não possui um Imovel!!!</a>
+					</div>
+					<div class="row">					
+						<div ng-show="cliente.empreendimento" class="col-sm-12">
+						
+						<h1><i class="fa fa-bank">{{cliente.empreendimento.descricao}}</i></h1>							
+						</div>
+					</div>
+					<div class="row">
+						<div ng-show="cliente.torre" class="col-sm-3">
+						
+							<h3>Torre: &nbsp <i >{{cliente.torre}}</i></h3>
+						</div>
+						<div ng-show="cliente.andar" class="col-sm-3">
+						
+							<h3>Andar: &nbsp<i >{{cliente.andar}}</i></h3>
+						</div>
+						<div ng-show="cliente.apartamento" class="col-sm-3">
+						
+							<h3>Apartamento: &nbsp<i >{{cliente.apartamento}}</i></h3>
+						</div>
+						<div ng-show="cliente.casa" class="col-sm-3">
+						
+							<h3>Casa: &nbsp<i>{{cliente.casa}}</i></h3>	
+						</div>
+						
+					</div>
+					
+					<div class="row">
+					
+						<div ng-show="cliente.telefoneCelular" class="col-sm-4">						
+							<h3>Contatos:&nbsp<i class="fa fa-phone">&nbsp{{cliente.telefoneCelular}}</i></h3>							
+						</div>
+						<div ng-show="cliente.telefoneFixo" class="col-sm-3">						
+							<h3><i class="fa fa-phone">&nbsp{{cliente.telefoneFixo}}</i></h3>							
+						</div>	
+						<div ng-show="cliente.email" class="col-sm-5">						
+							<h3><i class="fa fa-at">&nbsp{{cliente.email}}</i></h3>							
+						</div>						
+						
+					</div>	
+					<br>
 					<div class="row">										
 						<div class="col-sm-6" >
 						Titulo
@@ -132,7 +176,7 @@
 								</div>
 							</div>
 						</div>
-					</div></div>
+					</div>
 					<br>
 					<div class="modal fade bs-example-modal-lg" id="myCategoria"
 						tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"">
@@ -155,13 +199,14 @@
 						</div>
 					</div>
 		
-		
+				</div>
+				
 				</form>
 			</div>
 			
 
 		</div>
-		<div class="tablecontainer"></div>
+		
 	</div>
 </div>
 

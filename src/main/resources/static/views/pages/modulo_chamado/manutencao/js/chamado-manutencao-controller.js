@@ -1,4 +1,4 @@
-app.controller('chamadoManutencaoController', function($scope, $rootScope, $timeout, chamadoManutencaoService, $location,  usuarioService,  $routeParams) {
+app.controller('chamadoManutencaoController', function($scope, $rootScope, $timeout, chamadoManutencaoService, $location,  usuarioService, moradorService, $routeParams) {
 
 	var self = this;
 	$scope.habilitaTexto = true;
@@ -199,15 +199,18 @@ app.controller('chamadoManutencaoController', function($scope, $rootScope, $time
 			self.titulo = function(){
 				chamadoManutencaoService.titulo().
 					then(function(f){
-						self.titulos = f;			
+						self.titulos = f;	
+						$scope.titulos = f;
 						}, function(errResponse){
 					});
 				};
+				self.titulo();
 	self.buscarPorId = function(id){
 			if(!id)return;
 			chamadoManutencaoService.buscarPorId(id).
 			then(function(p){
 				self.chamadoManutencao = p;
+				buscarClientePorCpf(p.usuarioSolicitante.login);
 				if(self.chamadoManutencao.status == "EM_ANDAMENTO"){	
 					$scope.habilitaTexto = true;
 					$scope.habilitaBotaoFecharChamado = true;
@@ -240,6 +243,16 @@ app.controller('chamadoManutencaoController', function($scope, $rootScope, $time
 			self.buscarPorId(idChamadoManutencao);
 			
 		}
+		
+		function buscarClientePorCpf(cpf){			
+			moradorService.buscarClientePorCpf(cpf).
+			then(function(f){
+				$scope.cliente = f;			
+				}, function(errResponse){
+				sweetAlert({ timer : 3000, text: errResponse.data.message, type : "info", width: 200, higth: 100, padding: 20});
+					
+			});
+		};
 				
 		self.buscaDinamicaUsuario = function(usuario){
 			$scope.buscaChamado = null;
@@ -267,6 +280,9 @@ app.controller('chamadoManutencaoController', function($scope, $rootScope, $time
 		 $scope.ativaTabela = false;
 	     $scope.ativaGrafico = false;
 	     
+	     $scope.porTitulo = false;
+	     $scope.porPeriodo = true;
+	     
 	     self.ativaBotaoTabelaGrafico =  function(botao){
 	    	 if(botao === false){
 	    		 $scope.ativaTabela = true;
@@ -274,6 +290,16 @@ app.controller('chamadoManutencaoController', function($scope, $rootScope, $time
 	    	 }else if(botao === true){
 	    		 $scope.ativaGrafico = true;
 	    		 $scope.ativaTabela = false;
+	    	 }
+	     };
+	     
+	     $scope.ativaBuscaRelatorio =  function(botao){
+	    	 if(botao == 'periodo'){
+	    		 $scope.porTitulo = false;
+	    	     $scope.porPeriodo = true;
+	    	 }else if(botao == 'titulo'){
+	    		 $scope.porTitulo = true;
+	    	     $scope.porPeriodo = false;;
 	    	 }
 	     };
 	     
@@ -290,6 +316,15 @@ app.controller('chamadoManutencaoController', function($scope, $rootScope, $time
 					for(i = 0; i < $scope.totalPages ; i++){
 						self.totalPages.push(i);
 					}
+					}, function(errResponse){
+				});
+	     };
+	     
+	     self.relatorioPorDataPorTitulo= function(dataInicial , dataFinal, titulo){
+	    	 chamadoManutencaoService.relatorioPorDataPorTitulo(dataInicial, dataFinal, titulo).
+				then(function(f){
+					$scope.ativaTabela = true;
+					$scope.relatorioChamadoSuporte = f;					
 					}, function(errResponse){
 				});
 	     };

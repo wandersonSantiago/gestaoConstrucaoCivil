@@ -1,8 +1,9 @@
 package br.com.system.gestaoConstrucaoCivil.repository.chamado;
 
 import java.util.Collection;
-import java.util.Date;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -23,6 +24,13 @@ public interface ChamadoTiRepository extends JpaRepository<ChamadoTi, Long> {
 	
 	@Query("FROM ChamadoTi chamado WHERE CAST(CAST(chamado.dataAbertura as date) as string) >= :dataInicial AND CAST(CAST(chamado.dataAbertura as date) as string) <= :dataFinal")
 	Collection<ChamadoTi> relatorio(@Param(value = "dataInicial") String dataInicial, @Param(value = "dataFinal") String dataFinal);
+
+	@Query("FROM ChamadoTi chamado WHERE chamado.empreendimento.id = ?1 ")
+	Page<ChamadoTi> buscarPoEmpreendimentoComPaginacao(Long id, Pageable page);
+	
+	@Query("FROM ChamadoTi chamado WHERE CAST(CAST(chamado.dataAbertura as date) as string) >= :dataInicial AND CAST(CAST(chamado.dataAbertura as date) as string) <= :dataFinal AND chamado.titulo = :titulo")
+	Iterable<ChamadoTi> relatorioPorDataETitulo(@Param(value = "dataInicial") String dataInicial, @Param(value = "dataFinal") String dataFinal, @Param(value = "titulo")String titulo);
+	
 	
 	
 }

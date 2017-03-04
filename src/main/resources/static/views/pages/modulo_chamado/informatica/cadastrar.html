@@ -28,7 +28,7 @@
 							</select>
 					</div>
 					<div class="col-sm-4"  ng-init="chamadoCtrl.tipoEquipamento()" >
-							<select class="form-control " ng-model="equipamento" id="tipo" ng-click="chamadoCtrl.verificaEquipamento(equipamento)"
+							<select class="form-control " ng-model="equipamento" id="tipo" ng-click="verificaEquipamento(equipamento)"
 							ng-options="tipoEquipamento for tipoEquipamento in chamadoCtrl.tipoEquipamentos" >
 								<option  value="">Tipo Equipamento</option>
 					</select>

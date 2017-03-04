@@ -16,22 +16,74 @@
 		<div class="panel-heading">
 			<span class="lead">Relátorio Chamado Informática </span>
 		</div>
-			<div>			
-				<br>
+			<div>	<br>		
 				<div class="row">
-				<div class="col-sm-1"></div>	
+					<div class="col-sm-1"></div>
+					<div class="btn-group" role="group" aria-label="...">
+					  <button type="button" ng-click="ativaBuscaRelatorio('titulo')" class="btn btn-default">Titulo</button>
+					  <button type="button" ng-click="ativaBuscaRelatorio('periodo')"  class="btn btn-default">Peridodo</button>
+					</div>				
+				</div>
+				<br>
+				<div ng-show="porTitulo" class="row">
+						<div class="col-sm-1"></div>
+					<div class="col-sm-2"  >
+					Tipo Equipamento
+						<select class="form-control " ng-model="equipamento" id="tipo" ng-click="verificaEquipamento(equipamento)"
+						ng-options="tipoEquipamento for tipoEquipamento in tipoEquipamentos" >
+							<option  value="">Tipo Equipamento</option>
+						</select>
+					</div>											
+						<div >	
+						<div ng-show="computador" class="col-sm-2"   >
+						Titulo
+							<select class="form-control select2" ng-model="titulo" id="titulo"
+							ng-options="titulo for titulo in titulos" >
+								<option value="">Titulo</option>
+							</select>
+						</div>						
+						<div ng-show="impressora" class="col-sm-2"   >
+						Titulo
+							<select class="form-control " ng-model="titulo" id="tituloImpressora"
+							ng-options="tituloImpressora for tituloImpressora in tituloImpressoras" >
+								<option value="">Titulo</option>
+							</select>
+						</div>							
+					</div>										
+						
 				<div class="col-sm-2">
+				Data inicial:
 						<input class="form-control" ng-model="dataInicial" id="dataInicial" type="date" 
 						title="Data pesquisa inicial" required>
 				</div>
 				<div class="col-sm-2">
+				Data final:
 						<input class="form-control" ng-model="dataFinal"  id="dataFinal" type="date" 
 						title="Data pesquisa final">
 					</div>											
 					<div class="col-sm-2">
-						<input type="button" id="buscar" value="Buscar" ng-click="chamadoCtr.relatorioPorData(dataInicial, dataFinal)"	class="btn btn-lg btn-primary btn-block btn-signin">
+					<br>
+						<input type="button" id="buscar" value="Buscar" ng-click="chamadoCtr.relatorioPorDataPorTitulo(dataInicial, dataFinal, titulo)"	class="btn btn-lg btn-primary btn-block btn-signin">
 					</div>				
 				</div>
+				
+				<div ng-show="porPeriodo" class="row">
+					<div class="col-sm-1"></div>	
+					<div class="col-sm-2">
+					Data inicial:
+							<input class="form-control" ng-model="dataInicial" id="dataInicial" type="date" 
+							title="Data pesquisa inicial" required>
+					</div>
+					<div class="col-sm-2">
+					Data final:
+							<input class="form-control" ng-model="dataFinal"  id="dataFinal" type="date" 
+							title="Data pesquisa final">
+						</div>											
+						<div class="col-sm-2">
+							<input type="button" id="buscar" value="Buscar" ng-click="chamadoCtr.relatorioPorData(dataInicial, dataFinal)"	class="btn btn-lg btn-primary btn-block btn-signin">
+						</div>				
+					</div>
+				<br>
 				<br>
 				<br>
 		</div>	
@@ -101,9 +153,7 @@
 						<td>{{ chamado.dataAbertura | date : 'dd/MM/yyyy'}}</td>
 						<td>{{ chamado.dataAbertura | date : 'HH:mm:ss' }}</td>									
 						<td><a href="#/chamado/informatica/suporte/atendimento/{{chamado.id}}"><i class="glyphicon glyphicon-search"></i></a> 
-						<td ng-if="!chamado.silenciar"><a href="" ng-click="chamadoCtr.silenciarChamadoTrue(chamado)"><i class="glyphicon glyphicon-volume-up"></i></a></td>
-						<td ng-if="chamado.silenciar"><a href="" ng-click="chamadoCtr.silenciarChamadoFalse(chamado)"><i class="glyphicon glyphicon-volume-off"></i></a></td>					
-				
+					
 				</tr>
 				</tbody>
 				<tfoot>

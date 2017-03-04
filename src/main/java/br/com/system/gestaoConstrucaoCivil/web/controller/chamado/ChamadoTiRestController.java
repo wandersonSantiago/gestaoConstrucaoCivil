@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.system.gestaoConstrucaoCivil.entity.chamado.ChamadoTi;
 import br.com.system.gestaoConstrucaoCivil.enuns.chamado.PrioridadeChamado;
@@ -43,6 +43,18 @@ public class ChamadoTiRestController {
 	public ResponseEntity<Iterable<ChamadoTi>>relatorio(@PathVariable Date dataInicial, @PathVariable Date dataFinal) {		
 			Iterable<ChamadoTi> chamadoTi = chamadoTiService.relatorio(dataInicial,dataFinal);
 			return new ResponseEntity<Iterable<ChamadoTi>>(chamadoTi, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/suporte/relatorio/dataInicial/{dataInicial}/dataFinal/{dataFinal}/titulo/{titulo}")
+	public ResponseEntity<Iterable<ChamadoTi>> relatorioPorDataETitulo(@PathVariable Date dataInicial, @PathVariable Date dataFinal, @PathVariable String titulo) {
+		Iterable<ChamadoTi> chamado = chamadoTiService.relatorioPorDataETitulo(dataInicial,dataFinal, titulo);
+		return new ResponseEntity<Iterable<ChamadoTi>>(chamado, HttpStatus.OK);
+	}
+	@GetMapping(value = "/suporte/relatorio")
+	public ResponseEntity<Page<ChamadoTi>> lista(@RequestParam(defaultValue="0", required=false) int page
+			,@RequestParam(defaultValue="0", required=false) int maxResults) {
+		Page<ChamadoTi> chamado = chamadoTiService.buscarPoEmpreendimentoComPaginacao(new PageRequest(page, maxResults));
+		return new ResponseEntity<Page<ChamadoTi>>(chamado, HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/usuario/lista")

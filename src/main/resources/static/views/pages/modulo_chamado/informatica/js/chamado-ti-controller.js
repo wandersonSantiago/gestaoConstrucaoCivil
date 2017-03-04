@@ -12,7 +12,7 @@ app.controller('chamadoTiController', function($scope, $timeout, $rootScope, cha
 	
 	var idChamadoTi = $routeParams.idChamadoTi;
 	
-	self.verificaEquipamento = function(equipamento){
+	$scope.verificaEquipamento = function(equipamento){
 		if(equipamento == "COMPUTADOR"){
 			$scope.computador = true;
 			$scope.impressora = false;
@@ -217,25 +217,30 @@ app.controller('chamadoTiController', function($scope, $timeout, $rootScope, cha
 			self.tipoEquipamento = function(){
 				 chamadoTiService.tipoEquipamento().
 					then(function(f){
-						self.tipoEquipamentos = f;			
+						self.tipoEquipamentos = f;	
+						$scope.tipoEquipamentos = f;
 						}, function(errResponse){
 					});
 				};
+				self.tipoEquipamento();
 			self.titulo = function(){
 				 chamadoTiService.titulo().
 					then(function(f){
-						self.titulos = f;			
+						self.titulos = f;	
+						$scope.titulos = f;
 						}, function(errResponse){
 					});
 				};
+				self.titulo();
 			self.tituloImpressora = function(){
 				 chamadoTiService.tituloImpressora().
 					then(function(f){
-						self.tituloImpressoras = f;			
+						self.tituloImpressoras = f;		
+						$scope.tituloImpressoras = f;
 						}, function(errResponse){
 					});
 				};	
-		
+				self.tituloImpressora();
 	self.buscarPorId = function(id){
 			if(!id)return;
 			chamadoTiService.buscarPorId(id).
@@ -305,6 +310,9 @@ app.controller('chamadoTiController', function($scope, $timeout, $rootScope, cha
 		 $scope.ativaTabela = false;
 	     $scope.ativaGrafico = false;
 	     
+	     $scope.porTitulo = false;
+	     $scope.porPeriodo = true;
+	     
 	     self.ativaBotaoTabelaGrafico =  function(botao){
 	    	 if(botao === false){
 	    		 $scope.ativaTabela = true;
@@ -312,6 +320,16 @@ app.controller('chamadoTiController', function($scope, $timeout, $rootScope, cha
 	    	 }else if(botao === true){
 	    		 $scope.ativaGrafico = true;
 	    		 $scope.ativaTabela = false;
+	    	 }
+	     };
+	     
+	     $scope.ativaBuscaRelatorio =  function(botao){
+	    	 if(botao == 'periodo'){
+	    		 $scope.porTitulo = false;
+	    	     $scope.porPeriodo = true;
+	    	 }else if(botao == 'titulo'){
+	    		 $scope.porTitulo = true;
+	    	     $scope.porPeriodo = false;;
 	    	 }
 	     };
 	     
@@ -341,6 +359,15 @@ app.controller('chamadoTiController', function($scope, $timeout, $rootScope, cha
 					}, function(errResponse){
 				});
 	  	     };
+	  	     
+	  	   self.relatorioPorDataPorTitulo= function(dataInicial , dataFinal, titulo){
+	  		 chamadoTiService.relatorioPorDataPorTitulo(dataInicial, dataFinal, titulo).
+					then(function(f){
+						$scope.ativaTabela = true;
+						$scope.relatorioChamadoSuporte = f;					
+						}, function(errResponse){
+					});
+		     };
 	    
 	  	     function chart(chamado){
 	  	    	for(i = 0 ; i < chamado.length ; i++){

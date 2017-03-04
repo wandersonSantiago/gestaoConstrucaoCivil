@@ -37,12 +37,24 @@ public class ChamadoManutencaoRestController {
 		return new ResponseEntity<Iterable<ChamadoManutencao>>(chamadoManutencao, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/suporte/relatorio/data/{dataInicial,dataFinal}")
-	public ResponseEntity<Iterable<ChamadoManutencao>> relatorio(Date dataInicial,Date dataFinal) {
-		
-		return new ResponseEntity<Iterable<ChamadoManutencao>>(chamadoManutencaoService.relatorio(dataInicial, dataFinal), HttpStatus.OK);
+	@GetMapping(value = "/suporte/relatorio/dataInicial/{dataInicial}/dataFinal/{dataFinal}")
+	public ResponseEntity<Iterable<ChamadoManutencao>> relatorio(@PathVariable Date dataInicial, @PathVariable Date dataFinal) {
+		Iterable<ChamadoManutencao> chamado = chamadoManutencaoService.relatorio(dataInicial,dataFinal);
+		return new ResponseEntity<Iterable<ChamadoManutencao>>(chamado, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/suporte/relatorio/dataInicial/{dataInicial}/dataFinal/{dataFinal}/titulo/{titulo}")
+	public ResponseEntity<Iterable<ChamadoManutencao>> relatorioPorDataETitulo(@PathVariable Date dataInicial, @PathVariable Date dataFinal, @PathVariable String titulo) {
+		Iterable<ChamadoManutencao> chamado = chamadoManutencaoService.relatorioPorDataETitulo(dataInicial,dataFinal, titulo);
+		return new ResponseEntity<Iterable<ChamadoManutencao>>(chamado, HttpStatus.OK);
 	}
 
+	@GetMapping(value = "/suporte/relatorio")
+	public ResponseEntity<Page<ChamadoManutencao>> lista(@RequestParam(defaultValue="0", required=false) int page
+			,@RequestParam(defaultValue="0", required=false) int maxResults) {
+		Page<ChamadoManutencao> chamado = chamadoManutencaoService.buscarPoEmpreendimentoComPaginacao(new PageRequest(page, maxResults));
+		return new ResponseEntity<Page<ChamadoManutencao>>(chamado, HttpStatus.OK);
+	}
 	@RequestMapping(method = RequestMethod.GET, value = "/usuario/lista")
 	public ResponseEntity<Iterable<ChamadoManutencao>> listaUsuario() {
 		Iterable<ChamadoManutencao> chamadoManutencao = chamadoManutencaoService.listaChamadoManutencaoUsuario();

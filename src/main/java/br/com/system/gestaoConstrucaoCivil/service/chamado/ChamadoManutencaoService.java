@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -97,9 +99,16 @@ public class ChamadoManutencaoService {
 		return chamadoManutencao;
 	}
 	
-	public Collection<ChamadoManutencao> relatorio(Date dataInicial,Date dataFinal) {
-		
+	public Collection<ChamadoManutencao> relatorio(Date dataInicial,Date dataFinal) {		
 		return chamadoManutencaoRepository.relatorio(new ConverteData(dataInicial).getString(),new ConverteData(dataFinal).getString());
+	}
+
+	public Page<ChamadoManutencao> buscarPoEmpreendimentoComPaginacao(PageRequest pageRequest) {
+		return chamadoManutencaoRepository.findByEmpreendimento_id(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId() , pageRequest);
+	}
+
+	public Iterable<ChamadoManutencao> relatorioPorDataETitulo(Date dataInicial, Date dataFinal, String titulo) {
+		return chamadoManutencaoRepository.relatorioPorDataETitulo(new ConverteData(dataInicial).getString(),new ConverteData(dataFinal).getString(), titulo);
 	}
 
 }

@@ -2,6 +2,8 @@ package br.com.system.gestaoConstrucaoCivil.repository.chamado;
 
 import java.util.Collection;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -9,7 +11,6 @@ import org.springframework.data.repository.query.Param;
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 import br.com.system.gestaoConstrucaoCivil.entity.chamado.ChamadoManutencao;
-import br.com.system.gestaoConstrucaoCivil.entity.chamado.ChamadoTi;
 
 public interface ChamadoManutencaoRepository extends JpaRepository<ChamadoManutencao, Long>{
 
@@ -21,5 +22,10 @@ public interface ChamadoManutencaoRepository extends JpaRepository<ChamadoManute
 
 	@Query("FROM ChamadoManutencao chamado WHERE CAST(CAST(chamado.dataAbertura as date) as string) >= :dataInicial AND CAST(CAST(chamado.dataAbertura as date) as string) <= :dataFinal")
 	Collection<ChamadoManutencao> relatorio(@Param(value = "dataInicial") String dataInicial, @Param(value = "dataFinal") String dataFinal);
+
+	Page<ChamadoManutencao> findByEmpreendimento_id(Long id, Pageable pageable);
+
+	@Query("FROM ChamadoManutencao chamado WHERE CAST(CAST(chamado.dataAbertura as date) as string) >= :dataInicial AND CAST(CAST(chamado.dataAbertura as date) as string) <= :dataFinal AND chamado.titulo = :titulo")
+	Iterable<ChamadoManutencao> relatorioPorDataETitulo(@Param(value = "dataInicial") String dataInicial, @Param(value = "dataFinal") String dataFinal, @Param(value = "titulo")String titulo);
 	
 }
