@@ -58,7 +58,7 @@
 	<script src="public/js/pages/diretivas/date.js"></script>
 	
 	<script src="public/js/pages/route/rotas.js" type="text/javascript"></script>
-	
+	<script src="views/templates/principal-rotas.js" type="text/javascript"></script>
 	
 	<script src="public/js/pages/servicos/tipo-empreendimento-service.js" type="text/javascript"></script>
 	<script src="public/js/pages/servicos/unidade-medida-service.js" type="text/javascript"></script>			
@@ -195,11 +195,11 @@
 	<div ng-show="logado" class="wrapper">
 
 		<header class="main-header navbar-fixed-top">		  
-		    <a href="#/" class="logo navbar-fixed-top">    
+		    <a href="#/" class="logo navbar-top">    
 		      <span class="logo-mini"><b>GCC</b></span>      
 		      <span class="logo-lg"><b>Sistema</b>GCC</span>
 		    </a>		    
-		    <nav class="navbar navbar-fixed-top" role="navigation">      
+		    <nav class="navbar navbar-top" role="navigation">      
 		      <a href="#/" class="sidebar-toggle" data-toggle="offcanvas" role="button">
 		        <span class="sr-only">Toggle navigation</span>
 		      </a>
@@ -229,6 +229,7 @@
 		                    <p>
 		                     		{{user.usuario.nome}}
 		                      <small>{{user.usuario.funcionario.cargo.descricao}}</small>
+		                      <small>{{user.usuario.empreendimento.descricao}}</small>
 		                    </p>
 		                  </li>                 
 		                  <li class="user-footer">
@@ -241,8 +242,8 @@
 		                  </li>
 		                </ul>
 		              </li>
-		              <li ng-if="logado" ><a>Expira em,  {{horaImprimivel}}</a></li>
-		              <li><a>Empreendimento: {{user.usuario.empreendimento.descricao}}</a></li>          
+		              <!-- <li ng-if="logado" ><a>Expira em,  {{horaImprimivel}}</a></li> -->
+		                        
          			<li>
 						<a href="" ng-controller="loginController as loginCtrl"  ng-click="loginCtrl.logout()"> Logout <i class="glyphicon glyphicon-log-out"></i>
 						</a>

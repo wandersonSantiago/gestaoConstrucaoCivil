@@ -1,9 +1,10 @@
 <meta charset="UTF-8">
-<br>
+
 <div 	ng-controller="chamadoTiController as chamadoCtrl">
-   <br>
+   
    <ol class="breadcrumb">
    <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/chamado/home">menu chamado</a></li>
    <li class="breadcrumb-item" ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_USUARIO"><a href="#/chamado/informatica/lista">Lista</a></li>
    <li class="breadcrumb-item" ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_SUPORTE"><a href="#/chamado/informatica/suporte/lista">Suporte</a></li>
    <li class="breadcrumb-item active">Abrir</li>
@@ -16,7 +17,6 @@
 		</div>
 		<div class="panel-body">
 
-			<br>
 			<div class="container col-sm-12 ">
 				<form role="form-vertical" name="formSecretaria" ng-submit="chamadoCtrl.salva()">
 									

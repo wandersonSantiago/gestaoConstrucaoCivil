@@ -1,9 +1,8 @@
 <meta charset="UTF-8">
-<br>
 <div  ng-controller="chamadoManutencaoController as chamadoCtrl">
-	    <br>
 <ol class="breadcrumb">
    <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/chamado/home">menu chamado</a></li>
    <li class="breadcrumb-item" ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_USUARIO"><a href="#/chamado/manutencao/cadastrar">Abrir</a></li>
    <li class="breadcrumb-item" ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_USUARIO"><a href="#/chamado/manutencao/lista">Lista</a></li>
    <li class="breadcrumb-item" ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_SUPORTE"><a href="#/chamado/manutencao/suporte/lista">Suporte</a></li>
@@ -17,7 +16,6 @@
 		</div>
 		<div class="panel-body">
 
-			<br>
 			<div class="container col-sm-12 " >
 				<form role="form-vertical" name="formSecretaria" ng-submit="chamadoCtrl.salvaMensagem()">
 									

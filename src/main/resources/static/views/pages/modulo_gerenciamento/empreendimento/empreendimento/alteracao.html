@@ -1,8 +1,7 @@
 <meta charset="UTF-8">
-<br>
-<br>
 <ol class="breadcrumb">
    <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/gerenciamento/home">menu gerenciamento</a></li>
    <li class="breadcrumb-item" ><a href="#/empreendimento/cadastro">cadastrar</a></li>
    <li class="breadcrumb-item" ><a href="#/empreendimento/listagem">lista</a></li>
    <li class="breadcrumb-item active">alterar</li>
@@ -15,8 +14,6 @@
 			<span class="lead"> Editar Empreendimento </span>
 		</div>
 		<div class="panel-body" >
-
-			<br>
 			<div class="container col-sm-12 ">
 				<form role="form-vertical" name="empreendimentoForm" ng-submit="empCtrl.altera()">
 					<div class="row"  ng-class="{ 'has-error' : empreendimentoForm.descricaoEmpreendimento.$invalid && !empreendimentoForm.descricaoEmpreendimento.$pristine }">

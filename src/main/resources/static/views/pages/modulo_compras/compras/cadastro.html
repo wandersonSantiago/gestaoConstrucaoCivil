@@ -1,9 +1,8 @@
 <meta charset="UTF-8">
-<br>
-<br>
 <div  ng-controller="pedidoCompraController as pedidoCompraCtrl" >
 <ol class="breadcrumb">
    <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/compras/home">menu compras</a></li>
    <li class="breadcrumb-item" ><a href="#/compras/lista">Lista</a></li>
    <li class="breadcrumb-item active">Cadastro</li>
   </ol>	
@@ -14,7 +13,7 @@
 		<div class="panel-body">
 			<div class="container col-sm-12 " >
 				<form role="form-vertical"  ng-submit="pedidoCompraCtrl.salva()" >
-					<br>
+				
 				<div class="row">
 						<div class="col-sm-3">
 							<input class="form-control"  id="numeroPedido" type="text" title="informe o numero do pedido" placeholder="Numero do pedido" 

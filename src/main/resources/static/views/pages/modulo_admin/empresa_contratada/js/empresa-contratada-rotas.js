@@ -3,12 +3,12 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 
 	$routeProvider
 	
-	
-	
+		
 	.when('/empresa_contratada/cadastro', {
 		templateUrl : "views/pages/modulo_admin/empresa_contratada/cadastro.html",
 		
 	})
+	
 	
 	.when('/empresa_contratada/alteracao/:idEmpresa', {
 		templateUrl : "views/pages/modulo_admin/empresa_contratada/alteracao.html",
