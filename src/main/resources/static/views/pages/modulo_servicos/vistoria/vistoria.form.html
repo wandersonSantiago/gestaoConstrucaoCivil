@@ -1,0 +1,279 @@
+<meta charset="UTF-8">
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/servicos/home">menu serviços</a></li>
+   <li class="breadcrumb-item" ><a href="#/servicos/vincular/listagem">listar</a></li>
+   <li class="breadcrumb-item active">vistoria</li>
+  </ol>
+<div ng-controller="servicoEmpresaController as servicoCtrl">
+	<div class="box box-primary">
+		<div class="box-header">
+			<span class="lead"> Vistoria Serviços </span>
+		</div>
+		<div class="panel-body">
+			<div class="container col-sm-12 ">
+				<form role="form-vertical" >		
+						<label ng-if="!tipoEmpreendimento"  class="radio-inline"><input type="radio"  ng-model="tipo.tipo" value="casa" ng-click="servicoCtrl.tipoConf()" name="optradio">Casa</label>
+						<label ng-if="tipoEmpreendimento" class="radio-inline"><input type="radio"  ng-model="tipo.tipo" value="edificio" ng-click="servicoCtrl.tipoConf()" name="optradio">Edificio</label>
+						<label class="radio-inline"><input type="radio"   ng-model="tipo.tipo" value="comunitaria" ng-click="servicoCtrl.tipoConf()" name="optradio">Edificações Comunitaria</label> 
+					<br>
+					<br>
+					<br>
+					<div class="row" ng-if="casa" ng-controller="configEmpreendimentoController as configCtrl" ng-init="configCtrl.quantidadeCasa()">
+						
+						<div class="col-sm-4"  >
+							<select class="form-control select2" style=" width: 100%;" ng-model="servicoCtrl.servicoCasa.NumeroCasa" 
+							ng-options="lista for lista in configCtrl.qtdeCasa.quantidadeCasa" required>
+								<option value="">---Casa---</option>
+							</select>
+						</div>
+							<div class="col-sm-4"  >
+							<select class="form-control select2" style=" width: 100%;" ng-model="servicoCtrl.servicoCasa.andar"  
+							ng-options="lista for lista in configCtrl.qtdeCasa.quantidadeAndarCasa" required>
+								<option value="">---Andar---</option>
+							</select>
+						</div>
+						<button type="button" name="salvar" ng-click="servicoCtrl.consultarServicoCasa()" class="btn  btn-primary ">Consultar</button>
+					</div>					
+					<div ng-if="edificio" class="row" ng-controller="configEmpreendimentoController as configCtrl" ng-init="configCtrl.quantidadeEdificio()">
+							<div class="col-sm-3"  >
+							<select class="form-control select2" style=" width: 100%;"  ng-model="servicoCtrl.servicoEdifico.torre"
+							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeTorres" 
+							 title="Selecione a torre a qual será atribuido a saida do produto" required>
+								<option value="">---Torre---</option>
+							</select>
+						</div>
+
+						
+						<div class="col-sm-3"  >
+							<select class="form-control select2" style=" width: 100%;"  ng-model="servicoCtrl.servicoEdifico.andar"
+							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeAndares"
+							 title="Selecione o andar a qual será atribuido a saída do produto" required>
+								<option value="">---Andar---</option>
+							</select>
+						</div>
+	
+						<div class="col-sm-3"  >
+							<select class="form-control select2" style=" width: 100%;"  ng-model="servicoCtrl.servicoEdifico.apartamento"
+							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeApartamentos" 
+							 title="Selecione o apartamento a qual será atribuido a saída do produto" required>
+								<option value="">---Apartamento---</option>
+							</select>
+						</div>
+						<button  type="button" name="consulta" ng-click="servicoCtrl.consultarServicoEdificio()" class="btn  btn-primary ">Consultar</button>
+					</div>									
+					
+								
+					<div class="row" ng-if="comunitaria">
+						<div class="col-sm-5"  ng-controller="configEmpreendimentoController as configCtrl" ng-init="configCtrl.listaOutros()">
+							<select class="form-control select2" style=" width: 100%;" ng-model="servicoCtrl.descricao" 
+							 ng-options="lista.descricao for lista in configCtrl.listaOutros" required>
+								<option value="">---Outros imoveis---</option>
+							</select>			
+					</div>
+							<button type="button" name="salvar" ng-click="servicoCtrl.consultarServicoEdificacoesComunitaria()" class="btn  btn-primary ">Consultar</button>
+					
+					</div>
+					<br>
+				
+				
+						<div ng-if="!listaEdificio" >
+						<select   ng-click="servicoCtrl.buscaTodosComPaginacaoEdificio(servicoCtrl.getPage , maxResults)" ng-model="maxResults" title="escolha a quantidade de itens por página" >
+										<option value="5">5</option>
+										<option value="15">15</option>
+										<option value="20">20</option>
+										<option value="50">50</option>
+										<option value="100">100</option>
+									</select>
+							
+							<div class="table-responsive">
+							<input class="form-control" type="text" placeholder="Buscar" ng-model="buscaPacotes" >
+							<table class="table table-hover table-bordered" ng-init="servicoCtrl.buscaTodosComPaginacaoEdificio(0 , 10)">
+								<thead>
+									<tr>
+										<th>Pacote de serviço</th>
+										<th>Prestadora de serviço</th>
+										<th>Categoria</th>
+										<th>Torre</th>
+										<th>Andar</th>
+										<th>Apartamento</th>
+										<th>Valor</th>										
+									</tr>
+								</thead>
+								<tbody
+									ng-repeat=" edificio in listaEdificio | filter : buscaPacotes">
+									<tr>
+									<td>{{ edificio.pacoteServico.descricao }}</td>
+										<td>{{ edificio.prestadoraServico.dadoEmpresa.nomeFantasia }}</td>
+										<td>{{ edificio.pacoteServico.categoria.descricao }}</td>
+										<td>{{ edificio.torre }}</td>
+										<td>{{ edificio.andar}}</td>
+										<td>{{ edificio.apartamento}}</td>
+										<td>{{ edificio.pacoteServico.valor | currency}}</td>									
+										<td><a href="#/servicos/vistoria/visualizar/edificio/{{edificio.id}}"><i class="glyphicon glyphicon-edit"></i></a> 												
+										</tr>			
+								</tbody>
+								<tfoot>
+									<tr>					
+									</tr>
+								</tfoot>
+							</table>							
+						</div>
+						<div class="row">
+								<div class="col-sm-5"></div>				
+								<div class="2">				
+									<nav>
+										<ul class="pagination">										
+											<li class="{{0==servicoCtrl.getPage ?'disabled':''}}"><a
+												ng-if="0!=servicoCtrl.getPage" ng-click="servicoCtrl.buscaTodosComPaginacaoEdificio(servicoCtrl.getPage -1, maxResults)"
+												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+											</a> <a ng-if="0==servicoCtrl.getPage" aria-label="Previous"> <span
+													aria-hidden="true">&laquo;</span></a></li>
+											<li ng-repeat="page in servicoCtrl.totalPages"
+												class="{{page==servicoCtrl.getPage ?'active':''}}"><a
+												ng-click="servicoCtrl.buscaTodosComPaginacaoEdificio(page , maxResults)">{{page + 1}}</a></li>
+											<li class="{{servicoCtrl.getPage+1 == totalPages ?'disabled':''}}"><a
+												ng-if="servicoCtrl.getPage+1 != totalPages"
+												ng-click="servicoCtrl.buscaTodosComPaginacaoEdificio(servicoCtrl.getPage+1, maxResults)" aria-label="Next"> <span
+													aria-hidden="true">&raquo;</span>
+											</a> <a ng-if="servicoCtrl.getPage+1==totalPages" aria-label="Next"> <span
+													aria-hidden="true">&raquo;</span>
+											</a></li>											
+										</ul>
+									</nav>
+								</div>
+							</div>
+						</div>
+						<div ng-if="!listaCasa" >
+						<div class="table-responsive">
+							<select   ng-click="servicoCtrl.buscaTodosComPaginacaoCasa(servicoCtrl.getPage , maxResults)" ng-model="maxResults" title="escolha a quantidade de itens por página" >
+										<option value="5">5</option>
+										<option value="15">15</option>
+										<option value="20">20</option>
+										<option value="50">50</option>
+										<option value="100">100</option>
+									</select>
+							<input class="form-control" type="text" placeholder="Buscar" ng-model="buscaPacotes" >
+							<table class="table table-hover table-bordered" ng-init="servicoCtrl.buscaTodosComPaginacaoCasa(0 , 10)">
+								<thead>
+									<tr>
+										<th>Pacote de serviço</th>
+										<th>Prestadora de serviço</th>
+										<th>Categoria</th>
+										<th>Número</th>
+										<th>Andar</th>
+										<th>Valor</th>										
+									</tr>
+								</thead>
+								<tbody
+									ng-repeat=" casa in listaCasa | filter : buscaPacotes">
+									<tr>
+										<td>{{ casa.pacoteServico.descricao }}</td>
+										<td>{{ casa.prestadoraServico.dadoEmpresa.nomeFantasia }}</td>
+										<td>{{ casa.pacoteServico.categoria.descricao }}</td>
+										<td>{{ casa.numero }}</td>
+										<td>{{ casa.andar}}</td>
+										<td>{{ casa.pacoteServico.valor | currency}}</td>										
+										<td><a href="#/servicos/vistoria/visualizar/casa/{{casa.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 							
+										</tr>				
+								</tbody>
+								<tfoot>
+									<tr>					
+									</tr>
+								</tfoot>
+							</table>							
+						</div>
+						<div class="row">
+								<div class="col-sm-5"></div>				
+								<div class="2">				
+									<nav>
+										<ul class="pagination">										
+											<li class="{{0==servicoCtrl.getPage ?'disabled':''}}"><a
+												ng-if="0!=servicoCtrl.getPage" ng-click="servicoCtrl.buscaTodosComPaginacaoCasa(servicoCtrl.getPage -1, maxResults)"
+												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+											</a> <a ng-if="0==servicoCtrl.getPage" aria-label="Previous"> <span
+													aria-hidden="true">&laquo;</span></a></li>
+											<li ng-repeat="page in servicoCtrl.totalPages"
+												class="{{page==servicoCtrl.getPage ?'active':''}}"><a
+												ng-click="servicoCtrl.buscaTodosComPaginacaoCasa(page , maxResults)">{{page + 1}}</a></li>
+											<li class="{{servicoCtrl.getPage+1 == totalPages ?'disabled':''}}"><a
+												ng-if="servicoCtrl.getPage+1 != totalPages"
+												ng-click="servicoCtrl.buscaTodosComPaginacaoCasa(servicoCtrl.getPage+1, maxResults)" aria-label="Next"> <span
+													aria-hidden="true">&raquo;</span>
+											</a> <a ng-if="servicoCtrl.getPage+1==totalPages" aria-label="Next"> <span
+													aria-hidden="true">&raquo;</span>
+											</a></li>											
+										</ul>
+									</nav>
+								</div>
+							</div>
+							</div>
+						<br>
+						<hr>
+						<br>							
+						<div ng-if="!listaEdificacoesComunitaria" class="table-responsive">
+						<select   ng-click="servicoCtrl.buscaTodosComPaginacaoEdificacoesComunitaria(servicoCtrl.getPage , maxResults)" ng-model="maxResults" title="escolha a quantidade de itens por página" >
+										<option value="5">5</option>
+										<option value="15">15</option>
+										<option value="20">20</option>
+										<option value="50">50</option>
+										<option value="100">100</option>
+									</select>
+							<input class="form-control" type="text" placeholder="Buscar" ng-model="buscaPacotes" >
+							<table class="table table-hover table-bordered" ng-init="servicoCtrl.buscaTodosComPaginacaoEdificacoesComunitaria(0 , 10)">
+								<thead>
+									<tr>
+										<th>Pacote de serviço</th>
+										<th>Prestadora de serviço</th>
+										<th>Categoria</th>
+										<th>Edif. Comunitária</th>
+										<th>Valor</th>										
+									</tr>
+								</thead>
+								<tbody
+									ng-repeat=" comunitario in listaEdificacoesComunitaria | filter : buscaPacotes">
+									<tr>
+										<td>{{ comunitario.pacoteServico.descricao }}</td>
+										<td>{{ comunitario.prestadoraServico.dadoEmpresa.nomeFantasia }}</td>
+										<td>{{ comunitario.pacoteServico.categoria.descricao }}</td>
+										<td>{{ comunitario.descricao }}</td>
+										<td>{{ comunitario.pacoteServico.valor | currency}}</td>
+										<td ><a href="#//servicos/vistoria/visualizar/comunitario/{{comunitario.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+										</tr>				
+								</tbody>
+								<tfoot>
+									<tr>					
+									</tr>
+								</tfoot>
+							</table>				
+						<div class="row">
+								<div class="col-sm-5"></div>				
+								<div class="2">				
+									<nav>
+										<ul class="pagination">										
+											<li class="{{0==servicoCtrl.getPage ?'disabled':''}}"><a
+												ng-if="0!=servicoCtrl.getPage" ng-click="servicoCtrl.buscaTodosComPaginacaoEdificacoesComunitaria(servicoCtrl.getPage -1, maxResults)"
+												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+											</a> <a ng-if="0==servicoCtrl.getPage" aria-label="Previous"> <span
+													aria-hidden="true">&laquo;</span></a></li>
+											<li ng-repeat="page in servicoCtrl.totalPages"
+												class="{{page==servicoCtrl.getPage ?'active':''}}"><a
+												ng-click="servicoCtrl.buscaTodosComPaginacaoEdificacoesComunitaria(page , maxResults)">{{page + 1}}</a></li>
+											<li class="{{servicoCtrl.getPage+1 == totalPages ?'disabled':''}}"><a
+												ng-if="servicoCtrl.getPage+1 != totalPages"
+												ng-click="servicoCtrl.buscaTodosComPaginacaoEdificacoesComunitaria(servicoCtrl.getPage+1, maxResults)" aria-label="Next"> <span
+													aria-hidden="true">&raquo;</span>
+											</a> <a ng-if="servicoCtrl.getPage+1==totalPages" aria-label="Next"> <span
+													aria-hidden="true">&raquo;</span>
+											</a></li>											
+										</ul>
+									</nav>
+								</div>
+							</div>
+						</div>					
+				</form>
+			</div>
+			<div class="tablecontainer"></div>
+		</div>
+	</div>
+	</div>

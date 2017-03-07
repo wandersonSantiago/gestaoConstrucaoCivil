@@ -188,7 +188,19 @@
 							<li ng-if="ROLE_VINCULAR_CONSULTAR"><a class="top" href="#/servicos/vincular/listagem">Lista</a></li>
 			          </ul>
 			        </li>
-			
+			<li ng-if="ROLE_VINCULAR_CADASTRAR || ROLE_VINCULAR_CONSULTAR"  class="treeview">
+			          <a href="">
+			            <i class="fa fa-cube"></i>
+			            <span>Vistoria dos Serviços</span>
+			            <span class="pull-right-container">
+			              <i class="fa fa-angle-left pull-right"></i>
+			            </span>
+			          </a>
+			          <ul class="treeview-menu">
+			           		<li ng-if="ROLE_VINCULAR_CADASTRAR"><a class="top" href="#/servicos/vistoria">Vistoria</a></li>
+							<li ng-if="ROLE_VINCULAR_CONSULTAR"><a class="top" href="#/servicos/vincular/listagem">Lista</a></li>
+			          </ul>
+			        </li>
 		
 		
 		<!-- menu recursos humanos -->

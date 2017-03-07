@@ -22,6 +22,21 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 		templateUrl:"views/pages/modulo_servicos/vincular/visualizarComunitario.html",		
 	})
 	
+	
+	
+	.when('/servicos/vistoria', {
+		templateUrl:"views/pages/modulo_servicos/vistoria/vistoria.form.html",		
+	})	
+	.when('/servicos/vistoria/visualizar/casa/:idServicoCasa', {
+		templateUrl:"views/pages/modulo_servicos/vistoria/visualizarVistoriaCasa.html",		
+	})
+	.when('/servicos/vistoria/visualizar/edificio/:idServicoEdificio', {
+		templateUrl:"views/pages/modulo_servicos/vistoria/visualizarVistoriaEdificio.html",		
+	})
+	.when('/servicos/vistoria/visualizar/comunitario/:idServicoComunitario', {
+		templateUrl:"views/pages/modulo_servicos/vistoria/visualizarVistoriaComunitario.html",		
+	})
+	
 }]);
 
 
