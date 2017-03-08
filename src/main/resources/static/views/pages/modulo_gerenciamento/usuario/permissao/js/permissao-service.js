@@ -27,7 +27,7 @@ app.factory('permissaoService', function($rootScope, toastr, $http,$q){
 		excluiPermissaoUsuario :function(permissao){
 			return $http.delete('/rest/permissao/permissaoUsuario/removerPermissao/'+permissao)
 			.then(function(response){
-				toastr.danger("Excluido com sucesso!!!");
+				toastr.success("Excluido com sucesso!!!");
 				return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
