@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.servicos.ServicoOutros;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
-import br.com.system.gestaoConstrucaoCivil.regras.servicos.ValidacaoServico;
 import br.com.system.gestaoConstrucaoCivil.repository.servicos.ServicoOutrosRepository;
 
 @Service
@@ -37,5 +36,9 @@ public class ServicoOutrosService {
 	}
 	public Iterable<ServicoOutros> lista() {
 		return servicoOutrosRepository.findAll();
+	}
+
+	public Iterable<ServicoOutros> buscarServicoComunitario(String outros) {
+		return servicoOutrosRepository.findByDescricao(outros);
 	}
 }

@@ -216,6 +216,40 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 			}
 			}
 
-	
+	//VISTORIA
+			
+			self.consultarServicoEdificio = function(torre, andar, apartamento){
+				servicoEmpresaService.consultarServicoEdificio(torre, andar, apartamento).
+				then(function(e){			
+					$scope.listaEdificio  = e;			
+				}, function(errResponse){
+				});
+			};
+			
+			self.consultarServicoCasa = function(casa, andar){
+				servicoEmpresaService.consultarServicoCasa(casa, andar).
+				then(function(e){			
+					$scope.listaCasa  = e;				
+				}, function(errResponse){
+				});
+			};
+			
+			self.consultarServicoEdificacoesComunitaria = function(outros){
+				servicoEmpresaService.consultarServicoEdificacoesComunitaria(outros).
+				then(function(e){			
+					$scope.listaEdificacoesComunitaria  = e;				
+				}, function(errResponse){
+				});
+			};
+			
+			 self.alteraVistoriaEdificio = function(servicoEdifico , pacoteServico , prestadoraServico){		
+				 servicoEdifico.pacoteServico = pacoteServico;
+				 servicoEdifico.prestadoraServico = prestadoraServico;
+				 servicoEmpresaService.alteraVistoriaEdificio(servicoEdifico).
+					then(function(response){
+						self.servicoEmpresa = null;
+						}, function(errResponse){
+					});
+				}
 		
 });

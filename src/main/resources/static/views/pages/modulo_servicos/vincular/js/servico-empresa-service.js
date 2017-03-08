@@ -152,6 +152,44 @@ app.factory('servicoEmpresaService', function($rootScope, toastr, $http,$q){
 			});
 		},
 		
+		consultarServicoEdificio: function(torre , andar , apartamento){
+			return $http.get('/rest/servico/edificio/vincular/vistoria/torre/'+torre+'/andar/'+andar+'/apartamento/'+apartamento)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
+			});
+		},
+		
+		consultarServicoCasa: function(casa , andar){
+			return $http.get('/rest/servico/outros/vincular/vistoria/casa/'+casa+'/andar/'+andar)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
+			});
+		},
+		
+		consultarServicoEdificacoesComunitaria: function(outros){
+			return $http.get('/rest/servico/outros/vincular/vistoria/outros/'+outros)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
+			});
+		},
+		alteraVistoriaEdificio: function(objeto){
+			return $http.put('/rest/servico/edificio/vincular/vistoria', objeto)
+			.then(function(response){
+				toastr.info("Alterado com sucesso!!!");	return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+				return $q.reject(errResponse);
+			});
+		},
 		
 	}
 });

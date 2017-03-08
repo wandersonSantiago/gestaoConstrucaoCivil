@@ -6,4 +6,6 @@ import br.com.system.gestaoConstrucaoCivil.entity.servicos.ServicoOutros;
 
 public interface ServicoOutrosRepository extends JpaRepository<ServicoOutros,Long> {
 
+	Iterable<ServicoOutros> findByDescricao(String outros);
+
 }

@@ -19,26 +19,22 @@
 								
 					<div class="row">
 							<div class="col-sm-4"  >
-							Torre do Edificio
+							Torre do Edificio:
 							{{servicoCtrl.servicoEdifico.torre}}							
-						</div>
-
-						
+						</div>						
 						<div class="col-sm-4"  >
-						Andar do Edificio
+						Andar do Edificio:
 						{{servicoCtrl.servicoEdifico.andar}}							
-						</div>
-	
+						</div>	
 						<div class="col-sm-4"  >
-						Apartamento do Edificio
+						Apartamento do Edificio:
 						{{servicoCtrl.servicoEdifico.apartamento}}							
 						</div>
-					</div>				
-						
+					</div>						
 					<br>
 					<div class="row">	
 					<div class="col-sm-4">		
-					Pacote de Serviço	
+					Pacote de Serviço:	
 						{{servicoCtrl.pacoteServico.descricao}}
 					</div>	
 						
@@ -48,10 +44,40 @@
 						</div>
 					</div>
 					<br>
-					
+					<div class="row">
+						<div class="col-sm-2">
+						% concluido
+							<input type="number" class="form-control"  ng-model="servicoCtrl.servicoEdifico.porcentagem">
+						</div>
+					</div>
+					<br>
+					<div class="row">
+					<div class="col-sm-12">
+						<div class="progress" style="margin-bottom:0">
+						  <div class="progress-bar"  ng-style="{ 'width' : servicoCtrl.servicoEdifico.porcentagem +'%'};">
+						  {{servicoCtrl.servicoEdifico.porcentagem}}%
+						  </div>
+						</div>
+						</div>
+					</div>
+					<br>
+					<div class="box">
+						<div class="box-header">
+							<h3 class="box-title">
+								Registrar Ocorrencias
+							</h3>							
+						</div>
+						<div class="box-body pad">							
+								<textarea class="textarea" placeholder="Texto" ng-model="texto" id="texto"
+									style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+						</div>
+					</div>
+					<br>
 					<div class="row ">
-						
-							<button  type="button" name="salvar"  ng-click="servicoCtrl.alteraEdificio(servicoCtrl.servicoEdifico , servicoCtrl.pacoteServico,  servicoCtrl.prestadoraServico)" class="btn btn-lg btn-primary btn-block btn-signin">Cadastrar</button>
+					<div class="col-sm-4"></div>
+						<div class="col-sm-4" >	
+							<button  type="button" name="salvar"  ng-click="servicoCtrl.alteraVistoriaEdificio(servicoCtrl.servicoEdifico , servicoCtrl.pacoteServico,  servicoCtrl.prestadoraServico)" class="btn btn-lg btn-primary btn-block btn-signin">Salvar</button>
+					</div>
 					</div>
 				</form>
 			</div>

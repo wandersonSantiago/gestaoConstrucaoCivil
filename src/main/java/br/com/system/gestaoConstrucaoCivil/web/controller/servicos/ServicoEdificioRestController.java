@@ -41,9 +41,19 @@ public class ServicoEdificioRestController {
 		servicoEdificioService.salvarOuEditar(servico);		
 	}
 	
+	@PutMapping(value="/vistoria")
+	public void alteraVistoria(@RequestBody ServicoEdificio servico) {
+		servicoEdificioService.salvarOuEditarVistoria(servico);		
+	}
+	
 	@GetMapping(value = "/lista")
 	public ResponseEntity<Iterable<ServicoEdificio>> buscarTodos() {
 		return new ResponseEntity<Iterable<ServicoEdificio>>(servicoEdificioService.lista(), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/vistoria/torre/{torre}/andar/{andar}/apartamento/{apartamento}")
+	public ResponseEntity<Iterable<ServicoEdificio>> buscarServicosPorApartamento(@PathVariable Integer torre, @PathVariable Integer andar, @PathVariable Integer apartamento) {
+		return new ResponseEntity<Iterable<ServicoEdificio>>(servicoEdificioService.buscarServicosPorApartamento(torre, andar, apartamento), HttpStatus.OK);
 	}
 	
 	@GetMapping

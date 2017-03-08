@@ -42,4 +42,14 @@ public class ServicoEdificioService {
 	public Iterable<ServicoEdificio> lista() {
 		return servicoEdificioRepository.findAll();
 	}
+
+	public Iterable<ServicoEdificio> buscarServicosPorApartamento(Integer torre, Integer andar, Integer apartamento) {
+		
+		 return servicoEdificioRepository.findByTorreAndAndarAndApartamento(torre, andar, apartamento);
+	}
+
+	public void salvarOuEditarVistoria(ServicoEdificio servico) {
+		servicoEdificioRepository.save(servico);
+		
+	}
 }

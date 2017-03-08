@@ -47,6 +47,11 @@ public class ServicoOutrosRestController {
 		return new ResponseEntity<Iterable<ServicoOutros>>(servicoOutrosService.lista(), HttpStatus.OK);
 	}
 	
+	@GetMapping(value = "/vistoria/outros/{outros}")
+	public ResponseEntity<Iterable<ServicoOutros>> buscarServicoComunitario(@PathVariable String outros) {
+		return new ResponseEntity<Iterable<ServicoOutros>>(servicoOutrosService.buscarServicoComunitario(outros), HttpStatus.OK);
+	}
+	
 	@GetMapping
 	public ResponseEntity<Page<ServicoOutros>> lista(@RequestParam(defaultValue="0", required=false) int page
 			,@RequestParam(defaultValue="0", required=false) int maxResults) {
