@@ -8,8 +8,8 @@ app.factory('chamadoTiService', function($rootScope, toastr, $http, $q){
 				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		
@@ -19,8 +19,8 @@ app.factory('chamadoTiService', function($rootScope, toastr, $http, $q){
 				toastr.info("Mensagem enviada");
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"Mensagem não Enviada",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		salvaServicos: function(chamado){
@@ -29,8 +29,8 @@ app.factory('chamadoTiService', function($rootScope, toastr, $http, $q){
 				toastr.info("Serviços Salvo");
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"Erro",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		atenderChamado: function(chamado){
@@ -39,8 +39,8 @@ app.factory('chamadoTiService', function($rootScope, toastr, $http, $q){
 				toastr.info("Chamado Em andamento");
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"Erro",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		silenciarChamadoFalse: function(chamado){
@@ -49,8 +49,8 @@ app.factory('chamadoTiService', function($rootScope, toastr, $http, $q){
 				toastr.info("Alerta Ativado");
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"não silenciado",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		silenciarChamadoTrue: function(chamado){
@@ -59,8 +59,8 @@ app.factory('chamadoTiService', function($rootScope, toastr, $http, $q){
 				toastr.info("Alerta desativado");
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"não silenciado",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+						return $q.reject(errResponse);
 			});
 		},
 		fecharChamado: function(chamado){
@@ -69,8 +69,8 @@ app.factory('chamadoTiService', function($rootScope, toastr, $http, $q){
 				toastr.info("Chamado Fechado");
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"não encerrado",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		altera: function(chamado){
@@ -79,8 +79,8 @@ app.factory('chamadoTiService', function($rootScope, toastr, $http, $q){
 				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		
@@ -90,7 +90,8 @@ app.factory('chamadoTiService', function($rootScope, toastr, $http, $q){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},		
 		
@@ -99,7 +100,8 @@ app.factory('chamadoTiService', function($rootScope, toastr, $http, $q){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		
@@ -109,7 +111,8 @@ app.factory('chamadoTiService', function($rootScope, toastr, $http, $q){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		relatorioPorData: function(dataInicial, dataFinal){
@@ -117,7 +120,8 @@ app.factory('chamadoTiService', function($rootScope, toastr, $http, $q){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		
@@ -126,7 +130,8 @@ app.factory('chamadoTiService', function($rootScope, toastr, $http, $q){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		
@@ -135,7 +140,8 @@ app.factory('chamadoTiService', function($rootScope, toastr, $http, $q){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		prioridade: function(){
@@ -143,7 +149,8 @@ app.factory('chamadoTiService', function($rootScope, toastr, $http, $q){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		status : function(){
@@ -151,7 +158,8 @@ app.factory('chamadoTiService', function($rootScope, toastr, $http, $q){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		tipoEquipamento : function(){
@@ -159,7 +167,8 @@ app.factory('chamadoTiService', function($rootScope, toastr, $http, $q){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		titulo : function(){
@@ -167,7 +176,8 @@ app.factory('chamadoTiService', function($rootScope, toastr, $http, $q){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		tituloImpressora : function(){
@@ -175,7 +185,8 @@ app.factory('chamadoTiService', function($rootScope, toastr, $http, $q){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		

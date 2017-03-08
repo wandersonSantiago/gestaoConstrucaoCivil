@@ -8,7 +8,7 @@ app.factory('chamadoManutencaoService', function($rootScope, toastr, $http){
 				sweetAlert({ timer : 3000, text :"Enviado com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"Não foi possivel Enviar",  type : "error", width: 300, higth: 300, padding: 20});
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
@@ -18,8 +18,8 @@ app.factory('chamadoManutencaoService', function($rootScope, toastr, $http){
 				toastr.info("Serviços Salvo");
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"Erro",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		salvaMensagem: function(mensagem){
@@ -29,7 +29,7 @@ app.factory('chamadoManutencaoService', function($rootScope, toastr, $http){
 				//	sweetAlert({ timer : 3000, text :"Mensagem Enviada", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"Mensagem não Enviada",  type : "error", width: 300, higth: 300, padding: 20});
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
@@ -40,7 +40,7 @@ app.factory('chamadoManutencaoService', function($rootScope, toastr, $http){
 				//sweetAlert({ timer : 3000, text :"Chamado Atendido", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"Erro",  type : "error", width: 300, higth: 300, padding: 20});
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
@@ -51,7 +51,7 @@ app.factory('chamadoManutencaoService', function($rootScope, toastr, $http){
 				//sweetAlert({ timer : 3000, text :"Encerrado", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"não encerrado",  type : "error", width: 300, higth: 300, padding: 20});
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 				return $q.reject(errResponse);
 			});
 		},
@@ -61,8 +61,8 @@ app.factory('chamadoManutencaoService', function($rootScope, toastr, $http){
 				toastr.info("Alerta Ativado");
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"não silenciado",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		silenciarChamadoTrue: function(chamado){
@@ -71,8 +71,8 @@ app.factory('chamadoManutencaoService', function($rootScope, toastr, $http){
 				toastr.info("Alterta desativado");
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"não silenciado",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		altera: function(chamado){
@@ -81,8 +81,8 @@ app.factory('chamadoManutencaoService', function($rootScope, toastr, $http){
 				sweetAlert({ timer : 3000, text :"Alterado!!!", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"não Alterado",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		
@@ -92,7 +92,8 @@ app.factory('chamadoManutencaoService', function($rootScope, toastr, $http){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		relatorioPorData: function(dataInicial, dataFinal){
@@ -100,7 +101,8 @@ app.factory('chamadoManutencaoService', function($rootScope, toastr, $http){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		relatorioPorDataPorTitulo: function(dataInicial, dataFinal ,titulo){
@@ -108,7 +110,8 @@ app.factory('chamadoManutencaoService', function($rootScope, toastr, $http){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		buscarPorId: function(chamado){
@@ -116,7 +119,8 @@ app.factory('chamadoManutencaoService', function($rootScope, toastr, $http){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},		
 		
@@ -125,7 +129,8 @@ app.factory('chamadoManutencaoService', function($rootScope, toastr, $http){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-			return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+				return $q.reject(errResponse);
 			});
 		},
 		listaUsuario: function(){
@@ -133,7 +138,8 @@ app.factory('chamadoManutencaoService', function($rootScope, toastr, $http){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		prioridade: function(){
@@ -141,7 +147,8 @@ app.factory('chamadoManutencaoService', function($rootScope, toastr, $http){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		status : function(){
@@ -149,7 +156,8 @@ app.factory('chamadoManutencaoService', function($rootScope, toastr, $http){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		titulo : function(){
@@ -157,7 +165,8 @@ app.factory('chamadoManutencaoService', function($rootScope, toastr, $http){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		

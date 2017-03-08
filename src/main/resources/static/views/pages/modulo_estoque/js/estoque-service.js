@@ -8,8 +8,8 @@ app.factory('estoqueService', function($rootScope, toastr, $http,$q){
 				sweetAlert({ timer : 10000, text :"Saida realizada com sucesso!!!", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 10000,  text :"Erro, não foi possivel dar a saida, tente novamente!!!",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},	
 		salvaCasa: function(baixaEstoqueCasa){	
@@ -18,8 +18,8 @@ app.factory('estoqueService', function($rootScope, toastr, $http,$q){
 				sweetAlert({ timer : 10000, text :"Saida realizada com sucesso!!!", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 10000,  text :"Erro, não foi possivel dar a saida, tente novamente!!!",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		salvaOutros: function(baixaEstoqueOutros){	
@@ -29,8 +29,8 @@ app.factory('estoqueService', function($rootScope, toastr, $http,$q){
 				sweetAlert({ timer : 10000, text :"Saida realizada com sucesso!!!", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 10000,  text :"Erro, não foi possivel dar a saida, tente novamente!!!",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		altera: function(baixaEstoque){			
@@ -39,8 +39,8 @@ app.factory('estoqueService', function($rootScope, toastr, $http,$q){
 				sweetAlert({ timer : 10000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 10000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		editarProdutoEstoque : function(produtoEstoque){			
@@ -49,8 +49,8 @@ app.factory('estoqueService', function($rootScope, toastr, $http,$q){
 				sweetAlert({ timer : 10000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 10000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		
@@ -59,8 +59,8 @@ app.factory('estoqueService', function($rootScope, toastr, $http,$q){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 10000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		
@@ -70,8 +70,8 @@ app.factory('estoqueService', function($rootScope, toastr, $http,$q){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 10000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		
@@ -81,8 +81,8 @@ app.factory('estoqueService', function($rootScope, toastr, $http,$q){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 10000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		buscaPorCodigoBarras : function(codigoBarras){
@@ -90,8 +90,8 @@ app.factory('estoqueService', function($rootScope, toastr, $http,$q){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 10000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		buscaPorId: function(param){
@@ -99,8 +99,8 @@ app.factory('estoqueService', function($rootScope, toastr, $http,$q){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 10000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		

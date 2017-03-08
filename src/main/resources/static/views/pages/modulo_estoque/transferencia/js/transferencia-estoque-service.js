@@ -9,8 +9,8 @@ app.factory('transferenciaEstoqueService', function($rootScope, toastr, $http,$q
 				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},		
 		aceitaTransferencia: function(numeroNota){
@@ -19,8 +19,8 @@ app.factory('transferenciaEstoqueService', function($rootScope, toastr, $http,$q
 				sweetAlert({ timer : 6000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+						return $q.reject(errResponse);
 			});
 		},		
 		rejeitaTransferencia: function(numeroNota){
@@ -29,8 +29,8 @@ app.factory('transferenciaEstoqueService', function($rootScope, toastr, $http,$q
 				sweetAlert({ timer : 6000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+						return $q.reject(errResponse);
 			});
 		},		
 		altera: function(baixaEstoque){			
@@ -39,8 +39,8 @@ app.factory('transferenciaEstoqueService', function($rootScope, toastr, $http,$q
 				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+						return $q.reject(errResponse);
 			});
 		},
 		listaEnviadas: function(){
@@ -48,8 +48,8 @@ app.factory('transferenciaEstoqueService', function($rootScope, toastr, $http,$q
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"Não existe transferencia",  type : "info", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+						return $q.reject(errResponse);
 			});
 		},
 		listaEnviadasComPaginacao: function(page , maxResults){
@@ -58,8 +58,8 @@ app.factory('transferenciaEstoqueService', function($rootScope, toastr, $http,$q
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"Não existe transferencia",  type : "info", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+						return $q.reject(errResponse);
 			});
 		},
 		listaRecebidas: function(){
@@ -67,8 +67,8 @@ app.factory('transferenciaEstoqueService', function($rootScope, toastr, $http,$q
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"Não existe transferencia",  type : "info", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		listaRecebidasComPaginacao: function(page , maxResults){
@@ -77,8 +77,8 @@ app.factory('transferenciaEstoqueService', function($rootScope, toastr, $http,$q
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"Não existe transferencia",  type : "info", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		lista: function(){
@@ -86,8 +86,8 @@ app.factory('transferenciaEstoqueService', function($rootScope, toastr, $http,$q
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"Não existe transferencia",  type : "info", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+						return $q.reject(errResponse);
 			});
 		},
 		listaProdutosComEstoque : function(){
@@ -95,8 +95,8 @@ app.factory('transferenciaEstoqueService', function($rootScope, toastr, $http,$q
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+						return $q.reject(errResponse);
 			});
 		},
 		buscaPorId: function(param){
@@ -104,8 +104,8 @@ app.factory('transferenciaEstoqueService', function($rootScope, toastr, $http,$q
 			.then(function(response){
 				return response.data;				
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		buscaEnviados: function(param){
@@ -113,8 +113,8 @@ app.factory('transferenciaEstoqueService', function($rootScope, toastr, $http,$q
 			.then(function(response){
 				return response.data;				
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+						return $q.reject(errResponse);
 			});
 		},
 		buscaRecebidos: function(param){
@@ -122,8 +122,8 @@ app.factory('transferenciaEstoqueService', function($rootScope, toastr, $http,$q
 			.then(function(response){
 				return response.data;				
 			},function(errResponse){
-				sweetAlert({ timer : 3000,  text :"falha na conexão",  type : "error", width: 300, higth: 300, padding: 20});
-				return $q.reject(errResponse);
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
 			});
 		},
 		
