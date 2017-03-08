@@ -6,8 +6,7 @@ app.factory('usuarioService', function($rootScope, toastr, $http,$q){
 		salva: function(usuario){
 			return $http.post('/rest/usuario/salva', usuario)
 			.then(function(response){
-				sweetAlert({ timer : 3000, text :"Salvo com sucesso",  type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
+				toastr.info("Salvo com sucesso!!!");return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 					return $q.reject(errResponse);
@@ -64,8 +63,7 @@ app.factory('usuarioService', function($rootScope, toastr, $http,$q){
 		altera: function(usuario){
 			return $http.put('rest/usuario/altera', usuario)
 			.then(function(response){
-				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
+				toastr.info("Alterado com sucesso!!!");return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 					return $q.reject(errResponse);

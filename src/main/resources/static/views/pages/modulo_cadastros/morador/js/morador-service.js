@@ -5,8 +5,7 @@ app.factory('moradorService', function($rootScope, toastr, $http){
 		salvarEdificio: function(morador){
 			return $http.post('/rest/morador/edificio', morador)
 			.then(function(response){
-				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
+				toastr.info("Salvo com sucesso!!!");return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 				return $q.reject(errResponse);
@@ -16,8 +15,7 @@ app.factory('moradorService', function($rootScope, toastr, $http){
 		salvarCasa: function(morador){
 			return $http.post('/rest/morador/casa', morador)
 			.then(function(response){
-				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
+				toastr.info("Salvo com sucesso!!!");return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 					return $q.reject(errResponse);
@@ -28,8 +26,7 @@ app.factory('moradorService', function($rootScope, toastr, $http){
 		alterarEdificio: function(morador){
 			return $http.put('/rest/morador/edificio', morador)
 			.then(function(response){
-				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
+				toastr.info("Alterado com sucesso!!!");return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 					return $q.reject(errResponse);
@@ -39,8 +36,7 @@ app.factory('moradorService', function($rootScope, toastr, $http){
 		alterarCasa: function(morador){
 			return $http.put('/rest/morador/casa', morador)
 			.then(function(response){
-				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
+				toastr.info("Alterado com sucesso!!!");return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 					return $q.reject(errResponse);

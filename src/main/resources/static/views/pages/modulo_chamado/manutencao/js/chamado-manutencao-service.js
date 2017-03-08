@@ -5,8 +5,7 @@ app.factory('chamadoManutencaoService', function($rootScope, toastr, $http){
 		salva: function(chamado){
 			return $http.post('/rest/chamado/chamadoManutencao/salvar', chamado)
 			.then(function(response){
-				sweetAlert({ timer : 3000, text :"Enviado com sucesso", type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
+				toastr.info("Salvo com sucesso!!!");	return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 				return $q.reject(errResponse);
@@ -26,7 +25,6 @@ app.factory('chamadoManutencaoService', function($rootScope, toastr, $http){
 			return $http.put('/rest/chamado/chamadoManutencao/mensagem', mensagem)
 			.then(function(response){
 				toastr.info("Mensagem Enviada");
-				//	sweetAlert({ timer : 3000, text :"Mensagem Enviada", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
@@ -37,7 +35,6 @@ app.factory('chamadoManutencaoService', function($rootScope, toastr, $http){
 			return $http.put('/rest/chamado/chamadoManutencao/atender', chamado)
 			.then(function(response){
 				toastr.info("Chamado Em andamento");
-				//sweetAlert({ timer : 3000, text :"Chamado Atendido", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
@@ -48,7 +45,6 @@ app.factory('chamadoManutencaoService', function($rootScope, toastr, $http){
 			return $http.put('/rest/chamado/chamadoManutencao/fechar', chamado)
 			.then(function(response){
 				toastr.info("Chamado Fechado");
-				//sweetAlert({ timer : 3000, text :"Encerrado", type : "success", width: 300, higth: 100, padding: 20});
 				return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
@@ -78,8 +74,7 @@ app.factory('chamadoManutencaoService', function($rootScope, toastr, $http){
 		altera: function(chamado){
 			return $http.put('/rest/chamado/chamadoManutencao/alterar', chamado)
 			.then(function(response){
-				sweetAlert({ timer : 3000, text :"Alterado!!!", type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
+				toastr.info("Alterado com sucesso!!!");return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 					return $q.reject(errResponse);

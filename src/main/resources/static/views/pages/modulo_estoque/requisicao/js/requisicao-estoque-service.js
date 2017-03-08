@@ -5,8 +5,7 @@ app.factory('requisicaoEstoqueService', function($rootScope, toastr, $http,$q){
 		salvaEdificio: function(requisicaoEstoque){	
 			return $http.post('/rest/almoxarifado/estoque/requisicaoEdificio/salva', requisicaoEstoque)
 			.then(function(response){
-				sweetAlert({ timer : 10000, text :"Saida realizada com sucesso!!!", type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
+				toastr.info("Salvo com sucesso!!!");	return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 						return $q.reject(errResponse);
@@ -15,8 +14,7 @@ app.factory('requisicaoEstoqueService', function($rootScope, toastr, $http,$q){
 		salvaCasa: function(requisicaoEstoqueCasa){	
 			return $http.post('/rest/almoxarifado/estoque/requisicaoCasa/salva', requisicaoEstoqueCasa)
 			.then(function(response){
-				sweetAlert({ timer : 10000, text :"Saida realizada com sucesso!!!", type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
+				toastr.info("Salvo com sucesso!!!");	return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 					return $q.reject(errResponse);
@@ -25,8 +23,7 @@ app.factory('requisicaoEstoqueService', function($rootScope, toastr, $http,$q){
 		salvaOutros: function(requisicaoEstoqueOutros){	
 			return $http.post('/rest/almoxarifado/estoque/requisicaoOutros/salva', requisicaoEstoqueOutros)
 			.then(function(response){
-				sweetAlert({ timer : 10000, text :"Saida realizada com sucesso!!!", type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
+				toastr.info("Salvo com sucesso!!!");	return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 					return $q.reject(errResponse);
@@ -35,8 +32,7 @@ app.factory('requisicaoEstoqueService', function($rootScope, toastr, $http,$q){
 		altera: function(requisicaoEstoque){			
 			return $http.put('/rest/almoxarifado/estoque/requisicao/altera', requisicaoEstoque)
 			.then(function(response){
-				sweetAlert({ timer : 10000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
+				toastr.info("Salvo com sucesso!!!");return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 						return $q.reject(errResponse);
@@ -162,8 +158,7 @@ app.factory('requisicaoEstoqueService', function($rootScope, toastr, $http,$q){
 		rejeitaRequisicaoCasa: function(numeroNota){
 			return $http.post('/rest/almoxarifado/estoque/requisicaoCasa/rejeitar', numeroNota)
 			.then(function(response){
-				sweetAlert({ timer : 6000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
+				toastr.info("Salvo com sucesso!!!");return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 					return $q.reject(errResponse);
@@ -172,8 +167,7 @@ app.factory('requisicaoEstoqueService', function($rootScope, toastr, $http,$q){
 		aceitarRequisicaoEdificio: function(numeroNota){
 			return $http.post('/rest/almoxarifado/estoque/requisicaoEdificio/aceitar', numeroNota)
 			.then(function(response){
-				sweetAlert({ timer : 6000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
+				toastr.info("Salvo com sucesso!!!");	return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 					return $q.reject(errResponse);
@@ -182,8 +176,7 @@ app.factory('requisicaoEstoqueService', function($rootScope, toastr, $http,$q){
 		rejeitaRequisicaoEdificio: function(numeroNota){
 			return $http.post('/rest/almoxarifado/estoque/requisicaoEdificio/rejeitar', numeroNota)
 			.then(function(response){
-				sweetAlert({ timer : 6000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
+				toastr.info("Salvo com sucesso!!!");return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 					return $q.reject(errResponse);
@@ -192,8 +185,7 @@ app.factory('requisicaoEstoqueService', function($rootScope, toastr, $http,$q){
 		aceitarRequisicaoOutros: function(numeroNota){
 			return $http.post('/rest/almoxarifado/estoque/requisicaoOutros/aceitar', numeroNota)
 			.then(function(response){
-				sweetAlert({ timer : 6000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
+				toastr.info("Salvo com sucesso!!!");	return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 					return $q.reject(errResponse);
@@ -202,8 +194,7 @@ app.factory('requisicaoEstoqueService', function($rootScope, toastr, $http,$q){
 		rejeitaRequisicaoOutros: function(numeroNota){
 			return $http.post('/rest/almoxarifado/estoque/requisicaoOutros/rejeitar', numeroNota)
 			.then(function(response){
-				sweetAlert({ timer : 6000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
+				toastr.info("Salvo com sucesso!!!");return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 						return $q.reject(errResponse);

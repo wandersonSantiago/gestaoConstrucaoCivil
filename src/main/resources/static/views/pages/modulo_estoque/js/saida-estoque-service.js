@@ -5,7 +5,7 @@ app.factory('saidaEstoqueService', function($rootScope, toastr, $http,$q){
 		salvaEdificio: function(baixaEstoque){	
 			return $http.post('/rest/almoxarifado/estoque/baixaEdificio/salva', baixaEstoque)
 			.then(function(response){
-				sweetAlert({ timer : 10000, text :"Saida realizada com sucesso!!!", type : "success", width: 300, higth: 100, padding: 20});
+				toastr.info("Salvo com sucesso!!!");
 				return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
@@ -15,7 +15,7 @@ app.factory('saidaEstoqueService', function($rootScope, toastr, $http,$q){
 		salvaCasa: function(baixaEstoqueCasa){	
 			return $http.post('/rest/almoxarifado/estoque/baixaCasa/salva', baixaEstoqueCasa)
 			.then(function(response){
-				sweetAlert({ timer : 10000, text :"Saida realizada com sucesso!!!", type : "success", width: 300, higth: 100, padding: 20});
+				toastr.info("Salvo com sucesso!!!");
 				return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
@@ -25,7 +25,7 @@ app.factory('saidaEstoqueService', function($rootScope, toastr, $http,$q){
 		salvaOutros: function(baixaEstoqueOutros){	
 			return $http.post('/rest/almoxarifado/estoque/baixaOutros/salva', baixaEstoqueOutros)
 			.then(function(response){
-				sweetAlert({ timer : 10000, text :"Saida realizada com sucesso!!!", type : "success", width: 300, higth: 100, padding: 20});
+				toastr.info("Salvo com sucesso!!!");
 				return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
@@ -35,7 +35,7 @@ app.factory('saidaEstoqueService', function($rootScope, toastr, $http,$q){
 		altera: function(baixaEstoque){			
 			return $http.put('/rest/almoxarifado/estoque/baixa/altera', baixaEstoque)
 			.then(function(response){
-				sweetAlert({ timer : 10000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
+				toastr.info("Alterado com sucesso!!!");
 				return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});

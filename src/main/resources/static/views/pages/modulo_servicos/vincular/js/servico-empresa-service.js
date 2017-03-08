@@ -5,8 +5,7 @@ app.factory('servicoEmpresaService', function($rootScope, toastr, $http,$q){
 		salvaEdificio: function(objeto){
 			return $http.post('/rest/servico/edificio/vincular/salva', objeto)
 			.then(function(response){
-				sweetAlert({ timer : 30000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
+				toastr.info("Salvo com sucesso!!!");return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 				return $q.reject(errResponse);
@@ -16,8 +15,7 @@ app.factory('servicoEmpresaService', function($rootScope, toastr, $http,$q){
 		alteraEdificio: function(objeto){
 			return $http.put('/rest/servico/edificio/vincular', objeto)
 			.then(function(response){
-				sweetAlert({ timer : 30000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
+				toastr.info("Alterado com sucesso!!!");	return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 				return $q.reject(errResponse);
@@ -57,8 +55,7 @@ app.factory('servicoEmpresaService', function($rootScope, toastr, $http,$q){
 		salvaCasa: function(objeto){
 			return $http.post('/rest/servico/casa/vincular/salva', objeto)
 			.then(function(response){
-				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
+				toastr.info("Salvo com sucesso!!!");return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 				return $q.reject(errResponse);
@@ -68,8 +65,7 @@ app.factory('servicoEmpresaService', function($rootScope, toastr, $http,$q){
 		alteraCasa: function(objeto){
 			return $http.put('/rest/servico/casa/vincular', objeto)
 			.then(function(response){
-				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
+				toastr.info("Alterado com sucesso!!!");	return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 					return $q.reject(errResponse);
@@ -110,8 +106,7 @@ app.factory('servicoEmpresaService', function($rootScope, toastr, $http,$q){
 		salvaEdificacoesComunitaria: function(objeto){
 			return $http.post('/rest/servico/outros/vincular/salva', objeto)
 			.then(function(response){
-				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
+				toastr.info("Salvo com sucesso!!!");	return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 					return $q.reject(errResponse);
@@ -121,8 +116,7 @@ app.factory('servicoEmpresaService', function($rootScope, toastr, $http,$q){
 		alteraEdificacoesComunitaria: function(objeto){
 			return $http.put('/rest/servico/outros/vincular', objeto)
 			.then(function(response){
-				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
+				toastr.info("Alterado com sucesso!!!");return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 				return $q.reject(errResponse);

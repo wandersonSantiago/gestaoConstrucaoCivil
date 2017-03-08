@@ -45,7 +45,8 @@ app.factory('configEmpreendimentoService', function($rootScope, $http){
 		configEmpreendimentoEdificioSalva: function(configEmpreendimentoEdificio){
 			console.log(configEmpreendimentoEdificio);
 			return $http.post('rest/empreendimento/configuracao/salvaEdificio', configEmpreendimentoEdificio)
-			.then(function(response){			
+			.then(function(response){	
+				toastr.info("Salvo com sucesso!!!");
 				return response.data;
 		},function(errResponse){
 			sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
@@ -56,16 +57,18 @@ app.factory('configEmpreendimentoService', function($rootScope, $http){
 		configEmpreendimentoCasaSalva: function(configEmpreendimentoCasa){
 			return $http.post('rest/empreendimento/configuracao/salvaCasa', configEmpreendimentoCasa)
 			.then(function(response){
+				toastr.info("Salvo com sucesso!!!");
 				return response.data;		
-	},function(errResponse){
-		sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
-			return $q.reject(errResponse);			
-		});
-		},
+			},function(errResponse){
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);			
+				});
+				},
 	
 		configEmpreendimentoOutrosSalva: function( listaOutros){
 			return $http.post('rest/empreendimento/configuracao/salvaOutros', listaOutros)
 			.then(function(response){
+				toastr.info("Salvo com sucesso!!!");
 				return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});

@@ -5,8 +5,7 @@ app.factory('cadastrarFuncionarioService', function($rootScope, toastr, $http){
 		salva: function(funcionario){
 			return $http.post('/rest/recursosHumanos/funcionario/salva', funcionario)
 			.then(function(response){
-				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
+				toastr.info("Salvo com sucesso!!!");return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 					return $q.reject(errResponse);
@@ -16,8 +15,7 @@ app.factory('cadastrarFuncionarioService', function($rootScope, toastr, $http){
 		altera: function(funcionario){
 			return $http.put('/rest/recursosHumanos/funcionario/altera', funcionario)
 			.then(function(response){
-				sweetAlert({ timer : 3000, text :"Salvo com sucesso", type : "success", width: 300, higth: 100, padding: 20});
-				return response.data;
+				toastr.info("Alterado com sucesso!!!");return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 				return $q.reject(errResponse);
