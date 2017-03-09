@@ -5,18 +5,25 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="cliente_morador_edificil")
 public class ClienteMoradorEdificio extends ClienteMorador implements Serializable{
 
-	@Column(nullable = false,length = 10)
+	@NotBlank
+	@Column(length = 10)
     private Integer torre;
    
-	@Column(nullable = false,length = 10)
+	@NotBlank
+	@Column(length = 10)
     private Integer andar;
      
-	@Column(nullable = false,length = 10)
+	@NotBlank
+	@Column(length = 10)
     private Integer apartamento;
 
 	public Integer getTorre() {

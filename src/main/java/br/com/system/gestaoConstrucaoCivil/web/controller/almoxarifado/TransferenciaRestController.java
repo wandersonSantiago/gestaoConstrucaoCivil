@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +27,8 @@ public class TransferenciaRestController {
 	@Autowired
 	private TransferenciaService transferenciaService;
 	
+	
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_ESTOQUE_TRANSFERENCIA_CADASTRAR')")
 	@PostMapping(value = "/salva")
 	public ResponseEntity<Collection<Transferencia>> salvar(@RequestBody Transferencia transferencia){
 		transferenciaService.salvarAlterar(transferencia);
@@ -38,6 +41,8 @@ public class TransferenciaRestController {
 		
 		return new ResponseEntity<Collection<Transferencia>>(transferenciaService.buscarTodos(), HttpStatus.OK);
 	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_ESTOQUE_TRANSFERENCIA_RECEBIDAS')")
 	@GetMapping(value = "/recebida/paginacao")
 	public ResponseEntity<Page<Transferencia>> recebida(@RequestParam(defaultValue="0", required=false) int page
 			,@RequestParam(defaultValue="0", required=false) int maxResults) {
@@ -45,6 +50,7 @@ public class TransferenciaRestController {
 		return new ResponseEntity<Page<Transferencia>>(objeto, HttpStatus.OK);
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_ESTOQUE_TRANSFERENCIA_ENVIADAS')")
 	@GetMapping(value = "/enviada/paginacao")
 	public ResponseEntity<Page<Transferencia>> enviada(@RequestParam(defaultValue="0", required=false) int page
 			,@RequestParam(defaultValue="0", required=false) int maxResults) {
@@ -52,23 +58,27 @@ public class TransferenciaRestController {
 		return new ResponseEntity<Page<Transferencia>>(objeto, HttpStatus.OK);
 	}
 	
+	
 	@GetMapping(value = "/buscaPorId/{id}")
 	public ResponseEntity<Transferencia> buscarPorId(@PathVariable Long id) {
 
 		return new ResponseEntity<Transferencia>(transferenciaService.buscaPorId(id), HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_ESTOQUE_TRANSFERENCIA_CONSULTA_RECEBIDAS')")
 	@GetMapping(value = "/recebida")
 	public ResponseEntity<Collection<Transferencia>> buscarTransferenciaRecebida() {
 		
     	return new ResponseEntity<Collection<Transferencia>>(transferenciaService.buscarTransferenciaRecebida(), HttpStatus.OK);
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_ESTOQUE_TRANSFERENCIA_CONSULTA_ENVIADAS')")
 	@GetMapping(value = "/enviada")
 	public ResponseEntity<Collection<Transferencia>>  buscarTransferenciaEnviada() {
 		
 		return new ResponseEntity<Collection<Transferencia>>(transferenciaService.buscarTransferenciaEnviada(), HttpStatus.OK);
 	}
+	
 	
 	@PostMapping(value = "/aceitar")
 	public ResponseEntity<Collection<Transferencia>> aceitar(@RequestBody Long numeroNota){

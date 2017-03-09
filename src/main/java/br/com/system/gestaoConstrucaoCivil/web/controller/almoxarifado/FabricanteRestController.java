@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,17 +26,20 @@ public class FabricanteRestController {
 	private FabricanteService fabricanteService;
 	
 	
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_CADASTROS_FABRICANTE_CONSULTAR')")
 	@GetMapping(value = "/lista")
 	public ResponseEntity<Iterable<Fabricante>> buscarTodos() {
 		return new ResponseEntity<Iterable<Fabricante>>(fabricanteService.buscarTodos(), HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_CADASTROS_FABRICANTE_CONSULTAR')")
 	@GetMapping(value = "/buscaPorId/{id}")
 	public ResponseEntity<Fabricante> buscarPorId(@PathVariable Long id) {
 
 		return new ResponseEntity<Fabricante>(fabricanteService.buscarPorId(id), HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_CADASTROS_FABRICANTE_CADASTRAR')")
 	@PostMapping(value = "/salva")
 	public ResponseEntity<Fabricante> salvar(@RequestBody Fabricante fabricante, UriComponentsBuilder ucBuilder) {
 		fabricanteService.salvarOuEditar(fabricante);
@@ -45,6 +49,7 @@ public class FabricanteRestController {
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_CADASTROS_FABRICANTE_ALTERAR')")
 	@PutMapping(value = "/altera")
 	public ResponseEntity<Fabricante> alterar(@RequestBody Fabricante fabricante, UriComponentsBuilder ucBuilder) {
 		fabricanteService.salvarOuEditar(fabricante);

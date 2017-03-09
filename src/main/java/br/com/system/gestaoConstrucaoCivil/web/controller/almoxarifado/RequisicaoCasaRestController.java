@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,6 +30,7 @@ public class RequisicaoCasaRestController {
 	@Autowired
 	private RequisicaoCasaService requisicaoCasaService;
 	
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_REQUISICAO_CADASTRAR')")
 	@PostMapping(value = "/salva")
 	public ResponseEntity<RequisicaoCasa> salvarOuEditar(@RequestBody RequisicaoCasa requisicao,UriComponentsBuilder ucBuilder)
 	{ 
@@ -37,12 +39,13 @@ public class RequisicaoCasaRestController {
 		return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_REQUISICAO_CONSULTA_CASA')")
 	@GetMapping(value = "/lista")
 	public ResponseEntity<Collection<RequisicaoCasa>> buscarTodos()
 	{
 		return new ResponseEntity<Collection<RequisicaoCasa>>(requisicaoCasaService.buscarTodos(), HttpStatus.OK);
 	}
-	
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_REQUISICAO_CONSULTA_CASA')")
 	@GetMapping(value = "/lista/paginacao")
 	public ResponseEntity<Page<RequisicaoCasa>> lista(@RequestParam(defaultValue="0", required=false) int page
 			,@RequestParam(defaultValue="0", required=false) int maxResults) {
@@ -63,6 +66,7 @@ public class RequisicaoCasaRestController {
 		return new ResponseEntity<>(new HttpHeaders(), HttpStatus.OK);
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_REQUISICAO_CONSULTA_CASA')")
 	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
 	public ResponseEntity<RequisicaoCasa> buscarPorId(@PathVariable Long id) {
 		return new ResponseEntity<RequisicaoCasa>(requisicaoCasaService.buscarPorId(id), HttpStatus.OK);

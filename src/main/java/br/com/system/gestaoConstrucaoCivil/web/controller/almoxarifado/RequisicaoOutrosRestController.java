@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +30,7 @@ public class RequisicaoOutrosRestController {
 	@Autowired
 	private RequisicaoOutrosService requisicaoOutrosService;
 	
-	
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_REQUISICAO_CADASTRAR')")
 	@PostMapping(value = "/salva")
 	public ResponseEntity<RequisicaoOutros> salvarOuEditar(@RequestBody RequisicaoOutros requisicao,UriComponentsBuilder ucBuilder)
 	{ 
@@ -38,12 +39,13 @@ public class RequisicaoOutrosRestController {
 		return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_REQUISICAO_CONSULTA_OUTROS')")
 	@GetMapping(value = "/lista")
 	public ResponseEntity<Collection<RequisicaoOutros>> buscarTodos()
 	{
 		return new ResponseEntity<Collection<RequisicaoOutros>>(requisicaoOutrosService.buscarTodos(), HttpStatus.OK);
 	}
-	
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_REQUISICAO_CONSULTA_OUTROS')")
 	@GetMapping(value = "/lista/paginacao")
 	public ResponseEntity<Page<RequisicaoOutros>> lista(@RequestParam(defaultValue="0", required=false) int page
 			,@RequestParam(defaultValue="0", required=false) int maxResults) {
@@ -63,7 +65,7 @@ public class RequisicaoOutrosRestController {
 		requisicaoOutrosService.rejeitar(numeroRequisicao);
 		return new ResponseEntity<>(new HttpHeaders(), HttpStatus.OK);
 	}
-	
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_REQUISICAO_CONSULTA_OUTROS')")
 	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
 	public ResponseEntity<RequisicaoOutros> buscarPorId(@PathVariable Long id) {
 		return new ResponseEntity<RequisicaoOutros>(requisicaoOutrosService.buscarPorId(id), HttpStatus.OK);

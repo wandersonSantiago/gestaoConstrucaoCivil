@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +29,7 @@ public class RequisicaoEdificioRestController {
 	@Autowired
 	private RequisicaoEdificioService requisicaoEdificioService;
 	
-	
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_REQUISICAO_CADASTRAR')")
 	@PostMapping(value = "/salva")
 	public ResponseEntity<RequisicaoEdificio> salvarOuEditar(@RequestBody RequisicaoEdificio requisicao,UriComponentsBuilder ucBuilder)
 	{ 
@@ -37,6 +38,7 @@ public class RequisicaoEdificioRestController {
 		return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_REQUISICAO_CONSULTA_EDIFICIO')")
 	@GetMapping(value = "/lista")
 	public ResponseEntity<Collection<RequisicaoEdificio>> buscarTodos()
 	{
@@ -44,7 +46,7 @@ public class RequisicaoEdificioRestController {
 	//	HttpHeaders headers = new HttpHeaders();
 		return new ResponseEntity<Collection<RequisicaoEdificio>>(requisicao, HttpStatus.OK);
 	}
-	
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_REQUISICAO_CONSULTA_EDIFICIO')")
 	@GetMapping(value = "/lista/paginacao")
 	public ResponseEntity<Page<RequisicaoEdificio>> lista(@RequestParam(defaultValue="0", required=false) int page
 			,@RequestParam(defaultValue="0", required=false) int maxResults) {
@@ -67,6 +69,7 @@ public class RequisicaoEdificioRestController {
 		return new ResponseEntity<>(headers, HttpStatus.OK);
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_REQUISICAO_CONSULTA_EDIFICIO')")
 	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
 	public ResponseEntity<RequisicaoEdificio> buscarPorId(@PathVariable Long id) {
 		return new ResponseEntity<RequisicaoEdificio>(requisicaoEdificioService.buscarPorId(id), HttpStatus.OK);

@@ -14,7 +14,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
@@ -22,32 +28,43 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Table(name = "cliente_morador")
 public abstract class ClienteMorador extends AbstractPersistable<Long> implements Serializable{
 
-	@Column(nullable = false,length = 50)
+	@NotBlank
+	@NotEmpty
+	@Size(min = 3,max = 50)
 	protected String nomeCompleto;
-	@Column(nullable = false,length = 20,unique = true)
+	
+	@NotBlank
+	@CPF
 	protected String cpf;
-	@Column(nullable = false,length = 15)
+	
+	@NotEmpty
+	@NotBlank
+	@Size(max = 15)
 	protected String telefoneFixo;
-	@Column(nullable = false,length = 15)
+	@NotEmpty
+	@NotBlank
+	@Size(max = 15)
 	protected String telefoneCelular;
 		
-	@Column(nullable = false)
+	@NotBlank
+	@Email
 	protected String email;
 	
+	@NotBlank
 	@ManyToOne
     @JoinColumn(name="id_empreendimento",nullable = true)
     protected Empreendimento empreendimento;
 	
+	@NotBlank
 	@OneToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST})
 	@JoinColumn(name="id_usuario")
 	protected Usuario usuario;
 	
+	@NotBlank
+	@NotEmpty
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_nascimento")
 	protected Date dataNascimento;
-	
-	
-	
 	
 	public String getNomeCompleto() {
 		return nomeCompleto;

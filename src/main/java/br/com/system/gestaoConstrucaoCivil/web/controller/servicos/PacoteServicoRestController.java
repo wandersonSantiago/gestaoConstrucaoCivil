@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,13 +28,14 @@ public class PacoteServicoRestController {
 	private PacoteServicoService pacoteServicoService;
 
 	
-
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_PACOTES_CONSULTAR')")
 	@GetMapping(value = "/lista")
 	public ResponseEntity<Iterable<PacoteServico>> buscarTodos() {
 		return new ResponseEntity<Iterable<PacoteServico>>(pacoteServicoService.lista(), HttpStatus.OK);
 	}
 	
-	
+
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_PACOTES_CONSULTAR')")
 	@GetMapping
 	public ResponseEntity<Page<PacoteServico>> lista(@RequestParam(defaultValue="0", required=false) int page
 			,@RequestParam(defaultValue="0", required=false) int maxResults) {
@@ -42,6 +44,7 @@ public class PacoteServicoRestController {
 	}
 	
 
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_PACOTES_CADASTRAR')")
 	@PostMapping(value = "/salva")
 	public ResponseEntity<PacoteServico> salvar(@RequestBody PacoteServico pacoteServico, UriComponentsBuilder ucBuilder) {
 		pacoteServicoService.salvarOuEditar(pacoteServico);
@@ -51,6 +54,7 @@ public class PacoteServicoRestController {
 		return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	}
 
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_PACOTES_ALTERAR')")
 	@PutMapping(value = "/altera")
 	public ResponseEntity<PacoteServico> alterar(@RequestBody PacoteServico pacoteServico, UriComponentsBuilder ucBuilder) {
 		pacoteServicoService.salvarOuEditar(pacoteServico);
@@ -60,6 +64,8 @@ public class PacoteServicoRestController {
 		return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	}
 
+
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_PACOTES_CONSULTAR')")
 	@GetMapping(value = "/buscaPorId/{id}")
 	public ResponseEntity<PacoteServico> buscarPorId(@PathVariable Long id) {
 		return new ResponseEntity<PacoteServico>(pacoteServicoService.buscarPorId(id), HttpStatus.OK);

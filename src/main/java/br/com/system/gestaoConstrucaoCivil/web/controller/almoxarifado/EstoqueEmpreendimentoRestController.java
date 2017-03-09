@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -32,17 +33,19 @@ public class EstoqueEmpreendimentoRestController {
 		HttpHeaders headers =  new HttpHeaders();
 		return new ResponseEntity<>(headers, HttpStatus.CREATED);				
 	}
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','MODULO_ESTOQUE_CONSULTA')")
 	@GetMapping
 	public ResponseEntity<Iterable<EstoqueEmpreendimento>> buscarTodos() {
 		return new ResponseEntity<Iterable<EstoqueEmpreendimento>>(estoqueService.buscarTodos(), HttpStatus.OK);
 	}
-	
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','MODULO_ESTOQUE_CONSULTA')")
 	@GetMapping(value = "/lista/paginacao")
 	public ResponseEntity<Page<EstoqueEmpreendimento>> lista(@RequestParam(defaultValue="0", required=false) int page
 			,@RequestParam(defaultValue="0", required=false) int maxResults) {
 		Page<EstoqueEmpreendimento> empresa = estoqueService.buscarTodosComPaginacao(new PageRequest(page, maxResults));
 		return new ResponseEntity<Page<EstoqueEmpreendimento>>(empresa, HttpStatus.OK);
 	}
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','MODULO_ESTOQUE_CONSULTA')")
 	@GetMapping(value = "/buscaPorCodigo/{codigo}")
 	public ResponseEntity<EstoqueEmpreendimento> buscarPorCodigo(@PathVariable String codigo)
 	{
