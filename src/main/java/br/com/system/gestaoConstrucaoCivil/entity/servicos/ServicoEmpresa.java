@@ -1,16 +1,20 @@
 package br.com.system.gestaoConstrucaoCivil.entity.servicos;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
+import br.com.system.gestaoConstrucaoCivil.entity.chamado.Mensagem;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -36,7 +40,8 @@ public class ServicoEmpresa extends AbstractPersistable<Long>{
 	@JoinColumn(name="id_empreendimento",nullable = false)
 	private Empreendimento empreendimento;
 	
-	
+	@OneToMany(mappedBy = "servicoEmpresa", cascade = CascadeType.ALL)
+	protected List<OcorrenciaServico> ocorrencias;	
 	
 	public PrestadoraServico getPrestadoraServico() {
 		return prestadoraServico;
@@ -62,6 +67,12 @@ public class ServicoEmpresa extends AbstractPersistable<Long>{
 	}
 	public void setEmpreendimento(Empreendimento empreendimento) {
 		this.empreendimento = empreendimento;
+	}
+	public List<OcorrenciaServico> getOcorrencias() {
+		return ocorrencias;
+	}
+	public void setOcorrencias(List<OcorrenciaServico> ocorrencias) {
+		this.ocorrencias = ocorrencias;
 	}
 	
 	

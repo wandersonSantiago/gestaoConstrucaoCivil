@@ -1,4 +1,4 @@
-app.controller('servicoEmpresaController', function($scope,servicoEmpresaService, $routeParams){
+app.controller('servicoEmpresaController', function($scope,servicoEmpresaService, $routeParams , FileUploader){
 	
 	var self = this;
 	self.getPage=0;
@@ -242,14 +242,40 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 				});
 			};
 			
-			 self.alteraVistoriaEdificio = function(servicoEdifico , pacoteServico , prestadoraServico){		
+			 self.alteraVistoriaEdificio = function(servicoEdifico , pacoteServico , prestadoraServico, ocorrencia){		
 				 servicoEdifico.pacoteServico = pacoteServico;
 				 servicoEdifico.prestadoraServico = prestadoraServico;
+				 servicoEdifico.ocorrencias = [{ocorrencia : ocorrencia}];
+				 console.log(servicoEdifico);
 				 servicoEmpresaService.alteraVistoriaEdificio(servicoEdifico).
 					then(function(response){
 						self.servicoEmpresa = null;
 						}, function(errResponse){
 					});
 				}
+			
+			 
+			 var uploader = $scope.uploader =  new FileUploader({
+	               url : 'service/upload.php?a=cadastrar',
+	               queueLimit : 5
+	           });
+	            
+	          /* uploader.onCompleteAll = function(){
+	            alert('Upload Completo!');
+	            //uploader.clearQueue();
+	           }*/
+			 
+			self.exportar = function(tipoImpressao){ 
+			      switch(tipoImpressao){ 
+			          case 'pdf': $scope.$broadcast('export-pdf', {}); 
+			                      break; 
+			          case 'excel': $scope.$broadcast('export-excel', {}); 
+			                      break; 
+			          case 'doc': $scope.$broadcast('export-doc', {});
+			                      break; 
+			          default: console.log('no event caught'); 
+			       }
+				};
+				
 		
 });

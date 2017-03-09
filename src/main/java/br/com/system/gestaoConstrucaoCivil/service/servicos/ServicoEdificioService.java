@@ -1,5 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.service.servicos;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -48,7 +50,13 @@ public class ServicoEdificioService {
 		 return servicoEdificioRepository.findByTorreAndAndarAndApartamento(torre, andar, apartamento);
 	}
 
+	@Transactional(readOnly = false)
 	public void salvarOuEditarVistoria(ServicoEdificio servico) {
+		for(int i = 0; i < servico.getOcorrencias().size() ; i++){
+			servico.getOcorrencias().get(i).setData(new Date());
+			servico.getOcorrencias().get(i).setUsuario(SessionUsuario.getInstance().getUsuario());
+			servico.getOcorrencias().get(i).setServicoEmpresa(servico);
+		}
 		servicoEdificioRepository.save(servico);
 		
 	}
