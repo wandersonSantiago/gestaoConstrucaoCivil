@@ -118,4 +118,16 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 			
 		}
 		
+		self.exportar = function(tipoImpressao){ 
+		      switch(tipoImpressao){ 
+		          case 'pdf': $scope.$broadcast('export-pdf', {}); 
+		                      break; 
+		          case 'excel': $scope.$broadcast('export-excel', {}); 
+		                      break; 
+		          case 'doc': $scope.$broadcast('export-doc', {});
+		                      break; 
+		          default: console.log('no event caught'); 
+		       }
+			};
+		
 });

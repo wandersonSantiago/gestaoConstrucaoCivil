@@ -12,13 +12,15 @@
 			<span class="lead">Estoque </span>
 		</div>
 		<div class="panel-body">
+		<a href="javascript://" ng-click="estroqueCtrl.exportar('pdf')">PDF</a>
+		<a href="javascript://" ng-click="estroqueCtrl.exportar('excel')">Excel</a>		
 	<div class="row">
 			
 			<input class="form-control" type="text" ng-model="buscar" >
 	
 		</div>
 		<div class="table-responsive">
-			<table class="table  table-bordered ">
+			<table class="export-table table  table-bordered ">
 				<thead>
 					<tr>						 
 						<th>Código</th>

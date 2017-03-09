@@ -256,7 +256,7 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 			
 			 
 			 var uploader = $scope.uploader =  new FileUploader({
-	               url : 'service/upload.php?a=cadastrar',
+	               url : '/rest/file/upload',
 	               queueLimit : 5
 	           });
 	            

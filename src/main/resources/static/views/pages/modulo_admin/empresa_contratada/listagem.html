@@ -12,18 +12,36 @@
 		<div class="box-header">
 			<span class="lead">Lista de Empresa </span>
 		</div>
-		<div class="panel-body table-responsive" >
-					<select   ng-click="adminCtrl.lista(adminCtrl.getPage , maxResults)" ng-model="maxResults" title="escolha a quantidade de itens por página" >
-						<option value="5">5</option>
-						<option value="15">15</option>
-						<option value="20">20</option>
-						<option value="50">50</option>
-						<option value="100">100</option>
-					</select>
+			<div class="panel-body table-responsive" >
+			<div class="row ">
+				<div class="col-sm-2">
+			    <div class="dropdown">
+			        <button class="btn btn-warning btn-export dropdown-toggle" margin-right=46px type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+			            Exportar <span class="caret"></span>
+			        </button>			
+			        <ul class="table-export dropdown-menu"
+			        table-selector="'auxTable'"
+			        export-options="{type: 'pdf', escape: true, ignoreColumn : '[4]', tableName: 'listaEmpresa' }"
+			        aria-labelledby="dropdownMenu1">
+			            <li te-option te-value="'pdf'" te-param="'type'">
+			                <a href="">PDF</a>
+			            </li>
+			
+			            <li te-option te-value="'excel'" te-param="'type'">
+			                <a href="">Excel</a>
+			            </li>
+			
+			            <li te-option te-value="'csv'" te-param="'type'">
+			                <a href="">CSV</a>
+			            </li>
+			        </ul>
+			    </div>
+			    </div>
+			</div>
 			<input type="text" class="form-control" ng-model="texto" ng-blur="adminCtrl.buscarPorTexto(adminCtrl.getPage)" ng-model-options="{ debounce: 100  }"
 				placeholder="Buscar">
 				<div class="table-responsive">
-			<table class="table  table-hover table-bordered">
+			<table st-table="adminCtrl.listaEmpresa" st-filtered-collection="filteredCollection" class="table table-striped">
 				<thead>
 					<tr>
 						<th>Razão Social</th>
@@ -44,25 +62,28 @@
 						<td>{{empresa.dadoEmpresa.telefone }}</td>
 						<td>{{empresa.dadoEmpresa.inscricaoEstadual}}</td>
 						<td>{{empresa.dadoEmpresa.endereco.uf }}</td>
-						<td ng-if="ROLE_EMPRESA_CONTRATADA_ALTERAR"><a href="#/empresa_contratada/alteracao/{{empresa.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
-					
+						<td ng-if="ROLE_EMPRESA_CONTRATADA_ALTERAR"><a href="#/empresa_contratada/alteracao/{{empresa.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 					
 					</tr>
-
-				</tbody>
-				<tfoot>
+				</tbody>				
+			</table>
+			<table id="auxTable" style="opacity: 0; position: absolute;">  
+            <thead>
 					<tr>
-						<th></th>
-						<th></th>
-						<th></th>
-						<th></th>
-						
-						<th>		</th>
-
-					
-			
-				</tr>
-				</tfoot>
-				
+						<th>Nome Fantasia</th>
+						<th>CNPJ</th>
+						<th>Telefone</th>
+						<th>Inscricao Estadual</th>
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" empresa in adminCtrl.listaEmpresa ">
+					<tr>
+						<td>{{empresa.dadoEmpresa.nomeFantasia }}</td>
+						<td>{{empresa.dadoEmpresa.cnpj }}</td>
+						<td>{{empresa.dadoEmpresa.telefone }}</td>
+						<td>{{empresa.dadoEmpresa.inscricaoEstadual}}</td>						
+					</tr>
+				</tbody>    
 			</table>
 			</div>
 			

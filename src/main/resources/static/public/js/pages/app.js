@@ -1,4 +1,4 @@
-var app = angular.module('gcc',['ngAnimate','ngRoute','ngMaterial', 'angucomplete-alt','ngResource','toastr','ui.bootstrap','blockUI', 'ngStorage','ui.utils.masks', 'ui.mask', 'chart.js'])
+var app = angular.module('gcc',['ceibo.components.table.export', 'ngAnimate','ngRoute','ngMaterial', 'angularFileUpload', 'angucomplete-alt','ngResource','toastr','ui.bootstrap','blockUI', 'ngStorage','ui.utils.masks', 'ui.mask', 'chart.js'])
 .run(function ($rootScope, $location, usuarioService, auth) {
 	 
 	var self = this;
