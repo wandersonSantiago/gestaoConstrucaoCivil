@@ -15,6 +15,9 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 		templateUrl:"views/pages/modulo_servicos/pacotes/lista.html",		
 	})
 	
+	.when('/servicos/pacotes/relatorio', {
+		templateUrl:"views/pages/modulo_servicos/pacotes/pacotes.relatorio.html",		
+	})
 	
 }]);
 

@@ -27,15 +27,12 @@
 					<br>
 					
 					<div class="row">					
-					<div class="col-sm-2">
-							Código
-							<input  class="form-control" ng-model="pacotesCtrl.pacoteServico.codigo" id="codigo" placeholder="Código" type="text"  required >
-						</div>
-						<div class="col-sm-4">
+				
+						<div class="col-sm-3">
 							Descrição do Pacote
 							<input  class="form-control" id="nome" type="text" ng-model="pacotesCtrl.pacoteServico.descricao" placeholder="Nome" required >
 						</div>
-						<div class="col-sm-4" ng-controller="categoriaController as categoriaCtrl" ng-init="categoriaCtrl.lista()">
+						<div class="col-sm-3" ng-controller="categoriaController as categoriaCtrl" ng-init="categoriaCtrl.lista()">
 						Categoria
 						<select class="form-control select2" ng-model="pacotesCtrl.pacoteServico.categoria" 
 							ng-options="listaCategorias.descricao for listaCategorias in categoriaCtrl.categorias" 

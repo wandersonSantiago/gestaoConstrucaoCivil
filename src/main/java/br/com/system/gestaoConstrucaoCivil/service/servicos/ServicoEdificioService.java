@@ -32,6 +32,7 @@ public class ServicoEdificioService {
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(ServicoEdificio servico) {
 		servico.setEmpreendimento(SessionUsuario.getInstance().getUsuario().getEmpreendimento());
+		servico.setDataCadastro(new Date());
 		validacao.verificarExistePacoteParaEmpresa(servico);
 		servicoEdificioRepository.save(servico);
 
@@ -56,6 +57,9 @@ public class ServicoEdificioService {
 			servico.getOcorrencias().get(i).setData(new Date());
 			servico.getOcorrencias().get(i).setUsuario(SessionUsuario.getInstance().getUsuario());
 			servico.getOcorrencias().get(i).setServicoEmpresa(servico);
+		}
+		if(servico.getPorcentagem() == 100){
+			servico.setDataFechamento(new Date());
 		}
 		servicoEdificioRepository.save(servico);
 		

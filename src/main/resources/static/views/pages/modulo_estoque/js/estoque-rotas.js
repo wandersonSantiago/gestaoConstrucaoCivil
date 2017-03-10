@@ -17,7 +17,9 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 	.when('/estoque/informacoes', {
 		templateUrl:"views/pages/modulo_estoque/informacoes.html",
 	})
-	
+	.when('/estoque/relatorio', {
+		templateUrl:"views/pages/modulo_estoque/estoque.relatorio.html",
+	})
 	
 
 }]);

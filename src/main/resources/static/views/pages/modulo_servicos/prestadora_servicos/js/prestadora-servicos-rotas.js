@@ -13,6 +13,9 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 		templateUrl : "views/pages/modulo_servicos/prestadora_servicos/listagem.html",
 	})
 
+	.when('/servicos/prestadora/relatorio', {
+		templateUrl : "views/pages/modulo_servicos/prestadora_servicos/prestadora.servicos.relatorio.html",
+	})
 	
 }]);
 

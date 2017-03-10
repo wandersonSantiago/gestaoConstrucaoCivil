@@ -22,6 +22,10 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 		templateUrl:"views/pages/modulo_servicos/vincular/visualizarComunitario.html",		
 	})
 	
+	.when('/servicos/vincular/relatorio', {
+		templateUrl:"views/pages/modulo_servicos/vincular/servicos.relatorio.html",		
+	})
+	
 	
 	
 	.when('/servicos/vistoria', {

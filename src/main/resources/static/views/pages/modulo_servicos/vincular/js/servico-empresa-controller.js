@@ -1,4 +1,4 @@
-app.controller('servicoEmpresaController', function($scope,servicoEmpresaService, $routeParams , FileUploader){
+app.controller('servicoEmpresaController', function($scope,servicoEmpresaService, $routeParams , FileUploader, $timeout){
 	
 	var self = this;
 	self.getPage=0;
@@ -51,6 +51,7 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 			servicoEmpresaService.listaEdificio().
 			then(function(e){			
 				$scope.listaEdificio  = e;
+				$scope.ativaTabela = true;
 			}, function(errResponse){
 			});
 		};
@@ -93,7 +94,8 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 			self.listaCasa = function(){						
 				servicoEmpresaService.listaCasa().
 				then(function(e){			
-					$scope.listaCasa  = e;					
+					$scope.listaCasa  = e;	
+					$scope.ativaTabela = true;
 				}, function(errResponse){
 				});
 			};
@@ -139,7 +141,8 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 				self.listaEdificacoesComunitaria = function(){	
 					servicoEmpresaService.listaEdificacoesComunitaria().
 					then(function(e){			
-						$scope.listaEdificacoesComunitaria  = e;					
+						$scope.listaEdificacoesComunitaria  = e;		
+						$scope.ativaTabela = true;
 					}, function(errResponse){
 					});
 				};
@@ -202,16 +205,31 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 				$scope.casa = false;
 				$scope.comunitaria = false;
 				$scope.edificio = true;
+				self.torre = false;
+				self.numeroCasa = false;
+				self.descricao = false;
+				$scope.ativaTabela = false;
+				 $scope.ativaGrafico = false;
 		}
 			if($scope.tipo.tipo == "comunitaria"){
 				$scope.casa = false;
 				$scope.edificio = false;
 				$scope.comunitaria = true;
+				self.torre = false;
+				self.numeroCasa = false;
+				self.descricao = false;
+				$scope.ativaTabela = false;
+				 $scope.ativaGrafico = false;
 			}
 			if($scope.tipo.tipo == "casa"){
 				$scope.comunitaria = false;
 				$scope.edificio = false;
 				$scope.casa = true;
+				self.torre = false;
+				self.numeroCasa = false;
+				self.descricao = false;
+				$scope.ativaTabela = false;
+				 $scope.ativaGrafico = false;
 				
 			}
 			}
@@ -221,7 +239,9 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 			self.consultarServicoEdificio = function(torre, andar, apartamento){
 				servicoEmpresaService.consultarServicoEdificio(torre, andar, apartamento).
 				then(function(e){			
-					$scope.listaEdificio  = e;			
+					$scope.listaEdificio  = e;
+					console.log(e);
+					$scope.ativaTabela = true;
 				}, function(errResponse){
 				});
 			};
@@ -229,7 +249,8 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 			self.consultarServicoCasa = function(casa, andar){
 				servicoEmpresaService.consultarServicoCasa(casa, andar).
 				then(function(e){			
-					$scope.listaCasa  = e;				
+					$scope.listaCasa  = e;		
+					$scope.ativaTabela = true;
 				}, function(errResponse){
 				});
 			};
@@ -237,7 +258,8 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 			self.consultarServicoEdificacoesComunitaria = function(outros){
 				servicoEmpresaService.consultarServicoEdificacoesComunitaria(outros).
 				then(function(e){			
-					$scope.listaEdificacoesComunitaria  = e;				
+					$scope.listaEdificacoesComunitaria  = e;
+					$scope.ativaTabela = true;
 				}, function(errResponse){
 				});
 			};
@@ -265,6 +287,14 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 	            //uploader.clearQueue();
 	           }*/
 			 
+			//==============================RELATORIO======================================================
+				
+			 $scope.ativaTabela = false;
+		     $scope.ativaGrafico = false;
+		     
+		     $scope.porTotal = true;
+		     $scope.porPeriodo = false;
+		     
 			self.exportar = function(tipoImpressao){ 
 			      switch(tipoImpressao){ 
 			          case 'pdf': $scope.$broadcast('export-pdf', {}); 
@@ -276,6 +306,54 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 			          default: console.log('no event caught'); 
 			       }
 				};
+				
+				 $scope.ativaBuscaRelatorio =  function(botao){
+			    	 if(botao == 'periodo'){
+			    		 $scope.porTotal = false;
+			    	     $scope.porPeriodo = true;
+			    	 }else if(botao == 'total'){
+			    		 $scope.porTotal = true;
+			    	     $scope.porPeriodo = false;;
+			    	 }
+			     };
+			     
+			     self.ativaBotaoTabelaGrafico =  function(botao){
+			    	 if(botao === false){
+			    		 $scope.ativaTabela = true;
+			    		 $scope.ativaGrafico = false;
+			    	 }else if(botao === true){
+			    		 $scope.ativaGrafico = true;
+			    		 $scope.ativaTabela = false;
+			    	 }
+			     };
+			     
+			     self.relatorioPorData = function(dataInicial , dataFinal){
+			    	 servicoEmpresaService.relatorioPorData(dataInicial, dataFinal).
+						then(function(f){
+							self.listaPacoteServicos = t;
+							 $scope.ativaTabela = true;
+								}, function(errResponse){
+						});
+			     };
+			     
+			     
+			     $scope.labels = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho"];
+			     $scope.series = ['Series A', 'Series B'];
+			     $scope.data = [
+			       [65, 59, 80, 81, 56, 55, 40],
+			       [28, 48, 40, 19, 86, 27, 90]
+			     ];
+			     $scope.onClick = function (points, evt) {
+			       console.log(points, evt);
+			     };
+			     
+			     // Simulate async data update 
+			     $timeout(function () {
+			       $scope.data = [
+			         [28, 48, 40, 19, 86, 27, 90],
+			         [65, 59, 80, 81, 56, 55, 40]
+			       ];
+			     }, 3000);
 				
 		
 });

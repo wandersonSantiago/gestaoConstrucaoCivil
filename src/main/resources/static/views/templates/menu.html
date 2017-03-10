@@ -178,6 +178,7 @@
 					<ul class="treeview-menu">
 						<li ng-if="ROLE_PRESTADORA_SERVICOS_CADASTRAR"><a class="top" href="#/servicos/prestadora/cadastro">Cadastro</a></li>
 				    	<li ng-if="ROLE_PRESTADORA_SERVICOS_CONSULTAR"><a class="top" href="#/servicos/prestadora/listagem">Lista</a></li>
+				    	<li ng-if="ROLE_PRESTADORA_SERVICOS_CONSULTAR"><a class="top" href="#/servicos/prestadora/relatorio">Relatório</a></li>
 					</ul>
 				</li>
 			<li ng-if="ROLE_PACOTES_CADASTRAR || ROLE_PACOTES_CONSULTAR" class="treeview"><a href=""><i class="glyphicon glyphicon-wrench"></i> <span>Pacotes</span>
@@ -185,6 +186,7 @@
 				<ul class="treeview-menu">
 					<li ng-if="ROLE_PACOTES_CADASTRAR"><a class="top" href="#/servicos/pacotes/cadastro">Cadastro</a></li>
 					<li ng-if="ROLE_PACOTES_CONSULTAR"><a class="top" href="#/servicos/pacotes/lista">Lista</a></li>
+						<li ng-if="ROLE_PACOTES_CONSULTAR"><a class="top" href="#/servicos/pacotes/relatorio">Relatório</a></li>
 			
 				</ul>
 			</li>
@@ -193,6 +195,7 @@
 				<ul class="treeview-menu">
 					<li ng-if="ROLE_VINCULAR_CADASTRAR"><a class="top" href="#/servicos/vincular/cadastro">Cadastro</a></li>
 					<li ng-if="ROLE_VINCULAR_CONSULTAR"><a class="top" href="#/servicos/vincular/listagem">Lista</a></li>
+					<li ng-if="ROLE_VINCULAR_CONSULTAR"><a class="top" href="#/servicos/vincular/relatorio">Relatório</a></li>
 			
 				</ul>
 			</li>
@@ -252,7 +255,7 @@
                   <ul class="treeview-menu">
                  		    <li ng-if="ROLE_MODULO_ESTOQUE_ENTRADA"><a class="top" href="#/estoque/entrada">Entrada</a></li>
 							<li ng-if="ROLE_MODULO_ESTOQUE_CONSULTA"><a class="top" href="#/estoque/listagem">Consultar</a></li>
-							                              
+							<li ng-if="ROLE_MODULO_ESTOQUE_CONSULTA"><a class="top" href="#/estoque/relatorio">Relatório</a></li>                             
                  	 <li ng-if="ROLE_MODULO_ESTOQUE_REQUISICAO_CADASTRAR || ROLE_MODULO_ESTOQUE_REQUISICAO_CONSULTA" class="treeview"><a href=""><span>Requisição</span> <i class="fa fa-angle-left pull-right"></i></a>
 						<ul class="treeview-menu">
 							<li ng-if="ROLE_MODULO_ESTOQUE_REQUISICAO_CADASTRAR"><a class="top" href="#/estoque/requisicao/cadastro">Cadastrar</a></li>

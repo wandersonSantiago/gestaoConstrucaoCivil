@@ -12,15 +12,7 @@
 		<div class="box-header">
 			<span class="lead">Lista pacotes serviços </span>
 		</div>
-		<div class="panel-body"  >
-		<select   ng-click="pacotesCtrl.buscaTodosComPaginacao(pacotesCtrl.getPage , maxResults)" ng-model="maxResults" title="escolha a quantidade de itens por página" >
-						<option value="5">5</option>
-						<option value="15">15</option>
-						<option value="20">20</option>
-						<option value="50">50</option>
-						<option value="100">100</option>
-					</select>
-		
+		<div class="panel-body"  >	
 		<input class="form-control" type="text" placeholder="Buscar" ng-model="buscaPacotes" >
 			<div class="table-responsive">
 			<table class="table table-hover table-bordered">
@@ -29,8 +21,7 @@
 						<th>Codigo</th>
 						<th>nome do pacote</th>
 						<th>categoria</th>
-						<th>valor</th>
-						
+						<th>valor</th>						
 					</tr>
 				</thead>
 				<tbody
@@ -39,20 +30,10 @@
 						<td>{{ pacoteServico.codigoPacote }}</td>
 						<td>{{ pacoteServico.descricao }}</td>
 						<td>{{ pacoteServico.categoria.descricao }}</td>
-						<td>{{ pacoteServico.valor | currency }}</td>
-						
-						<td ng-if="ROLE_PACOTES_ALTERAR"><a href="#/servicos/pacotes/edita/{{pacoteServico.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
-						
-						
-						
+						<td>{{ pacoteServico.valor | currency }}</td>						
+						<td ng-if="ROLE_PACOTES_ALTERAR"><a href="#/servicos/pacotes/edita/{{pacoteServico.id}}"><i class="glyphicon glyphicon-edit"></i></a> 
 						</tr>
-
-				</tbody>
-				<tfoot>
-					<tr>
-	
-					</tr>
-				</tfoot>
+				</tbody>				
 			</table>			
 			</div>
 			<div class="row">

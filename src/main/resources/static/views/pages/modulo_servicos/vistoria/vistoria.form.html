@@ -91,7 +91,8 @@
 										<th>Torre</th>
 										<th>Andar</th>
 										<th>Apartamento</th>
-										<th>Valor</th>										
+										<th>Valor</th>	
+										<th>Término</th>										
 									</tr>
 								</thead>
 								<tbody
@@ -103,7 +104,9 @@
 										<td>{{ edificio.torre }}</td>
 										<td>{{ edificio.andar}}</td>
 										<td>{{ edificio.apartamento}}</td>
-										<td>{{ edificio.pacoteServico.valor | currency}}</td>									
+										<td>{{ edificio.pacoteServico.valor | currency}}</td>	
+										<td ng-if="edificio.dataFechamento"><a class="label label-success ">{{ edificio.dataFechamento | date : 'dd/MM/yyyy'}}</a></td>
+										<td ng-if="!edificio.dataFechamento"><a class="label label-warning">em andamento...</a></td>								
 										<td><a href="#/servicos/vistoria/visualizar/edificio/{{edificio.id}}"><i class="glyphicon glyphicon-edit"></i></a> 												
 										</tr>			
 								</tbody>
@@ -137,6 +140,8 @@
 										<td>{{ casa.numero }}</td>
 										<td>{{ casa.andar}}</td>
 										<td>{{ casa.pacoteServico.valor | currency}}</td>										
+										<td ng-if="casa.dataFechamento"><a class="label label-success ">{{ casa.dataFechamento | date : 'dd/MM/yyyy'}}</a></td>
+										<td ng-if="!casa.dataFechamento"><a class="label label-warning">em andamento...</a></td>										
 										<td><a href="#/servicos/vistoria/visualizar/casa/{{casa.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 							
 										</tr>				
 								</tbody>
@@ -172,6 +177,8 @@
 										<td>{{ comunitario.pacoteServico.categoria.descricao }}</td>
 										<td>{{ comunitario.descricao }}</td>
 										<td>{{ comunitario.pacoteServico.valor | currency}}</td>
+										<td ng-if="comunitario.dataFechamento"><a class="label label-success ">{{ comunitario.dataFechamento | date : 'dd/MM/yyyy'}}</a></td>
+										<td ng-if="!comunitario.dataFechamento"><a class="label label-warning">em andamento...</a></td>										
 										<td ><a href="#//servicos/vistoria/visualizar/comunitario/{{comunitario.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
 										</tr>				
 								</tbody>

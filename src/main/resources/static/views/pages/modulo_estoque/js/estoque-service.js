@@ -71,7 +71,6 @@ app.factory('estoqueService', function($rootScope, toastr, $http,$q){
 		},
 		
 		listaProdutosComEstoque : function(){
-			console.log("teste");
 			return $http.get('/rest/produtoEstoque')
 			.then(function(response){
 				return response.data;

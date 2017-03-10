@@ -1,5 +1,6 @@
 package br.com.system.gestaoConstrucaoCivil.entity.servicos;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,7 +15,6 @@ import javax.persistence.Table;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
-import br.com.system.gestaoConstrucaoCivil.entity.chamado.Mensagem;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -22,17 +22,17 @@ import br.com.system.gestaoConstrucaoCivil.entity.chamado.Mensagem;
 public class ServicoEmpresa extends AbstractPersistable<Long>{
 
 	
-	//@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
 	@ManyToOne
-	//OneToMany usar
 	@JoinColumn(name="id_prestadora_servico",nullable = false)
 	private PrestadoraServico prestadoraServico;
 	
 	
 	private Double porcentagem;
+	private Date dataCadastro;
+	private Date dataFechamento;
+	private Date dataPagamento;
 	
 	@ManyToOne
-	//OneToMany
 	@JoinColumn(name="id_pacote_servico",nullable = false)
 	private PacoteServico pacoteServico;
 	
@@ -73,6 +73,24 @@ public class ServicoEmpresa extends AbstractPersistable<Long>{
 	}
 	public void setOcorrencias(List<OcorrenciaServico> ocorrencias) {
 		this.ocorrencias = ocorrencias;
+	}
+	public Date getDataCadastro() {
+		return dataCadastro;
+	}
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+	public Date getDataFechamento() {
+		return dataFechamento;
+	}
+	public void setDataFechamento(Date dataFechamento) {
+		this.dataFechamento = dataFechamento;
+	}
+	public Date getDataPagamento() {
+		return dataPagamento;
+	}
+	public void setDataPagamento(Date dataPagamento) {
+		this.dataPagamento = dataPagamento;
 	}
 	
 	

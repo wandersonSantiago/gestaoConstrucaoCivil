@@ -48,7 +48,7 @@
 						</div>
 					</div>
 					<br>
-					<div class="row">
+					<div ng-if="!servicoCtrl.servicoEdifico.dataFechamento" class="row">
 						<div class="col-sm-2">
 						% concluido
 							<input type="number" class="form-control"  ng-model="servicoCtrl.servicoEdifico.porcentagem">
@@ -65,14 +65,31 @@
 						</div>
 					</div>
 					<br>
-					<div class="box">
+					<div ng-if="servicoCtrl.servicoEdifico.dataFechamento" class="row">
+						<div class="alert alert-success" role="alert">
+						Este serviço ,&nbsp;foi &nbsp; concluido&nbsp; na &nbsp;data&nbsp;{{servicoCtrl.servicoEdifico.dataFechamento | date :'dd/MM/yyyy'}}!!</div>							  		
+					</div><br>
+					<div ng-if="servicoCtrl.servicoEdifico.dataPagamento" class="row">
+						<div class="alert alert-success" role="alert">
+						Pagamento &nbsp; realizada na &nbsp;data&nbsp;{{servicoCtrl.servicoEdifico.dataPagamento | date :'dd/MM/yyyy'}}!!</div>							  		
+					</div>
+					<div ng-show="servicoCtrl.servicoEdifico.dataFechamento" ng-if="!servicoCtrl.servicoEdifico.dataPagamento" class="row">
+						<div class="alert alert-warning" role="alert">
+						Pagamento &nbsp; Pendente!!</div>							  		
+					</div>
+					<div class="box"ng-if="!servicoCtrl.servicoEdifico.dataFechamento">
 						<div class="box-header">
 							<h3 class="box-title">
 								Registrar Ocorrencias
-							</h3>							
+							</h3>				
+							<div class="btn-group" role="group" aria-label="...">
+							  <button type="button" class="btn btn-info">Informação</button>
+							  <button type="button" class="btn btn-warning">Atenção</button>
+							  <button type="button" class="btn btn-danger">Perigo</button>
+							</div>			
 						</div>
 						<div class="box-body pad">							
-								<textarea class="textarea" placeholder="Texto" ng-model="ocorrencia" id="texto"
+								<textarea class="textarea" placeholder="Texto" ng-model="servicoCtrl.ocorrencia" id="texto"
 									style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
 						</div>
 						<div class="row">
@@ -118,15 +135,49 @@
 				        </div>  
 					</div>
 					<br>
-					<div class="row ">
+					<div ng-if="!servicoCtrl.servicoEdifico.dataFechamento" class="row ">
 					<div class="col-sm-4"></div>
 						<div class="col-sm-4" >	
-							<button  type="button" name="salvar"  ng-click="servicoCtrl.alteraVistoriaEdificio(servicoCtrl.servicoEdifico , servicoCtrl.pacoteServico,  servicoCtrl.prestadoraServico, ocorrencia)" class="btn btn-lg btn-primary btn-block btn-signin">Salvar</button>
+							<button  type="button" name="salvar"  ng-click="servicoCtrl.alteraVistoriaEdificio(servicoCtrl.servicoEdifico , servicoCtrl.pacoteServico,  servicoCtrl.prestadoraServico, servicoCtrl.ocorrencia)" class="btn btn-lg btn-primary btn-block btn-signin">Salvar</button>
 					</div>
-					</div>
+					</div><hr><br>
 				</form>
 			</div>
-			<div class="tablecontainer"></div>
+			<div class="row">
+						<div class="col-md-12">
+							<div class="box box-primary direct-chat direct-chat-primary">
+								<div class="box-header with-border">
+									<h2 class="box-title">Ocorrencias</h2>
+									<div class="box-tools pull-right">
+										<span data-toggle="tooltip" title="quantidade de mensagens"
+											class="badge bg-light-blue">{{quantidadeMensagem}}</span>
+									</div>
+								</div>
+								<br>
+								<div class="box-body">
+									
+										<div ng-repeat=" ocorrencia in servicoCtrl.servicoEdifico.ocorrencias | orderBy:'-id' ">
+											<div class="alert alert-success">
+												<div class="direct-chat-primary clearfix">
+													<span class="direct-chat-name pull-left">{{ocorrencia.usuario.nome}}</span>
+													<span class="direct-chat-name pull-right">
+														Data : {{ ocorrencia.data | date : 'dd/MM/yyyy'}} 
+														Horas : {{ ocorrencia.data | date : 'HH:mm:ss'}} 
+													</span>
+													</div>
+												<img class="direct-chat-img" src="public/img/avatar_2x.png"
+													alt="message user image">
+												<div class="direct-chat-text">{{ ocorrencia.ocorrencia }}</div>
+												<br>
+											</div>
+											<br>											
+											<br>
+										</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
 		</div>
 	</div>
 	</div>
