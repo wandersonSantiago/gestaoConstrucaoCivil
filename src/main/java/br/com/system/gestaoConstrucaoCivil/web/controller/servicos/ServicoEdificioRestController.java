@@ -36,6 +36,16 @@ public class ServicoEdificioRestController {
 		return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	}
 	
+	@PostMapping(value = "/pagamento/salvar")
+	public ResponseEntity<ServicoEdificio> salvarPagamento(@RequestBody ServicoEdificio servico,
+			UriComponentsBuilder ucBuilder) {
+		servicoEdificioService.salvarPagamento(servico);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setLocation(
+				ucBuilder.path("/rest/servico/vincular/salva/{id}").buildAndExpand(servico.getId()).toUri());
+		return new ResponseEntity<>(headers, HttpStatus.CREATED);
+	}
+	
 	@PutMapping
 	public void altera(@RequestBody ServicoEdificio servico) {
 		servicoEdificioService.salvarOuEditar(servico);		

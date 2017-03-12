@@ -1,0 +1,83 @@
+<meta charset="UTF-8">
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/servicos/home">menu serviços</a></li>
+   <li class="breadcrumb-item" ><a href="#/servicos/vincular/listagem">listar</a></li>
+   <li class="breadcrumb-item active">vistoria</li>
+  </ol>
+<div ng-controller="servicoEmpresaController as servicoCtrl">
+	<div class="box box-primary">
+		<div class="box-header">
+			<span class="lead"> Pagamento de Serviços </span>
+		</div>
+		<div class="panel-body">
+		<form role="form-vertical" >
+		
+			<div class="container col-sm-12 ">			
+			<div class="row">				
+				<div class="col-sm-4" ng-controller="prestadoraServicoController as ctrlPrestadora" ng-init="ctrlPrestadora.lista()">
+							<br>Prestadora de Serviços:
+							<md-autocomplete 
+							 	md-selected-item="servicoCtrl.prestadoraServico" 
+							 	md-search-text="pCtrl.searchText" 
+							 	md-selected-item-change="pCtrl.selectedItemChange(prestadora)" 
+							 	md-items=" prestadora in ctrlPrestadora.prestadoraServicos | filter : pCtrl.searchText" 
+							 	md-item-text="prestadora.dadoEmpresa.nomeFantasia" 
+							 	md-min-length="0" placeholder="buscar...">
+       							<md-item-template>
+          							<span md-highlight-text="pCtrl.searchText" md-highlight-flags="^i">{{prestadora.dadoEmpresa.nomeFantasia}}</span>
+       							 </md-item-template>        								
+     						 </md-autocomplete>
+							
+						</div>
+						<div class="col-sm-2">
+							<br><br>
+							<input class="btn btn-lg btn-primary "
+								ng-click="servicoCtrl.buscarServicosDaPrestadora(servicoCtrl.prestadoraServico.id)" value="adicionar"
+								title="pressione para adicionar a lista" type="button"  >
+						</div>
+				
+			</div>				<br><br>				
+							<div  class="table-responsive">
+							<input class="form-control" type="text" placeholder="Buscar" ng-model="buscaPacotes" >
+							<table class="table table-hover table-bordered"">
+								<thead>
+									<tr>
+										<th>Pacote de serviço</th>
+										<th>Categoria</th>
+										<th>Local</th>
+										<th>Valor do serviço</th>	
+										<th>Término</th>									
+									</tr>
+								</thead>
+								<tbody
+									ng-repeat=" servico in servicos | filter : buscaPacotes">
+									<tr>
+										<td>{{ servico.pacoteServico.descricao }}</td>
+										<td>{{ servico.pacoteServico.categoria.descricao }}</td>
+										<td ng-if="servico.torre">{{ servico.torre }}-{{ servico.andar}}-{{ servico.apartamento}}</td>
+										<td ng-if="servico.numeroCasa">{{ servico.numeroCasa}}-{{ servico.andar}}</td>
+										<td ng-if="servico.descricao">{{ servico.descricao}}</td>
+										<td>{{ servico.valorPacoteServico | currency}}</td>	
+										<td ng-if="servico.dataFechamento"><a class="label label-success ">{{ servico.dataFechamento | date : 'dd/MM/yyyy'}}</a></td>
+										<td ng-if="!servico.dataFechamento"><a class="label label-warning">em andamento...</a></td>								
+										<td ng-if="servico.ocorrencias.length > 0"><a class="label label-danger" href="#/servicos/vistoria/visualizar/edificio/{{servico.id}}">{{servico.ocorrencias.length}}</a> 												
+										<td ng-if="servico.ocorrencias.length == 0"><a class="label label-info" href="#/servicos/vistoria/visualizar/edificio/{{servico.id}}">{{servico.ocorrencias.length}}</a> 												
+										<td><a href="#/servicos/pagamento/cadatrar/{{servico.id}}"><i class="fa fa-money"></i></a> 												
+										
+										</tr>			
+								</tbody>
+								<tfoot>
+									<tr>					
+									</tr>
+								</tfoot>
+							</table>							
+									
+						</div>
+						</div>					
+				</form>
+			</div>
+			<div class="tablecontainer"></div>
+		</div>
+	</div>
+	</div>

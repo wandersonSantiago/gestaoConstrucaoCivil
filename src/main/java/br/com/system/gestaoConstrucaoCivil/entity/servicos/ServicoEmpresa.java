@@ -1,5 +1,6 @@
 package br.com.system.gestaoConstrucaoCivil.entity.servicos;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -31,6 +32,10 @@ public class ServicoEmpresa extends AbstractPersistable<Long>{
 	private Date dataCadastro;
 	private Date dataFechamento;
 	private Date dataPagamento;
+	private Double valorPacoteServico;
+	private Double valorDesconto;
+	private Double valorAdicional;
+	private String observacao;
 	
 	@ManyToOne
 	@JoinColumn(name="id_pacote_servico",nullable = false)
@@ -91,6 +96,30 @@ public class ServicoEmpresa extends AbstractPersistable<Long>{
 	}
 	public void setDataPagamento(Date dataPagamento) {
 		this.dataPagamento = dataPagamento;
+	}
+	public Double getValorPacoteServico() {
+		return valorPacoteServico;
+	}
+	public void setValorPacoteServico(Double valorPacoteServico) {
+		this.valorPacoteServico = valorPacoteServico;
+	}
+	public Double getValorAdicional() {
+		return valorAdicional;
+	}
+	public void setValorAdicional(Double valorAdicional) {
+		this.valorAdicional = valorAdicional;
+	}
+	public String getObservacao() {
+		return observacao;
+	}
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
+	public Double getValorDesconto() {
+		return valorDesconto;
+	}
+	public void setValorDesconto(Double valorDesconto) {
+		this.valorDesconto = valorDesconto;
 	}
 	
 	

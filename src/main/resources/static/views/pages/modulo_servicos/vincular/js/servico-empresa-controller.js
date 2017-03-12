@@ -1,4 +1,4 @@
-app.controller('servicoEmpresaController', function($scope,servicoEmpresaService, $routeParams , FileUploader, $timeout){
+app.controller('servicoEmpresaController', function($scope, $rootScope, servicoEmpresaService, $routeParams , FileUploader, $timeout){
 	
 	var self = this;
 	self.getPage=0;
@@ -8,7 +8,7 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 	var  idServicoComunitario = $routeParams.idServicoComunitario;
 	var  idServicoEdificio = $routeParams.idServicoEdificio;
 	var  idServicoCasa = $routeParams.idServicoCasa;
-	
+	var  idServico = $routeParams.idServico;
 	
 	 self.salvaEdificio = function(servicoEdifico , pacoteServico , prestadoraServico){
 		 servicoEdifico.pacoteServico = pacoteServico;
@@ -233,6 +233,35 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 				
 			}
 			}
+			//PAGAMENTOS
+			self.buscarServicosDaPrestadora = function(prestadora){
+				servicoEmpresaService.buscarServicosDaPrestadora(prestadora).
+				then(function(e){			
+					$rootScope.servicos  = e;
+					$rootScope.ativaTabela = true;
+				}, function(errResponse){
+				});
+			};
+			
+			self.buscarServicosDaPrestadoraPorId = function(prestadora){
+				servicoEmpresaService.buscarServicosDaPrestadoraPorId(prestadora).
+				then(function(e){			
+					self.servicoEmpresa  = e;
+				}, function(errResponse){
+				});
+			};
+			if(idServico){
+				self.buscarServicosDaPrestadoraPorId(idServico);
+			}
+			
+			self.salvarPagamento = function(prestadora){
+				servicoEmpresaService.salvarPagamento(prestadora).
+				then(function(e){			
+					self.servicoEmpresa  = null;
+					$location.path('#/servicos/vistoria');
+				}, function(errResponse){
+				});
+			};
 
 	//VISTORIA
 			
@@ -267,10 +296,13 @@ app.controller('servicoEmpresaController', function($scope,servicoEmpresaService
 			 self.alteraVistoriaEdificio = function(servicoEdifico , pacoteServico , prestadoraServico, ocorrencia){		
 				 servicoEdifico.pacoteServico = pacoteServico;
 				 servicoEdifico.prestadoraServico = prestadoraServico;
-				 servicoEdifico.ocorrencias = [{ocorrencia : ocorrencia}];
-				 console.log(servicoEdifico);
+				
+				 if(ocorrencia){
+					 servicoEdifico.ocorrencias = [{ocorrencia : ocorrencia}];
+				 }
 				 servicoEmpresaService.alteraVistoriaEdificio(servicoEdifico).
 					then(function(response){
+						self.ocorrencia = null;
 						self.servicoEmpresa = null;
 						}, function(errResponse){
 					});

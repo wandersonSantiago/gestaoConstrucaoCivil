@@ -28,15 +28,6 @@ public class ServicoEdificioService {
 
 		return servicoEdificioRepository.findAll(pages);
 	}
-
-	@Transactional(readOnly = false)
-	public void salvarOuEditar(ServicoEdificio servico) {
-		servico.setEmpreendimento(SessionUsuario.getInstance().getUsuario().getEmpreendimento());
-		servico.setDataCadastro(new Date());
-		validacao.verificarExistePacoteParaEmpresa(servico);
-		servicoEdificioRepository.save(servico);
-
-	}
 	public ServicoEdificio buscarPorId(Long id) {
 		
 		return servicoEdificioRepository.findOne(id);
@@ -50,6 +41,15 @@ public class ServicoEdificioService {
 		
 		 return servicoEdificioRepository.findByTorreAndAndarAndApartamento(torre, andar, apartamento);
 	}
+	
+	@Transactional(readOnly = false)
+	public void salvarOuEditar(ServicoEdificio servico) {
+		servico.setEmpreendimento(SessionUsuario.getInstance().getUsuario().getEmpreendimento());
+		servico.setDataCadastro(new Date());
+		servico.setValorPacoteServico(servico.getPacoteServico().getValor());
+		validacao.verificarExistePacoteParaEmpresa(servico);
+		servicoEdificioRepository.save(servico);
+	}
 
 	@Transactional(readOnly = false)
 	public void salvarOuEditarVistoria(ServicoEdificio servico) {
@@ -61,6 +61,11 @@ public class ServicoEdificioService {
 		if(servico.getPorcentagem() == 100){
 			servico.setDataFechamento(new Date());
 		}
+		servicoEdificioRepository.save(servico);
+		
+	}
+	public void salvarPagamento(ServicoEdificio servico) {
+		servico.setDataPagamento(new Date());
 		servicoEdificioRepository.save(servico);
 		
 	}

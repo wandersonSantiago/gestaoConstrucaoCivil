@@ -199,6 +199,15 @@
 			
 				</ul>
 			</li>
+			<li ng-if="ROLE_VINCULAR_CADASTRAR || ROLE_VINCULAR_CONSULTAR" class="treeview"><a href=""><i class="glyphicon glyphicon-wrench"></i> <span>Pagamento</span>
+				<i class="fa fa-angle-left pull-right"></i></a>
+				<ul class="treeview-menu">
+					<li ng-if="ROLE_VINCULAR_CADASTRAR"><a class="top" href="#/servicos/pagamento/cadastrar">Cadastro</a></li>
+					<li ng-if="ROLE_VINCULAR_CONSULTAR"><a class="top" href="#/servicos/pagamento/listagem">Lista</a></li>
+					<li ng-if="ROLE_VINCULAR_CONSULTAR"><a class="top" href="#/servicos/pagamento/relatorio">Relatório</a></li>
+			
+				</ul>
+			</li>
 			</ul>
 			</li>
 		

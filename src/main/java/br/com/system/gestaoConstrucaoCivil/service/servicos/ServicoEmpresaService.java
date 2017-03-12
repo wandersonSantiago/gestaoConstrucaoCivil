@@ -19,17 +19,23 @@ public class ServicoEmpresaService {
 	private ServicoEmpresaRepository servicoRepository;
 	
 	public Page<ServicoEmpresa> buscarTodos(PageRequest pages) {
- 		
  		return servicoRepository.findAll(pages);
 	}
 	
 	@Transactional(readOnly = false)
-	public void salvarOuEditar(ServicoEmpresa servico)
-	{
+	public void salvarOuEditar(ServicoEmpresa servico){
 		servicoRepository.save(servico);
 	}
 
 	public Iterable<ServicoEmpresa> lista() {
 		return servicoRepository.findAll();
+	}
+
+	public Iterable<ServicoEmpresa> buscarServicosDaPrestadora(Long id) {		
+		return servicoRepository.findByPrestadoraServico_id(id);
+	}
+
+	public ServicoEmpresa buscarPorId(Long id) {
+		return servicoRepository.findOne(id);
 	}
 }

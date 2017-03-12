@@ -1,0 +1,95 @@
+<meta charset="UTF-8">
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/servicos/home">menu serviços</a></li>
+   <li class="breadcrumb-item" ><a href="#/servicos/vincular/cadastro">cadastrar</a></li>
+   <li class="breadcrumb-item" ><a href="#/servicos/vincular/listagem">listar</a></li>
+   <li class="breadcrumb-item active">Pagamento</li>
+  </ol>
+<div ng-controller="servicoEmpresaController as servicoCtrl">
+	<div class="box box-primary">
+		<div class="box-header">
+			<span class="lead"> Pagamento Serviços </span>
+		</div>
+		<div class="panel-body">
+			<div class="container col-sm-12 ">
+				<form role="form-vertical" >							
+					<br>
+					<div ng-if="servicos.torre" class="row">
+							<div class="col-sm-4"  >
+							<strong>Torre do Edificio:</strong>
+							<h4><span>{{servicoCtrl.servicoEmpresa.torre}}</span></h4>							
+						</div>						
+						<div class="col-sm-4"  >
+						<strong>Andar do Edificio:</strong>
+						<h4><span>{{servicoCtrl.servicoEmpresa.andar}}</span></h4>							
+						</div>	
+						<div class="col-sm-4"  >
+						<strong>Apartamento do Edificio:</strong>
+						<h4><span>{{servicoCtrl.servicoEmpresa.apartamento}}</span></h4>							
+						</div>
+					</div>
+					
+					<div ng-if="servicos.numeroCasa" class="row">						
+						<div class="col-sm-4"  >
+						<strong>Numero da Casa</strong>
+							<h4><span>{{servicoCtrl.servicoEmpresa.numeroCasa}}</span></h4>
+						</div>
+							<div class="col-sm-4"  >
+							<strong>Andar da Casa</strong>
+							<h4><span>{{servicoCtrl.servicoEmpresa.andar}}</span></h4>
+						</div>
+					</div>					
+					<br>
+					<div class="row">	
+						<div class="col-sm-4">	
+							<strong>Pacotes de Serviço</strong>	
+							<h4><span>{{servicoCtrl.servicoEmpresa.pacoteServico.descricao}}</span></h4>
+						</div>							
+						<div class="col-sm-8">	
+							<strong>Prestadora de Serviços</strong>
+							<h4><span>{{servicoCtrl.servicoEmpresa.prestadoraServico.dadoEmpresa.nomeFantasia }}</span></h4>
+							</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-4">
+							<strong>Preço Fixado</strong>	
+							<h4><span>{{servicoCtrl.servicoEmpresa.valorPacoteServico | currency}}</span></h4>
+						</div>
+						<div class="col-sm-4">
+							<strong>Valor Adicional</strong>	
+							<input ng-model="servicoCtrl.servicoEmpresa.valorAdicional" placeholder="R$" class="form-control" id="valorAdicional" type="text" ui-money-mask="2">
+						</div>
+						<div class="col-sm-4">
+							<strong>Valor desconto</strong>	
+							<input ng-model="servicoCtrl.servicoEmpresa.valorDesconto" placeholder="R$" class="form-control" id="valorDesconto" type="text" ui-money-mask="2">
+						</div>
+					</div>
+					<br>
+					<div class="row">
+					<div class="col-sm-4">
+					<strong>Valor total a ser pago</strong><br>
+					R$ {{servicoCtrl.servicoEmpresa.valorPacoteServico + servicoCtrl.servicoEmpresa.valorAdicional - servicoCtrl.servicoEmpresa.valorDesconto | currency}}
+					</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<strong>Observação</strong>	
+							<input class="form-control " type="text" ng-model="servicoCtrl.servicoEmpresa.observacao">
+						</div>
+					</div>
+					<br>
+					<div class="row ">
+						<div class="col-sm-4"></div>
+						<div class="col-sm-4">
+							<button  type="button" name="salvar" ng-click="servicoCtrl.salvarPagamento(servicoCtrl.servicoEmpresa)" class="btn btn-lg btn-primary btn-block btn-signin">Salvar</button>
+					    </div>
+					</div>
+				</form>
+			</div>
+			<div class="tablecontainer"></div>
+		</div>
+	</div>
+	</div>
