@@ -8,7 +8,10 @@ import br.com.system.gestaoConstrucaoCivil.entity.servicos.ServicoEmpresa;
 public interface ServicoEmpresaRepository extends JpaRepository<ServicoEmpresa,Long>{
 
 	
-	@Query("From ServicoEmpresa servico where servico.prestadoraServico.id = ?1 AND servico.dataFechamento != null")
+	@Query("From ServicoEmpresa servico where servico.prestadoraServico.id = ?1 AND servico.dataEncerramentoServico != null")
 	Iterable<ServicoEmpresa> findByPrestadoraServico_id(Long id);
+
+	//@Query("From ServicoEmpresa servico where servico.prestadoraServico.id = ?1 AND servico.dataFechamento != null")
+	Iterable<ServicoEmpresa> findByPrestadoraServico_idAndDataFechamentoNotNull(Long id);
 
 }

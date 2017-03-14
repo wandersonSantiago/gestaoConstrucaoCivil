@@ -9,13 +9,13 @@
 <div ng-controller="servicoEmpresaController as servicoCtrl">
 	<div class="box box-primary">
 		<div class="box-header">
-			<span class="lead"> Pagamento Serviços </span>
+			<span class="lead"> Liberar Pagamento Serviço </span>
 		</div>
 		<div class="panel-body">
 			<div class="container col-sm-12 ">
 				<form role="form-vertical" >							
 					<br>
-					<div ng-if="servicos.torre" class="row">
+					<div ng-if="servicoCtrl.servicoEmpresa.torre" class="row">
 							<div class="col-sm-4"  >
 							<strong>Torre do Edificio:</strong>
 							<h4><span>{{servicoCtrl.servicoEmpresa.torre}}</span></h4>							
@@ -30,7 +30,7 @@
 						</div>
 					</div>
 					
-					<div ng-if="servicos.numeroCasa" class="row">						
+					<div ng-if="servicoCtrl.servicoEmpresa.numeroCasa" class="row">						
 						<div class="col-sm-4"  >
 						<strong>Numero da Casa</strong>
 							<h4><span>{{servicoCtrl.servicoEmpresa.numeroCasa}}</span></h4>
@@ -39,7 +39,13 @@
 							<strong>Andar da Casa</strong>
 							<h4><span>{{servicoCtrl.servicoEmpresa.andar}}</span></h4>
 						</div>
-					</div>					
+					</div>
+					<div ng-if="servicoCtrl.servicoEmpresa.descricao" class="row">						
+						<div class="col-sm-4"  >
+						<strong>Numero da Casa</strong>
+							<h4><span>{{servicoCtrl.servicoEmpresa.descricao}}</span></h4>
+						</div>							
+					</div>							
 					<br>
 					<div class="row">	
 						<div class="col-sm-4">	
@@ -84,7 +90,9 @@
 					<div class="row ">
 						<div class="col-sm-4"></div>
 						<div class="col-sm-4">
-							<button  type="button" name="salvar" ng-click="servicoCtrl.salvarPagamento(servicoCtrl.servicoEmpresa)" class="btn btn-lg btn-primary btn-block btn-signin">Salvar</button>
+							<button ng-if="servicoCtrl.servicoEmpresa.torre" type="button" name="salvar" ng-click="servicoCtrl.salvarPagamento('edificio',servicoCtrl.servicoEmpresa)" class="btn btn-lg btn-primary btn-block btn-signin">Salvar</button>
+					   		<button ng-if="servicoCtrl.servicoEmpresa.numeroCasa" type="button" name="salvar" ng-click="servicoCtrl.salvarPagamento('casa',servicoCtrl.servicoEmpresa)" class="btn btn-lg btn-primary btn-block btn-signin">Salvar</button>
+					     	<button ng-if="servicoCtrl.servicoEmpresa.descricao" type="button" name="salvar" ng-click="servicoCtrl.salvarPagamento('outros',servicoCtrl.servicoEmpresa)" class="btn btn-lg btn-primary btn-block btn-signin">Salvar</button>
 					    </div>
 					</div>
 				</form>

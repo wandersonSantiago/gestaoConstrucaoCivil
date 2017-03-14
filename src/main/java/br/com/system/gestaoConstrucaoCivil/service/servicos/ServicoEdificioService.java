@@ -59,14 +59,10 @@ public class ServicoEdificioService {
 			servico.getOcorrencias().get(i).setServicoEmpresa(servico);
 		}
 		if(servico.getPorcentagem() == 100){
-			servico.setDataFechamento(new Date());
+			servico.setDataEncerramentoServico(new Date());
 		}
 		servicoEdificioRepository.save(servico);
 		
 	}
-	public void salvarPagamento(ServicoEdificio servico) {
-		servico.setDataPagamento(new Date());
-		servicoEdificioRepository.save(servico);
-		
-	}
+	
 }

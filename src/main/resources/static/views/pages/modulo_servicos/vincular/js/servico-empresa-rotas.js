@@ -41,17 +41,14 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 		templateUrl:"views/pages/modulo_servicos/vistoria/visualizarVistoriaComunitario.html",		
 	})
 	
-	.when('/servicos/pagamento/cadastrar', {
-		templateUrl:"views/pages/modulo_servicos/pagamento/pagamento.form.html",		
+	.when('/servicos/pagamento/liberar', {
+		templateUrl:"views/pages/modulo_servicos/pagamento/liberarPagamento.form.html",		
 	})	
-	.when('/servicos/pagamento/cadatrar/:idServico', {
-		templateUrl:"views/pages/modulo_servicos/pagamento/pagamentoVistoria.html",		
+	.when('/servicos/pagamento/cadastrar/:idServico', {
+		templateUrl:"views/pages/modulo_servicos/pagamento/liberarPagamento.html",		
 	})
-	.when('/servicos/vistoria/pagamento/edificio/:idServicoEdificio', {
-		templateUrl:"views/pages/modulo_servicos/pagamento/pagamentoVistoriaEdificio.html",		
-	})
-	.when('/servicos/vistoria/pagamento/comunitario/:idServicoComunitario', {
-		templateUrl:"views/pages/modulo_servicos/pagamento/pagamentoVistoriaComunitario.html",		
+	.when('/servicos/pagamento/efetuar', {
+		templateUrl:"views/pages/modulo_servicos/pagamento/efetuarPagamento.form.html",		
 	})
 	
 }]);

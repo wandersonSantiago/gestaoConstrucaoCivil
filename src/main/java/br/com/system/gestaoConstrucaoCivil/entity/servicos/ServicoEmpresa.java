@@ -1,6 +1,5 @@
 package br.com.system.gestaoConstrucaoCivil.entity.servicos;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +15,7 @@ import javax.persistence.Table;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
+import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -32,9 +32,11 @@ public class ServicoEmpresa extends AbstractPersistable<Long>{
 	private Date dataCadastro;
 	private Date dataFechamento;
 	private Date dataPagamento;
+	private Date dataEncerramentoServico;
 	private Double valorPacoteServico;
 	private Double valorDesconto;
 	private Double valorAdicional;
+	private Double valorTotalPago;
 	private String observacao;
 	
 	@ManyToOne
@@ -44,6 +46,10 @@ public class ServicoEmpresa extends AbstractPersistable<Long>{
 	@ManyToOne
 	@JoinColumn(name="id_empreendimento",nullable = false)
 	private Empreendimento empreendimento;
+	
+	@ManyToOne
+	@JoinColumn(name="id_usuario")
+	private Usuario usuarioCadastro;
 	
 	@OneToMany(mappedBy = "servicoEmpresa", cascade = CascadeType.ALL)
 	protected List<OcorrenciaServico> ocorrencias;	
@@ -120,6 +126,24 @@ public class ServicoEmpresa extends AbstractPersistable<Long>{
 	}
 	public void setValorDesconto(Double valorDesconto) {
 		this.valorDesconto = valorDesconto;
+	}
+	public Usuario getUsuarioCadastro() {
+		return usuarioCadastro;
+	}
+	public void setUsuarioCadastro(Usuario usuarioCadastro) {
+		this.usuarioCadastro = usuarioCadastro;
+	}
+	public Double getValorTotalPago() {
+		return valorTotalPago;
+	}
+	public void setValorTotalPago(Double valorTotalPago) {
+		this.valorTotalPago = valorTotalPago;
+	}
+	public Date getDataEncerramentoServico() {
+		return dataEncerramentoServico;
+	}
+	public void setDataEncerramentoServico(Date dataEncerramentoServico) {
+		this.dataEncerramentoServico = dataEncerramentoServico;
 	}
 	
 	

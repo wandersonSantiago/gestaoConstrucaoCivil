@@ -8,7 +8,7 @@
 <div ng-controller="servicoEmpresaController as servicoCtrl">
 	<div class="box box-primary">
 		<div class="box-header">
-			<span class="lead"> Pagamento de Serviços </span>
+			<span class="lead"> Efetuar Pagamento</span>
 		</div>
 		<div class="panel-body">
 		<form role="form-vertical" >
@@ -33,14 +33,18 @@
 						<div class="col-sm-2">
 							<br><br>
 							<input class="btn btn-lg btn-primary "
-								ng-click="servicoCtrl.buscarServicosDaPrestadora(servicoCtrl.prestadoraServico.id)" value="adicionar"
+								ng-click="servicoCtrl.buscarServicosPagamentoLiberadoDaPrestadora(servicoCtrl.prestadoraServico.id)" value="adicionar"
 								title="pressione para adicionar a lista" type="button"  >
 						</div>
 				
 			</div>				<br><br>				
 							<div  class="table-responsive">
-							<input class="form-control" type="text" placeholder="Buscar" ng-model="buscaPacotes" >
 							<table class="table table-hover table-bordered"">
+								<thead>
+									<tr>
+										<center><h3>Pagamento a Empresa {{servicoCtrl.prestadoraServico.dadoEmpresa.nomeFantasia}} data {{dataAtual | date : 'dd/MM/yyyy'}}	</h3>	</center>						
+									</tr>
+								</thead>
 								<thead>
 									<tr>
 										<th>Pacote de serviço</th>
@@ -50,8 +54,9 @@
 										<th>Término</th>									
 									</tr>
 								</thead>
+								
 								<tbody
-									ng-repeat=" servico in servicos | filter : buscaPacotes">
+									ng-repeat=" servico in servicosliberados | filter : buscaPacotes">
 									<tr>
 										<td>{{ servico.pacoteServico.descricao }}</td>
 										<td>{{ servico.pacoteServico.categoria.descricao }}</td>
@@ -63,7 +68,7 @@
 										<td ng-if="!servico.dataFechamento"><a class="label label-warning">em andamento...</a></td>								
 										<td ng-if="servico.ocorrencias.length > 0"><a class="label label-danger" href="#/servicos/vistoria/visualizar/edificio/{{servico.id}}">{{servico.ocorrencias.length}}</a> 												
 										<td ng-if="servico.ocorrencias.length == 0"><a class="label label-info" href="#/servicos/vistoria/visualizar/edificio/{{servico.id}}">{{servico.ocorrencias.length}}</a> 												
-										<td><a href="#/servicos/pagamento/cadatrar/{{servico.id}}"><i class="fa fa-money"></i></a> 												
+										<td><a href="#/servicos/pagamento/cadastrar/{{servico.id}}"><i class="fa fa-money"></i></a> 												
 										
 										</tr>			
 								</tbody>

@@ -37,6 +37,11 @@ public class ServicoEmpresaRestController {
 		return new ResponseEntity<Iterable<ServicoEmpresa>>(servicoService.buscarServicosDaPrestadora(id), HttpStatus.OK);
 	}
 	
+	@GetMapping(value = "/prestadora/{id}/pagamentos/liberado")
+	public ResponseEntity<Iterable<ServicoEmpresa>> buscarServicosPagamentoLiberadoDaPrestadora(@PathVariable Long id) {
+		return new ResponseEntity<Iterable<ServicoEmpresa>>(servicoService.buscarServicosPagamentoLiberadoDaPrestadora(id), HttpStatus.OK);
+	}
+	
 	 @GetMapping
 		public ResponseEntity<Page<ServicoEmpresa>> lista(@RequestParam(defaultValue="0", required=false) int page
 				,@RequestParam(defaultValue="0", required=false) int maxResults) {
@@ -49,7 +54,6 @@ public class ServicoEmpresaRestController {
 	 {
 		 servicoService.salvarOuEditar(servico);
 		 HttpHeaders headers = new HttpHeaders();
-		 headers.setLocation(ucBuilder.path("/rest/servico/vincular/salva/{id}").buildAndExpand(servico.getId()).toUri());
 		 return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	 }
 	 
@@ -57,5 +61,27 @@ public class ServicoEmpresaRestController {
 		public ResponseEntity<ServicoEmpresa> buscarPorId(@PathVariable Long id) {
 			return new ResponseEntity<ServicoEmpresa>(servicoService.buscarPorId(id), HttpStatus.OK);
 		}
+	 @PostMapping(value = "/pagamento/edificio/salvar")
+		public ResponseEntity<ServicoEdificio> salvarPagamentoEdificio(@RequestBody ServicoEdificio servico,
+				UriComponentsBuilder ucBuilder) {
+		 servicoService.salvarPagamento(servico);
+			HttpHeaders headers = new HttpHeaders();
+		return new ResponseEntity<>(headers, HttpStatus.CREATED);
+		}
+	 @PostMapping(value = "/pagamento/casa/salvar")
+		public ResponseEntity<ServicoEdificio> salvarPagamentoCasa(@RequestBody ServicoEdificio servico,
+				UriComponentsBuilder ucBuilder) {
+		 servicoService.salvarPagamento(servico);
+			HttpHeaders headers = new HttpHeaders();
+		return new ResponseEntity<>(headers, HttpStatus.CREATED);
+		}
+	 @PostMapping(value = "/pagamento/outros/salvar")
+		public ResponseEntity<ServicoEdificio> salvarPagamentoOutros(@RequestBody ServicoEdificio servico,
+				UriComponentsBuilder ucBuilder) {
+		 servicoService.salvarPagamento(servico);
+			HttpHeaders headers = new HttpHeaders();
+		return new ResponseEntity<>(headers, HttpStatus.CREATED);
+		}
+	 
 
 }

@@ -207,16 +207,25 @@ app.factory('servicoEmpresaService', function($rootScope, toastr, $http,$q){
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 					return $q.reject(errResponse);
-			});
+			})
 		},
-		salvarPagamento: function(objeto){
-			return $http.post('/rest/servico/edificio/vincular/pagamento/salvar', objeto)
+		salvarPagamento: function(tipo ,objeto){
+			return $http.post('/rest/servico/vincular/pagamento/'+tipo+'/salvar', objeto)
 			.then(function(response){
 				toastr.info("Salvo com sucesso!!!");	return response.data;
 			},function(errResponse){
 				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 					return $q.reject(errResponse);
 			});
+		},
+		buscarServicosPagamentoLiberadoDaPrestadora: function(id){
+			return $http.get('/rest/servico/vincular/prestadora/'+id+'/pagamentos/liberado')
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
+			})
 		},
 	}
 });

@@ -1,4 +1,4 @@
-app.controller('servicoEmpresaController', function($scope, $rootScope, servicoEmpresaService, $routeParams , FileUploader, $timeout){
+app.controller('servicoEmpresaController', function($scope, $rootScope, $location ,servicoEmpresaService, $routeParams , FileUploader, $timeout){
 	
 	var self = this;
 	self.getPage=0;
@@ -254,11 +254,21 @@ app.controller('servicoEmpresaController', function($scope, $rootScope, servicoE
 				self.buscarServicosDaPrestadoraPorId(idServico);
 			}
 			
-			self.salvarPagamento = function(prestadora){
-				servicoEmpresaService.salvarPagamento(prestadora).
+			self.salvarPagamento = function(tipo , prestadora){
+				servicoEmpresaService.salvarPagamento(tipo ,prestadora).
 				then(function(e){			
-					self.servicoEmpresa  = null;
-					$location.path('#/servicos/vistoria');
+					$location.path("/servicos/pagamento/liberar");
+				}, function(errResponse){
+				});
+			};
+			
+			
+			self.buscarServicosPagamentoLiberadoDaPrestadora = function(prestadora){
+				servicoEmpresaService.buscarServicosPagamentoLiberadoDaPrestadora(prestadora).
+				then(function(e){			
+					$scope.servicosliberados  = e;
+					$scope.dataAtual = new Date();
+					$rootScope.ativaTabela = true;
 				}, function(errResponse){
 				});
 			};

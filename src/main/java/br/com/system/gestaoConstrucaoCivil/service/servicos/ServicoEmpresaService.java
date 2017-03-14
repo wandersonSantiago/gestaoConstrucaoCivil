@@ -1,5 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.service.servicos;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -8,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.servicos.ServicoEmpresa;
+import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.servicos.ServicoEmpresaRepository;
 
 @Service
@@ -37,5 +40,16 @@ public class ServicoEmpresaService {
 
 	public ServicoEmpresa buscarPorId(Long id) {
 		return servicoRepository.findOne(id);
+	}
+	@Transactional(readOnly = false)
+	public void salvarPagamento(ServicoEmpresa servico) {
+		servico.setDataFechamento(new Date());
+		servico.setUsuarioCadastro(SessionUsuario.getInstance().getUsuario());
+		servico.setValorTotalPago(servico.getValorAdicional() + servico.getValorPacoteServico() - servico.getValorDesconto());
+		servicoRepository.save(servico);		
+	}
+
+	public Iterable<ServicoEmpresa> buscarServicosPagamentoLiberadoDaPrestadora(Long id) {
+		return servicoRepository.findByPrestadoraServico_idAndDataFechamentoNotNull(id);
 	}
 }
