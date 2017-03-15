@@ -37,21 +37,44 @@
 								title="pressione para adicionar a lista" type="button"  >
 						</div>
 				
-			</div>				<br><br>				
-							<div  class="table-responsive">
-							<table class="table table-hover table-bordered"">
-								<thead>
-									<tr>
-										<center><h3>Pagamento a Empresa {{servicoCtrl.prestadoraServico.dadoEmpresa.nomeFantasia}} data {{dataAtual | date : 'dd/MM/yyyy'}}	</h3>	</center>						
-									</tr>
-								</thead>
+			</div>				<br><br>
+							<div ng-if="servicosliberados" class="row ">
+								<div class="col-sm-2">
+							    <div class="dropdown">
+							        <button class="btn btn-warning btn-export dropdown-toggle" margin-right=46px type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+							            Exportar <span class="caret"></span>
+							        </button>			
+							        <ul class="table-export dropdown-menu"
+							        table-selector="'auxTable'"
+							        export-options="{type: 'pdf', escape: true, ignoreColumn : '[4]', tableName: 'listaEstoque' }"
+							        aria-labelledby="dropdownMenu1">
+							            <li >
+							                <a href="" ng-click="servicoCtrl.exportar('pdf')">PDF</a>
+							            </li>
+							
+							            <li te-option te-value="'excel'" te-param="'type'">
+							                <a href="">Excel</a>
+							            </li>
+							
+							            <li te-option te-value="'csv'" te-param="'type'">
+							                <a href="">CSV</a>
+							            </li>
+							        </ul>
+							    </div>
+							    </div>
+							</div>				
+							<div ng-show="servicosliberados" class="table-responsive">
+							<table st-table="servicosliberados" st-filtered-collection="filteredCollection" class="export-table table  table-bordered table-striped ">
+							
 								<thead>
 									<tr>
 										<th>Pacote de serviço</th>
 										<th>Categoria</th>
 										<th>Local</th>
-										<th>Valor do serviço</th>	
-										<th>Término</th>									
+										<th>Valor do serviço</th>
+										<th>Adicional</th>
+										<th>Desconto</th>
+										<th>Total Pago</th>									
 									</tr>
 								</thead>
 								
@@ -64,22 +87,26 @@
 										<td ng-if="servico.numeroCasa">{{ servico.numeroCasa}}-{{ servico.andar}}</td>
 										<td ng-if="servico.descricao">{{ servico.descricao}}</td>
 										<td>{{ servico.valorPacoteServico | currency}}</td>	
-										<td ng-if="servico.dataFechamento"><a class="label label-success ">{{ servico.dataFechamento | date : 'dd/MM/yyyy'}}</a></td>
-										<td ng-if="!servico.dataFechamento"><a class="label label-warning">em andamento...</a></td>								
-										<td ng-if="servico.ocorrencias.length > 0"><a class="label label-danger" href="#/servicos/vistoria/visualizar/edificio/{{servico.id}}">{{servico.ocorrencias.length}}</a> 												
-										<td ng-if="servico.ocorrencias.length == 0"><a class="label label-info" href="#/servicos/vistoria/visualizar/edificio/{{servico.id}}">{{servico.ocorrencias.length}}</a> 												
-										<td><a href="#/servicos/pagamento/cadastrar/{{servico.id}}"><i class="fa fa-money"></i></a> 												
-										
+										<td>{{ servico.valorAdicional | currency}}</td>	
+										<td>{{ servico.valorDesconto | currency}}</td>	
+										<td>{{ servico.valorTotalPago | currency}}</td>	
 										</tr>			
 								</tbody>
 								<tfoot>
 									<tr>					
 									</tr>
 								</tfoot>
-							</table>							
+							</table>
+												
 									
 						</div>
-						</div>					
+						</div>	
+						<div ng-show="servicosliberados" class="row ">
+						<div class="col-sm-4"></div>
+						<div class="col-sm-4">
+							<input type="button" id="submit" ng-click="servicoCtrl.efetuarPagamento()" value="pagar"	class="btn btn-lg btn-primary btn-block btn-signin">
+						</div>
+					</div>				
 				</form>
 			</div>
 			<div class="tablecontainer"></div>

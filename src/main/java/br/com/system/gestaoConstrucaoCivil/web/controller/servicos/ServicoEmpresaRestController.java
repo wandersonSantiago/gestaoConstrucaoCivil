@@ -1,5 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller.servicos;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -56,7 +58,13 @@ public class ServicoEmpresaRestController {
 		 HttpHeaders headers = new HttpHeaders();
 		 return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	 }
-	 
+	 @PostMapping( value="/{lista}/efetuar")
+	 public ResponseEntity<List<?>> efetuarPagamento(@SuppressWarnings("rawtypes") @PathVariable List lista,UriComponentsBuilder ucBuilder)
+	 {
+		 servicoService.efetuarPagamento(lista);
+		 HttpHeaders headers = new HttpHeaders();
+		 return new ResponseEntity<>(headers, HttpStatus.CREATED);
+	 }
 	 @GetMapping(value = "/buscarPorId/{id}")
 		public ResponseEntity<ServicoEmpresa> buscarPorId(@PathVariable Long id) {
 			return new ResponseEntity<ServicoEmpresa>(servicoService.buscarPorId(id), HttpStatus.OK);

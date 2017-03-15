@@ -227,5 +227,14 @@ app.factory('servicoEmpresaService', function($rootScope, toastr, $http,$q){
 					return $q.reject(errResponse);
 			})
 		},
+		efetuarPagamento: function(lista){
+			return $http.post('/rest/servico/vincular/pagamento/'+lista+'/efetuar')
+			.then(function(response){
+				toastr.info("Pagamento Realizado!!!");	return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
+			});
+		},
 	}
 });
