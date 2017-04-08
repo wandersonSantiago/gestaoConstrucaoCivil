@@ -263,6 +263,7 @@ app.controller('servicoEmpresaController', function($scope, $rootScope, $locatio
 			};
 			
 			self.efetuarPagamento = function(prestadora){
+				self.exportar('pdf');
 				servicoEmpresaService.efetuarPagamento(prestadora).
 				then(function(e){		
 				}, function(errResponse){
