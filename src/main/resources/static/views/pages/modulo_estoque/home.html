@@ -4,11 +4,11 @@
    <li class="breadcrumb-item"><a href="#/">home</a></li>
    <li class="breadcrumb-item active">Modulo almoxarifado</li>
  </ol>
-      
-    
+     <div ng-controller="estoqueController as estoqueCtrl">
+    <div class="row" >
         <div class="col-lg-3 ">
           <!-- small box -->
-          <div class="small-box bg-purple">
+          <div class="small-box bg-aqua">
             <div class="inner">
               <h3>01</h3>
               <p>Estoque</p>
@@ -24,7 +24,7 @@
        
         <div class="col-lg-3 ">
           <!-- small box -->
-          <div class="small-box bg-yellow">
+          <div class="small-box bg-green">
             <div class="inner">
               <h3>02</h3>
               <p>Requisição</p>
@@ -40,7 +40,7 @@
         
          <div class="col-lg-3 ">
           <!-- small box -->
-          <div class="small-box bg-green">
+          <div class="small-box bg-blue">
             <div class="inner">
               <h3>03</h3>
               <p>Transferencia</p>
@@ -53,5 +53,17 @@
             </a>
           </div>
         </div>
-       
+     </div>  
         
+         <div ng-show="estoqueCtrl.qtdProdutoEstoqueBaixo" class="alert alert-warning alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h3><i class="icon fa fa-warning"></i> Alerta!</h3>
+                <h4><a href="#/estoque/informacoes/estoque/baixo">Existem {{estoqueCtrl.qtdProdutoEstoqueBaixo}} produtos  abaixo do estoque mínimo!!!</a></h4>
+          </div>
+        <div ng-show="estoqueCtrl.qtdProdutoEstoqueAlto" class="alert alert-warning alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h3><i class="icon fa fa-warning"></i> Alerta!</h3>
+                <h4><a href="#/estoque/informacoes/estoque/alto">Existem {{estoqueCtrl.qtdProdutoEstoqueAlto}} produtos acima do estoque máximo!!!</a></h4>
+          </div>
+         
+  </div>        

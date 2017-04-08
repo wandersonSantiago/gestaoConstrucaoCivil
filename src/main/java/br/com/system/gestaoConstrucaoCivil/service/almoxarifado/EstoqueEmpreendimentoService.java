@@ -77,4 +77,15 @@ public class EstoqueEmpreendimentoService {
 	     return  estoque;
 	 
 	 }
+	public Iterable<EstoqueEmpreendimento> produtoEstoqueBaixo() {
+		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
+		return estoqueRepository.produtoEstoqueBaixo(idEmpreendimento);
+	}
+	public Iterable<EstoqueEmpreendimento> produtoEstoqueAlto() {
+		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
+		return estoqueRepository.produtoEstoqueAlto(idEmpreendimento);
+	}
+	public Page<EstoqueEmpreendimento> findAll(PageRequest pageRequest) {
+		return estoqueRepository.findAll(pageRequest);
+	}
 }

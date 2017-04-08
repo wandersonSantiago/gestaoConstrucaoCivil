@@ -51,13 +51,17 @@ public class ServicoEmpresaService {
 	}
 
 	public Iterable<ServicoEmpresa> buscarServicosPagamentoLiberadoDaPrestadora(Long id) {
-		return servicoRepository.findByPrestadoraServico_idAndDataFechamentoNotNull(id);
+		return servicoRepository.findByPrestadoraServico_idAndDataFechamentoNotNullAndDataPagamentoNull(id);
 	}
 
-	public void efetuarPagamento(List<?> servicos) {
-		for(int i = 0; i < servicos.size(); i ++){
-			System.out.println(servicos);
-		}
 		
+	@Transactional(readOnly = false)
+	public List<ServicoEmpresa> efetuarPagamento(Long id) {
+		List<ServicoEmpresa> servicos =  (List<ServicoEmpresa>) servicoRepository.findByPrestadoraServico_idAndDataFechamentoNotNullAndDataPagamentoNull(id);
+		for(int i = 0; i < servicos.size(); i ++){
+			servicos.get(i).setDataPagamento(new Date());
+			servicoRepository.save(servicos.get(i));
+		}
+		return null;
 	}
 }

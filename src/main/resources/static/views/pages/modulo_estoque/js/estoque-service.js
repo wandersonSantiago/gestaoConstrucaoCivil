@@ -79,6 +79,26 @@ app.factory('estoqueService', function($rootScope, toastr, $http,$q){
 					return $q.reject(errResponse);
 			});
 		},
+		
+		listaProdutosComEstoqueBaixo: function(){
+			return $http.get('/rest/produtoEstoque/baixo')
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
+			});
+		},
+		listaProdutosComEstoqueAlto: function(){
+			return $http.get('/rest/produtoEstoque/alto')
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+					return $q.reject(errResponse);
+			});
+		},
+		
 		buscaPorCodigoBarras : function(codigoBarras){
 			return $http.get('/rest/almoxarifado/estoque/baixa/buscaPorCodigoBarras/'+codigoBarras)
 			.then(function(response){

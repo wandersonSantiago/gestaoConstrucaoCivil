@@ -104,7 +104,7 @@
 						<div ng-show="servicosliberados" class="row ">
 						<div class="col-sm-4"></div>
 						<div class="col-sm-4">
-							<input type="button" id="submit" ng-click="servicoCtrl.efetuarPagamento()" value="pagar"	class="btn btn-lg btn-primary btn-block btn-signin">
+							<input type="button" id="submit" ng-click="servicoCtrl.efetuarPagamento(servicoCtrl.prestadoraServico.id)" value="pagar"	class="btn btn-lg btn-primary btn-block btn-signin">
 						</div>
 					</div>				
 				</form>

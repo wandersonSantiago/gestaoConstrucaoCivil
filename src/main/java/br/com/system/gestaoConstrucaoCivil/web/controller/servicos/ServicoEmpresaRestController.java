@@ -58,13 +58,11 @@ public class ServicoEmpresaRestController {
 		 HttpHeaders headers = new HttpHeaders();
 		 return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	 }
-	 @PostMapping( value="/{lista}/efetuar")
-	 public ResponseEntity<List<?>> efetuarPagamento(@SuppressWarnings("rawtypes") @PathVariable List lista,UriComponentsBuilder ucBuilder)
-	 {
-		 servicoService.efetuarPagamento(lista);
-		 HttpHeaders headers = new HttpHeaders();
-		 return new ResponseEntity<>(headers, HttpStatus.CREATED);
-	 }
+	 @PostMapping( value="/prestadora/{id}/pagamentos/efetuar")
+	 public ResponseEntity<Iterable<ServicoEmpresa>> efetuarPagamento(@PathVariable Long id) {
+			return new ResponseEntity<Iterable<ServicoEmpresa>>(servicoService.efetuarPagamento(id), HttpStatus.OK);
+		}
+	 
 	 @GetMapping(value = "/buscarPorId/{id}")
 		public ResponseEntity<ServicoEmpresa> buscarPorId(@PathVariable Long id) {
 			return new ResponseEntity<ServicoEmpresa>(servicoService.buscarPorId(id), HttpStatus.OK);

@@ -78,7 +78,26 @@ app.controller('estoqueController', function($scope,estoqueService, produtoServi
 							}, function(errResponse){
 					});
 				};
-			
+			self.listaProdutosComEstoqueBaixo = function(){	
+				estoqueService.listaProdutosComEstoqueBaixo().
+					then(function(t){
+						self.listaProdutosComEstoqueBaixo = t;
+						self.qtdProdutoEstoqueBaixo = t.length; 
+										
+							}, function(errResponse){
+					});
+				};
+				self.listaProdutosComEstoqueBaixo();
+				
+			self.listaProdutosComEstoqueAlto = function(){	
+				estoqueService.listaProdutosComEstoqueAlto().
+					then(function(t){
+						self.listaProdutosComEstoqueAlto = t;	
+						self.qtdProdutoEstoqueAlto = t.length;				
+							}, function(errResponse){
+					});
+				};
+				self.listaProdutosComEstoqueAlto();
 				self.listaProdutosComEstoqueComPaginacao = function(pages, maxResults){
 					self.totalPages = [];
 					self.getPage=pages;	

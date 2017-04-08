@@ -38,6 +38,19 @@ public class EstoqueEmpreendimentoRestController {
 	public ResponseEntity<Iterable<EstoqueEmpreendimento>> buscarTodos() {
 		return new ResponseEntity<Iterable<EstoqueEmpreendimento>>(estoqueService.buscarTodos(), HttpStatus.OK);
 	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','MODULO_ESTOQUE_CONSULTA')")
+	@GetMapping(value="/baixo")
+	public ResponseEntity<Iterable<EstoqueEmpreendimento>> produtoEstoqueBaixo() {
+		return new ResponseEntity<Iterable<EstoqueEmpreendimento>>(estoqueService.produtoEstoqueBaixo(), HttpStatus.OK);
+	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','MODULO_ESTOQUE_CONSULTA')")
+	@GetMapping(value="/alto")
+	public ResponseEntity<Iterable<EstoqueEmpreendimento>> produtoEstoqueAlto() {
+		return new ResponseEntity<Iterable<EstoqueEmpreendimento>>(estoqueService.produtoEstoqueAlto(), HttpStatus.OK);
+	}
+	
 	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','MODULO_ESTOQUE_CONSULTA')")
 	@GetMapping(value = "/lista/paginacao")
 	public ResponseEntity<Page<EstoqueEmpreendimento>> lista(@RequestParam(defaultValue="0", required=false) int page
@@ -45,6 +58,15 @@ public class EstoqueEmpreendimentoRestController {
 		Page<EstoqueEmpreendimento> empresa = estoqueService.buscarTodosComPaginacao(new PageRequest(page, maxResults));
 		return new ResponseEntity<Page<EstoqueEmpreendimento>>(empresa, HttpStatus.OK);
 	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN')")
+	@GetMapping(value = "/auditoria/entrada")
+	public ResponseEntity<Page<EstoqueEmpreendimento>> listaAuditoria(@RequestParam(defaultValue="0", required=false) int page
+			,@RequestParam(defaultValue="0", required=false) int maxResults) {
+		Page<EstoqueEmpreendimento> empresa = estoqueService.findAll(new PageRequest(page, maxResults));
+		return new ResponseEntity<Page<EstoqueEmpreendimento>>(empresa, HttpStatus.OK);
+	}
+	
 	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','MODULO_ESTOQUE_CONSULTA')")
 	@GetMapping(value = "/buscaPorCodigo/{codigo}")
 	public ResponseEntity<EstoqueEmpreendimento> buscarPorCodigo(@PathVariable String codigo)

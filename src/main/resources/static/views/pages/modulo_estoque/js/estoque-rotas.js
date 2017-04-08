@@ -14,8 +14,12 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider,  $httpPr
 	.when('/estoque/alteracao/:idProdutoEstoque', {
 		templateUrl:"views/pages/modulo_estoque/alteracao.html",
 	})
-	.when('/estoque/informacoes', {
-		templateUrl:"views/pages/modulo_estoque/informacoes.html",
+	.when('/estoque/informacoes/estoque/alto', {
+		templateUrl:"views/pages/modulo_estoque/informacoesEstoqueAlto.html",
+	})
+	
+	.when('/estoque/informacoes/estoque/baixo', {
+		templateUrl:"views/pages/modulo_estoque/informacoesEstoqueBaixo.html",
 	})
 	.when('/estoque/relatorio', {
 		templateUrl:"views/pages/modulo_estoque/estoque.relatorio.html",

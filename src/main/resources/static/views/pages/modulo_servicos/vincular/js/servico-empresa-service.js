@@ -227,8 +227,8 @@ app.factory('servicoEmpresaService', function($rootScope, toastr, $http,$q){
 					return $q.reject(errResponse);
 			})
 		},
-		efetuarPagamento: function(lista){
-			return $http.post('/rest/servico/vincular/pagamento/'+lista+'/efetuar')
+		efetuarPagamento: function(id){
+			return $http.post('/rest/servico/vincular/prestadora/'+id+'/pagamentos/efetuar')
 			.then(function(response){
 				toastr.info("Pagamento Realizado!!!");	return response.data;
 			},function(errResponse){

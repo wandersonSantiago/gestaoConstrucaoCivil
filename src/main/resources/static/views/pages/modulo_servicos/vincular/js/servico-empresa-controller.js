@@ -262,12 +262,9 @@ app.controller('servicoEmpresaController', function($scope, $rootScope, $locatio
 				});
 			};
 			
-			self.efetuarPagamento = function(lista){
-				var objeto =[];
-				objeto.lista = $scope.servicosliberados;
-				servicoEmpresaService.efetuarPagamento(objeto).
+			self.efetuarPagamento = function(prestadora){
+				servicoEmpresaService.efetuarPagamento(prestadora).
 				then(function(e){		
-					self.exportar('pdf');
 				}, function(errResponse){
 				});
 			};

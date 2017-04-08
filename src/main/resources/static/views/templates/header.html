@@ -1,80 +1,63 @@
-<meta charset="UTF-8">
-<header class="main-header navbar-top">
-
-	<a href="#/" class="logo navbar-top"> <span class="logo-mini"><b>G.C.C</b></span>
-	<!-- <div class="pull-left image">
-				<img src="public/img/logo2.png" class="img-circle"
-					alt="User Image">
-			</div> -->
-		<span class="logo-lg"><b>Sistema</b>GCC</span>
-	</a>
-
-	<nav class="navbar navbar-top" role="navigation">
-
-		<a href="" class="sidebar-toggle" data-toggle="offcanvas"
-			role="button"> <span class="sr-only">Toggle navigation</span>
-		</a>
-		
-		<div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
-		 <li class="dropdown messages-menu" ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_SUPORTE">
-                <a href="#/chamado/manutencao/suporte/lista" title="Quantidade de Chamados Abertos para Manutenção" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="fa fa-envelope-o"></i>
-                  <span class="label label-success">{{quantidadeChamadoAberto}}</span>
-                </a>	
-		 		 
-          </li>              
-          <li class="dropdown messages-menu" ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_SUPORTE">
-                <a href="#/chamado/informatica/suporte/lista" title="Quantidade de Chamados Abertos para Informática" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="fa fa-envelope-o"></i>
-                  <span class="label label-success">{{quantidadeChamadoAbertoTi}}</span>
-                </a>	
-		 		 
-          </li>
-          </ul>
-          </div>
-		<ul class="nav navbar-nav pull-right" ng-controller="usuarioController as userCtrl" >
-			
-				<li><a>Empreendimento: {{user.usuario.empreendimento.descricao}}
-				</a></li>
-			<li class="dropdown user user-menu">
-                <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="public/img/avatar_2x.png" class="user-image" alt="User Image">
-                  <span class="hidden-xs">{{user.usuario.nome}}</span>
-                </a>
-                <ul class="dropdown-menu">
-                  <!-- User image -->
-                  <li class="user-header">
-                    <img src="public/img/avatar_2x.png" class="img-circle" alt="User Image">
-                    <p>
-                     		{{userCtrl.usuario.nome}}
-                      <small>{{user.usuario.funcionario.cargo.descricao}}</small>
-                    </p>
-                  </li>                 
-                  <li class="user-footer">
-                    <div class="pull-left">
-                      <a href="" ng-click="userCtrl.buscaPorId(user.usuario.id)" data-toggle="modal" data-target="#alteraSenha" class="btn btn-default btn-flat">Alterar senha</a>
-                    </div>
-                    <div class="pull-right">
-                      <a href=""  ng-click="userCtrl.buscaPorId(user.usuario.id)" data-toggle="modal" data-target="#alteraEmpreendimento"  class="btn btn-default btn-flat">Alterar Empreend.</a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              
-				<li>
-					<a href="" ng-controller="loginController as loginCtrl"  ng-click="loginCtrl.logout()" > Logout <i class="glyphicon glyphicon-log-out"></i>
-					</a>
-				</li>
-
-			</ul>
-				
-		
-	</nav>
-	
-</header>
-
-<div class="modal fade" id="alteraSenha" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="usuarioController as userCtrl">
+<header class="main-header navbar-fixed-top"  ng-controller="usuarioController as userCtrl" ng-init="userCtrl.user()">		  
+		    <a href="#/" class="logo navbar-top">    
+		      <span class="logo-mini"><b>GCC</b></span>      
+		      <span class="logo-lg"><b>Sistema</b>GCC</span>
+		    </a>		    
+		    <nav class="navbar navbar-top" role="navigation">      
+		      <a href="" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+		        <span class="sr-only">Toggle navigation</span>
+		      </a>
+		       <div class="navbar-custom-menu">
+		        <ul class="nav navbar-nav">		     
+					          
+				 <li  class="dropdown messages-menu" ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_SUPORTE">
+		                <a href="#/chamado/manutencao/suporte/lista" title="Quantidade de Chamados Abertos para Manutenção" class="dropdown-toggle" data-toggle="dropdown">
+		                  <i class="fa fa-envelope-o"></i>
+		                  <span class="label label-success">{{quantidadeChamadoAberto}}</span>
+		                </a>					 		 
+		          </li>
+		          <li  class="dropdown messages-menu" ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_SUPORTE">
+		                <a href="#/chamado/informatica/suporte/lista" title="Quantidade de Chamados Abertos para Informática" class="dropdown-toggle" data-toggle="dropdown">
+		                  <i class="fa fa-envelope-o"></i>
+		                  <span class="label label-success">{{quantidadeChamadoAbertoTi}}</span>
+		                </a>					 		 
+		          </li>
+		       <li class="dropdown user user-menu" ">
+		                <a href="" class="dropdown-toggle" data-toggle="dropdown">
+		                  <i class="glyphicon glyphicon-user"></i>
+		                </a>
+		                <ul class="dropdown-menu">
+		                  <!-- User image -->
+		                  <li class="user-header">
+		                    <img src="public/img/avatar_2x.png" class="img-circle" alt="User Image">
+		                    <p>
+		                     		{{user.usuario.nome}}
+		                      <small>{{user.usuario.funcionario.cargo.descricao}}</small>
+		                      <small>{{user.usuario.empreendimento.descricao}}</small>
+		                    </p>
+		                  </li>                 
+		                  <li class="user-footer">
+		                    <div class="pull-left">
+		                      <a href="" ng-click="userCtrl.buscaPorId(user.usuario.id)" data-toggle="modal" data-target="#alteraSenha" class="btn btn-default btn-flat">Alterar senha</a>
+		                    </div>
+		                    <div  class="pull-right">
+		                      <a href=""  ng-click="userCtrl.buscaPorId(user.usuario.id)" data-toggle="modal" data-target="#alteraEmpreendimento"  class="btn btn-default btn-flat">Alterar Empreend.</a>
+		                    </div>
+		                  </li>
+		                </ul>
+		              </li>
+		              <!-- <li ng-if="logado" ><a>Expira em,  {{horaImprimivel}}</a></li> -->
+		                        
+         			<li>
+						<a href="" ng-controller="loginController as loginCtrl"  ng-click="loginCtrl.logout()"> Logout <i class="glyphicon glyphicon-log-out"></i>
+						</a>
+					</li>
+		        </ul>
+		      </div>
+		    </nav>
+		  </header>
+		  
+		  <div ng-if="logado"  class="modal fade" id="alteraSenha" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="usuarioController as userCtrl">
 				  <div class="modal-dialog" role="document" >
 				    <div class="modal-content">
 				      <div class="modal-header">
@@ -97,7 +80,7 @@
 					       
 				      </div>
 				      <div class="modal-footer">
-				        <button type="button" ng-click="userCtrl.altera()" class="btn btn-primary">Alterar</button>
+				        <button type="button" ng-click="userCtrl.alteraSenha(user)" class="btn btn-primary">Alterar</button>
 				        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
 				        
 				      </div>
@@ -106,7 +89,7 @@
 				</div>
 				
 				
-				<div class="modal fade" id="alteraEmpreendimento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="usuarioController as userCtrl">
+				<div ng-if="logado"  class="modal fade" id="alteraEmpreendimento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="usuarioController as userCtrl">
 				  <div class="modal-dialog" role="document" >
 				    <div class="modal-content">
 				      <div class="modal-header">
@@ -118,8 +101,7 @@
 					      <div class="row">
 					      	<div  class="col-sm-12" ng-controller="empreendimentoController as empCtrl" ng-init="empCtrl.lista()">
 							<select class="form-control " ng-model="userCtrl.usuario.empreendimento" 
-								ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.tipoEmpreendimento for listarEmpreendimentos in empreendimentos"
-								style="width: 100%;" required>
+								ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.tipoEmpreendimento for listarEmpreendimentos in empreendimentos" required>
 								<option  value="">--selecione o Empreendimento--</option>
 							</select>
 						</div>		
@@ -127,7 +109,7 @@
 					       
 				      </div>
 				      <div class="modal-footer">
-				        <button type="button" ng-click="userCtrl.altera()" class="btn btn-primary">Alterar</button>
+				        <button type="button" ng-click="userCtrl.alteraEmpreendimento(user.usuario)" class="btn btn-primary">Alterar</button>
 				        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
 				        
 				      </div>

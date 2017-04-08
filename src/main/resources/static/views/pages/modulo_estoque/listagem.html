@@ -12,15 +12,38 @@
 			<span class="lead">Estoque </span>
 		</div>
 		<div class="panel-body">
-		<a href="javascript://" ng-click="estroqueCtrl.exportar('pdf')">PDF</a>
-		<a href="javascript://" ng-click="estroqueCtrl.exportar('excel')">Excel</a>		
-	<div class="row">
+		<div class="row ">
+				<div class="col-sm-2">
+			    <div class="dropdown">
+			        <button class="btn btn-warning btn-export dropdown-toggle" margin-right=46px type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+			            Exportar <span class="caret"></span>
+			        </button>			
+			        <ul class="table-export dropdown-menu"
+			        table-selector="'auxTable'"
+			        export-options="{type: 'pdf', escape: true, ignoreColumn : '[4]', tableName: 'listaEstoque' }"
+			        aria-labelledby="dropdownMenu1">
+			            <li >
+			                <a href="" ng-click="estroqueCtrl.exportar('pdf')">PDF</a>
+			            </li>
+			
+			            <li te-option te-value="'excel'" te-param="'type'">
+			                <a href="">Excel</a>
+			            </li>
+			
+			            <li te-option te-value="'csv'" te-param="'type'">
+			                <a href="">CSV</a>
+			            </li>
+			        </ul>
+			    </div>
+			    </div>
+			</div>
+		<div class="row">
 			
 			<input class="form-control" type="text" ng-model="buscar" >
 	
 		</div>
 		<div class="table-responsive">
-			<table class="export-table table  table-bordered ">
+			<table class="export-table table  table-bordered " st-table="estroqueCtrl.listaProdutosComEstoques" st-filtered-collection="filteredCollection" class="table table-striped">
 				<thead>
 					<tr>						 
 						<th>Código</th>
@@ -36,7 +59,6 @@
 				<tbody
 					ng-repeat=" lista in estroqueCtrl.listaProdutosComEstoques | filter : buscar | orderBy : 'id' ">
 					<tr>
-						<td>{{lista.id}}</td>
 						<td>{{lista.produto.codigo}}</td>
 						<td>{{lista.produto.descricao}}</td>
 						<td>{{lista.produto.categoria.descricao}}</td>
@@ -46,7 +68,42 @@
 						<td>{{lista.custoMedio | currency}}</td>
 					    <td>{{lista.valorTotal | currency}}</td>
 					
-						<td ng-if="ROLE_MODULO_ESTOQUE_ALTERA_LIMITE"><a href="#/estoque/alteracao/{{lista.produto.codigo}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						<td ng-if="ROLE_MODULO_ESTOQUE_ALTERA_LIMITE"><a href="#/estoque/alteracao/{{lista.produto.codigo}}"><i class="glyphicon glyphicon-edit"></i></a> 
+						
+					</tr>
+
+				</tbody>
+				<tfoot>
+				
+					
+				</tfoot>
+			</table>
+			<table id="auxTable" style="opacity: 0; position: absolute;" >
+				<thead>
+					<tr>						 
+						<th>Código</th>
+						<th>Descrição</th>
+						<th>Categoria</th>
+						<th>Tipo</th>
+						<th>Unidade Medida</th>						
+						<th>quantidade Estoque</th>
+						<th>Custo médio</th>
+						<th>Valor Total</th>
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" lista in estroqueCtrl.listaProdutosComEstoques | filter : buscar | orderBy : 'id' ">
+					<tr>
+						<td>{{lista.produto.codigo}}</td>
+						<td>{{lista.produto.descricao}}</td>
+						<td>{{lista.produto.categoria.descricao}}</td>
+						<td>{{lista.produto.tipoProduto.descricao}}</td>
+						<td>{{lista.produto.unidadeMedida}}</td>
+						<td>{{lista.quantidade}}</td>
+						<td>{{lista.custoMedio | currency}}</td>
+					    <td>{{lista.valorTotal | currency}}</td>
+					
+						<td ng-if="ROLE_MODULO_ESTOQUE_ALTERA_LIMITE"><a href="#/estoque/alteracao/{{lista.produto.codigo}}"><i class="glyphicon glyphicon-edit"></i></a> 
 						
 					</tr>
 
