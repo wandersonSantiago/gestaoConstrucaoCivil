@@ -24,7 +24,6 @@ public class ProdutoService {
 	
     public List<Produto> buscarTodos() {
 
-	 //	return produtoRepository.findAll();
     	return produtoRepository.buscarTodos();
 	}
     public List<Produto> buscarPorDescricao(String descricao)
@@ -46,6 +45,7 @@ public class ProdutoService {
 		{
 		    produto.setCodigoBarra(gerar.gerarCodigoBarra());
 		}
+		produto.setUsuarioCadastrado();
 		produtoRepository.save(produto);
 
 	}

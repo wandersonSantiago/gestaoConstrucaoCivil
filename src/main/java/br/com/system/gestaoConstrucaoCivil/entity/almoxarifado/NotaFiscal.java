@@ -20,10 +20,10 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
+import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 import br.com.system.gestaoConstrucaoCivil.enuns.Situacao;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
-import br.com.system.gestaoConstrucaoCivil.util.geradorCodigo.GeraNumeroNota;
 
 
 
@@ -68,6 +68,11 @@ public class NotaFiscal implements Serializable {
 	@Column(nullable = false)
 	private Double valorTotal;
 
+	@ManyToOne
+	@JoinColumn(name ="id_usuario_cadastro")
+	private Usuario usuarioCadastro;
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -140,8 +145,16 @@ public class NotaFiscal implements Serializable {
 	public void novaNota()
 	{
 		this.situacao = Situacao.OK;
-		this.empreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
+		Usuario usuarioSessao = SessionUsuario.getInstance().getUsuario();
+		this.empreendimento = usuarioSessao.getEmpreendimento();
+		this.usuarioCadastro = usuarioSessao;
 	}
+	
+	
+	public Usuario getUsuarioCadastro() {
+		return usuarioCadastro;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

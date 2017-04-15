@@ -3,6 +3,7 @@ package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -19,6 +20,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
+import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.View.Summary;
 import br.com.system.gestaoConstrucaoCivil.enuns.StatusRequisicao;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
@@ -55,7 +57,10 @@ public class InformacaoRequisicao extends AbstractPersistable<Long> implements S
     @JoinColumn(name="id_empreendimento")
     private Empreendimento empreendimento;
    	
-   
+    @ManyToOne
+	@JoinColumn(name ="id_usuario_cadastro")
+	private Usuario usuarioCadastro;
+    
     public Integer getNumeroRequisicao() {
 		return numeroRequisicao;
 	}
@@ -87,7 +92,9 @@ public class InformacaoRequisicao extends AbstractPersistable<Long> implements S
 		this.statusRequisicao = StatusRequisicao.PENDENTE;
         GeraNumeroRequisicao gerarNumero = new GeraNumeroRequisicao();
 		this.numeroRequisicao = gerarNumero.gerarNumeroRequisicao();
-		this.empreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
+		Usuario usuarioSessao = SessionUsuario.getInstance().getUsuario();
+		this.empreendimento = usuarioSessao.getEmpreendimento();
+		this.usuarioCadastro = usuarioSessao;
 		this.dataCriacao = new Date();
 	}
 	public void statusAceito()
@@ -99,4 +106,8 @@ public class InformacaoRequisicao extends AbstractPersistable<Long> implements S
 	{
 		this.statusRequisicao = StatusRequisicao.RECUSADO;
 	}
+	public Usuario getUsuarioCadastro() {
+		return usuarioCadastro;
+	}
+	
 }

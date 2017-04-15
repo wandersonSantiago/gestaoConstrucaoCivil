@@ -18,9 +18,12 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
+import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.EntradaOuBaixa;
 import br.com.system.gestaoConstrucaoCivil.enuns.StatusTransferencia;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
+import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
+import br.com.system.gestaoConstrucaoCivil.service.UsuarioService;
 import br.com.system.gestaoConstrucaoCivil.util.geradorCodigo.GeraNumeroNota;
 
 @Entity
@@ -48,6 +51,8 @@ public class Transferencia implements Serializable,EntradaOuBaixa {
 
 	@OneToMany(mappedBy = "transferencia", cascade = CascadeType.ALL)
 	private List<TransferenciaItem> itens;
+	
+	
 	
 	
 	public NotaFiscal getNotaFiscal() {
@@ -91,6 +96,7 @@ public class Transferencia implements Serializable,EntradaOuBaixa {
 		getNotaFiscal().setNumero(new GeraNumeroNota().gerarNumeroNota().longValue());
 		getNotaFiscal().novaNota();
 		getNotaFiscal().setDataNota(new Date());
+		
 	}
 	public void aceitarTransferencia()
 	{
@@ -111,9 +117,6 @@ public class Transferencia implements Serializable,EntradaOuBaixa {
 		// TODO Auto-generated method stub
 		return empreendimentoDestino;
 	}
-	
-	
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -138,12 +141,5 @@ public class Transferencia implements Serializable,EntradaOuBaixa {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 }

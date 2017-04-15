@@ -51,7 +51,7 @@ public class PedidoCompra implements Serializable{
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCadastro;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="usuario_cadastro")
 	private Usuario usuarioCadastro;
 			

@@ -21,9 +21,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
+import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 import br.com.system.gestaoConstrucaoCivil.enuns.StatusCotacao;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 
@@ -53,6 +52,10 @@ public class Cotacao implements Serializable{
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_fechamento")
 	private Date dataFechamento;
+	
+	@ManyToOne
+	@JoinColumn(name ="id_usuario_cadastro")
+	private Usuario usuarioCadastro;
 	
     public Long getId() {
 		return id;
@@ -107,7 +110,9 @@ public class Cotacao implements Serializable{
     {
     	this.dataCriacao = new Date();
     	this.statusCotacao = StatusCotacao.ABERTO;
-    	this.empreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
+    	Usuario usuarioSessao = SessionUsuario.getInstance().getUsuario();
+    	this.empreendimento = usuarioSessao.getEmpreendimento();
+    	this.usuarioCadastro =usuarioSessao;
     	adicionarCotacaoNoItem();
     }
 	private void adicionarCotacaoNoItem() {
@@ -122,6 +127,12 @@ public class Cotacao implements Serializable{
     	this.statusCotacao = StatusCotacao.FECHADO;
     	this.dataFechamento = new Date();
     }
+    
+    
+	public Usuario getUsuarioCadastro() {
+		return usuarioCadastro;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

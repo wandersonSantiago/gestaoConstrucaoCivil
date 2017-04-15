@@ -2,6 +2,7 @@ package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -23,8 +24,10 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Categoria;
+import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.View.Summary;
 import br.com.system.gestaoConstrucaoCivil.enuns.UnidadeMedidaEnum;
+import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 
 @Entity
 
@@ -70,6 +73,9 @@ public class Produto extends AbstractPersistable<Long> {
 	@Transient
 	private boolean geraCodigoBarra = true;
 	
+	@ManyToOne
+	@JoinColumn(name ="id_usuario_cadastro")
+	private Usuario usuarioCadastro;
 	
 	public boolean isGeraCodigoBarra() {
 		return geraCodigoBarra;
@@ -146,6 +152,14 @@ public class Produto extends AbstractPersistable<Long> {
 
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
+	}
+	public void setUsuarioCadastrado()
+	{
+		this.usuarioCadastro = SessionUsuario.getInstance().getUsuario();
+	}
+			
+	public Usuario getUsuarioCadastro() {
+		return usuarioCadastro;
 	}
     
 
