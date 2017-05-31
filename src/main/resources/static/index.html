@@ -19,14 +19,10 @@
 	
 	<link	href="public/components/angular-block-ui/dist/angular-block-ui.min.css"	rel="stylesheet" />
 	<link href="public/components/angular-toastr/dist/angular-toastr.css"	rel="stylesheet" />
-	<!-- <link href="public/css/app.css" rel="stylesheet" /> -->
-	<!-- <link href="public/css/simple-sidebar.css" rel="stylesheet"> -->
 	<link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	<link rel="stylesheet"	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 	
 	<link rel="stylesheet" href="public/components/sweetalert2/dist/sweetalert2.min.css">
-	<!-- <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	<script	src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> -->
 	<link href="public/css/login.css" rel="stylesheet" />
 	<link rel="stylesheet" href="public/components/angular-material/angular-material.min.css">
 
@@ -215,10 +211,10 @@
 
 </head>
 
-<div ng-if="!logado" ng-include="'views/index.html'"></div>
+<div ng-if="!logado" ng-include="'views/login.html'"></div>
 <!-- <div ng-if="!logado" ng-view></div> -->
 
-<body class="hold-transition skin-purple sidebar-mini">
+<body class="hold-transition skin-purple  sidebar-mini">
 	<div  class="wrapper">
 
 		<div ng-show="logado" ng-include="'views/templates/header.html'" ></div>
