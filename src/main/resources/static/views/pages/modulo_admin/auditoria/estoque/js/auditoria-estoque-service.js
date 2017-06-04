@@ -12,9 +12,9 @@ app.factory('auditoriaEstoqueService', function($rootScope, toastr, $http, $q){
 					return $q.reject(errResponse);
 				});
 		},	
-	entradaComPaginacao: function(page , maxResults){
-			var config = {params: {page: page , maxResults : maxResults}};
-			return $http.get('rest/produtoEstoque/auditoria/entrada', config)
+	buscarComPaginacao: function(page , maxResults, tipo){
+			var config = {params: {page: page , maxResults : maxResults, tipo : tipo}};
+			return $http.get('/rest/almoxarifado/auditoria/estoque/', config)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){

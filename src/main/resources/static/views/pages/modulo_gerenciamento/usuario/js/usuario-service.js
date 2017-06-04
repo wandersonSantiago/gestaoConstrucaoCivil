@@ -74,7 +74,6 @@ app.factory('usuarioService', function($rootScope, toastr, $http,$q){
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 					return $q.reject(errResponse);
 			});
 		},

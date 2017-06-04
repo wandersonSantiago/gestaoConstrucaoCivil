@@ -10,11 +10,11 @@ app.controller('auditoriaEstoqueController', function($scope, auditoriaEstoqueSe
 	var idEmpresa =  $routeParams.idEmpresa;
 	
 	
-	self.auditoria = function(pages, maxResults){
-		console.log("teste");
+	self.buscar = function(pages, maxResults, tipo){
 		self.totalPages = [];
 		self.getPage=pages;		
-		auditoriaEstoqueService.entradaComPaginacao(pages, maxResults).
+		console.log("teste");
+		auditoriaEstoqueService.buscarComPaginacao(pages, maxResults, tipo).
 		then(function(e){			
 			self.listaAuditoria = e.content;
 			$scope.totalPages = e.totalPages;

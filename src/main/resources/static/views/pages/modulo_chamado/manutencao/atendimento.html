@@ -56,7 +56,7 @@
 							</h3>							
 						</div>
 						<div class="box-body pad">							
-								<textarea class="textarea" placeholder="Texto" ng-model="texto" id="texto"
+								<textarea class="compose-textarea" placeholder="Texto" ng-model="texto" id="texto"
 									style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
 						</div>
 					</div>			
@@ -128,5 +128,10 @@
 		</div>
 		<div class="tablecontainer"></div>
 	</div>
-</div>
+<script>
+	$(function() {
+		//Add text editor
+		$("#compose-textarea").wysihtml5();
+	});
+</script>
 

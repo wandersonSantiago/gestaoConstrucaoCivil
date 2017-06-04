@@ -46,9 +46,9 @@
 								Escreva o Problema 
 							</h3>							
 						</div>
-						<div class="box-body pad">							
-								<textarea class="textarea" placeholder="Texto" ng-model="texto" id="texto"
-									style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+						<div class="form-group">
+							<textarea id="textarea" placeholder="Texto"
+								ng-model="texto" class="form-control" style="height: 300px"></textarea>
 						</div>
 					</div>			
 					
@@ -56,7 +56,7 @@
 					<br>
 			<div class="row ">
 					
-							<input type="submit" id="submit" ng-disabled="!texto || !chamadoCtrl.chamadoManutencao.titulo || !chamadoCtrl.chamadoManutencao.prioridade"  value="Enviar"	class="btn btn-lg btn-primary btn-block btn-signin">
+							<input type="submit" id="submit" ng-disabled=" !chamadoCtrl.chamadoManutencao.titulo || !chamadoCtrl.chamadoManutencao.prioridade"  value="Enviar"	class="btn btn-lg btn-primary btn-block btn-signin">
 						
 					</div>
 					
@@ -69,3 +69,9 @@
 	</div>
 </div>
 
+<script>
+	$(function() {
+		//Add text editor
+		$("#compose-textarea").wysihtml5();
+	});
+</script>

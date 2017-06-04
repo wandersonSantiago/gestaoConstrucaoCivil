@@ -13,10 +13,10 @@ app.controller('chamadoTiController', function($scope, $timeout, $rootScope, cha
 	var idChamadoTi = $routeParams.idChamadoTi;
 	
 	$scope.verificaEquipamento = function(equipamento){
-		if(equipamento == "COMPUTADOR"){
+		if(equipamento == "INFORMATICA"){
 			$scope.computador = true;
 			$scope.impressora = false;
-		}else if(equipamento == "IMPRESSORA"){
+		}else if(equipamento == "MAQUINAS"){
 			$scope.computador = false;
 			$scope.impressora = true;
 		}else if(equipamento == null){

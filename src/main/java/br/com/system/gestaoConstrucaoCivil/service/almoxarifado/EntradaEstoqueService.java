@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,11 +9,15 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Auditoria;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.EstoqueEmpreendimento;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Item;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Produto;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.EntradaOuBaixa;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.IItem;
+import br.com.system.gestaoConstrucaoCivil.enuns.TipoMovimentacaoEnum;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
+import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.AuditoriaRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.EstoqueEmpreendimentoRepository;
 
 @Service
@@ -22,20 +27,29 @@ public class EntradaEstoqueService {
 	@Autowired
 	private EstoqueEmpreendimentoRepository estoqueRepository;
 	
+	@Autowired
+	private AuditoriaRepository auditoriaRepository;
+	
 	@Transactional(readOnly = false)
     public void entradaEstoque(EntradaOuBaixa entrada)
     {
+		Auditoria auditoria = new Auditoria();
 	    Collection<IItem> t = entrada.getItens();
 		
 		for(IItem item : t)
 		{
-			if (estoqueRepository.existeProduto(item.getProduto().getId(),entrada.empreendimentoEntrada().getId())) {
-				
+			if (estoqueRepository.existeProduto(item.getProduto().getId(),entrada.empreendimentoEntrada().getId())) {				
 				adicionarQuantidade(item.getProduto(),item.getQuantidade(),entrada.empreendimentoEntrada().getId());
 			} else {
 				estoqueRepository.save(criarNovoEstoque(item.getProduto(), item.getQuantidade()));
 				
 			}	
+			auditoria.setDataCadastro(new Date());
+			auditoria.setEmpreendimento(SessionUsuario.getInstance().getUsuario().getEmpreendimento());
+			auditoria.setUsuarioCadastro(SessionUsuario.getInstance().getUsuario());
+			auditoria.setTipoMovimentacao(TipoMovimentacaoEnum.ENTRADA_ESTOQUE);
+			auditoria.setItem((Item) item);
+			auditoriaRepository.save(auditoria);
 		}
 	}
 	@Transactional(readOnly = false)

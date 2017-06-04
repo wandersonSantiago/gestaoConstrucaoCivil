@@ -18,10 +18,11 @@
             </div>
 		<div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
-                <li><a href="" ng-click="auditoriaCtrl.auditoria(1,15)"><i class="fa fa-sign-in"></i>Entrada</a></li>
-                <li><a href=""><i class="fa  fa-sign-out"></i>Saida</a></li>
-                <li><a href=""><i class="fa fa-barcode "></i> Requisições</a></li>
-                <li><a href=""><i class="fa fa-random"></i>Transferencias</a>
+                <li><a href="" ng-click="auditoriaCtrl.buscar(1,15, 'ENTRADA_ESTOQUE')"><i class="fa fa-sign-in"></i>Entrada</a></li>
+                <li><a href="" ng-click="auditoriaCtrl.buscar(1,15, 'SAIDA_ESTOQUE')"><i class="fa  fa-sign-out"></i>Saida</a></li>
+                <li><a href="" ng-click="auditoriaCtrl.buscar(1,15, 'ENTRADA_ESTOQUE')"><i class="fa fa-barcode "></i> Requisições</a></li>
+                <li><a href="" ng-click="auditoriaCtrl.buscar(1,15, 'TRASFERENCIA_ESTOQUE_SAIDA')"><i class="fa fa-random"></i>Transferencias Entrada</a>
+                 <li><a href="" ng-click="auditoriaCtrl.buscar(1,15, 'TRASFERENCIA_ESTOQUE_ENTRADA')"><i class="fa fa-random"></i>Transferencias Saida</a>
                 </li>
               </ul>
             </div>
@@ -78,7 +79,7 @@
 								<tbody
 									ng-repeat=" lista in auditoriaCtrl.listaAuditoria | filter : buscar | orderBy : 'id' ">
 									<tr>
-										<td>{{lista.produto.codigo}}</td>
+										<td>{{lista}}</td>
 										<td>{{lista.produto.descricao}}</td>
 										<td>{{lista.produto.categoria.descricao}}</td>
 										<td>{{lista.produto.tipoProduto.descricao}}</td>

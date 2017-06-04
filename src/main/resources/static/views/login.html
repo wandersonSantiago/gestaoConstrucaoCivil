@@ -10,7 +10,9 @@
    	
 		<form ng-controller="loginController as loginCtrl" ng-submit="loginCtrl.login()">
 			<center><h2 class="form-signin-heading" contenteditable="false">Gestão Construção Civil</h2></center>
-
+	<center>	<img id="profile-img" class="profile-img-card"
+							src="/public/img/avatar_2x.png" />
+						<p id="profile-name" class="profile-name-card"></p></center>
 				<p  ng-if="!loginCtrl.falhaLogin" class="alert alert-warning ">Usuário ou senha inválido</p>
 					
 			<input type="text" class="form-control" title="Insira seu usuário"
