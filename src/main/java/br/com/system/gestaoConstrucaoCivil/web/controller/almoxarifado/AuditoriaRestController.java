@@ -1,5 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller.almoxarifado;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,5 +31,10 @@ public class AuditoriaRestController {
 		return new ResponseEntity<Page<Auditoria>>(auditoria, HttpStatus.OK);
 	}
 	
+	@GetMapping
+	public ResponseEntity<List<Auditoria>> entrada() {
+		List<Auditoria> auditoria = auditoriaService.findAll();
+		return new ResponseEntity<List<Auditoria>>(auditoria, HttpStatus.OK);
+	}
 	
 }

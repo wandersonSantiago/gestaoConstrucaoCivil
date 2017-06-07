@@ -53,6 +53,7 @@ public class ClienteMoradorService {
 			user.setEmpreendimento(SessionUsuario.getInstance().getUsuario().getEmpreendimento());
 			user.setNome(cliente.getNomeCompleto());
 			user.setLogin(cliente.getCpf());
+			user.setEmail(cliente.getEmail());
 			String hash = new BCryptPasswordEncoder().encode(cliente.getCpf());
 			user.setSenha(hash);
 			cliente.setUsuario(user);			

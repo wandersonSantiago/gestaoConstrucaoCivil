@@ -28,40 +28,40 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Table(name = "cliente_morador")
 public abstract class ClienteMorador extends AbstractPersistable<Long> implements Serializable{
 
-	@NotBlank
+	
 	@NotEmpty
 	@Size(min = 3,max = 50)
 	protected String nomeCompleto;
 	
-	@NotBlank
+	
 	@CPF
 	protected String cpf;
 	
 	@NotEmpty
-	@NotBlank
+	
 	@Size(max = 15)
 	protected String telefoneFixo;
 	@NotEmpty
-	@NotBlank
+	
 	@Size(max = 15)
 	protected String telefoneCelular;
 		
-	@NotBlank
+	//@NotBlank
 	@Email
 	protected String email;
 	
-	@NotBlank
+	
 	@ManyToOne
     @JoinColumn(name="id_empreendimento",nullable = true)
     protected Empreendimento empreendimento;
 	
-	@NotBlank
+	
 	@OneToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST})
 	@JoinColumn(name="id_usuario")
 	protected Usuario usuario;
 	
-	@NotBlank
-	@NotEmpty
+	
+	//@NotEmpty
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_nascimento")
 	protected Date dataNascimento;

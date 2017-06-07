@@ -14,15 +14,15 @@ import org.hibernate.validator.constraints.NotBlank;
 @Table(name="cliente_morador_edificil")
 public class ClienteMoradorEdificio extends ClienteMorador implements Serializable{
 
-	@NotBlank
+	
 	@Column(length = 10)
     private Integer torre;
    
-	@NotBlank
+	
 	@Column(length = 10)
     private Integer andar;
      
-	@NotBlank
+	
 	@Column(length = 10)
     private Integer apartamento;
 
