@@ -18,11 +18,11 @@
             </div>
 		<div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
-                <li><a href="" ng-click="auditoriaCtrl.buscar()"><i class="fa fa-sign-in"></i>Entrada</a></li>
-                <li><a href="" ng-click="auditoriaCtrl.buscar(1,15, 'SAIDA_ESTOQUE')"><i class="fa  fa-sign-out"></i>Saida</a></li>
-                <li><a href="" ng-click="auditoriaCtrl.buscar(1,15, 'ENTRADA_ESTOQUE')"><i class="fa fa-barcode "></i> Requisições</a></li>
-                <li><a href="" ng-click="auditoriaCtrl.buscar(1,15, 'TRASFERENCIA_ESTOQUE_SAIDA')"><i class="fa fa-random"></i>Transferencias Entrada</a>
-                 <li><a href="" ng-click="auditoriaCtrl.buscar(1,15, 'TRASFERENCIA_ESTOQUE_ENTRADA')"><i class="fa fa-random"></i>Transferencias Saida</a>
+                <li><a href="" ng-click="auditoriaCtrl.buscarEntrada()"><i class="fa fa-sign-in"></i>Entrada</a></li>
+                <li><a href="" ng-click="auditoriaCtrl.buscarSaida()"><i class="fa  fa-sign-out"></i>Saida</a></li>
+              <!--   <li><a href="" ng-click="auditoriaCtrl.buscarTranfereciaEntrada()"><i class="fa fa-barcode "></i> Requisições</a></li>
+                <li><a href="" ng-click="auditoriaCtrl.buscarTransferenciaSaida()"><i class="fa fa-random"></i>Transferencias Entrada</a>
+                 <li><a href="" ng-click="auditoriaCtrl.buscarRequisicao()"><i class="fa fa-random"></i>Transferencias Saida</a>-->
                 </li>
               </ul>
             </div>
@@ -32,7 +32,7 @@
 			<div class="box box-primary" >	
 					<div class="box-header">Auditoria Estoque</div>
 					<div class="panel-body">
-						<div class="row ">
+					<!--	<div class="row ">
 							<div class="col-sm-2">
 						    <div class="dropdown">
 						        <button class="btn btn-warning btn-export dropdown-toggle" margin-right=46px type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -56,7 +56,7 @@
 						        </ul>
 						    </div>
 						    </div>
-						</div>
+						</div>-->
 						<div class="row">
 							<div class="col-sm-4">
 								<input class="form-control" type="text" placeholder="Pesquisar..." ng-model="buscar" >
@@ -66,28 +66,24 @@
 							<table class="export-table table  table-bordered " st-table="auditoriaCtrl.listaAuditoria" st-filtered-collection="filteredCollection" class="table table-striped">
 								<thead>
 									<tr>						 
-										<th>Código</th>
-										<th>Descrição</th>
-										<th>Categoria</th>
-										<th>Tipo</th>
-										<th>Unidade Medida</th>						
-										<th>quantidade Estoque</th>
-										<th>Custo médio</th>
-										<th>Valor Total</th>
+										<th>Tipo Movimentação</th>
+										<th>Data</th>
+										<th>Usuario</th>
+										<th>Empreendimento</th>
+										<th>Produto</th>
+										<th>Quantidade</th>
+										
 									</tr>
 								</thead>
 								<tbody
 									ng-repeat=" lista in auditoriaCtrl.listaAuditoria | filter : buscar | orderBy : 'id' ">
 									<tr>
-										<td>{{lista}}</td>
+										<td>{{lista.tipoMovimentacao}}</td>
+										<td>{{lista.dataCadastro}}</td>
+										<td>{{lista.usuarioCadastro.login}}</td>
+										<td>{{lista.empreendimento.descricao}}</td>
 										<td>{{lista.produto.descricao}}</td>
-										<td>{{lista.produto.categoria.descricao}}</td>
-										<td>{{lista.produto.tipoProduto.descricao}}</td>
-										<td>{{lista.produto.unidadeMedida}}</td>
 										<td>{{lista.quantidade}}</td>
-										<td>{{lista.custoMedio | currency}}</td>
-									    <td>{{lista.valorTotal | currency}}</td>
-									
 										<td ng-if="ROLE_MODULO_ESTOQUE_ALTERA_LIMITE"><a href="#/estoque/alteracao/{{lista.produto.codigo}}"><i class="glyphicon glyphicon-edit"></i></a> 
 										
 									</tr>

@@ -31,10 +31,35 @@ public class AuditoriaRestController {
 		return new ResponseEntity<Page<Auditoria>>(auditoria, HttpStatus.OK);
 	}
 	
-	@GetMapping
+	@GetMapping(value="/entrada")
 	public ResponseEntity<List<Auditoria>> entrada() {
-		List<Auditoria> auditoria = auditoriaService.findAll();
+		List<Auditoria> auditoria = auditoriaService.findByTipoMovimentacao(TipoMovimentacaoEnum.ENTRADA_ESTOQUE);
 		return new ResponseEntity<List<Auditoria>>(auditoria, HttpStatus.OK);
 	}
+	
+	@GetMapping(value="/saida")
+	public ResponseEntity<List<Auditoria>> saida() {
+		List<Auditoria> auditoria = auditoriaService.findByTipoMovimentacao(TipoMovimentacaoEnum.SAIDA_ESTOQUE);
+		return new ResponseEntity<List<Auditoria>>(auditoria, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/transferencia/entrada")
+	public ResponseEntity<List<Auditoria>> transferenciaEntrada() {
+		List<Auditoria> auditoria = auditoriaService.findByTipoMovimentacao(TipoMovimentacaoEnum.TRASFERENCIA_ESTOQUE_ENTRADA);
+		return new ResponseEntity<List<Auditoria>>(auditoria, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/transferencia/saida")
+	public ResponseEntity<List<Auditoria>> transferenciaSaida() {
+		List<Auditoria> auditoria = auditoriaService.findByTipoMovimentacao(TipoMovimentacaoEnum.TRASFERENCIA_ESTOQUE_SAIDA);
+		return new ResponseEntity<List<Auditoria>>(auditoria, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/requisicao")
+	public ResponseEntity<List<Auditoria>> requisicao() {
+		List<Auditoria> auditoria = auditoriaService.findByTipoMovimentacao(TipoMovimentacaoEnum.REQUISICAO);
+		return new ResponseEntity<List<Auditoria>>(auditoria, HttpStatus.OK);
+	}
+	
 	
 }

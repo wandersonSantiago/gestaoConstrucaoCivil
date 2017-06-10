@@ -17,6 +17,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoMovimentacaoEnum;
@@ -43,9 +45,11 @@ public class Auditoria{
 	@JoinColumn(name ="id_usuario_cadastro")
 	private Usuario usuarioCadastro;
 
-	@OneToOne
-	@JoinColumn(name ="id_item")
-	private Item item;
+	private Integer quantidade;
+	
+	@ManyToOne
+	@JoinColumn(name ="id_produto")
+	private Produto produto;
 	
 	public Date getDataCadastro() {
 		return dataCadastro;
@@ -87,13 +91,23 @@ public class Auditoria{
 		this.tipoMovimentacao = tipoMovimentacao;
 	}
 
-	public Item getItem() {
-		return item;
+	public Integer getQuantidade() {
+		return quantidade;
 	}
 
-	public void setItem(Item item) {
-		this.item = item;
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
 	}
+
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
+
+	
 
 	
 	

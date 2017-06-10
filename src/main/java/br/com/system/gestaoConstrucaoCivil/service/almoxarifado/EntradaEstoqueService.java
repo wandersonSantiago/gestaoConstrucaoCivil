@@ -48,7 +48,8 @@ public class EntradaEstoqueService {
 			auditoria.setEmpreendimento(SessionUsuario.getInstance().getUsuario().getEmpreendimento());
 			auditoria.setUsuarioCadastro(SessionUsuario.getInstance().getUsuario());
 			auditoria.setTipoMovimentacao(TipoMovimentacaoEnum.ENTRADA_ESTOQUE);
-			auditoria.setItem((Item) item);
+			auditoria.setProduto(item.getProduto());
+			auditoria.setQuantidade(item.getQuantidade());
 			auditoriaRepository.save(auditoria);
 		}
 	}

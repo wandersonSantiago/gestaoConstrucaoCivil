@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,9 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Auditoria;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Transferencia;
+import br.com.system.gestaoConstrucaoCivil.enuns.TipoMovimentacaoEnum;
 import br.com.system.gestaoConstrucaoCivil.pojo.CancelamentoTransferencia;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
+import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.AuditoriaRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.TransferenciaRepository;
 
 
@@ -27,6 +31,8 @@ public class TransferenciaService {
 	@Autowired 
 	private EntradaEstoqueService entradaEstoque;
 	
+	@Autowired
+	private AuditoriaRepository auditoriaRepository;
 	
 	@Transactional(readOnly = false)
 	public void salvarAlterar(Transferencia transferencia) {
@@ -42,6 +48,20 @@ public class TransferenciaService {
 		transferencia.aceitarTransferencia();
 		entradaEstoque.entradaEstoque(transferencia);
 	    transferenciaRepository.save(transferencia);
+	   
+	    for(int i = 0; i< transferencia.getItens().size() ; i++){
+	    	
+	    	 Auditoria auditoria = new Auditoria();
+	 	    
+	 	    auditoria.setDataCadastro(new Date());
+	 		auditoria.setEmpreendimento(SessionUsuario.getInstance().getUsuario().getEmpreendimento());
+	 		auditoria.setUsuarioCadastro(SessionUsuario.getInstance().getUsuario());
+	 		auditoria.setTipoMovimentacao(TipoMovimentacaoEnum.TRASFERENCIA_ESTOQUE_ENTRADA);
+	 		auditoria.setProduto(transferencia.getItens().get(i).getProduto());
+	 		auditoria.setQuantidade(transferencia.getItens().get(i).getQuantidade());
+	 		auditoriaRepository.save(auditoria);
+	    }
+	   
 	}
 	@Transactional(readOnly = false)
 	public void rejeitarTransferencia(Long numeroNota)

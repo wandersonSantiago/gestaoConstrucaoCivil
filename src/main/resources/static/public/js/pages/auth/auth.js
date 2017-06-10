@@ -54,6 +54,7 @@ app.factory(
 					$http.post(auth.logoutPath, {}).then(function() {
 						console.log("Logout succeeded");
 						$rootScope.logado = false;
+						$rootScope.user = null;
 						limpaPermissão();
 					}, function() {
 						console.log("Logout failed");

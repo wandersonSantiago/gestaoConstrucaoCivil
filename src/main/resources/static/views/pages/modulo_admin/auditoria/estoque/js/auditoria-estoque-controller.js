@@ -2,26 +2,46 @@ app.controller('auditoriaEstoqueController', function($scope, auditoriaEstoqueSe
 	
 	var self = this;
  
-	self.getPage=0;
-	self.totalPages = 0;
-	self.totalElements = 0;
-	$scope.maxResults = 15;
-	
+		
 	var idEmpresa =  $routeParams.idEmpresa;
 	
 	
-	self.buscar = function(pages, maxResults, tipo){
-		self.totalPages = [];
-		self.getPage=pages;		
-		console.log("teste");
-		auditoriaEstoqueService.buscarComPaginacao(pages, maxResults, tipo).
+	self.buscarEntrada = function(){
+		auditoriaEstoqueService.buscarEntrada().
 		then(function(e){			
-			self.listaAuditoria = e.content;
-			$scope.totalPages = e.totalPages;
-			self.totalElements = e.totalElements;
-			for(i = 0; i < $scope.totalPages ; i++){
-				self.totalPages.push(i);
-			}
+			self.listaAuditoria = e;
+		}, function(errResponse){
+		});
+	};
+	
+	self.buscarSaida = function(){
+		auditoriaEstoqueService.buscarSaida().
+		then(function(e){			
+			self.listaAuditoria = e;
+		}, function(errResponse){
+		});
+	};
+	
+	self.buscarTransferenciaEntrada = function(){
+		auditoriaEstoqueService.buscarTransferenciaEntrada().
+		then(function(e){			
+			self.listaAuditoria = e;
+		}, function(errResponse){
+		});
+	};
+	
+	self.buscarTransferenciaSaida = function(){
+		auditoriaEstoqueService.buscarTransferenciaSaida().
+		then(function(e){			
+			self.listaAuditoria = e;
+		}, function(errResponse){
+		});
+	};
+	
+	self.buscarRequisicao = function(){
+		auditoriaEstoqueService.buscarRequisicao().
+		then(function(e){			
+			self.listaAuditoria = e;
 		}, function(errResponse){
 		});
 	};

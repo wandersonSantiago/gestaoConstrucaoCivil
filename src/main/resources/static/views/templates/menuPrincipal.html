@@ -1,7 +1,7 @@
 <meta charset="UTF-8">
-<aside class="main-sidebar">
+<aside class="main-sidebar" ng-controller="usuarioController as userCtrl">
 
-	<section class="sidebar">
+	<section class="sidebar" ng-init="userCtrl.user()">
 
 <!-- dados do usuario logado -->
 		<div class="user-panel">

@@ -38,4 +38,8 @@ public class AuditoriaService {
 	public List<Auditoria> findAll(){
 		return auditoriaRepository.findAll();
 	}
+
+	public List<Auditoria> findByTipoMovimentacao(TipoMovimentacaoEnum tipo) {
+		return auditoriaRepository.findByTipoMovimentacao(tipo);
+	}
 }
