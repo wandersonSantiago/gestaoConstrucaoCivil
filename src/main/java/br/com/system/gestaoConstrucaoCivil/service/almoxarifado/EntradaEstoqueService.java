@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Auditoria;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.EstoqueEmpreendimento;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Item;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Produto;
@@ -17,7 +16,6 @@ import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.Entrad
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.IItem;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoMovimentacaoEnum;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
-import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.AuditoriaRepository;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.EstoqueEmpreendimentoRepository;
 
 @Service
@@ -27,13 +25,10 @@ public class EntradaEstoqueService {
 	@Autowired
 	private EstoqueEmpreendimentoRepository estoqueRepository;
 	
-	@Autowired
-	private AuditoriaRepository auditoriaRepository;
 	
 	@Transactional(readOnly = false)
     public void entradaEstoque(EntradaOuBaixa entrada)
     {
-		Auditoria auditoria = new Auditoria();
 	    Collection<IItem> t = entrada.getItens();
 		
 		for(IItem item : t)
@@ -44,13 +39,7 @@ public class EntradaEstoqueService {
 				estoqueRepository.save(criarNovoEstoque(item.getProduto(), item.getQuantidade()));
 				
 			}	
-			auditoria.setDataCadastro(new Date());
-			auditoria.setEmpreendimento(SessionUsuario.getInstance().getUsuario().getEmpreendimento());
-			auditoria.setUsuarioCadastro(SessionUsuario.getInstance().getUsuario());
-			auditoria.setTipoMovimentacao(TipoMovimentacaoEnum.ENTRADA_ESTOQUE);
-			auditoria.setProduto(item.getProduto());
-			auditoria.setQuantidade(item.getQuantidade());
-			auditoriaRepository.save(auditoria);
+		
 		}
 	}
 	@Transactional(readOnly = false)

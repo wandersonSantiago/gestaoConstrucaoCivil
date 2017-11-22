@@ -18,11 +18,12 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @SequenceGenerator(name = "item_cotacao_id_seq", sequenceName = "item_cotacao_id_seq", initialValue = 1, allocationSize = 1)
-@Table(name = "cotacao_item")
+@Table(name = "cotacao_item" , schema = "almoxarifado")
 public class CotacaoItem implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	
-    @Id	
+	@Id	
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "item_cotacao_id_seq")
     private Long id;
 	@Column(nullable = false)

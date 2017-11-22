@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.EntradaOuBaixa;
 
-public interface IRequisicao<E> extends EntradaOuBaixa{
+public interface IRequisicao<E> extends EntradaOuBaixa<E>{
 
 	public List<E> getItens();
 	public InformacaoRequisicao getInformacaoRequisicao();

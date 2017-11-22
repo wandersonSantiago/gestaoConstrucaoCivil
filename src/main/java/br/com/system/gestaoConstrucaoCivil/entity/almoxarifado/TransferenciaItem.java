@@ -8,9 +8,10 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "transferencia_item")
+@Table(name = "transferencia_item", schema="almoxarifado")
 public class TransferenciaItem  extends Item {
 	
+	private static final long serialVersionUID = 1L;
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "id_transferencia")

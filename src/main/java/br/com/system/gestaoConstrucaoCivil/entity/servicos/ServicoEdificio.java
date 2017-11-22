@@ -12,9 +12,11 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "servico_edificio")
+@Table(name = "servico_edificio" , schema="servicos")
 public class ServicoEdificio extends ServicoEmpresa{
 
+	private static final long serialVersionUID = 1L;
+	
 	private Integer torre;
 	private Integer andar;
 	private Integer apartamento;

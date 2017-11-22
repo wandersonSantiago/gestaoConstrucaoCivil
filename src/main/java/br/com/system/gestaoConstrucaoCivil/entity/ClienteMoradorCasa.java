@@ -8,9 +8,11 @@ import javax.validation.constraints.Max;
 
 import org.hibernate.validator.constraints.NotBlank;
 @Entity
-@Table(name="cliente_morador_casa")
+@Table(name="cliente_morador_casa" , schema = "communs")
 public class ClienteMoradorCasa extends ClienteMorador implements Serializable{
 	
+	
+	private static final long serialVersionUID = 1L;
 	
 	@NotBlank
 	@Max(10)

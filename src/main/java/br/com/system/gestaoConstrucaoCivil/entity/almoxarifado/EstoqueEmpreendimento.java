@@ -20,8 +20,10 @@ import br.com.system.gestaoConstrucaoCivil.pojo.InformacaoEntradaProduto;
 @Entity
 @NamedEntityGraph(name = "EstoqueEmpreendimento.detail",
 attributeNodes = {@NamedAttributeNode("produto"),@NamedAttributeNode("empreendimento")})
-@Table(name = "estoque_empreendimento")
+@Table(name = "estoque_empreendimento",  schema = "almoxarifado")
 public class EstoqueEmpreendimento implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(unique = true, nullable = false)

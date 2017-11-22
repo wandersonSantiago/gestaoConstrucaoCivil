@@ -25,7 +25,6 @@ public class PedidoCompraRestController {
 	private PedidoCompraService pedidoCompraService;
 	
 	
-	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_COMPRAS_CADASTRAR')")
 	@PostMapping(value = "/salva")
 	public ResponseEntity<PedidoCompra> salvar(@RequestBody PedidoCompra pedidoCompra){
 		pedidoCompraService.salvaAltera(pedidoCompra);
@@ -33,14 +32,12 @@ public class PedidoCompraRestController {
 		return new ResponseEntity<>(headers, HttpStatus.CREATED);				
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_COMPRAS_CONSULTAR')")
 	@GetMapping(value = "/lista")
 	public ResponseEntity<Collection<PedidoCompra>> buscarTodos(){
 		
 		return new ResponseEntity<Collection<PedidoCompra>>(pedidoCompraService.buscarTodos(), HttpStatus.OK);
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_COMPRAS_CONSULTAR')")
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<PedidoCompra> buscarPorId(@PathVariable Long id) {
 

@@ -15,11 +15,11 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 
 @Entity
-@Table(name ="requisicao_outros")
+@Table(name ="requisicao_outros", schema="almoxarifado")
 public class RequisicaoOutros extends AbstractPersistable<Long> implements IRequisicao<RequisicaoOutrosItem>{
 
-	
-	
+	private static final long serialVersionUID = 1L;
+
 	@ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="id_informacao_requisicao",nullable = true)
 	private InformacaoRequisicao informacaoRequisicao;

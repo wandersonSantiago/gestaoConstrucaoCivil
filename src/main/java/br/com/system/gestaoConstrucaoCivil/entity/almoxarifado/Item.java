@@ -25,6 +25,8 @@ import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.IItem;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Item implements Serializable,IItem{
 
+	private static final long serialVersionUID = 1L;
+
 	@JsonView(View.Summary.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "item_id_seq")

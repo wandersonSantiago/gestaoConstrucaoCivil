@@ -1,5 +1,6 @@
 package br.com.system.gestaoConstrucaoCivil.entity.chamado;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -30,8 +31,10 @@ import br.com.system.gestaoConstrucaoCivil.enuns.chamado.StatusChamado;
 @SequenceGenerator(name = "chamado_id_seq", sequenceName = "chamado_id_seq", schema="chamado", initialValue = 1, allocationSize = 1)
 @Table(name="chamado", schema = "chamado")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Chamado {
+public abstract class Chamado implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "chamado_id_seq")
 	private Long id;

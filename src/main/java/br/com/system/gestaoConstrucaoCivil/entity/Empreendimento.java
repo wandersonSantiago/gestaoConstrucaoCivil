@@ -1,5 +1,6 @@
 package br.com.system.gestaoConstrucaoCivil.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -8,6 +9,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -24,10 +28,16 @@ import br.com.system.gestaoConstrucaoCivil.enuns.TipoEmpreendimentoEnum;
 
 
 @Entity
-@Table(name = "empreendimento")
-public class Empreendimento extends AbstractPersistable<Long> {
+@Table(name = "empreendimento" , schema = "communs")
+public class Empreendimento implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 
+	@Id
+	@Column(unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private Long id;
+	
 	@ManyToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST})
 	@JoinColumn(name="id_endereco_empreendimento",nullable = false)
 	private Endereco enderecoEmpreendimento;
@@ -68,7 +78,15 @@ public class Empreendimento extends AbstractPersistable<Long> {
     @Column(nullable = false)
 	private boolean ativo;
 	
-    public Endereco getEnderecoEmpreendimento() {
+    
+    
+    public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Endereco getEnderecoEmpreendimento() {
 		return enderecoEmpreendimento;
 	}
 	public void setEnderecoEmpreendimento(Endereco enderecoEmpreendimento) {

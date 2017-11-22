@@ -12,8 +12,9 @@ import br.com.system.gestaoConstrucaoCivil.enuns.chamado.TipoEquipamentoChamadoT
 @Table(name="chamado_ti", schema="chamado")
 public class ChamadoTi extends Chamado {
 
-	
-	
+
+	private static final long serialVersionUID = 1L;
+
 	@Column(name="descricao_servico")
 	private String descricaoServico;
 	

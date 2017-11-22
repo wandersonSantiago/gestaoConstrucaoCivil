@@ -28,12 +28,15 @@ import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 
 @Entity
 @SequenceGenerator(name = "cotacao_id_seq", sequenceName = "cotacao_id_seq", initialValue = 1, allocationSize = 1)
-@Table(name = "cotacao")
+@Table(name = "cotacao", schema="almoxarifado")
 public class Cotacao implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cotacao_id_seq")
 	private Long id;
+	
 	@Column(nullable = false)
 	private String tema;	
 	@OneToMany(mappedBy = "cotacao",cascade = CascadeType.ALL,fetch = FetchType.EAGER)

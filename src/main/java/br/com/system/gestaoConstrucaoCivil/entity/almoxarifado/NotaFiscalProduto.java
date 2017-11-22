@@ -28,8 +28,10 @@ import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.Entrad
 attributeNodes = {@NamedAttributeNode("notaFiscal"),@NamedAttributeNode("fornecedor")})
 
 @SequenceGenerator(name = "nota_fiscal_produto_id_seq", sequenceName = "nota_fiscal_produto_id_seq", initialValue = 1, allocationSize = 50)
-@Table(name = "nota_fiscal_produto")
+@Table(name = "nota_fiscal_produto", schema="almoxarifado")
 public class NotaFiscalProduto implements Serializable,EntradaOuBaixa<NotaFiscalItem> {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "nota_fiscal_produto_id_seq")

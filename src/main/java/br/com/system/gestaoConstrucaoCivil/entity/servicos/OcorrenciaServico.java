@@ -15,10 +15,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 
 @Entity
-@Table(name="ocorrencia_servico")
+@Table(name="ocorrencia_servico" , schema="servicos")
 public class OcorrenciaServico extends AbstractPersistable<Long> {
 	
-	
+	private static final long serialVersionUID = 1L;
+
+
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="id_servico_empresa")

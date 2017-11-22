@@ -6,6 +6,9 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
@@ -25,9 +28,15 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "cliente_morador")
-public abstract class ClienteMorador extends AbstractPersistable<Long> implements Serializable{
+@Table(name = "cliente_morador" , schema = "communs")
+public abstract class ClienteMorador implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@Column(unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private Long id;
 	
 	@NotEmpty
 	@Size(min = 3,max = 50)
@@ -66,6 +75,14 @@ public abstract class ClienteMorador extends AbstractPersistable<Long> implement
 	@Column(name = "data_nascimento")
 	protected Date dataNascimento;
 	
+	
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getNomeCompleto() {
 		return nomeCompleto;
 	}

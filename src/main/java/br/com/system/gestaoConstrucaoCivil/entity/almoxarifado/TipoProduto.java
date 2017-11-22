@@ -10,10 +10,12 @@ import javax.persistence.Table;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
-@Table(name = "tipo_produto")
+@Table(name = "tipo_produto", schema="almoxarifado")
 public class TipoProduto  extends AbstractPersistable<Long> implements Serializable  {
 
 	
+	private static final long serialVersionUID = 1L;
+
 	@Column(nullable = false)
 	private boolean ativo;
 	

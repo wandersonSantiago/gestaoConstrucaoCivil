@@ -3,11 +3,13 @@ package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
@@ -15,7 +17,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -33,9 +34,15 @@ import br.com.system.gestaoConstrucaoCivil.util.geradorCodigo.GeraNumeroRequisic
 sequenceName = "informacaoRequisicao_id_seq",
 initialValue = 1,
 allocationSize = 1)
-@Table(name = "informacao_requisicao")
-public class InformacaoRequisicao extends AbstractPersistable<Long> implements Serializable{
+@Table(name = "informacao_requisicao", schema = "almoxarifado")
+public class InformacaoRequisicao implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "informacaoRequisicao_id_seq")
+	private Long id;
+	
 	
 	@JsonView(Summary.class)
 	@Column(name = "numero_requisicao")

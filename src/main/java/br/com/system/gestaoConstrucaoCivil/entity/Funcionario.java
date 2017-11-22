@@ -13,10 +13,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "funcionario")
+@Table(name = "funcionario",  schema = "communs")
 public class Funcionario  extends Pessoa implements Serializable{
 
-
+	private static final long serialVersionUID = 1L;
 	@Column(nullable = false)
 	private Integer carteiraTrabalho;
 	@Temporal(TemporalType.DATE)
@@ -32,6 +32,9 @@ public class Funcionario  extends Pessoa implements Serializable{
 	private Cargo cargo;
 	@Column(nullable = true )
 	private Integer crea;
+	
+	
+	
 	public Integer getCarteiraTrabalho() {
 		return carteiraTrabalho;
 	    

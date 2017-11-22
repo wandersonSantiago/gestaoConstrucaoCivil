@@ -1,5 +1,6 @@
 package br.com.system.gestaoConstrucaoCivil.entity.chamado;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -19,7 +20,9 @@ import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 @Entity
 @SequenceGenerator(name = "mensagem_id_seq", sequenceName = "mensagem_id_seq", schema="chamado", initialValue = 1, allocationSize = 1)
 @Table(name="mensagem", schema="chamado")
-public class Mensagem {
+public class Mensagem implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mensagem_id_seq")

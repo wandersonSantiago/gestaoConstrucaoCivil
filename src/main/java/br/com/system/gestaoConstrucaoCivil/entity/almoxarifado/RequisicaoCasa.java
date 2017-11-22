@@ -17,11 +17,11 @@ import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 
 
 @Entity
-@Table(name ="requisicao_casa")
+@Table(name ="requisicao_casa" , schema="almoxarifado")
 public class RequisicaoCasa extends AbstractPersistable<Long> implements IRequisicao<RequisicaoCasaItem> {
-	
-	
-	   
+		
+	private static final long serialVersionUID = 1L;
+
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="id_informacao_requisicao",nullable = true)
 	private InformacaoRequisicao informacaoRequisicao;

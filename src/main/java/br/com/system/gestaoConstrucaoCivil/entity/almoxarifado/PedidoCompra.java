@@ -27,8 +27,10 @@ import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 sequenceName = "pedido_compra_id_seq",
 initialValue = 1,
 allocationSize = 1)
-@Table(name = "pedido_compra")
+@Table(name = "pedido_compra" , schema="almoxarifado")
 public class PedidoCompra implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "pedido_compra_id_seq")

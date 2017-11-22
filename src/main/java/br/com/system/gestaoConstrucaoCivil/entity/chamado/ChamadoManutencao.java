@@ -8,6 +8,7 @@ import javax.persistence.Table;
 @Table(name="chamado_manutencao", schema="chamado")
 public class ChamadoManutencao extends Chamado {
 
+	private static final long serialVersionUID = 1L;
 	
 	
 	@Column(name="descricao_servico")

@@ -31,8 +31,11 @@ import br.com.system.gestaoConstrucaoCivil.util.geradorCodigo.GeraNumeroNota;
 sequenceName = "transferencia_id_seq",
 initialValue = 1,
 allocationSize = 1)
-@Table(name = "transferencia")
+@Table(name = "transferencia" , schema="almoxarifado")
 public class Transferencia implements Serializable,EntradaOuBaixa {
+
+	
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "transferencia_id_seq")

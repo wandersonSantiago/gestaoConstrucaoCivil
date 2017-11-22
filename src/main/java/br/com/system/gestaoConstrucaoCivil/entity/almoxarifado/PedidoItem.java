@@ -9,10 +9,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
-@Table(name = "pedido_item")
+@Table(name = "pedido_item" , schema="almoxarifado")
 public class PedidoItem extends Item{
 
-		
+	private static final long serialVersionUID = 1L;
+	
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "id_pedido_compra")

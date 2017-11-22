@@ -13,8 +13,10 @@ import javax.persistence.Table;
 
 @Entity
 @SequenceGenerator(name = "nota_fiscal_servico_id_seq", sequenceName = "nota_fiscal_servico_id_seq", initialValue = 1, allocationSize = 50)
-@Table(name = "nota_fiscal_servico")
+@Table(name = "nota_fiscal_servico", schema="almoxarifado")
 public class NotaFiscalServico implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "nota_fiscal_servico_id_seq")

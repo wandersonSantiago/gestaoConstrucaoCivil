@@ -9,6 +9,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
@@ -23,9 +26,16 @@ import br.com.system.gestaoConstrucaoCivil.enuns.EstadoCivilEnum;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "pessoa")
-public abstract class Pessoa extends AbstractPersistable<Long> implements Serializable{
+@Table(name = "pessoa" , schema = "communs")
+public abstract class Pessoa implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@Column(unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private Long id;
+	
 	@Column(nullable = false,length = 50)
 	protected String nomeCompleto;
 	@Column(nullable = false)
@@ -52,6 +62,15 @@ public abstract class Pessoa extends AbstractPersistable<Long> implements Serial
 	@Enumerated(EnumType.STRING)
 	protected EstadoCivilEnum estadoCivil;
 	
+	
+	
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getNomeCompleto() {
 		return nomeCompleto;
 	}

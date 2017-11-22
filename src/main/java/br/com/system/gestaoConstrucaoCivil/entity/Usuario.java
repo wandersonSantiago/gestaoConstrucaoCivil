@@ -1,5 +1,6 @@
  package br.com.system.gestaoConstrucaoCivil.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -7,6 +8,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -23,9 +27,16 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 
 @Entity
-@Table(name = "usuario")
-public class Usuario extends AbstractPersistable<Long>{
+@Table(name = "usuario" , schema = "communs")
+public class Usuario implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@Column(unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private Long id;
+	
 	@ManyToOne
 	@JoinColumn(name="id_funcionario",nullable = true)
 	private Funcionario funcionario;
@@ -53,6 +64,15 @@ public class Usuario extends AbstractPersistable<Long>{
 	{
 		dataCadastro = new Date();
 	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getNome() {
 		return nome;
 	}

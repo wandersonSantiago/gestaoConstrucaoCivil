@@ -9,9 +9,11 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name="cliente_morador_outros")
+@Table(name="cliente_morador_outros" , schema = "communs")
 public class ClienteMoradorOutros extends ClienteMorador implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	@NotBlank
 	@NotEmpty
 	private String descricao;

@@ -24,12 +24,18 @@ import br.com.system.gestaoConstrucaoCivil.enuns.TipoEmpreendimentoEnum;
  
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "config_empreendimento")
+@Table(name = "config_empreendimento" , schema = "communs")
 
-public  class ConfigEmpreendimento  extends AbstractPersistable<Long> implements Serializable {
+public  class ConfigEmpreendimento  implements Serializable {
  
-     
-    @ManyToOne
+   	private static final long serialVersionUID = 1L;
+
+   	@Id
+	@Column(unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private Long id;
+   	
+	@ManyToOne
     @JoinColumn(name="id_empreendimento",nullable = true)
     private Empreendimento empreendimento;
      
@@ -38,7 +44,15 @@ public  class ConfigEmpreendimento  extends AbstractPersistable<Long> implements
      
      
   
-    public Empreendimento getEmpreendimento() {
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Empreendimento getEmpreendimento() {
          
         return empreendimento;
     }

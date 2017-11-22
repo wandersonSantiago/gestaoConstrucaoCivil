@@ -24,20 +24,17 @@ public class FornecedorRestController {
 	@Autowired
 	private FornecedorService fornecedorService;
 	
-	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_CADASTROS_FORNECEDOR_CONSULTAR')")
 	@GetMapping(value = "/lista")
 	public ResponseEntity<Iterable<Fornecedor>> buscarTodos() {
 		return new ResponseEntity<Iterable<Fornecedor>>(fornecedorService.buscarTodos(), HttpStatus.OK);
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_CADASTROS_FORNECEDOR_CONSULTAR')")
 	@GetMapping(value = "/buscaPorId/{id}")
 	public ResponseEntity<Fornecedor> buscarPorId(@PathVariable Long id) {
 
 		return new ResponseEntity<Fornecedor>(fornecedorService.buscarPorId(id), HttpStatus.OK);
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_CADASTROS_FORNECEDOR_CADASTRAR')")
 	@PostMapping(value = "/salva")
 	public ResponseEntity<Fornecedor> salvar(@RequestBody Fornecedor fornecedor, UriComponentsBuilder ucBuilder) {
 		fornecedorService.salvarOuEditar(fornecedor);
@@ -47,7 +44,6 @@ public class FornecedorRestController {
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_CADASTROS_FORNECEDOR_ALTERAR')")
 	@PutMapping(value = "/altera")
 	public ResponseEntity<Fornecedor> alterar(@RequestBody Fornecedor fornecedor, UriComponentsBuilder ucBuilder) {
 		fornecedorService.salvarOuEditar(fornecedor);

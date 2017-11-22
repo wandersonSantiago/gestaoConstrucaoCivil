@@ -31,8 +31,8 @@
 		<ul class="sidebar-menu">
 			
 			
-			<li ng-if="ROLE_MODULO_ADMIN" class="header">Administrador</li>
-			 <li  ng-if="ROLE_MODULO_ADMIN" class="treeview">
+			<li  class="header">Administrador</li>
+			 <li   class="treeview">
 		          <a href="">
 		            <i class="fa fa-institution"></i>
 		            <span>Empresa</span>
@@ -41,16 +41,16 @@
 		            </span>
 		          </a>
 		          <ul class="treeview-menu">
-		           		<li ng-if="ROLE_EMPRESA_CONTRATADA_CADASTRAR"><a href="#/empresa_contratada/cadastro">Cadastro</a></li>
-						<li ng-if="ROLE_EMPRESA_CONTRATADA_CONSULTAR"><a href="#/empresa_contratada/listagem" > Listagem</a></li>
+		           		<li ><a href="#/empresa_contratada/cadastro">Cadastro</a></li>
+						<li ><a href="#/empresa_contratada/listagem" > Listagem</a></li>
 		          </ul>
 		        </li>
 			
 				
                    <!-- Menu chamado -->
                                                    
-           <li ng-if="ROLE_MODULO_CHAMADO" class="header">Chamado</li>
-				 <li ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_USUARIO || ROLE_MODULO_CHAMADO_INFORMATICA_SUPORTE || ROLE_MODULO_CHAMADO_INFORMATICA_SUPORTE_RELATORIO"  class="treeview">
+           <li class="header">Chamado</li>
+				 <li  class="treeview">
 			          <a href="">
 			            <i class="fa  fa-envelope-o"></i>
 			            <span>Informática</span>
@@ -59,13 +59,13 @@
 			            </span>
 			          </a>
 			          <ul class="treeview-menu">
-			           		<li ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_USUARIO"><a class="top" href="#/chamado/informatica/cadastrar">cadastrar</a></li>
-							<li ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_USUARIO"><a class="top" href="#/chamado/informatica/lista">Meus Chamados</a></li>
-							<li ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_SUPORTE" ><a class="top" href="#/chamado/informatica/suporte/lista">Suporte Chamado</a></li>
-							<li ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_SUPORTE_RELATORIO" ><a class="top" href="#/chamado/informatica/suporte/relatorio">Relatório</a></li>
+			           		<li ><a class="top" href="#/chamado/informatica/cadastrar">cadastrar</a></li>
+							<li ><a class="top" href="#/chamado/informatica/lista">Meus Chamados</a></li>
+							<li ><a class="top" href="#/chamado/informatica/suporte/lista">Suporte Chamado</a></li>
+							<li  ><a class="top" href="#/chamado/informatica/suporte/relatorio">Relatório</a></li>
 			          </ul>
 			        </li>
-	            <li ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_USUARIO || ROLE_MODULO_CHAMADO_MANUTENCAO_SUPORTE || ROLE_MODULO_CHAMADO_MANUTENCAO_SUPORTE_RELATORIO"  class="treeview">
+	            <li   class="treeview">
 				          <a href="">
 				            <i class="fa  fa-envelope-o"></i>
 				            <span>Manutenção</span>
@@ -74,10 +74,10 @@
 				            </span>
 				          </a>
 				          <ul class="treeview-menu">
-				           		<li ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_USUARIO"><a class="top" href="#/chamado/manutencao/cadastrar">cadastro</a></li>
-							<li ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_USUARIO"><a class="top" href="#/chamado/manutencao/lista">Meus Chamados</a></li>
-							<li ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_SUPORTE"><a class="top" href="#/chamado/manutencao/suporte/lista">Suporte Chamado</a></li>
-							<li ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_SUPORTE_RELATORIO"><a class="top" href="#/chamado/manutencao/suporte/relatorio">Relatório</a></li>
+				           		<li><a class="top" href="#/chamado/manutencao/cadastrar">cadastro</a></li>
+							<li ><a class="top" href="#/chamado/manutencao/lista">Meus Chamados</a></li>
+							<li ><a class="top" href="#/chamado/manutencao/suporte/lista">Suporte Chamado</a></li>
+							<li ><a class="top" href="#/chamado/manutencao/suporte/relatorio">Relatório</a></li>
 						 </ul>
 				        </li>
 										
@@ -85,8 +85,8 @@
 					
 	
 <!-- menu admin Empresa -->		
-			<li ng-if="ROLE_MODULO_GERENCIAMENTO || ROLE_MODULO_ADMIN" class="header">Gerenciamento</li>
-				 <li ng-if=" ROLE_USUARIO_CADASTRAR || ROLE_USUARIO_EMPREENDIMENTO_CONSULTAR"  class="treeview">
+			<li class="header">Gerenciamento</li>
+				 <li  class="treeview">
 			          <a href="">
 			            <i class="fa fa-user"></i>
 			            <span>Usuário</span>
@@ -95,12 +95,12 @@
 			            </span>
 			          </a>
 			          <ul class="treeview-menu">
-			           		<li ng-if="ROLE_USUARIO_CADASTRAR "><a class="top" href="#/usuario/cadastro">Cadastro</a></li>
-							<li ng-if=" ROLE_USUARIO_EMPREENDIMENTO_CONSULTAR "><a class="top" href="#/usuario/listagem">Listagem</a></li>
+			           		<li ><a class="top" href="#/usuario/cadastro">Cadastro</a></li>
+							<li ><a class="top" href="#/usuario/listagem">Listagem</a></li>
 			          </ul>
 			        </li>
 			        
-			        <li ng-if=" ROLE_USUARIO_CADASTRAR || ROLE_USUARIO_EMPREENDIMENTO_CONSULTAR"  class="treeview">
+			        <li  class="treeview">
 			          <a href="">
 			            <i class="fa  fa-unlock-alt"></i>
 			            <span>Permissão</span>
@@ -114,7 +114,7 @@
 			          </ul>
 			        </li>
 		
-				 <li  ng-if="ROLE_MODULO_GERENCIAMENTO_EMPREENDIMENTO_CADASTRAR || ROLE_MODULO_GERENCIAMENTO_EMPREENDIMENTO_CONSULTAR "  class="treeview">
+				 <li  class="treeview">
 					          <a href="">
 					            <i class="fa fa-bank"></i>
 					            <span>Empreendimento</span>
@@ -123,12 +123,12 @@
 					            </span>
 					          </a>
 					          <ul class="treeview-menu">
-					           		<li ng-if="ROLE_MODULO_GERENCIAMENTO_EMPREENDIMENTO_CADASTRAR "><a class="top" href="#/empreendimento/cadastro">Cadastro</a></li>
-									<li ng-if="ROLE_MODULO_GERENCIAMENTO_EMPREENDIMENTO_CONSULTAR "><a class="top" href="#/empreendimento/listagem">Listagem</a></li>
+					           		<li ><a class="top" href="#/empreendimento/cadastro">Cadastro</a></li>
+									<li ><a class="top" href="#/empreendimento/listagem">Listagem</a></li>
 					          </ul>
 					        </li>
 					        
-	         	<li  ng-if="ROLE_EMPREENDIMENTO_CONFIGURACAO_CADASTRAR || ROLE_EMPREENDIMENTO_CONFIGURACAO_CONSULTAR || ROLE_MODULO_ADMIN"  class="treeview">
+	         	<li   class="treeview">
 			          <a href="">
 			            <i class="fa fa-cog "></i>
 			            <span>Config. Empreendimento</span>
@@ -137,8 +137,8 @@
 			            </span>
 			          </a>
 			          <ul class="treeview-menu">
-			           		<li ng-if="ROLE_EMPREENDIMENTO_CONFIGURACAO_CADASTRAR "><a class="top" href="#/empreendimento/configuracao/cadastro">Cadastro</a></li>
-						<li ng-if="ROLE_EMPREENDIMENTO_CONFIGURACAO_CONSULTAR "><a class="top" href="#/empreendimento/configuracao/listagem">Listagem</a></li>
+			           		<li><a class="top" href="#/empreendimento/configuracao/cadastro">Cadastro</a></li>
+						<li ><a class="top" href="#/empreendimento/configuracao/listagem">Listagem</a></li>
 			          </ul>
 			        </li>
 										
@@ -146,8 +146,8 @@
 		
 		<!-- menu Serviços -->		
 		
-		<li ng-if="ROLE_MODULO_SERVICOS" class="header">Serviços</li>
-				 <li ng-if="ROLE_PRESTADORA_SERVICOS_CADASTRAR || ROLE_PRESTADORA_SERVICOS_CONSULTAR"  class="treeview">
+		<li  class="header">Serviços</li>
+				 <li   class="treeview">
 			          <a href="">
 			            <i class="fa fa-hand-o-right"></i>
 			            <span>Prestadora de Serviços</span>
@@ -156,13 +156,13 @@
 			            </span>
 			          </a>
 			          <ul class="treeview-menu">
-			           		<li ng-if="ROLE_PRESTADORA_SERVICOS_CADASTRAR"><a class="top" href="#/servicos/prestadora/cadastro">Cadastro</a></li>
-				    	    <li ng-if="ROLE_PRESTADORA_SERVICOS_CONSULTAR"><a class="top" href="#/servicos/prestadora/listagem">Lista</a></li>
-			          		<li ng-if="ROLE_PRESTADORA_SERVICOS_CONSULTAR"><a class="top" href="#/servicos/prestadora/relatorio">Relatório</a></li>
+			           		<li ><a class="top" href="#/servicos/prestadora/cadastro">Cadastro</a></li>
+				    	    <li ><a class="top" href="#/servicos/prestadora/listagem">Lista</a></li>
+			          		<li ><a class="top" href="#/servicos/prestadora/relatorio">Relatório</a></li>
 			          </ul>
 			        </li>
 		        
-		        <li ng-if="ROLE_PACOTES_CADASTRAR || ROLE_PACOTES_CONSULTAR"  class="treeview">
+		        <li   class="treeview">
 			          <a href="">
 			            <i class="fa fa-cube"></i>
 			            <span>Pacotes de Serviços</span>
@@ -171,13 +171,13 @@
 			            </span>
 			          </a>
 			          <ul class="treeview-menu">
-			           		<li ng-if="ROLE_PACOTES_CADASTRAR"><a class="top" href="#/servicos/pacotes/cadastro">Cadastro</a></li>
-							<li ng-if="ROLE_PACOTES_CONSULTAR"><a class="top" href="#/servicos/pacotes/lista">Lista</a></li>
-							<li ng-if="ROLE_PACOTES_CONSULTAR"><a class="top" href="#/servicos/pacotes/relatorio">Relatório</a></li>
+			           		<li ><a class="top" href="#/servicos/pacotes/cadastro">Cadastro</a></li>
+							<li ><a class="top" href="#/servicos/pacotes/lista">Lista</a></li>
+							<li ><a class="top" href="#/servicos/pacotes/relatorio">Relatório</a></li>
 			          </ul>
 			        </li>
 			
-			<li ng-if="ROLE_VINCULAR_CADASTRAR || ROLE_VINCULAR_CONSULTAR"  class="treeview">
+			<li   class="treeview">
 			          <a href="">
 			            <i class="fa fa-cube"></i>
 			            <span>Vincular Serviços</span>
@@ -186,11 +186,11 @@
 			            </span>
 			          </a>
 			          <ul class="treeview-menu">
-			           		<li ng-if="ROLE_VINCULAR_CADASTRAR"><a class="top" href="#/servicos/vincular/cadastro">Cadastro</a></li>
-							<li ng-if="ROLE_VINCULAR_CONSULTAR"><a class="top" href="#/servicos/vincular/listagem">Lista</a></li>
+			           		<li ><a class="top" href="#/servicos/vincular/cadastro">Cadastro</a></li>
+							<li ><a class="top" href="#/servicos/vincular/listagem">Lista</a></li>
 			          </ul>
 			        </li>
-			<li ng-if="ROLE_VINCULAR_CADASTRAR || ROLE_VINCULAR_CONSULTAR"  class="treeview">
+			<li   class="treeview">
 			          <a href="">
 			            <i class="fa fa-cube"></i>
 			            <span>Vistoria dos Serviços</span>
@@ -199,12 +199,12 @@
 			            </span>
 			          </a>
 			          <ul class="treeview-menu">
-			           		<li ng-if="ROLE_VINCULAR_CADASTRAR"><a class="top" href="#/servicos/vistoria">Vistoria</a></li>
-							<li ng-if="ROLE_VINCULAR_CONSULTAR"><a class="top" href="#/servicos/vincular/relatorio">Relatório</a></li>
+			           		<li><a class="top" href="#/servicos/vistoria">Vistoria</a></li>
+							<li><a class="top" href="#/servicos/vincular/relatorio">Relatório</a></li>
 			          </ul>
 			        </li>
 			        
-			 <li ng-if="ROLE_VINCULAR_CADASTRAR || ROLE_VINCULAR_CONSULTAR"  class="treeview">
+			 <li  class="treeview">
 			          <a href="">
 			            <i class="fa fa-cube"></i>
 			            <span>Pagamento dos Serviços</span>
@@ -213,17 +213,17 @@
 			            </span>
 			          </a>
 			          <ul class="treeview-menu">
-			           		<li ng-if="ROLE_VINCULAR_CADASTRAR"><a class="top" href="#/servicos/pagamento/liberar">Liberar Pagamento</a></li>
-							<li ng-if="ROLE_VINCULAR_CONSULTAR"><a class="top" href="#/servicos/pagamento/efetuar">Efetuar Pagamento</a></li>
-							<li ng-if="ROLE_VINCULAR_CONSULTAR"><a class="top" href="#/servicos/pagamento/relatorio">Relatório</a></li>
+			           		<li ><a class="top" href="#/servicos/pagamento/liberar">Liberar Pagamento</a></li>
+							<li ><a class="top" href="#/servicos/pagamento/efetuar">Efetuar Pagamento</a></li>
+							<li ><a class="top" href="#/servicos/pagamento/relatorio">Relatório</a></li>
 				        </ul>
 			        </li>
 		
 		
 		<!-- menu recursos humanos -->
 				
-			<li ng-if="ROLE_MODULO_RECURSOS_HUMANOS " class="header">Recursos Humanos</li>
-				 <li ng-if="ROLE_MODULO_RECURSOS_HUMANOS_FUNCIONARIO_CADASTRAR || ROLE_MODULO_RECURSOS_HUMANOS_FUNCIONARIO_CONSULTAR"  class="treeview">
+			<li class="header">Recursos Humanos</li>
+				 <li   class="treeview">
 			          <a href="">
 			            <i class="glyphicon glyphicon-user"></i>
 			            <span>Funcionário</span>
@@ -232,12 +232,12 @@
 			            </span>
 			          </a>
 			          <ul class="treeview-menu">
-			           		<li ng-if="ROLE_MODULO_RECURSOS_HUMANOS_FUNCIONARIO_CADASTRAR "><a class="top" href="#/funcionario/cadastro">Cadastro</a></li>
-							<li ng-if="ROLE_MODULO_RECURSOS_HUMANOS_FUNCIONARIO_CONSULTAR "><a class="top" href="#/funcionario/lista">Lista</a></li>
+			           		<li ><a class="top" href="#/funcionario/cadastro">Cadastro</a></li>
+							<li ><a class="top" href="#/funcionario/lista">Lista</a></li>
 			          </ul>
 			        </li>
 		
-			<li ng-if="ROLE_MODULO_RECURSOS_HUMANOS_CARGO_CADASTRAR || ROLE_MODULO_RECURSOS_HUMANOS_CARGO_CONSULTAR" class="treeview">
+			<li  class="treeview">
 			          <a href="">
 			            <i class="fa  fa-suitcase"></i>
 			            <span>Cargo</span>
@@ -246,15 +246,15 @@
 			            </span>
 			          </a>
 			          <ul class="treeview-menu">
-			           		<li ng-if="ROLE_MODULO_RECURSOS_HUMANOS_CARGO_CADASTRAR"><a class="top" href="#/cargo/cadastro">Cadastro</a></li>
-						<li ng-if="ROLE_MODULO_RECURSOS_HUMANOS_CARGO_CONSULTAR"><a class="top" href="#/cargo/lista">Lista</a></li>
+			           		<li ><a class="top" href="#/cargo/cadastro">Cadastro</a></li>
+						<li><a class="top" href="#/cargo/lista">Lista</a></li>
 			          </ul>
 			        </li>                   
                 
                <!-- menu Compras  -->
                	 
-               <li ng-if="ROLE_MODULO_COMPRAS" class="header">Compras</li>
-				 <li ng-if="ROLE_MODULO_COMPRAS_COTACAO_GERAR || ROLE_MODULO_COMPRAS_COTACAO_ABERTO"  class="treeview">
+               <li class="header">Compras</li>
+				 <li  class="treeview">
 			          <a href="">
 			            <i class="fa fa-money"></i>
 			            <span>Cotação</span>
@@ -263,12 +263,12 @@
 			            </span>
 			          </a>
 			          <ul class="treeview-menu">
-			           		<li ng-if="ROLE_MODULO_COMPRAS_COTACAO_GERAR"><a class="top" href="#/cotacao/gerar">Gerar </a></li>
-								<li ng-if="ROLE_MODULO_COMPRAS_COTACAO_ABERTO"><a class="top" href="#/cotacao/em_aberto">em aberto</a></li>
+			           		<li ><a class="top" href="#/cotacao/gerar">Gerar </a></li>
+								<li><a class="top" href="#/cotacao/em_aberto">em aberto</a></li>
 			          </ul>
 			        </li>
 			        
-		        <li ng-if="ROLE_MODULO_COMPRAS_CADASTRAR || ROLE_MODULO_COMPRAS_CONSULTAR"  class="treeview">
+		        <li  class="treeview">
 			          <a href="">
 			            <i class="fa fa-shopping-cart"></i>
 			            <span>Compras</span>
@@ -277,16 +277,16 @@
 			            </span>
 			          </a>
 			          <ul class="treeview-menu">
-			           			<li ng-if="ROLE_MODULO_COMPRAS_CADASTRAR"><a class="top" href="#/compras/cadastro">Pedido de compra</a></li>
-								<li ng-if="ROLE_MODULO_COMPRAS_CONSULTAR"><a class="top" href="#/compras/lista">Lista de compra</a></li>
+			           			<li ><a class="top" href="#/compras/cadastro">Pedido de compra</a></li>
+								<li ><a class="top" href="#/compras/lista">Lista de compra</a></li>
 			          </ul>
 			        </li>
 		
 		               
 		<!-- menu Almoxarifado  -->		
 			
-			<li ng-if="ROLE_MODULO_ESTOQUE " class="header">Almoxarifado</li>
-				 <li ng-if="ROLE_MODULO_ESTOQUE_ENTRADA || ROLE_MODULO_ESTOQUE_CONSULTA"  class="treeview">
+			<li  class="header">Almoxarifado</li>
+				 <li   class="treeview">
 			          <a href="">
 			            <i class="fa fa-cubes"></i>
 			            <span>Estoque</span>
@@ -295,13 +295,13 @@
 			            </span>
 			          </a>
 			          <ul class="treeview-menu">
-			           		<li ng-if="ROLE_MODULO_ESTOQUE_ENTRADA"><a class="top" href="#/estoque/entrada">Entrada</a></li>
-							<li ng-if="ROLE_MODULO_ESTOQUE_CONSULTA"><a class="top" href="#/estoque/listagem">Consultar</a></li>
-							<li ng-if="ROLE_MODULO_ESTOQUE_CONSULTA"><a class="top" href="#/estoque/relatorio">Relatório</a></li> 
+			           		<li ><a class="top" href="#/estoque/entrada">Entrada</a></li>
+							<li ><a class="top" href="#/estoque/listagem">Consultar</a></li>
+							<li ><a class="top" href="#/estoque/relatorio">Relatório</a></li> 
 			          </ul>
 			        </li>
 			        
-		        <li ng-if="ROLE_MODULO_ESTOQUE_REQUISICAO_CADASTRAR || ROLE_MODULO_ESTOQUE_REQUISICAO_CONSULTA"  class="treeview">
+		        <li  class="treeview">
 			          <a href="">
 			            <i class="fa fa-file-word-o"></i>
 			            <span>Requisição</span>
@@ -310,12 +310,12 @@
 			            </span>
 			          </a>
 			          <ul class="treeview-menu">
-			           		<li ng-if="ROLE_MODULO_ESTOQUE_REQUISICAO_CADASTRAR"><a class="top" href="#/estoque/requisicao/cadastro">Cadastrar</a></li>
-							<li ng-if="ROLE_MODULO_ESTOQUE_REQUISICAO_CONSULTA"><a class="top" href="#/estoque/requisicao/listagem">Consulta</a></li>
+			           		<li ><a class="top" href="#/estoque/requisicao/cadastro">Cadastrar</a></li>
+							<li ><a class="top" href="#/estoque/requisicao/listagem">Consulta</a></li>
 			          </ul>
 			        </li>
             
-            	 <li ng-if="ROLE_MODULO_ESTOQUE_TRANSFERENCIA_CADASTRAR || ROLE_MODULO_ESTOQUE_TRANSFERENCIA_ENVIADAS ||  ROLE_MODULO_ESTOQUE_TRANSFERENCIA_RECEBIDAS"  class="treeview">
+            	 <li  class="treeview">
 			          <a href="">
 			            <i class="fa fa-exchange"></i>
 			            <span>Transferência</span>
@@ -324,14 +324,14 @@
 			            </span>
 			          </a>
 			          <ul class="treeview-menu">
-			           		<li ng-if="ROLE_MODULO_ESTOQUE_TRANSFERENCIA_CADASTRAR"><a class="top" href="#/estoque/transferencia/cadastro">Nova</a></li>
-							<li ng-if="ROLE_MODULO_ESTOQUE_TRANSFERENCIA_ENVIADAS"><a class="top" href="#/estoque/transferencia/enviadas">Enviadas</a></li>
-							<li  ng-if="ROLE_MODULO_ESTOQUE_TRANSFERENCIA_RECEBIDAS"><a class="top" href="#/estoque/transferencia/recebidas">Recebidas</a></li>
+			           		<li ><a class="top" href="#/estoque/transferencia/cadastro">Nova</a></li>
+							<li ><a class="top" href="#/estoque/transferencia/enviadas">Enviadas</a></li>
+							<li ><a class="top" href="#/estoque/transferencia/recebidas">Recebidas</a></li>
 			          </ul>
 			        </li>  		 
              
              <!-- menu Cadastros-->
-				<li ng-if="ROLE_MODULO_CADASTROS" class="header">Cadastros</li>
+				<li  class="header">Cadastros</li>
 				 <li   class="treeview">
 			          <a href="">
 			            <i class="fa  fa-child"></i>
@@ -347,7 +347,7 @@
 			        </li>
 			              
 			              
-			      <li ng-if="ROLE_MODULO_CADASTROS_FORNECEDOR_CADASTRAR || ROLE_MODULO_CADASTROS_FORNECEDOR_CONSULTAR"   class="treeview">
+			      <li  class="treeview">
 			          <a href="">
 			            <i class="fa  fa-truck"></i>
 			            <span>Fornecedor</span>
@@ -356,8 +356,8 @@
 			            </span>
 			          </a>
 			          <ul class="treeview-menu">
-			           		<li ng-if="ROLE_MODULO_CADASTROS_FORNECEDOR_CADASTRAR"><a class="top" href="#/fornecedor/cadastro">Cadastro</a></li>
-							<li ng-if="ROLE_MODULO_CADASTROS_FORNECEDOR_CONSULTAR"><a class="top" href="#/fornecedor/lista">Lista</a></li>
+			           		<li><a class="top" href="#/fornecedor/cadastro">Cadastro</a></li>
+							<li ><a class="top" href="#/fornecedor/lista">Lista</a></li>
 			          </ul>
 			        </li>                      
                 
@@ -378,7 +378,7 @@
 			        </li>                  
                    
                    
-                   <li ng-if="ROLE_MODULO_CADASTROS_AREA_CADASTRAR || ROLE_MODULO_CADASTROS_AREA_CONSULTAR"   class="treeview">
+                   <li   class="treeview">
 			          <a href="">
 			            <i class="fa  fa-arrows"></i>
 			            <span>Local de aplicação</span>
@@ -387,12 +387,12 @@
 			            </span>
 			          </a>
 			          <ul class="treeview-menu">
-			           		<li ng-if="ROLE_MODULO_CADASTROS_AREA_CADASTRAR"><a class="top" href="#/area/cadastro">Cadastro</a></li>
-							<li ng-if="ROLE_MODULO_CADASTROS_AREA_CONSULTAR"><a class="top" href="#/area/lista">Lista</a></li>
+			           		<li ><a class="top" href="#/area/cadastro">Cadastro</a></li>
+							<li ><a class="top" href="#/area/lista">Lista</a></li>
 			          </ul>
 			        </li> 
                    
-                   <li ng-if="ROLE_MODULO_CADASTROS_PRODUTO_CATEGORIA_CADASTRAR || ROLE_MODULO_CADASTROS_PRODUTO_CATEGORIA_CONSULTAR"   class="treeview">
+                   <li   class="treeview">
 			          <a href="">
 			            <i class="fa fa-hand-o-right"></i>
 			            <span>Categoria</span>
@@ -401,13 +401,13 @@
 			            </span>
 			          </a>
 			          <ul class="treeview-menu">
-			           		<li ng-if="ROLE_MODULO_CADASTROS_PRODUTO_CATEGORIA_CADASTRAR"><a class="top" href="#/produto/categoria/cadastro">Cadastro</a></li>
-							<li ng-if="ROLE_MODULO_CADASTROS_PRODUTO_CATEGORIA_CONSULTAR"><a class="top" href="#/produto/categoria/lista">Lista</a></li>
+			           		<li ><a class="top" href="#/produto/categoria/cadastro">Cadastro</a></li>
+							<li ><a class="top" href="#/produto/categoria/lista">Lista</a></li>
 			          </ul>
 			        </li> 
                    
                    
-                   <li ng-if="ROLE_MODULO_CADASTROS_PRODUTO_TIPO_CADASTRAR || ROLE_MODULO_CADASTROS_PRODUTO_TIPO_CONSULTAR"   class="treeview">
+                   <li   class="treeview">
 			          <a href="">
 			            <i class="fa fa-pie-chart"></i>
 			            <span>Tipo Produto</span>
@@ -416,13 +416,13 @@
 			            </span>
 			          </a>
 			          <ul class="treeview-menu">
-			           		<li ng-if="ROLE_MODULO_CADASTROS_PRODUTO_TIPO_CADASTRAR"><a class="top" href="#/produto/tipo/cadastro">Cadastro</a></li>
-							<li ng-if="ROLE_MODULO_CADASTROS_PRODUTO_TIPO_CONSULTAR"><a class="top" href="#/produto/tipo/lista">Lista</a></li>
+			           		<li ><a class="top" href="#/produto/tipo/cadastro">Cadastro</a></li>
+							<li ><a class="top" href="#/produto/tipo/lista">Lista</a></li>
 			          </ul>
 			        </li> 
                    
                    
-                   <li ng-if="ROLE_MODULO_CADASTROS_PRODUTO_CADASTRAR || ROLE_MODULO_CADASTROS_PRODUTO_ALTERAR || ROLE_MODULO_CADASTROS_PRODUTO_CONSULTAR"   class="treeview">
+                   <li   class="treeview">
 			          <a href="">
 			            <i class="fa fa-cubes"></i>
 			            <span>Produto</span>
@@ -431,8 +431,8 @@
 			            </span>
 			          </a>
 			          <ul class="treeview-menu">
-			           		<li ng-if="ROLE_MODULO_CADASTROS_PRODUTO_CADASTRAR"><a class="top" href="#/produto/cadastro">Cadastro</a></li>
-							<li ng-if="ROLE_MODULO_CADASTROS_PRODUTO_CONSULTAR"><a class="top" href="#/produto/lista">Lista</a></li>
+			           		<li ><a class="top" href="#/produto/cadastro">Cadastro</a></li>
+							<li ><a class="top" href="#/produto/lista">Lista</a></li>
 			          </ul>
 			        </li> 
    
@@ -440,21 +440,6 @@
 	</section>
 </aside>
 		
-			<div ng-show="false" >
-			<div ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_SUPORTE"  ng-controller="chamadoManutencaoController as manuctrl" ng-init="manuctrl.verificaMensagemLida()">
-				<audio  id="myVideo" ng-show="teste" controls="controls" height="5px" width="10px">
-				  <source src="/public/img/som.mp3" type="audio/mpeg" />
-					<embed height="5px" width="10px" src="/public/img/som.mp3" />
-				</audio>
-			</div>	
-			</div>
-			<div ng-show="false">
-			<div ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_SUPORTE" ng-controller="chamadoTiController as ctrl" ng-init="ctrl.verificaMensagemLida()">
-				<audio id="myAudio"  ng-show="teste" controls="controls"	height="5px" width="10px">
-					<source src="/public/img/som.mp3" type="audio/mpeg" />
-					<embed height="5px" width="10px" src="/public/img/som.mp3" />
-				</audio>
-			</div>
-			</div>
+			
 
 

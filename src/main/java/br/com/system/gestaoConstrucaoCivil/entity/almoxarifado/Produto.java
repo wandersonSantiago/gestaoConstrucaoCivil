@@ -34,8 +34,10 @@ import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 @NamedEntityGraph(name = "Produto.detail",
 attributeNodes = {@NamedAttributeNode("categoria"),@NamedAttributeNode("fabricante"),@NamedAttributeNode("tipoProduto")})
 
-@Table(name = "produto")
+@Table(name = "produto" , schema="almoxarifado")
 public class Produto extends AbstractPersistable<Long> {
+	
+	private static final long serialVersionUID = 1L;
 
 	@JsonView(Summary.class)
 	@Column(nullable = true,unique = true)

@@ -12,9 +12,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import br.com.system.gestaoConstrucaoCivil.entity.AreaProduto;
 
 @Entity
-@Table(name = "requisicao_edificio_item")
+@Table(name = "requisicao_edificio_item", schema="almoxarifado")
 public class RequisicaoEdificioItem extends Item implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	
 	private Integer andar;
 	private Integer torre;

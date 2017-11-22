@@ -27,13 +27,11 @@ public class PrestadoraRestServicoController {
 	@Autowired
 	private PrestadoraServicoService prestadoraServicoService;
 
-	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_PRESTADORA_SERVICOS_CONSULTAR')")
 	@GetMapping(value = "/lista")
 	public ResponseEntity<Iterable<PrestadoraServico>> buscarTodos() {
 		return new ResponseEntity<Iterable<PrestadoraServico>>(prestadoraServicoService.lista(), HttpStatus.OK);
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_PRESTADORA_SERVICOS_CONSULTAR')")
 	@GetMapping
 	public ResponseEntity<Page<PrestadoraServico>> lista(@RequestParam(defaultValue="0", required=false) int page
 			,@RequestParam(defaultValue="0", required=false) int maxResults) {
@@ -41,13 +39,11 @@ public class PrestadoraRestServicoController {
 		return new ResponseEntity<Page<PrestadoraServico>>(objeto, HttpStatus.OK);
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_PRESTADORA_SERVICOS_CONSULTAR')")
 	@GetMapping(value = "/buscaPorId/{id}")
 	public ResponseEntity<PrestadoraServico> buscarPorId(@PathVariable Long id) {
 		return new ResponseEntity<PrestadoraServico>(prestadoraServicoService.buscarPorId(id), HttpStatus.OK);
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_PRESTADORA_SERVICOS_CADASTRAR')")
 	@PostMapping(value = "/salva")
 	public ResponseEntity<PrestadoraServico> salvar(@RequestBody PrestadoraServico prestadoraServico, UriComponentsBuilder ucBuilder) {
 		System.out.println(prestadoraServico);
@@ -60,7 +56,6 @@ public class PrestadoraRestServicoController {
 	}
 
 
-	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_PRESTADORA_SERVICOS_ALTERAR')")
 	@PutMapping(value = "/altera")
 	public ResponseEntity<PrestadoraServico> alterar(@RequestBody PrestadoraServico prestadoraServico, UriComponentsBuilder ucBuilder) {
 

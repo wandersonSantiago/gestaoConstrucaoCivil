@@ -29,20 +29,17 @@ public class CategoriaRestController {
 	@Autowired
 	private Servico<Categoria> categoriaService;
 
-	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_CADASTROS_PRODUTO_CATEGORIA_CONSULTAR')")
 	@GetMapping(value = "/lista")
 	public ResponseEntity<Iterable<Categoria>> buscarTodos() {
 		return new ResponseEntity<Iterable<Categoria>>(categoriaService.buscarTodos(), HttpStatus.OK);
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_CADASTROS_PRODUTO_CATEGORIA_CONSULTAR')")
 	@GetMapping(value = "/buscaPorId/{id}")
 	public ResponseEntity<Categoria> buscarPorId(@PathVariable Long id) {
 
 		return new ResponseEntity<Categoria>(categoriaService.buscarPorId(id), HttpStatus.OK);
 	}
 	
-	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_CADASTROS_PRODUTO_CATEGORIA_CADASTRAR')")
 	@PostMapping(value = "/salva")
 	public ResponseEntity<Categoria> salvar(@RequestBody @Validated Categoria categoria, BindingResult result,
 			UriComponentsBuilder ucBuilder) {
@@ -56,7 +53,6 @@ public class CategoriaRestController {
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 	
-	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_CADASTROS_PRODUTO_CATEGORIA_ALTERAR')")
 	@PutMapping(value = "/altera")
 	public ResponseEntity<Categoria> alterar(@RequestBody Categoria categoria, UriComponentsBuilder ucBuilder) {
 		categoriaService.salvarOuEditar(categoria);
@@ -66,7 +62,6 @@ public class CategoriaRestController {
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 	
-	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_CADASTROS_PRODUTO_CATEGORIA_CONSULTAR')")
 	@GetMapping(value = "/tipoCategoria")
 	public ResponseEntity<Iterable<TipoCategoriaEnum>> tipoCategoria() {
 		return new ResponseEntity<Iterable<TipoCategoriaEnum>>(Arrays.asList(TipoCategoriaEnum.values()), HttpStatus.OK);

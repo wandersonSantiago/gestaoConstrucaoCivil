@@ -23,8 +23,10 @@ import br.com.system.gestaoConstrucaoCivil.enuns.CotacaoEmpresaItemStatus;
 sequenceName = "cotacao_empresa_item_id_seq",
 initialValue = 1,
 allocationSize = 1)
-@Table(name = "cotacao_empresa_item")
+@Table(name = "cotacao_empresa_item" , schema = "almoxarifado")
 public class CotacaoEmpresaItem implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cotacao_empresa_item_id_seq")

@@ -13,9 +13,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import br.com.system.gestaoConstrucaoCivil.entity.AreaProduto;
 
 @Entity
-@Table(name = "requisicao_casa_item")
+@Table(name = "requisicao_casa_item", schema="almoxarifado")
 public class RequisicaoCasaItem extends Item implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 
 	@Column(nullable = false)
 	private Integer andar;

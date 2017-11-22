@@ -29,14 +29,12 @@ public class ProdutoRestController {
 	 private ProdutoService produtoService;
 	
 	
-	 @PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_CADASTROS_PRODUTO_CONSULTAR')")
 	 @GetMapping(value="/lista")
 	 public ResponseEntity<Iterable<Produto>> buscarTodos() {	  
 	  
 	  return new ResponseEntity<Iterable<Produto>>(produtoService.buscarTodos(), HttpStatus.OK);
 	 }
 	 
-	 @PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_CADASTROS_PRODUTO_CONSULTAR')")
 	 @GetMapping
 	 public ResponseEntity<Page<Produto>> lista(@RequestParam(defaultValue="0", required=false) int page
 				,@RequestParam(defaultValue="0", required=false) int maxResults) {
@@ -44,21 +42,18 @@ public class ProdutoRestController {
 			return new ResponseEntity<Page<Produto>>(objeto, HttpStatus.OK);
 		}
 	
-	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_CADASTROS_PRODUTO_CONSULTAR')")
 	@GetMapping(value = "/buscaPorId/{id}")
 	public ResponseEntity<Produto> buscarPorId(@PathVariable Long id) {
 
 			return new ResponseEntity<Produto>(produtoService.buscaPorId(id), HttpStatus.OK);
 		}
 
-	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_CADASTROS_PRODUTO_CONSULTAR')")
 	@GetMapping(value = "/buscaPorCodigo/{codigo}")
 	public ResponseEntity<Produto> buscarPorCodigo(@PathVariable String codigo)
 	{
 		return new ResponseEntity<Produto>(produtoService.buscarPorCodigoOuCodigoBarra(codigo),HttpStatus.OK);
 	}
 	
-	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_CADASTROS_PRODUTO_CADASTRAR')")
 	@PostMapping(value="/salva")
 	 public ResponseEntity<Produto> salvar(@RequestBody Produto produto,UriComponentsBuilder ucBuilder)
 	 {
@@ -68,7 +63,6 @@ public class ProdutoRestController {
 		 return new ResponseEntity(headers, HttpStatus.CREATED);
 	 }
 	 
-	@PreAuthorize("hasAnyRole('ROLE_MODULO_ADMIN','ROLE_MODULO_CADASTROS_PRODUTO_ALTERAR')")
 	 @PutMapping(value="/altera")
 	 public ResponseEntity<Produto> alterar(@RequestBody Produto produto,UriComponentsBuilder ucBuilder)
 	 { produtoService.salvarOuEditar(produto);

@@ -19,10 +19,12 @@ import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "servico_empresa")
+@Table(name = "servico_empresa" , schema="servicos")
 public class ServicoEmpresa extends AbstractPersistable<Long>{
 
-	
+	private static final long serialVersionUID = 1L;
+
+
 	@ManyToOne
 	@JoinColumn(name="id_prestadora_servico",nullable = false)
 	private PrestadoraServico prestadoraServico;

@@ -11,10 +11,13 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table(name="cliente_morador_edificil")
+@Table(name="cliente_morador_edificil" , schema = "communs")
 public class ClienteMoradorEdificio extends ClienteMorador implements Serializable{
 
 	
+	private static final long serialVersionUID = 1L;
+
+
 	@Column(length = 10)
     private Integer torre;
    

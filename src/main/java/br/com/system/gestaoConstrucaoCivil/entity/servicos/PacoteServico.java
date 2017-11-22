@@ -13,8 +13,10 @@ import br.com.system.gestaoConstrucaoCivil.util.geradorCodigo.GereCodigoPacoteSe
 
 
 @Entity
-@Table(name = "pacote_servico")
+@Table(name = "pacote_servico" , schema="servicos")
 public class PacoteServico extends AbstractPersistable<Long>{
+
+	private static final long serialVersionUID = 1L;
 
 	@Column(nullable = false)
 	private boolean ativo;
