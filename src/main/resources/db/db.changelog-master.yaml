@@ -1,0 +1,8 @@
+databaseChangeLog:
+    - include:
+        file: db/create-schema/create-schema.sql
+    - includeAll:
+        path: db/tabelas/
+    - includeAll:
+        path: db/foreign_key/
+

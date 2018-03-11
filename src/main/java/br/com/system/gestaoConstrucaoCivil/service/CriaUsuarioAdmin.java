@@ -32,7 +32,7 @@ public class CriaUsuarioAdmin {
 	@EventListener(ContextRefreshedEvent.class)
     void contextRefreshedEvent() {
        
-		criarUsuario();
+		//criarUsuario();
     }
 	private void criarUsuario()
 	{
