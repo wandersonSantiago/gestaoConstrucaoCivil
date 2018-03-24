@@ -2,6 +2,9 @@ package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +18,7 @@ public class NotaFiscalService {
 	@Autowired
 	private NotaFiscalRepository notaFiscalRepository;
 
-	public Iterable<NotaFiscal> buscarTodos() {
+	public Collection<NotaFiscal> buscarTodos() {
 		
 		return  notaFiscalRepository.findAll();
 		

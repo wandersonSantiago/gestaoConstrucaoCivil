@@ -1,21 +1,20 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller.almoxarifado;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.CotacaoEmpresa;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.EstoqueEmpreendimento;
 import br.com.system.gestaoConstrucaoCivil.service.almoxarifado.EstoqueEmpreendimentoService;
 
@@ -25,48 +24,53 @@ public class EstoqueEmpreendimentoRestController {
 
 	@Autowired
 	private EstoqueEmpreendimentoService estoqueService;
-	
-	
+
+	@ResponseStatus(HttpStatus.CREATED)
 	@PutMapping(value = "/alteraProduto")
-	public ResponseEntity<CotacaoEmpresa> salvar(@RequestBody EstoqueEmpreendimento estoqueEmpreendimento){
+	public void salvar(@RequestBody EstoqueEmpreendimento estoqueEmpreendimento) {
 		estoqueService.salvarOuEditar(estoqueEmpreendimento);
-		HttpHeaders headers =  new HttpHeaders();
-		return new ResponseEntity<>(headers, HttpStatus.CREATED);				
+
 	}
-	
+
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping
-	public ResponseEntity<Iterable<EstoqueEmpreendimento>> buscarTodos() {
-		return new ResponseEntity<Iterable<EstoqueEmpreendimento>>(estoqueService.buscarTodos(), HttpStatus.OK);
+	public Collection<EstoqueEmpreendimento> buscarTodos() {
+		return estoqueService.buscarTodos();
 	}
-	
-	@GetMapping(value="/baixo")
-	public ResponseEntity<Iterable<EstoqueEmpreendimento>> produtoEstoqueBaixo() {
-		return new ResponseEntity<Iterable<EstoqueEmpreendimento>>(estoqueService.produtoEstoqueBaixo(), HttpStatus.OK);
+
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value = "/baixo")
+	public Collection<EstoqueEmpreendimento> produtoEstoqueBaixo() {
+		return estoqueService.produtoEstoqueBaixo();
 	}
-	
-	@GetMapping(value="/alto")
-	public ResponseEntity<Iterable<EstoqueEmpreendimento>> produtoEstoqueAlto() {
-		return new ResponseEntity<Iterable<EstoqueEmpreendimento>>(estoqueService.produtoEstoqueAlto(), HttpStatus.OK);
+
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value = "/alto")
+	public Collection<EstoqueEmpreendimento> produtoEstoqueAlto() {
+		return estoqueService.produtoEstoqueAlto();
 	}
-	
+
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/lista/paginacao")
-	public ResponseEntity<Page<EstoqueEmpreendimento>> lista(@RequestParam(defaultValue="0", required=false) int page
-			,@RequestParam(defaultValue="0", required=false) int maxResults) {
-		Page<EstoqueEmpreendimento> empresa = estoqueService.buscarTodosComPaginacao(new PageRequest(page, maxResults));
-		return new ResponseEntity<Page<EstoqueEmpreendimento>>(empresa, HttpStatus.OK);
+	public Page<EstoqueEmpreendimento> lista(
+			@RequestParam(defaultValue = "0", required = false) int page,
+			@RequestParam(defaultValue = "0", required = false) int maxResults) {
+		return estoqueService.buscarTodosComPaginacao(new PageRequest(page, maxResults));
+		 
 	}
-	
+
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/auditoria/entrada")
-	public ResponseEntity<Page<EstoqueEmpreendimento>> listaAuditoria(@RequestParam(defaultValue="0", required=false) int page
-			,@RequestParam(defaultValue="0", required=false) int maxResults) {
-		Page<EstoqueEmpreendimento> empresa = estoqueService.findAll(new PageRequest(page, maxResults));
-		return new ResponseEntity<Page<EstoqueEmpreendimento>>(empresa, HttpStatus.OK);
+	public Page<EstoqueEmpreendimento> listaAuditoria(
+			@RequestParam(defaultValue = "0", required = false) int page,
+			@RequestParam(defaultValue = "0", required = false) int maxResults) {
+		return estoqueService.findAll(new PageRequest(page, maxResults));
 	}
-	
+
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/buscaPorCodigo/{codigo}")
-	public ResponseEntity<EstoqueEmpreendimento> buscarPorCodigo(@PathVariable String codigo)
-	{
-	    return new ResponseEntity<EstoqueEmpreendimento>(estoqueService.buscarPorCodigoOuCodigoBarraEstoque(codigo),HttpStatus.OK);
-		
+	public  EstoqueEmpreendimento buscarPorCodigo(@PathVariable String codigo) {
+		return estoqueService.buscarPorCodigoOuCodigoBarraEstoque(codigo);
+
 	}
 }

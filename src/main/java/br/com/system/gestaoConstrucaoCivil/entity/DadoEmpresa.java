@@ -15,8 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 import br.com.system.gestaoConstrucaoCivil.enuns.UfEnum;
 
 @Entity

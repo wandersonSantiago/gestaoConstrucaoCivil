@@ -1,12 +1,10 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Categoria;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoCategoriaEnum;
@@ -29,42 +27,37 @@ public class CategoriaRestController {
 	@Autowired
 	private Servico<Categoria> categoriaService;
 
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/lista")
-	public ResponseEntity<Iterable<Categoria>> buscarTodos() {
-		return new ResponseEntity<Iterable<Categoria>>(categoriaService.buscarTodos(), HttpStatus.OK);
+	public List<Categoria> buscarTodos() {
+		return categoriaService.buscarTodos();
 	}
 
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/buscaPorId/{id}")
-	public ResponseEntity<Categoria> buscarPorId(@PathVariable Long id) {
+	public Categoria buscarPorId(@PathVariable Long id) {
 
-		return new ResponseEntity<Categoria>(categoriaService.buscarPorId(id), HttpStatus.OK);
+		return categoriaService.buscarPorId(id);
 	}
 	
+	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(value = "/salva")
-	public ResponseEntity<Categoria> salvar(@RequestBody @Validated Categoria categoria, BindingResult result,
-			UriComponentsBuilder ucBuilder) {
+	public void salvar(@RequestBody @Validated Categoria categoria, BindingResult result) {
 
 		CategoriaValidator v = new CategoriaValidator();
 		v.validate(categoria, result);
 		categoriaService.salvarOuEditar(categoria);
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(
-				ucBuilder.path("rest/almoxarifado/categoria/salva/{id}").buildAndExpand(categoria.getId()).toUri());
-		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 	
+	@ResponseStatus(HttpStatus.CREATED)
 	@PutMapping(value = "/altera")
-	public ResponseEntity<Categoria> alterar(@RequestBody Categoria categoria, UriComponentsBuilder ucBuilder) {
+	public void alterar(@RequestBody Categoria categoria) {
 		categoriaService.salvarOuEditar(categoria);
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("rest/almoxarifado/categoria/altera/{categoria}")
-				.buildAndExpand(categoria.getId()).toUri());
-		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
-	
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/tipoCategoria")
-	public ResponseEntity<Iterable<TipoCategoriaEnum>> tipoCategoria() {
-		return new ResponseEntity<Iterable<TipoCategoriaEnum>>(Arrays.asList(TipoCategoriaEnum.values()), HttpStatus.OK);
+	public List<TipoCategoriaEnum> tipoCategoria() {
+		return Arrays.asList(TipoCategoriaEnum.values());
 	}
 
 }

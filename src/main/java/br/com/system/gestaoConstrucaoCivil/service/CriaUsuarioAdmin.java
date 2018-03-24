@@ -83,7 +83,8 @@ public class CriaUsuarioAdmin {
     	Scanner lerSenha = new Scanner(System.in);
     	 System.out.println("Digite uma senha para o usuário root:");
     	  String senha = lerSenha.nextLine();
-    	 return senha;
+    	  lerSenha.close();
+    	  return senha;
     	
     	
     }

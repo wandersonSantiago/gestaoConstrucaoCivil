@@ -18,12 +18,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
-import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.EntradaOuBaixa;
 import br.com.system.gestaoConstrucaoCivil.enuns.StatusTransferencia;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
-import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
-import br.com.system.gestaoConstrucaoCivil.service.UsuarioService;
 import br.com.system.gestaoConstrucaoCivil.util.geradorCodigo.GeraNumeroNota;
 
 @Entity

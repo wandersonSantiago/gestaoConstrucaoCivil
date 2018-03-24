@@ -11,8 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoModulo;
 
 @Entity

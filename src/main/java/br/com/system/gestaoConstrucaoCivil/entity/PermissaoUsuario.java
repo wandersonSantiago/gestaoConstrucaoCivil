@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 @Entity
 @Table(name = "permissao_usuario" , schema = "communs")
 public class PermissaoUsuario implements Serializable{

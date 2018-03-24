@@ -36,9 +36,9 @@ public interface EstoqueEmpreendimentoRepository extends JpaRepository<EstoqueEm
 	EstoqueEmpreendimento findByCodigoOrCodigoBarraEstoque(@Param("codigoOuCodigoBarra") String codigoOuCodigoBarra,@Param("idEmpreendimento") Long id);
 
 	@Query("FROM EstoqueEmpreendimento estoque WHERE estoque.empreendimento.id = ?1 AND estoque.quantidade < estoque.quantidadeMinima ")
-	Iterable<EstoqueEmpreendimento> produtoEstoqueBaixo(Long idEmpreendimento);
+	List<EstoqueEmpreendimento> produtoEstoqueBaixo(Long idEmpreendimento);
 
 	@Query("FROM EstoqueEmpreendimento estoque WHERE estoque.empreendimento.id = ?1 AND estoque.quantidade > estoque.quantidadeMaxima ")
-	Iterable<EstoqueEmpreendimento> produtoEstoqueAlto(Long idEmpreendimento);
+	List<EstoqueEmpreendimento> produtoEstoqueAlto(Long idEmpreendimento);
 
 }

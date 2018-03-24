@@ -1,7 +1,6 @@
 package br.com.system.gestaoConstrucaoCivil.entity;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -19,8 +18,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import br.com.system.gestaoConstrucaoCivil.enuns.EstadoCivilEnum;
 

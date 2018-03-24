@@ -14,7 +14,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @SequenceGenerator(name = "item_cotacao_id_seq", sequenceName = "item_cotacao_id_seq", initialValue = 1, allocationSize = 1)

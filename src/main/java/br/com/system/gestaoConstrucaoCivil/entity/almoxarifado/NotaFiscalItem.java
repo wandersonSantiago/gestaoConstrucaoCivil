@@ -8,8 +8,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.IItem;
-
 @Entity
 @Table(name = "nota_fiscal_item" , schema="almoxarifado")
 public class NotaFiscalItem  extends Item implements Serializable{

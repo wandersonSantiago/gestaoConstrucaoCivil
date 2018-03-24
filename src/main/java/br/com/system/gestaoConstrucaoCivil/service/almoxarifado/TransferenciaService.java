@@ -1,7 +1,6 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
 import java.util.Collection;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,7 +10,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Transferencia;
-import br.com.system.gestaoConstrucaoCivil.enuns.TipoMovimentacaoEnum;
 import br.com.system.gestaoConstrucaoCivil.pojo.CancelamentoTransferencia;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.TransferenciaRepository;

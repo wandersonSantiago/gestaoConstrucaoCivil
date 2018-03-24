@@ -19,7 +19,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.system.gestaoConstrucaoCivil.entity.ClienteMorador;
 import br.com.system.gestaoConstrucaoCivil.entity.ClienteMoradorCasa;
 import br.com.system.gestaoConstrucaoCivil.entity.ClienteMoradorEdificio;
-import br.com.system.gestaoConstrucaoCivil.entity.ClienteMoradorOutros;
 import br.com.system.gestaoConstrucaoCivil.service.ClienteMoradorService;
 
 @RestController

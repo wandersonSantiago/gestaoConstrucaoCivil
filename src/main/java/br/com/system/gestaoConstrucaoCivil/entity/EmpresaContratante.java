@@ -12,9 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 @Entity
 @Table(name = "empresa_contratante" , schema = "communs")
 public class EmpresaContratante implements Serializable{

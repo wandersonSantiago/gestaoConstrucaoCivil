@@ -77,11 +77,11 @@ public class EstoqueEmpreendimentoService {
 	     return  estoque;
 	 
 	 }
-	public Iterable<EstoqueEmpreendimento> produtoEstoqueBaixo() {
+	public List<EstoqueEmpreendimento> produtoEstoqueBaixo() {
 		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
 		return estoqueRepository.produtoEstoqueBaixo(idEmpreendimento);
 	}
-	public Iterable<EstoqueEmpreendimento> produtoEstoqueAlto() {
+	public List<EstoqueEmpreendimento> produtoEstoqueAlto() {
 		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
 		return estoqueRepository.produtoEstoqueAlto(idEmpreendimento);
 	}

@@ -12,14 +12,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.csrf.CsrfFilter;
-import org.springframework.security.web.csrf.CsrfTokenRepository;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
  	
 @Configuration
-//@EnableWebSecurity
+@EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -56,12 +52,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		
-		//auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
-		//PasswordEncoder passwordEncoder = new CustomPasswordEncoder();
-	//	auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
-		auth
-            .inMemoryAuthentication()
-                .withUser("user").password("123").roles("USER");
+		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+		 
+		 
+//		auth
+//            .inMemoryAuthentication()
+//                .withUser("user").password("123").roles("USER");
 	}
 
 	

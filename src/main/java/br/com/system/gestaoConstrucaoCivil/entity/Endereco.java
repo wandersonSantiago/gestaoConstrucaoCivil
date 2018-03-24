@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 @Entity
 @Table(name = "endereco" , schema = "communs")
 public class Endereco implements Serializable  {

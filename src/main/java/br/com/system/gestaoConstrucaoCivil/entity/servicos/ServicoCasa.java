@@ -1,7 +1,5 @@
 package br.com.system.gestaoConstrucaoCivil.entity.servicos;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 

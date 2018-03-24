@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.servicos.ServicoCasa;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
-import br.com.system.gestaoConstrucaoCivil.regras.servicos.ValidacaoServico;
 import br.com.system.gestaoConstrucaoCivil.repository.servicos.ServicoCasaRepository;
 
 @Service

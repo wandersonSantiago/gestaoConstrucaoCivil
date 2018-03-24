@@ -2,7 +2,6 @@ package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
