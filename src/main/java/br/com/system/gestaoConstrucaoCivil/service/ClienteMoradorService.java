@@ -1,5 +1,6 @@
 package br.com.system.gestaoConstrucaoCivil.service;
 
+import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class ClienteMoradorService {
 	public ClienteMorador buscarPorCpf(String cpf) {
 		return clienteMoradorRepository.findByCpf(cpf);
 	}
-	public Iterable<ClienteMorador> lista() {		
+	public Collection<ClienteMorador> lista() {		
 		return clienteMoradorRepository.findAll();
 	}
 	

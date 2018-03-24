@@ -1,8 +1,9 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller.almoxarifado;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,15 +23,17 @@ public class FornecedorRestController {
 	@Autowired
 	private FornecedorService fornecedorService;
 	
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/lista")
-	public ResponseEntity<Iterable<Fornecedor>> buscarTodos() {
-		return new ResponseEntity<Iterable<Fornecedor>>(fornecedorService.buscarTodos(), HttpStatus.OK);
+	public Collection<Fornecedor> buscarTodos() {
+		return fornecedorService.buscarTodos();
 	}
 
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/buscaPorId/{id}")
-	public ResponseEntity<Fornecedor> buscarPorId(@PathVariable Long id) {
+	public Fornecedor buscarPorId(@PathVariable Long id) {
 
-		return new ResponseEntity<Fornecedor>(fornecedorService.buscarPorId(id), HttpStatus.OK);
+		return fornecedorService.buscarPorId(id);
 	}
 
 	@ResponseStatus(HttpStatus.CREATED)

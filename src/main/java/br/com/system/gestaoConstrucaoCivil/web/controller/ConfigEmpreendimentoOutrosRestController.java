@@ -1,10 +1,10 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,19 +27,20 @@ public class ConfigEmpreendimentoOutrosRestController {
 	@PostMapping(value = "/salvaOutros")
 	public void salvar(@RequestBody List<ConfigEmpreendimentoOutros> configEmpreendimentoOutros) {
 		configEmpreeendimentoOutrosService.salvarOuEditar(configEmpreendimentoOutros);
-		
+
 	}
 
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/listaOutros")
-	public ResponseEntity<Iterable<ConfigEmpreendimentoOutros>> buscarTodos() {
-		
-		return new ResponseEntity<Iterable<ConfigEmpreendimentoOutros>>(configEmpreeendimentoOutrosService.buscarTodos(), HttpStatus.OK);
+	public Collection<ConfigEmpreendimentoOutros> buscarTodos() {
+
+		return configEmpreeendimentoOutrosService.buscarTodos();
 	}
 
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/buscaOutrosPorId/{id}")
-	public ResponseEntity<ConfigEmpreendimentoOutros> buscarPorId(@PathVariable Long id) {
-		return new ResponseEntity<ConfigEmpreendimentoOutros>(configEmpreeendimentoOutrosService.buscarPorId(id),
-				HttpStatus.OK);
+	public ConfigEmpreendimentoOutros buscarPorId(@PathVariable Long id) {
+		return configEmpreeendimentoOutrosService.buscarPorId(id);
 	}
 
 }

@@ -1,10 +1,11 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,30 +29,33 @@ public class FuncionarioRestController {
 	@Autowired
 	private FuncionarioService funcionarioService;
 
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/buscarFuncionariosEngenheiro")
-	public ResponseEntity<Iterable<Funcionario>> buscarEngenheiros() {
-		return new ResponseEntity<Iterable<Funcionario>>(funcionarioService.buscarFuncionarioEngenheiro(),
-				HttpStatus.OK);
+	public Collection<Funcionario> buscarEngenheiros() {
+		return funcionarioService.buscarFuncionarioEngenheiro();
+
 	}
 
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/lista")
-	public ResponseEntity<Iterable<Funcionario>> buscarTodos() {
+	public Collection<Funcionario> buscarTodos() {
 
-		return new ResponseEntity<Iterable<Funcionario>>(funcionarioService.buscarTodos(), HttpStatus.OK);
+		return funcionarioService.buscarTodos();
 	}
 
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping
-	public ResponseEntity<Page<Funcionario>> listaComPaginacao(
-			@RequestParam(defaultValue = "0", required = false) int page,
+	public Page<Funcionario> listaComPaginacao(@RequestParam(defaultValue = "0", required = false) int page,
 			@RequestParam(defaultValue = "0", required = false) int maxResults) {
-		Page<Funcionario> objeto = funcionarioService.listaComPaginacao(new PageRequest(page, maxResults));
-		return new ResponseEntity<Page<Funcionario>>(objeto, HttpStatus.OK);
+		return funcionarioService.listaComPaginacao(new PageRequest(page, maxResults));
+
 	}
 
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/buscaPorId/{id}")
-	public ResponseEntity<Funcionario> buscarPorId(@PathVariable Long id) {
+	public Funcionario buscarPorId(@PathVariable Long id) {
 
-		return new ResponseEntity<Funcionario>(funcionarioService.buscarFuncionarioPorId(id), HttpStatus.OK);
+		return funcionarioService.buscarFuncionarioPorId(id);
 	}
 
 	@ResponseStatus(HttpStatus.CREATED)

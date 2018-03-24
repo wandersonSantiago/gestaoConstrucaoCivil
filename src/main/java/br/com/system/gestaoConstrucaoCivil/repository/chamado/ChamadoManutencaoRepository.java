@@ -26,6 +26,6 @@ public interface ChamadoManutencaoRepository extends JpaRepository<ChamadoManute
 	Page<ChamadoManutencao> findByEmpreendimento_id(Long id, Pageable pageable);
 
 	@Query("FROM ChamadoManutencao chamado WHERE CAST(CAST(chamado.dataAbertura as date) as string) >= :dataInicial AND CAST(CAST(chamado.dataAbertura as date) as string) <= :dataFinal AND chamado.titulo = :titulo")
-	Iterable<ChamadoManutencao> relatorioPorDataETitulo(@Param(value = "dataInicial") String dataInicial, @Param(value = "dataFinal") String dataFinal, @Param(value = "titulo")String titulo);
+	Collection<ChamadoManutencao> relatorioPorDataETitulo(@Param(value = "dataInicial") String dataInicial, @Param(value = "dataFinal") String dataFinal, @Param(value = "titulo")String titulo);
 	
 }

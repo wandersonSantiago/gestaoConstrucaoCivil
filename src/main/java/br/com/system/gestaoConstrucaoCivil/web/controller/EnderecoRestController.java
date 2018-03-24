@@ -1,7 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collection;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +18,7 @@ public class EnderecoRestController {
 
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/uf")
-	public List<UfEnum> uf() {
+	public Collection<UfEnum> uf() {
 
 		return  Arrays.asList(UfEnum.values());
 	}

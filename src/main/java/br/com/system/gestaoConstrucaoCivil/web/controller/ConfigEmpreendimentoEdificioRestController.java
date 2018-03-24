@@ -2,7 +2,6 @@ package br.com.system.gestaoConstrucaoCivil.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,19 +26,19 @@ public class ConfigEmpreendimentoEdificioRestController {
 	public void salvar(@RequestBody ConfigEmpreendimentoEdificio configEmpreendimentoEdificio) {
 
 		configEmpreeendimentoEdificioService.salvarOuEditar(configEmpreendimentoEdificio);
-	 
+
 	}
 
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/listaEdificio/{id}")
-	public ResponseEntity<ConfigEmpreendimentoEdificio> buscarPorId(@PathVariable Long id) {
-		return new ResponseEntity<ConfigEmpreendimentoEdificio>(configEmpreeendimentoEdificioService.buscarPorId(id),
-				HttpStatus.OK);
+	public ConfigEmpreendimentoEdificio buscarPorId(@PathVariable Long id) {
+		return configEmpreeendimentoEdificioService.buscarPorId(id);
 	}
 
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/quantidadeEdificio")
-	public ResponseEntity<ConfigEmpreendimentoEdificioPojo> configPojo() {
+	public ConfigEmpreendimentoEdificioPojo configPojo() {
 
-		return new ResponseEntity<ConfigEmpreendimentoEdificioPojo>(configEmpreeendimentoEdificioService.getConfig(),
-				HttpStatus.OK);
+		return configEmpreeendimentoEdificioService.getConfig();
 	}
 }

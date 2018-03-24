@@ -2,7 +2,6 @@ package br.com.system.gestaoConstrucaoCivil.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,16 +29,17 @@ public class ConfigEmpreendimentoCasaRestController {
 
 	}
 
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/listaCasa/{id}")
-	public ResponseEntity<ConfigEmpreendimentoCasa> buscarPorId(@PathVariable Long id) {
-		return new ResponseEntity<ConfigEmpreendimentoCasa>(configEmpreeendimentoCasaService.buscarPorId(id),
-				HttpStatus.OK);
+	public ConfigEmpreendimentoCasa buscarPorId(@PathVariable Long id) {
+		return configEmpreeendimentoCasaService.buscarPorId(id);
 	}
 
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/quantidadeCasa")
-	public ResponseEntity<ConfigEmpreendimentoCasaPojo> configPojo() {
+	public ConfigEmpreendimentoCasaPojo configPojo() {
 
-		return new ResponseEntity<ConfigEmpreendimentoCasaPojo>(configEmpreeendimentoCasaService.getConfig(),
-				HttpStatus.OK);
+		return configEmpreeendimentoCasaService.getConfig();
+
 	}
 }

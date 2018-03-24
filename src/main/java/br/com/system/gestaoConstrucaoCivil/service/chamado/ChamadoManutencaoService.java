@@ -107,7 +107,7 @@ public class ChamadoManutencaoService {
 		return chamadoManutencaoRepository.findByEmpreendimento_id(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId() , pageRequest);
 	}
 
-	public Iterable<ChamadoManutencao> relatorioPorDataETitulo(Date dataInicial, Date dataFinal, String titulo) {
+	public Collection<ChamadoManutencao> relatorioPorDataETitulo(Date dataInicial, Date dataFinal, String titulo) {
 		return chamadoManutencaoRepository.relatorioPorDataETitulo(new ConverteData(dataInicial).getString(),new ConverteData(dataFinal).getString(), titulo);
 	}
 

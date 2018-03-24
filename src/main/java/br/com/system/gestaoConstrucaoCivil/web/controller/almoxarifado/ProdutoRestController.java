@@ -1,6 +1,6 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller.almoxarifado;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,7 +29,7 @@ public class ProdutoRestController {
 
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/lista")
-	public List<Produto> buscarTodos() {
+	public Collection<Produto> buscarTodos() {
 
 		return produtoService.buscarTodos();
 	}
