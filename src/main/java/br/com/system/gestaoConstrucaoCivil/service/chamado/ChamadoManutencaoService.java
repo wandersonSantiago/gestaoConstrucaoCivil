@@ -3,6 +3,7 @@ package br.com.system.gestaoConstrucaoCivil.service.chamado;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -74,8 +75,9 @@ public class ChamadoManutencaoService {
 		return chamadoManutencaoRepository.listaSuporte(SessionUsuario.getInstance().getUsuario().getEmpreendimento());
 	}
 	
-	public ChamadoManutencao buscaPorId(Long id){
-		return chamadoManutencaoRepository.findOne(id);
+	public Optional<ChamadoManutencao> buscaPorId(Long id){
+		
+		return chamadoManutencaoRepository.findById(id);
 	}
 	
 	@Transactional(readOnly = false)

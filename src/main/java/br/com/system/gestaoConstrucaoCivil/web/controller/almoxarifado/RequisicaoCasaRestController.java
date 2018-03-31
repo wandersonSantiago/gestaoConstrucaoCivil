@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller.almoxarifado;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -61,7 +62,7 @@ public class RequisicaoCasaRestController {
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@GetMapping(value = "/buscaPorId/{id}")
-	public RequisicaoCasa buscarPorId(@PathVariable Long id) {
+	public Optional<RequisicaoCasa> buscarPorId(@PathVariable Long id) {
 		return  requisicaoCasaService.buscarPorId(id);
 	}
 }

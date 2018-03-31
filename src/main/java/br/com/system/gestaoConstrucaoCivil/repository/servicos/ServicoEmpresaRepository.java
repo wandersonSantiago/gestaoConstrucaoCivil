@@ -1,5 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.repository.servicos;
 
+import java.util.Collection;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -9,9 +11,9 @@ public interface ServicoEmpresaRepository extends JpaRepository<ServicoEmpresa,L
 
 	
 	@Query("From ServicoEmpresa servico where servico.prestadoraServico.id = ?1 AND servico.dataEncerramentoServico != null")
-	Iterable<ServicoEmpresa> findByPrestadoraServico_id(Long id);
+	Collection<ServicoEmpresa> findByPrestadoraServico_id(Long id);
 
 	//@Query("From ServicoEmpresa servico where servico.prestadoraServico.id = ?1 AND servico.dataFechamento != null")
-	Iterable<ServicoEmpresa> findByPrestadoraServico_idAndDataFechamentoNotNullAndDataPagamentoNull(Long id);
+	Collection<ServicoEmpresa> findByPrestadoraServico_idAndDataFechamentoNotNullAndDataPagamentoNull(Long id);
 
 }

@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,9 +45,9 @@ public class NotaFiscalProdutoService {
       
      }
 
-	public NotaFiscalProduto buscarPorId(Long id) {
+	public Optional<NotaFiscalProduto> buscarPorId(Long id) {
 
-		return notaFiscalProdutoRepository.findOne(id);
+		return notaFiscalProdutoRepository.findById(id);
 	}
 	public InformacaoEntradaProduto getInformacaoProduto(Long idProduto) {
 

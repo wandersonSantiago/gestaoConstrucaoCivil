@@ -3,6 +3,8 @@ package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.EstoqueEmpree
 
 @Service
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
+@CacheConfig(cacheNames = "instruments")
 public class EstoqueEmpreendimentoService {
 
 	@Autowired
@@ -29,6 +32,7 @@ public class EstoqueEmpreendimentoService {
 
 		estoqueRepository.save(produtoEstoque);
 	}
+    
     public List<EstoqueEmpreendimento> buscarTodos(){
 		
     	Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();  
@@ -42,7 +46,7 @@ public class EstoqueEmpreendimentoService {
     	 }
     	return estoques;
 	}
-    
+    @Cacheable("instruments")
     public Page<EstoqueEmpreendimento> buscarTodosComPaginacao(PageRequest pageRequest){
 		
     	Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();  

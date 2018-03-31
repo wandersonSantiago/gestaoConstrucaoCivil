@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,8 @@ public class FabricanteService {
 	{
 		fabricanteRepository.save(fabricante);
 	}
-	public Fabricante buscarPorId(Long id) {
+	public Optional<Fabricante> buscarPorId(Long id) {
 		
-		return fabricanteRepository.findOne(id);
+		return fabricanteRepository.findById(id);
 	}
 }

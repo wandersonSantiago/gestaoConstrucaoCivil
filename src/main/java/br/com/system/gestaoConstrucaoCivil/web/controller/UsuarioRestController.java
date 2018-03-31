@@ -3,6 +3,7 @@ package br.com.system.gestaoConstrucaoCivil.web.controller;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -62,7 +63,7 @@ public class UsuarioRestController {
 
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/buscaPorId/{id}")
-	public Usuario buscarPorId(@PathVariable Long id) {
+	public Optional<Usuario> buscarPorId(@PathVariable Long id) {
 
 		return usuarioService.buscarUsuarioPorId(id);
 	}

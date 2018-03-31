@@ -2,6 +2,7 @@ package br.com.system.gestaoConstrucaoCivil.web.controller;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,7 +41,7 @@ public class PermissaoRestController {
 
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/{id}")
-	public Permissao buscarPorId(@PathVariable Long id) {
+	public Optional<Permissao> buscarPorId(@PathVariable Long id) {
 		return permissaoService.buscarPorId(id);
 	}
 

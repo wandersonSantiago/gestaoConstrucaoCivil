@@ -1,5 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.entity.chamado;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,7 +12,7 @@ import br.com.system.gestaoConstrucaoCivil.enuns.chamado.TipoEquipamentoChamadoT
 
 @Entity
 @Table(name="chamado_ti", schema="chamado")
-public class ChamadoTi extends Chamado {
+public class ChamadoTi extends Chamado implements Serializable {
 
 
 	private static final long serialVersionUID = 1L;

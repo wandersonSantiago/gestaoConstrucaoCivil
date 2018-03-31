@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,8 +37,8 @@ public class RequisicaoOutrosService {
 		return requisicaoRepository.buscarTodasRequisicoes(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId());
 	}
 	
-	public RequisicaoOutros buscarPorId(Long id){
-		return requisicaoRepository.findOne(id);
+	public Optional<RequisicaoOutros> buscarPorId(Long id){
+		return requisicaoRepository.findById(id);
 	}
 	@Transactional(readOnly = false)
 	public void aceitar(Integer numeroRequisicao)

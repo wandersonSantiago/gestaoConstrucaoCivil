@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +29,9 @@ public class CategoriaService implements Servico<Categoria>{
 	{
 		categoriaRepository.save(categoria);
 	}
-	public Categoria buscarPorId(Long id) {
-		return categoriaRepository.findOne(id);
+	 
+	@Override
+	public Optional<Categoria> findById(Long id) {
+		return categoriaRepository.findById(id);
 	}
 }

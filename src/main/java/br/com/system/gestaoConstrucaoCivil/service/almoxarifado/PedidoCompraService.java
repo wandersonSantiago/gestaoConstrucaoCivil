@@ -2,6 +2,7 @@ package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,8 +32,8 @@ public class PedidoCompraService {
 		return pedidoCompraRepository.buscaTodos(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId());
 	}
 	
-	public PedidoCompra buscaPorId(Long id){
-		return pedidoCompraRepository.findOne(id);
+	public Optional<PedidoCompra> buscaPorId(Long id){
+		return pedidoCompraRepository.findById(id);
 	}
 	
 	public PedidoCompra salvaAtributosPedidoCompra(PedidoCompra pedidoCompra){

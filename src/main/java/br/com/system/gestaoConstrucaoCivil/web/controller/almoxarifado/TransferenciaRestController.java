@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller.almoxarifado;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -56,7 +57,7 @@ public class TransferenciaRestController {
 
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/buscaPorId/{id}")
-	public Transferencia buscarPorId(@PathVariable Long id) {
+	public Optional<Transferencia> buscarPorId(@PathVariable Long id) {
 
 		return transferenciaService.buscaPorId(id);
 	}

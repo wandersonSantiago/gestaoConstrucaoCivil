@@ -61,7 +61,7 @@ public class CargoInitTest {
 	{
 		cargoRepository.save(cargo);
 		
-		Cargo cargoEditado = cargoRepository.findOne(cargo.getId());
+		Cargo cargoEditado = cargoRepository.findById(cargo.getId()).get();
 		cargoEditado.setDescricao(UPDATED_DESCRICAO);
 		cargoRepository.save(cargoEditado);
 		

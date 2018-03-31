@@ -19,9 +19,9 @@ import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.pojo.InformacaoEntradaProduto;
 
 @Entity
-@NamedEntityGraph(name = "EstoqueEmpreendimento.detail",
-attributeNodes = {@NamedAttributeNode("produto"),@NamedAttributeNode("empreendimento")})
-@Table(name = "estoque_empreendimento",  schema = "almoxarifado")
+@NamedEntityGraph(name = "EstoqueEmpreendimento.detail", attributeNodes = { @NamedAttributeNode("produto"),
+		@NamedAttributeNode("empreendimento") })
+@Table(name = "estoque_empreendimento", schema = "almoxarifado")
 public class EstoqueEmpreendimento implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -55,6 +55,10 @@ public class EstoqueEmpreendimento implements Serializable {
 	private Double custoMedio;
 	@Transient
 	private Double valorTotal;
+
+	public EstoqueEmpreendimento() {
+
+	}
 
 	public void setInforProduto(InformacaoEntradaProduto inforProduto) {
 

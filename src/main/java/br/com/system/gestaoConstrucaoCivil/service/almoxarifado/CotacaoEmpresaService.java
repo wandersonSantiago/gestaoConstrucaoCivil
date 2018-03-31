@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,9 +36,9 @@ public class CotacaoEmpresaService {
 		return cotacaoEmpresaRepository.findAll();
 	}
 
-	public CotacaoEmpresa buscarPorId(Long id) {
+	public Optional<CotacaoEmpresa> buscarPorId(Long id) {
 
-		return cotacaoEmpresaRepository.findOne(id);
+		return cotacaoEmpresaRepository.findById(id);
 	}
 	public List<CotacaoEmpresa> ganhadores(Long idCotacao)
 	{

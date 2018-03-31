@@ -1,12 +1,13 @@
 package br.com.system.gestaoConstrucaoCivil.service;
  
 import java.util.List;
- 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
- 
+
 import br.com.system.gestaoConstrucaoCivil.entity.ConfigEmpreendimento;
 import br.com.system.gestaoConstrucaoCivil.repository.ConfigEmpreendimentoRepository;
  
@@ -28,9 +29,9 @@ public class ConfigEmpreendimentoService {
         return configEmpreendimentoRepository.findAll();
     }
     
-    public ConfigEmpreendimento buscarPorId(Long id)
+    public Optional<ConfigEmpreendimento> buscarPorId(Long id)
     {
-        return configEmpreendimentoRepository.findOne(id);
+        return configEmpreendimentoRepository.findById(id);
     }
    
 }

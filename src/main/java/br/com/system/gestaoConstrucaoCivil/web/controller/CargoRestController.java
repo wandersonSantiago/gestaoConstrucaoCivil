@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -50,8 +51,8 @@ public class CargoRestController {
 
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/buscaPorId/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-	public Cargo buscarCargoPorId(@PathVariable Long id) {
-		return cargoService.buscarPorId(id);
+	public Optional<Cargo> buscarCargoPorId(@PathVariable Long id) {
+		return cargoService.findById(id);
 	}
 
 	@ResponseStatus(HttpStatus.CREATED)

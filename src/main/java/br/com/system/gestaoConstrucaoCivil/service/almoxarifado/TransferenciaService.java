@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -60,8 +61,8 @@ public class TransferenciaService {
 		return transferenciaRepository.findAll();
 	}
 
-	public Transferencia buscaPorId(Long id){
-		return transferenciaRepository.findOne(id);
+	public Optional<Transferencia> buscaPorId(Long id){
+		return transferenciaRepository.findById(id);
 	}
 	
 	public Collection<Transferencia>  buscarTransferenciaRecebida() {

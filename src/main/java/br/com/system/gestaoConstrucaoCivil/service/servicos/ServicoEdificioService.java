@@ -1,6 +1,8 @@
 package br.com.system.gestaoConstrucaoCivil.service.servicos;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,18 +30,18 @@ public class ServicoEdificioService {
 
 		return servicoEdificioRepository.findAll(pages);
 	}
-	public ServicoEdificio buscarPorId(Long id) {
+	public Optional<ServicoEdificio> buscarPorId(Long id) {
 		
-		return servicoEdificioRepository.findOne(id);
+		return servicoEdificioRepository.findById(id);
 	}
 
-	public Iterable<ServicoEdificio> lista() {
+	public Collection<ServicoEdificio> lista() {
 		return servicoEdificioRepository.findAll();
 	}
 
-	public Iterable<ServicoEdificio> buscarServicosPorApartamento(Integer torre, Integer andar, Integer apartamento) {
+	public Collection<ServicoEdificio> buscarServicosPorApartamento(Integer torre, Integer andar, Integer apartamento) {
 		
-		 return servicoEdificioRepository.findByTorreAndAndarAndApartamento(torre, andar, apartamento);
+		return servicoEdificioRepository.findByTorreAndAndarAndApartamento(torre, andar, apartamento);
 	}
 	
 	@Transactional(readOnly = false)

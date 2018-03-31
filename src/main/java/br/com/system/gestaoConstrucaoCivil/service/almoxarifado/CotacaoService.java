@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,13 +29,13 @@ public class CotacaoService {
 	public Collection<Cotacao> buscarTodos(){
 		return cotacaoRepository.findAll();
 	}
-	public Cotacao buscaPorId(Long id){
-		return cotacaoRepository.findOne(id);
+	public Optional<Cotacao> buscaPorId(Long id){
+		return cotacaoRepository.findById(id);
 	}
 	@Transactional(readOnly = false)
 	public void fecharCotacao(Long idCotacao)
 	{
-		Cotacao cotacao = cotacaoRepository.findOne(idCotacao);
+		Cotacao cotacao = cotacaoRepository.findById(idCotacao).get();
 		cotacao.fechar();
 		verificarItens.verificarGanhadores(cotacao);
 		cotacaoRepository.save(cotacao);

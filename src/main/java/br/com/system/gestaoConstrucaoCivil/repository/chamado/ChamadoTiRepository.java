@@ -29,7 +29,7 @@ public interface ChamadoTiRepository extends JpaRepository<ChamadoTi, Long> {
 	Page<ChamadoTi> buscarPoEmpreendimentoComPaginacao(Long id, Pageable page);
 	
 	@Query("FROM ChamadoTi chamado WHERE CAST(CAST(chamado.dataAbertura as date) as string) >= :dataInicial AND CAST(CAST(chamado.dataAbertura as date) as string) <= :dataFinal AND chamado.titulo = :titulo")
-	Iterable<ChamadoTi> relatorioPorDataETitulo(@Param(value = "dataInicial") String dataInicial, @Param(value = "dataFinal") String dataFinal, @Param(value = "titulo")String titulo);
+	Collection<ChamadoTi> relatorioPorDataETitulo(@Param(value = "dataInicial") String dataInicial, @Param(value = "dataFinal") String dataFinal, @Param(value = "titulo")String titulo);
 	
 	
 	

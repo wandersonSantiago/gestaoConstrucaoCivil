@@ -85,7 +85,7 @@ public class ProdutoResourceIntTest {
     {
 		produtoRepository.save(produto);
 		
-		Produto produtoEditado = produtoRepository.findOne(produto.getId());
+		Produto produtoEditado = produtoRepository.findById(produto.getId()).get();
 		
 		produtoEditado.setAtivo(UPDATED_ATIVO);
 		produtoEditado.setCodigo(UPDATED_CODIGO);

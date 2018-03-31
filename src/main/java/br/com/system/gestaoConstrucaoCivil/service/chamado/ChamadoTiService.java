@@ -2,6 +2,7 @@ package br.com.system.gestaoConstrucaoCivil.service.chamado;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,13 +21,13 @@ import br.com.system.gestaoConstrucaoCivil.repository.chamado.ChamadoTiRepositor
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
 public class ChamadoTiService {
 
-	
 	@Autowired
 	private ChamadoTiRepository chamadoTiRepository;
-	
+
 	private Date dataAtual;
+
 	@Transactional(readOnly = false)
-	public void salvarEditar(ChamadoTi chamadoTi){
+	public void salvarEditar(ChamadoTi chamadoTi) {
 		dataAtual = new Date();
 		chamadoTi.setEmpreendimento(SessionUsuario.getInstance().getUsuario().getEmpreendimento());
 		chamadoTi.setUsuarioSolicitante(SessionUsuario.getInstance().getUsuario());
@@ -35,63 +36,65 @@ public class ChamadoTiService {
 		chamadoTi.setSilenciar(false);
 		chamadoTi.setDataAbertura(dataAtual);
 		adicionarChamadoNasMensagens(chamadoTi);
-		
+
 		chamadoTiRepository.save(chamadoTi);
 	}
-	
+
 	@Transactional(readOnly = false)
-	public void servicos(ChamadoTi chamadoTi){
-		chamadoTiRepository.save( chamadoTi);
-	}
-	
-	@Transactional(readOnly = false)
-	public void mensagens(ChamadoTi chamadoTi){
-		adicionarChamadoNasMensagens(chamadoTi);	
+	public void servicos(ChamadoTi chamadoTi) {
 		chamadoTiRepository.save(chamadoTi);
 	}
+
 	@Transactional(readOnly = false)
-	public void atenderChamado(ChamadoTi chamadoTi){	
+	public void mensagens(ChamadoTi chamadoTi) {
+		adicionarChamadoNasMensagens(chamadoTi);
+		chamadoTiRepository.save(chamadoTi);
+	}
+
+	@Transactional(readOnly = false)
+	public void atenderChamado(ChamadoTi chamadoTi) {
 		chamadoTi.setStatus(StatusChamado.EM_ANDAMENTO);
 		chamadoTi.setLido(true);
 		chamadoTi.setUsuarioAtendente(SessionUsuario.getInstance().getUsuario());
 		chamadoTiRepository.save(chamadoTi);
 	}
-	
+
 	@Transactional(readOnly = false)
-	public void fecharChamado(ChamadoTi chamadoTi){
-		dataAtual = new Date();	
+	public void fecharChamado(ChamadoTi chamadoTi) {
+		dataAtual = new Date();
 		chamadoTi.setStatus(StatusChamado.FECHADO);
-		chamadoTi.setDataFechamento(dataAtual);	
+		chamadoTi.setDataFechamento(dataAtual);
 		chamadoTiRepository.save(chamadoTi);
 	}
-	
+
 	@Transactional(readOnly = false)
-	public void silenciarChamadoTrue(ChamadoTi chamado){
+	public void silenciarChamadoTrue(ChamadoTi chamado) {
 		chamado.setSilenciar(true);
 		chamadoTiRepository.save(chamado);
 	}
-	
+
 	@Transactional(readOnly = false)
-	public void silenciarChamadoFalse(ChamadoTi chamado){
+	public void silenciarChamadoFalse(ChamadoTi chamado) {
 		chamado.setSilenciar(false);
 		chamadoTiRepository.save(chamado);
 	}
-	
-	
-	public Collection<ChamadoTi> listaChamadoTiUsuario(){
-		return chamadoTiRepository.listaChamadoUsuario(SessionUsuario.getInstance().getUsuario(), SessionUsuario.getInstance().getUsuario().getEmpreendimento());
+
+	public Collection<ChamadoTi> listaChamadoTiUsuario() {
+		return chamadoTiRepository.listaChamadoUsuario(SessionUsuario.getInstance().getUsuario(),
+				SessionUsuario.getInstance().getUsuario().getEmpreendimento());
 	}
-	
-	public Collection<ChamadoTi> listaSuporte(){
+
+	public Collection<ChamadoTi> listaSuporte() {
 		return chamadoTiRepository.listaSuporte(SessionUsuario.getInstance().getUsuario().getEmpreendimento());
 	}
-	
-	public ChamadoTi buscaPorId(Long id){
-		return chamadoTiRepository.findOne(id);
+
+	public Optional<ChamadoTi> buscaPorId(Long id) {
+
+		return chamadoTiRepository.findById(id);
 	}
-	
-	public void adicionarChamadoNasMensagens(ChamadoTi chamadoTi){
-		for(int i = 0; i < chamadoTi.getMensagens().size() ; i ++){
+
+	public void adicionarChamadoNasMensagens(ChamadoTi chamadoTi) {
+		for (int i = 0; i < chamadoTi.getMensagens().size(); i++) {
 			chamadoTi.getMensagens().get(i).setChamado(chamadoTi);
 			chamadoTi.getMensagens().get(i).setData(new Date());
 			chamadoTi.getMensagens().get(i).setUsuario(SessionUsuario.getInstance().getUsuario());
@@ -99,16 +102,19 @@ public class ChamadoTiService {
 	}
 
 	public Collection<ChamadoTi> relatorio(Date dataInicial, Date dataFinal) {
-		
-		return chamadoTiRepository.relatorio(new ConverteData(dataInicial).getString(),new ConverteData(dataFinal).getString());
+
+		return chamadoTiRepository.relatorio(new ConverteData(dataInicial).getString(),
+				new ConverteData(dataFinal).getString());
 	}
 
-	public Page<ChamadoTi> buscarPoEmpreendimentoComPaginacao(PageRequest pageRequest) {		
-		return chamadoTiRepository.buscarPoEmpreendimentoComPaginacao(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId() , pageRequest);
+	public Page<ChamadoTi> buscarPoEmpreendimentoComPaginacao(PageRequest pageRequest) {
+		return chamadoTiRepository.buscarPoEmpreendimentoComPaginacao(
+				SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId(), pageRequest);
 	}
-	
-	public Iterable<ChamadoTi> relatorioPorDataETitulo(Date dataInicial, Date dataFinal, String titulo) {
-		return chamadoTiRepository.relatorioPorDataETitulo(new ConverteData(dataInicial).getString(),new ConverteData(dataFinal).getString(), titulo);
+
+	public Collection<ChamadoTi> relatorioPorDataETitulo(Date dataInicial, Date dataFinal, String titulo) {
+		return chamadoTiRepository.relatorioPorDataETitulo(new ConverteData(dataInicial).getString(),
+				new ConverteData(dataFinal).getString(), titulo);
 	}
 
 }

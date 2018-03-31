@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,7 +34,7 @@ public class AreaRestController {
 
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/buscaPorId/{id}")
-	public AreaProduto buscarPorId(@PathVariable Long id) {
+	public Optional<AreaProduto> buscarPorId(@PathVariable Long id) {
 
 		return areaService.buscarPorId(id);
 	}

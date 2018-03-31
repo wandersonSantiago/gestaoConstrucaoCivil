@@ -1,5 +1,8 @@
 package br.com.system.gestaoConstrucaoCivil.service.servicos;
 
+import java.util.Collection;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,26 +19,28 @@ public class ServicoCasaService {
 
 	@Autowired
 	private ServicoCasaRepository servicoCasaRepository;
-	
-	//@Autowired
-	//private ValidacaoServico<ServicoCasa> validacao;
-	
-	
+
+	// @Autowired
+	// private ValidacaoServico<ServicoCasa> validacao;
+
 	public Page<ServicoCasa> buscarTodos(PageRequest pages) {
-		
+
 		return servicoCasaRepository.findAll(pages);
 	}
+
 	@Transactional(readOnly = false)
-	public void  salvarOuEditar(ServicoCasa servico){
+	public void salvarOuEditar(ServicoCasa servico) {
 		servico.setEmpreendimento(SessionUsuario.getInstance().getUsuario().getEmpreendimento());
-		//validacao.verificarExistePacoteParaEmpresa(servico);
+		// validacao.verificarExistePacoteParaEmpresa(servico);
 		servicoCasaRepository.save(servico);
 	}
-	public ServicoCasa buscarPorId(Long id) {
-		return servicoCasaRepository.findOne(id);
+
+	public Optional<ServicoCasa> buscarPorId(Long id) {
+		return servicoCasaRepository.findById(id);
 	}
-	public Iterable<ServicoCasa> lista() {
+
+	public Collection<ServicoCasa> lista() {
 		return servicoCasaRepository.findAll();
 	}
-	
+
 }

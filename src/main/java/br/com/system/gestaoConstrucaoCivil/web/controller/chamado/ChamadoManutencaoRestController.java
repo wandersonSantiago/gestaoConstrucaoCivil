@@ -3,6 +3,7 @@ package br.com.system.gestaoConstrucaoCivil.web.controller.chamado;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -121,7 +122,7 @@ public class ChamadoManutencaoRestController {
 
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/buscaPorId/{id}")
-	public ChamadoManutencao buscarPorId(@PathVariable Long id) {
+	public Optional<ChamadoManutencao> buscarPorId(@PathVariable Long id) {
 		return chamadoManutencaoService.buscaPorId(id);
 	}
 

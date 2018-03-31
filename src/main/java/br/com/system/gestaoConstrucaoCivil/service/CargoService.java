@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.EnableCaching;
@@ -16,28 +17,29 @@ import br.com.system.gestaoConstrucaoCivil.service.interfaceservice.ICargoServic
 
 @Service
 @EnableCaching(proxyTargetClass = true)
-@Transactional(readOnly = true,propagation = Propagation.REQUIRED)
+@Transactional(readOnly = true, propagation = Propagation.REQUIRED)
 public class CargoService implements ICargoService<Cargo> {
 
 	@Autowired
 	private CargoRepository cargoRepository;
-	
+
 	@Transactional(readOnly = false)
-	public void salvarOuEditar(Cargo cargo)
-	{
+	public void salvarOuEditar(Cargo cargo) {
 		cargoRepository.save(cargo);
 	}
-	
-    public List<Cargo> buscarTodos(){
-		
+
+	public List<Cargo> buscarTodos() {
+
 		return cargoRepository.findAll();
 	}
-    public Cargo buscarPorId(Long id)
-    {
-    	return cargoRepository.findOne(id);
-    }
 
 	public Page<Cargo> listaComPaginacao(PageRequest pageRequest) {
 		return cargoRepository.findAll(pageRequest);
+	}
+
+	@Override
+	public Optional<Cargo> findById(Long id) {
+
+		return cargoRepository.findById(id);
 	}
 }

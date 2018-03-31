@@ -1,22 +1,23 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller.chamado;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.system.gestaoConstrucaoCivil.entity.chamado.ChamadoTi;
 import br.com.system.gestaoConstrucaoCivil.enuns.chamado.PrioridadeChamado;
@@ -33,125 +34,132 @@ public class ChamadoTiRestController {
 	@Autowired
 	private ChamadoTiService chamadoTiService;
 
-	@RequestMapping(method = RequestMethod.GET, value = "/suporte/lista")
-	public ResponseEntity<Iterable<ChamadoTi>> listaSuporte() {
-		Iterable<ChamadoTi> chamadoTi = chamadoTiService.listaSuporte();
-		return new ResponseEntity<Iterable<ChamadoTi>>(chamadoTi, HttpStatus.OK);
-	}
-
-	@GetMapping(value = "/suporte/relatorio/dataInicial/{dataInicial}/dataFinal/{dataFinal}")
-	public ResponseEntity<Iterable<ChamadoTi>>relatorio(@PathVariable Date dataInicial, @PathVariable Date dataFinal) {		
-			Iterable<ChamadoTi> chamadoTi = chamadoTiService.relatorio(dataInicial,dataFinal);
-			return new ResponseEntity<Iterable<ChamadoTi>>(chamadoTi, HttpStatus.OK);
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value = "/suporte/lista")
+	public Collection<ChamadoTi> listaSuporte() {
+		return chamadoTiService.listaSuporte();
+		 
 	}
 	
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value = "/suporte/relatorio/dataInicial/{dataInicial}/dataFinal/{dataFinal}")
+	public Collection<ChamadoTi> relatorio(@PathVariable Date dataInicial, @PathVariable Date dataFinal) {
+		return chamadoTiService.relatorio(dataInicial, dataFinal);
+		 
+	}
+	
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/suporte/relatorio/dataInicial/{dataInicial}/dataFinal/{dataFinal}/titulo/{titulo}")
-	public ResponseEntity<Iterable<ChamadoTi>> relatorioPorDataETitulo(@PathVariable Date dataInicial, @PathVariable Date dataFinal, @PathVariable String titulo) {
-		Iterable<ChamadoTi> chamado = chamadoTiService.relatorioPorDataETitulo(dataInicial,dataFinal, titulo);
-		return new ResponseEntity<Iterable<ChamadoTi>>(chamado, HttpStatus.OK);
+	public Collection<ChamadoTi> relatorioPorDataETitulo(@PathVariable Date dataInicial, @PathVariable Date dataFinal,
+			@PathVariable String titulo) {
+		return chamadoTiService.relatorioPorDataETitulo(dataInicial, dataFinal, titulo);
+
 	}
+
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/suporte/relatorio")
-	public ResponseEntity<Page<ChamadoTi>> lista(@RequestParam(defaultValue="0", required=false) int page
-			,@RequestParam(defaultValue="0", required=false) int maxResults) {
-		Page<ChamadoTi> chamado = chamadoTiService.buscarPoEmpreendimentoComPaginacao(new PageRequest(page, maxResults));
-		return new ResponseEntity<Page<ChamadoTi>>(chamado, HttpStatus.OK);
+	public Page<ChamadoTi> lista(@RequestParam(defaultValue = "0", required = false) int page,
+			@RequestParam(defaultValue = "0", required = false) int maxResults) {
+		return chamadoTiService.buscarPoEmpreendimentoComPaginacao(new PageRequest(page, maxResults));
+
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/usuario/lista")
-	public ResponseEntity<Iterable<ChamadoTi>> listaUsuario() {
-		Iterable<ChamadoTi> chamadoTi = chamadoTiService.listaChamadoTiUsuario();
-		return new ResponseEntity<Iterable<ChamadoTi>>(chamadoTi, HttpStatus.OK);
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value = "/usuario/lista")
+	public Collection<ChamadoTi> listaUsuario() {
+		return chamadoTiService.listaChamadoTiUsuario();
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = "/salvar")
-	public ResponseEntity<ChamadoTi> salvar(@RequestBody ChamadoTi chamadoTi, UriComponentsBuilder ucBuilder) {
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping(value = "/salvar")
+	public void salvar(@RequestBody ChamadoTi chamadoTi) {
 		chamadoTiService.salvarEditar(chamadoTi);
-		HttpHeaders headers = new HttpHeaders();
-		return new ResponseEntity<ChamadoTi>(headers, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, value = "/servicos")
-	public ResponseEntity<ChamadoTi> servicos(@RequestBody ChamadoTi chamadoTi, UriComponentsBuilder ucBuilder) {
+	@ResponseStatus(HttpStatus.CREATED)
+	@PutMapping(value = "/servicos")
+	public void servicos(@RequestBody ChamadoTi chamadoTi) {
 		chamadoTiService.servicos(chamadoTi);
-		HttpHeaders headers = new HttpHeaders();
-		return new ResponseEntity<ChamadoTi>(headers, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, value = "/alterar")
-	public ResponseEntity<ChamadoTi> alterar(@RequestBody ChamadoTi chamadoTi, UriComponentsBuilder ucBuilder) {
+	@ResponseStatus(HttpStatus.CREATED)
+	@PutMapping(value = "/alterar")
+	public void alterar(@RequestBody ChamadoTi chamadoTi) {
 		chamadoTiService.salvarEditar(chamadoTi);
-		HttpHeaders headers = new HttpHeaders();
-		return new ResponseEntity<ChamadoTi>(headers, HttpStatus.CREATED);
+
 	}
 
-	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
-	public ResponseEntity<ChamadoTi> buscarPorId(@PathVariable Long id) {
-		return new ResponseEntity<ChamadoTi>(chamadoTiService.buscaPorId(id), HttpStatus.OK);
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value = "/buscaPorId/{id}")
+	public Optional<ChamadoTi> buscarPorId(@PathVariable Long id) {
+		return chamadoTiService.buscaPorId(id);
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/prioridade")
-	public ResponseEntity<Iterable<PrioridadeChamado>> prioridade() {
-		Iterable<PrioridadeChamado> prioridadeChamado = Arrays.asList(PrioridadeChamado.values());
-		return new ResponseEntity<Iterable<PrioridadeChamado>>(prioridadeChamado, HttpStatus.OK);
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value = "/prioridade")
+	public Collection<PrioridadeChamado> prioridade() {
+		return Arrays.asList(PrioridadeChamado.values());
+
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, value = "/mensagem")
-	public ResponseEntity<ChamadoTi> mensagem(@RequestBody ChamadoTi chamadoTi, UriComponentsBuilder ucBuilder) {
+	@ResponseStatus(HttpStatus.CREATED)
+	@PutMapping(value = "/mensagem")
+	public void mensagem(@RequestBody ChamadoTi chamadoTi) {
 		chamadoTiService.mensagens(chamadoTi);
-		HttpHeaders headers = new HttpHeaders();
-		return new ResponseEntity<ChamadoTi>(headers, HttpStatus.CREATED);
+
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, value = "/atender")
-	public ResponseEntity<ChamadoTi> atender(@RequestBody ChamadoTi chamadoTi, UriComponentsBuilder ucBuilder) {
+	@ResponseStatus(HttpStatus.CREATED)
+	@PutMapping(value = "/atender")
+	public void atender(@RequestBody ChamadoTi chamadoTi) {
 		chamadoTiService.atenderChamado(chamadoTi);
-		HttpHeaders headers = new HttpHeaders();
-		return new ResponseEntity<ChamadoTi>(headers, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, value = "/fechar")
-	public ResponseEntity<ChamadoTi> fechar(@RequestBody ChamadoTi chamadoTi, UriComponentsBuilder ucBuilder) {
+	@ResponseStatus(HttpStatus.CREATED)
+	@PutMapping(value = "/fechar")
+	public void fechar(@RequestBody ChamadoTi chamadoTi) {
 		chamadoTiService.fecharChamado(chamadoTi);
-		HttpHeaders headers = new HttpHeaders();
-		return new ResponseEntity<ChamadoTi>(headers, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, value = "/silenciar/false")
-	public ResponseEntity<ChamadoTi> silenciarFalse(@RequestBody ChamadoTi chamadoTi, UriComponentsBuilder ucBuilder) {
+	@ResponseStatus(HttpStatus.CREATED)
+	@PutMapping(value = "/silenciar/false")
+	public void silenciarFalse(@RequestBody ChamadoTi chamadoTi) {
 		chamadoTiService.silenciarChamadoFalse(chamadoTi);
-		HttpHeaders headers = new HttpHeaders();
-		return new ResponseEntity<ChamadoTi>(headers, HttpStatus.CREATED);
+
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, value = "/silenciar/true")
-	public ResponseEntity<ChamadoTi> silenciarTrue(@RequestBody ChamadoTi chamadoTi, UriComponentsBuilder ucBuilder) {
+	@ResponseStatus(HttpStatus.CREATED)
+	@PutMapping(value = "/silenciar/true")
+	public void silenciarTrue(@RequestBody ChamadoTi chamadoTi) {
 		chamadoTiService.silenciarChamadoTrue(chamadoTi);
-		HttpHeaders headers = new HttpHeaders();
-		return new ResponseEntity<ChamadoTi>(headers, HttpStatus.CREATED);
+
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/status")
-	public ResponseEntity<Iterable<StatusChamado>> status() {
-		Iterable<StatusChamado> statusChamado = Arrays.asList(StatusChamado.values());
-		return new ResponseEntity<Iterable<StatusChamado>>(statusChamado, HttpStatus.OK);
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value = "/status")
+	public Collection<StatusChamado> status() {
+		return Arrays.asList(StatusChamado.values());
+
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/equipamento/tipo")
-	public ResponseEntity<Iterable<TipoEquipamentoChamadoTi>> tipoEquipamentoChamado() {
-		Iterable<TipoEquipamentoChamadoTi> tipoEquipamentoChamadoTi = Arrays.asList(TipoEquipamentoChamadoTi.values());
-		return new ResponseEntity<Iterable<TipoEquipamentoChamadoTi>>(tipoEquipamentoChamadoTi, HttpStatus.OK);
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value = "/equipamento/tipo")
+	public Collection<TipoEquipamentoChamadoTi> tipoEquipamentoChamado() {
+		return Arrays.asList(TipoEquipamentoChamadoTi.values());
+
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/titulo/tI")
-	public ResponseEntity<Iterable<TituloChamadoTiEnum>> tituloChamadoInformatica() {
-		Iterable<TituloChamadoTiEnum> tituloChamadoTiEnum = Arrays.asList(TituloChamadoTiEnum.values());
-		return new ResponseEntity<Iterable<TituloChamadoTiEnum>>(tituloChamadoTiEnum, HttpStatus.OK);
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value = "/titulo/tI")
+	public Collection<TituloChamadoTiEnum> tituloChamadoInformatica() {
+		return Arrays.asList(TituloChamadoTiEnum.values());
+
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/titulo/impressora")
-	public ResponseEntity<Iterable<TituloChamadoImpressoraEnum>> tituloChamadoImpressora() {
-		Iterable<TituloChamadoImpressoraEnum> tituloChamadoImpressoraEnum = Arrays
-				.asList(TituloChamadoImpressoraEnum.values());
-		return new ResponseEntity<Iterable<TituloChamadoImpressoraEnum>>(tituloChamadoImpressoraEnum, HttpStatus.OK);
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value = "/titulo/impressora")
+	public Collection<TituloChamadoImpressoraEnum> tituloChamadoImpressora() {
+		return Arrays.asList(TituloChamadoImpressoraEnum.values());
+
 	}
 }

@@ -1,5 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +33,7 @@ public class ConfigEmpreendimentoEdificioRestController {
 
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/listaEdificio/{id}")
-	public ConfigEmpreendimentoEdificio buscarPorId(@PathVariable Long id) {
+	public Optional<ConfigEmpreendimentoEdificio> buscarPorId(@PathVariable Long id) {
 		return configEmpreeendimentoEdificioService.buscarPorId(id);
 	}
 

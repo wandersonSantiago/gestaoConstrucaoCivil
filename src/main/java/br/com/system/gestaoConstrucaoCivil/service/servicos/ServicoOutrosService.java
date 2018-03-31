@@ -1,5 +1,8 @@
 package br.com.system.gestaoConstrucaoCivil.service.servicos;
 
+import java.util.Collection;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,14 +34,14 @@ public class ServicoOutrosService {
 		//validacao.verificarExistePacoteParaEmpresa(servico);
 		servicoOutrosRepository.save(servico);
 	}
-	public ServicoOutros buscarPorId(Long id) {
-		return servicoOutrosRepository.findOne(id);
+	public Optional<ServicoOutros> buscarPorId(Long id) {
+		return servicoOutrosRepository.findById(id);
 	}
-	public Iterable<ServicoOutros> lista() {
+	public Collection<ServicoOutros> lista() {
 		return servicoOutrosRepository.findAll();
 	}
 
-	public Iterable<ServicoOutros> buscarServicoComunitario(String outros) {
+	public Collection<ServicoOutros> buscarServicoComunitario(String outros) {
 		return servicoOutrosRepository.findByDescricao(outros);
 	}
 }

@@ -2,6 +2,7 @@ package br.com.system.gestaoConstrucaoCivil.service;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,8 +29,8 @@ public class ClienteMoradorService {
 		
 		return  clienteMoradorRepository.findAll(page);
 	}	
-	public ClienteMorador buscarPorId(Long id) {
-		return clienteMoradorRepository.findOne(id);
+	public Optional<ClienteMorador> buscarPorId(Long id) {
+		return clienteMoradorRepository.findById(id);
 	}
 	public ClienteMorador buscarPorCpf(String cpf) {
 		return clienteMoradorRepository.findByCpf(cpf);

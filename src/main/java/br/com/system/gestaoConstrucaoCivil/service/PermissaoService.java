@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +24,8 @@ public class PermissaoService {
 		permissaoRepository.save(permissao);
 	}
 	
-	public Permissao buscarPorId(Long id){
-		return permissaoRepository.findOne(id);
+	public Optional<Permissao> buscarPorId(Long id){
+		return permissaoRepository.findById(id);
 	}
 	
 	public List<Permissao>  lista(){

@@ -1,13 +1,14 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Produto;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.ProdutoRepository;
@@ -30,9 +31,9 @@ public class ProdutoService {
     {
     	return null;
     }
-	public Produto buscaPorId(Long id) {
+	public Optional<Produto> buscaPorId(Long id) {
 
-		return produtoRepository.findOne(id);
+		return produtoRepository.findById(id);
 	}
 
 	@Transactional(readOnly = false)

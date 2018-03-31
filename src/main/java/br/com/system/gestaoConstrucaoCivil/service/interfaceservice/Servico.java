@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.service.interfaceservice;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,5 +11,6 @@ public interface Servico<E> {
 	public void salvarOuEditar(E entity);
 	
     public List<E> buscarTodos();
-    public E buscarPorId(Long id);
+   
+    public Optional<E> findById(Long id);
 }

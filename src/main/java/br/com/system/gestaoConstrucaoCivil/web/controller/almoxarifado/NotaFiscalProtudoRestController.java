@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller.almoxarifado;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,7 +33,7 @@ public class NotaFiscalProtudoRestController {
 
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/buscarPorNumeroNota/{numero}")
-	public  NotaFiscalProduto buscarPorNumeroNota(@PathVariable Long numero) {
+	public  Optional<NotaFiscalProduto> buscarPorNumeroNota(@PathVariable Long numero) {
 
 		return  notaFiscalProdutoService.buscarPorId(numero);
 	}

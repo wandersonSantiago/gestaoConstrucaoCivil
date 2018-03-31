@@ -1,11 +1,12 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller.servicos;
 
+import java.util.Collection;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,8 +14,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.system.gestaoConstrucaoCivil.entity.servicos.ServicoEdificio;
 import br.com.system.gestaoConstrucaoCivil.service.servicos.ServicoEdificioService;
@@ -26,47 +27,49 @@ public class ServicoEdificioRestController {
 	@Autowired
 	private ServicoEdificioService servicoEdificioService;
 
+	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(value = "/salva")
-	public ResponseEntity<ServicoEdificio> salvar(@RequestBody ServicoEdificio servico,
-			UriComponentsBuilder ucBuilder) {
+	public void salvar(@RequestBody ServicoEdificio servico) {
 		servicoEdificioService.salvarOuEditar(servico);
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(
-				ucBuilder.path("/rest/servico/vincular/salva/{id}").buildAndExpand(servico.getId()).toUri());
-		return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	}
-		
-	
+
+	@ResponseStatus(HttpStatus.CREATED)
 	@PutMapping
 	public void altera(@RequestBody ServicoEdificio servico) {
-		servicoEdificioService.salvarOuEditar(servico);		
+		servicoEdificioService.salvarOuEditar(servico);
 	}
-	
-	@PutMapping(value="/vistoria")
+
+	@ResponseStatus(HttpStatus.CREATED)
+	@PutMapping(value = "/vistoria")
 	public void alteraVistoria(@RequestBody ServicoEdificio servico) {
-		servicoEdificioService.salvarOuEditarVistoria(servico);		
+		servicoEdificioService.salvarOuEditarVistoria(servico);
 	}
-	
+
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/lista")
-	public ResponseEntity<Iterable<ServicoEdificio>> buscarTodos() {
-		return new ResponseEntity<Iterable<ServicoEdificio>>(servicoEdificioService.lista(), HttpStatus.OK);
+	public Collection<ServicoEdificio> buscarTodos() {
+		return servicoEdificioService.lista();
 	}
-	
+
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/vistoria/torre/{torre}/andar/{andar}/apartamento/{apartamento}")
-	public ResponseEntity<Iterable<ServicoEdificio>> buscarServicosPorApartamento(@PathVariable Integer torre, @PathVariable Integer andar, @PathVariable Integer apartamento) {
-		return new ResponseEntity<Iterable<ServicoEdificio>>(servicoEdificioService.buscarServicosPorApartamento(torre, andar, apartamento), HttpStatus.OK);
+	public Collection<ServicoEdificio> buscarServicosPorApartamento(@PathVariable Integer torre,
+			@PathVariable Integer andar, @PathVariable Integer apartamento) {
+		return servicoEdificioService.buscarServicosPorApartamento(torre, andar, apartamento);
 	}
-	
+
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping
-	public ResponseEntity<Page<ServicoEdificio>> lista(@RequestParam(defaultValue="0", required=false) int page
-			,@RequestParam(defaultValue="0", required=false) int maxResults) {
-		Page<ServicoEdificio> objeto = servicoEdificioService.buscarTodos(new PageRequest(page, maxResults));
-		return new ResponseEntity<Page<ServicoEdificio>>(objeto, HttpStatus.OK);
+	public Page<ServicoEdificio> lista(@RequestParam(defaultValue = "0", required = false) int page,
+			@RequestParam(defaultValue = "0", required = false) int maxResults) {
+		return servicoEdificioService.buscarTodos(new PageRequest(page, maxResults));
+		
 	}
-	
+
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/buscaPorId/{id}")
-	public ResponseEntity<ServicoEdificio> buscarPorId(@PathVariable Long id) {
-		return new ResponseEntity<ServicoEdificio>(servicoEdificioService.buscarPorId(id), HttpStatus.OK);
+	public Optional<ServicoEdificio> buscarPorId(@PathVariable Long id) {
+		return servicoEdificioService.buscarPorId(id);
 	}
 
 }

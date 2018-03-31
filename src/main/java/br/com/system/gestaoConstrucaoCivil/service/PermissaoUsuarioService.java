@@ -11,31 +11,29 @@ import br.com.system.gestaoConstrucaoCivil.entity.PermissaoUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.PermissaoUsuarioRepository;
 
 @Service
-@Transactional(readOnly = true,propagation = Propagation.REQUIRED)
+@Transactional(readOnly = true, propagation = Propagation.REQUIRED)
 public class PermissaoUsuarioService {
 
 	@Autowired
 	private PermissaoUsuarioRepository permissaoUsuarioRepository;
-	
+
 	@Transactional(readOnly = false)
-	public void salvarOuEditar(PermissaoUsuario permissao)
-	{
+	public void salvarOuEditar(PermissaoUsuario permissao) {
 		permissaoUsuarioRepository.save(permissao);
 	}
-	
-    public List<PermissaoUsuario> buscarTodos(){
-		
-    	return permissaoUsuarioRepository.findAll();
+
+	public List<PermissaoUsuario> buscarTodos() {
+
+		return permissaoUsuarioRepository.findAll();
 	}
-    public List<PermissaoUsuario> buscarPorIdUsuario(Long id)
-    {
-    	return permissaoUsuarioRepository.findByUsuario_id(id);
-    }
-    @Transactional(readOnly = false)
-	public void removerPermissao(Long  permissao)
-	{
-    	permissaoUsuarioRepository.delete(permissaoUsuarioRepository.findOne(permissao));
+
+	public List<PermissaoUsuario> buscarPorIdUsuario(Long id) {
+		return permissaoUsuarioRepository.findByUsuario_id(id);
 	}
-    
-   
+
+	@Transactional(readOnly = false)
+	public void removerPermissao(Long permissao) {
+		permissaoUsuarioRepository.delete(permissaoUsuarioRepository.findById(permissao).get());
+	}
+
 }

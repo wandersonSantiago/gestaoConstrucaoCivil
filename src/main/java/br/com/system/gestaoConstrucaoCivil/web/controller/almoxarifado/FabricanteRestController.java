@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller.almoxarifado;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,7 @@ public class FabricanteRestController {
 
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/buscaPorId/{id}")
-	public Fabricante buscarPorId(@PathVariable Long id) {
+	public Optional<Fabricante> buscarPorId(@PathVariable Long id) {
 
 		return fabricanteService.buscarPorId(id);
 	}

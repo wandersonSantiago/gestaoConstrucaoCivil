@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -53,7 +54,7 @@ public class FuncionarioRestController {
 
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/buscaPorId/{id}")
-	public Funcionario buscarPorId(@PathVariable Long id) {
+	public Optional<Funcionario> buscarPorId(@PathVariable Long id) {
 
 		return funcionarioService.buscarFuncionarioPorId(id);
 	}
