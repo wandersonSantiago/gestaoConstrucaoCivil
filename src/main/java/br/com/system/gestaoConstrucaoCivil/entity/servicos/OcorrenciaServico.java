@@ -1,45 +1,58 @@
 package br.com.system.gestaoConstrucaoCivil.entity.servicos;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 
 @Entity
-@Table(name="ocorrencia_servico" , schema="servicos")
-public class OcorrenciaServico extends AbstractPersistable<Long> {
-	
+@SequenceGenerator(name = "ocorrencia_servico_id_seq", sequenceName = "ocorrencia_servico_id_seq", schema = "servicos", initialValue = 1, allocationSize = 1)
+@Table(name = "ocorrencia_servico", schema = "servicos")
+public class OcorrenciaServico implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ocorrencia_servico_id_seq")
+	private Long id;
 
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="id_servico_empresa")
+	@JoinColumn(name = "id_servico_empresa")
 	private ServicoEmpresa servicoEmpresa;
-	
-	
-	@Column(name="ocorrencia")
+
+	@Column(name = "ocorrencia")
 	private String ocorrencia;
-	
-	
-	@Column(name="data")
+
+	@Column(name = "data")
 	private Date data;
-	
+
 	@ManyToOne
-	@JoinColumn(name="id_usuario")
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
-	
-	@Column(name="arquivo")
+
+	@Column(name = "arquivo")
 	private Byte arquivo;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public ServicoEmpresa getServicoEmpresa() {
 		return servicoEmpresa;
@@ -80,8 +93,5 @@ public class OcorrenciaServico extends AbstractPersistable<Long> {
 	public void setArquivo(Byte arquivo) {
 		this.arquivo = arquivo;
 	}
-	
-	
-	
 
 }

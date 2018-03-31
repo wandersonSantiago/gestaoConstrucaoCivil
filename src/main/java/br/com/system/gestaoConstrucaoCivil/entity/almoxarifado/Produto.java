@@ -7,18 +7,21 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -29,15 +32,19 @@ import br.com.system.gestaoConstrucaoCivil.enuns.UnidadeMedidaEnum;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 
 @Entity
-
+@SequenceGenerator(name = "produto_id_seq", sequenceName = "produto_id_seq",schema="almoxarifado", initialValue = 1, allocationSize = 1)
 @NamedEntityGraph(name = "Produto.detail",
 attributeNodes = {@NamedAttributeNode("categoria"),@NamedAttributeNode("fabricante"),@NamedAttributeNode("tipoProduto")})
 
 @Table(name = "produto" , schema="almoxarifado")
-public class Produto extends AbstractPersistable<Long> {
+public class Produto {
 	
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "produto_id_seq")
+	private Long id;
+	
 	@JsonView(Summary.class)
 	@Column(nullable = true,unique = true)
 	private Integer codigo;
@@ -78,6 +85,13 @@ public class Produto extends AbstractPersistable<Long> {
 	@JoinColumn(name ="id_usuario_cadastro")
 	private Usuario usuarioCadastro;
 	
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public boolean isGeraCodigoBarra() {
 		return geraCodigoBarra;
 	}
