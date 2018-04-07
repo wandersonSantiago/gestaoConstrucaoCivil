@@ -10,4 +10,7 @@ CREATE TABLE almoxarifado.produto (
 	id_tipo int8 NULL,
 	id_usuario_cadastro int8 NULL,
 	CONSTRAINT produto_pkey PRIMARY KEY (id)
-)
+);
+
+ALTER TABLE almoxarifado.produto ADD CONSTRAINT uk_a32tv48ww0lvru07p7se4c15o UNIQUE (codigo);
+ALTER TABLE almoxarifado.produto ADD CONSTRAINT uk_ch9vhi0a5s30o477fb50ook3 UNIQUE (codigo_barra);

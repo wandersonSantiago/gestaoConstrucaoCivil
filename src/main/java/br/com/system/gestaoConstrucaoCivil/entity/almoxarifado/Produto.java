@@ -65,7 +65,7 @@ public class Produto {
 	private Categoria categoria;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "produtos_fornecedores", joinColumns = @JoinColumn(name = "id_produto"), 
+	@JoinTable(name = "produtos_fornecedores", schema="almoxarifado",joinColumns = @JoinColumn(name = "id_produto"), 
 	inverseJoinColumns = @JoinColumn(name = "id_fornecedor"))
 	@Fetch(FetchMode.SUBSELECT)
 	private List<Fornecedor> fornecedores;
