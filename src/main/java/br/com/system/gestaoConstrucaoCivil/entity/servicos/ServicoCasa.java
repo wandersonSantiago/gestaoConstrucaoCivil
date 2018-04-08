@@ -1,14 +1,14 @@
 package br.com.system.gestaoConstrucaoCivil.entity.servicos;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "servico_casa")
+@Table(name = "servico_casa" , schema="servicos")
 public class ServicoCasa extends ServicoEmpresa{
-
+	
+	private static final long serialVersionUID = 1L;
+	
 	private Integer andar;
 	private Integer numero;
 	

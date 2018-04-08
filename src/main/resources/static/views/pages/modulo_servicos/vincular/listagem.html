@@ -1,0 +1,255 @@
+<meta charset="UTF-8">
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/servicos/home">menu serviços</a></li>
+   <li class="breadcrumb-item" ><a href="#/servicos/vincular/cadastro">cadastrar</a></li>
+   <li class="breadcrumb-item active">listar</li>
+  </ol>
+<div ng-controller="servicoEmpresaController as servicoCtrl" >
+
+
+	<div class="box box-primary" >
+		<div class="panel-body"  >
+		<div class="row pull-right">
+		
+				
+				
+ 
+</div>
+		<div ng-if="tipoEmpreendimento" >
+		<a href="javascript://" ng-click="servicoCtrl.exportar('pdf')">PDF</a>
+		<a href="javascript://" ng-click="servicoCtrl.exportar('excel')">Excel</a>
+		<select   ng-click="servicoCtrl.buscaTodosComPaginacaoEdificio(servicoCtrl.getPage , maxResults)" ng-model="maxResults" title="escolha a quantidade de itens por página" >
+						<option value="5">5</option>
+						<option value="15">15</option>
+						<option value="20">20</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select>
+			
+			<div class="table-responsive">
+			<h3>Lista dos serviços nos Edifícos</h3>
+			<input class="form-control" type="text" placeholder="Buscar" ng-model="buscaPacotes" >
+			<table class="export-table table table-hover table-bordered" ng-init="servicoCtrl.buscaTodosComPaginacaoEdificio(0 , 10)">
+				<thead>
+					<tr>
+						<th>Pacote de serviço</th>
+						<th>Prestadora de serviço</th>
+						<th>Categoria</th>
+						<th>Torre</th>
+						<th>Andar</th>
+						<th>Apartamento</th>
+						<th>Valor</th>
+						
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" edificio in listaEdificio | filter : buscaPacotes">
+					<tr>
+					<td>{{ edificio.pacoteServico.descricao }}</td>
+						<td>{{ edificio.prestadoraServico.dadoEmpresa.nomeFantasia }}</td>
+						<td>{{ edificio.pacoteServico.categoria.descricao }}</td>
+						<td>{{ edificio.torre }}</td>
+						<td>{{ edificio.andar}}</td>
+						<td>{{ edificio.apartamento}}</td>
+						<td>{{ edificio.pacoteServico.valor | currency}}</td>
+						<td ng-if="edificio.dataFechamento"><a class="label label-success ">{{ edificio.dataFechamento | date : 'dd/MM/yyyy'}}</a></td>
+						<td ng-if="!edificio.dataFechamento"><a class="label label-warning">em andamento...</a></td>										
+						<td ng-if="ROLE_VINCULAR_CONSULTAR_EDIFICIO"><a href="#/servicos/vincular/visualizar/edificio/{{edificio.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						
+						
+						
+						</tr>
+
+				</tbody>
+				<tfoot>
+					<tr>
+	
+					</tr>
+				</tfoot>
+			</table>
+			
+		</div>
+		<div class="row">
+				<div class="col-sm-5"></div>				
+				<div class="2">				
+					<nav>
+						<ul class="pagination">
+						
+							<li class="{{0==servicoCtrl.getPage ?'disabled':''}}"><a
+								ng-if="0!=servicoCtrl.getPage" ng-click="servicoCtrl.buscaTodosComPaginacaoEdificio(servicoCtrl.getPage -1, maxResults)"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a> <a ng-if="0==servicoCtrl.getPage" aria-label="Previous"> <span
+									aria-hidden="true">&laquo;</span></a></li>
+							<li ng-repeat="page in servicoCtrl.totalPages"
+								class="{{page==servicoCtrl.getPage ?'active':''}}"><a
+								ng-click="servicoCtrl.buscaTodosComPaginacaoEdificio(page , maxResults)">{{page + 1}}</a></li>
+							<li class="{{servicoCtrl.getPage+1 == totalPages ?'disabled':''}}"><a
+								ng-if="servicoCtrl.getPage+1 != totalPages"
+								ng-click="servicoCtrl.buscaTodosComPaginacaoEdificio(servicoCtrl.getPage+1, maxResults)" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a> <a ng-if="servicoCtrl.getPage+1==totalPages" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a></li>
+							
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+		<div ng-if="!tipoEmpreendimento" >
+		<div class="table-responsive">
+			<h3>Lista dos serviços nas Casas</h3>
+			<select   ng-click="servicoCtrl.buscaTodosComPaginacaoCasa(servicoCtrl.getPage , maxResults)" ng-model="maxResults" title="escolha a quantidade de itens por página" >
+						<option value="5">5</option>
+						<option value="15">15</option>
+						<option value="20">20</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select>
+			<input class="form-control" type="text" placeholder="Buscar" ng-model="buscaPacotes" >
+			<table class="table table-hover table-bordered" ng-init="servicoCtrl.buscaTodosComPaginacaoCasa(0 , 10)">
+				<thead>
+					<tr>
+						<th>Pacote de serviço</th>
+						<th>Prestadora de serviço</th>
+						<th>Categoria</th>
+						<th>Número</th>
+						<th>Andar</th>
+						<th>Valor</th>
+						
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" casa in listaCasa | filter : buscaPacotes">
+					<tr>
+						<td>{{ casa.pacoteServico.descricao }}</td>
+						<td>{{ casa.prestadoraServico.dadoEmpresa.nomeFantasia }}</td>
+						<td>{{ casa.pacoteServico.categoria.descricao }}</td>
+						<td>{{ casa.numero }}</td>
+						<td>{{ casa.andar}}</td>
+						<td>{{ casa.pacoteServico.valor | currency}}</td>
+						<td ng-if="casa.dataFechamento"><a class="label label-success ">{{ casa.dataFechamento | date : 'dd/MM/yyyy'}}</a></td>
+						<td ng-if="!casa.dataFechamento"><a class="label label-warning">em andamento...</a></td>										
+						<td ng-if="ROLE_VINCULAR_CONSULTAR_CASA"><a href="#/servicos/vincular/visualizar/casa/{{casa.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						
+						
+						
+						</tr>
+
+				</tbody>
+				<tfoot>
+					<tr>
+	
+					</tr>
+				</tfoot>
+			</table>
+			
+		</div>
+		<div class="row">
+				<div class="col-sm-5"></div>				
+				<div class="2">				
+					<nav>
+						<ul class="pagination">
+						
+							<li class="{{0==servicoCtrl.getPage ?'disabled':''}}"><a
+								ng-if="0!=servicoCtrl.getPage" ng-click="servicoCtrl.buscaTodosComPaginacaoCasa(servicoCtrl.getPage -1, maxResults)"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a> <a ng-if="0==servicoCtrl.getPage" aria-label="Previous"> <span
+									aria-hidden="true">&laquo;</span></a></li>
+							<li ng-repeat="page in servicoCtrl.totalPages"
+								class="{{page==servicoCtrl.getPage ?'active':''}}"><a
+								ng-click="servicoCtrl.buscaTodosComPaginacaoCasa(page , maxResults)">{{page + 1}}</a></li>
+							<li class="{{servicoCtrl.getPage+1 == totalPages ?'disabled':''}}"><a
+								ng-if="servicoCtrl.getPage+1 != totalPages"
+								ng-click="servicoCtrl.buscaTodosComPaginacaoCasa(servicoCtrl.getPage+1, maxResults)" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a> <a ng-if="servicoCtrl.getPage+1==totalPages" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a></li>
+							
+						</ul>
+					</nav>
+				</div>
+			</div>
+			</div>
+		<br>
+		<hr>
+		<br>	
+		
+		<div class="table-responsive">
+		<select   ng-click="servicoCtrl.buscaTodosComPaginacaoEdificacoesComunitaria(servicoCtrl.getPage , maxResults)" ng-model="maxResults" title="escolha a quantidade de itens por página" >
+						<option value="5">5</option>
+						<option value="15">15</option>
+						<option value="20">20</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select>
+			<h3>Lista dos serviços nas Edificações Comunitarias</h3>
+			<input class="form-control" type="text" placeholder="Buscar" ng-model="buscaPacotes" >
+			<table class="table table-hover table-bordered" ng-init="servicoCtrl.buscaTodosComPaginacaoEdificacoesComunitaria(0 , 10)">
+				<thead>
+					<tr>
+						<th>Pacote de serviço</th>
+						<th>Prestadora de serviço</th>
+						<th>Categoria</th>
+						<th>Edif. Comunitária</th>
+						<th>Valor</th>
+						
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" comunitario in listaEdificacoesComunitaria | filter : buscaPacotes">
+					<tr>
+						<td>{{ comunitario.pacoteServico.descricao }}</td>
+						<td>{{ comunitario.prestadoraServico.dadoEmpresa.nomeFantasia }}</td>
+						<td>{{ comunitario.pacoteServico.categoria.descricao }}</td>
+						<td>{{ comunitario.descricao }}</td>
+						<td>{{ comunitario.pacoteServico.valor | currency}}</td>
+						<td ng-if="comunitario.dataFechamento"><a class="label label-success ">{{ comunitario.dataFechamento | date : 'dd/MM/yyyy'}}</a></td>
+						<td ng-if="!comunitario.dataFechamento"><a class="label label-warning">em andamento...</a></td>										
+						<td ng-if="ROLE_VINCULAR_CONSULTAR_EDIFICACOES_COMUNITARIA"><a href="#/servicos/vincular/visualizar/comunitario/{{comunitario.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						</tr>
+
+				</tbody>
+				<tfoot>
+					<tr>
+	
+					</tr>
+				</tfoot>
+			</table>
+			
+		</div>
+		<div class="row">
+				<div class="col-sm-5"></div>				
+				<div class="2">				
+					<nav>
+						<ul class="pagination">
+						
+							<li class="{{0==servicoCtrl.getPage ?'disabled':''}}"><a
+								ng-if="0!=servicoCtrl.getPage" ng-click="servicoCtrl.buscaTodosComPaginacaoEdificacoesComunitaria(servicoCtrl.getPage -1, maxResults)"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a> <a ng-if="0==servicoCtrl.getPage" aria-label="Previous"> <span
+									aria-hidden="true">&laquo;</span></a></li>
+							<li ng-repeat="page in servicoCtrl.totalPages"
+								class="{{page==servicoCtrl.getPage ?'active':''}}"><a
+								ng-click="servicoCtrl.buscaTodosComPaginacaoEdificacoesComunitaria(page , maxResults)">{{page + 1}}</a></li>
+							<li class="{{servicoCtrl.getPage+1 == totalPages ?'disabled':''}}"><a
+								ng-if="servicoCtrl.getPage+1 != totalPages"
+								ng-click="servicoCtrl.buscaTodosComPaginacaoEdificacoesComunitaria(servicoCtrl.getPage+1, maxResults)" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a> <a ng-if="servicoCtrl.getPage+1==totalPages" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a></li>
+							
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+	
+</div>
+
+

@@ -1,15 +1,22 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller.almoxarifado;
 
+import java.util.Collection;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Produto;
 import br.com.system.gestaoConstrucaoCivil.service.almoxarifado.ProdutoService;
@@ -18,43 +25,47 @@ import br.com.system.gestaoConstrucaoCivil.service.almoxarifado.ProdutoService;
 @RequestMapping("/rest/almoxarifado/produto")
 public class ProdutoRestController {
 
-	 @Autowired
-	 private ProdutoService produtoService;
-	
-	
-	 @RequestMapping(method = RequestMethod.GET, value="/lista")
-	 public ResponseEntity<Iterable<Produto>> buscarProduto() {	  
-	  
-	  Iterable<Produto> produto = produtoService.buscarTodos();
-	  return new ResponseEntity<Iterable<Produto>>(produto, HttpStatus.OK);
-	 }
-	
-	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Produto> buscarProdutoPorId(@PathVariable Long id) {
+	@Autowired
+	private ProdutoService produtoService;
 
-			return new ResponseEntity<Produto>(produtoService.buscaPorId(id), HttpStatus.OK);
-		}
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value = "/lista")
+	public Collection<Produto> buscarTodos() {
 
-	@RequestMapping(value = "/buscaPorCodigo/{codigo}", method = RequestMethod.GET)
-	public ResponseEntity<Produto> buscarPorCodigo(@PathVariable String codigo)
-	{
-		return new ResponseEntity<Produto>(produtoService.buscarPorCodigoOuCodigoBarra(codigo),HttpStatus.OK);
+		return produtoService.buscarTodos();
 	}
-	
-	@RequestMapping(value="/salva", method = RequestMethod.POST)
-	 public ResponseEntity salva(@RequestBody Produto produto,UriComponentsBuilder ucBuilder)
-	 {
-		 produtoService.salvarOuEditar(produto);
-		 HttpHeaders headers = new HttpHeaders();
-		 headers.setLocation(ucBuilder.path("/rest/almoxarifado/produto/salva/{id}").buildAndExpand(produto.getId()).toUri());
-		 return new ResponseEntity(headers, HttpStatus.CREATED);
-	 }
-	 
-	 @RequestMapping(value="/altera", method = RequestMethod.PUT)
-	 public ResponseEntity altera(@RequestBody Produto produto,UriComponentsBuilder ucBuilder)
-	 { produtoService.salvarOuEditar(produto);
-		 HttpHeaders headers = new HttpHeaders();
-		 headers.setLocation(ucBuilder.path("/rest/almoxarifado/produto/altera/{id}").buildAndExpand(produto.getId()).toUri());
-		 return new ResponseEntity(headers, HttpStatus.CREATED);
-	 }
+
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public Page<Produto> lista(@RequestParam(defaultValue = "0", required = false) int page,
+			@RequestParam(defaultValue = "0", required = false) int maxResults) {
+		return produtoService.buscarTodosComPaginacao(new PageRequest(page, maxResults));
+
+	}
+
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value = "/buscaPorId/{id}")
+	public Optional<Produto> buscarPorId(@PathVariable Long id) {
+
+		return produtoService.buscaPorId(id);
+	}
+
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value = "/buscaPorCodigo/{codigo}")
+	public Produto buscarPorCodigo(@PathVariable String codigo) {
+		return produtoService.buscarPorCodigoOuCodigoBarra(codigo);
+	}
+
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping(value = "/salva")
+	public void salvar(@RequestBody Produto produto) {
+		produtoService.salvarOuEditar(produto);
+
+	}
+
+	@ResponseStatus(HttpStatus.CREATED)
+	@PutMapping(value = "/altera")
+	public void alterar(@RequestBody Produto produto) {
+		produtoService.salvarOuEditar(produto);
+	}
 }

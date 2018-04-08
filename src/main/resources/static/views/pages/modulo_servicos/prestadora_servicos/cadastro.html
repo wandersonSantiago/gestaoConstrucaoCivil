@@ -1,0 +1,161 @@
+<meta charset="UTF-8">
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/servicos/home">menu serviços</a></li>
+   <li class="breadcrumb-item" ><a href="#/servicos/prestadora/listagem">listar</a></li>
+   <li class="breadcrumb-item active">cadastro</li>
+  </ol>
+<div 	ng-controller="prestadoraServicoController as prestadoraCtrl">
+
+	<div class="box box-primary">
+
+		<div class="box-header">
+			<span class="lead">Cadastrar Prestadora de Servico</span>
+		</div>
+		<div class="panel-body">
+
+			<div class="container col-sm-12 ">
+				<form role="form-vertical" name="formPrestadora"
+					ng-submit="prestadoraCtrl.salva()">
+					
+					<div class="row">
+						<div class="col-sm-5" ng-controller="verificaDadosController as verificaCtrl">
+							<input class="form-control" name="cnpjField" placeholder="CNPJ" ng-blur="verificaCtrl.verificaCnpj(prestadoraCtrl.prestadoraServico.dadoEmpresa.cnpj)"
+								ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.cnpj" id="cnpj"
+								type="text" ui-br-cnpj-mask required>
+								<p ng-show="formPrestadora.cnpjField.$error.cnpj" class="alert alert-warning ">Digite um CNPJ Válido</p>
+						</div>
+						<div  class="col-sm-2" ng-controller="enderecoController as endCtrl" ng-init="endCtrl.lista()">
+								<select class="form-control"  ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.ufIe" ng-options="uf for uf in ufs">
+									<option value="">Estado</option>
+								</select>
+						</div>				
+						<div class="col-sm-5" ng-controller="verificaDadosController as verificaCtrl">
+							<input class="form-control" name="iefield"  ng-blur="verificaCtrl.verificaIe(prestadoraCtrl.prestadoraServico.dadoEmpresa.inscricaoEstadual)"
+								ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.inscricaoEstadual"
+								id="inscricaoEstadual" type="text" ui-br-ie-mask='prestadoraCtrl.prestadoraServico.dadoEmpresa.ufIe' placeholder="Inscrição Estadual"
+								required>
+								<p ng-show="formPrestadora.ieField.$error.ie" class="alert alert-warning ">Digite uma inscrição estadual Válida</p>
+		 				 </div>
+		 			</div>
+		 			<br>
+					<div class="row">
+							<div class="col-sm-6" ng-class="{ 'has-error' : formPrestadora.razaoSocial.$invalid && !formPrestadora.razaoSocial.$pristine }">
+								<input class="form-control" ng-minlength="5" ng-maxlength="50" placeholder="Razão social"
+									ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.razaoSocial"
+									id="razaoSocial" name="razaoSocial" type="text" required>
+							
+					
+						<p ng-show="formPrestadora.razaoSocial.$error.minlength"
+							class="alert alert-warning ">campo Razão Social no minimo 5 caracter</p>
+						<p ng-show="formPrestadora.razaoSocial.$error.maxlength"
+							class="alert alert-warning ">campo Razão Social no maximo 50 caracter</p>
+						</div>
+						
+							<div class="col-sm-6" ng-class="{ 'has-error' : formPrestadora.nomeFantasia.$invalid && !formPrestadora.razaoSocial.$pristine }">
+								<input class="form-control" ng-minlength="5" ng-maxlength="50" placeholder="Nome fantasia"
+									ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.nomeFantasia"
+									id="nomeFantasia" name="nomeFantasia" type="text" required>
+							</div>
+							<p ng-show="formPrestadora.nomeFantasia.$error.minlength"
+							class="alert alert-warning ">campo nome Fantasia no minimo 5 caracter</p>
+							<p ng-show="formPrestadora.nomeFantasia.$error.maxlength"
+							class="alert alert-warning ">campo nome Fantasia no maximo 50 caracter</p>
+						
+					</div>
+					<br>
+					<div class="row">					
+						<div class="col-sm-6">
+							<input class="form-control" placeholder="E-mail"
+								ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.email" id="email"
+								type="email" required>
+						</div>
+					<div class="col-sm-6">
+							<input class="form-control" placeholder="Telefone"
+								ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.telefone" id="telefone"
+								type="tel" ui-br-phone-number required>
+						</div>
+					</div>
+					
+					<br>
+					<hr>
+
+					<h4>Endereço</h4>
+
+					<br>
+					<div class="row">
+						<div class="col-sm-3">
+							<input class="form-control" name="cepField"	ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.endereco.cep" id="cep" placeholder="CEP"
+								type="text"  ng-blur="prestadoraCtrl.findCep()"  onkeyup="if(this.value.length > 8) { numeroEmpresa.focus(); }"   ui-br-cep-mask required>
+								
+							<p ng-show="formPrestadora.cepField.$error.cep" class="alert alert-warning ">Digite um CEP Válido</p>
+								
+						</div>
+					</div>
+						
+
+					<br>
+
+					<div class="row">
+						<div class="col-sm-5">
+							<input class="form-control" placeholder="Rua"
+								ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.endereco.logradouro" id="rua"
+								type="text" required>
+						</div>
+						
+						<div class="col-sm-2"
+							ng-class="{ 'has-error' : formPrestadora.numeroEmpresa.$invalid && !formPrestadora.numeroEmpresa.$pristine }">
+							<input class="form-control" name="numeroEmpresa" placeholder="Nº"
+								ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.endereco.numero"
+								id="numero" type="text" ng-minlength="1" ng-maxlength="7"
+								required>
+								<p ng-show="formPrestadora.numeroEmpresa.$error.minlength"
+								class="alert alert-warning ">campo numero no minimo 1 caracter</p>
+								<p ng-show="formPrestadora.numeroEmpresa.$error.maxlength"
+								class="alert alert-warning ">campo numero no maximo 7 caracter</p>
+						</div>
+					
+							
+						
+						<div class="col-sm-5">
+							<input class="form-control" placeholder="Complemento"
+								ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.endereco.complemento"
+								id="complemento" type="text">
+						</div>
+					</div>
+						<br>
+					<div class="row">
+									
+						<div class="col-sm-5">
+							<input class="form-control" placeholder="Bairro"
+								ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.endereco.bairro"
+								id="bairro" type="text" reuired>
+						</div>
+						<div class="col-sm-5">
+							<input class="form-control" placeholder="Cidade"
+								ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.endereco.localidade"
+								id="cidade" type="text" required>
+						</div>
+						<div class="col-sm-2">
+							<input class="form-control" placeholder="Estado"
+								ng-model="prestadoraCtrl.prestadoraServico.dadoEmpresa.endereco.uf"
+								id="estado" type="text" required>
+						</div>
+					</div>
+					<br>
+					
+					<br>
+					<div class="row ">
+					
+							<input type="submit" id="submit" value="Salvar"
+								class="btn btn-lg btn-primary btn-block btn-signin">
+						
+					</div>
+
+				</form>
+			</div>
+
+		</div>
+		<div class="tablecontainer"></div>
+	</div>
+</div>

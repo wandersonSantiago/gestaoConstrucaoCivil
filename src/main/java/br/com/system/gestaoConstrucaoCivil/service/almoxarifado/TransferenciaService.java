@@ -1,23 +1,20 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
 import java.util.Collection;
-import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.ItemTransferencia;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Transferencia;
-import br.com.system.gestaoConstrucaoCivil.enuns.Situacao;
-import br.com.system.gestaoConstrucaoCivil.enuns.StatusTransferencia;
-import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
-import br.com.system.gestaoConstrucaoCivil.pojo.EntradaOuBaixa;
+import br.com.system.gestaoConstrucaoCivil.pojo.CancelamentoTransferencia;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.TransferenciaRepository;
-import br.com.system.gestaoConstrucaoCivil.util.GeraCodigo;
+
 
 
 @Service
@@ -27,63 +24,36 @@ public class TransferenciaService {
 	@Autowired
 	private TransferenciaRepository transferenciaRepository;
 	@Autowired
-	private EstoqueEmpreendimentoService estoqueService;
+	private BaixaEstoqueService baixarEstoque;
+	@Autowired 
+	private EntradaEstoqueService entradaEstoque;
 	
 	
 	@Transactional(readOnly = false)
-	public void salvaAltera(Transferencia transferencia) {
+	public void salvarAlterar(Transferencia transferencia) {
 
-		transferencia.setStatusTransferencia(StatusTransferencia.PENDENTE);
-		transferencia.getNotaFiscal().setSituacao(Situacao.OK);
-		transferencia.getNotaFiscal().setTipoNota(TipoNotaEnum.TRANSFERENCIA_ESTOQUE_EMPREENDIMENTO);
-		transferencia.getNotaFiscal().setDataNota(new Date());
-		transferencia.getNotaFiscal().setNumero(new GeraCodigo(100000,9999999).gerarNumeroTransferencia().longValue());
-		
-		Empreendimento empreendimentoSaida = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
-		transferencia.getNotaFiscal().setEmpreendimento(empreendimentoSaida);
-		adicionarTransferenciaItem(transferencia);
-        
-		for (ItemTransferencia item : transferencia.getItens()) {
-			EntradaOuBaixa baixa = new EntradaOuBaixa(item.getProduto(), item.getQuantidade(),
-					transferencia.getNotaFiscal().getEmpreendimento());
-			estoqueService.baixar(baixa);
-		}
-		transferencia.setStatusTransferencia(StatusTransferencia.PENDENTE);
+        transferencia.novaTransferencia();
+        baixarEstoque.baixar(transferencia);
 		transferenciaRepository.save(transferencia);
-	}
-	private void adicionarTransferenciaItem(Transferencia transferencia)
-	{
-		for(ItemTransferencia item : transferencia.getItens())
-		{
-			item.setTransferencia(transferencia);
-		}
 	}
 	@Transactional(readOnly = false)
 	public void aceitarTransferencia(Long numeroNota)
 	{
-		
 		Transferencia transferencia =  transferenciaRepository.buscarTransferenciaPorNumeroNota(numeroNota);
-		
-		for(ItemTransferencia item : transferencia.getItens())
-		{
-			EntradaOuBaixa entrada = new EntradaOuBaixa(item.getProduto(),item.getQuantidade(), transferencia.getEmpreendimentoDestino());
-			estoqueService.entradaEstoque(entrada);	
-		}
-	    transferencia.setStatusTransferencia(StatusTransferencia.EFETUADO);
-		
+		transferencia.aceitarTransferencia();
+		entradaEstoque.entradaEstoque(transferencia);
 	    transferenciaRepository.save(transferencia);
+	   
+	  
+	   
 	}
 	@Transactional(readOnly = false)
 	public void rejeitarTransferencia(Long numeroNota)
 	{
 		Transferencia transferencia =  transferenciaRepository.buscarTransferenciaPorNumeroNota(numeroNota);
-		transferencia.setStatusTransferencia(StatusTransferencia.RECUSADO);
-		transferencia.getNotaFiscal().setSituacao(Situacao.CANCELADA);
-		for(ItemTransferencia item : transferencia.getItens())
-		{
-			EntradaOuBaixa entrada = new EntradaOuBaixa(item.getProduto(),item.getQuantidade(), transferencia.getNotaFiscal().getEmpreendimento());
-			estoqueService.entradaEstoque(entrada);
-		}
+		transferencia.rejeitarTransferencia();
+		CancelamentoTransferencia cancelamento = new CancelamentoTransferencia(transferencia);
+		entradaEstoque.entradaEstoque(cancelamento);
 		transferenciaRepository.save(transferencia);
 	}
 	
@@ -91,18 +61,30 @@ public class TransferenciaService {
 		return transferenciaRepository.findAll();
 	}
 
-	public Transferencia buscaPorId(Long id){
-		return transferenciaRepository.findOne(id);
+	public Optional<Transferencia> buscaPorId(Long id){
+		return transferenciaRepository.findById(id);
 	}
+	
 	public Collection<Transferencia>  buscarTransferenciaRecebida() {
 		
-		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
-		return transferenciaRepository.buscarTransferenciaRecebidas(idEmpreendimento);
+		return transferenciaRepository
+				.buscarTransferenciaRecebidas(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId());
 	}
+	
 	public Collection<Transferencia>  buscarTransferenciaEnviada() {
 		
-		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
-		return transferenciaRepository.buscarTransferenciaEnviada(idEmpreendimento);
+		return transferenciaRepository
+				.buscarTransferenciaEnviada(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId());
+	}
+	
+	public Page<Transferencia> buscarRecebidaComPaginacao(PageRequest pageRequest) {
+		return transferenciaRepository
+				.buscarTransferenciaRecebidasComPaginacao(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId(), pageRequest);
+	}
+	
+	public Page<Transferencia> buscarEnviadaComPaginacao(PageRequest pageRequest) {
+		return transferenciaRepository
+				.buscarTransferenciaEnviadaComPaginacao(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId(), pageRequest);
 	}
 	
 }

@@ -1,15 +1,25 @@
 package br.com.system.gestaoConstrucaoCivil.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 @Entity
-@Table(name = "endereco")
-public class Endereco extends AbstractPersistable<Long>  {
+@Table(name = "endereco" , schema = "communs")
+public class Endereco implements Serializable  {
 
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@Column(unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private Long id;
+	
 	@Column(nullable = false,length = 50)
 	private String logradouro;
 	@Column(nullable = false,length = 50)
@@ -25,6 +35,15 @@ public class Endereco extends AbstractPersistable<Long>  {
 	@Column(nullable = true,length = 50)
 	private String complemento;
 	
+	
+	
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getLogradouro() {
 		return logradouro;
 	}

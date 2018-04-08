@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,7 +9,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.CotacaoEmpresa;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.ItemCotacaoEmpresa;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.CotacaoEmpresaItem;
+import br.com.system.gestaoConstrucaoCivil.enuns.CotacaoEmpresaItemStatus;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.CotacaoEmpresaRepository;
 
 @Service
@@ -17,13 +19,13 @@ public class CotacaoEmpresaService {
 
 	@Autowired
 	private CotacaoEmpresaRepository cotacaoEmpresaRepository;
-
+	
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(CotacaoEmpresa cotacaoEmpresa) {
-		
-		for(ItemCotacaoEmpresa item : cotacaoEmpresa.getItens())
-		{
+
+		for (CotacaoEmpresaItem item : cotacaoEmpresa.getItens()) {
 			item.setId(null);
+			item.setStatus(CotacaoEmpresaItemStatus.PENDENTE);
 			item.setCotacaoEmpresa(cotacaoEmpresa);
 		}
 		cotacaoEmpresaRepository.save(cotacaoEmpresa);
@@ -34,9 +36,24 @@ public class CotacaoEmpresaService {
 		return cotacaoEmpresaRepository.findAll();
 	}
 
-	public CotacaoEmpresa buscarPorId(Long id) {
+	public Optional<CotacaoEmpresa> buscarPorId(Long id) {
 
-		return cotacaoEmpresaRepository.findOne(id);
+		return cotacaoEmpresaRepository.findById(id);
 	}
-
+	public List<CotacaoEmpresa> ganhadores(Long idCotacao)
+	{
+		List<CotacaoEmpresa>  cotacoes = cotacaoEmpresaRepository.buscarGanhadores(idCotacao);
+		for(CotacaoEmpresa item :  cotacoes)
+		{
+			item.removerItensPerdedores();
+		}
+		return  cotacoes;
+	
+	}
+	
+	public List<CotacaoEmpresa> concorrentes(Long idCotacao)
+	{
+		return cotacaoEmpresaRepository.buscarPorCotacao(idCotacao);
+	}
+	
 }

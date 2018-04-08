@@ -1,24 +1,33 @@
 package br.com.system.gestaoConstrucaoCivil.entity;
 
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 import br.com.system.gestaoConstrucaoCivil.enuns.UfEnum;
 
 @Entity
-@Table(name = "dado_empresa")
-public class DadoEmpresa extends AbstractPersistable<Long>  {
+@Table(name = "dado_empresa" , schema = "communs")
+public class DadoEmpresa implements Serializable  {
 
 	
+	@Id
+	@Column(unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private Long id;
+	
+	private static final long serialVersionUID = 1L;
 	@Column(nullable = false,length = 50)
 	private String razaoSocial;
 	@Column(nullable = false,length = 50)
@@ -40,6 +49,12 @@ public class DadoEmpresa extends AbstractPersistable<Long>  {
 	
 	
 	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getRazaoSocial() {
 		return razaoSocial;
 	}

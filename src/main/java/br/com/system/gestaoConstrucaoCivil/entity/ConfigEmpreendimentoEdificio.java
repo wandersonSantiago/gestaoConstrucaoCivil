@@ -7,9 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
  
 @Entity
-@Table(name = "config_empreendimento_edificio")
+@Table(name = "config_empreendimento_edificio" , schema = "communs")
 public class ConfigEmpreendimentoEdificio extends ConfigEmpreendimento implements Serializable{
  
+	private static final long serialVersionUID = 1L;
+
 	@Column(nullable = false,length = 10)
     private Integer quantidadeAndarPorTorre;
    

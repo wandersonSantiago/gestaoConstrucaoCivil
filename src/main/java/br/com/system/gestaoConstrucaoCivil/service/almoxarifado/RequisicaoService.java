@@ -1,44 +1,39 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Requisicao;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.View.Summary;
-import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.RequisicaoRepository;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.IRequisicao;
+import br.com.system.gestaoConstrucaoCivil.enuns.StatusRequisicao;
+import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.InformacaoRequisicaoRepository;
 
 @Service
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
 public class RequisicaoService {
 
 	@Autowired
-	private RequisicaoRepository requisicaoRepository;
+	private InformacaoRequisicaoRepository requisicaoRepository;
+	@Autowired
+	private BaixaEstoqueService baixaEstoque;
+	
 	
 	@Transactional(readOnly = false)
-	public void salvarOuEditar(Requisicao requisicao)
+	public void aceitar(IRequisicao requisicao)
 	{
-	    // requisicaoRepository.save(requisicao);
+		if(requisicao.getInformacaoRequisicao().getStatusRequisicao() == StatusRequisicao.PENDENTE)
+		{
+		   baixaEstoque.baixar(requisicao);	
+		   requisicao.getInformacaoRequisicao().statusAceito();
+		   requisicaoRepository.save(requisicao.getInformacaoRequisicao());
+		}
 		
-		/*  for(int i  = 0 ; i < requisicao.size(); i++)
-	    {
-	    	requisicao.get(i).setDataSaida(LocalDate.now());
-	    	estoque.baixarEstoque(requisicao.get(i).getProduto().getId(),requisicao.get(i).getQuantidadeSaida());
-	    }
-		 requisicaoRepository.save(requisicao);*/
 	}
-	@JsonView(Summary.class)
-	public List<Requisicao> buscarTodos()
+	@Transactional(readOnly = false)
+	public void rejeitar(IRequisicao requisicao)
 	{
-		return requisicaoRepository.findAll();
+		requisicao.getInformacaoRequisicao().statusRejeitado();
+		requisicaoRepository.save(requisicao.getInformacaoRequisicao());
 	}
-	public Requisicao buscarPorId(Long id)
-    {
-    	return requisicaoRepository.findOne(id);
-    }
 }

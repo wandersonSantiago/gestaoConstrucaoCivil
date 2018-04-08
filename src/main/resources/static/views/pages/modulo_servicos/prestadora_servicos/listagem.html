@@ -1,0 +1,97 @@
+<meta charset="UTF-8">
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/servicos/home">menu serviços</a></li>
+   <li class="breadcrumb-item" ><a href="#/servicos/prestadora/cadastro">cadastrar</a></li>
+   <li class="breadcrumb-item active">lista</li>
+  </ol>
+<div ng-controller="prestadoraServicoController as prestadoraCtr">
+
+	<div class="box box-primary" ng-init="prestadoraCtr.buscaTodosComPaginacao(0 , 15)">
+	
+		<div class="box-header">
+			<span class="lead">Lista de Prestadora de Serviço </span>
+		</div>
+		<div class="panel-body">
+		<select   ng-click="prestadoraCtr.buscaTodosComPaginacao(prestadoraCtr.getPage , maxResults)" ng-model="maxResults" title="escolha a quantidade de itens por página" >
+						<option value="5">5</option>
+						<option value="15">15</option>
+						<option value="20">20</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select>
+		<input type="text" class="form-control" ng-model="buscaPrestadora" placeholder="buscar">
+			<div class="table-responsive">
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+					
+						<th>Razão Social</th>
+						<th>Nome Fantasia</th>
+						<th>CNPJ</th>
+						<th>Telefone</th>
+						<th>Cidade</th>
+						<th>Estado</th>
+						
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" prestadoraServico in prestadoraCtr.prestadoraServicos | filter : buscaPrestadora ">
+					<tr>
+					
+						
+						<td>{{ prestadoraServico.dadoEmpresa.razaoSocial }}</td>
+						<td>{{ prestadoraServico.dadoEmpresa.nomeFantasia}}</td>
+						<td>{{ prestadoraServico.dadoEmpresa.cnpj }}</td>
+						<td>{{ prestadoraServico.dadoEmpresa.telefone }}</td>
+						<td>{{ prestadoraServico.dadoEmpresa.endereco.localidade }}</td>
+						<td>{{ prestadoraServico.dadoEmpresa.endereco.uf }}</td>
+						<td ng-if="ROLE_PRESTADORA_SERVICOS_ALTERAR"><a href="#/servicos/prestadora/alteracao/{{prestadoraServico.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						
+						
+					</tr>
+
+				</tbody>
+		
+				<tfoot>
+				
+					<tr>
+					
+
+					</tr>
+				</tfoot>
+			</table>			
+		</div>
+		<div class="row">
+				<div class="col-sm-5"></div>				
+				<div class="2">				
+					<nav>
+						<ul class="pagination">
+						
+							<li class="{{0==prestadoraCtr.getPage ?'disabled':''}}"><a
+								ng-if="0!=prestadoraCtr.getPage" ng-click="prestadoraCtr.buscaTodosComPaginacao(prestadoraCtr.getPage -1, maxResults)"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a> <a ng-if="0==prestadoraCtr.getPage" aria-label="Previous"> <span
+									aria-hidden="true">&laquo;</span></a></li>
+							<li ng-repeat="page in prestadoraCtr.totalPages"
+								class="{{page==prestadoraCtr.getPage ?'active':''}}"><a
+								ng-click="prestadoraCtr.buscaTodosComPaginacao(page , maxResults)">{{page + 1}}</a></li>
+							<li class="{{prestadoraCtr.getPage+1 == totalPages ?'disabled':''}}"><a
+								ng-if="prestadoraCtr.getPage+1 != totalPages"
+								ng-click="prestadoraCtr.buscaTodosComPaginacao(prestadoraCtr.getPage+1, maxResults)" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a> <a ng-if="prestadoraCtr.getPage+1==totalPages" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a></li>
+							
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+
+</div>
+
+

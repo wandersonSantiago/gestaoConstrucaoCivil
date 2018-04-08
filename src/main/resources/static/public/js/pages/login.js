@@ -24,7 +24,7 @@ app.controller( 'loginController', function($route, $location, $rootScope, auth)
 						self.error = false;
 					} else {
 						self.falhaLogin = false;
-						
+						$rootScope.logado = false;
 						self.error = true;
 					}
 				})

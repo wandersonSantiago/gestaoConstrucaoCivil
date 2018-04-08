@@ -1,11 +1,12 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Fornecedor;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.FornecedorRepository;
@@ -26,8 +27,8 @@ public class FornecedorService {
 	{
 		fornecedorRepository.save(fornecedor);
 	}
-	public Fornecedor buscarPorId(Long id) {
+	public Optional<Fornecedor> buscarPorId(Long id) {
 		
-		return fornecedorRepository.findOne(id);
+		return fornecedorRepository.findById(id);
 	}
 }

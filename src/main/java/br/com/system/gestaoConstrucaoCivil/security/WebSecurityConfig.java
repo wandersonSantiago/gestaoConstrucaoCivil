@@ -12,16 +12,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.csrf.CsrfFilter;
-import org.springframework.security.web.csrf.CsrfTokenRepository;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
  	
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+//@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -34,7 +30,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 		.httpBasic().and()
 		.authorizeRequests()
-			.antMatchers("/public/**","/login","/views/login.html","/views/templates/header.html","/views/templates/menu.html","/views/templates/footer.html", "/index.html","/").permitAll()
+			.antMatchers("/public/**","/views/**","/login","/views/login.html", "/index.html","/").permitAll()			
+			/*.antMatchers("/public/**","/views/templates/menu.html", "/views/templates/footer.html", "/views/templates/header.html", "/views/pages/modulo_admin/empresa_contratada/js",
+					"/views/pages/modulo_cadastros/area/js", "/views/pages/modulo_cadastros/fabricante/js",	"/views/pages/modulo_cadastros/fornecedor/js",
+					"/views/pages/modulo_cadastros/produto/categoria/js", "/views/pages/modulo_cadastros/produto/tipo/js", "/views/pages/modulo_cadastros/produto/js",
+					"/views/pages/modulo_compras/compras/js", "/views/pages/modulo_compras/cotacao/js",
+					"/views/pages/modulo_estoque/js", "/views/pages/modulo_estoque/gerenciamento/js", "/views/pages/modulo_estoque/requisicao/js", "/views/pages/modulo_estoque/transferencia/js",
+					"/views/pages/modulo_gerenciamento/empreendimento/configuracao/js", "/views/pages/modulo_gerenciamento/empreendimento/empreendimento/js",
+					"/views/pages/modulo_gerenciamento/usuario/js",
+					"/views/pages/modulo_recursos_humanos/cargo/js", "/views/pages/modulo_recursos_humanos/funcionario/js",
+					"/views/pages/modulo_servicos/pacotes/js", "/views/pages/modulo_servicos/prestadora_servicos/js", "/views/pages/modulo_servicos/vincular/js",
+					"/login","/views/login.html", "/index.html","/").permitAll()*/
 			.anyRequest().authenticated()
 			.and()
 			.logout()
@@ -47,8 +53,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		
 		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
-		//PasswordEncoder passwordEncoder = new CustomPasswordEncoder();
-	//	auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+		 
+		 
+//		auth
+//            .inMemoryAuthentication()
+//                .withUser("user").password("123").roles("USER");
 	}
 
 	

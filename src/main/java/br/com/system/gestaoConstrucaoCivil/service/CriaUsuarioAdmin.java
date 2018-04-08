@@ -1,51 +1,91 @@
 package br.com.system.gestaoConstrucaoCivil.service;
 
-import java.util.Arrays;
 
+import java.util.List;
+import java.util.Scanner;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+import br.com.system.gestaoConstrucaoCivil.entity.Permissao;
+import br.com.system.gestaoConstrucaoCivil.entity.PermissaoUsuario;
 import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
-import br.com.system.gestaoConstrucaoCivil.enuns.PerfilUsuarioEnum;
+import br.com.system.gestaoConstrucaoCivil.repository.PermissaoRepository;
 
 
 @Component
-public class CriaUsuarioAdmin implements ApplicationListener<ContextRefreshedEvent>{
+public class CriaUsuarioAdmin {
 
 	@Autowired
 	private UsuarioService usuarioService;
+	private final Logger log = LoggerFactory.getLogger(CriaUsuarioAdmin.class);
+	@Autowired
+	private PermissaoRepository permissaoRepository;
+	@Autowired
+	private PermissaoUsuarioService permissaoUsuarioService;
 	
 	
+	@EventListener(ContextRefreshedEvent.class)
+    void contextRefreshedEvent() {
+       
+		//criarUsuario();
+    }
 	private void criarUsuario()
 	{
+		
 		if(usuarioService.existeLoginCadastrado("root") == false)
 		{
-			System.out.println("Usuário root não encontrado.");
-			System.out.println("Criando usuário root.");
+			log.warn("Usuário root não encontrado.");
+			log.info("Criando usuário root.");
 			usuarioService.salvarOuEditar(criarObjetoUsuario());
-		    System.out.println("Usuário root criado.");
+			log.info("Usuário root criado.");
+			colocarTodasPermissaosNoRoot();
 		}else
 		{
-			System.out.println("Usuário root [OK]");
+			log.info("Usuário root [OK]");
 		}
 			
 	}
+	
+	private void colocarTodasPermissaosNoRoot()
+	{
+		List<Permissao> permissoes = permissaoRepository.findAll();
+		Usuario usuarioRoot = usuarioService.buscarPorLogin("root");
+		
+		for(Permissao permissao : permissoes)
+		{
+			PermissaoUsuario permissaoUsuario = new PermissaoUsuario();
+			permissaoUsuario.setPermissao(permissao);
+			permissaoUsuario.setUsuario(usuarioRoot);
+		    permissaoUsuarioService.salvarOuEditar(permissaoUsuario);
+		    
+		}
+	}
+
     private Usuario criarObjetoUsuario()
     {
+    	
     	Usuario usuario = new Usuario();
 		usuario.setAtivo(true);
 		usuario.setLogin("root");
+		usuario.setSenha(pedirSenha());
 		usuario.setEmail("root@suporte.com.br");
-	    usuario.setSenha("root951951");
-	    usuario.setNome("Usuario root");
-	    usuario.setPerfilsUsuario(Arrays.asList(PerfilUsuarioEnum.ADMIN));
+		usuario.setNome("Usuario root");
 	    return usuario;
     }
-	@Override
-	public void onApplicationEvent(ContextRefreshedEvent event) {
-		criarUsuario();
-		
-	}
+    private String pedirSenha()
+    {
+    	 
+    	Scanner lerSenha = new Scanner(System.in);
+    	 System.out.println("Digite uma senha para o usuário root:");
+    	  String senha = lerSenha.nextLine();
+    	  lerSenha.close();
+    	  return senha;
+    	
+    	
+    }
 }

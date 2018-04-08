@@ -1,18 +1,15 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.ItemNotaFiscal;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.NotaFiscalItem;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.NotaFiscalProduto;
-import br.com.system.gestaoConstrucaoCivil.enuns.Situacao;
-import br.com.system.gestaoConstrucaoCivil.pojo.EntradaOuBaixa;
 import br.com.system.gestaoConstrucaoCivil.pojo.InformacaoEntradaProduto;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.NotaFiscalProdutoRepository;
@@ -25,8 +22,11 @@ public class NotaFiscalProdutoService {
 	@Autowired
 	private NotaFiscalProdutoRepository notaFiscalProdutoRepository;
 	@Autowired
-	private EstoqueEmpreendimentoService estoque;
-    @Autowired
+	private EntradaEstoqueService entradaEstoque;
+	@Autowired
+	private BaixaEstoqueService baixarEstoque;
+	
+	@Autowired
     private EmpreendimentoService empreendimentoService;
     
     
@@ -38,32 +38,17 @@ public class NotaFiscalProdutoService {
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(NotaFiscalProduto notaFiscalProduto) {
 
-		adicionarNotaProdutoItens(notaFiscalProduto);
-		Empreendimento empreendimentoDoUsuario = SessionUsuario.getInstance().getUsuario().getEmpreendimento(); 
-		notaFiscalProduto.getNotaFiscal().setEmpreendimento(empreendimentoDoUsuario);
+		notaFiscalProduto.novaNotaProduto();
 		notaFiscalProdutoRepository.save(notaFiscalProduto);
-		
-	    empreendimentoService.adcionarValorGasto(notaFiscalProduto.getNotaFiscal().getValorTotal());
-       
-        for(ItemNotaFiscal itemNota : notaFiscalProduto.getItens())
-        {
-        	 EntradaOuBaixa entrada = new EntradaOuBaixa(itemNota.getProduto(), itemNota.getQuantidade(),empreendimentoDoUsuario);
-        	estoque.entradaEstoque(entrada); 
-        }
-       
+		empreendimentoService.adcionarValorGasto(notaFiscalProduto.getNotaFiscal().getValorTotal());
+	    entradaEstoque.entradaEstoque(notaFiscalProduto);
+      
      }
 
-	public NotaFiscalProduto buscarPorId(Long id) {
+	public Optional<NotaFiscalProduto> buscarPorId(Long id) {
 
-		return notaFiscalProdutoRepository.findOne(id);
+		return notaFiscalProdutoRepository.findById(id);
 	}
-
-	private void adicionarNotaProdutoItens(NotaFiscalProduto nota) {
-		for (int i = 0; i < nota.getItens().size(); i++) {
-			nota.getItens().get(i).setNotaFiscalProduto(nota);
-		}
-	}
-
 	public InformacaoEntradaProduto getInformacaoProduto(Long idProduto) {
 
 		return gerarInformacao(idProduto);
@@ -77,7 +62,7 @@ public class NotaFiscalProdutoService {
 		Integer quantidadeTotal = 0;
 		for (NotaFiscalProduto notaFiscal : notas) {
 
-			for (ItemNotaFiscal item : notaFiscal.getItens()) {
+			for (NotaFiscalItem item : notaFiscal.getItens()) {
 				
 				if (item.getProduto().getId().equals(idProduto)) {
 					
@@ -92,13 +77,9 @@ public class NotaFiscalProdutoService {
 	public void cancelarEntrada(Long numeroEntrada)
 	{
 		NotaFiscalProduto nota = notaFiscalProdutoRepository.buscarPorNumero(numeroEntrada);
-		for(ItemNotaFiscal item : nota.getItens())
-		{
-			EntradaOuBaixa baixa = new EntradaOuBaixa(item.getProduto(), item.getQuantidade(), nota.getNotaFiscal().getEmpreendimento());
-			estoque.baixar(baixa);
-		}
+		baixarEstoque.baixar(nota);
 		empreendimentoService.removerValorGasto(nota.getNotaFiscal().getValorTotal());
-		nota.getNotaFiscal().setSituacao(Situacao.CANCELADA);
+		nota.getNotaFiscal().cancelarNota();
 		notaFiscalProdutoRepository.save(nota);
 	}
 }

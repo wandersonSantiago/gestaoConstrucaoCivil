@@ -20,17 +20,19 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.system.gestaoConstrucaoCivil.enuns.EstadoCivilEnum;
-import br.com.system.gestaoConstrucaoCivil.enuns.UfEnum;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "pessoa")
+@Table(name = "pessoa" , schema = "communs")
 public abstract class Pessoa implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@Column(unique = true, nullable = false)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private Long id;
+	
 	@Column(nullable = false,length = 50)
 	protected String nomeCompleto;
 	@Column(nullable = false)
@@ -47,8 +49,9 @@ public abstract class Pessoa implements Serializable{
 	protected String telefoneFixo;
 	@Column(nullable = false,length = 15)
 	protected String telefoneCelular;
+
 	@Temporal(TemporalType.DATE)
-	@Column(nullable = false)
+	@Column(name = "data_nascimento")
 	protected Date dataNascimento;
 	@Column(nullable = false)
 	protected String sexo;
@@ -56,6 +59,15 @@ public abstract class Pessoa implements Serializable{
 	@Enumerated(EnumType.STRING)
 	protected EstadoCivilEnum estadoCivil;
 	
+	
+	
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getNomeCompleto() {
 		return nomeCompleto;
 	}
@@ -104,13 +116,6 @@ public abstract class Pessoa implements Serializable{
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
 	public String getSexo() {
 		return sexo;
 	}
@@ -124,30 +129,5 @@ public abstract class Pessoa implements Serializable{
 	public void setEstadoCivil(EstadoCivilEnum estadoCivil) {
 		this.estadoCivil = estadoCivil;
 	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Pessoa other = (Pessoa) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
-    
 	
 }

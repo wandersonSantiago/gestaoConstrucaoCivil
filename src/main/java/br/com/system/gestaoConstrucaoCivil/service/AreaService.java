@@ -1,6 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,8 +28,8 @@ public class AreaService {
 		
 		return areaRepository.findAll();
 	}
-    public AreaProduto buscarPorId(Long id)
+    public Optional<AreaProduto> buscarPorId(Long id)
     {
-    	return areaRepository.findOne(id);
+    	return areaRepository.findById(id);
     }
 }

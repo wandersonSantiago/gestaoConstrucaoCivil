@@ -1,0 +1,163 @@
+<meta charset="UTF-8">
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item "><a href="#/administrador/home">Modulo Administrador</a></li>
+   <li class="breadcrumb-item "><a href="#/auditoria/menu">Menu Auditoria</a></li>
+   <li class="breadcrumb-item active">Estoque</li>
+ </ol>
+<div class="row" ng-controller="auditoriaEstoqueController as auditoriaCtrl">
+	<div class="col-sm-2">
+	 <div class="box box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">Menu</h3>
+
+              <div class="box-tools">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+		<div class="box-body no-padding">
+              <ul class="nav nav-pills nav-stacked">
+                <li><a href="" ng-click="auditoriaCtrl.buscarEntrada()"><i class="fa fa-sign-in"></i>Entrada</a></li>
+                <li><a href="" ng-click="auditoriaCtrl.buscarSaida()"><i class="fa  fa-sign-out"></i>Saida</a></li>
+              <!--   <li><a href="" ng-click="auditoriaCtrl.buscarTranfereciaEntrada()"><i class="fa fa-barcode "></i> Requisições</a></li>
+                <li><a href="" ng-click="auditoriaCtrl.buscarTransferenciaSaida()"><i class="fa fa-random"></i>Transferencias Entrada</a>
+                 <li><a href="" ng-click="auditoriaCtrl.buscarRequisicao()"><i class="fa fa-random"></i>Transferencias Saida</a>-->
+                </li>
+              </ul>
+            </div>
+           </div>
+        </div>
+       <div class="col-sm-10">     
+			<div class="box box-primary" >	
+					<div class="box-header">Auditoria Estoque</div>
+					<div class="panel-body">
+					<!--	<div class="row ">
+							<div class="col-sm-2">
+						    <div class="dropdown">
+						        <button class="btn btn-warning btn-export dropdown-toggle" margin-right=46px type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						            Exportar <span class="caret"></span>
+						        </button>			
+						        <ul class="table-export dropdown-menu"
+						        table-selector="'auxTable'"
+						        export-options="{type: 'pdf', escape: true, ignoreColumn : '[4]', tableName: 'listaEstoque' }"
+						        aria-labelledby="dropdownMenu1">
+						            <li >
+						                <a href="" ng-click="auditoriaCtrl.exportar('pdf')">PDF</a>
+						            </li>
+						
+						            <li te-option te-value="'excel'" te-param="'type'">
+						                <a href="">Excel</a>
+						            </li>
+						
+						            <li te-option te-value="'csv'" te-param="'type'">
+						                <a href="">CSV</a>
+						            </li>
+						        </ul>
+						    </div>
+						    </div>
+						</div>-->
+						<div class="row">
+							<div class="col-sm-4">
+								<input class="form-control" type="text" placeholder="Pesquisar..." ng-model="buscar" >
+							</div>
+						</div>
+						<div class="table-responsive">
+							<table class="export-table table  table-bordered " st-table="auditoriaCtrl.listaAuditoria" st-filtered-collection="filteredCollection" class="table table-striped">
+								<thead>
+									<tr>						 
+										<th>Tipo Movimentação</th>
+										<th>Data</th>
+										<th>Usuario</th>
+										<th>Empreendimento</th>
+										<th>Produto</th>
+										<th>Quantidade</th>
+										
+									</tr>
+								</thead>
+								<tbody
+									ng-repeat=" lista in auditoriaCtrl.listaAuditoria | filter : buscar | orderBy : 'id' ">
+									<tr>
+										<td>{{lista.tipoMovimentacao}}</td>
+										<td>{{lista.dataCadastro}}</td>
+										<td>{{lista.usuarioCadastro.login}}</td>
+										<td>{{lista.empreendimento.descricao}}</td>
+										<td>{{lista.produto.descricao}}</td>
+										<td>{{lista.quantidade}}</td>
+										<td ng-if="ROLE_MODULO_ESTOQUE_ALTERA_LIMITE"><a href="#/estoque/alteracao/{{lista.produto.codigo}}"><i class="glyphicon glyphicon-edit"></i></a> 
+										
+									</tr>
+				
+								</tbody>
+								<tfoot>
+								
+									
+								</tfoot>
+							</table>
+							<table id="auxTable" style="opacity: 0; position: absolute;" >
+								<thead>
+									<tr>						 
+										<th>Código</th>
+										<th>Descrição</th>
+										<th>Categoria</th>
+										<th>Tipo</th>
+										<th>Unidade Medida</th>						
+										<th>quantidade Estoque</th>
+										<th>Custo médio</th>
+										<th>Valor Total</th>
+									</tr>
+								</thead>
+								<tbody
+									ng-repeat=" lista in auditoriaCtrl.listaAuditoria | filter : buscar | orderBy : 'id' ">
+									<tr>
+										<td>{{lista.produto.codigo}}</td>
+										<td>{{lista.produto.descricao}}</td>
+										<td>{{lista.produto.categoria.descricao}}</td>
+										<td>{{lista.produto.tipoProduto.descricao}}</td>
+										<td>{{lista.produto.unidadeMedida}}</td>
+										<td>{{lista.quantidade}}</td>
+										<td>{{lista.custoMedio | currency}}</td>
+									    <td>{{lista.valorTotal | currency}}</td>
+									
+										<td ng-if="ROLE_MODULO_ESTOQUE_ALTERA_LIMITE"><a href="#/estoque/alteracao/{{lista.produto.codigo}}"><i class="glyphicon glyphicon-edit"></i></a> 
+										
+									</tr>
+				
+								</tbody>
+								<tfoot>
+								
+									
+								</tfoot>
+							</table>
+							</div>
+							<div class="row">
+								<div class="col-sm-5"></div>				
+								<div class="2">				
+									<nav>
+										<ul class="pagination">
+										
+											<li class="{{0==auditoriaCtrl.getPage ?'disabled':''}}"><a
+												ng-if="0!=auditoriaCtrl.getPage" ng-click="auditoriaCtrl.auditoria(auditoriaCtrl.getPage -1, maxResults)"
+												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+											</a> <a ng-if="0==auditoriaCtrl.getPage" aria-label="Previous"> <span
+													aria-hidden="true">&laquo;</span></a></li>
+											<li ng-repeat="page in auditoriaCtrl.totalPages"
+												class="{{page==auditoriaCtrl.getPage ?'active':''}}"><a
+												ng-click="auditoriaCtrl.auditoria(page , maxResults)">{{page + 1}}</a></li>
+											<li class="{{auditoriaCtrl.getPage+1 == totalPages ?'disabled':''}}"><a
+												ng-if="auditoriaCtrl.getPage+1 != totalPages"
+												ng-click="auditoriaCtrl.auditoria(auditoriaCtrl.getPage+1, maxResults)" aria-label="Next"> <span
+													aria-hidden="true">&raquo;</span>
+											</a> <a ng-if="auditoriaCtrl.getPage+1==totalPages" aria-label="Next"> <span
+													aria-hidden="true">&raquo;</span>
+											</a></li>
+											
+										</ul>
+									</nav>
+								</div>
+							</div>
+			
+						</div>
+				</div>
+		</div>
+</div>

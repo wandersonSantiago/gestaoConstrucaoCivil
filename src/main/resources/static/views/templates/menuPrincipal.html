@@ -1,0 +1,445 @@
+<meta charset="UTF-8">
+<aside class="main-sidebar" ng-controller="usuarioController as userCtrl">
+
+	<section class="sidebar" ng-init="userCtrl.user()">
+
+<!-- dados do usuario logado -->
+		<div class="user-panel">
+			<div class="pull-left image">
+				<img src="public/img/avatar_2x.png" class="img-circle"
+					alt="User Image">
+			</div>
+			<div class="pull-left info" ng-controller="usuarioController as userCtrl">
+				<p>{{user.usuario.login}}</p>
+				<a href="#"><i class="glyphicon glyphicon-star-empty"></i> Online</a>
+			</div>
+		</div>
+		<form action="" class="sidebar-form">
+            <div class="input-group">
+              <input type="text" name="q" class="form-control" ng-model="buscaMenu" placeholder="busca">
+              <span class="input-group-btn">
+                <button   class="btn btn-flat"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+          </form>
+
+
+		<div>
+		
+		</div>
+<!-- menu admin Sistema -->
+		<ul class="sidebar-menu">
+			
+			
+			<li  class="header">Administrador</li>
+			 <li   class="treeview">
+		          <a href="">
+		            <i class="fa fa-institution"></i>
+		            <span>Empresa</span>
+		            <span class="pull-right-container">
+		              <i class="fa fa-angle-left pull-right"></i>
+		            </span>
+		          </a>
+		          <ul class="treeview-menu">
+		           		<li ><a href="#/empresa_contratada/cadastro">Cadastro</a></li>
+						<li ><a href="#/empresa_contratada/listagem" > Listagem</a></li>
+		          </ul>
+		        </li>
+			
+				
+                   <!-- Menu chamado -->
+                                                   
+           <li class="header">Chamado</li>
+				 <li  class="treeview">
+			          <a href="">
+			            <i class="fa  fa-envelope-o"></i>
+			            <span>Informática</span>
+			            <span class="pull-right-container">
+			              <i class="fa fa-angle-left pull-right"></i>
+			            </span>
+			          </a>
+			          <ul class="treeview-menu">
+			           		<li ><a class="top" href="#/chamado/informatica/cadastrar">cadastrar</a></li>
+							<li ><a class="top" href="#/chamado/informatica/lista">Meus Chamados</a></li>
+							<li ><a class="top" href="#/chamado/informatica/suporte/lista">Suporte Chamado</a></li>
+							<li  ><a class="top" href="#/chamado/informatica/suporte/relatorio">Relatório</a></li>
+			          </ul>
+			        </li>
+	            <li   class="treeview">
+				          <a href="">
+				            <i class="fa  fa-envelope-o"></i>
+				            <span>Manutenção</span>
+				            <span class="pull-right-container">
+				              <i class="fa fa-angle-left pull-right"></i>
+				            </span>
+				          </a>
+				          <ul class="treeview-menu">
+				           		<li><a class="top" href="#/chamado/manutencao/cadastrar">cadastro</a></li>
+							<li ><a class="top" href="#/chamado/manutencao/lista">Meus Chamados</a></li>
+							<li ><a class="top" href="#/chamado/manutencao/suporte/lista">Suporte Chamado</a></li>
+							<li ><a class="top" href="#/chamado/manutencao/suporte/relatorio">Relatório</a></li>
+						 </ul>
+				        </li>
+										
+					
+					
+	
+<!-- menu admin Empresa -->		
+			<li class="header">Gerenciamento</li>
+				 <li  class="treeview">
+			          <a href="">
+			            <i class="fa fa-user"></i>
+			            <span>Usuário</span>
+			            <span class="pull-right-container">
+			              <i class="fa fa-angle-left pull-right"></i>
+			            </span>
+			          </a>
+			          <ul class="treeview-menu">
+			           		<li ><a class="top" href="#/usuario/cadastro">Cadastro</a></li>
+							<li ><a class="top" href="#/usuario/listagem">Listagem</a></li>
+			          </ul>
+			        </li>
+			        
+			        <li  class="treeview">
+			          <a href="">
+			            <i class="fa  fa-unlock-alt"></i>
+			            <span>Permissão</span>
+			            <span class="pull-right-container">
+			              <i class="fa fa-angle-left pull-right"></i>
+			            </span>
+			          </a>
+			          <ul class="treeview-menu">
+			           		<li ><a class="top" href="#/usuario/permissao/cadastro">Cadastro</a></li>
+							<li ><a class="top" href="#/usuario/permissao/listagem">Listagem</a></li>
+			          </ul>
+			        </li>
+		
+				 <li  class="treeview">
+					          <a href="">
+					            <i class="fa fa-bank"></i>
+					            <span>Empreendimento</span>
+					            <span class="pull-right-container">
+					              <i class="fa fa-angle-left pull-right"></i>
+					            </span>
+					          </a>
+					          <ul class="treeview-menu">
+					           		<li ><a class="top" href="#/empreendimento/cadastro">Cadastro</a></li>
+									<li ><a class="top" href="#/empreendimento/listagem">Listagem</a></li>
+					          </ul>
+					        </li>
+					        
+	         	<li   class="treeview">
+			          <a href="">
+			            <i class="fa fa-cog "></i>
+			            <span>Config. Empreendimento</span>
+			            <span class="pull-right-container">
+			              <i class="fa fa-angle-left pull-right"></i>
+			            </span>
+			          </a>
+			          <ul class="treeview-menu">
+			           		<li><a class="top" href="#/empreendimento/configuracao/cadastro">Cadastro</a></li>
+						<li ><a class="top" href="#/empreendimento/configuracao/listagem">Listagem</a></li>
+			          </ul>
+			        </li>
+										
+				
+		
+		<!-- menu Serviços -->		
+		
+		<li  class="header">Serviços</li>
+				 <li   class="treeview">
+			          <a href="">
+			            <i class="fa fa-hand-o-right"></i>
+			            <span>Prestadora de Serviços</span>
+			            <span class="pull-right-container">
+			              <i class="fa fa-angle-left pull-right"></i>
+			            </span>
+			          </a>
+			          <ul class="treeview-menu">
+			           		<li ><a class="top" href="#/servicos/prestadora/cadastro">Cadastro</a></li>
+				    	    <li ><a class="top" href="#/servicos/prestadora/listagem">Lista</a></li>
+			          		<li ><a class="top" href="#/servicos/prestadora/relatorio">Relatório</a></li>
+			          </ul>
+			        </li>
+		        
+		        <li   class="treeview">
+			          <a href="">
+			            <i class="fa fa-cube"></i>
+			            <span>Pacotes de Serviços</span>
+			            <span class="pull-right-container">
+			              <i class="fa fa-angle-left pull-right"></i>
+			            </span>
+			          </a>
+			          <ul class="treeview-menu">
+			           		<li ><a class="top" href="#/servicos/pacotes/cadastro">Cadastro</a></li>
+							<li ><a class="top" href="#/servicos/pacotes/lista">Lista</a></li>
+							<li ><a class="top" href="#/servicos/pacotes/relatorio">Relatório</a></li>
+			          </ul>
+			        </li>
+			
+			<li   class="treeview">
+			          <a href="">
+			            <i class="fa fa-cube"></i>
+			            <span>Vincular Serviços</span>
+			            <span class="pull-right-container">
+			              <i class="fa fa-angle-left pull-right"></i>
+			            </span>
+			          </a>
+			          <ul class="treeview-menu">
+			           		<li ><a class="top" href="#/servicos/vincular/cadastro">Cadastro</a></li>
+							<li ><a class="top" href="#/servicos/vincular/listagem">Lista</a></li>
+			          </ul>
+			        </li>
+			<li   class="treeview">
+			          <a href="">
+			            <i class="fa fa-cube"></i>
+			            <span>Vistoria dos Serviços</span>
+			            <span class="pull-right-container">
+			              <i class="fa fa-angle-left pull-right"></i>
+			            </span>
+			          </a>
+			          <ul class="treeview-menu">
+			           		<li><a class="top" href="#/servicos/vistoria">Vistoria</a></li>
+							<li><a class="top" href="#/servicos/vincular/relatorio">Relatório</a></li>
+			          </ul>
+			        </li>
+			        
+			 <li  class="treeview">
+			          <a href="">
+			            <i class="fa fa-cube"></i>
+			            <span>Pagamento dos Serviços</span>
+			            <span class="pull-right-container">
+			              <i class="fa fa-angle-left pull-right"></i>
+			            </span>
+			          </a>
+			          <ul class="treeview-menu">
+			           		<li ><a class="top" href="#/servicos/pagamento/liberar">Liberar Pagamento</a></li>
+							<li ><a class="top" href="#/servicos/pagamento/efetuar">Efetuar Pagamento</a></li>
+							<li ><a class="top" href="#/servicos/pagamento/relatorio">Relatório</a></li>
+				        </ul>
+			        </li>
+		
+		
+		<!-- menu recursos humanos -->
+				
+			<li class="header">Recursos Humanos</li>
+				 <li   class="treeview">
+			          <a href="">
+			            <i class="glyphicon glyphicon-user"></i>
+			            <span>Funcionário</span>
+			            <span class="pull-right-container">
+			              <i class="fa fa-angle-left pull-right"></i>
+			            </span>
+			          </a>
+			          <ul class="treeview-menu">
+			           		<li ><a class="top" href="#/funcionario/cadastro">Cadastro</a></li>
+							<li ><a class="top" href="#/funcionario/lista">Lista</a></li>
+			          </ul>
+			        </li>
+		
+			<li  class="treeview">
+			          <a href="">
+			            <i class="fa  fa-suitcase"></i>
+			            <span>Cargo</span>
+			            <span class="pull-right-container">
+			              <i class="fa fa-angle-left pull-right"></i>
+			            </span>
+			          </a>
+			          <ul class="treeview-menu">
+			           		<li ><a class="top" href="#/cargo/cadastro">Cadastro</a></li>
+						<li><a class="top" href="#/cargo/lista">Lista</a></li>
+			          </ul>
+			        </li>                   
+                
+               <!-- menu Compras  -->
+               	 
+               <li class="header">Compras</li>
+				 <li  class="treeview">
+			          <a href="">
+			            <i class="fa fa-money"></i>
+			            <span>Cotação</span>
+			            <span class="pull-right-container">
+			              <i class="fa fa-angle-left pull-right"></i>
+			            </span>
+			          </a>
+			          <ul class="treeview-menu">
+			           		<li ><a class="top" href="#/cotacao/gerar">Gerar </a></li>
+								<li><a class="top" href="#/cotacao/em_aberto">em aberto</a></li>
+			          </ul>
+			        </li>
+			        
+		        <li  class="treeview">
+			          <a href="">
+			            <i class="fa fa-shopping-cart"></i>
+			            <span>Compras</span>
+			            <span class="pull-right-container">
+			              <i class="fa fa-angle-left pull-right"></i>
+			            </span>
+			          </a>
+			          <ul class="treeview-menu">
+			           			<li ><a class="top" href="#/compras/cadastro">Pedido de compra</a></li>
+								<li ><a class="top" href="#/compras/lista">Lista de compra</a></li>
+			          </ul>
+			        </li>
+		
+		               
+		<!-- menu Almoxarifado  -->		
+			
+			<li  class="header">Almoxarifado</li>
+				 <li   class="treeview">
+			          <a href="">
+			            <i class="fa fa-cubes"></i>
+			            <span>Estoque</span>
+			            <span class="pull-right-container">
+			              <i class="fa fa-angle-left pull-right"></i>
+			            </span>
+			          </a>
+			          <ul class="treeview-menu">
+			           		<li ><a class="top" href="#/estoque/entrada">Entrada</a></li>
+							<li ><a class="top" href="#/estoque/listagem">Consultar</a></li>
+							<li ><a class="top" href="#/estoque/relatorio">Relatório</a></li> 
+			          </ul>
+			        </li>
+			        
+		        <li  class="treeview">
+			          <a href="">
+			            <i class="fa fa-file-word-o"></i>
+			            <span>Requisição</span>
+			            <span class="pull-right-container">
+			              <i class="fa fa-angle-left pull-right"></i>
+			            </span>
+			          </a>
+			          <ul class="treeview-menu">
+			           		<li ><a class="top" href="#/estoque/requisicao/cadastro">Cadastrar</a></li>
+							<li ><a class="top" href="#/estoque/requisicao/listagem">Consulta</a></li>
+			          </ul>
+			        </li>
+            
+            	 <li  class="treeview">
+			          <a href="">
+			            <i class="fa fa-exchange"></i>
+			            <span>Transferência</span>
+			            <span class="pull-right-container">
+			              <i class="fa fa-angle-left pull-right"></i>
+			            </span>
+			          </a>
+			          <ul class="treeview-menu">
+			           		<li ><a class="top" href="#/estoque/transferencia/cadastro">Nova</a></li>
+							<li ><a class="top" href="#/estoque/transferencia/enviadas">Enviadas</a></li>
+							<li ><a class="top" href="#/estoque/transferencia/recebidas">Recebidas</a></li>
+			          </ul>
+			        </li>  		 
+             
+             <!-- menu Cadastros-->
+				<li  class="header">Cadastros</li>
+				 <li   class="treeview">
+			          <a href="">
+			            <i class="fa  fa-child"></i>
+			            <span>Cliente Morador</span>
+			            <span class="pull-right-container">
+			              <i class="fa fa-angle-left pull-right"></i>
+			            </span>
+			          </a>
+			          <ul class="treeview-menu">
+			           		<li ><a class="top" href="#/morador/cadastrar">Cadastro</a></li>
+							<li ><a class="top" href="#/morador/listar">Lista</a></li>
+			          </ul>
+			        </li>
+			              
+			              
+			      <li  class="treeview">
+			          <a href="">
+			            <i class="fa  fa-truck"></i>
+			            <span>Fornecedor</span>
+			            <span class="pull-right-container">
+			              <i class="fa fa-angle-left pull-right"></i>
+			            </span>
+			          </a>
+			          <ul class="treeview-menu">
+			           		<li><a class="top" href="#/fornecedor/cadastro">Cadastro</a></li>
+							<li ><a class="top" href="#/fornecedor/lista">Lista</a></li>
+			          </ul>
+			        </li>                      
+                
+                        
+                        
+                   <li ng-if="ROLE_MODULO_CADASTROS_FABRICANTE_CADASTRAR || ROLE_MODULO_CADASTROS_FABRICANTE_CONSULTAR"   class="treeview">
+			          <a href="">
+			            <i class="fa  fa-cogs"></i>
+			            <span>Fabricante</span>
+			            <span class="pull-right-container">
+			              <i class="fa fa-angle-left pull-right"></i>
+			            </span>
+			          </a>
+			          <ul class="treeview-menu">
+			           		<li ng-if="ROLE_MODULO_CADASTROS_FABRICANTE_CADASTRAR" ><a class="top" href="#/fabricante/cadastro">Cadastro</a></li>
+							<li ng-if="ROLE_MODULO_CADASTROS_FABRICANTE_CONSULTAR"><a class="top" href="#/fabricante/lista">Lista</a></li>
+			          </ul>
+			        </li>                  
+                   
+                   
+                   <li   class="treeview">
+			          <a href="">
+			            <i class="fa  fa-arrows"></i>
+			            <span>Local de aplicação</span>
+			            <span class="pull-right-container">
+			              <i class="fa fa-angle-left pull-right"></i>
+			            </span>
+			          </a>
+			          <ul class="treeview-menu">
+			           		<li ><a class="top" href="#/area/cadastro">Cadastro</a></li>
+							<li ><a class="top" href="#/area/lista">Lista</a></li>
+			          </ul>
+			        </li> 
+                   
+                   <li   class="treeview">
+			          <a href="">
+			            <i class="fa fa-hand-o-right"></i>
+			            <span>Categoria</span>
+			            <span class="pull-right-container">
+			              <i class="fa fa-angle-left pull-right"></i>
+			            </span>
+			          </a>
+			          <ul class="treeview-menu">
+			           		<li ><a class="top" href="#/produto/categoria/cadastro">Cadastro</a></li>
+							<li ><a class="top" href="#/produto/categoria/lista">Lista</a></li>
+			          </ul>
+			        </li> 
+                   
+                   
+                   <li   class="treeview">
+			          <a href="">
+			            <i class="fa fa-pie-chart"></i>
+			            <span>Tipo Produto</span>
+			            <span class="pull-right-container">
+			              <i class="fa fa-angle-left pull-right"></i>
+			            </span>
+			          </a>
+			          <ul class="treeview-menu">
+			           		<li ><a class="top" href="#/produto/tipo/cadastro">Cadastro</a></li>
+							<li ><a class="top" href="#/produto/tipo/lista">Lista</a></li>
+			          </ul>
+			        </li> 
+                   
+                   
+                   <li   class="treeview">
+			          <a href="">
+			            <i class="fa fa-cubes"></i>
+			            <span>Produto</span>
+			            <span class="pull-right-container">
+			              <i class="fa fa-angle-left pull-right"></i>
+			            </span>
+			          </a>
+			          <ul class="treeview-menu">
+			           		<li ><a class="top" href="#/produto/cadastro">Cadastro</a></li>
+							<li ><a class="top" href="#/produto/lista">Lista</a></li>
+			          </ul>
+			        </li> 
+   
+		</ul>				 	
+	</section>
+</aside>
+		
+			
+
+

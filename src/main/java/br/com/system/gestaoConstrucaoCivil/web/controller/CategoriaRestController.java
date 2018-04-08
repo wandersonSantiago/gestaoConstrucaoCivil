@@ -1,25 +1,25 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Categoria;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoCategoriaEnum;
-import br.com.system.gestaoConstrucaoCivil.enuns.UfEnum;
-import br.com.system.gestaoConstrucaoCivil.service.CategoriaService;
-import br.com.system.gestaoConstrucaoCivil.service.servicos.Servico;
+import br.com.system.gestaoConstrucaoCivil.service.interfaceservice.Servico;
 
 @RestController
 @RequestMapping("/rest/almoxarifado/categoria")
@@ -27,42 +27,38 @@ public class CategoriaRestController {
 
 	@Autowired
 	private Servico<Categoria> categoriaService;
-	@RequestMapping(method = RequestMethod.GET, value = "/lista")
-	public ResponseEntity<Iterable<Categoria>> buscarCategoria() {
-	Iterable<Categoria> categoria = categoriaService.buscarTodos();
-		return new ResponseEntity<Iterable<Categoria>>(categoria, HttpStatus.OK);
+
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value = "/lista")
+	public List<Categoria> buscarTodos() {
+		return categoriaService.buscarTodos();
+	}
+
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value = "/buscaPorId/{id}")
+	public Optional<Categoria> buscarPorId(@PathVariable Long id) {
+
+		return categoriaService.findById(id);
 	}
 	
-	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Categoria> buscarCategoriaPorId(@PathVariable Long id) {
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping(value = "/salva")
+	public void salvar(@RequestBody @Validated Categoria categoria, BindingResult result) {
 
-		return new ResponseEntity<Categoria>(categoriaService.buscarPorId(id), HttpStatus.OK);
-	}
-	@RequestMapping(value = "/salva", method = RequestMethod.POST)
-	public ResponseEntity salvar(@RequestBody  @Validated Categoria categoria,BindingResult result, UriComponentsBuilder ucBuilder) {
-		
-		
 		CategoriaValidator v = new CategoriaValidator();
-   	     v.validate(categoria, result);
+		v.validate(categoria, result);
 		categoriaService.salvarOuEditar(categoria);
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("rest/almoxarifado/categoria/salva/{id}").buildAndExpand(categoria.getId()).toUri());
-		return new ResponseEntity(headers, HttpStatus.CREATED);
-	}
-
-	@RequestMapping(value = "/altera", method = RequestMethod.PUT)
-	public ResponseEntity alterar(@RequestBody Categoria categoria, UriComponentsBuilder ucBuilder) {
-		categoriaService.salvarOuEditar(categoria);
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("rest/almoxarifado/categoria/altera/{categoria}")
-				.buildAndExpand(categoria.getId()).toUri());
-		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value="/tipoCategoria")
-	 public ResponseEntity<Iterable<TipoCategoriaEnum>> tipoCategoria() {
-	Iterable<TipoCategoriaEnum> tipoCategoriaEnum = Arrays.asList(TipoCategoriaEnum.values());
-	return new ResponseEntity<Iterable<TipoCategoriaEnum>>(tipoCategoriaEnum, HttpStatus.OK);
-}
+	@ResponseStatus(HttpStatus.CREATED)
+	@PutMapping(value = "/altera")
+	public void alterar(@RequestBody Categoria categoria) {
+		categoriaService.salvarOuEditar(categoria);
+	}
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value = "/tipoCategoria")
+	public List<TipoCategoriaEnum> tipoCategoria() {
+		return Arrays.asList(TipoCategoriaEnum.values());
+	}
 
 }

@@ -1,15 +1,22 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller.servicos;
 
+import java.util.Collection;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
+import br.com.system.gestaoConstrucaoCivil.entity.servicos.ServicoEdificio;
 import br.com.system.gestaoConstrucaoCivil.entity.servicos.ServicoEmpresa;
 import br.com.system.gestaoConstrucaoCivil.service.servicos.ServicoEmpresaService;
 
@@ -18,23 +25,75 @@ import br.com.system.gestaoConstrucaoCivil.service.servicos.ServicoEmpresaServic
 public class ServicoEmpresaRestController {
 
 	@Autowired
-	 private ServicoEmpresaService servicoService;
+	private ServicoEmpresaService servicoService;
+
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value = "/lista")
+	public Collection<ServicoEmpresa> buscarTodos() {
+		return servicoService.lista();
+	}
+
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value = "/prestadora/{id}/pagamentos")
+	public  Collection<ServicoEmpresa> buscarServicosDaPrestadora(@PathVariable Long id) {
+		return servicoService.buscarServicosDaPrestadora(id);
+			 
+	}
+
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value = "/prestadora/{id}/pagamentos/liberado")
+	public Collection<ServicoEmpresa> buscarServicosPagamentoLiberadoDaPrestadora(@PathVariable Long id) {
+		return  servicoService.buscarServicosPagamentoLiberadoDaPrestadora(id);
+	}
+
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping
+	public  Page<ServicoEmpresa>  lista(@RequestParam(defaultValue = "0", required = false) int page,
+			@RequestParam(defaultValue = "0", required = false) int maxResults) {
+		return servicoService.buscarTodos(new PageRequest(page, maxResults));
+		 
+	}
+
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping(value = "/salvar")
+	public void salvar(@RequestBody ServicoEmpresa servico) {
+		servicoService.salvarOuEditar(servico);
 	
-	 @RequestMapping(method = RequestMethod.GET, value="/lista")
-	 public ResponseEntity<Iterable<ServicoEmpresa>> buscarServico() {	  
-	  Iterable<ServicoEmpresa> servico = servicoService.buscarTodos();
-	  return new ResponseEntity<Iterable<ServicoEmpresa>>(servico, HttpStatus.OK);
-	 }
-	 
-	 @RequestMapping( value="/salva", method = RequestMethod.POST)
-	 public ResponseEntity salva(@RequestBody ServicoEmpresa servico,UriComponentsBuilder ucBuilder)
-	 {
-		 System.out.println(servico.getPacoteServico().getDescricao());
-		 System.out.println(servico.getPrestadoraServico().getDadoEmpresa().getNomeFantasia());
-		
-		 servicoService.salvarOuEditar(servico);
-		 HttpHeaders headers = new HttpHeaders();
-		 headers.setLocation(ucBuilder.path("/rest/servico/vincular/salva/{id}").buildAndExpand(servico.getId()).toUri());
-		 return new ResponseEntity(headers, HttpStatus.CREATED);
-	 }
+	}
+
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping(value = "/prestadora/{id}/pagamentos/efetuar")
+	public void efetuarPagamento(@PathVariable Long id) {
+		servicoService.efetuarPagamento(id);
+	}
+
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value = "/buscarPorId/{id}")
+	public Optional<ServicoEmpresa>  buscarPorId(@PathVariable Long id) {
+		return  servicoService.buscarPorId(id);
+	}
+
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping(value = "/pagamento/edificio/salvar")
+	public void salvarPagamentoEdificio(@RequestBody ServicoEdificio servico) {
+
+		servicoService.salvarPagamento(servico);
+
+	}
+
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping(value = "/pagamento/casa/salvar")
+	public void salvarPagamentoCasa(@RequestBody ServicoEdificio servico) {
+
+		servicoService.salvarPagamento(servico);
+
+	}
+
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping(value = "/pagamento/outros/salvar")
+	public void salvarPagamentoOutros(@RequestBody ServicoEdificio servico) {
+		servicoService.salvarPagamento(servico);
+
+	}
+
 }

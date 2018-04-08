@@ -20,14 +20,20 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
+import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 import br.com.system.gestaoConstrucaoCivil.enuns.Situacao;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoNotaEnum;
+import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
+
 
 
 @Entity
 @SequenceGenerator(name = "nota_fiscal_id_seq", sequenceName = "nota_fiscal_id_seq", initialValue = 1, allocationSize = 1)
-@Table(name = "nota_fiscal")
+@Table(name = "nota_fiscal", schema="almoxarifado")
 public class NotaFiscal implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "nota_fiscal_id_seq")
@@ -50,10 +56,12 @@ public class NotaFiscal implements Serializable {
     private Empreendimento empreendimento;
     
 	@Temporal(TemporalType.DATE)
+	@Column(name = "data_nota")
 	private Date dataNota;
 	
 	@JsonView(View.Summary.class)
 	@Temporal(TemporalType.DATE)
+	@Column(name = "data_vencimento")
 	private Date dataVencimento;
 
 	@Column(nullable = true)
@@ -63,6 +71,11 @@ public class NotaFiscal implements Serializable {
 	@Column(nullable = false)
 	private Double valorTotal;
 
+	@ManyToOne
+	@JoinColumn(name ="id_usuario_cadastro")
+	private Usuario usuarioCadastro;
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -127,9 +140,22 @@ public class NotaFiscal implements Serializable {
     public Situacao getSituacao() {
 		return situacao;
 	}
+    public void cancelarNota()
+    {
+    	this.situacao = Situacao.CANCELADA;
+    }
 
-	public void setSituacao(Situacao situacao) {
-		this.situacao = situacao;
+	public void novaNota()
+	{
+		this.situacao = Situacao.OK;
+		Usuario usuarioSessao = SessionUsuario.getInstance().getUsuario();
+		this.empreendimento = usuarioSessao.getEmpreendimento();
+		this.usuarioCadastro = usuarioSessao;
+	}
+	
+	
+	public Usuario getUsuarioCadastro() {
+		return usuarioCadastro;
 	}
 
 	@Override

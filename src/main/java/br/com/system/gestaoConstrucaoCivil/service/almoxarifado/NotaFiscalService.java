@@ -1,9 +1,12 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.Collection;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.NotaFiscal;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.NotaFiscalRepository;
@@ -15,15 +18,15 @@ public class NotaFiscalService {
 	@Autowired
 	private NotaFiscalRepository notaFiscalRepository;
 
-	public Iterable<NotaFiscal> buscarTodos() {
+	public Collection<NotaFiscal> buscarTodos() {
 		
 		return  notaFiscalRepository.findAll();
 		
 	}
 
-	public NotaFiscal buscarPorId(Long id) {
+	public Optional<NotaFiscal> buscarPorId(Long id) {
 		
-		return notaFiscalRepository.findOne(id);
+		return notaFiscalRepository.findById(id);
 	}
 
 	public void salvarOuEditar(NotaFiscal notaFiscal) {

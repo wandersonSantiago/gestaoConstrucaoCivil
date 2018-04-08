@@ -1,0 +1,104 @@
+<meta charset="UTF-8">
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/gerenciamento/home">menu gerenciamento</a></li>
+   <li class="breadcrumb-item" ><a href="#/usuario/listagem">lista</a></li>
+   <li class="breadcrumb-item active">cadastro</li>
+  </ol>
+<div class="generic-container"	ng-controller="usuarioController as userCtrl" >
+				
+	<div class="box box-primary">
+		<!-- Default panel contents -->
+		<div class="box-header">
+			<span class="lead"> Cadastro Usuario </span>
+		</div>
+		<div class="panel-body">
+
+			<br>
+			<div class="container col-sm-12 ">
+				<form role="form-vertical"	ng-submit="userCtrl.salva()">
+
+					
+					<div class="row" ng-controller="empreendimentoController as empCtrl">
+						<div class="col-sm-6" ng-init="empCtrl.lista()">
+							<select class="form-control select2" ng-model="userCtrl.usuario.empreendimento" 
+								ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.tipoEmpreendimento for listarEmpreendimentos in empreendimentos"
+								style="width: 100%;" required>
+								<option  value="">--selecione o Empreendimento--</option>
+							</select>
+						</div>												
+						<div class="col-sm-6"  ng-controller="cadastrarFuncionarioController as funCtrl" ng-init="funCtrl.lista()">
+						<md-autocomplete 
+							  md-no-cache="funCtrl.noCache"
+							 	md-selected-item="userCtrl.usuario.funcionario" 
+							 	md-search-text="busca" 
+							 	md-selected-item-change="funCtrl.selectedItemChange(funcionario)" 
+							 	md-items=" funcionario in listaFuncionario | filter : busca" 
+							 	md-item-text="funcionario.nomeCompleto" 
+							 	md-min-length="0" placeholder="busca Funcionário">
+       							 <md-item-template>
+          							<span md-highlight-text="busca" md-highlight-flags="^i">{{funcionario.nomeCompleto}}</span>
+       							 </md-item-template>        								
+     						 </md-autocomplete>
+								
+						</div>						
+					</div>
+						
+					
+					<br>
+					<br>
+
+					<div class="row">
+						<label class="col-sm-2 control-label" for="ativo">Usuário Ativo</label>
+						<div class="col-sm-2">
+							<input type="checkbox" ng-model="userCtrl.usuario.ativo" >
+						</div>
+					</div>
+
+					<br>
+					<div class="row" >
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="nome" ng-model="userCtrl.usuario.nome" placeholder="Nome"
+								title="Nome de usuario" maxlength="50"	required>
+						</div>						
+					
+						<div class="col-sm-6">
+							<input type="email" class="form-control" id="email" ng-model="userCtrl.usuario.email" placeholder="E-mail"
+								title="Email de usuario, para acesso ao sistema"  maxlength="50"	>
+						</div>
+					</div>
+					
+					
+					<br>
+					<div class="row" >
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="nome" ng-model="userCtrl.usuario.login" ng-blur="userCtrl.existeLogin(userCtrl.usuario.login)" placeholder="Usuário"
+								title="Nome de usuario" maxlength="15"	required>
+						</div>						
+					
+	
+						<div class="col-sm-2">
+							<input type="password" class="form-control" id="senha" ng-model="userCtrl.senha" placeholder="Senha"
+								title="Digite uma senha"maxlength="12" required>
+						</div>
+						<div class="col-sm-2">
+							<input type="password" class="form-control" id="repitaSenha" ng-model="userCtrl.senhaRepitida" placeholder="Repita a Senha"
+								title="repita a senha" required>
+						</div>
+						
+					</div>
+					<br> <br>
+					
+					
+					<div class="row ">
+						
+							<button type="submit" name="submit" class="btn btn-lg btn-primary btn-block btn-signin">Cadastrar</button>
+						</div>
+						
+					</div>
+				</form>
+				
+			</div>
+			<div class="tablecontainer"></div>
+		</div>
+	</div>

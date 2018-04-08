@@ -1,0 +1,66 @@
+<meta charset="UTF-8">
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/recursos_humanos/home">menu recursos humanos</a></li>
+   <li class="breadcrumb-item" ><a href="#/cargo/lista">lista</a></li>
+   <li class="breadcrumb-item active">cadastro</li>
+  </ol>
+<div  ng-controller="cargoController as cargoCtr" >
+
+	<div class="box box-primary">
+		<!-- Default panel contents -->
+		<div class="box-header">
+			<span class="lead">Cadastrar Cargo </span>
+		</div>
+		<div class="panel-body">
+			<div class="container col-sm-12 ">
+				<form role="form-vertical" ng-submit="cargoCtr.salva()" >
+					<div class="row">
+						<div class="col-sm-11">
+							<input class="form-control" ng-model="cargoCtr.cargo.descricao" placeholder="Descrição" id="descricao" type="text" required>
+						</div>
+					</div>
+					<br>
+					<div >
+					<ul ng-repeat=" listarCargos in listaCargo ">
+					<li>
+					{{ listarCargos.descricao }}
+					</li>
+					</ul>
+					
+					</div>
+		
+								<div ng-if="gravado" class="alert alert-info alert-dismissible"
+						role="alert">
+						<button type="button" class="close" data-dismiss="alert"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<strong>Sucesso</strong> cadastro realizado
+					</div>
+
+
+					<div ng-if="naoGravado"
+						class="alert alert-danger alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<strong>Error</strong> cadastro não realizado
+					</div>
+					<br>
+					<div class="row ">
+					
+							<input type="submit" id="submit" value="Salvar" ng-disabled="!cargoCtr.cargo.descricao"
+								class="btn btn-lg btn-primary btn-block btn-signin">
+						
+					</div>
+
+
+				</form>
+			</div>
+
+		</div>
+		<div class="tablecontainer"></div>
+	</div>
+</div>

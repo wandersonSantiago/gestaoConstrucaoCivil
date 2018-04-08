@@ -3,24 +3,24 @@ package br.com.system.gestaoConstrucaoCivil.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "funcionario")
+@Table(name = "funcionario",  schema = "communs")
 public class Funcionario  extends Pessoa implements Serializable{
 
-
+	private static final long serialVersionUID = 1L;
 	@Column(nullable = false)
 	private Integer carteiraTrabalho;
-	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
+	@Column(name = "data_admissao")
 	private Date dataAdmissao;
 	@ManyToOne
 	@JoinColumn(name="id_empreendimento",nullable = true)
@@ -32,6 +32,9 @@ public class Funcionario  extends Pessoa implements Serializable{
 	private Cargo cargo;
 	@Column(nullable = true )
 	private Integer crea;
+	
+	
+	
 	public Integer getCarteiraTrabalho() {
 		return carteiraTrabalho;
 	    
@@ -39,7 +42,7 @@ public class Funcionario  extends Pessoa implements Serializable{
 	public void setCarteiraTrabalho(Integer carteiraTrabalho) {
 		this.carteiraTrabalho = carteiraTrabalho;
 	}
-	public Date getDataAdmissao() {
+	public Date  getDataAdmissao() {
 		return dataAdmissao;
 	}
 	public void setDataAdmissao(Date dataAdmissao) {
@@ -69,7 +72,4 @@ public class Funcionario  extends Pessoa implements Serializable{
 	public void setCrea(Integer crea) {
 		this.crea = crea;
 	}
-	
-    
-	
 }

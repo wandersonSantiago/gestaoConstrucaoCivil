@@ -1,7 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.entity;
  
 import java.io.Serializable;
- 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,16 +9,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
  
 @Entity
-@SequenceGenerator(name = "config_outros_id_seq", sequenceName = "config_outros_id_seq", initialValue = 1, allocationSize = 1)
-@Table(name = "config_empreendimento_outros")
+@Table(name = "config_empreendimento_outros" , schema = "communs")
 public class ConfigEmpreendimentoOutros implements Serializable {
  
+	private static final long serialVersionUID = 1L;
+
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "config_outros_id_seq")
+	@Column(unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 
      
@@ -28,6 +30,9 @@ public class ConfigEmpreendimentoOutros implements Serializable {
     @ManyToOne
 	@JoinColumn(name="id_empreendimento",nullable = true)
     Empreendimento empreendimento;
+    
+    
+    
     public Long getId() {
         return id;
     }
