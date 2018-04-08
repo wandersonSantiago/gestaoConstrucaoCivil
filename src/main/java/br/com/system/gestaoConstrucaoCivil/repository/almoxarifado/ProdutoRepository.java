@@ -2,8 +2,10 @@ package br.com.system.gestaoConstrucaoCivil.repository.almoxarifado;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.EntityGraph.EntityGraphType;
 import org.springframework.data.repository.query.Param;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Produto;
@@ -26,4 +28,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 	@Query("FROM Produto produto WHERE CAST(produto.codigo as string) = :codigoOuCodigoBarra OR produto.codigoBarra = :codigoOuCodigoBarra")
 	Produto findByCodigoOrCodigoBarra(@Param("codigoOuCodigoBarra") String codigoOuCodigoBarra);
 
+	@EntityGraph(value = "Produto.detail", type = EntityGraphType.LOAD)
+	@Query("FROM Produto produto")
+	List<Produto> buscarTodos();
 }

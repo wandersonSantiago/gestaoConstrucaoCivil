@@ -1,0 +1,178 @@
+<meta charset="UTF-8">
+<div  ng-controller="estoqueController as estroqueCtrl">
+	
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/almoxarifado/home">menu almoxarifado</a></li>
+   <li class="breadcrumb-item" ><a href="#/estoque/entrada">entrada</a></li>
+   <li class="breadcrumb-item active">lista</li>
+  </ol>			    
+	  
+	<div class="panel panel-default"></div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<span class="lead">Relátorio Estoque </span>
+		</div>
+			<div>			
+				<div class="row">
+					<div class="col-sm-1"></div>
+					<div class="btn-group" role="group" aria-label="...">
+					  <button type="button" ng-click="ativaBuscaRelatorio('total')" class="btn btn-default">Total</button>
+					  <button type="button" ng-click="ativaBuscaRelatorio('periodo')"  class="btn btn-default">Peridodo</button>
+					</div>				
+				</div>
+				<br>
+				<div ng-show="porTotal" class="row">													
+					<div class="col-sm-2">
+						<input type="button" id="buscar" value="Buscar" ng-click="estroqueCtrl.listaProdutosComEstoque()"	class="btn btn-lg btn-primary btn-block btn-signin">
+					</div>				
+				</div>
+				
+				<div ng-show="porPeriodo" class="row">
+					<div class="col-sm-1"></div>	
+					<div class="col-sm-2">
+					Data inicial:
+							<input class="form-control" ng-model="dataInicial" id="dataInicial" type="date" 
+							title="Data pesquisa inicial" required>
+					</div>
+					<div class="col-sm-2">
+					Data final:
+							<input class="form-control" ng-model="dataFinal"  id="dataFinal" type="date" 
+							title="Data pesquisa final">
+						</div>											
+						<div class="col-sm-2">
+							<input type="button" id="buscar" value="Buscar" ng-click="estroqueCtrl.relatorioPorData(dataInicial, dataFinal)"	class="btn btn-lg btn-primary btn-block btn-signin">
+						</div>				
+					</div>
+				<br>
+				<br>
+		</div>	
+	</div>						
+			<div class="row">
+				<div  ng-if="ativaTabela" class="col-sm-2">
+					<input type="button" id="buscar" value="Gráfico" ng-click="estroqueCtrl.ativaBotaoTabelaGrafico(ativaTabela)"	class="btn btn-lg btn-success btn-block btn-signin">
+				</div>
+				<div  ng-if="ativaGrafico" class="col-sm-2">
+					<input type="button" id="buscar" value="Lista" ng-click="estroqueCtrl.ativaBotaoTabelaGrafico(ativaTabela)"	class="btn btn-lg btn-success btn-block btn-signin">
+				</div>
+			</div>	
+				<br>
+				<br>
+				<div ng-if="ativaTabela" class="row ">
+				<div class="col-sm-2">
+			    <div class="dropdown">
+			        <button class="btn btn-warning btn-export dropdown-toggle" margin-right=46px type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+			            Exportar <span class="caret"></span>
+			        </button>			
+			        <ul class="table-export dropdown-menu"
+			        table-selector="'auxTable'"
+			        export-options="{type: 'pdf', escape: true, ignoreColumn : '[4]', tableName: 'listaEstoque' }"
+			        aria-labelledby="dropdownMenu1">
+			            <li >
+			                <a href="" ng-click="estroqueCtrl.exportar('pdf')">PDF</a>
+			            </li>
+			
+			            <li te-option te-value="'excel'" te-param="'type'">
+			                <a href="">Excel</a>
+			            </li>
+			
+			            <li te-option te-value="'csv'" te-param="'type'">
+			                <a href="">CSV</a>
+			            </li>
+			        </ul>
+			    </div>
+			    </div>
+			</div>
+			<div ng-if="ativaTabela" class="panel panel-default">
+				<div class="panel-heading">
+					<span class="lead">Relatorio do estoque </span>
+				</div>															
+					<input class="form-control" autofocus="autofocus" name="criterioBusca" type="text" ng-model="buscar"	placeholder="Busca..." />
+					<div class="table-responsive">
+			<table  st-table="estroqueCtrl.listaProdutosComEstoques" st-filtered-collection="filteredCollection" class="export-table table  table-bordered table-striped ">
+				<thead>
+					<tr>						 
+						<th>Código</th>
+						<th>Descrição</th>
+						<th>Categoria</th>
+						<th>Tipo</th>
+						<th>Unidade Medida</th>						
+						<th>quantidade Estoque</th>
+						<th>Custo médio</th>
+						<th>Valor Total</th>
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" lista in estroqueCtrl.listaProdutosComEstoques | filter : buscar | orderBy : 'id' ">
+					<tr>
+						<td>{{lista.produto.codigo}}</td>
+						<td>{{lista.produto.descricao}}</td>
+						<td>{{lista.produto.categoria.descricao}}</td>
+						<td>{{lista.produto.tipoProduto.descricao}}</td>
+						<td>{{lista.produto.unidadeMedida}}</td>
+						<td>{{lista.quantidade}}</td>
+						<td>{{lista.custoMedio | currency}}</td>
+					    <td>{{lista.valorTotal | currency}}</td>				
+							
+					</tr>
+
+				</tbody>
+				<tfoot>
+				
+					
+				</tfoot>
+			</table>
+			
+			<table class="auxTable" style="opacity: 0; position: absolute;" ">
+				<thead>
+					<tr>						 
+						<th>Código</th>
+						<th>Descrição</th>
+						<th>Categoria</th>
+						<th>Tipo</th>
+						<th>Unidade Medida</th>						
+						<th>quantidade Estoque</th>
+						<th>Custo médio</th>
+						<th>Valor Total</th>
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" lista in estroqueCtrl.listaProdutosComEstoques">
+					<tr>
+						<td>{{lista.produto.codigo}}</td>
+						<td>{{lista.produto.descricao}}</td>
+						<td>{{lista.produto.categoria.descricao}}</td>
+						<td>{{lista.produto.tipoProduto.descricao}}</td>
+						<td>{{lista.produto.unidadeMedida}}</td>
+						<td>{{lista.quantidade}}</td>
+						<td>{{lista.custoMedio | currency}}</td>
+					    <td>{{lista.valorTotal | currency}}</td>				
+							
+					</tr>
+
+				</tbody>
+				<tfoot>
+				
+					
+				</tfoot>
+			</table>
+			</div>					
+			</div>						
+			<div ng-if="ativaGrafico" class="panel panel-default">
+				<div class="panel-heading">
+					<span class="lead">Gráfico </span>
+				</div>			
+						
+					<div class="row">
+						<div class="col-sm-3"></div>
+						<div class="col-sm-6">
+							<canvas class="chart chart-line" chart-data="data" chart-labels="labels" 
+								chart-series="series" chart-click="onClick"></canvas>
+						</div>
+					</div>	
+							
+			</div>
+
+			
+</div>
+					

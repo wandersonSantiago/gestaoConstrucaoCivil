@@ -1,0 +1,192 @@
+<meta charset="UTF-8">
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/cadastros/home">menu cadastros</a></li>
+   <li class="breadcrumb-item"><a href="#/fornecedor/lista">Lista de Fornecedor</a></li>
+   <li class="breadcrumb-item active">Cadastro Fornecedor</li>
+ </ol>
+<div ng-controller="fornecedorController as fornecedorCtrl">
+
+<div class="box box-primary" >
+		<!-- Default panel contents -->
+		<div class="box-header" >
+			<span class="lead">Cadastro de Fornecedor </span>
+		</div>
+		<div class="panel-body">
+		<div class="container col-sm-12 ">
+				<form role="form-vertical" name="formFornecedor"
+					ng-submit="fornecedorCtrl.salva()">
+					
+					
+					<div class="row">
+						<div class="col-sm-5" ng-controller="verificaDadosController as verificaCtrl">
+							<input class="form-control" name="cnpjField" placeholder="CNPJ" ng-blur="verificaCtrl.verificaCnpj(fornecedorCtrl.fornecedor.dadoEmpresa.cnpj)"
+								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.cnpj" id="cnpj"
+								type="text" ui-br-cnpj-mask required>
+								<p ng-show="formFornecedor.cnpjField.$error.cnpj"
+								class="alert alert-warning ">Digite um CNPJ válido!!</p>
+						</div>	
+							<div  class="col-sm-2" ng-controller="enderecoController as endCtrl" ng-init="endCtrl.lista()">
+								<select class="form-control"  ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.ufIe" ng-options="uf for uf in ufs">
+									<option value="">Estado</option>
+								</select>
+						</div>
+					
+						<div class="col-sm-5" ng-controller="verificaDadosController as verificaCtrl">
+							<input class="form-control" name="iefield" ng-blur="verificaCtrl.verificaIe(fornecedorCtrl.fornecedor.dadoEmpresa.inscricaoEstadual)"
+								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.inscricaoEstadual" placeholder="Inscrição Estadual"
+								id="inscricaoEstadual" type="text" ui-br-ie-mask='fornecedorCtrl.fornecedor.dadoEmpresa.ufIe'
+								required>
+						 <p ng-show="formFornecedor.iefield.$error.ie"	class="alert alert-warning ">Digite um Inscrição Estadual Válida</p>
+						</div>				
+					</div>
+					<br>
+					
+					<div class="row">
+						<div class="col-sm-6" ng-class="{ 'has-error' : formFornecedorSistema.razaoSocial.$invalid && !formFornecedor.razaoSocial.$pristine }">
+							<input class="form-control" ng-minlength="5" ng-maxlength="50" placeholder="Razão social"
+								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.razaoSocial"
+								id="razaoSocial" name="razaoSocial" type="text" required>
+							<p ng-show="formFornecedor.razaoSocial.$error.minlength"
+							class="alert alert-warning ">campo Razão Social no minimo 5 caracter</p>
+							<p ng-show="formFornecedor.razaoSocial.$error.maxlength"
+							class="alert alert-warning ">campo Razão Social no maximo 50 caracter</p>
+						</div>
+						
+						<div class="col-sm-6" ng-class="{ 'has-error' : formFornecedor.nomeFantasia.$invalid && !formFornecedor.razaoSocial.$pristine }">
+							<input class="form-control" ng-minlength="5" ng-maxlength="50" placeholder="Nome fantasia"
+								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.nomeFantasia"
+								id="nomeFantasia" name="nomeFantasia" type="text" required>
+								<p ng-show="formFornecedor.nomeFantasia.$error.minlength"
+								class="alert alert-warning ">campo nome Fantasia no minimo 5 caracter</p>
+								<p ng-show="formFornecedor.nomeFantasia.$error.maxlength"
+								class="alert alert-warning ">campo nome Fantasia no maximo 50 caracter</p>
+						</div>
+					</div>
+					
+					<br>			
+					
+					
+					
+					<div class="row">					
+						
+						<div class="col-sm-4">
+							<input class="form-control" placeholder="Telefone Fixo"
+								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.telefone" id="telefone"
+								type="tel" ui-br-phone-number required>
+						</div>
+						<div class="col-sm-4">
+							<input class="form-control" placeholder="Telefone celular"
+								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.telefoneCelular" id="telefoneCelular"
+								type="tel" ui-br-phone-number required>
+						</div>
+						<div class="col-sm-4">
+							<input class="form-control" placeholder="Telefone para contato"
+								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.telefoneContato" id="telefoneContato"
+								type="tel" ui-br-phone-number required>
+						</div>
+					</div>
+					<br>
+					
+					<br>
+					<hr>
+
+				<h4>Endereço</h4>
+
+
+
+					<br>
+					<div class="row">
+						<div class="col-sm-3">
+						<input class="form-control" placeholder="CEP"
+								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.endereco.cep" id="cep"
+								type="text" name="cepField" ui-br-cep-mask ng-blur="fornecedorCtrl.findCep()"  onkeyup="if(this.value.length > 8) { numeroEmpresa.focus(); }"   ui-br-cep-mask required>
+								
+							<p ng-show="formFornecedor.cepField.$error.cep" class="alert alert-warning ">Digite um CEP Válido</p>
+						</div>						
+					</div>
+					<br>
+					<div class="row">
+					<div class="col-sm-5">
+								<input class="form-control" placeholder="Rua"
+									ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.endereco.logradouro" id="rua"
+									type="text" maxlength="50" required>
+							</div>
+							
+							<div class="col-sm-2"
+									ng-class="{ 'has-error' : formFornecedor.numeroEmpresa.$invalid && !formFornecedor.numeroEmpresa.$pristine }">
+									<input class="form-control" name="numeroEmpresa" placeholder="Nº"
+										ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.endereco.numero"
+										id="numero" type="text" ng-minlength="1" ng-maxlength="7"
+										required>
+								<p ng-show="formFornecedor.numeroEmpresa.$error.minlength"
+									class="alert alert-warning ">campo numero no minimo 1
+									caracter</p>
+								<p ng-show="formFornecedor.numeroEmpresa.$error.maxlength"
+									class="alert alert-warning ">campo numero no maximo 7
+									caracter</p>
+						   </div>
+						   <div class="col-sm-5">
+							<input class="form-control" placeholder="Complemento" maxlength="50"
+								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.endereco.complemento"
+								id="complemento" type="text">
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-5">
+							<input class="form-control" placeholder="Bairro"
+								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.endereco.bairro"
+								id="bairro" type="text"  maxlength="50" required>
+
+						</div>
+						<div class="col-sm-5">
+							<input class="form-control" placeholder="Cidade" maxlength="50"
+								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.endereco.localidade"
+								id="cidade" type="text" required>
+						</div>
+				
+						<div class="col-sm-2">
+							<input class="form-control" placeholder="Estado"  maxlength="50"
+								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.endereco.uf"
+								id="estado" type="text" required>
+						</div>
+						
+					</div>
+					<br>
+				
+					<div class="row">
+						<div class="col-sm-4">
+							<input class="form-control" name="emailPrestadora" placeholder="E-mail"
+								ng-model="fornecedorCtrl.fornecedor.dadoEmpresa.email" id="email"
+								type="email"  maxlength="40" required>
+								<p ng-show="formFornecedor.emailPrestadora.$error.email"
+							class="alert alert-warning ">Digite um Email Válido</p>
+						</div>
+						<div class="col-sm-4">
+							<input class="form-control" placeholder="Contato"
+								ng-model="fornecedorCtrl.fornecedor.contato"
+								id="contato" maxlength="50" type="text">
+
+						</div>
+			
+						<div class="col-sm-4">
+							<input class="form-control" placeholder="Observação"
+								ng-model="fornecedorCtrl.fornecedor.observacao"
+								id="observacao" maxlength="50" type="text">
+
+						</div>
+					</div>
+					<br>
+                    
+						<div class="row ">
+							<input type="submit" id="submit"  value="Salvar"  ng-disabled="!fornecedorCtrl.fornecedor.dadoEmpresa.razaoSocial"
+								class="btn btn-lg btn-primary btn-block btn-signin">
+						</div>						
+				</form>
+			</div>
+
+		</div>
+		<div class="tablecontainer"></div>
+	</div>
+</div>

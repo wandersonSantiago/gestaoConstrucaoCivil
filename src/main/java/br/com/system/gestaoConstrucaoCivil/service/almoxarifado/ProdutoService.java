@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Produto;
@@ -22,7 +24,7 @@ public class ProdutoService {
 	
     public List<Produto> buscarTodos() {
 
-		return produtoRepository.findAll();
+    	return produtoRepository.buscarTodos();
 	}
     public List<Produto> buscarPorDescricao(String descricao)
     {
@@ -43,6 +45,7 @@ public class ProdutoService {
 		{
 		    produto.setCodigoBarra(gerar.gerarCodigoBarra());
 		}
+		produto.setUsuarioCadastrado();
 		produtoRepository.save(produto);
 
 	}
@@ -56,5 +59,8 @@ public class ProdutoService {
 
 	public boolean existeCodigoBarra(String codigoBarra) {
 		return produtoRepository.existeCodigoBarra(codigoBarra);
+	}
+	public Page<Produto> buscarTodosComPaginacao(PageRequest pageRequest) {
+		return produtoRepository.findAll(pageRequest);
 	}
 }

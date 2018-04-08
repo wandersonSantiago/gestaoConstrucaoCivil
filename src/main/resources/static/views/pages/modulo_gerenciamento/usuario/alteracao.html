@@ -1,0 +1,107 @@
+<meta charset="UTF-8">
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/gerenciamento/home">menu gerenciamento</a></li>
+   <li class="breadcrumb-item" ><a href="#/usuario/cadastro">cadastrar</a></li>
+   <li class="breadcrumb-item" ><a href="#/usuario/listagem">lista</a></li>
+   <li class="breadcrumb-item active">alterar</li>
+  </ol>
+<div ng-controller="usuarioController as userCtrl" ng-init="perfil()">
+				
+	<div class="box box-primary">
+		<!-- Default panel contents -->
+		<div class="box-header">
+			<span class="lead"> Editar Usuário </span>
+		</div>
+		<div class="panel-body">
+			<div class="container col-sm-12 ">
+				<form role="form-vertical"	ng-submit="userCtrl.altera()">
+
+					
+					<div class="row" ng-controller="empreendimentoController as empCtrl">
+						<div class="col-sm-6" ng-init="empCtrl.lista()">
+							<select class="form-control select2" ng-model="userCtrl.usuario.empreendimento" 
+								ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.tipoEmpreendimento for listarEmpreendimentos in empreendimentos"
+								style="width: 100%;" required>
+								<option  ng-value="userCtrl.usuario.empreendimento" value="">{{userCtrl.usuario.empreendimento.descricao}}</option>
+							</select>
+						</div>												
+						<div class="col-sm-6"  ng-controller="cadastrarFuncionarioController as funCtrl" ng-init="funCtrl.lista()">
+								<select class="form-control select2" ng-model="userCtrl.usuario.funcionario" ng-options="engenheiros.nomeCompleto  group by engenheiros.shade for engenheiros in listaFuncionario" style="width: 100%;" required>
+									<option ng-value="userCtrl.usuario.funcionario" value="">{{userCtrl.usuario.funcionario.nomeCompleto}}</option>                                                                                 
+							</select>
+						</div>						
+					</div>
+					
+					<br>
+					<br>
+
+					<div class="row">
+						<label class="col-sm-2 control-label" for="ativo">Usuário Ativo</label>
+						<div class="col-sm-2">
+							<input type="checkbox" ng-model="userCtrl.usuario.ativo" >
+						</div>
+					</div>
+
+					<br>
+					<div class="row" >
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="nome" ng-model="userCtrl.usuario.nome" placeholder="Nome"
+								title="Nome de usuario"	required>
+						</div>						
+					
+						<div class="col-sm-6">
+							<input type="email" class="form-control" id="email" ng-model="userCtrl.usuario.email" placeholder="E-mail"
+								title="Email de usuario, para acesso ao sistema"	>
+						</div>
+					</div>
+					
+					
+					<br>
+					<div class="row" >
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="nome" ng-model="userCtrl.usuario.login" placeholder="Usuário"
+								title="Nome de usuário" disabled	required>
+						</div>						
+					
+	
+						<div class="col-sm-2">
+							<input type="password" class="form-control" id="senha" ng-model="userCtrl.senha" placeholder="Senha"
+								title="Digite uma senha" required>
+						</div>
+						<div class="col-sm-2">
+							<input type="password" class="form-control" id="repitaSenha" ng-model="userCtrl.senhaRepitida" placeholder="Repita a Senha"
+								title="Repita a senha" required>
+						</div>
+						
+					</div>
+					<br> <br>
+					
+					<br> <br>					
+					 <div flex="100" flex-gt-sm="100" layout="column">
+									      <div>        
+									        <fieldset class="standard" >         
+									          <div layout="row" layout-wrap flex>
+									            <div flex="25" ng-repeat="user in perfils">
+									             <md-checkbox ng-model="ativado" ng-checked="existeExclui(user)" ng-click="permissao(user)">
+									                {{ user }} 
+									              </md-checkbox>									             
+									            </div>
+									          </div>
+									        </fieldset>
+									      </div>
+									    </div>
+
+						
+					
+					<div class="row ">
+							<button type="submit" name="submit" class="btn btn-lg btn-primary btn-block btn-signin">Cadastrar</button>
+						</div>
+						
+					</div>
+				</form>
+				
+			</div>
+			<div class="tablecontainer"></div>
+		</div>
+	</div>

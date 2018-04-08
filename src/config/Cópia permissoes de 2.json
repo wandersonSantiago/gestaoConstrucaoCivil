@@ -1,0 +1,107 @@
+[{"id":null,"descricao":"Modulo administrador","rol":"MODULO_ADMIN","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"Empresa contradata","rol":"EMPRESA_CONTRATADA_CADASTRAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"Empresa contradata","rol":"EMPRESA_CONTRATADA_ALTERAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"Empresa contradata","rol":"EMPRESA_CONTRATADA_CONSULTAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CADASTROS","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CADASTROS_AREA_CADASTRAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CADASTROS_AREA_ALTERAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CADASTROS_AREA_CONSULTAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CADASTROS_FABRICANTE_CADASTRAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CADASTROS_FABRICANTE_ALTERAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CADASTROS_FABRICANTE_CONSULTAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CADASTROS_FORNECEDOR_CADASTRAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CADASTROS_FORNECEDOR_ALTERAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CADASTROS_FORNECEDOR_CONSULTAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CADASTROS_PRODUTO_CADASTRAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CADASTROS_PRODUTO_ALTERAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CADASTROS_PRODUTO_CONSULTAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CADASTROS_PRODUTO_CATEGORIA_CADASTRAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CADASTROS_PRODUTO_CATEGORIA_ALTERAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CADASTROS_PRODUTO_CATEGORIA_CONSULTAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CADASTROS_PRODUTO_TIPO_CADASTRAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CADASTROS_PRODUTO_TIPO_ALTERAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CADASTROS_PRODUTO_TIPO_CONSULTAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CHAMADO","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CHAMADO_INFORMATICA_USUARIO","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CHAMADO_INFORMATICA_SUPORTE","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CHAMADO_INFORMATICA_SUPORTE_RELATORIO","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CHAMADO_MANUTENCAO_USUARIO","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CHAMADO_MANUTENCAO_SUPORTE","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_CHAMADO_MANUTENCAO_SUPORTE_RELATORIO","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_COMPRAS","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_COMPRAS_CADASTRAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_COMPRAS_ALTERAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_COMPRAS_CONSULTAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_COMPRAS_COTACAO_GERAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_COMPRAS_COTACAO_CADASTRAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_COMPRAS_COTACAO_ABERTO","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_COMPRAS_COTACAO_VENCEDORES_CONSULTAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo de cadastros","rol":"MODULO_COMPRAS_COTACAO_CONCORRENTES_CONSULTAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo estoque","rol":"MODULO_ESTOQUE","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"ENTRADA","rol":"MODULO_ESTOQUE_ENTRADA","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"ENTRADA","rol":"MODULO_ESTOQUE_CONSULTA","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"ROLE_MODULO_COMPRAS_ALTERA_LIMITE","rol":"MODULO_ESTOQUE_ALTERA_LIMITE","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"ENTRADA","rol":"MODULO_REQUISICAO_CADASTRAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"ENTRADA","rol":"MODULO_REQUISICAO_CONSULTA","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"ENTRADA","rol":"MODULO_REQUISICAO_CONSULTA_CASA","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"ENTRADA","rol":"MODULO_REQUISICAO_CONSULTA_EDIFICIO","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"ENTRADA","rol":"MODULO_REQUISICAO_CONSULTA_OUTROS","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo estoque","rol":"MODULO_ESTOQUE_TRANSFERENCIA_ENVIADAS","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo estoque","rol":"MODULO_ESTOQUE_TRANSFERENCIA_RECEBIDAS","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo estoque","rol":"MODULO_ESTOQUE_TRANSFERENCIA_CADASTRAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo estoque","rol":"MODULO_ESTOQUE_TRANSFERENCIA_CONSULTA_ENVIADAS","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"modulo estoque","rol":"MODULO_ESTOQUE_TRANSFERENCIA_CONSULTA_RECEBIDAS","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"MODULO GERENCIAMENTO","rol":"MODULO_GERENCIAMENTO","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"MODULO GERENCIAMENTO","rol":"MODULO_GERENCIAMENTO_EMPREENDIMENTO_CADASTRAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"MODULO GERENCIAMENTO","rol":"MODULO_GERENCIAMENTO_EMPREENDIMENTO_CONSULTAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"MODULO GERENCIAMENTO","rol":"MODULO_GERENCIAMENTO_EMPREENDIMENTO_ALTERAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"MODULO GERENCIAMENTO","rol":"MODULO_GERENCIAMENTO_EMPREENDIMENTO_INFORMACOES","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"MODULO GERENCIAMENTO","rol":"EMPREENDIMENTO_CONFIGURACAO_CADASTRAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"MODULO GERENCIAMENTO","rol":"EMPREENDIMENTO_CONFIGURACAO_CONSULTAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"MODULO GERENCIAMENTO","rol":"EMPREENDIMENTO_CONFIGURACAO_ALTERAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"MODULO GERENCIAMENTO","rol":"USUARIO_CADASTRAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"MODULO GERENCIAMENTO","rol":"USUARIO_EMPREENDIMENTO_CONSULTAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"MODULO GERENCIAMENTO","rol":"USUARIO_EMPREENDIMENTO_ALTERAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"MODULO GERENCIAMENTO","rol":"USUARIO_EMPREENDIMENTO_PERMISSSAO","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"MODULO GERENCIAMENTO","rol":"USUARIO_PERMISSAO_CADASTRAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"MODULO GERENCIAMENTO","rol":"USUARIO_PERMISSAO_EMPREENDIMENTO_CONSULTAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"MODULO GERENCIAMENTO","rol":"USUARIO_PERMISSAO_EMPREENDIMENTO_ALTERAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"MODULO RH","rol":"MODULO_RECURSOS_HUMANOS","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"MODULO RH","rol":"MODULO_RECURSOS_HUMANOS_CARGO_CADASTRAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"MODULO RH","rol":"MODULO_RECURSOS_HUMANOS_CARGO_ALTERAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"MODULO RH","rol":"MODULO_RECURSOS_HUMANOS_CARGO_CONSULTAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"MODULO RH","rol":"MODULO_RECURSOS_HUMANOS_FUNCIONARIO_CADASTRAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"MODULO RH","rol":"MODULO_RECURSOS_HUMANOS_FUNCIONARIO_ALTERAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":"MODULO RH","rol":"MODULO_RECURSOS_HUMANOS_FUNCIONARIO_CONSULTAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":" MODULO SERVIÇOS","rol":"MODULO_SERVICOS","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":" MODULO SERVIÇOS","rol":"PACOTES_CADASTRAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":" MODULO SERVIÇOS","rol":"PACOTES_ALTERAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":" MODULO SERVIÇOS","rol":"PACOTES_CONSULTAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":" MODULO SERVIÇOS","rol":"PRESTADORA_SERVICOS_CADASTRAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":" MODULO SERVIÇOS","rol":"PRESTADORA_SERVICOS_ALTERAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":" MODULO SERVIÇOS","rol":"PRESTADORA_SERVICOS_CONSULTAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":" MODULO SERVIÇOS","rol":"VINCULAR_CADASTRAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":" MODULO SERVIÇOS","rol":"VINCULAR_CONSULTAR","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":" MODULO SERVIÇOS","rol":"VINCULAR_CONSULTAR_CASA","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":" MODULO SERVIÇOS","rol":"VINCULAR_CONSULTAR_EDIFICIO","tipoModulo":"MODULO_CHAMADO","new":true},
+{"id":null,"descricao":" MODULO SERVIÇOS","rol":"VINCULAR_CONSULTAR_EDIFICACOES_COMUNITARIA","tipoModulo":"MODULO_CHAMADO","new":true}]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

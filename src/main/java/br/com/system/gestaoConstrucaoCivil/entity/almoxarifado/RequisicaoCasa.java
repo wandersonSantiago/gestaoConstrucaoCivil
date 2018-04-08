@@ -1,37 +1,69 @@
 package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
-import java.io.Serializable;
+import java.util.List;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
+
 
 
 @Entity
-@Table(name = "requisicao_casa")
-public class RequisicaoCasa extends Requisicao implements Serializable{
+@Table(name ="requisicao_casa" , schema="almoxarifado")
+public class RequisicaoCasa extends AbstractPersistable<Long> implements IRequisicao<RequisicaoCasaItem> {
+		
+	private static final long serialVersionUID = 1L;
 
-	@Column(nullable = false)
-	private Integer andar;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name="id_informacao_requisicao",nullable = true)
+	private InformacaoRequisicao informacaoRequisicao;
+
+	 @OneToMany(mappedBy = "requisicaoCasa", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	 private List<RequisicaoCasaItem> itens;
 	
-	@Column(nullable = false)
-	private Integer casa;
-
-	public Integer getAndar() {
-		return andar;
+	public InformacaoRequisicao getInformacaoRequisicao() {
+		return informacaoRequisicao;
 	}
 
-	public void setAndar(Integer andar) {
-		this.andar = andar;
+	public void setInformacaoRequisicao(InformacaoRequisicao informacaoRequisicao) {
+		this.informacaoRequisicao = informacaoRequisicao;
 	}
 
-	public Integer getCasa() {
-		return casa;
+	public List<RequisicaoCasaItem> getItens() {
+		return itens;
 	}
 
-	public void setCasa(Integer casa) {
-		this.casa = casa;
+	public void setItens(List<RequisicaoCasaItem> itens) {
+		this.itens = itens;
+		
+		for(RequisicaoCasaItem item: this.itens)
+		{
+			item.setRequisicaoCasa(this);
+		}
 	}
+
+	@Override
+	public Empreendimento empreendimentoSaida() {
+		
+	     return informacaoRequisicao.getEmpreendimento();
+	}
+
+	@Override
+	public Empreendimento empreendimentoEntrada() {
+		
+		 return informacaoRequisicao.getEmpreendimento();
+			
+	}
+	
+    
 	
 	
 }

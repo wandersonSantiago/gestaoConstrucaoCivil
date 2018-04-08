@@ -1,11 +1,11 @@
 package br.com.system.gestaoConstrucaoCivil.service.servicos;
 
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import br.com.system.gestaoConstrucaoCivil.entity.servicos.PrestadoraServico;
 import br.com.system.gestaoConstrucaoCivil.repository.servicos.PrestadoraServicoRepository;
@@ -17,9 +17,9 @@ public class PrestadoraServicoService {
 	@Autowired
 	private PrestadoraServicoRepository prestadoraServicoRepository;
 	
-	 public List<PrestadoraServico> buscarTodos() {
+	 public Page<PrestadoraServico> buscarTodos(PageRequest pages) {
 	 		
-	 		return prestadoraServicoRepository.findAll();
+	 		return prestadoraServicoRepository.findAll(pages);
 	 	}
 	 
 	 
@@ -34,4 +34,9 @@ public class PrestadoraServicoService {
 		 
 		 return prestadoraServicoRepository.findOne(id);
 	 }
+
+
+	public Iterable<PrestadoraServico> lista() {
+		return prestadoraServicoRepository.findAll();
+	}
 }

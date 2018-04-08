@@ -1,0 +1,50 @@
+<meta charset="UTF-8">
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/servicos/home">menu serviços</a></li>
+   <li class="breadcrumb-item" ><a href="#/servicos/vincular/cadastro">cadastrar</a></li>
+   <li class="breadcrumb-item" ><a href="#/servicos/vincular/listagem">listar</a></li>
+   <li class="breadcrumb-item active">vistoria casa</li>
+  </ol>
+<div ng-controller="servicoEmpresaController as servicoCtrl">
+	<div class="box box-primary">
+		<div class="box-header">
+			<span class="lead"> Vincular Serviços </span>
+		</div>
+		<div class="panel-body">
+			<div class="container col-sm-12 ">
+				<form role="form-vertical" >							
+					<br>
+					<div class="row">						
+						<div class="col-sm-4"  >
+						Numero da Casa
+							{{servicoCasa.NumeroCasa}}
+						</div>
+							<div class="col-sm-4"  >
+							Andar da Casa
+							{{servicoCasa.andar}}
+						</div>
+					</div>					
+					<br>
+					<div class="row">	
+					<div class="col-sm-4">	
+						Pacotes de Serviço	
+						{{servicoCtrl.pacoteServico.descricao}}</select>
+					</div>							
+					<div class="col-sm-4">	
+						Prestadora de Serviços
+						{{servicoCtrl.prestadoraServico.dadoEmpresa.nomeFantasia }}
+						</div>
+					</div>
+					<br>
+					
+					<div class="row ">
+						
+							<button  type="button" name="salvar" ng-click="servicoCtrl.alteraCasa(servicoCtrl.servicoCasa , servicoCtrl.pacoteServico,  servicoCtrl.prestadoraServico)" class="btn btn-lg btn-primary btn-block btn-signin">Cadastrar</button>
+					</div>
+				</form>
+			</div>
+			<div class="tablecontainer"></div>
+		</div>
+	</div>
+	</div>

@@ -6,10 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.CotacaoEmpresa;
@@ -22,29 +23,34 @@ public class CotacaoEmpresaRestController {
 	@Autowired
 	private CotacaoEmpresaService cotacaoEmpresaService;
 	
-	@RequestMapping(value = "/salva", method = RequestMethod.POST)
-	public ResponseEntity<CotacaoEmpresa> salva(@RequestBody CotacaoEmpresa cotacaoEmpresa){
-		System.out.println("cotacao  ======== 1" + cotacaoEmpresa.getCotacao().getId());
-		System.out.println("fornecedor  ======== 1" + cotacaoEmpresa.getFornecedor().getDadoEmpresa().getRazaoSocial());
-	/*	for(int i = 0; i < cotacaoEmpresa.getItens().size(); i++){
-			System.out.println("itens ==================================" + cotacaoEmpresa.getItens().get(i).getDescricao());
-		}*/
+	@PostMapping(value = "/salva")
+	public ResponseEntity<CotacaoEmpresa> salvar(@RequestBody CotacaoEmpresa cotacaoEmpresa){
 		cotacaoEmpresaService.salvarOuEditar(cotacaoEmpresa);
-		System.out.println("teste ==========2");
 		HttpHeaders headers =  new HttpHeaders();
-		return new ResponseEntity(headers, HttpStatus.CREATED);				
+		return new ResponseEntity<>(headers, HttpStatus.CREATED);				
 	}
 	
-	@RequestMapping(value = "/lista", method = RequestMethod.GET)
-	public ResponseEntity<List<CotacaoEmpresa>> lista(){
+	@GetMapping(value = "/lista")
+	public ResponseEntity<List<CotacaoEmpresa>> buscarTodos(){
 		
-		List<CotacaoEmpresa> cotacaoEmpresa = cotacaoEmpresaService.buscarTodos(); 
-		return new ResponseEntity<List<CotacaoEmpresa>>(cotacaoEmpresa, HttpStatus.OK);
+		return new ResponseEntity<List<CotacaoEmpresa>>(cotacaoEmpresaService.buscarTodos(), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
+	@GetMapping(value = "/buscaPorId/{id}")
 	public ResponseEntity<CotacaoEmpresa> buscarPorId(@PathVariable Long id) {
 
 		return new ResponseEntity<CotacaoEmpresa>(cotacaoEmpresaService.buscarPorId(id), HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/buscaGanhdores/{idCotacao}")
+	public ResponseEntity<List<CotacaoEmpresa>> buscarGanhadores(@PathVariable Long idCotacao) {
+
+		return new ResponseEntity<List<CotacaoEmpresa>>(cotacaoEmpresaService.ganhadores(idCotacao), HttpStatus.OK);
+	} 
+	
+	@GetMapping(value = "/concorrentes/{idCotacao}")
+	public ResponseEntity<List<CotacaoEmpresa>> buscarConcorrentes(@PathVariable Long idCotacao) {
+
+		return new ResponseEntity<List<CotacaoEmpresa>>(cotacaoEmpresaService.concorrentes(idCotacao) , HttpStatus.OK);
+	} 
 }

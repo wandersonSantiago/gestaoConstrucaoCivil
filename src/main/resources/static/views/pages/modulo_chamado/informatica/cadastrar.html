@@ -1,0 +1,98 @@
+<meta charset="UTF-8">
+
+<div ng-controller="chamadoTiController as chamadoCtrl">
+
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#/">home</a></li>
+		<li class="breadcrumb-item"><a href="#/chamado/home">menu
+				chamado</a></li>
+		<li class="breadcrumb-item"
+			ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_USUARIO"><a
+			href="#/chamado/informatica/lista">Lista</a></li>
+		<li class="breadcrumb-item"
+			ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_SUPORTE"><a
+			href="#/chamado/informatica/suporte/lista">Suporte</a></li>
+		<li class="breadcrumb-item active">Abrir</li>
+	</ol>
+
+	<div class="box box-primary">
+
+		<div class="box-header">
+			<span class="lead">Abrir Chamado </span>
+		</div>
+		<div class="panel-body">
+
+			<div class="container col-sm-12 ">
+				<form role="form-vertical" name="formSecretaria"
+					ng-submit="chamadoCtrl.salva()">
+
+					<div class="row">
+						<div class="col-sm-4" ng-init="chamadoCtrl.prioridade()">
+							<select class="form-control "
+								ng-model="chamadoCtrl.chamadoTi.prioridade" id="prioridadeId"
+								ng-options="prioridade for prioridade in chamadoCtrl.prioridades">
+								<option value="">Prioridade</option>
+							</select>
+						</div>
+						<div class="col-sm-4" ng-init="chamadoCtrl.tipoEquipamento()">
+							<select class="form-control " ng-model="equipamento" id="tipo"
+								ng-click="verificaEquipamento(equipamento)"
+								ng-options="tipoEquipamento for tipoEquipamento in chamadoCtrl.tipoEquipamentos">
+								<option value="">Tipo Equipamento</option>
+							</select>
+						</div>
+					</div>
+					<br> <br>
+					<div class="row">
+						<div ng-if="computador" class="col-sm-4"
+							ng-init="chamadoCtrl.titulo()">
+							<select class="form-control select2"
+								ng-model="chamadoCtrl.chamadoTi.titulo" id="titulo"
+								ng-options="titulo for titulo in chamadoCtrl.titulos">
+								<option value="">Equipamento</option>
+							</select>
+						</div>
+						<div ng-if="impressora" class="col-sm-4"
+							ng-init="chamadoCtrl.tituloImpressora()">
+							<select class="form-control "
+								ng-model="chamadoCtrl.chamadoTi.titulo" id="tituloImpressora"
+								ng-options="tituloImpressora for tituloImpressora in chamadoCtrl.tituloImpressoras">
+								<option value="">Equipamento</option>
+							</select>
+						</div>
+					</div>
+					<br>
+					<div class="box">
+						<div class="box-header">
+							<h3 class="box-title">Escreva o Problema</h3>
+						</div>
+						<div class="form-group">
+							<textarea id="textarea" placeholder="Texto"
+								ng-model="texto" class="form-control" style="height: 300px"></textarea>
+						</div>
+					</div>
+					
+					<br> <br>
+					<div class="row ">
+
+						<input type="submit" id="submit"
+							ng-disabled="!chamadoCtrl.chamadoTi.titulo ||  !chamadoCtrl.chamadoTi.prioridade"
+							value="Enviar"
+							class="btn btn-lg btn-primary btn-block btn-signin">
+
+					</div>
+
+
+				</form>
+			</div>
+
+		</div>
+		<div class="tablecontainer"></div>
+	</div>
+</div>
+<script>
+	$(function() {
+		//Add text editor
+		$("#compose-textarea").wysihtml5();
+	});
+</script>

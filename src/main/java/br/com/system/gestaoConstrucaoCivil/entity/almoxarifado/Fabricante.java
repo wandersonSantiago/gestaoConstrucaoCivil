@@ -19,9 +19,11 @@ import br.com.system.gestaoConstrucaoCivil.entity.DadoEmpresa;
 				   sequenceName = "fabricante_id_seq",
 				   initialValue = 1,
 				   allocationSize = 50)
-@Table(name = "fabricante")
+@Table(name = "fabricante" , schema = "almoxarifado")
 public class Fabricante  implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fabricante_id_seq")
 	private Long id;

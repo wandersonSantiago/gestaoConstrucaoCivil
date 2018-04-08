@@ -1,0 +1,90 @@
+<meta charset="UTF-8">
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/almoxarifado/home">menu almoxarifado</a></li>
+   <li class="breadcrumb-item" ><a href="#/estoque/requisicao/cadastro">cadastrar</a></li>
+   <li class="breadcrumb-item" ><a href="#/estoque/requisicao/listagem">lista</a></li>
+   <li class="breadcrumb-item active">visualização</li>
+  </ol>	
+<div 	ng-controller="requisicaoEstoqueController as requisicaoCtrl">
+	<div class="box box-primary">
+		<div class="box-header">
+			<span class="lead">Requisição  </span>
+		</div>
+		<div class="panel-body">
+		<br>
+			<div class="container col-sm-12 " >
+				<form role="form-vertical">
+							
+							<div class="row">
+								<div class="col-sm-4">
+									<md-input-container class="md-block" flex-gt-sm>
+							            <label>Número</label>
+							            <input  disabled ng-model="requisicaoCtrl.requisicao.informacaoRequisicao.numeroRequisicao">
+							         </md-input-container>
+						         </div>
+						         <div class="col-sm-4">
+									<md-input-container class="md-block" flex-gt-sm>
+							            <label>Status</label>
+							            <input disabled ng-model="requisicaoCtrl.requisicao.informacaoRequisicao.statusRequisicao">
+							         </md-input-container>
+						         </div>
+						         <div class="col-sm-4">
+									<md-input-container class="md-block" flex-gt-sm>
+							            <label>Data cadastro</label>
+							            <input type="date" disabled ng-model="requisicaoCtrl.requisicao.informacaoRequisicao.dataSaida">
+							         </md-input-container>
+						         </div>
+							</div>
+						<div>
+							<table class="table table-hover ">
+								<thead>
+									<tr>
+										<th>Descrição</th>
+										<th>Area Aplicação</th>
+										<th >Casa</th>
+										<th >Andar</th>
+										<th>Qtd saida</th>
+										<th>Valor Unitario</th>
+										
+
+									</tr>
+								</thead>
+								<tbody ng-repeat="produto in requisicaoCtrl.itensCasa" >
+									<tr>
+										<td>{{produto.produto.descricao}}</td>	
+										<td>{{produto.areaProduto.descricao}}</td>	
+										<td>{{produto.casa}}</td>
+										<td>{{produto.andar}}</td>					
+										<td>{{produto.quantidade}}</td>
+										<td>{{produto.valorUnitario | currency}}</td>
+										
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					
+					
+					<br>
+					
+					<div class="row">
+					<div class="col-sm-2"></div>
+						<div ng-if="status" class="col-sm-4">
+							<input  class="form-control btn-primary" type="button" ng-click="requisicaoCtrl.aceitarRequisicaoCasa(requisicaoCtrl.requisicao.informacaoRequisicao.numeroRequisicao)" value="Aceitar">
+						</div>
+						<div ng-if="status" class="col-sm-4">
+							<input  class="form-control btn-warning" type="button" ng-click="requisicaoCtrl.rejeitaRequisicaoCasa(requisicaoCtrl.requisicao.informacaoRequisicao.numeroRequisicao)" value="Rejeitar">
+						</div>
+					</div>			
+					
+				</form>
+			</div>
+			<div class="tablecontainer"></div>
+		</div>
+	</div>
+	</div>

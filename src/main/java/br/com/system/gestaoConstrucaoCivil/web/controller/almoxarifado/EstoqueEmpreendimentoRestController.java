@@ -1,13 +1,18 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller.almoxarifado;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.CotacaoEmpresa;
@@ -22,18 +27,43 @@ public class EstoqueEmpreendimentoRestController {
 	private EstoqueEmpreendimentoService estoqueService;
 	
 	
-	@RequestMapping(value = "/alteraProduto", method = RequestMethod.PUT)
-	public ResponseEntity<CotacaoEmpresa> salva(@RequestBody EstoqueEmpreendimento estoqueEmpreendimento){
+	@PutMapping(value = "/alteraProduto")
+	public ResponseEntity<CotacaoEmpresa> salvar(@RequestBody EstoqueEmpreendimento estoqueEmpreendimento){
 		estoqueService.salvarOuEditar(estoqueEmpreendimento);
 		HttpHeaders headers =  new HttpHeaders();
-		return new ResponseEntity(headers, HttpStatus.CREATED);				
+		return new ResponseEntity<>(headers, HttpStatus.CREATED);				
 	}
-	@RequestMapping(method = RequestMethod.GET, value = "/lista")
+	
+	@GetMapping
 	public ResponseEntity<Iterable<EstoqueEmpreendimento>> buscarTodos() {
-		Iterable<EstoqueEmpreendimento> estoqueEmpreendimento = estoqueService.buscarTodos();
-		return new ResponseEntity<Iterable<EstoqueEmpreendimento>>(estoqueEmpreendimento, HttpStatus.OK);
+		return new ResponseEntity<Iterable<EstoqueEmpreendimento>>(estoqueService.buscarTodos(), HttpStatus.OK);
 	}
-	@RequestMapping(value = "/buscaPorCodigo/{codigo}", method = RequestMethod.GET)
+	
+	@GetMapping(value="/baixo")
+	public ResponseEntity<Iterable<EstoqueEmpreendimento>> produtoEstoqueBaixo() {
+		return new ResponseEntity<Iterable<EstoqueEmpreendimento>>(estoqueService.produtoEstoqueBaixo(), HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/alto")
+	public ResponseEntity<Iterable<EstoqueEmpreendimento>> produtoEstoqueAlto() {
+		return new ResponseEntity<Iterable<EstoqueEmpreendimento>>(estoqueService.produtoEstoqueAlto(), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/lista/paginacao")
+	public ResponseEntity<Page<EstoqueEmpreendimento>> lista(@RequestParam(defaultValue="0", required=false) int page
+			,@RequestParam(defaultValue="0", required=false) int maxResults) {
+		Page<EstoqueEmpreendimento> empresa = estoqueService.buscarTodosComPaginacao(new PageRequest(page, maxResults));
+		return new ResponseEntity<Page<EstoqueEmpreendimento>>(empresa, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/auditoria/entrada")
+	public ResponseEntity<Page<EstoqueEmpreendimento>> listaAuditoria(@RequestParam(defaultValue="0", required=false) int page
+			,@RequestParam(defaultValue="0", required=false) int maxResults) {
+		Page<EstoqueEmpreendimento> empresa = estoqueService.findAll(new PageRequest(page, maxResults));
+		return new ResponseEntity<Page<EstoqueEmpreendimento>>(empresa, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/buscaPorCodigo/{codigo}")
 	public ResponseEntity<EstoqueEmpreendimento> buscarPorCodigo(@PathVariable String codigo)
 	{
 	    return new ResponseEntity<EstoqueEmpreendimento>(estoqueService.buscarPorCodigoOuCodigoBarraEstoque(codigo),HttpStatus.OK);

@@ -1,0 +1,126 @@
+<meta charset="UTF-8">
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/gerenciamento/home">menu gerenciamento</a></li>
+   <li class="breadcrumb-item" ><a href="#/empreendimento/cadastro">cadastrar</a></li>
+   <li class="breadcrumb-item" ><a href="#/empreendimento/listagem">lista</a></li>
+   <li class="breadcrumb-item active">visualização</li>
+  </ol>
+<div ng-controller="empreendimentoController as empCtrl">
+
+	<div class="box box-primary">
+		<!-- Default panel contents -->
+		
+		<div class="panel-body">
+		
+		<div class="container col-sm-12">
+		<div class="box-header">
+			<h1><span >Dados do Empreendimento </span></h1>
+		</div>
+		<hr>
+		
+			<div class="row center">
+						
+						<h1><label class="col-sm-12 " for="descricao">{{empCtrl.empreendimento.descricao}}</label></h1>
+			</div>
+			
+			
+			<h3><span class="label label-default input-group-addon">R$</span><span class="label label-default input-group-addon">Financeiro</span></h3>
+			<br>
+			
+	
+			<div class="row">
+					<center>
+						<h5><label class="col-sm-1 label-control" for="previsto">Valor Previstos</label></h5>
+						<h3><label class="col-sm-1 label label-info " for="previsto"> {{empCtrl.empreendimento.valorMaximoGastar}}</label></h3>
+			
+			
+						<h5><label class="col-sm-1  label-control" for="gastos">Valores gastos</label></h5>
+						<h3><label class="col-sm-1 label label-warning" for="gastos">{{empCtrl.empreendimento.valoresGastos}}</label></h3>
+			
+						<h5><label class="col-sm-1 control-label" for="gastar">valor a gastar</label></h5>
+						<h3><label class="col-sm-1 label label-success" for="gastar">{{empCtrl.empreendimento.valorMaximoGastar - empCtrl.empreendimento.valoresGastos}}</label></h3>
+			</center>
+			</div>
+			<hr>
+			
+			<h3><span class="label label-default">Previsões</span></h3>
+			<br>
+			<div class="row">
+						<h5><label class="col-sm-1 control-label" for="descricao">Data de Inicio</label></h5>
+						<h3><label class="col-sm-1 label label-info " for="descricao">{{empCtrl.empreendimento.dataAbertura | date:'dd/MM/yyyy '}}</label></h3>
+						
+						<h5><label class="col-sm-1 control-label" for="descricao">Data de Termino</label></h5>
+						<h3><label class="col-sm-1 label label-warning " for="descricao">{{empCtrl.empreendimento.datafechamento | date:'dd/MM/yyyy '}}</label></h3>
+						
+						<h5><label class="col-sm-1 control-label" for="descricao">Tempo restante</label></h5>
+						<h3><label class="col-sm-1 label label-succsses" for="descricao">1 ano 27 dias</label></h3>
+						
+						<h5><label class="col-sm-1 control-label" for="porcentagem">concluido</label></h5>
+						<h3><label class="col-sm-1 label label-warning " for="porcentagem">{{empCtrl.empreendimento.porcentagem}}</label></h3>
+				</div>
+				<br>
+				<div class="row">
+				<h5><label class="col-sm-3 control-label" for="porcentagem">Andamento do Empreendimento</label></h5>
+				</div>
+				
+				
+				<div class=" progress">
+				
+  					<div class="progress-bar" role="progressbar" aria-valuenow="{{empCtrl.empreendimento.porcentagem}}" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+ 							
+ 						 {{empCtrl.empreendimento.porcentagem}}
+						  </div>
+					</div>
+			<br> 
+				<hr>
+			
+			<h3><span class="label label-default">Equipe Responsavel</span></h3>
+			<br>
+			<div class="row">
+						<h5><label class="col-sm-1 control-label" for="engenheiro">Engenheiro</label></h5>
+						<h3><label class="col-sm-2 " for="engenheiro">{{empCtrl.empreendimento.funcionario.engenheiroResponsavelFuncionario}}</label></h3>
+						
+						<h5><label class="col-sm-1 control-label" for="crea">CREA</label></h5>
+						<h3><label class="col-sm-2 " for="crea">{{empCtrl.empreendimento.funcionario.crea}}</label></h3>
+			</div>
+			<hr>
+			
+			<h3><span class="label label-default">Endereço</span></h3>
+			
+			<div class="row">
+						<h3><label class="col-sm-2 control-label" for="rua">Rua</label></h3>
+						<h3><label class="col-sm-2 " for="rua">{{empCtrl.empreendimento.enderecoEmpreendimento.rua}}</label></h3>
+			</div>
+			<div class="row">
+						<h3><label class="col-sm-2 control-label" for="numero">numero</label></h3>
+						<h3><label class="col-sm-2 " for="numero">{{empCtrl.empreendimento.enderecoEmpreendimento.numero}}</label></h3>
+			</div>
+			<div class="row">
+						<h3><label class="col-sm-2 control-label" for="bairro">Bairro</label></h3>
+						<h3><label class="col-sm-2 " for="bairro">{{empCtrl.empreendimento.enderecoEmpreendimento.bairro}}</label></h3>
+			</div>
+			<div class="row">
+						<h3><label class="col-sm-2 control-label" for="cidade">Cidade</label></h3>
+						<h3><label class="col-sm-2 " for="cidade">{{empCtrl.empreendimento.enderecoEmpreendimento.cidade}}</label></h3>
+			</div>
+			<div class="row">
+						<h3><label class="col-sm-2 control-label" for="estado">Estado</label></h3>
+						<h3><label class="col-sm-2 " for=""estado"">{{empCtrl.empreendimento.enderecoEmpreendimento.estado}}</label></h3>
+			</div>
+			<div class="row">
+						<h3><label class="col-sm-2 control-label" for="complemento">Complemento</label></h3>
+						<h3><label class="col-sm-2 " for="complemento">{{empCtrl.empreendimento.enderecoEmpreendimento.complemento}}</label></h3>
+			</div>
+			<div class="row">
+						<h3><label class="col-sm-2 control-label" for="cep">CEP</label></h3>
+						<h3><label class="col-sm-2 " for="cep">{{empCtrl.empreendimento.enderecoEmpreendimento.cep}}</label></h3>
+			</div>
+			
+			
+			
+			
+	</div>
+	<div class="tablecontainer"></div>
+</div>
+</div>

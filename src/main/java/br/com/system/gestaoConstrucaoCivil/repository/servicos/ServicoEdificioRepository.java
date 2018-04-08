@@ -6,4 +6,6 @@ import br.com.system.gestaoConstrucaoCivil.entity.servicos.ServicoEdificio;
 
 public interface ServicoEdificioRepository  extends JpaRepository<ServicoEdificio, Long>{
 
+	Iterable<ServicoEdificio> findByTorreAndAndarAndApartamento(Integer torre, Integer andar, Integer apartamento);
+
 }

@@ -1,63 +1,71 @@
 package br.com.system.gestaoConstrucaoCivil.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
+
 import br.com.system.gestaoConstrucaoCivil.entity.EmpresaContratante;
-
-import br.com.system.gestaoConstrucaoCivil.service.DadoEmpresaService;
 import br.com.system.gestaoConstrucaoCivil.service.EmpresaContratanteService;
-import br.com.system.gestaoConstrucaoCivil.service.EnderecoService;
-
 
 @RestController
 @RequestMapping("rest/empresaContratada")
 public class EmpresaContratanteRestController {
 
 	@Autowired
-	public EmpresaContratanteService empresaContratanteService;
-    @Autowired
-    public EnderecoService enderecoService;
-    @Autowired
-    public DadoEmpresaService dadoEmpresaService;
-    
-	@RequestMapping(method = RequestMethod.GET, value="/lista")
-	 public ResponseEntity<Iterable<EmpresaContratante>> buscarEmpresaContratante() {	  
-	  Iterable<EmpresaContratante> empresaContratante = empresaContratanteService.buscarTodos();
-	  return new ResponseEntity<Iterable<EmpresaContratante>>(empresaContratante, HttpStatus.OK);
-	 }
-	
-	@RequestMapping(value = "/buscaPorId/{id}", method = RequestMethod.GET)
-	public ResponseEntity<EmpresaContratante> buscarEmpresaPorId(@PathVariable Long id) {
-		
-		return new ResponseEntity<EmpresaContratante>(empresaContratanteService.buscarPorId(id), HttpStatus.OK);
+	private EmpresaContratanteService empresaContratanteService;
+
+	@GetMapping(value = "/lista")
+	public ResponseEntity<Iterable<EmpresaContratante>> buscarTodos() {
+
+		return new ResponseEntity<Iterable<EmpresaContratante>>(empresaContratanteService.buscarTodos(), HttpStatus.OK);
+	}
+
+	@GetMapping
+	public ResponseEntity<Page<EmpresaContratante>> lista(@RequestParam(defaultValue="0", required=false) int page
+			,@RequestParam(defaultValue="0", required=false) int maxResults) {
+		Page<EmpresaContratante> empresa = empresaContratanteService.buscarTodos(new PageRequest(page, maxResults));
+		return new ResponseEntity<Page<EmpresaContratante>>(empresa, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value ="/salva", method = RequestMethod.POST)
-	public ResponseEntity salvarEmpresaContratante(@RequestBody EmpresaContratante empresaContratante, UriComponentsBuilder ucBuilder) {
-		
+	@GetMapping(value = "/buscaPorId/{id}")
+	public ResponseEntity<EmpresaContratante> buscarPorId(@PathVariable Long id) {
+
+		return new ResponseEntity<EmpresaContratante>(empresaContratanteService.buscarPorId(id), HttpStatus.OK);
+	}
+
+	@PostMapping(value = "/salva")
+	public ResponseEntity<EmpresaContratante> salvar(@RequestBody EmpresaContratante empresaContratante,
+			UriComponentsBuilder ucBuilder) {
+
 		empresaContratanteService.salvarOuEditar(empresaContratante);
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("rest/empresaContratada/salva/{empresa}").buildAndExpand(empresaContratante.getId()).toUri());
-										
+		headers.setLocation(ucBuilder.path("rest/empresaContratada/salva/{empresa}")
+				.buildAndExpand(empresaContratante.getId()).toUri());
+
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/altera", method = RequestMethod.PUT)
-	public ResponseEntity alterarEmpresaContratante(@RequestBody EmpresaContratante empresaContratante, UriComponentsBuilder ucBuilder) {
-		
+	@PutMapping(value = "/altera")
+	public ResponseEntity<EmpresaContratante> alterar(@RequestBody EmpresaContratante empresaContratante,
+			UriComponentsBuilder ucBuilder) {
+
 		empresaContratanteService.salvarOuEditar(empresaContratante);
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("rest/empresaContratada/altera/{empresa}").buildAndExpand(empresaContratante.getId()).toUri());
-										
+		headers.setLocation(ucBuilder.path("rest/empresaContratada/altera/{empresa}")
+				.buildAndExpand(empresaContratante.getId()).toUri());
+
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 }

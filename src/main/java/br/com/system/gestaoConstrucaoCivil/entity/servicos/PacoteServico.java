@@ -9,17 +9,20 @@ import javax.persistence.Table;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Categoria;
+import br.com.system.gestaoConstrucaoCivil.util.geradorCodigo.GereCodigoPacoteServico;
 
 
 @Entity
-@Table(name = "pacote_servico")
+@Table(name = "pacote_servico" , schema="servicos")
 public class PacoteServico extends AbstractPersistable<Long>{
+
+	private static final long serialVersionUID = 1L;
 
 	@Column(nullable = false)
 	private boolean ativo;
 	
 	@Column(nullable = false)
-	private String codigoPacote;
+	private Integer codigo;
 	
 	@Column(nullable = false,length = 50)
 	private String descricao;
@@ -37,7 +40,11 @@ public class PacoteServico extends AbstractPersistable<Long>{
 	private Double valor;
 	
 	
-	
+	public void novoPacote()
+	{
+		this.codigo = new GereCodigoPacoteServico().gerarNumeroPacote();
+	   
+	}
 	
 	public Categoria getCategoria() {
 		return categoria;
@@ -51,11 +58,11 @@ public class PacoteServico extends AbstractPersistable<Long>{
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
 	}
-	public String getCodigoPacote() {
-		return codigoPacote;
+	public Integer getCodigoPacote() {
+		return codigo;
 	}
-	public void setCodigoPacote(String codigoPacote) {
-		this.codigoPacote = codigoPacote;
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
 	}
 	public String getServicosAtribuidos() {
 		return servicosAtribuidos;

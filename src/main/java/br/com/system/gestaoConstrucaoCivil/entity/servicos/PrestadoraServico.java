@@ -16,8 +16,10 @@ import br.com.system.gestaoConstrucaoCivil.entity.DadoEmpresa;
 
 
 @Entity
-@Table(name = "prestadora_servico")
+@Table(name = "prestadora_servico" , schema="servicos")
 public class PrestadoraServico extends AbstractPersistable<Long>{
+
+	private static final long serialVersionUID = 1L;
 
 	@OneToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST})
 	@JoinColumn(name="id_dado_empresa",nullable = false)

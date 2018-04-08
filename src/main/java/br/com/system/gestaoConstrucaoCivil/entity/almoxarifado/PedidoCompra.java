@@ -10,33 +10,53 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
+import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 
 @Entity
 @SequenceGenerator(name = "pedido_compra_id_seq",
 sequenceName = "pedido_compra_id_seq",
 initialValue = 1,
 allocationSize = 1)
-@Table(name = "pedido_compra")
+@Table(name = "pedido_compra" , schema="almoxarifado")
 public class PedidoCompra implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "pedido_compra_id_seq")
 	private Long id;
 	
 	@OneToMany(mappedBy = "pedidoCompra", cascade = CascadeType.ALL)
-	private List<ItemPedido> itens;
+	private List<PedidoItem> itens;
 	@ManyToOne
 	private Fornecedor fornecedor;
-    @Temporal(TemporalType.DATE)
-    @Column(nullable = false)
-    private Date previsao;
+    
+	@Column(name = "numeroPedido")
+	private Integer numeroPedido;
 	
+	@ManyToOne
+	private Empreendimento empreendimento;
+	
+	@Temporal(TemporalType.DATE)
+	private Date previsao;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataCadastro;
+	
+	@ManyToOne
+	@JoinColumn(name="usuario_cadastro")
+	private Usuario usuarioCadastro;
+			
 	public Long getId() {
 		return id;
 	}
@@ -44,11 +64,11 @@ public class PedidoCompra implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-    public List<ItemPedido> getItens() {
+    public List<PedidoItem> getItens() {
 		return itens;
 	}
 
-	public void setItens(List<ItemPedido> itens) {
+	public void setItens(List<PedidoItem> itens) {
 		this.itens = itens;
 	}
 
@@ -66,6 +86,38 @@ public class PedidoCompra implements Serializable{
 
 	public void setPrevisao(Date previsao) {
 		this.previsao = previsao;
+	}
+    
+	public Integer getNumeroPedido() {
+		return numeroPedido;
+	}
+
+	public void setNumeroPedido(Integer numeroPedido) {
+		this.numeroPedido = numeroPedido;
+	}
+
+	public Empreendimento getEmpreendimento() {
+		return empreendimento;
+	}
+
+	public void setEmpreendimento(Empreendimento empreendimento) {
+		this.empreendimento = empreendimento;
+	}
+	
+	public Date getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
+	public Usuario getUsuarioCadastro() {
+		return usuarioCadastro;
+	}
+
+	public void setUsuarioCadastro(Usuario usuarioCadastro) {
+		this.usuarioCadastro = usuarioCadastro;
 	}
 
 	@Override

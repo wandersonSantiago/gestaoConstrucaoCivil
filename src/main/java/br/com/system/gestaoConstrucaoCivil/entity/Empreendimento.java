@@ -1,5 +1,7 @@
 package br.com.system.gestaoConstrucaoCivil.entity;
 
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -7,11 +9,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -23,19 +26,28 @@ import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.View;
 import br.com.system.gestaoConstrucaoCivil.entity.servicos.PrestadoraServico;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoEmpreendimentoEnum;
 
+
 @Entity
-@Table(name = "empreendimento")
-public class Empreendimento extends AbstractPersistable<Long> {
+@Table(name = "empreendimento" , schema = "communs")
+public class Empreendimento implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 
+	@Id
+	@Column(unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private Long id;
+	
 	@ManyToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST})
 	@JoinColumn(name="id_endereco_empreendimento",nullable = false)
 	private Endereco enderecoEmpreendimento;
 	
+	@JsonView(View.Summary.class)
 	@ManyToOne
 	@JoinColumn(name="id_engenheiro_responsavel_funcionario",nullable = true)
 	private Funcionario engenheiroResponsavelFuncionario;
 	
+	@JsonView(View.Summary.class)
 	@ManyToOne
 	@JoinColumn(name="id_engenheiro_responsavel_terceiro",nullable = true)
 	private PrestadoraServico engenheiroResponsavelTerceiro;
@@ -43,7 +55,7 @@ public class Empreendimento extends AbstractPersistable<Long> {
 	@Enumerated(EnumType.STRING)
 	private TipoEmpreendimentoEnum tipoEmpreendimento;
     
-	@JsonView(View.Summary.class)
+	//@JsonView(View.Summary.class)
 	@Column(nullable = false,length = 50)
 	private String descricao;
 	
@@ -54,16 +66,27 @@ public class Empreendimento extends AbstractPersistable<Long> {
 	private Double valoresGastos = 0.0;
 	@Column(nullable = false)
 	private Double porcentagem =  0.0;
-	@Column(nullable = false)
+	
 	@Temporal(TemporalType.DATE)
+	@Column(name = "data_abertura")
 	private Date dataAbertura;
-	@Column(nullable = true)
+	
 	@Temporal(TemporalType.DATE)
+	@Column(name = "data_fechamento")
 	private Date datafechamento;
+	
     @Column(nullable = false)
 	private boolean ativo;
 	
-    public Endereco getEnderecoEmpreendimento() {
+    
+    
+    public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Endereco getEnderecoEmpreendimento() {
 		return enderecoEmpreendimento;
 	}
 	public void setEnderecoEmpreendimento(Endereco enderecoEmpreendimento) {
@@ -120,8 +143,6 @@ public class Empreendimento extends AbstractPersistable<Long> {
 	public void setDatafechamento(Date datafechamento) {
 		this.datafechamento = datafechamento;
 	}
-	
-	
 	public boolean isAtivo() {
 		return ativo;
 	}

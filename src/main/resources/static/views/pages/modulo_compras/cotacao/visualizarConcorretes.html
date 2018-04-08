@@ -1,0 +1,112 @@
+<meta charset="UTF-8">
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/compras/home">menu compras</a></li>
+   <li class="breadcrumb-item" ><a href="#/cotacao/gerar">gerar</a></li>
+   <li class="breadcrumb-item" ><a href="#/cotacao/em_aberto">em aberto</a></li>
+   <li class="breadcrumb-item active">Visualizar concorrentes</li>
+  </ol>	
+<div  ng-controller="cotacaoCompraController as cotacaoCtrl" >
+
+<div class="box box-primary" >
+		<div class="box-header" >
+			<span class="lead"></span>
+		</div>
+		<div class="panel-body">
+		<br>
+		<div class="row">
+			  		<div class="col-sm-4">
+			  		Empresa Fornecedora
+			  				<input class="form-control" ng-model="cotacao.fornecedor.dadoEmpresa.razaoSocial " type="text" id="fornecedor"   disabled>
+					
+			  		</div>
+				</div>
+			<br>
+		<div class="row">
+			<div class="col-sm-6" >
+				Cotação
+						<input class="form-control" ng-model="cotacao.cotacao.tema" type="text" id="temaCotacao"  disabled>
+				</div>	
+			<div class="col-sm-2" >
+				Data de Abertura
+						<input class="form-control" ng-model="cotacao.cotacao.dataCriacao" type=date  id="dataCriacaoCotacao"   disabled>
+				</div>
+			<div class="col-sm-2" >
+				Data Limite
+						<input class="form-control" ng-model="cotacao.cotacao.dataLimite " type="date"  id="dataLimiteCotacao"   disabled>
+				</div>
+		</div>
+			  <br>
+			  
+			<div class="container col-sm-12 table-responsive " >				
+				
+					<table class="table table-hover " ng-if="visialuzarTable">
+					<thead>
+						<tr>
+							<th ng-if="!fechado">selecione</th>	
+							<th>Status</th>						
+							<th>Descrição</th>
+							<th>Quantidade</th>
+							<th>Valor unitário</th>
+							<th>Valor total produto</th>
+							
+						</tr>
+					</thead>
+					
+					<tbody
+						ng-repeat=" f in cotacao.itens | filter : busca">
+						<tr>
+						<td ng-if="!cotacao.fechado" ><input class="col-sm-1" type="checkbox" ng-model="f.selecionado"	ng-click="cotacaoCtrl.ativarExcluirLote(cotacao.itens)"></td>
+							<td>{{f.status}}</td>
+							<td>{{f.item.descricao}}</td>
+							<td>{{f.item.quantidade}}</td>		
+							<td>{{f.valorUnitario | currency}}</td>				
+							<td>{{f.valorTotal = somaUnitario(f.item.quantidade, f.valorUnitario) | currency}}</td>
+							
+						</tr>
+	
+					</tbody>
+					<tfoot>
+						<tr>
+							<th><input type="button" class="btn-danger" ng-if="ativadoExcluirLote"  value="excluir" name="apagar" ng-click="cotacaoCtrl.apagarProdutos(listaCotacao)"></th>
+							<th></th>
+							<th></th>
+							<th></th>			
+							<th> Valor Total</th>
+							<th>{{valorTotalCotacao | currency}}</th>
+						</tr>
+					</tfoot>
+				</table>
+				</div>
+				<div class="row">
+				<div class="col-sm-5"></div>
+				<div class="3">			
+				<nav aria-label="Page navigation">
+					  <ul class="pagination">
+					    <li>
+					      <a href="#" aria-label="Previous">
+					        <span aria-hidden="true">&laquo;</span>
+					      </a>
+							    </li>
+							    <li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>
+							    <li><a href="#">2</a></li>
+							    <li><a href="#">3</a></li>
+							    <li><a href="#">4</a></li>
+							    <li><a href="#">5</a></li>
+							    <li>
+					      <a href="#" aria-label="Next">
+					        <span aria-hidden="true">&raquo;</span>
+					      </a>
+					    </li>
+					  </ul>
+				</nav>
+				</div>
+			</div>
+					
+					<br>		
+		
+
+		</div>
+		<div class="tablecontainer"></div>
+	</div>
+</div>

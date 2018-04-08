@@ -1,0 +1,202 @@
+<meta charset="UTF-8">
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/almoxarifado/home">menu almoxarifado</a></li>
+   <li class="breadcrumb-item" ><a href="#/estoque/requisicao/cadastro">cadastrar</a></li>
+   <li class="breadcrumb-item active">lista de requisição</li>
+  </ol>	
+<div 	ng-controller="requisicaoEstoqueController as requisicaoCtrl">
+
+	<div class="box box-primary" >
+	
+		<div class="box-header">
+			<span class="lead">Requisições </span>
+		</div>
+		<div class="panel-body">
+	<div class="row">
+			
+			
+	
+		</div>
+		<div >
+			<input type="text" class="form-control"  ng-model="buscar" placeholder="buscar por descrição">
+			<div ng-if="tipoEmpreendimento" >
+			<div class="table-responsive">
+			<table  class="table table-hover table-bordered" ng-init="requisicaoCtrl.listaRequisicaoEdificioComPaginacao(0 , 10)">
+				<thead>
+					<tr>
+						 
+						<th>Número</th>
+						<th>Status</th>
+						<th>Data</th>
+					
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" lista in listaRequisicaoEdificio | filter : buscar ">
+					<tr>
+						
+						<td>{{lista.informacaoRequisicao.numeroRequisicao}}</td>
+						<td>{{lista.informacaoRequisicao.statusRequisicao}}</td>
+						<td>{{lista.informacaoRequisicao.dataSaida | date : 'dd/MM/yyyy' }}</td>						
+					
+						<td ng-if="ROLE_MODULO_REQUISICAO_CONSULTA_EDIFICIO"><a href="#/estoque/visualizar/edificio/{{lista.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						
+					</tr>
+
+				</tbody>
+				<tfoot>
+				
+					
+				</tfoot>
+			</table>
+			</div>
+			<div class="row">
+				<div class="col-sm-5"></div>				
+				<div class="2">				
+					<nav>
+						<ul class="pagination">
+						
+							<li class="{{0==requisicaoCtrl.getPageEdificio ?'disabled':''}}"><a
+								ng-if="0!=requisicaoCtrl.getPageEdificio" ng-click="requisicaoCtrl.listaRequisicaoEdificioComPaginacao(requisicaoCtrl.getPageEdificio -1, maxResults)"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a> <a ng-if="0==requisicaoCtrl.getPageEdificio" aria-label="Previous"> <span
+									aria-hidden="true">&laquo;</span></a></li>
+							<li ng-repeat="pageEdificio in requisicaoCtrl.totalPagesEdificio"
+								class="{{pageEdificio==requisicaoCtrl.getPageEdificio ?'active':''}}"><a
+								ng-click="requisicaoCtrl.listaRequisicaoEdificioComPaginacao(pageEdificio , maxResults)">{{pageEdificio + 1}}</a></li>
+							<li class="{{requisicaoCtrl.getPageEdificio+1 == totalPagesEdificio ?'disabled':''}}"><a
+								ng-if="requisicaoCtrl.getPageEdificio+1 != totalPagesEdificio"
+								ng-click="requisicaoCtrl.listaRequisicaoEdificioComPaginacao(requisicaoCtrl.getPageEdificio+1, maxResults)" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a> <a ng-if="requisicaoCtrl.getPageEdificio+1==totalPagesEdificio" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a></li>
+							
+						</ul>
+					</nav>
+				</div>
+			</div>
+			</div>
+			<div ng-if="!tipoEmpreendimento" >
+			<div class="table-responsive">
+			<table  class="table table-hover table-bordered" ng-init="requisicaoCtrl.listaRequisicaoCasaComPaginacao(0 , 10)">
+				<thead>
+					<tr>
+						 
+						<th>Número</th>
+						<th>Status</th>
+						<th>Data</th>
+					
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" lista in listaRequisicaoCasa | filter : buscar ">
+					<tr>
+						
+						<td>{{lista.informacaoRequisicao.numeroRequisicao}}</td>
+						<td>{{lista.informacaoRequisicao.statusRequisicao}}</td>
+						<td>{{lista.informacaoRequisicao.dataSaida | date : 'dd/MM/yyyy'}}</td>						
+					
+						<td ng-if="ROLE_MODULO_REQUISICAO_CONSULTA_CASA"><a href="#/estoque/visualizar/casa/{{lista.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						
+					</tr>
+
+				</tbody>
+				<tfoot>
+				
+					
+				</tfoot>
+			</table>
+			</div>
+			<div class="row">
+				<div class="col-sm-5"></div>				
+				<div class="2">				
+					<nav>
+						<ul class="pagination">
+						
+							<li class="{{0==requisicaoCtrl.getPageCasa ?'disabled':''}}"><a
+								ng-if="0!=requisicaoCtrl.getPageCasa" ng-click="requisicaoCtrl.listaRequisicaoCasaComPaginacao(requisicaoCtrl.getPageCasa -1, maxResults)"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a> <a ng-if="0==requisicaoCtrl.getPageCasa" aria-label="Previous"> <span
+									aria-hidden="true">&laquo;</span></a></li>
+							<li ng-repeat="pageCasa in requisicaoCtrl.totalPagesCasa"
+								class="{{pageCasa==requisicaoCtrl.getPageCasa ?'active':''}}"><a
+								ng-click="requisicaoCtrl.listaRequisicaoCasaComPaginacao(pageCasa , maxResults)">{{pageCasa + 1}}</a></li>
+							<li class="{{requisicaoCtrl.getPageCasa+1 == totalPagesCasa ?'disabled':''}}"><a
+								ng-if="requisicaoCtrl.getPageCasa+1 != totalPagesCasa"
+								ng-click="requisicaoCtrl.listaRequisicaoCasaComPaginacao(requisicaoCtrl.getPageCasa+1, maxResults)" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a> <a ng-if="requisicaoCtrl.getPageCasa+1==totalPagesCasa" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a></li>
+							
+						</ul>
+					</nav>
+				</div>
+			</div>
+			</div>
+			<hr>
+			<div class="table-responsive">
+			<h3>Edificações Comunitária</h3>
+			<table class="table table-hover table-bordered" ng-init="requisicaoCtrl.listaRequisicaoOutrosComPaginacao(0 , 10)">
+				<thead>
+					<tr>
+						 
+						<th>Número</th>
+						<th>Status</th>
+						<th>Data</th>
+					
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" lista in listaRequisicaoOutros | filter : buscar ">
+					<tr>
+						
+						<td>{{lista.informacaoRequisicao.numeroRequisicao}}</td>
+						<td>{{lista.informacaoRequisicao.statusRequisicao}}</td>
+						<td>{{lista.informacaoRequisicao.dataSaida | date : 'dd/MM/yyyy'}}</td>						
+					
+						<td ng-if="ROLE_MODULO_REQUISICAO_CONSULTA_OUTROS"><a href="#/estoque/visualizar/outros/{{lista.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						
+					</tr>
+
+				</tbody>
+				<tfoot>
+				
+					
+				</tfoot>
+			</table>
+			</div>
+			<div class="row">
+				<div class="col-sm-5"></div>				
+				<div class="2">				
+					<nav>
+						<ul class="pagination">
+						
+							<li class="{{0==requisicaoCtrl.getPageOutros ?'disabled':''}}"><a
+								ng-if="0!=requisicaoCtrl.getPageOutros" ng-click="requisicaoCtrl.listaRequisicaoOutrosComPaginacao(requisicaoCtrl.getPageOutros -1, maxResults)"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a> <a ng-if="0==requisicaoCtrl.getPageOutros" aria-label="Previous"> <span
+									aria-hidden="true">&laquo;</span></a></li>
+							<li ng-repeat="pageOutros in requisicaoCtrl.totalPagesOutros"
+								class="{{pageOutros==requisicaoCtrl.getPageOutros ?'active':''}}"><a
+								ng-click="requisicaoCtrl.listaRequisicaoOutrosComPaginacao(pageOutros , maxResults)">{{pageOutros + 1}}</a></li>
+							<li class="{{requisicaoCtrl.getPageOutros+1 == totalPagesOutros ?'disabled':''}}"><a
+								ng-if="requisicaoCtrl.getPageOutros+1 != totalPagesOutros"
+								ng-click="requisicaoCtrl.listaRequisicaoOutrosComPaginacao(requisicaoCtrl.getPageOutros+1, maxResults)" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a> <a ng-if="requisicaoCtrl.getPageOutros+1==totalPagesOutros" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a></li>
+							
+						</ul>
+					</nav>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+

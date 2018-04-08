@@ -1,19 +1,16 @@
 package br.com.system.gestaoConstrucaoCivil.service.almoxarifado;
 
-
-import java.util.List;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.ItemRequisicao;
+import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.InformacaoRequisicao;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.RequisicaoCasa;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.RequisicaoOutros;
-import br.com.system.gestaoConstrucaoCivil.enuns.StatusRequisicao;
-import br.com.system.gestaoConstrucaoCivil.pojo.EntradaOuBaixa;
 import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.RequisicaoCasaRepository;
 
@@ -21,57 +18,48 @@ import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.RequisicaoCas
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
 public class RequisicaoCasaService {
 
-	@Autowired
-	private RequisicaoCasaRepository requisicaoCasaRepository;
-	@Autowired
-	private EstoqueEmpreendimentoService estoque;
 
+	@Autowired
+	private RequisicaoCasaRepository requisicaoRepository;
+	@Autowired
+	private RequisicaoService requisicaoService; 
+	
+	
 	@Transactional(readOnly = false)
-	public void salvarOuEditar(RequisicaoCasa requisicaoCasa) {
+	public void salvarOuEditar(RequisicaoCasa requisicaoCasa){
 		
-		adicionarItemRequisicao(requisicaoCasa);
-		Empreendimento empreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
-		requisicaoCasa.setEmpreendimento(empreendimento);
-		requisicaoCasaRepository.save(requisicaoCasa);
-	}
-	private void adicionarItemRequisicao(RequisicaoCasa requisicao)
-	{
-		for(ItemRequisicao item : requisicao.getItem())
-		{
-			item.setRequisicao(requisicao);
-		}
+		
+		InformacaoRequisicao informacaoRequisicao = new InformacaoRequisicao();
+		informacaoRequisicao.novaRequisicao();
+		requisicaoCasa.setInformacaoRequisicao(informacaoRequisicao);
+		requisicaoRepository.save(requisicaoCasa);
 	}
 	
-	public List<RequisicaoCasa> buscarTodos() {
-		return requisicaoCasaRepository.findAll();
+	
+	public Collection<RequisicaoCasa> buscarTodos(){
+		return requisicaoRepository.buscarTodasRequisicoes(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId());
 	}
-	public RequisicaoCasa buscarPorId(Long id) {
-		return requisicaoCasaRepository.findOne(id);
+	
+	public RequisicaoCasa buscarPorId(Long id){
+		return requisicaoRepository.findOne(id);
 	}
-	public void aceitarRequisicao(Integer numeroRequisicao)
+	@Transactional(readOnly = false)
+	public void aceitar(Integer numeroRequisicao)
 	{
-		Empreendimento empreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
-		RequisicaoCasa requisicao = requisicaoCasaRepository.findByNumeroRequisicao(numeroRequisicao);
-		if(requisicao.getStatusRequisicao() == StatusRequisicao.PENDENTE)
-		{
-		
-			
-			for(ItemRequisicao item: requisicao.getItem())
-			{
-			    EntradaOuBaixa baixa = new EntradaOuBaixa(item.getProduto(), item.getQuantidade(), empreendimento);
-			
-			    estoque.baixar(baixa);
-				
-			}
-		   requisicao.setStatusRequisicao(StatusRequisicao.EFETUADO);	
-		}
-		
+		RequisicaoCasa requisicao = requisicaoRepository.buscarPorNumeroRequisicao(numeroRequisicao);
+	    requisicaoService.aceitar(requisicao);
 	}
-	public void rejeitarRequisicao(Integer numeroRequisicao)
+	@Transactional(readOnly = false)
+	public void rejeitar(Integer numeroRequisicao)
 	{
-		 Empreendimento empreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
-		 RequisicaoCasa requisicao = requisicaoCasaRepository.findByNumeroRequisicao(numeroRequisicao);
-		 requisicao.setStatusRequisicao(StatusRequisicao.RECUSADO);
+		RequisicaoCasa requisicao = requisicaoRepository.buscarPorNumeroRequisicao(numeroRequisicao);
+		requisicaoService.rejeitar(requisicao);
 	}
 
+
+	public Page<RequisicaoCasa> buscarTodosComPaginacao(PageRequest pageRequest) {
+		return requisicaoRepository.buscarTodasRequisicoesComPaginacao(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId(), pageRequest);
+	}
+	
+	
 }

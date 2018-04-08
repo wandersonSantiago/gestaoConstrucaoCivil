@@ -9,35 +9,30 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@SequenceGenerator(name = "area_id_seq",
-sequenceName = "area_id_seq",
-initialValue = 1,
-allocationSize = 50)
-
-@Table(name = "area")
-public class AreaProduto implements Serializable{
+@Table(name = "area_produto", schema = "communs")
+public class AreaProduto  implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "area_id_seq")
+	@Column(unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	
 	@Column(nullable = false)
 	private boolean ativo;
-	
-	@Column(nullable = false, length = 30)
-	public String descricao;
 
-	public Long getId() {
-		return id;
-	}
+	@NotBlank
+	@NotEmpty
+	@Size(min = 3, max = 25)
+	private String descricao;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
 	public boolean isAtivo() {
 		return ativo;
 	}
@@ -52,6 +47,14 @@ public class AreaProduto implements Serializable{
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	@Override
@@ -78,7 +81,5 @@ public class AreaProduto implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
+
 }

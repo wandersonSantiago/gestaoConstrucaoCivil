@@ -2,6 +2,7 @@ package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,20 +12,32 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
 import br.com.system.gestaoConstrucaoCivil.entity.Categoria;
+import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.View.Summary;
 import br.com.system.gestaoConstrucaoCivil.enuns.UnidadeMedidaEnum;
+import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 
 @Entity
-@Table(name = "produto")
+
+@NamedEntityGraph(name = "Produto.detail",
+attributeNodes = {@NamedAttributeNode("categoria"),@NamedAttributeNode("fabricante"),@NamedAttributeNode("tipoProduto")})
+
+@Table(name = "produto" , schema="almoxarifado")
 public class Produto extends AbstractPersistable<Long> {
+	
+	private static final long serialVersionUID = 1L;
 
 	@JsonView(Summary.class)
 	@Column(nullable = true,unique = true)
@@ -48,6 +61,7 @@ public class Produto extends AbstractPersistable<Long> {
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "produtos_fornecedores", joinColumns = @JoinColumn(name = "id_produto"), 
 	inverseJoinColumns = @JoinColumn(name = "id_fornecedor"))
+	@Fetch(FetchMode.SUBSELECT)
 	private List<Fornecedor> fornecedores;
 	
 	@ManyToOne
@@ -61,6 +75,9 @@ public class Produto extends AbstractPersistable<Long> {
 	@Transient
 	private boolean geraCodigoBarra = true;
 	
+	@ManyToOne
+	@JoinColumn(name ="id_usuario_cadastro")
+	private Usuario usuarioCadastro;
 	
 	public boolean isGeraCodigoBarra() {
 		return geraCodigoBarra;
@@ -137,6 +154,14 @@ public class Produto extends AbstractPersistable<Long> {
 
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
+	}
+	public void setUsuarioCadastrado()
+	{
+		this.usuarioCadastro = SessionUsuario.getInstance().getUsuario();
+	}
+			
+	public Usuario getUsuarioCadastro() {
+		return usuarioCadastro;
 	}
     
 

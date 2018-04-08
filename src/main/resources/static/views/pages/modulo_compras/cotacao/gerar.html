@@ -1,0 +1,100 @@
+<meta charset="UTF-8">
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/compras/home">menu compras</a></li>
+   <li class="breadcrumb-item" ><a href="#/cotacao/em_aberto">em aberto</a></li>
+   <li class="breadcrumb-item active">gerar cotação</li>
+  </ol>	
+<div  ng-controller="cotacaoCompraController as cotacaoCtrl" >
+
+<div class="box box-primary" >
+		<!-- Default panel contents -->
+		<div class="box-header" >
+			<span class="lead">Gerar cotação </span>
+		</div>
+		<div class="panel-body">
+
+			<div class="container col-sm-12 " >
+				<form role="form-vertical" ng-submit="cotacaoCtrl.salva()" >
+					
+					<div class="row">
+						<div class="col-sm-6">
+							<input class="form-control " ng-model="cotacaoCtrl.cotacao.tema" placeholder="tema da cotação"  id="temaCotacao"							 
+								title="Tema para a cotação"  style=" width: 100%;" >					
+						</div>
+						<div class="col-sm-3">
+							<input class="form-control " type="date" ng-model="cotacaoCtrl.cotacao.dataLimite" placeholder="data limite"  title="escolha uma data limite para o encerramento desta cotação"> 
+						</div>						
+					</div>
+					<br>
+					<br>
+				<div class="row" >			
+					<div class="col-sm-4" >
+							<input class="form-control select2" ng-model="cotacaoCtrl.descricao" placeholder="descrição do produto" id="descricao"							 
+							 title="descrição do produto" style=" width: 100%;" >
+						
+					</div>
+					<div class="col-sm-4" >
+							<input class="form-control select2" ng-model="cotacaoCtrl.quantidade" placeholder="quantidade do produto" ui-number-mask="0" id="quantidade"							 
+							title="quantidade de produtos para a cotação"  style=" width: 100%;" >
+						
+					</div>
+							<div class="col-sm-2">							
+							<input class="btn btn-lg btn-primary btn-block btn-signin" ng-disabled="!cotacaoCtrl.quantidade || !cotacaoCtrl.descricao"
+								ng-click="cotacaoCtrl.adicionarProdutos(cotacaoCtrl.descricao, cotacaoCtrl.quantidade)" value="adicionar"
+								title="pressione para adicionar a lista" type="button" ng-disabled="!cotacaoCtrl.produto" >
+						</div>
+					</div>
+					<br>
+					
+				
+					<table class="table table-hover " ng-show="visialuzarTable">
+					<thead>
+						<tr>
+							<th>selecione</th>							
+							<th>Descrição</th>
+							<th>Quantidade</th>
+							
+						</tr>
+					</thead>
+					
+					<tbody
+						ng-repeat=" f in cotacaoCtrl.listaCotacao | filter : busca">
+						<tr>
+						<td><input class="col-sm-1" type="checkbox" ng-model="f.selecionado"	ng-click="cotacaoCtrl.ativarExcluirLote(listaCotacao)"></td>
+							<td><input class="form-control"  id="descricaoProduto"  type="text" placeholder="descrição do Produto" 
+							ng-model="f.descricao" disabled></td>
+							<td><input class="form-control"  id="quantidadeProduto"  type="text" placeholder="quantidade"
+							ng-model="f.quantidade" ui-number-mask="0" disabled></td>							
+						</tr>
+	
+					</tbody>
+					<tfoot>
+						<tr>
+							<th><input type="button" class="btn btn-danger" ng-if="ativadoExcluirLote"  value="excluir" name="apagar" ng-click="cotacaoCtrl.apagarProdutos(listaCotacao)"></th>
+							<th></th>
+							<th></th>
+							<th></th>			
+	
+						</tr>
+					</tfoot>
+				</table>
+					
+					<br>
+				
+					<div class="row ">
+						
+						
+							<input type="submit" id="submit" value="Salvar"	class="btn btn-lg btn-primary btn-block btn-signin">
+						
+						
+					</div>
+
+
+				</form>
+			</div>
+
+		</div>
+		<div class="tablecontainer"></div>
+	</div>
+</div>

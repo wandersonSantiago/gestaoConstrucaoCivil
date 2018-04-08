@@ -1,39 +1,66 @@
 package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
 
-import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
+import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 
 @Entity
-@Table(name = "requisicao_edificio")
-public class RequisicaoEdificio  extends  Requisicao implements Serializable{
+@Table(name ="requisicao_edificio" , schema="almoxarifado")
+public class RequisicaoEdificio extends AbstractPersistable<Long> implements IRequisicao<RequisicaoEdificioItem>{
 
+	private static final long serialVersionUID = 1L;
+
+	@ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="id_informacao_requisicao",nullable = true)
+	private InformacaoRequisicao informacaoRequisicao;
+    
+    @OneToMany(mappedBy = "requisicaoEdificio", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private List<RequisicaoEdificioItem> itens;
 	
-	private Integer andar;
-	private Integer torre;
-	private Integer apartamento;
 	
-	public Integer getAndar() {
-		return andar;
+    public List<RequisicaoEdificioItem> getItens() {
+		return itens;
 	}
-	public void setAndar(Integer andar) {
-		this.andar = andar;
+
+	public void setItens(List<RequisicaoEdificioItem> itens) {
+	
+		this.itens = itens;
+		
+		for(RequisicaoEdificioItem item: this.itens)
+		{
+			item.setRequisicaoEdificio(this);
+		}
 	}
-	public Integer getTorre() {
-		return torre;
+
+	public InformacaoRequisicao getInformacaoRequisicao() {
+		return informacaoRequisicao;
+
 	}
-	public void setTorre(Integer torre) {
-		this.torre = torre;
+
+	public void setInformacaoRequisicao(InformacaoRequisicao informacaoRequisicao) {
+		this.informacaoRequisicao = informacaoRequisicao;
 	}
-	public Integer getApartamento() {
-		return apartamento;
+
+	@Override
+	public Empreendimento empreendimentoSaida() {
+		
+		return informacaoRequisicao.getEmpreendimento();
 	}
-	public void setApartamento(Integer apartamento) {
-		this.apartamento = apartamento;
+
+	@Override
+	public Empreendimento empreendimentoEntrada() {
+		
+		return informacaoRequisicao.getEmpreendimento();
 	}
 	
 }

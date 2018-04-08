@@ -13,7 +13,7 @@ public abstract class GeraCodigo {
 		this.maximo = maximo;
 		this.minimo = minimo;
 	}
-	protected Integer gerar()
+	protected Integer gerarNumero()
 	{
 		Random random = new Random();
 		Integer codigo  = random.nextInt((maximo - minimo) + 1) + minimo;
