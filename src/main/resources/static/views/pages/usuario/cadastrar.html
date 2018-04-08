@@ -1,7 +1,11 @@
 <meta charset="UTF-8">
-<br>
-<br>
-<div class="generic-container"	ng-controller="usuarioController as userCtrl" ng-init="perfil()">
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/gerenciamento/home">menu gerenciamento</a></li>
+   <li class="breadcrumb-item" ><a href="#/usuario/listagem">lista</a></li>
+   <li class="breadcrumb-item active">cadastro</li>
+  </ol>
+<div class="generic-container"	ng-controller="usuarioController as userCtrl" >
 				
 	<div class="box box-primary">
 		<!-- Default panel contents -->
@@ -85,25 +89,6 @@
 					</div>
 					<br> <br>
 					
-					<br> <br>
-
-					<div class="panel panel-primary" >
-						<div class="panel-heading">Lista de Permissões</div>
-						<div class="panel-body">
-							<md-grid-list md-cols="2" md-cols-sm="2" md-cols-md="3"	md-cols-gt-md="5" md-row-height-gt-md="09:1" md-row-height="16:09"
-								md-gutter="8px" md-gutter-gt-sm="4px"> 
-								<md-grid-tile	ng-repeat="user in perfils"  md-colspan-sm="1" md-colspan-xs="1">
-								
-								<label  class="radio-inline"><input type="checkbox"  ng-model="user.perfil" value="perfil" name="optradio">{{ user }}</label>
-								
-									</md-grid-tile-footer> 
-								</md-grid-tile> 
-							</md-grid-list>
-						</div>
-					</div>
-									
-
-
 					
 					<div class="row ">
 						
@@ -116,4 +101,4 @@
 			</div>
 			<div class="tablecontainer"></div>
 		</div>
-	</div>
+</div>
