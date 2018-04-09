@@ -4,13 +4,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>br.com.system</groupId>
-	<artifactId>gestaoConstrucaoCivil</artifactId>
+	<groupId>br.com.app</groupId>
+	<artifactId>gestao-construcao-civil</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>gestaoConstrucaoCivil</name>
-	<description>gestaoConstrucaoCivil</description>
+	<name>gestao-construcao-civil</name>
+	<description>Gestao Construcao Civil</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

@@ -12,9 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.system.gestaoConstrucaoCivil.GestaoConstrucaoCivilApplication;
-import br.com.system.gestaoConstrucaoCivil.entity.Cargo;
-import br.com.system.gestaoConstrucaoCivil.repository.CargoRepository;
+import br.com.app.GestaoConstrucaoCivilApplication;
+import br.com.app.entity.Cargo;
+import br.com.app.repository.CargoRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GestaoConstrucaoCivilApplication.class)

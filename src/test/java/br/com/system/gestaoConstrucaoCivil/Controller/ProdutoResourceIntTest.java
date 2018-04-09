@@ -12,10 +12,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.system.gestaoConstrucaoCivil.GestaoConstrucaoCivilApplication;
-import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.Produto;
-import br.com.system.gestaoConstrucaoCivil.enuns.UnidadeMedidaEnum;
-import br.com.system.gestaoConstrucaoCivil.repository.almoxarifado.ProdutoRepository;
+import br.com.app.GestaoConstrucaoCivilApplication;
+import br.com.app.entity.almoxarifado.Produto;
+import br.com.app.enuns.UnidadeMedidaEnum;
+import br.com.app.repository.almoxarifado.ProdutoRepository;
 
 
 @RunWith(SpringRunner.class)
