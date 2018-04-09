@@ -15,6 +15,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,6 +23,7 @@ import javax.persistence.TemporalType;
 import br.com.system.gestaoConstrucaoCivil.enuns.EstadoCivilEnum;
 
 @Entity
+@SequenceGenerator(name = "pessoa_id_seq", sequenceName = "pessoa_id_seq",schema="communs")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "pessoa" , schema = "communs")
 public abstract class Pessoa implements Serializable{
@@ -29,8 +31,7 @@ public abstract class Pessoa implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(unique = true, nullable = false)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pessoa_id_seq")
 	private Long id;
 	
 	@Column(nullable = false,length = 50)

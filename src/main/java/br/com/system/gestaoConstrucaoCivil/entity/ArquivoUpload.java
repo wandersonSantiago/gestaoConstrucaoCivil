@@ -7,18 +7,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 
 @Entity
+@SequenceGenerator(name = "arquivo_produto_id_seq", sequenceName = "arquivo_produto_id_seq",schema="communs")
 @Table(name = "arquivo_upload" , schema = "communs")
 public class ArquivoUpload implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(unique = true, nullable = false)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "arquivo_produto_id_seq")
 	private Long id;
 	
 	private Long proprietarioId ;

@@ -15,19 +15,16 @@ import javax.persistence.Table;
 import br.com.system.gestaoConstrucaoCivil.entity.DadoEmpresa;
 
 @Entity
-@SequenceGenerator(name = "fabricante_id_seq",
-				   sequenceName = "fabricante_id_seq",
-				   initialValue = 1,
-				   allocationSize = 50)
-@Table(name = "fabricante" , schema = "almoxarifado")
-public class Fabricante  implements Serializable {
+@SequenceGenerator(name = "fabricante_id_seq", sequenceName = "fabricante_id_seq", schema = "almoxarifado")
+@Table(name = "fabricante", schema = "almoxarifado")
+public class Fabricante implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fabricante_id_seq")
 	private Long id;
-	@OneToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST})
+	@OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
 	@JoinColumn(name = "id_dado_empresa", nullable = false)
 	private DadoEmpresa dadoEmpresa;
 
@@ -71,9 +68,5 @@ public class Fabricante  implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
+
 }

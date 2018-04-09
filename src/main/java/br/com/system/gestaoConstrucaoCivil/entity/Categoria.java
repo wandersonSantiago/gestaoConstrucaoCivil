@@ -9,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -19,14 +20,14 @@ import org.hibernate.validator.constraints.NotEmpty;
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoCategoriaEnum;
 
 @Entity
+@SequenceGenerator(name = "categoria_id_seq", sequenceName = "categoria_id_seq",schema="communs")
 @Table(name = "categoria" , schema = "communs")
 public class Categoria implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(unique = true, nullable = false)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categoria_id_seq")
 	private Long id;
 	
 	@Column(nullable = false)

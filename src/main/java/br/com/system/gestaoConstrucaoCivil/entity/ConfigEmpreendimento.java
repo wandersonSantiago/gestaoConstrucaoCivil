@@ -13,12 +13,14 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import br.com.system.gestaoConstrucaoCivil.enuns.TipoEmpreendimentoEnum;
 
  
 @Entity
+@SequenceGenerator(name = "config_empreendimento_id_seq", sequenceName = "config_empreendimento_id_seq",schema="communs")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "config_empreendimento" , schema = "communs")
 
@@ -27,8 +29,7 @@ public  class ConfigEmpreendimento  implements Serializable {
    	private static final long serialVersionUID = 1L;
 
    	@Id
-	@Column(unique = true, nullable = false)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+   	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "config_empreendimento_id_seq")
 	private Long id;
    	
 	@ManyToOne

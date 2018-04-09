@@ -19,8 +19,7 @@ import br.com.system.gestaoConstrucaoCivil.entity.almoxarifado.interfaces.IItem;
 
 
 @Entity
-@SequenceGenerator(name = "item_id_seq", sequenceName = "item_id_seq", initialValue = 1, allocationSize = 1)
-//@Table(name = "item_id_seq")
+@SequenceGenerator(name = "item_id_seq", sequenceName = "item_id_seq",schema="almoxarifado")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Item implements Serializable,IItem{
 

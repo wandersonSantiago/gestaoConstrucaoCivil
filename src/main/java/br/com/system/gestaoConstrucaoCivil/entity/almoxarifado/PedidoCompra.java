@@ -23,9 +23,7 @@ import br.com.system.gestaoConstrucaoCivil.entity.Usuario;
 
 @Entity
 @SequenceGenerator(name = "pedido_compra_id_seq",
-sequenceName = "pedido_compra_id_seq",
-initialValue = 1,
-allocationSize = 1)
+sequenceName = "pedido_compra_id_seq",schema="almoxarifado")
 @Table(name = "pedido_compra" , schema="almoxarifado")
 public class PedidoCompra implements Serializable{
 

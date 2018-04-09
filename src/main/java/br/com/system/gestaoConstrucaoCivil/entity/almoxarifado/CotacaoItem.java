@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@SequenceGenerator(name = "item_cotacao_id_seq", sequenceName = "item_cotacao_id_seq", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "item_cotacao_id_seq", sequenceName = "item_cotacao_id_seq",schema = "almoxarifado")
 @Table(name = "cotacao_item" , schema = "almoxarifado")
 public class CotacaoItem implements Serializable {
 

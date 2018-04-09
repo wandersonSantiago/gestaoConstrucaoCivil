@@ -28,7 +28,7 @@ import br.com.system.gestaoConstrucaoCivil.pojo.SessionUsuario;
 
 
 @Entity
-@SequenceGenerator(name = "nota_fiscal_id_seq", sequenceName = "nota_fiscal_id_seq", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "nota_fiscal_id_seq", sequenceName = "nota_fiscal_id_seq", schema="almoxarifado")
 @Table(name = "nota_fiscal", schema="almoxarifado")
 public class NotaFiscal implements Serializable {
 

@@ -31,9 +31,7 @@ import br.com.system.gestaoConstrucaoCivil.util.geradorCodigo.GeraNumeroRequisic
 
 @Entity
 @SequenceGenerator(name = "informacaoRequisicao_id_seq",
-sequenceName = "informacaoRequisicao_id_seq",
-initialValue = 1,
-allocationSize = 1)
+		sequenceName = "informacaoRequisicao_id_seq",schema = "almoxarifado")
 @Table(name = "informacao_requisicao", schema = "almoxarifado")
 public class InformacaoRequisicao implements Serializable{
 	

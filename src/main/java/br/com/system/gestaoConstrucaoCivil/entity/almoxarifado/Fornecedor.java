@@ -20,9 +20,7 @@ import br.com.system.gestaoConstrucaoCivil.findControll.FornecedorFindControll;
 
 @Entity
 @SequenceGenerator(name = "fornecedor_id_seq",
-sequenceName = "fornecedor_id_seq",
-initialValue = 1,
-allocationSize = 1)
+sequenceName = "fornecedor_id_seq",schema = "almoxarifado")
 @Table(name = "fornecedor", schema = "almoxarifado")
 public class Fornecedor implements Serializable{
 

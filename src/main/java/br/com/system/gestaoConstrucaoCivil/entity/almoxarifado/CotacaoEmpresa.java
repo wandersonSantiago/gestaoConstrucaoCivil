@@ -20,35 +20,33 @@ import javax.persistence.Transient;
 import br.com.system.gestaoConstrucaoCivil.enuns.CotacaoEmpresaItemStatus;
 
 @Entity
-@SequenceGenerator(name = "cotacao_empresa_id_seq", sequenceName = "cotacao_empresa_id_seq", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "cotacao_empresa_id_seq", sequenceName = "cotacao_empresa_id_seq", schema = "almoxarifado")
 @Table(name = "cotacao_empresa", schema = "almoxarifado")
-public class CotacaoEmpresa implements Serializable{
+public class CotacaoEmpresa implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cotacao_empresa_id_seq")
 	private Long id;
-	
-	
+
 	@ManyToOne
-	@JoinColumn(name="id_cotacao",nullable = false)
+	@JoinColumn(name = "id_cotacao", nullable = false)
 	private Cotacao cotacao;
-	
+
 	@ManyToOne
-	@JoinColumn(name="id_fornecedor",nullable = false)
+	@JoinColumn(name = "id_fornecedor", nullable = false)
 	private Fornecedor fornecedor;
-	
-	@OneToMany(mappedBy = "cotacaoEmpresa",cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "cotacaoEmpresa", cascade = CascadeType.ALL)
 	@Column(nullable = false)
 	private List<CotacaoEmpresaItem> itens;
 
 	@Transient
 	private Integer quantidade = 0;
-	
+
 	private Boolean ganhou;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -80,42 +78,41 @@ public class CotacaoEmpresa implements Serializable{
 	public void setItens(List<CotacaoEmpresaItem> itens) {
 		this.itens = itens;
 	}
-	public void removerItensPerdedores()
-	{
+
+	public void removerItensPerdedores() {
 		List<CotacaoEmpresaItem> itensParaRemover = new ArrayList<CotacaoEmpresaItem>();
-		itens.forEach(item ->{
-			
-			if(item.getStatus().equals(CotacaoEmpresaItemStatus.PERDEU))
-			{
-			    itensParaRemover.add(item);
+		itens.forEach(item -> {
+
+			if (item.getStatus().equals(CotacaoEmpresaItemStatus.PERDEU)) {
+				itensParaRemover.add(item);
 			}
 		});
-	    itens.removeAll(itensParaRemover);
-	}
-	public Integer getQuantidadeItensGanhos()
-	{
+		itens.removeAll(itensParaRemover);
 		
+	}
+
+	public Integer getQuantidadeItensGanhos() {
+
 		itens.forEach(item -> {
-			
-			if(item.getStatus().equals(CotacaoEmpresaItemStatus.GANHOU))
-			{
+
+			if (item.getStatus().equals(CotacaoEmpresaItemStatus.GANHOU)) {
 				this.quantidade++;
 			}
 		});
 		return quantidade;
 	}
-	public void perdeu()
-	{
+
+	public void perdeu() {
 		this.ganhou = false;
-		
+
 	}
-	public void ganhou(){
+
+	public void ganhou() {
 		this.ganhou = true;
 	}
-	public Boolean getGanhou()
-	{
+
+	public Boolean getGanhou() {
 		return this.ganhou;
 	}
-	
-	
+
 }

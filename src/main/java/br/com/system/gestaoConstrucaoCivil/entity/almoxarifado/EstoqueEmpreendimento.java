@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -19,6 +20,7 @@ import br.com.system.gestaoConstrucaoCivil.entity.Empreendimento;
 import br.com.system.gestaoConstrucaoCivil.pojo.InformacaoEntradaProduto;
 
 @Entity
+@SequenceGenerator(name = "estoque_empreendimento_id_seq", sequenceName = "estoque_empreendimento_id_seq",schema = "almoxarifado")
 @NamedEntityGraph(name = "EstoqueEmpreendimento.detail", attributeNodes = { @NamedAttributeNode("produto"),
 		@NamedAttributeNode("empreendimento") })
 @Table(name = "estoque_empreendimento", schema = "almoxarifado")
@@ -27,8 +29,7 @@ public class EstoqueEmpreendimento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(unique = true, nullable = false)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "estoque_empreendimento_id_seq")
 	Long id;
 
 	@Column(nullable = false)

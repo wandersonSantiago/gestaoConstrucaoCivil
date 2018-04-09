@@ -9,9 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
  
 @Entity
+@SequenceGenerator(name = "config_empreendimento_outros_id_seq", sequenceName = "config_empreendimento_outros_id_seq",schema="communs")
 @Table(name = "config_empreendimento_outros" , schema = "communs")
 public class ConfigEmpreendimentoOutros implements Serializable {
  
@@ -19,8 +21,7 @@ public class ConfigEmpreendimentoOutros implements Serializable {
 
 
 	@Id
-	@Column(unique = true, nullable = false)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "config_empreendimento_outros_id_seq")
 	private Long id;
 
      

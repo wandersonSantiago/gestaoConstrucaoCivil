@@ -19,11 +19,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import br.com.system.gestaoConstrucaoCivil.enuns.CotacaoEmpresaItemStatus;
 
 @Entity
-@SequenceGenerator(name = "cotacao_empresa_item_id_seq",
-sequenceName = "cotacao_empresa_item_id_seq",
-initialValue = 1,
-allocationSize = 1)
-@Table(name = "cotacao_empresa_item" , schema = "almoxarifado")
+@SequenceGenerator(name = "cotacao_empresa_item_id_seq", sequenceName = "cotacao_empresa_item_id_seq", schema = "almoxarifado")
+@Table(name = "cotacao_empresa_item", schema = "almoxarifado")
 public class CotacaoEmpresaItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -33,22 +30,21 @@ public class CotacaoEmpresaItem implements Serializable {
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "id_item",nullable = false)
+	@JoinColumn(name = "id_item", nullable = false)
 	private CotacaoItem item;
-	
-	@Column(name="observacao")
+
+	@Column(name = "observacao")
 	private String observaocao;
 	@Column(nullable = false)
 	private Double valorUnitario;
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name = "id_cotacao_empresa",nullable = false)
+	@JoinColumn(name = "id_cotacao_empresa", nullable = false)
 	private CotacaoEmpresa cotacaoEmpresa;
 
 	@Enumerated(EnumType.STRING)
 	private CotacaoEmpresaItemStatus status;
-	
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -64,8 +60,7 @@ public class CotacaoEmpresaItem implements Serializable {
 	public void setItem(CotacaoItem item) {
 		this.item = item;
 	}
-    
-	
+
 	public CotacaoEmpresaItemStatus getStatus() {
 		return status;
 	}
@@ -77,6 +72,7 @@ public class CotacaoEmpresaItem implements Serializable {
 	public Double getValorUnitario() {
 		return valorUnitario;
 	}
+
 	public String getObservaocao() {
 		return observaocao;
 	}
@@ -97,7 +93,4 @@ public class CotacaoEmpresaItem implements Serializable {
 		this.cotacaoEmpresa = cotacaoEmpresa;
 	}
 
-
-		
-	
 }
