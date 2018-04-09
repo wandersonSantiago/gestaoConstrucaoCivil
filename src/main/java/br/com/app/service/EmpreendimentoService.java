@@ -56,9 +56,9 @@ public class EmpreendimentoService {
 	}
 
 	
-	public Page<Empreendimento> findByNomeFantasiaOrRazaoSocialOrCnpjIgnoreCase(String descricao, Pageable page){
+	public Page<Empreendimento> findByDescricaoIgnoreCase(String descricao, Pageable page){
 		
-		Page<Empreendimento> empreendimentos = empreendimentoRepository.findByDescricaoIgnoreCase(descricao, page);
+		Page<Empreendimento> empreendimentos = empreendimentoRepository.findByDescricaoContainsIgnoreCase(descricao, page);
 	
 		if(empreendimentos.getNumberOfElements() < 1  || empreendimentos == null) {
 			throw new NotFoundException("Não foi possivel encontrar nenhuma empreendimento com esta descrição: " + descricao);

@@ -1,6 +1,6 @@
 package br.com.app.entity;
 
-import java.io.Serializable;
+ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -33,7 +33,7 @@ public class Empreendimento implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	
-	@ManyToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST})
+	@ManyToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name="id_endereco",nullable = false)
 	private Endereco endereco;
 	

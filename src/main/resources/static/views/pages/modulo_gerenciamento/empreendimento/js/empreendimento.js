@@ -37,9 +37,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			templateUrl : "views/pages/modulo_gerenciamento/empreendimento/empreendimento.form.html",
 			controller : "EmpreendimentoEditarController as ctrl",
 			ncyBreadcrumb: {
-				 	parent: 'empreendimento.listar',
+				 	parent: 'empreendimento.consultar',
 				    label: 'Editar'
-				  }
+				  },
+				  resolve:{
+			        	empreendimentoPrepService: empreendimentoPrepService
+					  }
 		
 		})
 		
@@ -54,3 +57,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		})
 
 });
+empreendimentoPrepService.$inject = ['$stateParams','EmpreendimentoService']
+
+function empreendimentoPrepService($stateParams, EmpreendimentoService){
+	return EmpreendimentoService.buscarPorId($stateParams.idEmpreendimento);
+}

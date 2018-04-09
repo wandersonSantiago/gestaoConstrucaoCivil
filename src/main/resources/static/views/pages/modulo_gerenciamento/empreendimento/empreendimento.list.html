@@ -5,7 +5,7 @@
 	<div class="col-lg-6">
 		<div class="input-group">
 			<input type="text" class="form-control"
-				placeholder="Digite o nome ou qualquer número de documento"
+				placeholder="Digite o nome"
 				ng-model="texto" autofocus
 				ng-keyup="$event.keyCode == 13 && ctrl.buscarPorTexto(texto)">
 			<span class="input-group-btn">
@@ -25,30 +25,35 @@
 </div>
 <br>
 
-<div class="table-responsive" ng-if="empreendimentos.length">
-	<table class="table table-hover">
+	<div class="panel panel-default table-responsive" ng-if="empreendimentos.length">
+			<table class="table table-bordered table-striped">
 		<tr>
 
-			<th>Descrição Empreendimento</th>
+			<th>Nome</th>
 			<th>Data Inicio</th>
+			<th>Data Término</th>
 			<th>Valor Total</th>
 			<th>Valor Gasto</th>
+			<th>Editar</th>
 
 
 		</tr>
 		<tbody
 			ng-repeat=" empreendimento in empreendimentos | filter : buscaEmpreendimento ">
 			<tr>
-
 				<td>{{ empreendimento.descricao }}</td>
 				<td>{{ empreendimento.dataAbertura | date : 'dd/MM/yyyy'}}</td>
+				<td>{{ empreendimento.datafechamento | date : 'dd/MM/yyyy'}}</td>
 				<td>{{ empreendimento.valorMaximoGastar | currency }}</td>
 				<td>{{ empreendimento.valoresGastos | currency }}</td>
+				<td  class="col-sm-1" title="Editar Empreendimento"><a
+				ui-sref="empreendimento.editar({ idEmpreendimento: empreendimento.id})"
+				class="glyphicon glyphicon-edit"></a></td>
 			</tr>
 		</tbody>
 	</table>
-	<nav>
-		<ul uib-pagination total-items="ctrl.totalPaginas"
+	<nav >
+		<ul uib-pagination total-items="ctrl.totalPaginas" 
 			ng-model="ctrl.paginaCorrente" max-size="10" class="pagination-sm"
 			boundary-link-numbers="true" ng-change="ctrl.buscarPorTexto(texto)"
 			previous-text="Anterior" last-text="Último" first-text="Primeiro"

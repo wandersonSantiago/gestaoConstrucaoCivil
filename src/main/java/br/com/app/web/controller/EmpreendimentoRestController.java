@@ -38,29 +38,22 @@ public class EmpreendimentoRestController {
 	public ResponseEntity<Page<Empreendimento>> findByDescricao(
 			@RequestParam(value="page", defaultValue="0") Integer page, 
 			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
-			@RequestParam(value="orderBy", defaultValue="nome") String orderBy, 
+			@RequestParam(value="orderBy", defaultValue="descricao") String orderBy, 
 			@RequestParam(value="direction", defaultValue="ASC") String direction,
-			@RequestParam(value="descricao") String descricao) {
+			@RequestParam(value="descricao", required = false , defaultValue="")String descricao) {
 
-		Page<Empreendimento> list = empreendimentoService.findByNomeFantasiaOrRazaoSocialOrCnpjIgnoreCase(descricao, PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy));
+		Page<Empreendimento> list = null;
+		
+		if(descricao.isEmpty() || descricao.equalsIgnoreCase("")) {
+			list = empreendimentoService.findAll(PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy));
+		}else {
+			list = empreendimentoService.findByDescricaoIgnoreCase(descricao, PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy));
+		}
 		
 		return ResponseEntity.ok().body(list);
 	}
 
-	
-	@GetMapping
-	public ResponseEntity<Page<Empreendimento>> findAll(@RequestParam(value="page", defaultValue="0") Integer page, 
-			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
-			@RequestParam(value="orderBy", defaultValue="nome") String orderBy, 
-			@RequestParam(value="direction", defaultValue="ASC") String direction) {
-
-		Page<Empreendimento> list = empreendimentoService.findAll(PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy));
 		
-		return ResponseEntity.ok().body(list);
-
-	}
-
-	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Optional<Empreendimento>> buscarPorId(@PathVariable Long id) {
 		Optional<Empreendimento> empreendimento = empreendimentoService.findById(id);

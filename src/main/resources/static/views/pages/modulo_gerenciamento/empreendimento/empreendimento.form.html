@@ -2,16 +2,28 @@
 <form name="formEmpreendimento" novalidate ng-submit="ctrl.submit()">
 
 	<div>
-		<h4>Cadastro</h4>
+		<h4>{{ctrl.titulo}}</h4>
 		<hr>
 		
 		<div class="row">
-			<div class="form-group col-sm-12"
+			<div class="form-group col-sm-8"
 				ng-class="{ 'has-error' : formEmpreendimento.descricao.$invalid && formEmpreendimento.$submitted}">
 				<label>Descricao*:</label> 
 					<input type="text"	 class="form-control" id="descricao"
 					name="descricao" ng-model="ctrl.empreendimento.descricao"
 					placeholder="Descricao" required ng-required="true">
+			</div>
+			<div class="form-group col-sm-2"
+				ng-class="{ 'has-error' : formEmpreendimento.inicio.$invalid && formEmpreendimento.$submitted}">
+				<label>Previsão de início*:</label> 
+					<input type="date"	 class="form-control" id="inicio" 
+					name="inicio" ng-model="ctrl.empreendimento.dataAbertura" required ng-required="true">
+			</div>
+			<div class="form-group col-sm-2"
+				ng-class="{ 'has-error' : formEmpreendimento.termino.$invalid && formEmpreendimento.$submitted}">
+				<label>Previsão de término*:</label> 
+					<input type="date"	 class="form-control" id="termino" 
+					name="termino" ng-model="ctrl.empreendimento.datafechamento" required ng-required="true">
 			</div>
 		</div>
 
@@ -35,7 +47,7 @@
 			
 			<div class="form-group col-sm-4">
 				<label>Fone:</label> <input type="text" class="form-control"
-					id="fone" name="fone" ng-model="ctrl.igreja.telefone"
+					id="fone" name="fone" ng-model="ctrl.empreendimento.telefone"
 					placeholder="Telefone" ui-br-phone-number >
 			</div>
 		</div>
@@ -47,7 +59,7 @@
 			<div class="form-group col-sm-3"
 				ng-class="{ 'has-error' : formEmpreendimento.cepField.$invalid && formEmpreendimento.$submitted }">
 				<label>CEP*:</label> <input type="text" class="form-control"
-					id="cep" ng-blur="ctrl.findCep(ctrl.igreja.endereco.cep)"
+					id="cep" ng-blur="ctrl.findCep(ctrl.empreendimento.endereco.cep)"
 					onkeyup="if(this.value.length > 8) { numero.focus(); }"
 					name="cepField" placeholder="CEP"
 					ng-model="ctrl.empreendimento.endereco.cep" ui-br-cep-mask required
