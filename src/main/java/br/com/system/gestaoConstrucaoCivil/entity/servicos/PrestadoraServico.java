@@ -1,53 +1,38 @@
 package br.com.system.gestaoConstrucaoCivil.entity.servicos;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import br.com.system.gestaoConstrucaoCivil.entity.DadoEmpresa;
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import br.com.system.gestaoConstrucaoCivil.entity.Empresa;
+
 
 @Entity
-@SequenceGenerator(name = "prestadora_servico_id_seq", sequenceName = "prestadora_servico_id_seq", schema = "servicos", initialValue = 1, allocationSize = 1)
-@Table(name = "prestadora_servico", schema = "servicos")
-public class PrestadoraServico implements Serializable {
+@Table(name = "prestadora_servico" , schema="servicos")
+public class PrestadoraServico extends AbstractPersistable<Long>{
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "prestadora_servico_id_seq")
-	private Long id;
-
-	@OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
-	@JoinColumn(name = "id_dado_empresa", nullable = false)
-	private DadoEmpresa dadoEmpresa;
-
+	@OneToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST})
+	@JoinColumn(name="id_dado_empresa",nullable = false)
+	private Empresa dadoEmpresa;
+	
 	@OneToMany(mappedBy = "prestadoraServico", cascade = CascadeType.ALL)
+	//@ManyToOne usar
 	private List<ServicoEmpresa> servicos;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public DadoEmpresa getDadoEmpresa() {
+	
+	public Empresa getDadoEmpresa() {
 		return dadoEmpresa;
 	}
-
-	public void setDadoEmpresa(DadoEmpresa dadoEmpresa) {
+	public void setDadoEmpresa(Empresa dadoEmpresa) {
 		this.dadoEmpresa = dadoEmpresa;
 	}
-
+	
 }
