@@ -1,249 +1,98 @@
-<!DOCTYPE html>
-
-<html id="ng-app" ng-app="gcc">
-<head>
-
 <meta charset="UTF-8">
+<html ng-app="gcc">
+<head>
+<title>GCC-Gestão Construção Civil</title>
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
 
+<link href="public/bower_components/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet">
+<link href="public/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="public/bower_components/angular-block-ui/dist/angular-block-ui.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="public/bower_components/sweetalert2/dist/sweetalert2.min.css">
+<link rel="stylesheet" type="text/css" href="public/css/app.css">
+<link rel="stylesheet" href="public/bower_components/AdminLTE/dist/css/AdminLTE.min.css">
+<link rel="stylesheet" href="public/bower_components/AdminLTE/dist/css/skins/skin-purple.css">
+<link rel="stylesheet" type="text/css" href="public/bower_components/angular-toastr/dist/angular-toastr.css" />
+<link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet"	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
-<title>Gestão Construção Civil</title>
-
-	<link rel="stylesheet" href="public/components/AdminLTE/dist/css/AdminLTE.min.css">
-	<link rel="stylesheet" href="public/components/AdminLTE/dist/css/skins/skin-purple.css">
+<!-- colocar aqui somente os componentes do bower -->
+	<script src="public/bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="public/bower_components/AdminLTE/dist/js/app.min.js" type="text/javascript"></script>
+	<script src="public/bower_components/angular/angular.js" type="text/javascript"></script>	
+	<script src="public/bower_components/angular-resource/angular-resource.min.js" type="text/javascript"></script>
+	<script src="public/bower_components/sweetalert2/dist/sweetalert2.min.js" type="text/javascript"></script>	
+	<script src="public/bower_components/angular-animate/angular-animate.js"></script>
+	<script	src="public/bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>	
+	<script src="public/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js" ></script>
+	<script src="public/bower_components/angular-ui-router/release/angular-ui-router.js" type="text/javascript"></script>
+	<script src="public/bower_components/angular-cookies/angular-cookies.min.js" ></script>
+	<script src="public/bower_components/bootstrap/dist/js/bootstrap.min.js" ></script>
+	<script src="public/bower_components/chart.js/dist/Chart.min.js" type="text/javascript"></script>
+	<script src="public/bower_components/angular-chart.js/dist/angular-chart.min.js" type="text/javascript"></script>
+	<script src="public/bower_components/angular-input-masks/angular-input-masks-standalone.js" type="text/javascript"></script>
+	<script src="public/bower_components/angular-block-ui/dist/angular-block-ui.min.js"></script>
+	<script src="public/bower_components/checklist-model/checklist-model.js"></script>
+	<script src="public/bower_components/angular-breadcrumb/dist/angular-breadcrumb.min.js"></script>
+	<script src="public/bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
+	<script src="public/bower_components/ng-flow/dist/ng-flow-standalone.min.js"></script>
+	<script src="public/bower_components/flow.js/dist/flow.min.js"></script>
+	<script src="public/bower_components/ng-flow/dist/ng-flow.min.js"></script>
+	<script src="public/bower_components/ngstorage/ngStorage.min.js"></script>
+	<script src="public/bower_components/angular-br-filters/release/angular-br-filters.min.js"></script>
 	
-	<link href="public/components/AdminLTE/bootstrap/css/bootstrap.css"	rel="stylesheet" />
-	
-	<link	href="public/components/angular-block-ui/dist/angular-block-ui.min.css"	rel="stylesheet" />
-	<link href="public/components/angular-toastr/dist/angular-toastr.css"	rel="stylesheet" />
-	<link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-	<link rel="stylesheet"	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">	
-	<link rel="stylesheet" href="public/components/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-	<link rel="stylesheet" href="public/components/sweetalert2/dist/sweetalert2.min.css">
-	<link href="public/css/login.css" rel="stylesheet" />
-	<link rel="stylesheet" href="public/components/angular-material/angular-material.min.css">
-
-	
-	<script src="public/components/jquery/dist/jquery.min.js" type="text/javascript"></script>
-	<script src="public/components/AdminLTE/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="public/components/AdminLTE/dist/js/app.min.js" type="text/javascript"></script>
-	<script src="public/components/angular/angular.min.js" type="text/javascript"></script>
-	<script src="public/components/angular/angular-resource.js" type="text/javascript"></script>
-	<script src="public/components/angular/ui-utils.min.js" type="text/javascript"></script>
-	<script	src="public/components/angular-toastr/dist/angular-toastr.tpls.js" type="text/javascript"></script>
-	<script src="public/components/angular-animate/angular-animate.js" type="text/javascript"></script>
-	<script src="public/components/angular-touch/angular-touch.js" type="text/javascript"></script>
-	<script	src="public/components/angular-locale-pt-br/angular-locale_pt-br.js" type="text/javascript"></script>
-	<script src="public/components/angular-bootstrap/ui-bootstrap-tpls.js" type="text/javascript"></script>	
-	<script	src="public/components/angular-block-ui/dist/angular-block-ui.min.js"></script>
-	<script src="public/components/angular-route/angular-route.min.js" type="text/javascript"></script>
-	<script src="public/components/ngstorage/ngStorage.min.js" type="text/javascript"></script>
-	<script src="public/components/angular-input-masks/angular-input-masks-standalone.min.js" type="text/javascript"></script>
-	<script src="public/components/es6-promise/promise.min.js" type="text/javascript"></script>
- 	<script src="public/components/sweetalert2/dist/sweetalert2.min.js" type="text/javascript"></script>
- 	<script src="public/components/angucomplete-alt/dist/angucomplete-alt.min.js" type="text/javascript"></script>
- 	<script src="public/components/angular-animate/angular-animate.min.js" type="text/javascript"></script>
-    <script src="public/components/angular-aria/angular-aria.min.js" type="text/javascript"></script>
-    <script src="public/components/angular-messages/angular-messages.min.js" type="text/javascript"></script>
- 	<script src="public/components/angular-material/angular-material.min.js" type="text/javascript"></script>
- 	<script src="public/components/angular-file-upload/dist/angular-file-upload.min.js"></script>
- 	<script src="public/components/angular-export-table/export/table-export-directive.js"></script>
-    <script src="public/components/angular-export-table/export/table-export-option-directive.js"></script>
-    <script src="public/components/angular-export-table/kayalshri-table-export.jquery.plugin-a891806/table-export.js"></script>
-    <script src="public/components/angular-export-table/kayalshri-table-export.jquery.plugin-a891806/jquery.base64.js"></script>
-    <script src="public/components/angular-export-table/kayalshri-table-export.jquery.plugin-a891806/html2canvas.js"></script>
-    <script src="public/components/angular-export-table/kayalshri-table-export.jquery.plugin-a891806/jspdf/jspdf.js"></script>
-    <script src="public/components/angular-export-table/kayalshri-table-export.jquery.plugin-a891806/jspdf/libs/base64.js"></script>
-    <script src="public/components/angular-export-table/kayalshri-table-export.jquery.plugin-a891806/jspdf/libs/sprintf.js"></script> 
-	<script src="public/components/angular-file-upload/dist/angular-file-upload.min.js"></script>	
-	<script src="public/components/ng-flow/dist/ng-flow-standalone.min.js"></script>
-	<script src="public/components/flow.js/dist/flow.min.js"></script>
-	<script src="public/components/ng-flow/dist/ng-flow.min.js"></script>    
-	<script src="public/components/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
- 	<script src="public/components/angular-smart-table/dist/smart-table.min.js"></script> 	
- 	<script src="public/components/Chart.js/Chart.min.js"></script>
-	<script src="public/components/angular-chart.js/dist/angular-chart.min.js"></script>
-	<script src="public/js/pages/app.js" type="text/javascript"></script>
-	<script src="public/js/pages/login.js"></script>
-	<script src="public/js/pages/backgroundLogin.js"></script>
-	<script src="public/js/pages/auth/auth.js"></script>
-	<script src="public/js/pages/diretivas/date.js"></script>
-	<script src="public/js/pages/diretivas/exportTable.js"></script>
-	
-	<script src="public/js/pages/route/rotas.js" type="text/javascript"></script>
-	<script src="views/templates/principal-rotas.js" type="text/javascript"></script>
-	
-	<script src="public/js/pages/servicos/tipo-empreendimento-service.js" type="text/javascript"></script>
-	<script src="public/js/pages/servicos/unidade-medida-service.js" type="text/javascript"></script>			
-	<script src="public/js/pages/servicos/busca-cep-service.js" type="text/javascript"></script>			
-	<script src="public/js/pages/servicos/veirifica-dados-service.js" type="text/javascript"></script>		
-	<script src="public/js/pages/servicos/endereco-service.js" type="text/javascript"></script>	
-	
-	
-			
-	<script src="public/js/pages/controller/tipo-empreendimento-controller.js" type="text/javascript"></script>
-	<script src="public/js/pages/controller/controla-tempo-login.js" type="text/javascript"></script>
-	<script src="public/js/pages/controller/unidade-medida-controller.js" type="text/javascript"></script>				
-	<script src="public/js/pages/controller/verifica-dados-controller.js" type="text/javascript"></script>		
-	<script src="public/js/pages/controller/endereco-controller.js" type="text/javascript"></script>		
-	
-	
-	
-	<script src="views/pages/modulo_admin/empresa_contratada/js/empresa-contratada-service.js" type="text/javascript"></script>	
-	<script src="views/pages/modulo_admin/empresa_contratada/js/empresa-contratada-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_admin/empresa_contratada/js/empresa-contratada-rotas.js" type="text/javascript"></script>
-	
-	<script src="views/pages/modulo_admin/auditoria/js/auditoria-service.js" type="text/javascript"></script>	
-	<script src="views/pages/modulo_admin/auditoria/js/auditoria-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_admin/auditoria/js/auditoria-rotas.js" type="text/javascript"></script>
-
-	<script src="views/pages/modulo_admin/auditoria/estoque/js/auditoria-estoque-service.js" type="text/javascript"></script>	
-	<script src="views/pages/modulo_admin/auditoria/estoque/js/auditoria-estoque-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_admin/auditoria/estoque/js/auditoria-estoque-rotas.js" type="text/javascript"></script>
-	
-	<script src="views/pages/modulo_admin/auditoria/servicos/js/auditoria-servico-service.js" type="text/javascript"></script>	
-	<script src="views/pages/modulo_admin/auditoria/servicos/js/auditoria-servico-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_admin/auditoria/servicos/js/auditoria-servico-rotas.js" type="text/javascript"></script>
-	
-	<script src="views/pages/modulo_gerenciamento/usuario/js/usuario-service.js" type="text/javascript"></script>	
-	<script src="views/pages/modulo_gerenciamento/usuario/js/usuario-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_gerenciamento/usuario/js/usuario-rotas.js" type="text/javascript"></script>	
-	
-	<script src="views/pages/modulo_gerenciamento/usuario/permissao/js/permissao-service.js" type="text/javascript"></script>	
-	<script src="views/pages/modulo_gerenciamento/usuario/permissao/js/permissao-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_gerenciamento/usuario/permissao/js/permissao-rotas.js" type="text/javascript"></script>	
-	
-	<script src="views/pages/modulo_gerenciamento/empreendimento/empreendimento/js/empreendimento-service.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_gerenciamento/empreendimento/empreendimento/js/empreendimento-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_gerenciamento/empreendimento/empreendimento/js/empreendimento-rotas.js" type="text/javascript"></script>
-	
-	<script src="views/pages/modulo_gerenciamento/empreendimento/configuracao/js/config-empreendimento-service.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_gerenciamento/empreendimento/configuracao/js/config-empreendimento-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_gerenciamento/empreendimento/configuracao/js/config-empreendimento-rotas.js" type="text/javascript"></script>
-	
-	<script src="views/pages/modulo_cadastros/fornecedor/js/fornecedor-service.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_cadastros/fornecedor/js/fornecedor-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_cadastros/fornecedor/js/fornecedor-rotas.js" type="text/javascript"></script>
-	
-	<script src="views/pages/modulo_cadastros/fabricante/js/fabricante-service.js" type="text/javascript"></script>	
-	<script src="views/pages/modulo_cadastros/fabricante/js/fabricante-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_cadastros/fabricante/js/fabricante-rotas.js" type="text/javascript"></script>
-	
-	<script src="views/pages/modulo_cadastros/morador/js/morador-service.js" type="text/javascript"></script>	
-	<script src="views/pages/modulo_cadastros/morador/js/morador-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_cadastros/morador/js/morador-rotas.js" type="text/javascript"></script>
-	
-	<script src="views/pages/modulo_cadastros/area/js/area-aplicacao-service.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_cadastros/area/js/area-aplicacao-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_cadastros/area/js/area-rotas.js" type="text/javascript"></script>
-	
-	<script src="views/pages/modulo_cadastros/produto/categoria/js/categoria-service.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_cadastros/produto/categoria/js/categoria-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_cadastros/produto/categoria/js/categoria-rotas.js" type="text/javascript"></script>
-	
-	<script src="views/pages/modulo_cadastros/produto/tipo/js/tipo-produto-service.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_cadastros/produto/tipo/js/tipo-produto-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_cadastros/produto/tipo/js/tipo-rotas.js" type="text/javascript"></script>
-	
-	<script src="views/pages/modulo_cadastros/produto/js/produto-service.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_cadastros/produto/js/produto-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_cadastros/produto/js/produto-rotas.js" type="text/javascript"></script>
-	
-	<script src="views/pages/modulo_recursos_humanos/cargo/js/cargo-service.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_recursos_humanos/cargo/js/cargo-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_recursos_humanos/cargo/js/cargo-rotas.js" type="text/javascript"></script>
-	
-	<script src="views/pages/modulo_recursos_humanos/funcionario/js/funcionario-service.js" type="text/javascript"></script>	
-	<script src="views/pages/modulo_recursos_humanos/funcionario/js/funcionario-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_recursos_humanos/funcionario/js/funcionario-rotas.js" type="text/javascript"></script>	
-	
-	<script src="views/pages/modulo_servicos/pacotes/js/pacote-servico-service.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_servicos/pacotes/js/pacote-servico-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_servicos/pacotes/js/pacote-rotas.js" type="text/javascript"></script>
-	
-	<script src="views/pages/modulo_servicos/prestadora_servicos/js/prestadora-servico-service.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_servicos/prestadora_servicos/js/prestadora-servico-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_servicos/prestadora_servicos/js/prestadora-servicos-rotas.js" type="text/javascript"></script>
-	
-	<script src="views/pages/modulo_servicos/vincular/js/servico-empresa-service.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_servicos/vincular/js/servico-empresa-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_servicos/vincular/js/servico-empresa-rotas.js" type="text/javascript"></script>
-	
-	<script src="views/pages/modulo_compras/cotacao/js/cotacao-compra-service.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_compras/cotacao/js/cotacao-compra-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_compras/cotacao/js/rotas.js" type="text/javascript"></script>
-	
-	<script src="views/pages/modulo_compras/compras/js/pedido-compra-service.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_compras/compras/js/pedido-compra-controller.js" type="text/javascript"></script><base>
-	<script src="views/pages/modulo_compras/compras/js/pedido-compra-rotas.js" type="text/javascript"></script>
-	
-	<script src="views/pages/modulo_estoque/requisicao/js/requisicao-estoque-service.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_estoque/requisicao/js/requisicao-estoque-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_estoque/requisicao/js/requisicao-estoque-rotas.js" type="text/javascript"></script>
-	
-	<script src="views/pages/modulo_estoque/transferencia/js/transferencia-estoque-service.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_estoque/transferencia/js/transferencia-estoque-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_estoque/transferencia/js/transferencia-estoque-rotas.js" type="text/javascript"></script>
-	
-	<script src="views/pages/modulo_estoque/js/estoque-service.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_estoque/js/estoque-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_estoque/js/estoque-rotas.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_estoque/js/nota-fiscal-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_estoque/js/nota-fiscal-service.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_estoque/js/saida-estoque-controller.js" type="text/javascript"></script>
-	<script src="views/pages/modulo_estoque/js/saida-estoque-service.js" type="text/javascript"></script>
-	
-	
-	<script src="views/pages/modulo_chamado/manutencao/js/chamado-manutencao-controller.js"></script>
-	<script src="views/pages/modulo_chamado/manutencao/js/chamado-manutencao-service.js"></script>
-	<script src="views/pages/modulo_chamado/manutencao/js/rotas.js"></script>
-	
-	<script src="views/pages/modulo_chamado/informatica/js/chamado-ti-controller.js"></script>
-	<script src="views/pages/modulo_chamado/informatica/js/chamado-ti-service.js"></script>
-	<script src="views/pages/modulo_chamado/informatica/js/rotas.js"></script>
-	
-
-	
-	
-	
-	<style>
-		[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {display: none !important;	}	
-	</style>
-
-
+	<!-- fim -->
+<style type="text/css">
+[ng\:cloak], [ng-cloak], .ng-cloak {
+	display: none !important;
+}
+</style>
 </head>
 
-<div ng-if="!logado" ng-include="'views/login.html'"></div>
-<!-- <div ng-if="!logado" ng-view></div> -->
 
-<body class="hold-transition skin-purple  sidebar-mini">
-	<div  class="wrapper">
+<div ng-if="!authenticated" ng-include="'views/login.html'"></div>
 
-		<div ng-show="logado" ng-include="'views/templates/header.html'" ></div>
+<body   class="hold-transition skin-purple sidebar-mini">
+	<div ng-if="authenticated" class="wrapper">
 
-		<div ng-show="logado" ng-include="'views/templates/menuPrincipal.html'" ></div>
+		<div ng-if="authenticated" ng-include="'views/templates/header.html'"></div>
 
-		<div ng-show="logado"  class="content-wrapper">
+		<div ng-if="authenticated" ng-include="'views/templates/menu.html'"></div>
 
-
-			<section class="content">
-				<br><br>
-				<div ng-if="logado" ng-view></div>
-
+		<div   class="content-wrapper">
+			<section  class="content">
+				<div class="visible-lg-block visible-md-block" ncy-breadcrumb></div>
+				<div ui-view ></div>
 			</section>
 		</div>
-
-
-		<div ng-show="logado" ng-include="'views/templates/footer.html'"></div>
-
-		
+		<div  ng-if="authenticated" ng-include="'views/templates/footer.html'"></div>
 	</div>
 	
+	<!-- colocar aqui nossos scripts -->
+	<!-- inject:js -->
+	<script src="public/js/pages/app.js" ></script>
+	<script src="public/js/pages/login.js" ></script>
+	<script src="public/js/pages/service/auth.js" ></script>
+	<script src="public/js/pages/directive/permission.js"></script>
+	<script src="public/js/pages/directive/dateInput.js"></script>
+	<script src="public/js/pages/rotas/rotas.js" ></script>
+	<script src="public/js/pages/filter/AuthHttpResponseIterceptor.js" ></script>
+	<script  src="public/js/pages/service/buscaCepService.js" type="text/javascript"></script>
 	
-
+	<script src="views/templates/js/home-controller.js" type="text/javascript"></script>
+	
+	
+	<script src="views/pages/modulo_admin/empresa_matriz/js/empresa-matriz.js" type="text/javascript"></script>
+	<script src="views/pages/modulo_admin/empresa_matriz/js/empresa-matriz-controller.js" type="text/javascript"></script>
+	<script src="views/pages/modulo_admin/empresa_matriz/js/empresa-matriz-service.js" type="text/javascript"></script>
+	
+	<script src="views/pages/modulo_gerenciamento/empreendimento/js/empreendimento.js" type="text/javascript"></script>
+	<script src="views/pages/modulo_gerenciamento/empreendimento/js/empreendimento-controller.js" type="text/javascript"></script>
+	<script src="views/pages/modulo_gerenciamento/empreendimento/js/empreendimento-service.js" type="text/javascript"></script>
+	<!-- endinject -->
+	
 </body>
-			
 </html>

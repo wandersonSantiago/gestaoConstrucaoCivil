@@ -1,5 +1,7 @@
 package br.com.app.web.controller;
 
+
+
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.Collection;
@@ -35,9 +37,11 @@ public class UsuarioRestController {
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/usuario")
 	@ResponseBody
-	public Principal user(Principal user, HttpSession session) {
+	public Usuario user(Principal user, HttpSession session) {
 
-		return user;
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
+		
+		return usuario;
 	}
 
 	@ResponseStatus(HttpStatus.OK)

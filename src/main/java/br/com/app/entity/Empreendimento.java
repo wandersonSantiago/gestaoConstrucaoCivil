@@ -13,47 +13,30 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
-import br.com.app.entity.almoxarifado.View;
-import br.com.app.entity.servicos.PrestadoraServico;
-import br.com.app.enuns.TipoEmpreendimentoEnum;
-
+import br.com.app.enuns.StatusEmpreendimento;
+import lombok.Data;
 
 @Entity
-@SequenceGenerator(name = "empreendimento_id_seq", sequenceName = "empreendimento_id_seq",schema="communs")
 @Table(name = "empreendimento" , schema = "communs")
+@Data
 public class Empreendimento implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "empreendimento_id_seq")
+	@Column(unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	
 	@ManyToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST})
-	@JoinColumn(name="id_endereco_empreendimento",nullable = false)
-	private Endereco enderecoEmpreendimento;
+	@JoinColumn(name="id_endereco",nullable = false)
+	private Endereco endereco;
 	
-	@JsonView(View.Summary.class)
-	@ManyToOne
-	@JoinColumn(name="id_engenheiro_responsavel_funcionario",nullable = true)
-	private Funcionario engenheiroResponsavelFuncionario;
-	
-	@JsonView(View.Summary.class)
-	@ManyToOne
-	@JoinColumn(name="id_engenheiro_responsavel_terceiro",nullable = true)
-	private PrestadoraServico engenheiroResponsavelTerceiro;
-	
-	@Enumerated(EnumType.STRING)
-	private TipoEmpreendimentoEnum tipoEmpreendimento;
-    
-	//@JsonView(View.Summary.class)
 	@Column(nullable = false,length = 50)
 	private String descricao;
 	
@@ -73,86 +56,21 @@ public class Empreendimento implements Serializable{
 	@Column(name = "data_fechamento")
 	private Date datafechamento;
 	
-    @Column(nullable = false)
-	private boolean ativo;
+    @Enumerated(EnumType.STRING)
+	private StatusEmpreendimento status;
 	
+    @OneToOne
+    private Empreendimento matriz;
     
     
-    public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public Endereco getEnderecoEmpreendimento() {
-		return enderecoEmpreendimento;
-	}
-	public void setEnderecoEmpreendimento(Endereco enderecoEmpreendimento) {
-		this.enderecoEmpreendimento = enderecoEmpreendimento;
-	}
-	public Funcionario getEngenheiroResponsavelFuncionario() {
-		return engenheiroResponsavelFuncionario;
-	}
-	public void setEngenheiroResponsavelFuncionario(Funcionario engenheiroResponsavelFuncionario) {
-		this.engenheiroResponsavelFuncionario = engenheiroResponsavelFuncionario;
-	}
-	public PrestadoraServico getEngenheiroResponsavelTerceiro() {
-		return engenheiroResponsavelTerceiro;
-	}
-	
-	public String getDescricao() {
-		return descricao;
-	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-	public void setEngenheiroResponsavelTerceiro(PrestadoraServico engenheiroResponsavelTerceiro) {
-		this.engenheiroResponsavelTerceiro = engenheiroResponsavelTerceiro;
-	}
-
-	public TipoEmpreendimentoEnum getTipoEmpreendimento() {
-		return tipoEmpreendimento;
-	}
-	public void setTipoEmpreendimento(TipoEmpreendimentoEnum tipoEmpreendimento) {
-		this.tipoEmpreendimento = tipoEmpreendimento;
-	}
-	public Double getValorMaximoGastar() {
-		return valorMaximoGastar;
-	}
-	public void setValorMaximoGastar(Double valorMaximoGastar) {
-		this.valorMaximoGastar = valorMaximoGastar;
-	}
-	
-	public Double getValoresGastos() {
-		return valoresGastos;
-	}
-	public void setValoresGastos(Double valoresGastos) {
-		this.valoresGastos = valoresGastos;
-	}
-	public Date getDataAbertura() {
-		return dataAbertura;
-	}
-	public void setDataAbertura(Date dataAbertura) {
-		this.dataAbertura = dataAbertura;
-	}
-	public Date getDatafechamento() {
-		return datafechamento;
-	}
-	public void setDatafechamento(Date datafechamento) {
-		this.datafechamento = datafechamento;
-	}
-	public boolean isAtivo() {
-		return ativo;
-	}
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
-	}
-	public Double getPorcentagem() {
-		return porcentagem;
-	}
-	public void setPorcentagem(Double porcentagem) {
-		this.porcentagem = porcentagem;
-	}
-
+    
+    public boolean isMatriz() {
+    	if(matriz == null) {
+    		return true;
+    	}
+    	return false;
+    }
+    
+ 
 	
 }

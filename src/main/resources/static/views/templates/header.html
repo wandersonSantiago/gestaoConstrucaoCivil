@@ -1,4 +1,4 @@
-<header class="main-header navbar-fixed-top"  ng-controller="usuarioController as userCtrl" ng-init="userCtrl.user()">		  
+<header class="main-header navbar-fixed-top">		  
 		    <a href="#/" class="logo navbar-top">    
 		      <span class="logo-mini"><b>GCC</b></span>      
 		      <span class="logo-lg"><b>Sistema</b>GCC</span>
@@ -31,9 +31,9 @@
 		                  <li class="user-header">
 		                    <img src="public/img/avatar_2x.png" class="img-circle" alt="User Image">
 		                    <p>
-		                     		{{user.usuario.nome}}
-		                      <small>{{user.usuario.funcionario.cargo.descricao}}</small>
-		                      <small>{{user.usuario.empreendimento.descricao}}</small>
+		                     		{{user.nome}}
+		                      <small>{{user.funcionario.cargo.descricao}}</small>
+		                      <small>{{user.empreendimento.descricao}}</small>
 		                    </p>
 		                  </li>                 
 		                  <li class="user-footer">
@@ -45,13 +45,10 @@
 		                    </div>
 		                  </li>
 		                </ul>
-		              </li>
-		              <!-- <li ng-if="logado" ><a>Expira em,  {{horaImprimivel}}</a></li> -->
-		                        
-         			<li>
-						<a href="" ng-controller="loginController as loginCtrl"  ng-click="loginCtrl.logout()"> Logout <i class="glyphicon glyphicon-log-out"></i>
-						</a>
-					</li>
+		              </li>		                        
+         			<li ng-controller="LoginController"><a href="" ng-click="logout()"> <span class="hidden-xs">Logout</span> <i
+						class="glyphicon glyphicon-log-out"></i>
+				</a></li>
 		        </ul>
 		      </div>
 		    </nav>
@@ -65,7 +62,7 @@
 				        <h4 class="modal-title" id="myModalLabel">Dados Usúario</h4>
 				      </div>
 				      <div class="modal-body">				      	
-				     		{{user.usuario.nome}}
+				     		{{user.nome}}
 				      		<br>
 					      <div class="row">
 					      	<div class="col-sm-4">
