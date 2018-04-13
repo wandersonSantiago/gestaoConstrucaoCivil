@@ -2,118 +2,85 @@
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.Email;
+import br.com.app.enuns.StatusUsuarioEnum;
+import lombok.Data;
 
-
+@Data
 @Entity
-@SequenceGenerator(name = "usuario_id_seq", sequenceName = "usuario_id_seq",schema="communs")
 @Table(name = "usuario" , schema = "communs")
 public class Usuario implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_id_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
-	
-	@ManyToOne
-	@JoinColumn(name="id_funcionario",nullable = true)
-	private Funcionario funcionario;
 
 	@ManyToOne
 	@JoinColumn(name="id_empreendimento",nullable = true)
 	private Empreendimento empreendimento;
 	
-	@Column(nullable = false,length = 50)
+	@Column(length = 50)
+	@NotNull(message="campo nome obrigatório")
 	private String nome;
-	@Column(nullable = false,length = 15,unique = false)
+	@Column(length = 50,unique = false)
+	@NotNull(message="campo login obrigatório")
 	private String login;
-	@Column(nullable = true,length = 40)
-	@Email
+	@Column(length = 40)
+	@NotNull(message="campo e-mail obrigatório")
 	private String email;
-	@Column(nullable = false,length = 256)
+	@Column(length = 256)
+	@NotNull(message="campo senha obrigatório")
 	private String senha;
 	@Column(nullable = false)
 	private boolean ativo;
+	
+	private String  caminhoFoto;
+    
+    @Enumerated(EnumType.STRING)
+    private StatusUsuarioEnum status;
+    
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_cadastro")
 	private Date dataCadastro;
 	
-	public Usuario()
-	{
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "usuario_permissoes", schema="communs", joinColumns = @JoinColumn(name = "id_usuario"), 
+	inverseJoinColumns = @JoinColumn(name = "id_permissoes"))	
+	private Set<Permissao> permissoes;
+	
+	@Transient
+	private boolean isRoot = false;
+	
+	public Usuario(){
 		dataCadastro = new Date();
 	}
 	
-	public Long getId() {
-		return id;
+	public boolean isRoot() {
+		if(login.equalsIgnoreCase("root")) {
+			isRoot = true;
+			return true;
+		}
+		return false;
 	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	
-	public String getLogin() {
-		return login;
-	}
-	public void setLogin(String login) {
-		this.login = login;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getSenha() {
-		return senha;
-	}
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-	public boolean isAtivo() {
-		return ativo;
-	}
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
-	}
-	public Funcionario getFuncionario() {
-		return funcionario;
-	}
-	public Date getDataCadastro() {
-		return dataCadastro;
-	} 
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
-	}
-	public Empreendimento getEmpreendimento() {
-		return empreendimento;
-	}
-	public void setEmpreendimento(Empreendimento empreendimento) {
-		this.empreendimento = empreendimento;
-	}
-	public void setDataCadastro(Date dataCadastro) {
-		this.dataCadastro = dataCadastro;
-	}
-	
-	
 }

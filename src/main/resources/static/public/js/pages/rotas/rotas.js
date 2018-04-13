@@ -1,6 +1,7 @@
-app.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+app
+		.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 
-			 $urlRouterProvider.otherwise("/404");
+			$urlRouterProvider.otherwise("/404");
 
 			$stateProvider.state('home', {
 				url : "",
@@ -8,19 +9,48 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 				controller : "HomeListaController as ctrl",
 				ncyBreadcrumb : {
 					label : 'Home'
-				}})
-			
+				}
+			})
+
 			.state('/', {
 				url : "/home",
 				templateUrl : "views/home.html",
 				controller : "HomeListaController as ctrl",
 				ncyBreadcrumb : {
 					parent : 'home',
-					label : 'Religioso'
+					label : 'Menu'
 				}
 			})
 
-			.state('login', {
+			.state('gerenciamento', {
+				url : "/gerenciamento/menu",
+				templateUrl : "views/pages/modulo_gerenciamento/home.html",
+				ncyBreadcrumb : {
+					parent : '/',
+					label : 'Gerenciamento'
+				}
+			}).state('estoque', {
+				url : "/estoque/menu",
+				templateUrl : "views/pages/modulo_estoque/home.html",
+				ncyBreadcrumb : {
+					parent : '/',
+					label : 'Estoque'
+				}
+			}).state('compras', {
+				url : "/compras/menu",
+				templateUrl : "views/pages/modulo_compras/home.html",
+				ncyBreadcrumb : {
+					parent : '/',
+					label : 'Compras'
+				}
+			}).state('servicos', {
+				url : "/servicos/menu",
+				templateUrl : "views/pages/modulo_servicos/home.html",
+				ncyBreadcrumb : {
+					parent : '/',
+					label : 'Servicos'
+				}
+			}).state('login', {
 				templateUrl : "views/login.html",
 				ncyBreadcrumb : {
 					skip : true

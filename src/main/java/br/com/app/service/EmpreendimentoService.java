@@ -57,9 +57,14 @@ public class EmpreendimentoService {
 
 	
 	public Page<Empreendimento> findByDescricaoIgnoreCase(String descricao, Pageable page){
+		Page<Empreendimento> empreendimentos = null;
 		
-		Page<Empreendimento> empreendimentos = empreendimentoRepository.findByDescricaoContainsIgnoreCase(descricao, page);
-	
+		Usuario user = SessionUsuario.getInstance().getUsuario();
+		if(user.isRoot()) {
+			empreendimentos =  empreendimentoRepository.findByDescricaoContainsIgnoreCaseAndMatrizIsNull(descricao, page);
+		}else if(user.getEmpreendimento().isMatriz()){
+			empreendimentos =  empreendimentoRepository.findByMatriz_idAndDescricaoContainsIgnoreCase(user.getEmpreendimento().getId(),descricao,page);
+		}		
 		if(empreendimentos.getNumberOfElements() < 1  || empreendimentos == null) {
 			throw new NotFoundException("Não foi possivel encontrar nenhuma empreendimento com esta descrição: " + descricao);
 		}
@@ -68,9 +73,17 @@ public class EmpreendimentoService {
 	}
 	
 	
-	public Page<Empreendimento> findAll(PageRequest pageRequest) {
+	public Page<Empreendimento> findAll(Pageable page) {
 		
-		Page<Empreendimento> empreendimentos =  empreendimentoRepository.findAll(pageRequest);
+		Page<Empreendimento> empreendimentos = null;
+				
+		Usuario user = SessionUsuario.getInstance().getUsuario();
+		if(user.isRoot()) {
+			empreendimentos =  empreendimentoRepository.findByMatrizIsNull(page);
+		}else if(user.getEmpreendimento().isMatriz()){
+			empreendimentos =  empreendimentoRepository.findByMatriz_id(user.getEmpreendimento().getId(),page);
+		}
+		
 		if(empreendimentos.getNumberOfElements() < 1 || empreendimentos == null) {
 			throw new NotFoundException("Não existe empreendimento cadastrada");
 		}

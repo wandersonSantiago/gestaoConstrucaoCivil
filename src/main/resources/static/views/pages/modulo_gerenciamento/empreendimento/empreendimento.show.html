@@ -1,165 +1,56 @@
 <meta charset="UTF-8">
-
-<strong><p>
-	<h3>{{::ctrl.empreendimento.nome}}</h3>
-	</p></strong>
-<strong><p>CNPJ: {{::ctrl.empreendimento.cnpj |
-		brCnpj}}</p></strong>
-<address>
-	<p>
-		<span class="glyphicon glyphicon-map-marker"></span>
-		{{::ctrl.empreendimento.endereco.logradouro}},
-		{{::ctrl.empreendimento.endereco.numero}} -
-		{{::ctrl.empreendimento.endereco.bairro}}
-		-{{::ctrl.empreendimento.endereco.cidade.nome}}
-		/{{::ctrl.empreendimento.endereco.estado.nome}} CEP:
-		{{::ctrl.empreendimento.endereco.cep | brCep}}
-	</p>
-	<p>{{::ctrl.empreendimento.endereco.complemento}}</p>
-	<p>
-		<abbr title="Telefone"><span class="glyphicon glyphicon-phone"></span></abbr>
-		{{::ctrl.empreendimento.telefone | brPhoneNumber}}
-	</p>
-	<p>
-		<abbr title="e-mail"><span class="glyphicon glyphicon-envelope"></span></abbr>
-		{{::ctrl.empreendimento.email}}
-	</p>
-	<p>
-		<abbr title="endereço do site"><span
-			class="glyphicon glyphicon-cloud"></span></abbr>
-		{{::ctrl.empreendimento.site}}
-	</p>
-</address>
-<div ng-if="ctrl.empreendimento.filial">
-	Matriz <a
-		ui-sref="empreendimento.visualizar({ idEntidade: ctrl.empreendimento.matriz.id})"><h5>{{::ctrl.empreendimento.matriz.nome}}</h5></a>
-	<p>CNPJ:{{::ctrl.empreendimento.matriz.cnpj | brCnpj}}</p>
+<div class="page-header">
+	<h3>
+		<strong>{{ctrl.empreendimento.descricao}}</strong>
+	</h3>
 </div>
+
 <div class="row">
-	<div class="col-xs-6 col-sm-2"
-		ng-repeat="documento in ctrl.empreendimento.documentosApresentados">
-		<p>
-			<span class="glyphicon glyphicon-check"></span>
-			{{::documento.descricao}}
-		</p>
-	</div>
-</div>
-
-<br>
-<div class="row">	
-	<div class="col-sm-2" ng-if="status !== 'INATIVO'">
-		<div class="btn-group" uib-dropdown>
-			<button id="btn-append-to-single-button" type="button" title="Click para abrir as opções de impressão."
-				class="btn btn-primary btn-block" uib-dropdown-toggle>
-				Imprimir Credenciais <span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu" uib-dropdown-menu role="menu"
-				aria-labelledby="btn-append-to-single-button">
-				<li role="menuitem"><a href="" title="Click para imprimir todas as credenciais ativas desta empreendimento."
-					ng-click="ctrl.imprimir(ctrl.empreendimento.id)">Todas</a></li>
-				<li role="menuitem"><a href="" title="Click para imprimir as credenciais selecionadas."
-					ng-click="ctrl.imprimirPorIds(ctrl.credenciaisSelecionadas)">Selecionadas</a></li>				
-				
+	<div class="col-md-12">
+		<div class="nav-tabs-custom">
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="" data-toggle="tab"
+					data-target=".statistica">Statisticas</a></li>
+				<li><a href="" data-toggle="tab" data-target=".dados">Dados
+						Empreendimento</a></li>
+				<li><a href="" data-toggle="tab" data-target=".diario">Diario
+						de Obra</a></li>
+				<li><a href="" data-toggle="tab" data-target=".funcionario">Funcionarios</a></li>
+				<li><a href="" data-toggle="tab" data-target=".servicos">Serviços</a></li>
+				<li><a href="" data-toggle="tab" data-target=".estoque">Estoque</a></li>
+				<li><a href="" data-toggle="tab" data-target=".compras">Compras</a></li>
+				<li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
 			</ul>
-		</div>
-	</div>
-	<div class="col-sm-3">
-		<div class="btn-group" uib-dropdown>
-			<button id="btn-append-to-single-button" type="button" title="Click para abrir as opções de listagem de membros por status."
-				class="btn btn-dafault btn-block" uib-dropdown-toggle>
-				Listar por Status <span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu" uib-dropdown-menu role="menu"
-				aria-labelledby="btn-append-to-single-button">
-				<li role="menuitem"><a href="" title="Click para listar os membros ativos desta empreendimento."
-					ng-click="ctrl.buscarMembroPorEntidadeReligiosa(ctrl.empreendimento.id, texto, 'ATIVO')">Ativos</a></li>
-				<li role="menuitem"><a href="" title="Click para listar os membros inativos desta empreendimento."
-					ng-click="ctrl.buscarMembroPorEntidadeReligiosa(ctrl.empreendimento.id, texto, 'INATIVO')">Inativos</a></li>				
-				
-			</ul>
-		</div>
-	</div>
-</div>
-
-<br>
-<div class="row col-sm-12 btn btn-flat  btn-primary">
-	<span class="lead ">Lista de Membros {{status}} - Total
-		{{ctrl.totalElementos}} </span>
-</div>
-
-<br>
-<br>
-<br>
-<div class="row">
-	<div class="col-sm-2">
-		<div class="col-sm-12">
-		<div class="row">
-		  <div class="col-lg-12">
-		    <div class="input-group">
-		      <input type="text" class="form-control" placeholder="Burcar por nome" ng-model="texto" autofocus
-		      	 ng-keyup="$event.keyCode == 13 && ctrl.buscarMembroPorEntidadeReligiosa(ctrl.empreendimento.id, texto)">
-		      	<span class="input-group-btn">
-		        <button class="btn btn-default" type="button" ng-click="ctrl.buscarMembroPorEntidadeReligiosa(ctrl.empreendimento.id, texto)">Ir!</button>
-		      </span>
-		    </div>
-		  </div>
-		  </div>
-			
-			<br>		
-			<div class="row" ng-show="membro">
-			 	<div class="col-xs-6 col-md-12">
-				    <a  class="thumbnail">
-				     	<img alt="Sem Foto"  src="{{membro.credencial.foto.path}}">
-				    </a>
-				    	<div class="caption text-center">
-				    		<strong >Código : </strong>{{membro.pessoa.id}}R<br><br>
-					        <strong >Status : </strong>{{membro.credencial.status}}<br><br>
-					        <strong >Tipo : </strong>{{membro.credencial.tipo.valor}}<br><br>
-					        <strong>Unidades : </strong>
-					        <p ng-repeat="unidade in membro.credencial.unidades">{{unidade.nome}}R</p>
-				      </div>
-				 </div>							
+			<div class="ui-view"></div>
+			<div class="tab-content">
+				<div class="tab-pane active statistica" id="statistica">
+					<div ng-include="'views/pages/modulo_gerenciamento/empreendimento/empreendimento.statistica.html'"></div>
+				</div>
+				<div class="tab-pane dados" id="tab_2">					
+					<div ng-include="'views/pages/modulo_gerenciamento/empreendimento/empreendimento.endereco.html'"></div>
+				</div>
+				<div class="tab-pane diario" id="tab_3">
+					<div ng-include="'views/pages/modulo_gerenciamento/empreendimento/empreendimento.diario.html'"></div>
+				</div>
+				<div class="tab-pane funcionario" id="tab_3">
+					<div ng-include="'views/pages/modulo_gerenciamento/empreendimento/empreendimento.funcionarios.html'"></div>
+				</div>
+				<div class="tab-pane servicos" id="tab_3">
+					<div ng-include="'views/pages/modulo_gerenciamento/empreendimento/empreendimento.servicos.html'"></div>
+				</div>
+				<div class="tab-pane estoque" id="tab_3">
+					<div ng-include="'views/pages/modulo_gerenciamento/empreendimento/empreendimento.estoque.html'"></div>
+				</div>
+				<div class="tab-pane compras" id="tab_3">
+					<div ng-include="'views/pages/modulo_gerenciamento/empreendimento/empreendimento.compras.html'"></div>
+				</div>
 			</div>
 		</div>
 	</div>
-	<div class="table-responsive col-sm-10">
-		<table class="table ">
-			<tr>
-				<th  ng-if="status !== 'INATIVO'"><input type="checkbox" ng-model="selecionados" ng-click="checkAll(selecionados)">Selecionar</th>
-				<th>Nome</th>
-				<th>Documento</th>
-				<th>CPF</th>
-				<th>Cargo</th>
-				<th>Data Cadastro</th>
-			</tr>
-			<tr	ng-repeat="membro in ctrl.membros  | orderBy: 'nome' ">
-				<td  ng-if="status !== 'INATIVO'"><input type="checkbox" ng-show="membro.credencial.id" class="form-check"
-					data-checklist-model="ctrl.credenciaisSelecionadas"
-					data-checklist-value="membro.credencial.id" title="Selecione para impressão da credencial."></td>
-				<td><a title="Click para visualizar as informações deste membro."
-					ng-mouseover="visualizarFoto(membro)"
-					ui-sref="membro.informacoes({ idMembro: membro.id, idPessoa: membro.pessoa.id})">{{::membro.pessoa.nome}}</a>
-				</td>
-				<td>{{::membro.pessoa.docs.documento.numero}}</td>
-				<td>{{::membro.pessoa.docs.CPF.numero | brCpf}}</td>
-				<td>{{::membro.cargo.valor}}</td>
-				<td>{{::membro.dataCadastro | date : 'dd/MM/yyyy'}}</td>
-
-				<td class="col-sm-1"><a title="Click para ir para a página de edição."
-					ui-sref="membro.editar({ idMembro: membro.id})"
-					class="glyphicon glyphicon-edit"></a></td>
-			</tr>
-		</table>
-		<nav ng-show="ctrl.totalElementos > 1">
-				<ul uib-pagination total-items="ctrl.totalElementos" items-per-page="ctrl.size"   boundary-links="true" force-ellipses="true"  
-					ng-model="ctrl.paginaCorrente" class="pagination-sm"  max-size="10" 
-					ng-change="ctrl.buscarMembroPorEntidadeReligiosa(ctrl.empreendimento.id, texto, status)"
-					previous-text="Anterior" last-text="Último" first-text="Primeiro"
-					next-text="Próximo"></ul>
-			</nav>
-		
-	</div>
-
 </div>
+
+
+
+
 
 

@@ -1,7 +1,7 @@
 app.controller("EmpreendimentoCadastarController", EmpreendimentoCadastarController);
 app.controller("EmpreendimentoEditarController", EmpreendimentoEditarController);
 app.controller("EmpreendimentoListarController", EmpreendimentoListarController);
-app.controller("EmpreendimentoVisualizarController", EmpreendimentoVisualizarController);
+app.controller("EmpreendimentoShowController", EmpreendimentoShowController);
 
 function EmpreendimentoCadastarController (toastr, $scope, buscaCepService, $location, $state, EmpreendimentoService, blockUI){
 		 
@@ -187,7 +187,7 @@ function EmpreendimentoListarController(EmpreendimentoService, blockUI, toastr, 
 	    }
 }
 
-function EmpreendimentoVisualizarController($scope, $stateParams, $state, EmpreendimentoService, toastr, CredencialService, blockUI){
+function EmpreendimentoShowController($scope, $stateParams, $state, EmpreendimentoService, toastr, blockUI){
 	var self = this;
 	var idEmpreendimento = $stateParams.idEmpreendimento;	
 	
@@ -197,87 +197,20 @@ function EmpreendimentoVisualizarController($scope, $stateParams, $state, Empree
 	$scope.texto = "";
 	
 	self.Empreendimento = null;	
-	self.imprimir = imprimir;
-	self.imprimirPorIds = imprimirPorIds;
-	$scope.visualizarFoto = visualizarFoto;
-	self.credenciaisSelecionadas = [];
-	self.buscarMembroPorEmpreendimento = buscarMembroPorEmpreendimento;
 	
-	buscarPorId(idEmpreendimento);
-	buscarMembroPorEmpreendimento(idEmpreendimento, $scope.texto, 'ATIVO');
-	
-	 $scope.checkAll = function(selecionado) {
-		 if(selecionado === true){
-			 self.credenciaisSelecionadas = self.membros.map(function(membro) { return membro.credencial.id; });
-		 }else{
-			 self.credenciaisSelecionadas = [];
-		 }
-		 
-		  };
+	buscarPorId(idEmpreendimento);	
 		  
 		  
 	  function buscarPorId(id){
 	    	 EmpreendimentoService.buscarPorId(id)
 	    	 .then(function(e){
-	    		 self.Empreendimento = e;
+	    		 self.empreendimento = e;
 	       	 }, function(errResponse){
 	    	 	 });
-	    	 };
-	    	 
-	 function buscarMembroPorEmpreendimento(id , texto, status){
-		 
-		 $scope.status = status;
-		 blockUI.start();
-		 var pagina;
-		 
-		 self.paginaCorrente != 0 ? pagina = self.paginaCorrente - 1:  pagina = 0;
-		
-    	 EmpreendimentoService.buscarMembroPorEmpreendimento(id, pagina, texto, status)
-    	 .then(function(e){    		
-    		 self.membros = e.content;	
-    		 self.totalElementos = e.totalElements;
-    		 self.totalPaginas = e.totalPages;
-    		 self.size =  e.size;    		 
-    		
-    		 visualizarFoto(self.membros[0]);
-    		
-    		 blockUI.stop();
-       	 }, function(errResponse){
-    	 	 });
-    	 };  	 
+	    	 };	
     	 
-    	 function visualizarFoto(membro){
-    		 $scope.membro = membro;
-    	 }
+    	
     	 
-    	 function imprimirPorIds(){
-        	 if(!self.credenciaisSelecionadas.length) return;
-        	 
-        	 blockUI.start();
-      		CredencialService.imprimirPorIds(self.credenciaisSelecionadas)
-         	 .then(function(d){
-         		var file = new Blob([d],{type: 'application/pdf'});
-         		var fileURL = URL.createObjectURL(file);
-         		blockUI.stop();
-         	    window.open(fileURL);
-         	 	 },function(errResponse){	
-         	 		blockUI.stop();
-      				 swal({ timer : 3000, text : errResponse.data.message ,  type : "error", width: 200, higth: 100, padding: 20}).catch(swal.noop);
-      		 	});
-         }
-    	 
-    	 function imprimir(id){
-    		 blockUI.start();
-    			CredencialService.imprimirPorEntidade(id)
-    	   	 .then(function(d){
-    	   		 blockUI.stop();
-    	   		var file = new Blob([d],{type: 'application/pdf'});
-    	   		var fileURL = URL.createObjectURL(file);
-    	   	    window.open(fileURL);
-    	   	 	 },function(errResponse){	
-    	   	 	 blockUI.stop();
-    					 swal({ timer : 3000, text : errResponse.data.message ,  type : "error", width: 200, higth: 100, padding: 20}).catch(swal.noop);
-    			 	});
-    		}
+    	
     		
 }

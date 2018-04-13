@@ -13,4 +13,12 @@ public interface EmpreendimentoRepository extends JpaRepository<Empreendimento,L
 
 	Page<Empreendimento> findByDescricaoContainsIgnoreCase(String descricao, Pageable page);
 
+	Page<Empreendimento> findByMatrizIsNull(Pageable pageRequest);
+
+	Page<Empreendimento> findByMatriz_id(Long id, Pageable pageRequest);
+
+	Page<Empreendimento> findByDescricaoContainsIgnoreCaseAndMatrizIsNull(String descricao, Pageable page);
+
+	Page<Empreendimento> findByMatriz_idAndDescricaoContainsIgnoreCase(Long id, String descricao, Pageable page);
+
 }

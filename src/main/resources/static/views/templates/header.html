@@ -10,18 +10,12 @@
 		       <div class="navbar-custom-menu">
 		        <ul class="nav navbar-nav">		     
 					          
-				 <li  class="dropdown messages-menu" ng-if="ROLE_MODULO_CHAMADO_MANUTENCAO_SUPORTE">
-		                <a href="#/chamado/manutencao/suporte/lista" title="Quantidade de Chamados Abertos para Manutenção" class="dropdown-toggle" data-toggle="dropdown">
-		                  <i class="fa fa-envelope-o"></i>
-		                  <span class="label label-success">{{quantidadeChamadoAberto}}</span>
-		                </a>					 		 
-		          </li>
-		          <li  class="dropdown messages-menu" ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_SUPORTE">
-		                <a href="#/chamado/informatica/suporte/lista" title="Quantidade de Chamados Abertos para Informática" class="dropdown-toggle" data-toggle="dropdown">
-		                  <i class="fa fa-envelope-o"></i>
-		                  <span class="label label-success">{{quantidadeChamadoAbertoTi}}</span>
-		                </a>					 		 
-		          </li>
+				 <li class="visible-lg-block visible-md-block">
+					<a><span><span ng-show="user.empreendimento == null">Administrador Sistema</span>
+					<span ng-show="user.empreendimento != null && user.empreendimento.matriz == null">Matriz</span>
+					<span ng-show="user.empreendimento.matriz != null">Empreendimento</span> 
+					: {{user.empreendimento.descricao}}</span></a>
+				</li>	          
 		       <li class="dropdown user user-menu" ">
 		                <a href="" class="dropdown-toggle" data-toggle="dropdown">
 		                  <i class="glyphicon glyphicon-user"></i>
@@ -29,7 +23,9 @@
 		                <ul class="dropdown-menu">
 		                  <!-- User image -->
 		                  <li class="user-header">
-		                    <img src="public/img/avatar_2x.png" class="img-circle" alt="User Image">
+								<img ng-src="/rest/usuario/{{user.id}}/foto"
+								  class="img-circle"
+									alt="User Image">		
 		                    <p>
 		                     		{{user.nome}}
 		                      <small>{{user.funcionario.cargo.descricao}}</small>
@@ -38,10 +34,10 @@
 		                  </li>                 
 		                  <li class="user-footer">
 		                    <div class="pull-left">
-		                      <a href="" ng-click="userCtrl.buscaPorId(user.usuario.id)" data-toggle="modal" data-target="#alteraSenha" class="btn btn-default btn-flat">Alterar senha</a>
-		                    </div>
+		                   		 <a href="" ui-sref="usuario.perfil"  class="btn btn-default btn-flat">Perfil</a>
+		                   	</div>
 		                    <div  class="pull-right">
-		                      <a href=""  ng-click="userCtrl.buscaPorId(user.usuario.id)" data-toggle="modal" data-target="#alteraEmpreendimento"  class="btn btn-default btn-flat">Alterar Empreend.</a>
+		                      <a href=""  data-toggle="modal" data-target="#alteraEmpreendimento"  class="btn btn-default btn-flat">Alterar Empreend.</a>
 		                    </div>
 		                  </li>
 		                </ul>
@@ -54,61 +50,42 @@
 		    </nav>
 		  </header>
 		  
-		  <div ng-if="logado"  class="modal fade" id="alteraSenha" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="usuarioController as userCtrl">
-				  <div class="modal-dialog" role="document" >
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        <h4 class="modal-title" id="myModalLabel">Dados Usúario</h4>
-				      </div>
-				      <div class="modal-body">				      	
-				     		{{user.nome}}
-				      		<br>
-					      <div class="row">
-					      	<div class="col-sm-4">
-								<input type="password" class="form-control" id="senha" ng-model="userCtrl.senha" placeholder="Senha"
-									title="Digite uma senha" maxlength="12" required>
-							</div>
-							<div class="col-sm-4">
-								<input type="password" class="form-control" id="repitaSenha" ng-model="userCtrl.senhaRepitida" placeholder="Repita a Senha"
-									title="repita a senha" required>
-							</div>
-					      </div>
-					       
-				      </div>
-				      <div class="modal-footer">
-				        <button type="button" ng-click="userCtrl.alteraSenha(user)" class="btn btn-primary">Alterar</button>
-				        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-				        
-				      </div>
-				    </div>
-				  </div>
-				</div>
+		  
 				
-				
-				<div ng-if="logado"  class="modal fade" id="alteraEmpreendimento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="usuarioController as userCtrl">
+				 <!-- MODAL -->				
+				<div  class="modal fade modal-primary" id="alteraEmpreendimento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="UsuarioEditarController as userCtrl">
 				  <div class="modal-dialog" role="document" >
-				    <div class="modal-content">
+				    <div class="modal-content" ng-controller="UsuarioEditarController as userCtrl">
 				      <div class="modal-header">
 				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				        <h4 class="modal-title" id="myModalLabel">Alterar Empreendimento</h4>
 				      </div>
-				      <div class="modal-body">				      	
-				     		
+				      <div class="modal-body">				     		
 					      <div class="row">
-					      	<div  class="col-sm-12" ng-controller="empreendimentoController as empCtrl" ng-init="empCtrl.lista()">
-							<select class="form-control " ng-model="userCtrl.usuario.empreendimento" 
-								ng-options="listarEmpreendimentos.descricao group by listarEmpreendimentos.tipoEmpreendimento for listarEmpreendimentos in empreendimentos" required>
-								<option  value="">--selecione o Empreendimento--</option>
-							</select>
-						</div>		
-					      </div>
-					       
+						      	<div class="form-group  col-sm-12">
+							 		<label>Selecione o Empreendimento:</label>
+								    <input type="text" ng-model="userCtrl.empreendimento" placeholder="Digite nome do empreendimento" 
+								    uib-typeahead="empreendimento as empreendimento.descricao for empreendimento in userCtrl.buscarPorTexto($viewValue) | limitTo:8" 
+								    typeahead-template-url="customTemplate.html" class="form-control" typeahead-show-hint="true"  
+								    typeahead-loading="loadingEmpreendimentos" typeahead-no-results="noResults" typeahead-min-length="3">
+								    <i ng-show="loadingEmpreendie=mentos" class="glyphicon glyphicon-refresh"></i>
+								    <div ng-show="noResults">
+								      <i class="glyphicon glyphicon-remove"></i> Nenhum resultado encontrado
+								    </div>
+							    </div>	
+					      </div>					       
 				      </div>
+				      			
+<script type="text/ng-template" id="customTemplate.html">
+  <a>
+      <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span> <span ng-if="!match.model.matriz"> - <b>Matriz</b></span><br/>
+	  <span>{{match.model.endereco.cidade}}-{{match.model.endereco.estado}}</span>
+  </a>
+</script>
+			
 				      <div class="modal-footer">
-				        <button type="button" ng-click="userCtrl.alteraEmpreendimento(user.usuario)" class="btn btn-primary">Alterar</button>
-				        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-				        
+				        <button type="button" data-dismiss="modal" ng-disabled="!userCtrl.empreendimento" ng-click="userCtrl.alterarEmpreendimento(userCtrl.empreendimento.id)" class="btn btn-primary">Alterar</button>
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>				        
 				      </div>
 				    </div>
 				  </div>

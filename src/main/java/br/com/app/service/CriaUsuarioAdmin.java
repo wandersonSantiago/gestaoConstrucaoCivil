@@ -12,7 +12,6 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import br.com.app.entity.Permissao;
-import br.com.app.entity.PermissaoUsuario;
 import br.com.app.entity.Usuario;
 import br.com.app.repository.PermissaoRepository;
 
@@ -25,8 +24,6 @@ public class CriaUsuarioAdmin {
 	private final Logger log = LoggerFactory.getLogger(CriaUsuarioAdmin.class);
 	@Autowired
 	private PermissaoRepository permissaoRepository;
-	@Autowired
-	private PermissaoUsuarioService permissaoUsuarioService;
 	
 	
 	@EventListener(ContextRefreshedEvent.class)
@@ -41,7 +38,7 @@ public class CriaUsuarioAdmin {
 		{
 			log.warn("Usuário root não encontrado.");
 			log.info("Criando usuário root.");
-			usuarioService.salvarOuEditar(criarObjetoUsuario());
+			usuarioService.insert(criarObjetoUsuario());
 			log.info("Usuário root criado.");
 			colocarTodasPermissaosNoRoot();
 		}else
@@ -54,16 +51,16 @@ public class CriaUsuarioAdmin {
 	private void colocarTodasPermissaosNoRoot()
 	{
 		List<Permissao> permissoes = permissaoRepository.findAll();
-		Usuario usuarioRoot = usuarioService.buscarPorLogin("root");
+		Usuario usuarioRoot = usuarioService.findByLogin("root");
 		
-		for(Permissao permissao : permissoes)
+		/*for(Permissao permissao : permissoes)
 		{
 			PermissaoUsuario permissaoUsuario = new PermissaoUsuario();
 			permissaoUsuario.setPermissao(permissao);
 			permissaoUsuario.setUsuario(usuarioRoot);
 		    permissaoUsuarioService.salvarOuEditar(permissaoUsuario);
 		    
-		}
+		}*/
 	}
 
     private Usuario criarObjetoUsuario()

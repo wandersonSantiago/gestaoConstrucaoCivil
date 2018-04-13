@@ -28,15 +28,15 @@ public class PermissaoRestController {
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping
-	public void salva(@RequestBody Permissao permissao) {
-		permissaoService.salvar(permissao);
+	public void insert(@RequestBody Permissao permissao) {
+		permissaoService.insert(permissao);
 
 	}
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PutMapping
 	public void alterar(@RequestBody Permissao permissao) {
-		permissaoService.salvar(permissao);
+		permissaoService.insert(permissao);
 	}
 
 	@ResponseStatus(HttpStatus.OK)
@@ -46,9 +46,8 @@ public class PermissaoRestController {
 	}
 
 	@ResponseStatus(HttpStatus.OK)
-	@GetMapping(value = "/lista")
+	@GetMapping
 	public Collection<Permissao> buscarUsuarios() {
-
 		return permissaoService.lista();
 
 	}

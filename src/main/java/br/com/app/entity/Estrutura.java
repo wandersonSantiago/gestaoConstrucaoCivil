@@ -30,7 +30,7 @@ public class Estrutura implements Serializable{
 	@ManyToOne
 	private Estrutura raiz;
 
-	
+	private Long idEmpreendimento;
 	
 	
 	public boolean isRaiz() {

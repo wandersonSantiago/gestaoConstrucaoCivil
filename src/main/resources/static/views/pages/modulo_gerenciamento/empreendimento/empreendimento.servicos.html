@@ -1,0 +1,19 @@
+<p>
+						<span>Status: {{ctrl.empreendimento.status}}</span>
+					</p>
+					<address>
+						<p>
+							<span class="glyphicon glyphicon-map-marker"></span>
+							{{ctrl.empreendimento.endereco.logradouro}},
+							{{ctrl.empreendimento.endereco.numero}} -
+							{{ctrl.empreendimento.endereco.bairro}}
+							-{{ctrl.empreendimento.endereco.localidade}}
+							-{{ctrl.empreendimento.endereco.uf}} / CEP:
+							{{ctrl.empreendimento.endereco.cep }} - Complemento:
+							{{ctrl.empreendimento.endereco.complemento}}
+						<p>
+							<abbr title="Telefone"><span
+								class="glyphicon glyphicon-phone"></span></abbr>
+							{{ctrl.empreendimento.telefone | brPhoneNumber}}
+						</p>
+					</address>

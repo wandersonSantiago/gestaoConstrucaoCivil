@@ -14,9 +14,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import br.com.app.enuns.StatusEmpreendimento;
 import lombok.Data;
@@ -40,6 +42,7 @@ public class Empreendimento implements Serializable{
 	@Column(nullable = false,length = 50)
 	private String descricao;
 	
+	private String telefone;
 	
 	@Column(nullable = false)
 	private Double valorMaximoGastar;
@@ -61,7 +64,6 @@ public class Empreendimento implements Serializable{
 	
     @OneToOne
     private Empreendimento matriz;
-    
     
     
     public boolean isMatriz() {

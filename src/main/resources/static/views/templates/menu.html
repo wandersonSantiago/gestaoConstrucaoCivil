@@ -6,12 +6,13 @@
 <!-- dados do usuario logado -->
 		<div class="user-panel">
 			<div class="pull-left image">
-				<img src="public/img/avatar_2x.png" class="img-circle"
-					alt="User Image">
+				<img ng-src="/rest/usuario/{{user.id}}/foto"
+				  class="img-circle"
+					alt="User Image">			
 			</div>
-			<div class="pull-left info">
-				<p>{{user.login}}</p>
-				<a href="#"><i class="glyphicon glyphicon-star-empty"></i> Online</a>
+			<div class="pull-left info" >
+				<p><a href="" ui-sref="usuario.perfil">{{user.nome | limitTo:17}}</a><p>
+				<a href="" data-toggle="modal" data-target="#alteraStatus"><i   class="glyphicon glyphicon-star-empty"></i> {{user.status}}</a>
 			</div>
 		</div>
 		<form action="" class="sidebar-form">
@@ -46,17 +47,17 @@
                 </span>
               </a>
               <ul class="treeview-menu">
-                <li><a href=""><i class="fa fa-circle-o"></i>Cadastrar</a></li>
-                <li><a href=""><i class="fa fa-circle-o"></i>Consultar</a></li>
-                <li>
+                <li><a href="" ui-sref="usuario.cadastrar" ><i class="fa fa-circle-o"></i>Cadastrar</a></li>
+                <li><a href="" ui-sref="usuario.listar"><i class="fa fa-circle-o"></i>Consultar</a></li>
+                <li ng-if="user.root">
                   <a href=""><i class="fa fa-circle-o"></i>Permissões
                     <span class="pull-right-container">
                       <i class="fa fa-angle-left pull-right"></i>
                     </span>
                   </a>
                   <ul class="treeview-menu">
-                    <li><a href=""><i class="fa fa-circle-o"></i>Cadastrar</a></li>
-                    <li><a href=""><i class="fa fa-circle-o"></i>Consultar</a></li>
+                    <li><a href="" ui-sref="permissao.cadastrar"><i class="fa fa-circle-o"></i>Cadastrar</a></li>
+                    <li><a href="" ui-sref="permissao.listar"><i class="fa fa-circle-o"></i>Consultar</a></li>
                   </ul>
                 </li>
               </ul>
@@ -68,17 +69,17 @@
                 </span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="" ui-sref="empreendimento.cadastrar"><i class="fa fa-circle-o"></i>Cadastrar</a></li>
-                <li><a href="" ui-sref="empreendimento.consultar"><i class="fa fa-circle-o"></i>Consultar</a></li>
-                <li>
-                  <a href=""><i class="fa fa-circle-o"></i>Configuração
+                <li ng-if="!user.empreendimento.matriz || user.root"><a href="" ui-sref="empreendimento.cadastrar"><i class="fa fa-circle-o"></i>Cadastrar</a></li>
+                <li ng-if="!user.empreendimento.matriz || user.root"><a href="" ui-sref="empreendimento.consultar"><i class="fa fa-circle-o"></i>Consultar</a></li>
+                <li ng-if="user.empreendimento.matriz">
+                  <a href=""><i class="fa fa-circle-o"></i>Estrutura
                     <span class="pull-right-container">
                       <i class="fa fa-angle-left pull-right"></i>
                     </span>
                   </a>
                   <ul class="treeview-menu">
-                    <li><a href=""><i class="fa fa-circle-o"></i>Cadastrar</a></li>
-                    <li><a href=""><i class="fa fa-circle-o"></i>Consultar</a></li>
+                    <li><a href="" ui-sref="estrutura.cadastrar"><i class="fa fa-circle-o"></i>Cadastrar</a></li>
+                    <li><a href="" ui-sref="estrutura.consultar"><i class="fa fa-circle-o"></i>Consultar</a></li>
                   </ul>
                 </li>
               </ul>
@@ -340,3 +341,28 @@
 			
 
 </aside>
+ <!-- MODAL -->				
+				<div  class="modal fade modal-primary" id="alteraStatus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="UsuarioEditarController as userCtrl">
+				  <div class="modal-dialog" role="document" >
+				    <div class="modal-content" ng-controller="UsuarioPerfilController as ctrl">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				      </div>
+				      <div class="modal-body">				     		
+					      <div class="input-group margin">
+								<select class="form-control"
+									ng-model="user.status"
+									ng-change="ctrl.alterarStatus(user)"
+									ng-options="status for status in ctrl.status track by status">
+									<option value=""></option>
+								</select> <span class="input-group-btn"> <a type="button"
+									class="btn btn-info btn-flat"><i>Status</i></a>
+								</span>
+							</div>			       
+				      </div>
+				      <div class="modal-footer">
+				      </div>
+				    </div>
+				  </div>
+				</div>
+		

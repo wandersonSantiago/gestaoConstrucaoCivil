@@ -25,7 +25,7 @@ public class LoginHandler implements ApplicationListener<AuthenticationSuccessEv
 
 		String login = ((UserDetails) event.getAuthentication().getPrincipal()).getUsername();
 		
-		Usuario usuario = usuarioService.buscarPorLogin(login);
+		Usuario usuario = usuarioService.findByLogin(login);
 		if(usuario != null)
 		{
 			session.setAttribute("usuario", usuario);

@@ -20,7 +20,7 @@ public class PermissaoService {
 	private PermissaoRepository permissaoRepository;
 	
 	@Transactional(readOnly=false)
-	public void salvar(Permissao permissao){
+	public void insert(Permissao permissao){
 		permissaoRepository.save(permissao);
 	}
 	

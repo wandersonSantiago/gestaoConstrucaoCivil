@@ -17,8 +17,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			templateUrl : "views/pages/modulo_gerenciamento/empreendimento/empreendimento.list.html",
 			controller : "EmpreendimentoListarController as ctrl",
 			ncyBreadcrumb: {
-				 	parent: 'empreendimento',
-				    label: 'Empreendimentos'
+				 	parent: 'empreendimento.menu',
+				    label: 'Consulta'
 				  }
 		})
 				
@@ -27,7 +27,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			templateUrl : "views/pages/modulo_gerenciamento/empreendimento/empreendimento.form.html",
 			controller : "EmpreendimentoCadastarController as ctrl",
 			ncyBreadcrumb: {
-			 	parent: 'empreendimento',
+			 	parent: 'empreendimento.menu',
 			    label: 'Cadastrar'
 			  }
 		})
@@ -46,13 +46,22 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		
 		})
 		
-		.state('empreendimento.visualizar', {
+		.state('empreendimento.show', {
 			url : "/:idEmpreendimento",
 			templateUrl : "views/pages/modulo_gerenciamento/empreendimento/empreendimento.show.html",
-			controller : "EmpreendimentoController as ctrl",
+			controller : "EmpreendimentoShowController as ctrl",
 			ncyBreadcrumb: {
-				 	parent: 'empreendimento.listar',
+				 	parent: 'empreendimento.consultar',
 				    label: 'Visualizar'
+				  }
+		})
+		.state('empreendimento.menu', {
+			requiresAuthentication: true,
+			url : "/gerenciamento/menu",
+			templateUrl : "views/pages/modulo_gerenciamento/empreendimento/home.html",
+			ncyBreadcrumb: {
+				 	parent: 'gerenciamento',
+				    label: 'Empreendimento'
 				  }
 		})
 

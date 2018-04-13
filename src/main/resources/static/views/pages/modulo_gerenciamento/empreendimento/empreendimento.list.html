@@ -26,7 +26,7 @@
 <br>
 
 	<div class="panel panel-default table-responsive" ng-if="empreendimentos.length">
-			<table class="table table-bordered table-striped">
+			<table class="table table-bordered">
 		<tr>
 
 			<th>Nome</th>
@@ -41,7 +41,7 @@
 		<tbody
 			ng-repeat=" empreendimento in empreendimentos | filter : buscaEmpreendimento ">
 			<tr>
-				<td>{{ empreendimento.descricao }}</td>
+				<td><a title="Visualizar informações do empreendimento" href="" ui-sref="empreendimento.show({idEmpreendimento: empreendimento.id})">{{ empreendimento.descricao }}</a></td>
 				<td>{{ empreendimento.dataAbertura | date : 'dd/MM/yyyy'}}</td>
 				<td>{{ empreendimento.datafechamento | date : 'dd/MM/yyyy'}}</td>
 				<td>{{ empreendimento.valorMaximoGastar | currency }}</td>

@@ -1,4 +1,4 @@
-app.factory("Auth", function($http, $q, $sessionStorage, $rootScope, $urlRouter){
+app.factory("Auth", function($http, $q, $sessionStorage, $state, $rootScope, $urlRouter){
 	
 	var auth ={};
 	
@@ -70,11 +70,11 @@ app.factory("Auth", function($http, $q, $sessionStorage, $rootScope, $urlRouter)
 	}
 	
 	auth.logout = function(){
-		$http.post('/religioso/logout',{})
+		$http.post('/logout',{})
 		.then(function(data){
 			 $rootScope.authenticated = false;
 			 $rootScope.user = null;
-			 $state.go("login");
+			 $state.go('login');
 		},function(data){
 			$rootScope.authenticated = false;
 			 $rootScope.user = null;
