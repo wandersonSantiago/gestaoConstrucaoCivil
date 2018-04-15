@@ -28,7 +28,7 @@ import org.hibernate.validator.constraints.br.CPF;
 @SequenceGenerator(name = "cliente_morador_id_seq", sequenceName = "cliente_morador_id_seq", schema = "communs")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "cliente_morador", schema = "communs")
-public abstract class ClienteMorador implements Serializable {
+public abstract class Morador implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

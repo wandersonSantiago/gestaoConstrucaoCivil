@@ -7,5 +7,5 @@ import br.com.app.entity.almoxarifado.interfaces.EntradaOuBaixa;
 public interface IRequisicao<E> extends EntradaOuBaixa<E>{
 
 	public List<E> getItens();
-	public InformacaoRequisicao getInformacaoRequisicao();
+	public Requisicao getInformacaoRequisicao();
 }

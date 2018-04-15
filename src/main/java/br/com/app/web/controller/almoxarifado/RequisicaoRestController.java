@@ -16,54 +16,57 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.app.entity.almoxarifado.RequisicaoOutros;
-import br.com.app.service.almoxarifado.RequisicaoOutrosService;
+import br.com.app.entity.almoxarifado.Requisicao;
+import br.com.app.service.almoxarifado.RequisicaoService;
 
 @RestController
-@RequestMapping("/rest/almoxarifado/estoque/requisicaoOutros")
-public class RequisicaoOutrosRestController {
+@RequestMapping("/rest/almoxarifado/estoque/requisicao")
+public class RequisicaoRestController {
 
 	@Autowired
-	private RequisicaoOutrosService requisicaoOutrosService;
-
+	private RequisicaoService requisicaoService;
+	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(value = "/salva")
-	public void salvarOuEditar(@RequestBody RequisicaoOutros requisicao) {
-		requisicaoOutrosService.salvarOuEditar(requisicao);
+	public void save(@RequestBody Requisicao requisicao) {
+		requisicaoService.salvarOuEditar(requisicao);
 
 	}
 
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/lista")
-	public Collection<RequisicaoOutros> buscarTodos() {
-		return requisicaoOutrosService.buscarTodos();
+	public Collection<Requisicao> buscarTodos() {
+		return requisicaoService.buscarTodos();
+
 	}
 
-	@ResponseStatus(HttpStatus.OK)
+	/*@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/lista/paginacao")
-	public Page<RequisicaoOutros> lista(@RequestParam(defaultValue = "0", required = false) int page,
+	public Page<Requisicao> lista(@RequestParam(defaultValue = "0", required = false) int page,
 			@RequestParam(defaultValue = "0", required = false) int maxResults) {
-		return requisicaoOutrosService.buscarTodosComPaginacao(new PageRequest(page, maxResults));
 
-	}
+		return requisicaoService.buscarTodosComPaginacao(new PageRequest(page, maxResults));
 
+	}*/
+/*
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(value = "/aceitar")
 	public void aceitar(@RequestBody Integer numeroRequisicao) {
-		requisicaoOutrosService.aceitar(numeroRequisicao);
+		requisicaoService.aceitar(numeroRequisicao);
 
 	}
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(value = "/rejeitar")
 	public void rejeitar(@RequestBody Integer numeroRequisicao) {
-		requisicaoOutrosService.rejeitar(numeroRequisicao);
+		requisicaoService.rejeitar(numeroRequisicao);
 
 	}
 
 	@ResponseStatus(HttpStatus.OK)
-	@GetMapping(value = "/buscaPorId/{id}")
-	public Optional<RequisicaoOutros> buscarPorId(@PathVariable Long id) {
-		return requisicaoOutrosService.buscarPorId(id);
-	}
+	@PostMapping(value = "/buscaPorId/{id}")
+	public Optional<Requisicao> buscarPorId(@PathVariable Long id) {
+		return requisicaoEdificioService.buscarPorId(id);
+	}*/
+
 }

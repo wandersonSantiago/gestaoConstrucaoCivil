@@ -12,42 +12,42 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.app.entity.ClienteMorador;
+import br.com.app.entity.Morador;
 import br.com.app.entity.Usuario;
 import br.com.app.pojo.SessionUsuario;
-import br.com.app.repository.ClienteMoradorRepository;
+import br.com.app.repository.MoradorRepository;
 
 
 @Service
 @Transactional(readOnly = true,propagation = Propagation.REQUIRED)
-public class ClienteMoradorService {
+public class MoradorService {
 
 	@Autowired
-	private ClienteMoradorRepository clienteMoradorRepository;
+	private MoradorRepository clienteMoradorRepository;
 	
-	public Page<ClienteMorador> buscarTodos(PageRequest page) {
+	public Page<Morador> buscarTodos(PageRequest page) {
 		
 		return  clienteMoradorRepository.findAll(page);
 	}	
-	public Optional<ClienteMorador> buscarPorId(Long id) {
+	public Optional<Morador> buscarPorId(Long id) {
 		return clienteMoradorRepository.findById(id);
 	}
-	public ClienteMorador buscarPorCpf(String cpf) {
+	public Morador buscarPorCpf(String cpf) {
 		return clienteMoradorRepository.findByCpf(cpf);
 	}
-	public Collection<ClienteMorador> lista() {		
+	public Collection<Morador> lista() {		
 		return clienteMoradorRepository.findAll();
 	}
 	
 	@Transactional(readOnly = false)
-	public void salvarOuEditar(ClienteMorador cliente)
+	public void salvarOuEditar(Morador cliente)
 	{ 
 		salvaAtributosCliente(cliente);		
 		cliente.setEmpreendimento(SessionUsuario.getInstance().getUsuario().getEmpreendimento());
 		clienteMoradorRepository.save(cliente);
 	}
 	
-	public ClienteMorador salvaAtributosCliente(ClienteMorador cliente){
+	public Morador salvaAtributosCliente(Morador cliente){
 			Boolean ativo = true;
 			Usuario user =  new Usuario();
 			user.setAtivo(ativo);
