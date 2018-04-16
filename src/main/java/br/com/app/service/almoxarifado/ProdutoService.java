@@ -46,7 +46,7 @@ public class ProdutoService {
 		{
 		    produto.setCodigoBarra(gerar.gerarCodigoBarra());
 		}
-		produto.setUsuarioCadastrado();
+		
 		produtoRepository.save(produto);
 
 	}
