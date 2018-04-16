@@ -23,6 +23,9 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import br.com.app.entity.Categoria;
@@ -37,6 +40,7 @@ import br.com.app.pojo.SessionUsuario;
 attributeNodes = {@NamedAttributeNode("categoria"),@NamedAttributeNode("fabricante"),@NamedAttributeNode("tipoProduto")})
 
 @Table(name = "produto" , schema="almoxarifado")
+@JsonIgnoreType
 public class Produto {
 	
 	private static final long serialVersionUID = 1L;
@@ -58,8 +62,11 @@ public class Produto {
 	private String descricao;
 	@Column(nullable = true)
 	private boolean ativo;
+	@JsonIgnore
 	@Enumerated(EnumType.STRING)
 	private UnidadeMedidaEnum unidadeMedida;
+	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "id_categoria", nullable = true)
 	private Categoria categoria;
@@ -81,10 +88,7 @@ public class Produto {
 	@Transient
 	private boolean geraCodigoBarra = true;
 	
-	@ManyToOne
-	@JoinColumn(name ="id_usuario_cadastro")
-	private Usuario usuarioCadastro;
-	
+	 
 	
 	public Long getId() {
 		return id;
@@ -168,15 +172,6 @@ public class Produto {
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
-	public void setUsuarioCadastrado()
-	{
-		this.usuarioCadastro = SessionUsuario.getInstance().getUsuario();
-	}
-			
-	public Usuario getUsuarioCadastro() {
-		return usuarioCadastro;
-	}
-    
-
+	 
 
 }

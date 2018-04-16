@@ -25,40 +25,36 @@ import br.com.app.enuns.Situacao;
 import br.com.app.enuns.TipoNotaEnum;
 import br.com.app.pojo.SessionUsuario;
 
-
-
 @Entity
-@SequenceGenerator(name = "nota_fiscal_id_seq", sequenceName = "nota_fiscal_id_seq", schema="almoxarifado")
-@Table(name = "nota_fiscal", schema="almoxarifado")
+@SequenceGenerator(name = "nota_fiscal_id_seq", sequenceName = "nota_fiscal_id_seq", schema = "almoxarifado")
+@Table(name = "nota_fiscal", schema = "almoxarifado")
 public class NotaFiscal implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "nota_fiscal_id_seq")
 	private Long id;
 
-	
 	@Enumerated(EnumType.STRING)
 	private TipoNotaEnum tipoNota;
 
 	@Enumerated(EnumType.STRING)
 	private Situacao situacao;
-	
+
 	@JsonView(View.Summary.class)
 	@Column(nullable = false)
 	private Long numero;
 
 	@JsonView(View.Summary.class)
-    @ManyToOne
-    @JoinColumn(name="id_empreendimento",nullable = true)
-    private Empreendimento empreendimento;
-    
+	@ManyToOne
+	@JoinColumn(name = "id_empreendimento", nullable = true)
+	private Empreendimento empreendimento;
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_nota")
 	private Date dataNota;
-	
+
 	@JsonView(View.Summary.class)
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_vencimento")
@@ -66,16 +62,11 @@ public class NotaFiscal implements Serializable {
 
 	@Column(nullable = true)
 	private String observacao;
-	
+
 	@JsonView(View.Summary.class)
 	@Column(nullable = false)
 	private Double valorTotal;
 
-	@ManyToOne
-	@JoinColumn(name ="id_usuario_cadastro")
-	private Usuario usuarioCadastro;
-	
-	
 	public Long getId() {
 		return id;
 	}
@@ -83,10 +74,11 @@ public class NotaFiscal implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-    public Long getNumero() {
+
+	public Long getNumero() {
 		return numero;
 	}
-     
+
 	public Empreendimento getEmpreendimento() {
 		return empreendimento;
 	}
@@ -130,6 +122,7 @@ public class NotaFiscal implements Serializable {
 	public void setValorTotal(Double valorTotal) {
 		this.valorTotal = valorTotal;
 	}
+
 	public TipoNotaEnum getTipoNota() {
 		return tipoNota;
 	}
@@ -137,25 +130,20 @@ public class NotaFiscal implements Serializable {
 	public void setTipoNota(TipoNotaEnum tipoNota) {
 		this.tipoNota = tipoNota;
 	}
-    public Situacao getSituacao() {
+
+	public Situacao getSituacao() {
 		return situacao;
 	}
-    public void cancelarNota()
-    {
-    	this.situacao = Situacao.CANCELADA;
-    }
 
-	public void novaNota()
-	{
+	public void cancelarNota() {
+		this.situacao = Situacao.CANCELADA;
+	}
+
+	public void novaNota() {
 		this.situacao = Situacao.OK;
 		Usuario usuarioSessao = SessionUsuario.getInstance().getUsuario();
 		this.empreendimento = usuarioSessao.getEmpreendimento();
-		this.usuarioCadastro = usuarioSessao;
-	}
-	
-	
-	public Usuario getUsuarioCadastro() {
-		return usuarioCadastro;
+
 	}
 
 	@Override

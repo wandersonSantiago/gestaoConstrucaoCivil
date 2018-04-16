@@ -56,10 +56,7 @@ public class Cotacao implements Serializable{
 	@Column(name = "data_fechamento")
 	private Date dataFechamento;
 	
-	@ManyToOne
-	@JoinColumn(name ="id_usuario_cadastro")
-	private Usuario usuarioCadastro;
-	
+	 
     public Long getId() {
 		return id;
 	}
@@ -115,7 +112,6 @@ public class Cotacao implements Serializable{
     	this.statusCotacao = StatusCotacao.ABERTO;
     	Usuario usuarioSessao = SessionUsuario.getInstance().getUsuario();
     	this.empreendimento = usuarioSessao.getEmpreendimento();
-    	this.usuarioCadastro =usuarioSessao;
     	adicionarCotacaoNoItem();
     }
 	private void adicionarCotacaoNoItem() {
@@ -130,12 +126,7 @@ public class Cotacao implements Serializable{
     	this.statusCotacao = StatusCotacao.FECHADO;
     	this.dataFechamento = new Date();
     }
-    
-    
-	public Usuario getUsuarioCadastro() {
-		return usuarioCadastro;
-	}
-
+   
 	@Override
 	public int hashCode() {
 		final int prime = 31;
