@@ -34,7 +34,7 @@ public class Categoria implements Serializable {
 	@NotNull
 	private String descricao;
 	@Enumerated(EnumType.STRING)
-	TipoCategoriaEnum tipoCategoria;
+	private TipoCategoriaEnum tipoCategoria;
 
 	public Long getId() {
 		return id;
