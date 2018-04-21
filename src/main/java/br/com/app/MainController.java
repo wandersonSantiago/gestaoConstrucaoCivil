@@ -7,21 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping
 public class MainController {
 
-	/*@RequestMapping("/usuario")
-	@ResponseBody
-	public Principal user(Principal user) {
-		return user;
-	}*/
-	
 	@RequestMapping(value = "/{[path:[^\\.]*}")
 	public String redirect() {
 	  return "forward:/";
 	}
 	
-	@RequestMapping("/home")
-	public String Home(){
-		
-		return "index";
-	}
 
 }

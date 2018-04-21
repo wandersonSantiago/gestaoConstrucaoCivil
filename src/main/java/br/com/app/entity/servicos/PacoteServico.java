@@ -13,7 +13,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import br.com.app.entity.Categoria;
-import br.com.app.util.geradorCodigo.GereCodigoPacoteServico;
+import br.com.app.util.gerador.codigo.GereCodigoPacoteServico;
 
 @Entity
 @SequenceGenerator(name = "pacote_servico_id_seq", sequenceName = "pacote_servico_id_seq", schema = "servicos")

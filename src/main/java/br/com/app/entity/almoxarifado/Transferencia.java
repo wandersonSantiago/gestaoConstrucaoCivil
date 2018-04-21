@@ -21,7 +21,7 @@ import br.com.app.entity.Empreendimento;
 import br.com.app.entity.almoxarifado.interfaces.EntradaOuBaixa;
 import br.com.app.enuns.StatusTransferencia;
 import br.com.app.enuns.TipoNotaEnum;
-import br.com.app.util.geradorCodigo.GeraNumeroNota;
+import br.com.app.util.gerador.codigo.GeraNumeroNota;
 
 @Entity
 @SequenceGenerator(name = "transferencia_id_seq", sequenceName = "transferencia_id_seq",schema = "almoxarifado")

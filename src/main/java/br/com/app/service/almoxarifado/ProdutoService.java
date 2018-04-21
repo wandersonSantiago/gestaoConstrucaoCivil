@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.app.entity.almoxarifado.Produto;
 import br.com.app.repository.almoxarifado.ProdutoRepository;
-import br.com.app.util.geradorCodigo.GeraCodigoProduto;
+import br.com.app.util.gerador.codigo.GeraCodigoProduto;
 
 @Service
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)

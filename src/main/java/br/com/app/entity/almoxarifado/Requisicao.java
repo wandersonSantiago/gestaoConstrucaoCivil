@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import br.com.app.entity.almoxarifado.View.Summary;
 import br.com.app.enuns.StatusRequisicao;
-import br.com.app.util.geradorCodigo.GeraNumeroRequisicao;
+import br.com.app.util.gerador.codigo.GeraNumeroRequisicao;
 
 @Entity
 @SequenceGenerator(name = "requisicao_id_seq", sequenceName = "requisicao_id_seq", schema = "almoxarifado")

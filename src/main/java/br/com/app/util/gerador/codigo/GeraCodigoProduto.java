@@ -1,4 +1,4 @@
-package br.com.app.util.geradorCodigo;
+package br.com.app.util.gerador.codigo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,8 +34,11 @@ public class GeraCodigoProduto extends GeraCodigo{
     }
     public String gerarCodigoBarra()
 	{
-		return "0000000".concat(codigo.toString());
+		return "0000000".concat(this.codigo.toString());
 	}
+    public String gerarCodigoBarra(Integer codigo) {
+    	return "0000000".concat(codigo.toString());
+    }
    
     
 }

@@ -1,4 +1,4 @@
-package br.com.app.util.geradorCodigo;
+package br.com.app.util.gerador.codigo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
