@@ -20,7 +20,7 @@ import br.com.app.entity.Empreendimento;
 import br.com.app.pojo.InformacaoEntradaProduto;
 
 @Entity
-@SequenceGenerator(name = "estoque_empreendimento_id_seq", sequenceName = "estoque_empreendimento_id_seq",schema = "almoxarifado")
+@SequenceGenerator(name = "estoque_empreendimento_id_seq", sequenceName = "estoque_empreendimento_id_seq", schema = "almoxarifado")
 @NamedEntityGraph(name = "EstoqueEmpreendimento.detail", attributeNodes = { @NamedAttributeNode("produto"),
 		@NamedAttributeNode("empreendimento") })
 @Table(name = "estoque_empreendimento", schema = "almoxarifado")
@@ -30,7 +30,7 @@ public class EstoqueEmpreendimento implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "estoque_empreendimento_id_seq")
-	Long id;
+	private Long id;
 
 	@Column(nullable = false)
 	private Integer quantidade;
@@ -56,10 +56,6 @@ public class EstoqueEmpreendimento implements Serializable {
 	private Double custoMedio;
 	@Transient
 	private Double valorTotal;
-
-	public EstoqueEmpreendimento() {
-
-	}
 
 	public void setInforProduto(InformacaoEntradaProduto inforProduto) {
 
@@ -137,10 +133,7 @@ public class EstoqueEmpreendimento implements Serializable {
 	}
 
 	public boolean isNegativo() {
-		if (quantidade >= 0) {
-			return true;
-		}
-		return false;
+		return quantidade >= 0;
 	}
 
 	@Override
