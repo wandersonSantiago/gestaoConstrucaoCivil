@@ -20,8 +20,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 import br.com.app.enuns.TipoCategoriaEnum;
 
 @Entity
-@SequenceGenerator(name = "categoria_id_seq", sequenceName = "categoria_id_seq",schema="communs")
-@Table(name = "categoria" , schema = "communs")
+@SequenceGenerator(name = "categoria_id_seq", sequenceName = "categoria_id_seq", schema = "communs")
+@Table(name = "categoria", schema = "communs")
 public class Categoria implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -29,21 +29,12 @@ public class Categoria implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categoria_id_seq")
 	private Long id;
-	
 	@Column(nullable = false)
 	private boolean ativo;
-
 	@NotNull
-	@NotEmpty
-	@Size(min = 3, max = 25)
 	private String descricao;
-
-	@NotBlank
 	@Enumerated(EnumType.STRING)
 	TipoCategoriaEnum tipoCategoria;
-	
-	
-	
 
 	public Long getId() {
 		return id;

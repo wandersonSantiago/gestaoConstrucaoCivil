@@ -9,10 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @SequenceGenerator(name = "area_produto_id_seq", sequenceName = "area_produto_id_seq",schema="communs")
@@ -27,10 +23,6 @@ public class AreaProduto  implements Serializable {
 	
 	@Column(nullable = false)
 	private boolean ativo;
-
-	@NotBlank
-	@NotEmpty
-	@Size(min = 3, max = 25)
 	private String descricao;
 
 	public boolean isAtivo() {
