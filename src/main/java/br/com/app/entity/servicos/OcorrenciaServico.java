@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import br.com.app.entity.Usuario;
 
 @Entity
-@SequenceGenerator(name = "ocorrencia_servico_id_seq", sequenceName = "ocorrencia_servico_id_seq", schema = "servicos", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "ocorrencia_servico_id_seq", sequenceName = "ocorrencia_servico_id_seq", schema = "servicos")
 @Table(name = "ocorrencia_servico", schema = "servicos")
 public class OcorrenciaServico implements Serializable {
 

@@ -2,26 +2,26 @@ package br.com.app.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
 
 @Entity
 @Table(name = "estrutura" , schema = "communs")
+@SequenceGenerator(name = "estrutura_id_seq", sequenceName = "estrutura_id_seq",schema="communs")
 @Data
 public class Estrutura implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(unique = true, nullable = false)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "estrutura_id_seq")
 	private Long id;
 	
 	

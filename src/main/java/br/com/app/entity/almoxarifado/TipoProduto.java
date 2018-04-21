@@ -10,10 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 @Entity
-@SequenceGenerator(name = "tipo_produto_id_seq", sequenceName = "tipo_produto_id_seq", schema = "almoxarifado", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "tipo_produto_id_seq", sequenceName = "tipo_produto_id_seq", schema = "almoxarifado")
 @Table(name = "tipo_produto", schema = "almoxarifado")
 public class TipoProduto implements Serializable {
 

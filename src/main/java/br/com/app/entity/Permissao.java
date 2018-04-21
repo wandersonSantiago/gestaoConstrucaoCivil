@@ -8,12 +8,14 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import br.com.app.enuns.TipoModulo;
 import lombok.Data;
 
 @Entity
+@SequenceGenerator(name = "permissao_id_seq", sequenceName = "permissao_id_seq",schema="communs")
 @Data
 @Table(name = "permissao" , schema = "communs")
 public class Permissao implements Serializable{
@@ -21,7 +23,7 @@ public class Permissao implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "permissao_id_seq")
 	private Long id;
 	
 	private String descricao;

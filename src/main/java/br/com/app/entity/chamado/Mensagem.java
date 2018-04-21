@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import br.com.app.entity.Usuario;
 
 @Entity
-@SequenceGenerator(name = "mensagem_id_seq", sequenceName = "mensagem_id_seq", schema="chamado", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "mensagem_id_seq", sequenceName = "mensagem_id_seq", schema="chamado")
 @Table(name="mensagem", schema="chamado")
 public class Mensagem implements Serializable{
 

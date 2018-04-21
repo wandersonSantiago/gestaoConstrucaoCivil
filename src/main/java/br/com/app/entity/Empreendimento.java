@@ -14,25 +14,24 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.PrePersist;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 import br.com.app.enuns.StatusEmpreendimento;
 import lombok.Data;
 
 @Entity
 @Table(name = "empreendimento" , schema = "communs")
+@SequenceGenerator(name = "empreendimento_id_seq", sequenceName = "empreendimento_id_seq", schema = "communs")
 @Data
 public class Empreendimento implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(unique = true, nullable = false)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "empreendimento_id_seq")
 	private Long id;
 	
 	@ManyToOne(cascade = {CascadeType.ALL})

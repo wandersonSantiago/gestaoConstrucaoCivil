@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,13 +28,14 @@ import lombok.Data;
 
 @Data
 @Entity
+@SequenceGenerator(name = "usuario_id_seq", sequenceName = "usuario_id_seq",schema="communs")
 @Table(name = "usuario" , schema = "communs")
 public class Usuario implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_id_seq")
 	private Long id;
 
 	@ManyToOne

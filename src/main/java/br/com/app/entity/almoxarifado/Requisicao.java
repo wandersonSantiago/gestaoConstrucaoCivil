@@ -22,14 +22,14 @@ import br.com.app.enuns.StatusRequisicao;
 import br.com.app.util.geradorCodigo.GeraNumeroRequisicao;
 
 @Entity
-@SequenceGenerator(name = "informacaoRequisicao_id_seq", sequenceName = "informacaoRequisicao_id_seq", schema = "almoxarifado")
-@Table(name = "informacao_requisicao", schema = "almoxarifado")
+@SequenceGenerator(name = "requisicao_id_seq", sequenceName = "requisicao_id_seq", schema = "almoxarifado")
+@Table(name = "requisicao", schema = "almoxarifado")
 public class Requisicao implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "informacaoRequisicao_id_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "requisicao_id_seq")
 	private Long id;
 
 	@JsonView(Summary.class)

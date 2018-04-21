@@ -24,37 +24,34 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import br.com.app.entity.Categoria;
-import br.com.app.entity.Usuario;
 import br.com.app.entity.almoxarifado.View.Summary;
 import br.com.app.enuns.UnidadeMedidaEnum;
-import br.com.app.pojo.SessionUsuario;
 
 @Entity
-@SequenceGenerator(name = "produto_id_seq", sequenceName = "produto_id_seq",schema="almoxarifado", initialValue = 1, allocationSize = 1)
-@NamedEntityGraph(name = "Produto.detail",
-attributeNodes = {@NamedAttributeNode("categoria"),@NamedAttributeNode("fabricante"),@NamedAttributeNode("tipoProduto")})
+@SequenceGenerator(name = "produto_id_seq", sequenceName = "produto_id_seq", schema = "almoxarifado")
+@NamedEntityGraph(name = "Produto.detail", attributeNodes = { @NamedAttributeNode("categoria"),
+		@NamedAttributeNode("fabricante"), @NamedAttributeNode("tipoProduto") })
 
-@Table(name = "produto" , schema="almoxarifado")
+@Table(name = "produto", schema = "almoxarifado")
 @JsonIgnoreType
 public class Produto {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "produto_id_seq")
 	private Long id;
-	
+
 	@JsonView(Summary.class)
-	@Column(nullable = true,unique = true)
+	@Column(nullable = true, unique = true)
 	private Integer codigo;
-	
+
 	@JsonView(Summary.class)
-	@Column(nullable = false, length = 50,unique = true)
+	@Column(nullable = false, length = 50, unique = true)
 	private String codigoBarra;
 
 	@JsonView(Summary.class)
@@ -65,41 +62,41 @@ public class Produto {
 	@JsonIgnore
 	@Enumerated(EnumType.STRING)
 	private UnidadeMedidaEnum unidadeMedida;
-	
+
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "id_categoria", nullable = true)
 	private Categoria categoria;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "produtos_fornecedores", schema="almoxarifado",joinColumns = @JoinColumn(name = "id_produto"), 
-	inverseJoinColumns = @JoinColumn(name = "id_fornecedor"))
+	@JoinTable(name = "produtos_fornecedores", schema = "almoxarifado", joinColumns = @JoinColumn(name = "id_produto"), inverseJoinColumns = @JoinColumn(name = "id_fornecedor"))
 	@Fetch(FetchMode.SUBSELECT)
 	private List<Fornecedor> fornecedores;
-	
+
 	@ManyToOne
-    @JoinColumn(name="id_fabricante",nullable = true)
+	@JoinColumn(name = "id_fabricante", nullable = true)
 	private Fabricante fabricante;
-	
+
 	@ManyToOne
-    @JoinColumn(name="id_tipo",nullable = true)
+	@JoinColumn(name = "id_tipo", nullable = true)
 	private TipoProduto tipoProduto;
-	
+
 	@Transient
 	private boolean geraCodigoBarra = true;
-	
-	 
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public boolean isGeraCodigoBarra() {
 		return geraCodigoBarra;
 	}
-    public String getCodigoBarra() {
+
+	public String getCodigoBarra() {
 		return codigoBarra;
 	}
 
@@ -115,7 +112,6 @@ public class Produto {
 		this.descricao = descricao;
 	}
 
-
 	public boolean isAtivo() {
 		return ativo;
 	}
@@ -123,7 +119,6 @@ public class Produto {
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
 	}
-    
 
 	public UnidadeMedidaEnum getUnidadeMedida() {
 		return unidadeMedida;
@@ -172,6 +167,5 @@ public class Produto {
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
-	 
 
 }

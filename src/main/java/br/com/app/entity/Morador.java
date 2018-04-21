@@ -25,15 +25,15 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
-@SequenceGenerator(name = "cliente_morador_id_seq", sequenceName = "cliente_morador_id_seq", schema = "communs")
+@SequenceGenerator(name = "morador_id_seq", sequenceName = "morador_id_seq", schema = "communs")
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "cliente_morador", schema = "communs")
-public abstract class Morador implements Serializable {
+@Table(name = "morador", schema = "communs")
+public class Morador implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cliente_morador_id_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "morador_id_seq")
 	private Long id;
 
 	@NotEmpty
