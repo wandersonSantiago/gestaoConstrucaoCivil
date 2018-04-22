@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,28 +26,29 @@ public class UsuarioService {
 	private UsuarioRepository usuarioRepository;
 	@Autowired
 	private EmpreendimentoService empreendimentoService;
+	
 
 	@Transactional(readOnly = false)
 	public Usuario insert(Usuario usuario) {
 		Usuario user = SessionUsuario.getInstance().getUsuario();
 		if (usuario.getId() == null) {
-			if(usuario.getEmpreendimento() == null) {
+			if (usuario.getEmpreendimento() == null) {
 				usuario.setEmpreendimento(user.getEmpreendimento());
 			}
 			String hash = new BCryptPasswordEncoder().encode(usuario.getSenha());
-			usuario.setSenha(hash);	
+			usuario.setSenha(hash);
 			usuario.setAtivo(true);
 			usuario.setStatus(StatusUsuarioEnum.OFFLINE);
-		return usuarioRepository.save(usuario);
+			return usuarioRepository.save(usuario);
 		}
 		return null;
 	}
 
 	@Transactional(readOnly = false)
-	public Usuario update(Usuario usuario) {	
+	public Usuario update(Usuario usuario) {
 		Usuario userSession = SessionUsuario.getInstance().getUsuario();
 		if (usuario.getId() != null) {
-			if(usuario.getEmpreendimento() == null) {
+			if (usuario.getEmpreendimento() == null) {
 				usuario.setEmpreendimento(userSession.getEmpreendimento());
 			}
 			Usuario user = usuarioRepository.findById(usuario.getId()).get();
@@ -56,7 +58,7 @@ public class UsuarioService {
 		}
 		return null;
 	}
-	
+
 	@Transactional(readOnly = false)
 	public void updatePassword(Long idUsuario, String senhaValidacao, String novaSenha) {
 		Usuario usuario = usuarioRepository.findById(idUsuario).get();
@@ -64,30 +66,19 @@ public class UsuarioService {
 		usuario.setSenha(newHash);
 		usuarioRepository.save(usuario);
 	}
-	
+
 	@Transactional(readOnly = false)
 	public void updateEmpreendimento(Long idEmpreendimento) {
 		Usuario user = SessionUsuario.getInstance().getUsuario();
-		Empreendimento empreendimento = empreendimentoService.findById(idEmpreendimento).get();		
+		Empreendimento empreendimento = empreendimentoService.findById(idEmpreendimento).get();
 		user.setEmpreendimento(empreendimento);
 		usuarioRepository.save(user);
 	}
-	
-	public String caminhoFoto() {
-		Usuario user = SessionUsuario.getInstance().getUsuario();
-		String login = user.getLogin();
-		String caminho = "/home/fotos/" + login + "/";
-		return caminho;
-
-	}
-
 	@Transactional(readOnly = false)
-	public void savePathFoto(String path, Usuario user) {
-
-		user.setCaminhoFoto(path);
+	public void savePathFoto(Usuario user) {
 		usuarioRepository.save(user);
 	}
-	
+
 	public Optional<Usuario> findById(Long id) {
 		return usuarioRepository.findById(id);
 	}
@@ -111,10 +102,10 @@ public class UsuarioService {
 
 	public Page<Usuario> findAll(Pageable page) {
 		Usuario user = SessionUsuario.getInstance().getUsuario();
-		if(user.isRoot()) {
+		if (user.isRoot()) {
 			return usuarioRepository.findAll(page);
-		}		
-		if(user.getEmpreendimento().isMatriz()) {
+		}
+		if (user.getEmpreendimento().isMatriz()) {
 			return usuarioRepository.findByEmpreendimentoMatriz_id(user.getEmpreendimento().getId(), page);
 		}
 		return usuarioRepository.findByEmpreendimento_id(user.getEmpreendimento().getId(), page);
@@ -122,14 +113,15 @@ public class UsuarioService {
 
 	public Page<Usuario> findByDescricaoIgnoreCase(String descricao, Pageable page) {
 		Usuario user = SessionUsuario.getInstance().getUsuario();
-		if(user.isRoot()) {
-			return usuarioRepository.findByNomeContainsIgnoreCase(descricao,page);
-		}		
-		if(user.getEmpreendimento().isMatriz()) {
-			return usuarioRepository.findByNomeContainsIgnoreCaseAndEmpreendimento_matriz_id(descricao, user.getEmpreendimento().getId(), page);
+		if (user.isRoot()) {
+			return usuarioRepository.findByNomeContainsIgnoreCase(descricao, page);
 		}
-		return usuarioRepository.findByNomeContainsIgnoreCaseAndEmpreendimento_id(descricao, user.getEmpreendimento().getId(), page);
+		if (user.getEmpreendimento().isMatriz()) {
+			return usuarioRepository.findByNomeContainsIgnoreCaseAndEmpreendimento_matriz_id(descricao,
+					user.getEmpreendimento().getId(), page);
+		}
+		return usuarioRepository.findByNomeContainsIgnoreCaseAndEmpreendimento_id(descricao,
+				user.getEmpreendimento().getId(), page);
 	}
 
-	
 }

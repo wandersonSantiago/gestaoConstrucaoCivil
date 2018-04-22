@@ -18,10 +18,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
@@ -35,36 +32,18 @@ public class Morador implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "morador_id_seq")
 	private Long id;
-
-	@NotEmpty
-	@Size(min = 3, max = 50)
 	protected String nomeCompleto;
-
 	@CPF
 	protected String cpf;
-
-	@NotEmpty
-
-	@Size(max = 15)
 	protected String telefoneFixo;
-	@NotEmpty
-
-	@Size(max = 15)
 	protected String telefoneCelular;
-
-	// @NotBlank
-	@Email
 	protected String email;
-
 	@ManyToOne
 	@JoinColumn(name = "id_empreendimento", nullable = true)
 	protected Empreendimento empreendimento;
-
 	@OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
 	@JoinColumn(name = "id_usuario")
 	protected Usuario usuario;
-
-	// @NotEmpty
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_nascimento")
 	protected Date dataNascimento;

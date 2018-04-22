@@ -34,6 +34,14 @@ public class PrestadoraServico implements Serializable {
 	@OneToMany(mappedBy = "prestadoraServico", cascade = CascadeType.ALL)
 	private List<ServicoEmpresa> servicos;
 
+	private String teste;
+	
+	public String getTeste() {
+		return this.teste;
+	}
+	public void setTeste(String teste) {
+		this.teste = teste;
+	}
 	public Long getId() {
 		return id;
 	}
