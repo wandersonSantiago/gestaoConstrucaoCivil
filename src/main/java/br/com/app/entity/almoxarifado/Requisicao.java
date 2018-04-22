@@ -10,6 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -17,9 +19,9 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import br.com.app.entity.Empreendimento;
 import br.com.app.entity.almoxarifado.View.Summary;
 import br.com.app.enuns.StatusRequisicao;
-import br.com.app.util.gerador.codigo.GeraNumeroRequisicao;
 
 @Entity
 @SequenceGenerator(name = "requisicao_id_seq", sequenceName = "requisicao_id_seq", schema = "almoxarifado")
@@ -48,16 +50,25 @@ public class Requisicao implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private StatusRequisicao statusRequisicao;
 
+	@ManyToOne
+    @JoinColumn(name="id_empreendimento")
+	private Empreendimento empreendimento;
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Integer getNumeroRequisicao() {
 		return numeroRequisicao;
 	}
 
 	public void setNumeroRequisicao(Integer numeroRequisicao) {
 		this.numeroRequisicao = numeroRequisicao;
-	}
-
-	public StatusRequisicao getStatusRequisicao() {
-		return statusRequisicao;
 	}
 
 	public Date getDataSaida() {
@@ -68,24 +79,28 @@ public class Requisicao implements Serializable {
 		this.dataSaida = dataSaida;
 	}
 
+	public Date getDataCriacao() {
+		return dataCriacao;
+	}
+
+	public void setDataCriacao(Date dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+
+	public StatusRequisicao getStatusRequisicao() {
+		return statusRequisicao;
+	}
+
 	public void setStatusRequisicao(StatusRequisicao statusRequisicao) {
 		this.statusRequisicao = statusRequisicao;
 	}
 
-	public void novaRequisicao() {
-		this.statusRequisicao = StatusRequisicao.PENDENTE;
-		GeraNumeroRequisicao gerarNumero = new GeraNumeroRequisicao();
-		this.numeroRequisicao = gerarNumero.gerarNumeroRequisicao();
-		this.dataCriacao = new Date();
+	public Empreendimento getEmpreendimento() {
+		return empreendimento;
 	}
 
-	public void statusAceito() {
-		dataSaida = new Date();
-		this.statusRequisicao = StatusRequisicao.EFETUADO;
-	}
-
-	public void statusRejeitado() {
-		this.statusRequisicao = StatusRequisicao.RECUSADO;
+	public void setEmpreendimento(Empreendimento empreendimento) {
+		this.empreendimento = empreendimento;
 	}
 
 }

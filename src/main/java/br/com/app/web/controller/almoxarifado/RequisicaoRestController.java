@@ -28,8 +28,8 @@ public class RequisicaoRestController {
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(value = "/salva")
-	public void save(@RequestBody Requisicao requisicao) {
-		requisicaoService.salvarOuEditar(requisicao);
+	public void insert(@RequestBody Requisicao requisicao) {
+		requisicaoService.insert(requisicao);
 
 	}
 
@@ -40,15 +40,15 @@ public class RequisicaoRestController {
 
 	}
 
-	/*@ResponseStatus(HttpStatus.OK)
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/lista/paginacao")
 	public Page<Requisicao> lista(@RequestParam(defaultValue = "0", required = false) int page,
 			@RequestParam(defaultValue = "0", required = false) int maxResults) {
 
 		return requisicaoService.buscarTodosComPaginacao(new PageRequest(page, maxResults));
 
-	}*/
-/*
+	}
+	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(value = "/aceitar")
 	public void aceitar(@RequestBody Integer numeroRequisicao) {
@@ -59,6 +59,7 @@ public class RequisicaoRestController {
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(value = "/rejeitar")
 	public void rejeitar(@RequestBody Integer numeroRequisicao) {
+		 
 		requisicaoService.rejeitar(numeroRequisicao);
 
 	}
@@ -66,7 +67,7 @@ public class RequisicaoRestController {
 	@ResponseStatus(HttpStatus.OK)
 	@PostMapping(value = "/buscaPorId/{id}")
 	public Optional<Requisicao> buscarPorId(@PathVariable Long id) {
-		return requisicaoEdificioService.buscarPorId(id);
-	}*/
+		return requisicaoService.buscarPorId(id);
+	}
 
 }

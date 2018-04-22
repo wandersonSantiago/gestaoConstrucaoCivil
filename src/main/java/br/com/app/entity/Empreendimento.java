@@ -66,10 +66,8 @@ public class Empreendimento implements Serializable{
     
     
     public boolean isMatriz() {
-    	if(matriz == null) {
-    		return true;
-    	}
-    	return false;
+    	return matriz == null;
+    	
     }
     
  
