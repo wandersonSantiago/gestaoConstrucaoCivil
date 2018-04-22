@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.app.entity.Empreendimento;
-import br.com.app.entity.almoxarifado.EstoqueBuilder;
 import br.com.app.entity.almoxarifado.EstoqueEmpreendimento;
 import br.com.app.entity.almoxarifado.Produto;
 import br.com.app.entity.almoxarifado.interfaces.EntradaOuBaixa;

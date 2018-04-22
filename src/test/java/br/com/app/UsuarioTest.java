@@ -4,23 +4,26 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.junit.Test;
 
+import br.com.app.entity.Usuario;
+
 public class UsuarioTest extends AbstractMvcTest {
 
-	String user = "{'login':'root','senha':'121232133'}";
-	
-	/*@Test
-	public void loginNok() throws Exception {
-		loginTeste().andExpect(status().isUnauthorized());
-	}*/
-	
 	@Test
 	public void save() {
-		
+
+		Usuario user = new Usuario();
+		user.setAtivo(true);
+		user.setEmail("josesilva@suport.com.br");
+		user.setNome("Jose Silva");
+		user.setSenha("78654");
+		user.setLogin("josesilva");
+
 	}
+
 	@Test
-	public void loginOk() throws Exception  {
-		
+	public void loginOk() throws Exception {
+
 		login().andExpect(status().isOk());
 	}
-	
+
 }

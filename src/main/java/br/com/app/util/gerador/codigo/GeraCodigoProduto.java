@@ -22,11 +22,11 @@ public class GeraCodigoProduto extends GeraCodigo{
     {
      	for(Integer tentativa = 0 ; tentativa <= 99999; tentativa++)
     	{
-    		 codigo  =  gerarNumero();
-    		if(produtoRepository.existeCodigo(codigo) == false ){
+    		 
+    		if(!produtoRepository.existeCodigo(codigo)){
     		   
-    			
-    			return codigo;
+    			return gerarNumero();
+    			 
     		}
     	}
     	throw new GeraCodigoProdutoException("Não é possivel gerar um código para produto");

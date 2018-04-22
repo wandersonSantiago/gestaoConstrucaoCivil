@@ -13,30 +13,26 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "estrutura" , schema = "communs")
-@SequenceGenerator(name = "estrutura_id_seq", sequenceName = "estrutura_id_seq",schema="communs")
+@Table(name = "estrutura", schema = "communs")
+@SequenceGenerator(name = "estrutura_id_seq", sequenceName = "estrutura_id_seq", schema = "communs")
 @Data
-public class Estrutura implements Serializable{
+public class Estrutura implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "estrutura_id_seq")
 	private Long id;
-	
-	
+
 	private String descricao;
-	
+
 	@ManyToOne
 	private Estrutura raiz;
 
 	private Long idEmpreendimento;
-	
-	
+
 	public boolean isRaiz() {
-		if(raiz == null) {
-			return true;
-		}
-		return false;
+		return raiz == null;
+		 
 	}
 }

@@ -50,4 +50,14 @@ public class PrestadoraServico implements Serializable {
 		this.dadoEmpresa = dadoEmpresa;
 	}
 
+	public List<ServicoEmpresa> getServicos() {
+		return servicos;
+	}
+
+	public void setServicos(List<ServicoEmpresa> servicos) {
+		this.servicos = servicos;
+	}
+
+	
+
 }

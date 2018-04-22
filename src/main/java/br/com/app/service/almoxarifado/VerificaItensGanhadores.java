@@ -68,7 +68,7 @@ public class VerificaItensGanhadores {
 
 		for (CotacaoEmpresaItem item : itensVerifica) {
 			
-			if (itemGanhador.equals(item) == false) {
+			if (!itemGanhador.equals(item)) {
 				
 				if (itemGanhador.getValorUnitario() > item.getValorUnitario()) {
 					
