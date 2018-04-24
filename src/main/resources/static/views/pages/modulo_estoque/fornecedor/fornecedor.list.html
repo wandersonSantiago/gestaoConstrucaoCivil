@@ -1,7 +1,7 @@
 <meta charset="UTF-8">
 
 
-	<div class="row">
+<div class="row">
   <div class="col-lg-6">
     <div class="input-group">
       <input type="text" class="form-control" placeholder="Digite o nome ou qualquer número de documento" ng-model="texto" autofocus
@@ -9,36 +9,33 @@
       <span class="input-group-btn">
         <button class="btn btn-default" type="button" ng-click="ctrl.paginaCorrente = 0; ctrl.buscarPorTexto(texto)">Ir!</button>
       </span>
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
+    </div>
   </div>
+ </div>
   <div ng-show="mensagemErro" class="alert alert-warning alert-dismissible">
 	                <h4><i class="icon fa fa-warning"></i>{{mensagemErro}}</h4>
-	              </div> <br>
+ </div> <br>
 
-<div class="table-responsive" ng-if="ctrl.entidadeReligiosas.length">
+<div class="table-responsive" ng-if="ctrl.fornecedores.length">
 	<table class="table table-hover" >
 		<tr>
 
 			<th>Id</th>
-			<th>Nome</th>
-			<th>Status</th>
+			<th>Razão Social</th>
+			<th>Nome Fantasia</th>
 			<th>CNPJ</th>
 			<th>Telefone</th>
-			<th title="Código da unidade que cadastrou a entidade religiosa">Unid. Cad.</th>
-			<th ng-if="!ctrl.selecionar">Editar</th>
+			<th>Editar</th>
 			
 
 		</tr>
-		<tr ng-repeat="entidade in ctrl.entidadeReligiosas | filter: texto ">
-			<td>{{entidade.id}}</td>
-			<td ng-if="!ctrl.selecionar"><a ui-sref="entidadeReligiosa.visualizar({ idEntidade: entidade.id})">{{::entidade.nome}} <span ng-if="entidade.matriz != null"> - <b>Filial</b></span></a></td>
-			<td ng-if="ctrl.selecionar"><a href ng-click="ctrl.selecionar(entidade)">{{::entidade.nome}} <span ng-if="entidade.matriz != null"> - Filial</span></a></td>
-			<td>{{::entidade.status}}</td>
-			<td>{{::entidade.cnpj | brCnpj}}</td>
-			<td>{{::entidade.telefone | brPhoneNumber}}</td>
-			<td title="Código das Coordenadorias,  CRC = 122 , COREVALE = 126, CRN = 123, CROESTE = 124, COREMETRO = 440, SAP = 119">{{::entidade.unidadeCadastro}}</td>
-			<td ng-if="!ctrl.selecionar"><a ui-sref="entidadeReligiosa.editar({ idEntidade: entidade.id})"><i class="glyphicon glyphicon-edit"></i></a></td>
+		<tr ng-repeat="forndecedor in ctrl.fornecedores | filter: texto ">
+			<td>{{forndecedor.id}}</td>
+			<td><a ui-sref="forndecedor.visualizar({ idFornecedor: forndecedor.id})">{{forndecedor.dadoUnidade.razaoSocial}}</a></td>
+			<td>{{forndecedor.dadoUnidade.nomeFantasia}}</td>
+			<td>{{forndecedor.dadoUnidade.cnpj | brCnpj}}</td>
+			<td>{{forndecedor.dadoUnidade.telefone | brPhoneNumber}}</td>
+			<td><a ui-sref="forndecedor.editar({ idFornecedor: forndecedor.id})"><i class="glyphicon glyphicon-edit"></i></a></td>
 		</tr>
 	</table>
 	<nav>
@@ -49,4 +46,3 @@
 </div>
 
 	
-
