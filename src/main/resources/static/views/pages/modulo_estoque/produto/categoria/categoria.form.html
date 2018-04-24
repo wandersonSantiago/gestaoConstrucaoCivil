@@ -1,0 +1,25 @@
+<meta charset="UTF-8">
+
+<form role="form-vertical" ng-submit="ctrl.salva()">
+	<div class="row">
+		<div class="col-sm-3">		
+			Status <br>
+			<input type="checkbox" ng-model="ctrl.categoria.ativo">{{ctrl.categoria.ativo ? 'Ativado' : 'Desativado'}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<input class="form-control" ng-model="ctrl.categoria.descricao"
+				id="descricao" type="text" placeholder="Descrição da categoria"
+				maxlength="30" required>
+		</div>		
+	</div>
+	<br>
+	<div class="row ">
+		<div class="col-md-4 col-md-offset-4">
+			<input type="submit" id="submit" value="Salvar"
+				class="btn btn-lg btn-primary btn-block btn-signin">
+		</div>
+
+	</div>
+</form>

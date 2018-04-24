@@ -1,5 +1,6 @@
 package br.com.app.entity.almoxarifado;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -38,7 +39,7 @@ import br.com.app.enuns.UnidadeMedidaEnum;
 
 @Table(name = "produto", schema = "almoxarifado")
 @JsonIgnoreType
-public class Produto {
+public class Produto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 

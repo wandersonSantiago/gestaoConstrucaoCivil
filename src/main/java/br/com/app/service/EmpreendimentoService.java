@@ -57,7 +57,7 @@ public class EmpreendimentoService {
 
 	
 	public Page<Empreendimento> findByDescricaoIgnoreCase(String descricao, Pageable page){
-		Page<Empreendimento> empreendimentos = null;
+		Page<Empreendimento> empreendimentos = null ;
 		
 		Usuario user = SessionUsuario.getInstance().getUsuario();
 		if(user.isRoot()) {

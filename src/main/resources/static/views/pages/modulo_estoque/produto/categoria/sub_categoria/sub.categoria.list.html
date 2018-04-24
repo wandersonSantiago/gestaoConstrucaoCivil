@@ -1,0 +1,34 @@
+<meta charset="UTF-8">
+
+		<input type="text" class="form-control" ng-model="buscarCategoria" placeholder="buscar">
+			<div class="table-responsive">
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+					
+						
+						<th>Descrição</th>
+						<th>Categoria</th>
+						<th>Editar</th>
+						
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" categoria in catCtr.categorias | filter : buscaCategoria ">
+					<tr>
+						
+						
+						<td>{{ categoria.descricao }}</td>
+						<td>{{ categoria.tipoCategoria }}</td>
+					
+						<td ><a href=""><i class="glyphicon glyphicon-pencil"></i></a> 
+						
+					</tr>
+
+				</tbody>
+				<tfoot>
+				
+					
+				</tfoot>
+			</table>
+			</div>

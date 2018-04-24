@@ -63,7 +63,7 @@ public class EstruturaRestController {
 	@PostMapping
 	public Estrutura insert(@RequestBody Estrutura estrutura) {
 
-		return estrutura = estruturaService.insert(estrutura);
+		return estruturaService.insert(estrutura);
 	}
 	
 	

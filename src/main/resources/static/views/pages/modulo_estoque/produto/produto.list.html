@@ -1,0 +1,39 @@
+<meta charset="UTF-8">
+
+<input type="text" class="form-control" ng-model="buscaProduto" placeholder="buscar">
+			<div class="table-responsive">
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+					
+						<th>Status</th>
+						<th>Descrição</th>
+						<th>Unidade Medida</th>
+						<th>Categoria</th>
+						<th>Sub-Categoria</th>
+						<th >Editar</th>
+									
+						
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" produto in produtoCtrl.produtos | filter : buscaProduto ">
+					<tr>
+						
+						<td>{{ produto.ativo }}</td>
+						<td>{{ produto.descricao }}</td>
+						<td>{{ produto.unidadeMedida }}</td>
+						<td>{{ produto.categoria.descricao }}</td>
+						<td>{{ produto.tipoProduto.descricao }}</td>
+					
+						<td><a href=""><i class="glyphicon glyphicon-pencil"></i></a> 
+						
+					</tr>
+
+				</tbody>
+				<tfoot>
+				
+					
+				</tfoot>
+			</table>
+	</div>
