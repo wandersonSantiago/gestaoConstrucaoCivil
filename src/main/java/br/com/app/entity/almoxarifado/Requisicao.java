@@ -17,10 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
 import br.com.app.entity.Empreendimento;
-import br.com.app.entity.almoxarifado.View.Summary;
 import br.com.app.enuns.StatusRequisicao;
 
 @Entity
@@ -34,7 +31,6 @@ public class Requisicao implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "requisicao_id_seq")
 	private Long id;
 
-	@JsonView(Summary.class)
 	@Column(name = "numero_requisicao")
 	private Integer numeroRequisicao;
 
@@ -46,15 +42,13 @@ public class Requisicao implements Serializable {
 	@Column(name = "data_criacao")
 	private Date dataCriacao;
 
-	@JsonView(Summary.class)
 	@Enumerated(EnumType.STRING)
 	private StatusRequisicao statusRequisicao;
 
 	@ManyToOne
-    @JoinColumn(name="id_empreendimento")
+	@JoinColumn(name = "id_empreendimento")
 	private Empreendimento empreendimento;
-	
-	
+
 	public Long getId() {
 		return id;
 	}
