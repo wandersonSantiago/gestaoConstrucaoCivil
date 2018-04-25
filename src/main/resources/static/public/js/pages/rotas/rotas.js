@@ -29,13 +29,6 @@ app
 					parent : '/',
 					label : 'Gerenciamento'
 				}
-			}).state('estoque', {
-				url : "/estoque/menu",
-				templateUrl : "views/pages/modulo_estoque/home.html",
-				ncyBreadcrumb : {
-					parent : '/',
-					label : 'Estoque'
-				}
 			}).state('compras', {
 				url : "/compras/menu",
 				templateUrl : "views/pages/modulo_compras/home.html",
