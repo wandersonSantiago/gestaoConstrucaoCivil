@@ -32,21 +32,21 @@ public class Morador implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "morador_id_seq")
 	private Long id;
-	protected String nomeCompleto;
+	private String nomeCompleto;
 	@CPF
-	protected String cpf;
-	protected String telefoneFixo;
-	protected String telefoneCelular;
-	protected String email;
+	private String cpf;
+	private String telefoneFixo;
+	private String telefoneCelular;
+	private String email;
 	@ManyToOne
 	@JoinColumn(name = "id_empreendimento", nullable = true)
-	protected Empreendimento empreendimento;
+	private Empreendimento empreendimento;
 	@OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
 	@JoinColumn(name = "id_usuario")
-	protected Usuario usuario;
+	private Usuario usuario;
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_nascimento")
-	protected Date dataNascimento;
+	private Date dataNascimento;
 
 	public Long getId() {
 		return id;
