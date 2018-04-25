@@ -17,8 +17,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
 import br.com.app.entity.Empreendimento;
 import br.com.app.entity.Usuario;
 import br.com.app.enuns.Situacao;
@@ -42,11 +40,9 @@ public class NotaFiscal implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Situacao situacao;
 
-	@JsonView(View.Summary.class)
 	@Column(nullable = false)
 	private Long numero;
 
-	@JsonView(View.Summary.class)
 	@ManyToOne
 	@JoinColumn(name = "id_empreendimento", nullable = true)
 	private Empreendimento empreendimento;
@@ -55,7 +51,6 @@ public class NotaFiscal implements Serializable {
 	@Column(name = "data_nota")
 	private Date dataNota;
 
-	@JsonView(View.Summary.class)
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_vencimento")
 	private Date dataVencimento;
@@ -63,7 +58,6 @@ public class NotaFiscal implements Serializable {
 	@Column(nullable = true)
 	private String observacao;
 
-	@JsonView(View.Summary.class)
 	@Column(nullable = false)
 	private Double valorTotal;
 

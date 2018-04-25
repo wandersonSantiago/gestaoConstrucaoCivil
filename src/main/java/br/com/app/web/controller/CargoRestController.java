@@ -20,17 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.app.entity.Cargo;
 import br.com.app.service.CargoService;
-import br.com.app.service.interfaceservice.ICargoService;
 
 @RestController
 @RequestMapping("/rest/recursosHumanos/cargo")
 public class CargoRestController {
 
+	
 	@Autowired
-	private ICargoService<Cargo> cargoService;
-
-	@Autowired
-	private CargoService cargoServiceNew;
+	private CargoService cargoService;
 
 	@Autowired
 	private CargoService cargoServices;
@@ -39,7 +36,7 @@ public class CargoRestController {
 	@GetMapping(value = "/lista", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Cargo> cargos() {
 
-		return cargoServiceNew.buscarTodos();
+		return cargoService.buscarTodos();
 	}
 
 	@ResponseStatus(HttpStatus.OK)

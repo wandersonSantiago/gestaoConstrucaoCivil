@@ -13,29 +13,25 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
-@SequenceGenerator(name = "item_cotacao_id_seq", sequenceName = "item_cotacao_id_seq",schema = "almoxarifado")
-@Table(name = "cotacao_item" , schema = "almoxarifado")
+@SequenceGenerator(name = "item_cotacao_id_seq", sequenceName = "item_cotacao_id_seq", schema = "almoxarifado")
+@Table(name = "cotacao_item", schema = "almoxarifado")
 public class CotacaoItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-	@Id	
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "item_cotacao_id_seq")
-    private Long id;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_cotacao_id_seq")
+	private Long id;
 	@Column(nullable = false)
 	private String descricao;
 	@Column(nullable = false)
 	private Integer quantidade;
-	
-    @JsonIgnore
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinColumn(name = "id_cotacao")
 	private Cotacao cotacao;
-    
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -67,5 +63,5 @@ public class CotacaoItem implements Serializable {
 	public void setContacao(Cotacao cotacao) {
 		this.cotacao = cotacao;
 	}
-	
+
 }

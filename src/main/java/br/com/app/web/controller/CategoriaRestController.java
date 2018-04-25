@@ -19,14 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.app.entity.Categoria;
 import br.com.app.enuns.TipoCategoriaEnum;
-import br.com.app.service.interfaceservice.Servico;
+import br.com.app.service.CategoriaService;
 
 @RestController
 @RequestMapping("/rest/almoxarifado/categoria")
 public class CategoriaRestController {
 
 	@Autowired
-	private Servico<Categoria> categoriaService;
+	private CategoriaService categoriaService;
 
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/lista")

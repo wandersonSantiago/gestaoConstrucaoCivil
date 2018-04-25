@@ -1,5 +1,6 @@
 package br.com.app.entity.almoxarifado;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -23,12 +24,9 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
-import com.fasterxml.jackson.annotation.JsonView;
 
 import br.com.app.entity.Categoria;
-import br.com.app.entity.almoxarifado.View.Summary;
 import br.com.app.enuns.UnidadeMedidaEnum;
 
 @Entity
@@ -38,7 +36,7 @@ import br.com.app.enuns.UnidadeMedidaEnum;
 
 @Table(name = "produto", schema = "almoxarifado")
 @JsonIgnoreType
-public class Produto {
+public class Produto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -46,24 +44,20 @@ public class Produto {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "produto_id_seq")
 	private Long id;
 
-	@JsonView(Summary.class)
 	@Column(nullable = true, unique = true)
 	private Integer codigo;
 
-	@JsonView(Summary.class)
 	@Column(nullable = false, length = 50, unique = true)
 	private String codigoBarra;
 
-	@JsonView(Summary.class)
 	@Column(nullable = false, length = 50)
 	private String descricao;
 	@Column(nullable = true)
 	private boolean ativo;
-	@JsonIgnore
+
 	@Enumerated(EnumType.STRING)
 	private UnidadeMedidaEnum unidadeMedida;
 
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "id_categoria", nullable = true)
 	private Categoria categoria;

@@ -13,62 +13,61 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
 import br.com.app.entity.almoxarifado.interfaces.IItem;
 
-
 @Entity
-@SequenceGenerator(name = "item_id_seq", sequenceName = "item_id_seq",schema="almoxarifado")
+@SequenceGenerator(name = "item_id_seq", sequenceName = "item_id_seq", schema = "almoxarifado")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Item implements Serializable,IItem{
+public abstract class Item implements Serializable, IItem {
 
 	private static final long serialVersionUID = 1L;
 
-	@JsonView(View.Summary.class)
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "item_id_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_id_seq")
 	private Long id;
-    
-	@JsonView(View.Summary.class)
+
 	@ManyToOne
 	@JoinColumn(name = "id_produto", nullable = false)
 	private Produto produto;
-	
-	@JsonView(View.Summary.class)
+
 	@Column(nullable = false)
 	private Integer quantidade;
-	
-	@JsonView(View.Summary.class)
+
 	@Column(nullable = false)
 	private Double valorUnitario;
-	
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public Produto getProduto() {
 		return produto;
 	}
+
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
+
 	public Integer getQuantidade() {
 		return quantidade;
 	}
+
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
+
 	public Double getValorUnitario() {
 		return valorUnitario;
 	}
+
 	public void setValorUnitario(Double valorUnitario) {
 		this.valorUnitario = valorUnitario;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -76,6 +75,7 @@ public abstract class Item implements Serializable,IItem{
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -92,9 +92,5 @@ public abstract class Item implements Serializable,IItem{
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
+
 }

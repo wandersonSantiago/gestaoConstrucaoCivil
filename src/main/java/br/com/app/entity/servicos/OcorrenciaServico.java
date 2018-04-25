@@ -13,8 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import br.com.app.entity.Usuario;
 
 @Entity
@@ -28,7 +26,6 @@ public class OcorrenciaServico implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ocorrencia_servico_id_seq")
 	private Long id;
 
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "id_servico_empresa")
 	private ServicoEmpresa servicoEmpresa;

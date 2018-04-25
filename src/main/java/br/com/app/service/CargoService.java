@@ -13,12 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.app.entity.Cargo;
 import br.com.app.repository.CargoRepository;
-import br.com.app.service.interfaceservice.ICargoService;
 
 @Service
 @EnableCaching(proxyTargetClass = true)
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
-public class CargoService implements ICargoService<Cargo> {
+public class CargoService  {
 
 	@Autowired
 	private CargoRepository cargoRepository;
@@ -37,7 +36,7 @@ public class CargoService implements ICargoService<Cargo> {
 		return cargoRepository.findAll(pageRequest);
 	}
 
-	@Override
+	 
 	public Optional<Cargo> findById(Long id) {
 
 		return cargoRepository.findById(id);
