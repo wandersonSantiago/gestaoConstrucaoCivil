@@ -1,4 +1,4 @@
-package br.com.system.gestaoConstrucaoCivil.entity.almoxarifado;
+package br.com.app.entity.almoxarifado;
 
 import java.io.Serializable;
 
@@ -13,41 +13,28 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
-import br.com.system.gestaoConstrucaoCivil.entity.DadoEmpresa;
-import br.com.system.gestaoConstrucaoCivil.findControll.FornecedorFindControll;
+import br.com.app.entity.DadoEmpresa;
 
 @Entity
-@SequenceGenerator(name = "fornecedor_id_seq",
-sequenceName = "fornecedor_id_seq",
-initialValue = 1,
-allocationSize = 1)
+@SequenceGenerator(name = "fornecedor_id_seq", sequenceName = "fornecedor_id_seq", schema = "almoxarifado")
 @Table(name = "fornecedor", schema = "almoxarifado")
-public class Fornecedor implements Serializable{
+public class Fornecedor implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fornecedor_id_seq")
 	private Long id;
-	
-	@JsonView(FornecedorFindControll.class)
 	@Column(nullable = false)
 	private boolean ativo;
-	@JsonView(FornecedorFindControll.class)
 	@Column(nullable = false, length = 50)
 	private String contato;
-	@JsonView(FornecedorFindControll.class)
 	@Column(nullable = true, length = 50)
 	private String observacao;
 
-	@JsonView(FornecedorFindControll.class)
-	@OneToOne(cascade = {CascadeType.MERGE ,CascadeType.PERSIST})
+	@OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
 	@JoinColumn(name = "id_dado_empresa", nullable = false)
 	private DadoEmpresa dadoEmpresa;
-
-
 
 	public Long getId() {
 		return id;
@@ -72,7 +59,7 @@ public class Fornecedor implements Serializable{
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-    
+
 	public DadoEmpresa getDadoEmpresa() {
 		return dadoEmpresa;
 	}
@@ -89,11 +76,10 @@ public class Fornecedor implements Serializable{
 		this.ativo = ativo;
 	}
 
-	/*public List<Produto> getProdutos() {
-		return produtos;
-	}
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
-	}*/
+	/*
+	 * public List<Produto> getProdutos() { return produtos; }
+	 * 
+	 * public void setProdutos(List<Produto> produtos) { this.produtos = produtos; }
+	 */
 
 }
