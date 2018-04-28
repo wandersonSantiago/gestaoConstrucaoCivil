@@ -1,69 +1,55 @@
 <meta charset="UTF-8">
 
-<ol class="breadcrumb">
-   <li class="breadcrumb-item"><a href="#/">home</a></li>
-   <li class="breadcrumb-item active">Modulo almoxarifado</li>
- </ol>
-     <div ng-controller="estoqueController as estoqueCtrl">
+     <div >
     <div class="row" >
-        <div class="col-lg-3 ">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <h3>01</h3>
-              <p>Estoque</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-cubes"></i>
-            </div>
-            <a href="#/estoque/entrada" class="small-box-footer">
-              Cadastros<i class="fa fa-arrow-circle-right"></i>
-            </a>
+        <a class="col-lg-4 " ui-sref="fabricante.menu">
+          <div class="small-box bg-orange"><br><br>
+            <div class="inner" align="center">
+              <h3>Fabricante</h3><br>
+            </div>           
           </div>
-        </div>
+        </a>
        
-        <div class="col-lg-3 ">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>02</h3>
-              <p>Requisição</p>
+        <a class="col-lg-4 " ui-sref="fornecedor.menu">
+          <div class="small-box bg-green"><br><br>
+            <div class="inner" align="center">
+              <h3>Fornecedor</h3><br>
             </div>
-            <div class="icon">
-              <i class="fa fa-file-word-o"></i>
-            </div>
-            <a href="#/estoque/requisicao/cadastro" class="small-box-footer">
-              Cadastros<i class="fa fa-arrow-circle-right"></i>
-            </a>
           </div>
-        </div>
+        </a>
         
-         <div class="col-lg-3 ">
-          <!-- small box -->
-          <div class="small-box bg-blue">
-            <div class="inner">
-              <h3>03</h3>
-              <p>Transferencia</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-exchange"></i>
-            </div>
-            <a href="#/estoque/transferencia/cadastro" class="small-box-footer">
-              Cadastros<i class="fa fa-arrow-circle-right"></i>
-            </a>
+         <a class="col-lg-4" ui-sref="produto.menu">
+          <div class="small-box bg-yellow"><br><br>
+            <div class="inner" align="center">
+              <h3>Produtos</h3><br>
+            </div>           
           </div>
-        </div>
+        </a>
      </div>  
+     <div class="row" >
+        <a class="col-lg-4" ui-sref="estoque.menu">
+          <div class="small-box bg-aqua"><br><br>
+            <div class="inner" align="center">
+              <h3>Estoque</h3><br>
+            </div>            
+          </div>
+        </a>
+       
+        <a class="col-lg-4 " ui-sref="requisicao.menu">
+          <div class="small-box bg-green"><br><br>
+            <div class="inner" align="center">
+              <h3>Requisição</h3><br>
+            </div>
+          </div>
+        </a>
         
-         <div ng-show="estoqueCtrl.qtdProdutoEstoqueBaixo" class="alert alert-warning alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h3><i class="icon fa fa-warning"></i> Alerta!</h3>
-                <h4><a href="#/estoque/informacoes/estoque/baixo">Existem {{estoqueCtrl.qtdProdutoEstoqueBaixo}} produtos  abaixo do estoque mínimo!!!</a></h4>
+         <a class="col-lg-4 " ui-sref="transferencia.menu">
+          <div class="small-box bg-blue"><br><br>
+            <div class="inner" align="center">
+              <h3>Transferencia</h3><br>
+            </div>
           </div>
-        <div ng-show="estoqueCtrl.qtdProdutoEstoqueAlto" class="alert alert-warning alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h3><i class="icon fa fa-warning"></i> Alerta!</h3>
-                <h4><a href="#/estoque/informacoes/estoque/alto">Existem {{estoqueCtrl.qtdProdutoEstoqueAlto}} produtos acima do estoque máximo!!!</a></h4>
-          </div>
+        </a>
+     </div>        
          
   </div>        

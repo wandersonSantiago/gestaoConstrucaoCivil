@@ -1,0 +1,51 @@
+<meta charset="UTF-8">
+<div class="row">
+	<div class="col-lg-6">
+		<div class="input-group">
+			<input type="text" class="form-control"
+				placeholder="Pesquisar por nome"
+				ng-model="texto" autofocus
+				ng-keyup="$event.keyCode == 13 && ctrl.buscarPorTexto(texto)">
+			<span class="input-group-btn">
+				<button class="btn btn-default" type="button"
+					ng-click="ctrl.paginaCorrente = 0; ctrl.buscarPorTexto(texto)">Ir!</button>
+			</span>
+		</div>
+		<!-- /input-group -->
+	</div>
+	<!-- /.col-lg-6 -->
+</div>
+<div ng-show="mensagemErro"
+	class="alert alert-warning alert-dismissible">
+	<h4>
+		<i class="icon fa fa-warning"></i>{{mensagemErro}}
+	</h4>
+</div>
+<br>
+		<div class="panel-body table-responsive">
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+					<th class="btn btn-primary btn-flat col-sm-2"><md-button  ><h5>Login</h5></md-button> </th>
+					<th class="btn btn-primary btn-flat col-sm-2"><md-button  ><h5>nome</h5></md-button> </th>
+					<th class="btn btn-primary btn-flat col-sm-2"><md-button  ><h5>email</h5></md-button> </th>
+					<th class="btn btn-primary btn-flat col-sm-1"><md-button  ><h5>Opções</h5></md-button></th>							
+					</tr>
+				</thead>
+				
+				<tbody	ng-repeat=" user in ctrl.usuarios | filter : buscar ">
+					<tr>
+						<td>{{ user.login }}</td>
+						<td>{{ user.nome}}</td>
+						<td>{{ user.email}}</td>
+						<td class="text-center"><a  title="Editar" ui-sref="usuario.editar({idUsuario : user.id})"><i class="glyphicon glyphicon-edit"></i></a>&nbsp;&nbsp;&nbsp; 						
+						<a title="Alterar Permissões" ui-sref="usuario.permissao({idUsuario : user.id})"><i class="fa  fa-lock"></i></a></td>					
+				
+				</tr>
+				</tbody>
+				<tfoot>
+				</tfoot>
+			</table>
+		</div>
+	
+

@@ -1,153 +1,82 @@
 <meta charset="UTF-8">
-      
-      <!-- =========================================================== -->
+<section class="content">
 
-      <!-- Small boxes (Stat box) -->
-      <div ng-if="ROLE_MODULO_ADMIN" class="row">
-        <div class="col-lg-3">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>01</h3>
-
-              <p>Módulo Administrador</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-user-secret"></i>
-            </div>
-            <a href="#/administrador/home" class="small-box-footer">
-              Menu<i class="fa fa-arrow-circle-right"></i>
-            </a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 ">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <h3>02</h3>
-
-              <p>Módulo Chamado</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-fax"></i>
-            </div>
-            <a href="#/chamado/home" class="small-box-footer">
-              Menu <i class="fa fa-arrow-circle-right"></i>
-            </a>
-          </div>
-        </div>
-        
-        <!-- ./col -->
-        <div class="col-lg-3 ">
-          <!-- small box -->
-          <div class="small-box bg-blue">
-            <div class="inner">
-              <h3>03</h3>
-
-              <p>Módulo gerenciamento</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-retweet"></i>
-            </div>
-            <a href="#/gerenciamento/home" class="small-box-footer">
-              Menu <i class="fa  fa-arrow-circle-right"></i>
-            </a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 ">
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
-              <h3>04</h3>
-
-              <p>Modulo Serviços</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-wrench"></i>
-            </div>
-            <a href="#/servicos/home" class="small-box-footer">
-              Menu<i class="fa  fa-arrow-circle-right"></i>
-            </a>
-          </div>
-        </div>
-        <!-- ./col -->
-      </div>
-      <!-- /.row -->
+	<div class="row">
+		<div class="col-lg-3 ">
+			<a href="" ui-sref="gerenciamento">
+				<div class="small-box bg-aqua">
+					<div class="inner" align="center">
+						<br>
+						<br>
+						<h3>Gerenciamento</h3>
+						<br>
+						<br>
+					</div>
+					<div class="icon">
+						<i class="fa fa-bank"></i>
+					</div>
+				</div>
+			</a>
+		</div>
 
 
-	<div ng-if="ROLE_MODULO_ADMIN"  class="row">
-        <div class="col-lg-3 ">
-          <!-- small box -->
-          <div class="small-box bg-purple">
-            <div class="inner">
-              <h3>05</h3>
+		<div class="col-lg-3 ">
+			<a href="" ui-sref="estoque.menu">
+				<div class="small-box bg-green">
+					<div class="inner" align="center">
 
-              <p>Módulo recursos humanos</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-group"></i>
-            </div>
-            <a href="#/recursos_humanos/home" class="small-box-footer">
-              Menu<i class="fa fa-arrow-circle-right"></i>
-            </a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 ">
-          <!-- small box -->
-          <div class="small-box bg-orange">
-            <div class="inner">
-              <h3>06</h3>
+						<br>
+						<br>
+						<h3>Estoque</h3>
+						<br>
+						<br>
 
-              <p>Módulo compras</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-opencart"></i>
-            </div>
-            <a href="#/compras/home" class="small-box-footer">
-              Menu <i class="fa fa-arrow-circle-right"></i>
-            </a>
-          </div>
-        </div>
-        
-        <!-- ./col -->
-        <div class="col-lg-3 ">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>07</h3>
+					</div>
+					<div class="icon">
+						<i class="ion ion-person-add"></i>
+					</div>
+				</div>
+			</a>
+		</div>
 
-              <p>Módulo almoxarifado</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-bar-chart"></i>
-            </div>
-            <a href="#/almoxarifado/home" class="small-box-footer">
-              Menu <i class="fa  fa-arrow-circle-right"></i>
-            </a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3>08</h3>
 
-              <p>Modulo cadastros</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-edit"></i>
-            </div>
-            <a href="#/cadastros/home" class="small-box-footer">
-              Menu<i class="fa fa-arrow-circle-right"></i>
-            </a>
-          </div>
-        </div>
-        <!-- ./col -->
-      </div>
-      <!-- /.row -->
+		<div class="col-lg-3">
+			<a href="" ui-sref="servicos">
+				<div class="small-box bg-yellow">
+					<div class="inner" align="center">
 
-     
+						<br>
+						<br>
+						<h3>Serviços</h3>
+						<br>
+						<br>
+
+					</div>
+					<div class="icon">
+						<i class="fa fa-credit-card"></i>
+					</div>
+				</div>
+			</a>
+		</div>
+
+
+		<div class="col-lg-3 ">
+			<a href="" ui-sref="compras">
+				<div class="small-box bg-red">
+					<div class="inner" align="center">
+
+						<br>
+						<br>
+						<h3>Compras</h3>
+						<br>
+						<br>
+
+					</div>
+					<div class="icon">
+						<i class="fa fa-line-chart"></i>
+					</div>
+				</div>
+			</a>
+		</div>
+	</div>
+</section>

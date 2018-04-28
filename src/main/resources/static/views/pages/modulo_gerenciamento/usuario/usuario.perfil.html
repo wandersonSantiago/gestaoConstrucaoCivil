@@ -1,0 +1,102 @@
+<meta charset="UTF-8">
+
+<form name="formFoto" ng-submit="ctrl.submit()" >
+	<div class="row">
+		<div class="col-sm-4"></div>
+		<div class="col-sm-4" flow-init="{singleFile:true}"
+			flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
+			class="ng-scope" flow-name="obj.flow">
+			<div ng-show="!$flow.files.length">
+			<div class="col-sm-3"></div>
+				<img ng-src="/rest/usuario/{{user.id}}/foto"
+				  class="img-circle" alt="User Image">
+			</div>
+			<div class="thumbnail " ng-show="$flow.files.length">
+				<img flow-img="$flow.files[0]">
+			</div>
+			<br>
+			<div>
+				<span class="btn btn-primary col-sm-12" ng-show="!$flow.files.length"
+					flow-btn="">Selecione uma imagem<input type="file"
+					style="visibility: hidden; position: absolute;">
+					</span> <br>
+					<span class="btn btn-info col-sm-12  " ng-show="$flow.files.length"
+					flow-btn="">Trocar<input type="file"
+					style="visibility: hidden; position: absolute;">
+					</span><br> 
+					<span class="btn btn-danger col-sm-12 " ng-show="$flow.files.length"
+					ng-click="$flow.cancel()"> Remover </span>
+					<br>
+					<input type="submit" id="submit" value="Salvar" ng-show="$flow.files.length"
+				class="btn btn-lg btn-primary btn-block btn-signin">
+					
+			</div>
+		</div>
+	</div>
+	</form >
+	<br> <br>
+	<br>
+	<form name="form">
+	<span class=" col-sm-12 btn btn-flat  btn-primary"><h5>Dados Usuário</h5></span>
+	<br><br>	<br><br>
+	 {{user.nome}} <br>
+	 {{user.email}} <br>
+	 {{user.empreendimento.descricao}}
+	
+	
+	<h3>Status</h3>
+	<div class="row">
+	<div class="col-sm-4">
+				<div class="input-group margin">
+					<select class="form-control select2"
+						ng-model="user.status"
+						ng-change="ctrl.alterarStatus(user)"
+						ng-options="status for status in ctrl.status track by status">
+						<option value=""></option>
+					</select> <span class="input-group-btn"> <a type="button"
+						class="btn btn-info btn-flat"><i>Status</i></a>
+					</span>
+				</div>
+			</div>
+			</div>
+	
+<h3>Senha</h3>
+<div class="row">
+
+		<div class="col-sm-3">
+			<div class="input-group margin">
+				<input type="password" class="form-control select2"
+					ng-model="senhaVerificacao"> <span class="input-group-btn">
+					<a type="button" class="btn btn-info btn-flat"><i>Senha Atual</i></a>
+				</span>
+			</div>
+		</div>	
+		<div class="col-sm-3">
+			<div class="input-group margin">
+				<input type="password" class="form-control select2" ng-minlength="6" name="senha"
+					ng-model="senha"> <span class="input-group-btn">
+					<a type="button" class="btn btn-info btn-flat"><i>Nova Senha</i></a>
+				</span>
+			</div>
+			<p ng-show="!form.senha.$valid"
+					class="alert alert-warning ">A senha deve conter no mínimo 6 digitos!!</p>
+		</div>
+		<div class="col-sm-3">
+			<div class="input-group margin">
+				<input type="password" class="form-control select2"
+					ng-model="senhaRepitida"> <span
+					class="input-group-btn"> <a type="button"
+					class="btn btn-info btn-flat"><i>Repetir Senha</i></a>
+				</span>
+			</div>
+		</div>
+		<div class="col-sm-3">
+		<div class="input-group margin">
+				<input type="button" ng-disabled="!senhaVerificacao || !senha || !senhaRepitida" ng-click="ctrl.alterarSenha(user , senhaVerificacao, senha, senhaRepitida  )" value="Alterar" class="btn btn-block btn-primary">
+		</div>
+		</div>
+		<br>
+	</div>
+	<br> <br>
+
+</form>

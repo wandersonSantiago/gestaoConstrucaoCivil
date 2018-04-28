@@ -1,0 +1,56 @@
+<meta charset="UTF-8">
+<div class="page-header">
+	<h3>
+		<strong>{{ctrl.empreendimento.descricao}}</strong>
+	</h3>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="nav-tabs-custom">
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="" data-toggle="tab"
+					data-target=".statistica">Statisticas</a></li>
+				<li><a href="" data-toggle="tab" data-target=".dados">Dados
+						Empreendimento</a></li>
+				<li><a href="" data-toggle="tab" data-target=".diario">Diario
+						de Obra</a></li>
+				<li><a href="" data-toggle="tab" data-target=".funcionario">Funcionarios</a></li>
+				<li><a href="" data-toggle="tab" data-target=".servicos">Serviços</a></li>
+				<li><a href="" data-toggle="tab" data-target=".estoque">Estoque</a></li>
+				<li><a href="" data-toggle="tab" data-target=".compras">Compras</a></li>
+				<li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+			</ul>
+			<div class="ui-view"></div>
+			<div class="tab-content">
+				<div class="tab-pane active statistica" id="statistica">
+					<div ng-include="'views/pages/modulo_gerenciamento/empreendimento/empreendimento.statistica.html'"></div>
+				</div>
+				<div class="tab-pane dados" id="tab_2">					
+					<div ng-include="'views/pages/modulo_gerenciamento/empreendimento/empreendimento.endereco.html'"></div>
+				</div>
+				<div class="tab-pane diario" id="tab_3">
+					<div ng-include="'views/pages/modulo_gerenciamento/empreendimento/empreendimento.diario.html'"></div>
+				</div>
+				<div class="tab-pane funcionario" id="tab_3">
+					<div ng-include="'views/pages/modulo_gerenciamento/empreendimento/empreendimento.funcionarios.html'"></div>
+				</div>
+				<div class="tab-pane servicos" id="tab_3">
+					<div ng-include="'views/pages/modulo_gerenciamento/empreendimento/empreendimento.servicos.html'"></div>
+				</div>
+				<div class="tab-pane estoque" id="tab_3">
+					<div ng-include="'views/pages/modulo_gerenciamento/empreendimento/empreendimento.estoque.html'"></div>
+				</div>
+				<div class="tab-pane compras" id="tab_3">
+					<div ng-include="'views/pages/modulo_gerenciamento/empreendimento/empreendimento.compras.html'"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+

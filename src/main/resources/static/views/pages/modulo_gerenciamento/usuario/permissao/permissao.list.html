@@ -1,0 +1,26 @@
+<meta charset="UTF-8">
+		<div class="panel-body table-responsive">
+		<input class="form-control" type="text" ng-model="buscar" placeholder="Buscar">
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+						<th>Rol</th>
+						<th>Descrição</th>
+						<th>Tipo</th>
+						<th>Opções</th>
+					</tr>
+				</thead>
+				<tbody	ng-repeat=" permissao in ctrl.permissoes | filter : buscar ">
+					<tr>
+						<td>{{ permissao.rol }}</td>
+						<td>{{ permissao.descricao }}</td>
+						<td>{{ permissao.tipoModulo}}</td>
+						<td><a ui-sref="permissao.editar({idPermissao : permissao.id})"><i class="glyphicon glyphicon-edit"></i></a> 						
+				</tr>
+				</tbody>
+				<tfoot>
+				</tfoot>
+			</table>
+		</div>
+	
+

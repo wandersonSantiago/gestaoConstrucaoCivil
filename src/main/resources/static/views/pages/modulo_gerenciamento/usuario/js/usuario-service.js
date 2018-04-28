@@ -1,80 +1,97 @@
-app.factory('usuarioService', function($rootScope, toastr, $http,$q){
+app.factory('UsuarioService', function($rootScope, toastr, $http,$q){
 	
+	var url = '/rest/usuario';
 	
 	return{
 		
-		salva: function(usuario){
-			return $http.post('/rest/usuario/salva', usuario)
-			.then(function(response){
-				toastr.info("Salvo com sucesso!!!");return response.data;
-			},function(errResponse){
-				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
-					return $q.reject(errResponse);
-			});
-		},
-		lista: function(){
-			return $http.get('rest/usuario/lista')
+		salvar: function(usuario){
+			return $http.post(url , usuario)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
-					return $q.reject(errResponse);
+				return $q.reject(errResponse);
 			});
 		},
-		perfil: function(){
-			return $http.get('rest/usuario/perfil')
+		listar: function(){
+			return $http.get(url)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
-					return $q.reject(errResponse);
+				return $q.reject(errResponse);
+			});
+		},
+		status: function(){
+			return $http.get(url + '/status')
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				return $q.reject(errResponse);
 			});
 		},
 		
-		buscaPorId: function(param){
-			return $http.get('rest/usuario/buscaPorId/'+param)
+		buscarPorId: function(param){
+			return $http.get(url + '/'+param)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
-					return $q.reject(errResponse);
+				return $q.reject(errResponse);
 			});
 		},
-		
-		buscaPermissaoPorIdUsuario: function(param){
-			return $http.get('/rest/permissao/permissaoUsuario/buscaPorUsuario/'+param)
+		alterar: function(parametroUsuario){
+			return $http.put(url , parametroUsuario)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
-					return $q.reject(errResponse);
+				return $q.reject(errResponse);
 			});
 		},
 		
 		existeLogin: function(login){
-			return $http.get('rest/usuario/existeLogin/'+login)
+			return $http.get(url + '/existeLogin/'+login)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
-					return $q.reject(errResponse);
+				return $q.reject(errResponse);
 			});
 		},
-		altera: function(usuario){
-			return $http.put('rest/usuario/altera', usuario)
-			.then(function(response){
-				toastr.info("Alterado com sucesso!!!");return response.data;
+	
+		salvarFoto: function(form){
+			return $http.post(url + '/foto', form, {
+	            transformRequest: angular.identity,
+	            headers: {'Content-Type': undefined}
+	        }).then(function(response){
+				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
-					return $q.reject(errResponse);
+			return $q.reject(errResponse);
 			});
 		},
-		user: function(){
-			return $http.get('/rest/usuario/usuarios')
+		alterarSenha: function(idUsuario, senha, novaSenha){
+			var config = {params: {idUsuario , senha , novaSenha }};
+			return $http.put(url + '/'+idUsuario+'/senha/'+senha+'/nova-senha/'+novaSenha)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-					return $q.reject(errResponse);
+				return $q.reject(errResponse);
+
+			});
+		},
+		alterarEmpreendimento: function(idEmpreendimento){
+			return $http.put(url + '/' + idEmpreendimento)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				return $q.reject(errResponse);
+
+			});
+		},
+		
+		buscarPorTexto: function(texto, pagina){
+			var config = {params: {page: pagina, descricao:texto}};
+			return $http.get(url + '/descricao', config)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				return $q.reject(errResponse);
 			});
 		},
 	}

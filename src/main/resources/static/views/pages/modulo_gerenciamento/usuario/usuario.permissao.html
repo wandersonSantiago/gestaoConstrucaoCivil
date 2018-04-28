@@ -1,0 +1,142 @@
+<meta charset="UTF-8">
+
+<div class="container col-sm-12 ">
+	<form role="form-vertical" ng-submit="ctrl.submit()">
+
+
+		<div class="row">
+			<div class="col-xs-12">
+				<h3>Dados Pessoais do Usuario</h3>
+			</div>
+			<div class="col-sm-2">
+				<div class="pull-left image">
+				<img ng-src="/rest/usuario/{{ctrl.usuario.id}}/foto"
+				  class="img-circle" alt="User Image">
+			</div>
+			</div>
+			<div class="col-xs-4">
+				<div class="row">
+					Nome: {{ctrl.usuario.nome}}<br>
+					<br> Email Usuario: {{ctrl.usuario.email}}<br>
+					<br> Login: {{ctrl.usuario.login}}<br>
+					<br> Data de Cadastro: {{ctrl.usuario.dataCadastro | date
+					:'dd/MM/yyyy'}}<br>
+					<br> Empreendimento: {{ctrl.usuario.empreendimento.descricao}}
+				</div>
+				<br>
+			</div>
+		</div>
+
+
+		<br> <br> <br> <br>
+			<div class="row">
+				<h3>
+					<span class=" col-sm-12 form-control label label-primary">GERENCIAMENTO 
+						</span>
+				</h3>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-xs-3 col-sm-4"
+					ng-repeat="permissao in ctrl.permissoes">
+					<label class="checkbox-inline" ng-show="permissao.tipoModulo == 'GERENCIAMENTO'"><input type="checkbox" 
+						data-checklist-model="ctrl.usuario.permissoes"
+						data-checklist-value="permissao">{{permissao.rol}}</label>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<h3>
+					<span class=" col-sm-12 form-control label label-primary">ESTOQUE 
+						</span>
+				</h3>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-xs-4 col-sm-3"
+					ng-repeat="permissao in ctrl.permissoes">
+					<label class="checkbox-inline" ng-show="permissao.tipoModulo == 'ESTOQUE'"><input type="checkbox" 
+						data-checklist-model="ctrl.usuario.permissoes"
+						data-checklist-value="permissao">{{permissao.descricao}}</label>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<h3>
+					<span class=" col-sm-12 form-control label label-primary">SERVICOS 
+						</span>
+				</h3>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-xs-4 col-sm-3"
+					ng-repeat="permissao in ctrl.permissoes">
+					<label class="checkbox-inline" ng-show="permissao.tipoModulo == 'SERVICOS'"><input type="checkbox" 
+						data-checklist-model="ctrl.usuario.permissoes"
+						data-checklist-value="permissao">{{permissao.descricao}}</label>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<h3>
+					<span class=" col-sm-12 form-control label label-primary"> COMPRAS
+						</span>
+				</h3>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-xs-4 col-sm-3"
+					ng-repeat="permissao in ctrl.permissoes">
+					<label class="checkbox-inline" ng-show="permissao.tipoModulo == 'COMPRAS'"><input type="checkbox" 
+						data-checklist-model="ctrl.usuario.permissoes"
+						data-checklist-value="permissao">{{permissao.descricao}}</label>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<h3>
+					<span class=" col-sm-12 form-control label label-primary">Fincanças 
+						</span>
+				</h3>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-xs-4 col-sm-3"
+					ng-repeat="permissao in ctrl.permissoes">
+					<label class="checkbox-inline" ng-show="permissao.tipoModulo == 'FINANCAS'"><input type="checkbox" 
+						data-checklist-model="ctrl.usuario.permissoes"
+						data-checklist-value="permissao">{{permissao.descricao}}</label>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<h3>
+					<span class=" col-sm-12 form-control label label-primary">Recursos Humanos 
+						</span>
+				</h3>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-xs-4 col-sm-3"
+					ng-repeat="permissao in ctrl.permissoes">
+					<label class="checkbox-inline" ng-show="permissao.tipoModulo == 'RECURSOS_HUMANOS'"><input type="checkbox" 
+						data-checklist-model="ctrl.usuario.permissoes"
+						data-checklist-value="permissao">{{permissao.descricao}}</label>
+				</div>
+			</div>
+			<br>
+			<br> <br>
+					
+					<div class="row ">
+					<div class="col-sm-4"></div>
+							<div class="col-sm-3">
+								<button type="submit" name="submit" class="btn btn-lg btn-primary btn-block btn-signin">Cadastrar</button>
+							
+							</div>
+						</div>
+						
+			
+	</form>
+
+</div>
+<div class="tablecontainer"></div>
