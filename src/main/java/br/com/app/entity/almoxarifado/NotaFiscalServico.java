@@ -12,7 +12,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@SequenceGenerator(name = "nota_fiscal_servico_id_seq", sequenceName = "nota_fiscal_servico_id_seq",schema="almoxarifado")
+@SequenceGenerator(name = "nota_fiscal_servico_id_seq", sequenceName = "nota_fiscal_servico_id_seq",allocationSize = 1,schema="almoxarifado")
 @Table(name = "nota_fiscal_servico", schema="almoxarifado")
 public class NotaFiscalServico implements Serializable {
 

@@ -13,7 +13,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@SequenceGenerator(name = "empresa_contratante_id_seq", sequenceName = "empresa_contratante_id_seq", schema = "communs")
+@SequenceGenerator(name = "empresa_contratante_id_seq", sequenceName = "empresa_contratante_id_seq",allocationSize = 1, schema = "communs")
 @Table(name = "empresa_contratante" , schema = "communs")
 public class EmpresaContratante implements Serializable{
 

@@ -11,7 +11,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@SequenceGenerator(name = "endereco_id_seq", sequenceName = "endereco_id_seq",schema="communs")
+@SequenceGenerator(name = "endereco_id_seq", sequenceName = "endereco_id_seq",allocationSize = 1,schema="communs")
 @Table(name = "endereco" , schema = "communs")
 public class Endereco implements Serializable  {
 

@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 import br.com.app.enuns.TipoCategoriaEnum;
 
 @Entity
-@SequenceGenerator(name = "categoria_id_seq", sequenceName = "categoria_id_seq", schema = "communs")
+@SequenceGenerator(name = "categoria_id_seq", sequenceName = "categoria_id_seq",allocationSize = 1, schema = "communs")
 @Table(name = "categoria", schema = "communs")
 public class Categoria implements Serializable {
 

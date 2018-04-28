@@ -18,7 +18,7 @@ import javax.persistence.Table;
 import br.com.app.enuns.UfEnum;
 
 @Entity
-@SequenceGenerator(name = "dado_empresa_id_seq", sequenceName = "dado_empresa_id_seq", schema = "communs")
+@SequenceGenerator(name = "dado_empresa_id_seq", sequenceName = "dado_empresa_id_seq",allocationSize = 1, schema = "communs")
 @Table(name = "dado_empresa", schema = "communs")
 public class DadoEmpresa implements Serializable {
 

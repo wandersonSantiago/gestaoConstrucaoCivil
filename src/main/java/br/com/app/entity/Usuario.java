@@ -28,7 +28,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@SequenceGenerator(name = "usuario_id_seq", sequenceName = "usuario_id_seq",schema="communs")
+@SequenceGenerator(name = "usuario_id_seq", sequenceName = "usuario_id_seq",allocationSize = 1,schema="communs")
 @Table(name = "usuario" , schema = "communs")
 public class Usuario implements Serializable{
 

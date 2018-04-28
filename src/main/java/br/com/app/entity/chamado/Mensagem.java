@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import br.com.app.entity.Usuario;
 
 @Entity
-@SequenceGenerator(name = "mensagem_id_seq", sequenceName = "mensagem_id_seq", schema = "chamado")
+@SequenceGenerator(name = "mensagem_id_seq", sequenceName = "mensagem_id_seq",allocationSize = 1, schema = "chamado")
 @Table(name = "mensagem", schema = "chamado")
 public class Mensagem implements Serializable {
 

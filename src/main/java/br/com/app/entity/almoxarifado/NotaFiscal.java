@@ -24,7 +24,7 @@ import br.com.app.enuns.TipoNotaEnum;
 import br.com.app.pojo.SessionUsuario;
 
 @Entity
-@SequenceGenerator(name = "nota_fiscal_id_seq", sequenceName = "nota_fiscal_id_seq", schema = "almoxarifado")
+@SequenceGenerator(name = "nota_fiscal_id_seq", sequenceName = "nota_fiscal_id_seq", allocationSize = 1,schema = "almoxarifado")
 @Table(name = "nota_fiscal", schema = "almoxarifado")
 public class NotaFiscal implements Serializable {
 

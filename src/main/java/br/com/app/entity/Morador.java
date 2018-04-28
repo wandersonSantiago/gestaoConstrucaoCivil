@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
-@SequenceGenerator(name = "morador_id_seq", sequenceName = "morador_id_seq", schema = "communs")
+@SequenceGenerator(name = "morador_id_seq", sequenceName = "morador_id_seq", allocationSize = 1,schema = "communs")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "morador", schema = "communs")
 public class Morador implements Serializable {

@@ -28,7 +28,7 @@ import br.com.app.enuns.chamado.StatusChamado;
 
 
 @Entity
-@SequenceGenerator(name = "chamado_id_seq", sequenceName = "chamado_id_seq", schema="chamado")
+@SequenceGenerator(name = "chamado_id_seq", sequenceName = "chamado_id_seq", allocationSize = 1,schema="chamado")
 @Table(name="chamado", schema = "chamado")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Chamado implements Serializable {

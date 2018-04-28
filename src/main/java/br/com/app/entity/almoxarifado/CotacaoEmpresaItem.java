@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import br.com.app.enuns.CotacaoEmpresaItemStatus;
 
 @Entity
-@SequenceGenerator(name = "cotacao_empresa_item_id_seq", sequenceName = "cotacao_empresa_item_id_seq", schema = "almoxarifado")
+@SequenceGenerator(name = "cotacao_empresa_item_id_seq", sequenceName = "cotacao_empresa_item_id_seq", allocationSize = 1,schema = "almoxarifado")
 @Table(name = "cotacao_empresa_item", schema = "almoxarifado")
 public class CotacaoEmpresaItem implements Serializable {
 

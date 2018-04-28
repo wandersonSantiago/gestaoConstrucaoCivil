@@ -20,7 +20,7 @@ import br.com.app.entity.Empreendimento;
 import br.com.app.pojo.InformacaoEntradaProduto;
 
 @Entity
-@SequenceGenerator(name = "estoque_empreendimento_id_seq", sequenceName = "estoque_empreendimento_id_seq", schema = "almoxarifado")
+@SequenceGenerator(name = "estoque_empreendimento_id_seq", sequenceName = "estoque_empreendimento_id_seq",allocationSize = 1, schema = "almoxarifado")
 @NamedEntityGraph(name = "EstoqueEmpreendimento.detail", attributeNodes = { @NamedAttributeNode("produto"),
 		@NamedAttributeNode("empreendimento") })
 @Table(name = "estoque_empreendimento", schema = "almoxarifado")

@@ -11,7 +11,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@SequenceGenerator(name = "area_produto_id_seq", sequenceName = "area_produto_id_seq",schema="communs")
+@SequenceGenerator(name = "area_produto_id_seq", sequenceName = "area_produto_id_seq",allocationSize = 1,schema="communs")
 @Table(name = "area_produto", schema = "communs")
 public class AreaProduto  implements Serializable {
 	

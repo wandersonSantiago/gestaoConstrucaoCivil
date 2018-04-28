@@ -23,7 +23,7 @@ import javax.persistence.TemporalType;
 import br.com.app.enuns.EstadoCivilEnum;
 
 @Entity
-@SequenceGenerator(name = "pessoa_id_seq", sequenceName = "pessoa_id_seq",schema="communs")
+@SequenceGenerator(name = "pessoa_id_seq", sequenceName = "pessoa_id_seq",allocationSize = 1,schema="communs")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "pessoa" , schema = "communs")
 public abstract class Pessoa implements Serializable{

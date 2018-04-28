@@ -16,7 +16,7 @@ import javax.persistence.SequenceGenerator;
 import br.com.app.entity.almoxarifado.interfaces.IItem;
 
 @Entity
-@SequenceGenerator(name = "item_id_seq", sequenceName = "item_id_seq", schema = "almoxarifado")
+@SequenceGenerator(name = "item_id_seq", sequenceName = "item_id_seq",allocationSize = 1, schema = "almoxarifado")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Item implements Serializable, IItem {
 

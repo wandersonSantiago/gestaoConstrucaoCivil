@@ -27,7 +27,7 @@ import br.com.app.enuns.StatusCotacao;
 import br.com.app.pojo.SessionUsuario;
 
 @Entity
-@SequenceGenerator(name = "cotacao_id_seq", sequenceName = "cotacao_id_seq",schema="almoxarifado")
+@SequenceGenerator(name = "cotacao_id_seq", sequenceName = "cotacao_id_seq",allocationSize = 1,schema="almoxarifado")
 @Table(name = "cotacao", schema="almoxarifado")
 public class Cotacao implements Serializable{
 

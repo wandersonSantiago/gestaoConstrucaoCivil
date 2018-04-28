@@ -23,7 +23,7 @@ import br.com.app.entity.Usuario;
 
 @Entity
 @SequenceGenerator(name = "pedido_compra_id_seq",
-sequenceName = "pedido_compra_id_seq",schema="almoxarifado")
+sequenceName = "pedido_compra_id_seq",allocationSize = 1,schema="almoxarifado")
 @Table(name = "pedido_compra" , schema="almoxarifado")
 public class PedidoCompra implements Serializable{
 

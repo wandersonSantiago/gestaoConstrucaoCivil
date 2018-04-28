@@ -10,7 +10,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@SequenceGenerator(name = "aluguel_equipamento_id_seq", sequenceName = "aluguel_equipamento_id_seq",schema="communs")
+@SequenceGenerator(name = "aluguel_equipamento_id_seq", sequenceName = "aluguel_equipamento_id_seq",allocationSize = 1,schema="communs")
 @Table(name = "aluguel_equipamento", schema = "communs")
 public class AluguelEquipamento implements Serializable{
 

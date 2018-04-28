@@ -20,7 +20,7 @@ import javax.persistence.Transient;
 import br.com.app.enuns.CotacaoEmpresaItemStatus;
 
 @Entity
-@SequenceGenerator(name = "cotacao_empresa_id_seq", sequenceName = "cotacao_empresa_id_seq", schema = "almoxarifado")
+@SequenceGenerator(name = "cotacao_empresa_id_seq", sequenceName = "cotacao_empresa_id_seq", allocationSize = 1,schema = "almoxarifado")
 @Table(name = "cotacao_empresa", schema = "almoxarifado")
 public class CotacaoEmpresa implements Serializable {
 

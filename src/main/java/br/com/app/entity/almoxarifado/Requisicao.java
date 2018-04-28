@@ -21,7 +21,7 @@ import br.com.app.entity.Empreendimento;
 import br.com.app.enuns.StatusRequisicao;
 
 @Entity
-@SequenceGenerator(name = "requisicao_id_seq", sequenceName = "requisicao_id_seq", schema = "almoxarifado")
+@SequenceGenerator(name = "requisicao_id_seq", sequenceName = "requisicao_id_seq",allocationSize = 1, schema = "almoxarifado")
 @Table(name = "requisicao", schema = "almoxarifado")
 public class Requisicao implements Serializable {
 

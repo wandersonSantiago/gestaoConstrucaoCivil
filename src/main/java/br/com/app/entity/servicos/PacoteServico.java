@@ -16,7 +16,7 @@ import br.com.app.entity.Categoria;
 import br.com.app.util.gerador.codigo.GereCodigoPacoteServico;
 
 @Entity
-@SequenceGenerator(name = "pacote_servico_id_seq", sequenceName = "pacote_servico_id_seq", schema = "servicos")
+@SequenceGenerator(name = "pacote_servico_id_seq", sequenceName = "pacote_servico_id_seq", allocationSize = 1,schema = "servicos")
 @Table(name = "pacote_servico", schema = "servicos")
 public class PacoteServico implements Serializable {
 

@@ -10,7 +10,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@SequenceGenerator(name = "cargo_id_seq", sequenceName = "cargo_id_seq",schema="communs")
+@SequenceGenerator(name = "cargo_id_seq", sequenceName = "cargo_id_seq",allocationSize = 1,schema="communs")
 @Table(name = "cargo", schema = "communs")
 public class Cargo implements Serializable {
 

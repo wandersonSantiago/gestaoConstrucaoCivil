@@ -21,7 +21,7 @@ import br.com.app.entity.Empreendimento;
 import br.com.app.entity.Usuario;
 
 @Entity
-@SequenceGenerator(name = "servico_empresa_id_seq", sequenceName = "servico_empresa_id_seq", schema = "servicos")
+@SequenceGenerator(name = "servico_empresa_id_seq", sequenceName = "servico_empresa_id_seq",allocationSize = 1, schema = "servicos")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "servico_empresa", schema = "servicos")
 public class ServicoEmpresa implements Serializable {

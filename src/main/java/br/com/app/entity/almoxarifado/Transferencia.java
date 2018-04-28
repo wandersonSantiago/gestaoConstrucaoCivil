@@ -24,7 +24,7 @@ import br.com.app.enuns.TipoNotaEnum;
 import br.com.app.util.gerador.codigo.GeraNumeroNota;
 
 @Entity
-@SequenceGenerator(name = "transferencia_id_seq", sequenceName = "transferencia_id_seq",schema = "almoxarifado")
+@SequenceGenerator(name = "transferencia_id_seq", sequenceName = "transferencia_id_seq",allocationSize = 1,schema = "almoxarifado")
 @Table(name = "transferencia", schema = "almoxarifado")
 public class Transferencia implements Serializable, EntradaOuBaixa {
 

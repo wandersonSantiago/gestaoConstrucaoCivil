@@ -30,7 +30,7 @@ import br.com.app.entity.Categoria;
 import br.com.app.enuns.UnidadeMedidaEnum;
 
 @Entity
-@SequenceGenerator(name = "produto_id_seq", sequenceName = "produto_id_seq", schema = "almoxarifado")
+@SequenceGenerator(name = "produto_id_seq", sequenceName = "produto_id_seq", allocationSize = 1,schema = "almoxarifado")
 @NamedEntityGraph(name = "Produto.detail", attributeNodes = { @NamedAttributeNode("categoria"),
 		@NamedAttributeNode("fabricante"), @NamedAttributeNode("tipoProduto") })
 

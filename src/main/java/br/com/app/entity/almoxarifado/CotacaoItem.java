@@ -14,7 +14,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@SequenceGenerator(name = "item_cotacao_id_seq", sequenceName = "item_cotacao_id_seq", schema = "almoxarifado")
+@SequenceGenerator(name = "item_cotacao_id_seq", sequenceName = "item_cotacao_id_seq",allocationSize = 1, schema = "almoxarifado")
 @Table(name = "cotacao_item", schema = "almoxarifado")
 public class CotacaoItem implements Serializable {
 

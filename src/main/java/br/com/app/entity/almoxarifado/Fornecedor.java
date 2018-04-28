@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import br.com.app.entity.DadoEmpresa;
 
 @Entity
-@SequenceGenerator(name = "fornecedor_id_seq", sequenceName = "fornecedor_id_seq", schema = "almoxarifado")
+@SequenceGenerator(name = "fornecedor_id_seq", sequenceName = "fornecedor_id_seq", allocationSize = 1,schema = "almoxarifado")
 @Table(name = "fornecedor", schema = "almoxarifado")
 public class Fornecedor implements Serializable {
 
