@@ -1,7 +1,7 @@
 <meta charset="UTF-8">
 
 <form role="form-vertical" ng-submit="ctrl.salva()">
-	<div class="row">
+	<div class="row" ng-if="ctrl.categoria.id">
 		<div class="col-sm-3">		
 			Status <br>
 			<input type="checkbox" ng-model="ctrl.categoria.ativo">{{ctrl.categoria.ativo ? 'Ativado' : 'Desativado'}}

@@ -34,43 +34,43 @@
 			
 		<li class="treeview">
           <a href="">
-            <i class="fa fa-share"></i> <span>Gerenciamento</span>
+            <img ng-src="public/img/icones/config.png"> <span>Gerenciamento</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
              <li>
-              <a href=""><i class="fa fa-circle-o"></i>Usuario
+              <a href=""><img ng-src="public/img/icones/user.png"> Usuario
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="" ui-sref="usuario.cadastrar" ><i class="fa fa-circle-o"></i>Cadastrar</a></li>
-                <li><a href="" ui-sref="usuario.listar"><i class="fa fa-circle-o"></i>Consultar</a></li>
+                <li><a href="" ui-sref="usuario.cadastrar" ><img ng-src="public/img/icones/plus.png">Cadastrar</a></li>
+                <li><a href="" ui-sref="usuario.listar"><img ng-src="public/img/icones/list.png">Consultar</a></li>
                 <li ng-if="user.root">
-                  <a href=""><i class="fa fa-circle-o"></i>Permissões
+                  <a href=""><img ng-src="public/img/icones/lock.png">Permissões
                     <span class="pull-right-container">
                       <i class="fa fa-angle-left pull-right"></i>
                     </span>
                   </a>
                   <ul class="treeview-menu">
-                    <li><a href="" ui-sref="permissao.cadastrar"><i class="fa fa-circle-o"></i>Cadastrar</a></li>
-                    <li><a href="" ui-sref="permissao.listar"><i class="fa fa-circle-o"></i>Consultar</a></li>
+                    <li><a href="" ui-sref="permissao.cadastrar"><img ng-src="public/img/icones/plus.png">Cadastrar</a></li>
+                    <li><a href="" ui-sref="permissao.listar"><img ng-src="public/img/icones/list.png">Consultar</a></li>
                   </ul>
                 </li>
               </ul>
             </li>
             <li>
-              <a href=""><i class="fa fa-circle-o"></i>Empreendimento
+              <a href=""><img ng-src="public/img/icones/building.png">Empreendimento
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
               </a>
               <ul class="treeview-menu">
-                <li ng-if="!user.empreendimento.matriz || user.root"><a href="" ui-sref="empreendimento.cadastrar"><i class="fa fa-circle-o"></i>Cadastrar</a></li>
-                <li ng-if="!user.empreendimento.matriz || user.root"><a href="" ui-sref="empreendimento.consultar"><i class="fa fa-circle-o"></i>Consultar</a></li>
+                <li ng-if="!user.empreendimento.matriz || user.root"><a href="" ui-sref="empreendimento.cadastrar"><img ng-src="public/img/icones/plus.png">Cadastrar</a></li>
+                <li ng-if="!user.empreendimento.matriz || user.root"><a href="" ui-sref="empreendimento.consultar"><img ng-src="public/img/icones/list.png">Consultar</a></li>
                 <li ng-if="user.empreendimento.matriz">
                   <a href=""><i class="fa fa-circle-o"></i>Estrutura
                     <span class="pull-right-container">
@@ -78,8 +78,8 @@
                     </span>
                   </a>
                   <ul class="treeview-menu">
-                    <li><a href="" ui-sref="estrutura.cadastrar"><i class="fa fa-circle-o"></i>Cadastrar</a></li>
-                    <li><a href="" ui-sref="estrutura.consultar"><i class="fa fa-circle-o"></i>Consultar</a></li>
+                    <li><a href="" ui-sref="estrutura.cadastrar"><img ng-src="public/img/icones/plus.png">Cadastrar</a></li>
+                    <li><a href="" ui-sref="estrutura.consultar"><img ng-src="public/img/icones/list.png">Consultar</a></li>
                   </ul>
                 </li>
               </ul>
@@ -88,55 +88,66 @@
         </li>
         <li class="treeview">
           <a href="">
-            <i class="fa fa-share"></i> <span>Estoque</span>
+            <img ng-src="public/img/icones/stock.png"> <span>Estoque</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
              <li>
-              <a href=""><i class="fa fa-circle-o"></i>Produto
+              <a href=""><img ng-src="public/img/icones/product.png">Produto
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="" ui-sref="produto.cadastrar" ><i class="fa fa-circle-o"></i>Cadastrar</a></li>
-                <li><a href="" ui-sref="produto.consultar"><i class="fa fa-circle-o"></i>Consultar</a></li>
-                <li ng-if="user.root">
+                <li><a href="" ui-sref="produto.cadastrar" ><img ng-src="public/img/icones/plus.png">Cadastrar</a></li>
+                <li><a href="" ui-sref="produto.consultar"><img ng-src="public/img/icones/list.png">Consultar</a></li>
+                <li>
                   <a href=""><i class="fa fa-circle-o"></i>Categoria
                     <span class="pull-right-container">
                       <i class="fa fa-angle-left pull-right"></i>
                     </span>
                   </a>
                   <ul class="treeview-menu">
-                    <li><a href="" ui-sref="categoria.cadastrar"><i class="fa fa-circle-o"></i>Cadastrar</a></li>
-                    <li><a href="" ui-sref="categoria.consultar"><i class="fa fa-circle-o"></i>Consultar</a></li>
+                    <li><a href="" ui-sref="categoria.cadastrar"><img ng-src="public/img/icones/plus.png">Cadastrar</a></li>
+                    <li><a href="" ui-sref="categoria.consultar"><img ng-src="public/img/icones/list.png">Consultar</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <a href=""><i class="fa fa-circle-o"></i>Sub-Categoria
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                  <ul class="treeview-menu">
+                    <li><a href="" ui-sref="sub-categoria.cadastrar"><img ng-src="public/img/icones/plus.png">Cadastrar</a></li>
+                    <li><a href="" ui-sref="sub-categoria.consultar"><img ng-src="public/img/icones/list.png">Consultar</a></li>
                   </ul>
                 </li>
               </ul>
             </li>
             <li>
-              <a href=""><i class="fa fa-circle-o"></i>Fornecedor
+              <a href=""><img ng-src="public/img/icones/supplier.png">Fornecedor
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
               </a>
               <ul class="treeview-menu">
-                <li ><a href="" ui-sref="fornecedor.cadastrar"><i class="fa fa-circle-o"></i>Cadastrar</a></li>
-                <li ><a href="" ui-sref="fornecedor.consultar"><i class="fa fa-circle-o"></i>Consultar</a></li>
+                <li ><a href="" ui-sref="fornecedor.cadastrar"><img ng-src="public/img/icones/plus.png">Cadastrar</a></li>
+                <li ><a href="" ui-sref="fornecedor.consultar"><img ng-src="public/img/icones/list.png">Consultar</a></li>
                
               </ul>
             </li>
             <li>
-              <a href=""><i class="fa fa-circle-o"></i>Fabricante
+              <a href=""><img ng-src="public/img/icones/manufactoring.png">Fabricante
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
               </a>
               <ul class="treeview-menu">
-                <li ><a href="" ui-sref="fabricante.cadastrar"><i class="fa fa-circle-o"></i>Cadastrar</a></li>
-                <li ><a href="" ui-sref="fabricante.consultar"><i class="fa fa-circle-o"></i>Consultar</a></li>
+                <li ><a href="" ui-sref="fabricante.cadastrar"><img ng-src="public/img/icones/plus.png">Cadastrar</a></li>
+                <li ><a href="" ui-sref="fabricante.consultar"><img ng-src="public/img/icones/list.png">Consultar</a></li>
                 
               </ul>
             </li>

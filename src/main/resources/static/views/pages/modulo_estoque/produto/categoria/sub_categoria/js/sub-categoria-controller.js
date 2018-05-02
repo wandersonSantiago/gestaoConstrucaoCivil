@@ -1,16 +1,16 @@
-app.controller("CategoriaCadastarController", CategoriaCadastarController);
-app.controller("CategoriaEditarController", CategoriaEditarController);
-app.controller("CategoriaListarController", CategoriaListarController);
+app.controller("SubCategoriaCadastarController", SubCategoriaCadastarController);
+app.controller("SubCategoriaEditarController", SubCategoriaEditarController);
+app.controller("SubCategoriaListarController", SubCategoriaListarController);
 
-function CategoriaCadastarController(Auth, CategoriaService, toastr, $rootScope, $scope) {
+function SubCategoriaCadastarController(Auth, SubCategoriaService, toastr, $rootScope, $scope) {
 
 	var self = this;
 
 	self.submit = submit;
 
 	function submit(categoria) {		
-			CategoriaService.salvar(self.categoria).then(function(response) {
-				toastr.success("Categoria, cadastrado")
+			SubCategoriaService.salvar(self.categoria).then(function(response) {
+				toastr.success("SubCategoria, cadastrado")
 				self.categoria = null;
 			}, function(errResponse) {
 				sweetAlert({
@@ -26,17 +26,17 @@ function CategoriaCadastarController(Auth, CategoriaService, toastr, $rootScope,
 
 }
 
-function CategoriaEditarController(CategoriaService, Auth,	$stateParams, $state, toastr, $rootScope, $scope) {
+function SubCategoriaEditarController(SubCategoriaService, Auth,	$stateParams, $state, toastr, $rootScope, $scope) {
 
 	var self = this;
 
-	var idCategoria = $stateParams.idCategoria;
+	var idSubCategoria = $stateParams.idSubCategoria;
 	self.submit = submit;
 	self.buscarPorId = buscarPorId;
 
 	function submit(categoria) {
-			CategoriaService.alterar(self.categoria).then(function(response) {
-				toastr.info("Categoria Salvo!!!")
+			SubCategoriaService.alterar(self.categoria).then(function(response) {
+				toastr.info("SubCategoria Salvo!!!")
 				self.categoria = null;
 			}, function(errResponse) {
 				sweetAlert({
@@ -54,19 +54,19 @@ function CategoriaEditarController(CategoriaService, Auth,	$stateParams, $state,
 	function buscarPorId(id) {
 		if (!id)
 			return;
-		CategoriaService.buscarPorId(id).then(function(p) {
+		SubCategoriaService.buscarPorId(id).then(function(p) {
 			self.categoria = p;
 		}, function(errResponse) {
 		});
 	}
 	;
 
-	if (idCategoria) {
-		self.buscarPorId(idCategoria);
+	if (idSubCategoria) {
+		self.buscarPorId(idSubCategoria);
 	}
 }
 
-function CategoriaListarController(blockUI, $stateParams, $state, CategoriaService,
+function SubCategoriaListarController(blockUI, $stateParams, $state, SubCategoriaService,
 		toastr, $rootScope, $scope) {
 
 	var self = this;
@@ -80,7 +80,7 @@ function CategoriaListarController(blockUI, $stateParams, $state, CategoriaServi
 
 	function listar() {
 		blockUI.start();
-		CategoriaService.buscarPorTexto("", self.paginaCorrente).then(
+		SubCategoriaService.buscarPorTexto("", self.paginaCorrente).then(
 				function(e) {
 					$scope.mensagemErro = null;
 					self.categorias = e.content;
@@ -100,7 +100,7 @@ function CategoriaListarController(blockUI, $stateParams, $state, CategoriaServi
 			return;
 		}
 		blockUI.start();
-		CategoriaService.buscarPorTexto(texto, self.paginaCorrente).then(
+		SubCategoriaService.buscarPorTexto(texto, self.paginaCorrente).then(
 				function(e) {
 					$scope.mensagemErro = null;
 					self.categorias = e.content;

@@ -1,4 +1,4 @@
-app.factory('CategoriaService', function($rootScope, toastr, $http,$q){
+app.factory('SubCategoriaService', function($rootScope, toastr, $http,$q){
 	
 	
 	return{

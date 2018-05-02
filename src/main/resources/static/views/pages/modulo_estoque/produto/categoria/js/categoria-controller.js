@@ -2,17 +2,27 @@ app.controller("CategoriaCadastarController", CategoriaCadastarController);
 app.controller("CategoriaEditarController", CategoriaEditarController);
 app.controller("CategoriaListarController", CategoriaListarController);
 
-function CategoriaCadastarController(Auth, CategoriaService, toastr, $rootScope, $scope) {
+function CategoriaCadastarController(blockUI,CategoriaService, toastr, $scope) {
 
 	var self = this;
 
 	self.submit = submit;
-
-	function submit(categoria) {		
-			CategoriaService.salvar(self.categoria).then(function(response) {
+	self.insertObjeto = insertObjeto;
+	self.implementModal = implementModal;
+	
+	function submit(form) {	
+		if(form.$invalid){
+			sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
+			return;
+		}	
+		 blockUI.start();
+			CategoriaService.insert(self.categoria)
+			.then(function(response) {
 				toastr.success("Categoria, cadastrado")
 				self.categoria = null;
+				blockUI.stop();
 			}, function(errResponse) {
+				blockUI.stop();
 				sweetAlert({
 					timer : 3000,
 					text : errResponse.data.message,
@@ -23,6 +33,16 @@ function CategoriaCadastarController(Auth, CategoriaService, toastr, $rootScope,
 				});
 			});
 		} 
+	
+	function implementModal(objeto){
+		$scope.objeto = objeto;
+		$('.implementModal').modal('show');
+	}
+		
+	 function insertObjeto(objeto){
+		 $('.implementModal').modal('hide');
+		 toastr.success(objeto + " cadastrado");		
+	};
 
 }
 
@@ -66,8 +86,7 @@ function CategoriaEditarController(CategoriaService, Auth,	$stateParams, $state,
 	}
 }
 
-function CategoriaListarController(blockUI, $stateParams, $state, CategoriaService,
-		toastr, $rootScope, $scope) {
+function CategoriaListarController(blockUI, $stateParams, $state, CategoriaService,	toastr, $rootScope, $scope) {
 
 	var self = this;
 
@@ -76,31 +95,13 @@ function CategoriaListarController(blockUI, $stateParams, $state, CategoriaServi
 	self.totalPaginas = null;
 	self.paginaCorrente = 0;
 
-	listar();
-
-	function listar() {
-		blockUI.start();
-		CategoriaService.buscarPorTexto("", self.paginaCorrente).then(
-				function(e) {
-					$scope.mensagemErro = null;
-					self.categorias = e.content;
-					self.totalElementos = e.totalElements;
-					self.totalPaginas = e.totalPages;
-					blockUI.stop();
-				}, function(errResponse) {
-					blockUI.stop();
-				});
-	}
-	;
+	buscarPorTexto('');
+	
 
 	function buscarPorTexto(texto) {
 		$scope.mensagemErro = null;
-		if (!texto || texto.length < 3) {
-			$scope.mensagemErro = "Digite pelo menos 3 caracters";
-			return;
-		}
 		blockUI.start();
-		CategoriaService.buscarPorTexto(texto, self.paginaCorrente).then(
+		CategoriaService.findByDescricaoPagination(texto, self.paginaCorrente).then(
 				function(e) {
 					$scope.mensagemErro = null;
 					self.categorias = e.content;
