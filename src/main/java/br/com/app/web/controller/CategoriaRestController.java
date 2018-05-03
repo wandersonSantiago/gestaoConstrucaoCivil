@@ -1,6 +1,5 @@
 package br.com.app.web.controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +30,7 @@ public class CategoriaRestController {
 	@Autowired
 	private CategoriaService categoriaService;
 
-	@ResponseStatus(HttpStatus.OK)
-	@GetMapping(value = "/lista")
-	public List<Categoria> buscarTodos() {
-		return categoriaService.buscarTodos();
-	}
-
+	
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping("/{id}")
 	public Optional<Categoria> findById(@PathVariable Long id) {
@@ -58,7 +52,7 @@ public class CategoriaRestController {
 	}
 	
 
-	@GetMapping(value = "/departamentos")
+	@GetMapping(value = "/descricao")
 	public ResponseEntity<Page<Categoria>> findByDepartamentosAndDescricao(
 			@RequestParam(value="page", defaultValue="0") Integer page, 
 			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
@@ -72,6 +66,25 @@ public class CategoriaRestController {
 			list = categoriaService.findByDepartamentos(PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy));
 		}else {
 			list = categoriaService.findByDescricaoIgnoreCaseAndCategoriaIsNull(descricao, PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy));
+		}
+		
+		return ResponseEntity.ok().body(list);
+	}
+	
+	@GetMapping(value = "/sub")
+	public ResponseEntity<Page<Categoria>> findByDescricaoAndPagination(
+			@RequestParam(value="page", defaultValue="0") Integer page, 
+			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
+			@RequestParam(value="orderBy", defaultValue="descricao") String orderBy, 
+			@RequestParam(value="direction", defaultValue="ASC") String direction,
+			@RequestParam(value="descricao", required = false , defaultValue="")String descricao) {
+
+		Page<Categoria> list = null;
+		
+		if(descricao.isEmpty() || descricao.equalsIgnoreCase("")) {
+			list = categoriaService.findAllByCategoria(PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy));
+		}else {
+			list = categoriaService.findByDescricaoIgnoreCaseAndCategoriaNotNull(descricao, PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy));
 		}
 		
 		return ResponseEntity.ok().body(list);

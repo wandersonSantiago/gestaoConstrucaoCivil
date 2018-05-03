@@ -1,5 +1,10 @@
 <meta charset="UTF-8">
-
+<div class="row">
+	<div class="col-md-4">
+		<a class="fa fa-plus" href="" ui-sref="categoria.cadastrar" title="Cadastrar nova categoria!">Nova Categoria</a>
+	</div>
+</div>
+<br>
 <div class="row">
   <div class="col-lg-6">
     <div class="input-group">
@@ -15,28 +20,24 @@
 	                <h4><i class="icon fa fa-warning"></i>{{mensagemErro}}</h4>
  </div> <br>
  
-<div class="table-responsive">
+<div class="table-responsive" ng-if="ctrl.categorias.length > 0">
 	<table class="table table-hover table-bordered">
 		<thead>
 			<tr>				
 				<th>Descrição</th>
-				<th>Categoria</th>
 				<th>Editar</th>				
 			</tr>
 		</thead>
 		<tbody
-			ng-repeat=" categoria in catCtr.categorias | filter : buscaCategoria ">
+			ng-repeat=" categoria in ctrl.categorias | filter : buscaCategoria ">
 			<tr>				
-				<td>{{ categoria.descricao }}</td>
-				<td>{{ categoria.tipoCategoria }}</td>			
-				<td ><a href=""><i class="glyphicon glyphicon-pencil"></i></a> 				
+				<td>{{ categoria.descricao }}</td>		
+				<td ><a href="" ui-sref="categoria.editar({idCategoria : categoria.id})"><i class="glyphicon glyphicon-pencil"></i></a> 				
 			</tr>
 		</tbody>
-		<tfoot>			
-		</tfoot>
 	</table>
 	<nav>
-		<ul uib-pagination total-items="ctrl.totalPaginas" ng-model="ctrl.paginaCorrente" max-size="10" class="pagination-sm"  
+		<ul uib-pagination total-items="ctrl.totalElementos" items-per-page="24" ng-model="ctrl.paginaCorrente" max-size="10" class="pagination-sm"  
 		boundary-link-numbers="true" ng-change="ctrl.buscarPorTexto(texto)"
 		previous-text="Anterior" last-text="Último" first-text="Primeiro" next-text="Próximo"></ul>
 	</nav>

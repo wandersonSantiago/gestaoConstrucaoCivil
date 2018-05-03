@@ -21,9 +21,9 @@ app.factory('CategoriaService', function($rootScope, toastr, $http,$q){
 			});
 		},
 		
-		findByDepartamentoByDescricao: function(texto){
+		findByDescricao: function(texto){
 			var config = {params: {descricao:texto}};
-			return $http.get(url + 'departamentos', config)
+			return $http.get(url + 'descricao', config)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
