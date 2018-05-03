@@ -13,7 +13,17 @@ app.factory('CategoriaService', function($rootScope, toastr, $http,$q){
 		
 		findByDescricaoPagination: function(texto, pagina){
 			var config = {params: {page: pagina, descricao:texto}};
-			return $http.get(url + '/descricao', config)
+			return $http.get(url + 'descricao', config)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				return $q.reject(errResponse);
+			});
+		},
+		
+		findByDepartamentoByDescricao: function(texto){
+			var config = {params: {descricao:texto}};
+			return $http.get(url + 'departamentos', config)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){

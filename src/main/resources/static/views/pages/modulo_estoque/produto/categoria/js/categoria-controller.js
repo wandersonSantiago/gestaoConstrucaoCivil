@@ -7,7 +7,8 @@ function CategoriaCadastarController(blockUI,CategoriaService, toastr, $scope) {
 	var self = this;
 
 	self.submit = submit;
-	self.insertObjeto = insertObjeto;
+	self.submitDepartamento = submitDepartamento;
+	self.buscarPorTexto = buscarPorTexto;
 	self.implementModal = implementModal;
 	
 	function submit(form) {	
@@ -15,11 +16,13 @@ function CategoriaCadastarController(blockUI,CategoriaService, toastr, $scope) {
 			sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
 			return;
 		}	
+		$scope.categoria == null ?'' : self.categoria.categoria = $scope.categoria;
 		 blockUI.start();
 			CategoriaService.insert(self.categoria)
 			.then(function(response) {
 				toastr.success("Categoria, cadastrado")
 				self.categoria = null;
+				$scope.categoria = null;
 				blockUI.stop();
 			}, function(errResponse) {
 				blockUI.stop();
@@ -34,15 +37,45 @@ function CategoriaCadastarController(blockUI,CategoriaService, toastr, $scope) {
 			});
 		} 
 	
+	function submitDepartamento(form, categoria) {	
+		if(form.$invalid){
+			sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
+			return;
+		}	
+		categoria.categoria = null;
+		 blockUI.start();
+			CategoriaService.insert(categoria)
+			.then(function(response) {
+				toastr.success("Departamento, cadastrado")
+				$('.implementModal').modal('hide');
+				$scope.categoria = null;
+				blockUI.stop();
+			}, function(errResponse) {
+				blockUI.stop();
+				sweetAlert({
+					timer : 3000,
+					text : errResponse.data.message,
+					type : "error",
+					width : 300,
+					higth : 300,
+					padding : 20
+				});
+			});
+		} 
+	 function buscarPorTexto(texto){
+	     	return  CategoriaService.findByDepartamentoByDescricao(texto).
+	     	 then(function(e){
+	     		return e.content;
+	     	 }, function(errResponse){
+	     	 });
+	     }
+	 
 	function implementModal(objeto){
 		$scope.objeto = objeto;
 		$('.implementModal').modal('show');
 	}
 		
-	 function insertObjeto(objeto){
-		 $('.implementModal').modal('hide');
-		 toastr.success(objeto + " cadastrado");		
-	};
+	 
 
 }
 

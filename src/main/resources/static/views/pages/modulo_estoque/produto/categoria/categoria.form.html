@@ -10,8 +10,8 @@
 	<div class="row">
 	<div class="form-group  col-sm-6" ng-class="{ 'has-error' : form.departamento.$invalid && form.$submitted }">
 	 		<a href="" class="fa fa-plus" ng-click="ctrl.implementModal('departamento')">Novo</a> | <label>Selecione o Departamento:</label>
-		    <input type="text" ng-model="ctrl.categoria.departamento" placeholder="ex: Material hidraulico" id="departamento" name="departamento"
-		    uib-typeahead="departamento as departamento.descricao for departamento in ctrl.buscarPorTexto($viewValue) | limitTo:8" 
+		    <input type="text" ng-model="categoria" placeholder="ex: Material hidraulico" id="departamento" name="departamento"
+		    uib-typeahead="categoria as categoria.descricao for categoria in ctrl.buscarPorTexto($viewValue) | limitTo:8" 
 		    typeahead-template-url="customTemplate.html" class="form-control" typeahead-show-hint="true"  
 		    typeahead-loading="loading" typeahead-no-results="noResults" typeahead-min-length="3" required>
 		    <i ng-show="loading" class="glyphicon glyphicon-refresh"></i>
@@ -45,23 +45,26 @@
 		<div  class="modal fade modal-default implementModal" id="implementModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		  <div class="modal-dialog" role="document" >
 		    <div class="modal-content">
+		    
+			<form role="form-vertical" name="formDepartamento" novalidate ng-submit="ctrl.submitDepartamento(formDepartamento, categoria)">
 		      <div class="modal-header">
-		      Cadastrar
+		      Novo Departamento
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		      </div>
 		      <div class="modal-body">				     		
 			     <div >
 			      Descrição:
 			      	<div class="col-md-12">
-						<input type="text" class="form-control select2" ng-model="objeto.descricao">
+						<input type="text" class="form-control select2" ng-model="categoria.descricao">
 					</div>
 				</div>			       
 		      </div><br><br>
 		      <div class="modal-footer ">
 			      <div class="col-md-4 col-md-offset-4">
-			     	 <input type="button" class="btn btn-lg btn-primary btn-block btn-signin" value="Salvar" ng-click="ctrl.insertObjeto(objeto)" >
+			     	 <input type="submit" class="btn btn-lg btn-primary btn-block btn-signin" value="Salvar" >
 			      </div>
 		      </div>
+		      </form>
 		    </div>
 		  </div>
 		</div>

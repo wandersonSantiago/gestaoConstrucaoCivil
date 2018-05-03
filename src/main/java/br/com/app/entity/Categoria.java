@@ -4,17 +4,17 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import br.com.app.enuns.TipoCategoriaEnum;
+import lombok.Data;
 
+@Data
 @Entity
 @SequenceGenerator(name = "categoria_id_seq", sequenceName = "categoria_id_seq",allocationSize = 1, schema = "communs")
 @Table(name = "categoria", schema = "communs")
@@ -29,38 +29,7 @@ public class Categoria implements Serializable {
 	private boolean ativo;
 	@NotNull
 	private String descricao;
-	@Enumerated(EnumType.STRING)
-	private TipoCategoriaEnum tipoCategoria;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public boolean isAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
-	}
-
-	public TipoCategoriaEnum getTipoCategoria() {
-		return tipoCategoria;
-	}
-
-	public void setTipoCategoria(TipoCategoriaEnum tipoCategoria) {
-		this.tipoCategoria = tipoCategoria;
-	}
+	
+	@ManyToOne
+	private Categoria categoria;
 }
