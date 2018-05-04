@@ -50,7 +50,7 @@
 			</div>
 		</div>
 		<div class="row" >
-			<div class="form-group col-sm-4">
+			<div class="form-group col-sm-4"ng-class="{ 'has-error' : formFabricante.nome.$invalid && formFabricante.$submitted}">
 				<b>Fone*</b> <input type="text" class="form-control" id="fone" name="fone"
 					ng-model="ctrl.igreja.telefone" placeholder="ex: (19)98873-5424" ui-br-phone-number required ng-required="true">
 			</div>

@@ -61,5 +61,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				    label: 'Fabricante'
 				  }
 		})
+		
+		.state('fabricante.identificar', {
+			requiresAuthentication: true,
+			url : "/fabricante/identificar",
+			templateUrl : "views/pages/modulo_estoque/empresa_matriz/empresa.identificar.html",
+			ncyBreadcrumb: {
+				 	parent: 'estoque.menu',
+				    label: 'Fabricante'
+				  }
+		})
 
 });
