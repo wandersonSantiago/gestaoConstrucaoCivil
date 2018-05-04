@@ -1,11 +1,11 @@
 <meta charset="UTF-8">
-<form name="form" ng-submit="ctrl.submit()">
+<form name="form" ng-submit="ctrl.existeCnpj(ctrl.cnpj)">
 
 	<div class="row">		
 		
 		<div class="form-group col-md-4 col-md-offset-4" >
 			<label>CNPJ: </label>
-			<input class="form-control" placeholder="" ng-model="ctrl.documento.numero"  id="cnpj" name="cnpj" ui-br-cnpj-mask type="text" required autofocus>
+			<input class="form-control" placeholder="" ng-model="ctrl.cnpj"  id="cnpj" name="cnpj" ui-br-cnpj-mask type="text" required autofocus>
 			<p ng-show="formMembro.cnpj.$error.cnpj" class="alert alert-danger">Digite um CPF válido!!</p>
 		</div>
 	</div>	

@@ -1,5 +1,5 @@
 app.factory("EmpresaMatrizService", function($http,$rootScope, toastr, $q){
-	var url = '/rest/empresa/matriz';
+	var url = '/rest/dadoEmpresa';
 	return{
 			
 		buscarPorTexto: function(texto, pagina){
@@ -38,7 +38,16 @@ app.factory("EmpresaMatrizService", function($http,$rootScope, toastr, $q){
 		},
 		
 		existeCnpj : function(cnpj){
-			return $http.post(url + '/cnpj', cnpj)
+			return $http.get(url + '/existeCnpj/'+ cnpj)
+			.then(function(response){
+			   return response.data;
+			}, function(errResponse){
+				return $q.reject(errResponse);
+			});
+		},
+		
+		uf : function(){
+			return $http.get(url + '/uf')
 			.then(function(response){
 			   return response.data;
 			}, function(errResponse){

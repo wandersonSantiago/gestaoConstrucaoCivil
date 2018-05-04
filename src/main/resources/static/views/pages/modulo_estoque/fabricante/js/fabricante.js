@@ -66,6 +66,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			requiresAuthentication: true,
 			url : "/fabricante/identificar",
 			templateUrl : "views/pages/modulo_estoque/empresa_matriz/empresa.identificar.html",
+			controller : "EmpresaMatrizCadastarController as ctrl",
 			ncyBreadcrumb: {
 				 	parent: 'estoque.menu',
 				    label: 'Fabricante'

@@ -3,19 +3,24 @@ app.controller("EmpresaMatrizEditarController", EmpresaMatrizEditarController);
 app.controller("EmpresaMatrizListarController", EmpresaMatrizListarController);
 app.controller("EmpresaMatrizVisualizarController", EmpresaMatrizVisualizarController);
 
-function EmpresaMatrizCadastarController (toastr, $scope, buscaCepService, $location, $state, EmpresaMatrizService, blockUI){
+function EmpresaMatrizCadastarController (toastr, $scope, buscaCepService, $location, $state, $stateParams, EmpresaMatrizService, blockUI){
 		 
 	var self = this;
 	$scope.submitted = false;
 	self.findCep = findCep;
 	self.submit = submit;
+	self.existeCnpj = existeCnpj;
+	self.cnpj = $stateParams.cnpj;
+	
+	uf();
+	status();
 	
 	
 	function findCep() {
-			self.cep = self.empresaMatriz.empresa.endereco.cep;
+			self.cep = self.dadoEmpresa.endereco.cep;
 				buscaCepService.get({'cep': self.cep}).$promise
 				.then(function success(result){				
-					self.cep = self.empresaMatriz.empresa.endereco = result;				
+					self.cep = self.dadoEmpresa.endereco = result;				
 				}).catch(function error(msg) {
 				});				
 		    }
@@ -23,12 +28,13 @@ function EmpresaMatrizCadastarController (toastr, $scope, buscaCepService, $loca
 	
 	 		
 	function submit(){		
-		if($scope.formEmpresaMatriz.$invalid){
+		if($scope.formMatriz.$invalid){
 			sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
 			return;
 		}			
 			 blockUI.start();
-	    	 EmpresaMatrizService.save(self.empresaMatriz).
+			 self.dadoEmpresa.cnpj = self.cnpj;
+	    	 EmpresaMatrizService.save(self.dadoEmpresa).
 				 then(function(response){					
 					 blockUI.stop();
 					 toastr.success('EmpresaMatriz', 'Cadastrada!');
@@ -50,24 +56,42 @@ function EmpresaMatrizCadastarController (toastr, $scope, buscaCepService, $loca
 		 }
 
 	     function clear(){	    	 
-	    	 $scope.formEmpresaMatriz.$setPristine();
-	    	 $scope.formEmpresaMatriz.$setUntouched();   
-	    	 self.empresaMatriz = null;
+	    	 $scope.formMatriz.$setPristine();
+	    	 $scope.formMatriz.$setUntouched();   
+	    	 self.dadoEmpresa = null;
 	    	
 	     }
 	     
-	  function existeCnpj(entidade){
-		  if(!entidade){
-			  return;
-		  }
-	    	 EmpresaMatrizService.existeCnpj(entidade)
-	    	 .then(function(e){	    		 
+		  function existeCnpj(cnpj){
+			  if(!cnpj){
+				  return;
+			  }
+		    	 EmpresaMatrizService.existeCnpj(cnpj)
+		    	 .then(function(e){	
+		    		 e == true ? $state.go('fabricante.cadastrar',{ cnpj}) : $state.go('matriz.cadastrar',{ cnpj});	    		 
+		 			}, function(errResponse){
+		 				self.dadoEmpresa.cnpj = null;
+		    		 swal({ text : errResponse.data.message ,  type : "info", width: 200, higth: 100, padding: 20}).catch(swal.noop);
+		 			});
+		     };
+	    
+	     function status(){			 
+		    	 EmpresaMatrizService.status()
+		    	 .then(function(e){	
+		    		 self.status = e;
+		 			}, function(errResponse){
+		    		 swal({ text : errResponse.data.message ,  type : "info", width: 200, higth: 100, padding: 20}).catch(swal.noop);
+		 			});
+		     };
+		     
+	     function uf(){			 
+	    	 EmpresaMatrizService.uf()
+	    	 .then(function(e){	
+	    		 self.ufs = e;
 	 			}, function(errResponse){
-	 				self.empresaMatriz.cnpj = null;
 	    		 swal({ text : errResponse.data.message ,  type : "info", width: 200, higth: 100, padding: 20}).catch(swal.noop);
 	 			});
-	     };
-    
+	     };    
   
 	          	
 }
