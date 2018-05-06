@@ -46,6 +46,15 @@ app.factory("EmpresaMatrizService", function($http,$rootScope, toastr, $q){
 			});
 		},
 		
+		buscarPorCnpj : function(cnpj){
+			return $http.get(url + '/cnpj/'+ cnpj)
+			.then(function(response){
+			   return response.data;
+			}, function(errResponse){
+				return $q.reject(errResponse);
+			});
+		},
+		
 		uf : function(){
 			return $http.get(url + '/uf')
 			.then(function(response){

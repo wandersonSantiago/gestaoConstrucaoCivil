@@ -1,9 +1,9 @@
 app.factory("FabricanteService", function($http,$rootScope, toastr, $q){
-	var url = '/rest/empresa/fabricante';
+	var url = '/rest/almoxarifado/fabricante';
 	return{
 			
 		buscarPorTexto: function(texto, pagina){
-			var config = {params: {page: pagina, q:texto}};
+			var config = {params: {page: pagina, descricao:texto}};
 			return $http.get(url + '/buscar', config)
 			.then(function(response){
 				return response.data;
@@ -36,9 +36,16 @@ app.factory("FabricanteService", function($http,$rootScope, toastr, $q){
 			return $q.reject(errResponse);
 			});
 		},
-		
+		buscarPorCNPJ: function(cnpj){
+			return $http.get(url + '/cnpj/' + cnpj)
+			.then(function(response){
+			   return response.data;
+			}, function(errResponse){
+				return $q.reject(errResponse);
+			});
+		},
 		existeCnpj : function(cnpj){
-			return $http.post(url + '/cnpj', cnpj)
+			return $http.get(url + '/existeCnpj/' + cnpj)
 			.then(function(response){
 			   return response.data;
 			}, function(errResponse){

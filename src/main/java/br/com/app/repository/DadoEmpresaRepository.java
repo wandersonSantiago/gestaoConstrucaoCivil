@@ -1,5 +1,7 @@
 package br.com.app.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,4 +15,6 @@ public interface DadoEmpresaRepository extends JpaRepository<DadoEmpresa,Long>{
 	
 	@Query("SELECT CASE WHEN COUNT(inscricaoEstadual) > 0 THEN true ELSE false END FROM DadoEmpresa d WHERE d.inscricaoEstadual = :inscricaoEstadual")
 	boolean existeIe(@Param("inscricaoEstadual") String inscricaoEstadual);
+
+	Optional<DadoEmpresa> findByCnpj(String cnpj);
 }

@@ -1,12 +1,11 @@
 package br.com.app.web.controller;
 
-import java.net.URI;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.app.entity.DadoEmpresa;
-import br.com.app.entity.Empreendimento;
 import br.com.app.enuns.StatusEnum;
 import br.com.app.enuns.UfEnum;
 import br.com.app.service.DadoEmpresaService;
@@ -42,6 +39,12 @@ public class DadoEmpresaRestController {
 		return dadoEmpresaService.existeCnpjCadastrado(cnpj);
 	}
 
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value = "/cnpj/{cnpj}")
+	public Optional<DadoEmpresa> findByCnpj(@PathVariable String cnpj) {
+		return dadoEmpresaService.findByCnpj(cnpj);
+	}
+	
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/existeIe/{ie}")
 	public Boolean existeIe(@PathVariable String ie) {

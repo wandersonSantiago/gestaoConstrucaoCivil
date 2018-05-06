@@ -4,121 +4,40 @@
 	<div>
 		<h4>Cadastro</h4>          
 		<hr>		
-		
-		<div class="row">
-		
-			<div class="form-group col-sm-4"
-				ng-class="{ 'has-error' : formFabricante.cnpj.$invalid && formFabricante.$submitted }">
-				<b>CNPJ*:</b> <input type="text" class="form-control" id="cnpj" name="cnpj"
-					ng-model="ctrl.empresaMatriz.empresa.cnpj" placeholder="ex: 47.119.940/0001-68"
-					ng-blur="ctrl.existeCnpj(ctrl.empresaMatriz.empresa.cnpj)" ui-br-cnpj-mask required ng-required="true">
-				<p ng-show="formFabricante.cnpj.$error.cnpj" class="alert alert-danger">Digite um CNPJ válido!!</p>
-			</div>
-			
-			<div  class="col-sm-2">
-			<label for="cnpj">Estado:</label>
-					<select class="form-control"  ng-model="ctrl.empresaMatriz.empresa.ufIe" ng-options="uf for uf in ufs">
-						<option value="">Estado</option>
-					</select>
-			</div>
-					
-			<div class="col-sm-2">
-			<b >Inscrição Estadual:</b>
-				<input class="form-control" name="iefield"  placeholder="ex: 150.520.462.843" 
-					 ng-model="ctrl.empresaMatriz.empresa.inscricaoEstadual" ng-blur="verificaCtrl.verificaIe(ctrl.empresaMatriz.empresa.inscricaoEstadual)"
-					id="inscricaoEstadual" type="text" ui-br-ie-mask='ctrl.empresaMatriz.empresa.ufIe'
-					required>
-			 <p ng-show="formFabricante.iefield.$error.ie"	class="alert alert-warning ">Digite uma inscrição estadual válida</p>
-			</div>	
-			
-			<div class="form-group col-sm-4" ng-class="{ 'has-error' : formFabricante.status.$invalid && formFabricante.$submitted}" >
-				<b>Status*:</b><br>
-				<select class="form-control select2 "  ng-model="ctrl.empresaMatriz.empresa.status" ng-options="status  for status in ctrl.listaStatus" 
-					name="status" style="width: 100%;" required ng-required="true">
-				</select>					
-			</div>	
-		</div>
+	</div>	
 
-		<div class="row">
-			<div class="form-group col-sm-6" ng-class="{ 'has-error' : formFabricante.nome.$invalid && formFabricante.$submitted}">
-				<b>Razão Social*:</b> <input type="text" class="form-control" id="nome" name="nome"
-					ng-model="ctrl.empresaMatriz.empresa.razaoSocial" placeholder="ex: Fabrica de Cimento Industrial Ltda." required ng-required="true">
-			</div>
-			<div class="form-group col-sm-6" ng-class="{ 'has-error' : formFabricante.nomeFantasia.$invalid && formFabricante.$submitted}">
-				<b>Nome Fantasia*:</b> <input type="text" class="form-control" id="nomeFantasia" name="nomeFantasia"
-					ng-model="ctrl.empresaMatriz.empresa.nomeFantasia" placeholder="ex: Cimentolândia" required ng-required="true">
-			</div>
-		</div>
-		<div class="row" >
-			<div class="form-group col-sm-4"ng-class="{ 'has-error' : formFabricante.nome.$invalid && formFabricante.$submitted}">
-				<b>Fone*</b> <input type="text" class="form-control" id="fone" name="fone"
-					ng-model="ctrl.igreja.telefone" placeholder="ex: (19)98873-5424" ui-br-phone-number required ng-required="true">
-			</div>
-			<div class="form-group col-sm-4">
-				<b>Site:</b> <input type="text" class="form-control" id="site"
-					ng-model="ctrl.igreja.site" placeholder="ex: www.cimentolandia.com.br">
-			</div>
-			<div class="form-group col-sm-4">
-				<b>E-mail:</b> <input type="email" class="form-control" id="email"
-					ng-model="ctrl.igreja.email" placeholder="ex: jose@cimentolandia.com.br">
-			</div>
+<label>Razão Social:</label>
+<p>{{::ctrl.empresa.razaoSocial}}</p>
+<label>Nome Fantasia:</label>
+<p>{{::ctrl.empresa.nomeFantasia}}</p>
+<strong>CNPJ:</strong> 
+<p>{{::ctrl.empresa.cnpj | brCnpj}}</p>
 
-		</div>
-		
-		
-		<h4>Endereço</h4>
-		 <hr>
-		<div class="row">
-			<div class="form-group col-sm-3">
-				<b>CEP:</b> <input type="text" class="form-control" id="cep"
-					ng-blur="ctrl.findCep(ctrl.igreja.endereco.cep)"
-					onkeyup="if(this.value.length > 8) { numero.focus(); }" name="cepField" placeholder="ex: 14158-358"
-					ng-model="ctrl.empresaMatriz.empresa.endereco.cep" ui-br-cep-mask required ng-required="true">
-
-				<p ng-show="formFabricante.cepField.$error.cep" class="alert alert-warning ">Digite um CEP Válido</p>
-			</div>
-		</div>
-
-
-		<div class="row">
-			<div class="form-group col-sm-12" >
-				<b>Rua:</b> <input type="text" class="form-control" id="rua" name="rua" placeholder="ex: Av. Dr Raul da Cunha Bueno"
-					ng-model="ctrl.empresaMatriz.empresa.endereco.logradouro" required ng-required="true">
-			</div>
-
-		</div>
-		<div class="row">
-			<div class="form-group col-sm-2">
-				<b>Numero:</b> <input type="text" class="form-control" id="numero" name="numero" placeholder="ex: N° 53400"
-					ng-model="ctrl.empresaMatriz.empresa.endereco.numero" required ng-required="true">
-			</div> 
-			<div class="form-group col-sm-5">
-				<b>Complemento:</b> <input type="text" class="form-control" placeholder="ex: esquina com av. da saúde" name="complemento"
-					ng-model="ctrl.empresaMatriz.empresa.endereco.complemento">
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="form-group col-sm-6" >
-				<b>Bairro:</b> <input type="text" class="form-control" id="bairro" name="bairro" placeholder="ex: João da Boa Vista"
-					ng-model="ctrl.empresaMatriz.empresa.endereco.bairro" required ng-required="true">
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="form-group col-sm-4" >
-				<b>Estado:</b> 
-				<input type="text" class="form-control select2" id="estado" name="estado" ng-model="ctrl.empresaMatriz.empresa.endereco.uf" placeholder="ex: SP"  	 required ng-required="true">							
-			</div>
-			
-			<div class="form-group col-sm-5" >
-				<b>Cidade:</b> 				
-				<input type="text" class="form-control select2" for="cidade" name="cidade" ng-model="ctrl.empresaMatriz.empresa.endereco.localidade" placeholder="ex: São Paulo" required ng-required="true">							
-			</div>
-		</div>
-		<br>
-	</div>
-	
+<address>
+	<p>
+		<span class="glyphicon glyphicon-map-marker"></span>
+		{{::ctrl.empresa.endereco.logradouro}},
+		{{::ctrl.empresa.endereco.numero}} -
+		{{::ctrl.empresa.endereco.bairro}}
+		-{{::ctrl.empresa.endereco.cidade.nome}}
+		/{{::ctrl.empresa.endereco.estado.nome}} CEP:
+		{{::ctrl.empresa.endereco.cep}}
+	</p>
+	<p>{{::ctrl.empresa.endereco.complemento}}</p>
+	<p>
+		<abbr title="Telefone"><span class="glyphicon glyphicon-phone"></span></abbr>
+		{{::ctrl.empresa.telefone | brPhoneNumber}}
+	</p>
+	<p>
+		<abbr title="e-mail"><span class="glyphicon glyphicon-envelope"></span></abbr>
+		{{::ctrl.empresa.email}}
+	</p>
+	<p>
+		<abbr title="endereço do site"><span
+			class="glyphicon glyphicon-cloud"></span></abbr>
+		{{::ctrl.empresa.site}}
+	</p>
+</address>
 	
 
 	<div class="row ">

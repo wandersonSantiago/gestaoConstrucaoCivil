@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import br.com.app.entity.DadoEmpresa;
 
 @Entity
@@ -24,7 +26,8 @@ public class Fabricante implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fabricante_id_seq")
 	private Long id;
-	@OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+	
+	@OneToOne
 	@JoinColumn(name = "id_dado_empresa", nullable = false)
 	private DadoEmpresa dadoEmpresa;
 

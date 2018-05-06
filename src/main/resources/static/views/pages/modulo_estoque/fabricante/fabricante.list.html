@@ -29,17 +29,17 @@
 			
 
 		</tr>
-		<tr ng-repeat="fabricante in ctrl.fabricantes | filter: texto ">
+		<tr ng-repeat="fabricante in ctrl.fabricantes">
 			<td>{{fabricante.id}}</td>
-			<td><a ui-sref="fabricante.visualizar({ idFabricante: fabricante.id})">{{fabricante.dadoUnidade.razaoSocial}}</a></td>
-			<td>{{fabricante.dadoUnidade.nomeFantasia}}</td>
-			<td>{{fabricante.dadoUnidade.cnpj | brCnpj}}</td>
-			<td>{{fabricante.dadoUnidade.telefone | brPhoneNumber}}</td>
+			<td><a ui-sref="fabricante.visualizar({ idFabricante: fabricante.id})">{{fabricante.dadoEmpresa.razaoSocial}}</a></td>
+			<td>{{fabricante.dadoEmpresa.nomeFantasia}}</td>
+			<td>{{fabricante.dadoEmpresa.cnpj | brCnpj}}</td>
+			<td>{{fabricante.dadoEmpresa.telefone | brPhoneNumber}}</td>
 			<td><a ui-sref="fabricante.editar({ idFabricante: fabricante.id})"><i class="glyphicon glyphicon-edit"></i></a></td>
 		</tr>
 	</table>
 	<nav>
-		<ul uib-pagination total-items="ctrl.totalPaginas" ng-model="ctrl.paginaCorrente" max-size="10" class="pagination-sm"  
+		<ul uib-pagination total-items="ctrl.totalElementos" items-per-page="24" ng-model="ctrl.paginaCorrente" max-size="10" class="pagination-sm"  
 		boundary-link-numbers="true" ng-change="ctrl.buscarPorTexto(texto)"
 		previous-text="Anterior" last-text="Último" first-text="Primeiro" next-text="Próximo"></ul>
 	</nav>
