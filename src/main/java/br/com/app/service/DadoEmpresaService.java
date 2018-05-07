@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.app.entity.DadoEmpresa;
-import br.com.app.entity.Empreendimento;
 import br.com.app.exceptions.NotFoundException;
 import br.com.app.repository.DadoEmpresaRepository;
 

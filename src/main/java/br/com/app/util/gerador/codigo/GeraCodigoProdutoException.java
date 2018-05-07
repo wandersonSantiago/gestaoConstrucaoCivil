@@ -1,8 +1,13 @@
 package br.com.app.util.gerador.codigo;
 
-public class GeraCodigoProdutoException extends RuntimeException{
+import java.io.Serializable;
 
-	 public GeraCodigoProdutoException(String msg) {
+public class GeraCodigoProdutoException extends RuntimeException implements Serializable{
+
+	 
+	private static final long serialVersionUID = 1L;
+
+	public GeraCodigoProdutoException(String msg) {
 		 super(msg);
 	}
 }

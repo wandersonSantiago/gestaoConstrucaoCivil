@@ -5,40 +5,40 @@ import org.springframework.stereotype.Service;
 
 import br.com.app.repository.almoxarifado.ProdutoRepository;
 
-
 @Service
-public class GeraCodigoProduto extends GeraCodigo{
+public class GeraCodigoProduto extends GeraCodigo {
 
 	@Autowired
 	private ProdutoRepository produtoRepository;
 	private Integer codigo = null;
-    
+
 	public GeraCodigoProduto() {
-		
-		super(100000,999999);
-	
+
+		super(100000, 999999);
+
 	}
-    public Integer gerarCodigoProduto()
+
+	public Integer gerarCodigoProduto()
     {
-     	for(Integer tentativa = 0 ; tentativa <= 99999; tentativa++)
+     	produtoRepository.existeCodigo(codigo);
+    	
+    	for(Integer tentativa = 0 ; tentativa <= 99999;)
     	{
-    		 
-    		if(!produtoRepository.existeCodigo(codigo)){
-    		   
-    			return gerarNumero();
-    			 
-    		}
+    		 this.codigo = gerarNumero();
+    		 if(!produtoRepository.existeCodigo(codigo)) {
+    			 return this.codigo;
+    		 }
     	}
     	throw new GeraCodigoProdutoException("Não é possivel gerar um código para produto");
     	
     }
-    public String gerarCodigoBarra()
-	{
+
+	public String gerarCodigoBarra() {
 		return "0000000".concat(this.codigo.toString());
 	}
-    public String gerarCodigoBarra(Integer codigo) {
-    	return "0000000".concat(codigo.toString());
-    }
-   
-    
+
+	public String gerarCodigoBarra(Integer codigo) {
+		return "0000000".concat(codigo.toString());
+	}
+
 }

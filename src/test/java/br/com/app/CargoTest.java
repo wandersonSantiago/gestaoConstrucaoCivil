@@ -25,7 +25,6 @@ public class CargoTest extends AbstractMvcTest {
 	
 	
 	@Test
-	@Transactional
 	public void list() throws Exception {
 
 		MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get("/rest/recursosHumanos/cargo/lista")

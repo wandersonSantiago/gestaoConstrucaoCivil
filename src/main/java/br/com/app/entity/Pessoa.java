@@ -21,7 +21,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.app.enuns.EstadoCivilEnum;
+import lombok.Data;
 
+@Data
 @Entity
 @SequenceGenerator(name = "pessoa_id_seq", sequenceName = "pessoa_id_seq",allocationSize = 1,schema="communs")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -59,76 +61,5 @@ public abstract class Pessoa implements Serializable{
 	@Column(nullable = true)
 	@Enumerated(EnumType.STRING)
 	protected EstadoCivilEnum estadoCivil;
-	
-	
-	
-	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getNomeCompleto() {
-		return nomeCompleto;
-	}
-	public void setNomeCompleto(String nomeCompleto) {
-		this.nomeCompleto = nomeCompleto;
-	}
-	public Integer getIdade() {
-		return idade;
-	}
-	public void setIdade(Integer idade) {
-		this.idade = idade;
-	}
-	public Endereco getEndereco() {
-		return endereco;
-	}
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-	public String getRg() {
-		return rg;
-	}
-	public void setRg(String rg) {
-		this.rg = rg;
-	}
-	public String getCpf() {
-		return cpf;
-	}
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-	public String getTelefoneFixo() {
-		return telefoneFixo;
-	}
-	public void setTelefoneFixo(String telefoneFixo) {
-		this.telefoneFixo = telefoneFixo;
-	}
-	public String getTelefoneCelular() {
-		return telefoneCelular;
-	}
-	public void setTelefoneCelular(String telefoneCelular) {
-		this.telefoneCelular = telefoneCelular;
-	}
-	public Date getDataNascimento() {
-		return dataNascimento;
-	}
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
-	public String getSexo() {
-		return sexo;
-	}
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
-	}
-	
-	public EstadoCivilEnum getEstadoCivil() {
-		return estadoCivil;
-	}
-	public void setEstadoCivil(EstadoCivilEnum estadoCivil) {
-		this.estadoCivil = estadoCivil;
-	}
 	
 }

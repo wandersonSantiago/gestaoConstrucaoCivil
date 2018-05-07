@@ -16,9 +16,11 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import br.com.app.enuns.UfEnum;
+import lombok.Data;
 
+@Data
 @Entity
-@SequenceGenerator(name = "dado_empresa_id_seq", sequenceName = "dado_empresa_id_seq",allocationSize = 1, schema = "communs")
+@SequenceGenerator(name = "dado_empresa_id_seq", sequenceName = "dado_empresa_id_seq", allocationSize = 1, schema = "communs")
 @Table(name = "dado_empresa", schema = "communs")
 public class DadoEmpresa implements Serializable {
 
@@ -45,77 +47,5 @@ public class DadoEmpresa implements Serializable {
 	private String telefone;
 	@Column(length = 40)
 	private String email;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getRazaoSocial() {
-		return razaoSocial;
-	}
-
-	public void setRazaoSocial(String razaoSocial) {
-		this.razaoSocial = razaoSocial;
-	}
-
-	public String getNomeFantasia() {
-		return nomeFantasia;
-	}
-
-	public void setNomeFantasia(String nomeFantasia) {
-		this.nomeFantasia = nomeFantasia;
-	}
-
-	public String getCnpj() {
-		return cnpj;
-	}
-
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
-
-	public String getInscricaoEstadual() {
-		return inscricaoEstadual;
-	}
-
-	public void setInscricaoEstadual(String inscricaoEstadual) {
-		this.inscricaoEstadual = inscricaoEstadual;
-	}
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public UfEnum getUfIe() {
-		return ufIe;
-	}
-
-	public void setUfIe(UfEnum ufIe) {
-		this.ufIe = ufIe;
-	}
 
 }

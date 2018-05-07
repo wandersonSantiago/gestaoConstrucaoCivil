@@ -14,9 +14,11 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import br.com.app.entity.DadoEmpresa;
+import lombok.Data;
 
+@Data
 @Entity
-@SequenceGenerator(name = "fornecedor_id_seq", sequenceName = "fornecedor_id_seq", allocationSize = 1,schema = "almoxarifado")
+@SequenceGenerator(name = "fornecedor_id_seq", sequenceName = "fornecedor_id_seq", allocationSize = 1, schema = "almoxarifado")
 @Table(name = "fornecedor", schema = "almoxarifado")
 public class Fornecedor implements Serializable {
 
@@ -35,51 +37,5 @@ public class Fornecedor implements Serializable {
 	@OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
 	@JoinColumn(name = "id_dado_empresa", nullable = false)
 	private DadoEmpresa dadoEmpresa;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getContato() {
-		return contato;
-	}
-
-	public void setContato(String contato) {
-		this.contato = contato;
-	}
-
-	public String getObservacao() {
-		return observacao;
-	}
-
-	public void setObservacao(String observacao) {
-		this.observacao = observacao;
-	}
-
-	public DadoEmpresa getDadoEmpresa() {
-		return dadoEmpresa;
-	}
-
-	public void setDadoEmpresa(DadoEmpresa dadoEmpresa) {
-		this.dadoEmpresa = dadoEmpresa;
-	}
-
-	public boolean isAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
-	}
-
-	/*
-	 * public List<Produto> getProdutos() { return produtos; }
-	 * 
-	 * public void setProdutos(List<Produto> produtos) { this.produtos = produtos; }
-	 */
 
 }

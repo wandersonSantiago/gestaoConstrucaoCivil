@@ -1,6 +1,6 @@
 package br.com.app.entity.almoxarifado;
 
-import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,20 +12,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.app.entity.Empreendimento;
+import br.com.app.entity.almoxarifado.interfaces.EntradaOuBaixa;
 import br.com.app.enuns.StatusRequisicao;
+import lombok.Data;
 
+@Data
 @Entity
-@SequenceGenerator(name = "requisicao_id_seq", sequenceName = "requisicao_id_seq",allocationSize = 1, schema = "almoxarifado")
+@SequenceGenerator(name = "requisicao_id_seq", sequenceName = "requisicao_id_seq", allocationSize = 1, schema = "almoxarifado")
 @Table(name = "requisicao", schema = "almoxarifado")
-public class Requisicao implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class Requisicao implements EntradaOuBaixa<RequisicaoItem> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "requisicao_id_seq")
@@ -49,52 +51,19 @@ public class Requisicao implements Serializable {
 	@JoinColumn(name = "id_empreendimento")
 	private Empreendimento empreendimento;
 
-	public Long getId() {
-		return id;
-	}
+	@OneToMany
+	private Collection<RequisicaoItem> itens;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+	@Override
+	public Empreendimento empreendimentoSaida() {
 
-	public Integer getNumeroRequisicao() {
-		return numeroRequisicao;
-	}
-
-	public void setNumeroRequisicao(Integer numeroRequisicao) {
-		this.numeroRequisicao = numeroRequisicao;
-	}
-
-	public Date getDataSaida() {
-		return dataSaida;
-	}
-
-	public void setDataSaida(Date dataSaida) {
-		this.dataSaida = dataSaida;
-	}
-
-	public Date getDataCriacao() {
-		return dataCriacao;
-	}
-
-	public void setDataCriacao(Date dataCriacao) {
-		this.dataCriacao = dataCriacao;
-	}
-
-	public StatusRequisicao getStatusRequisicao() {
-		return statusRequisicao;
-	}
-
-	public void setStatusRequisicao(StatusRequisicao statusRequisicao) {
-		this.statusRequisicao = statusRequisicao;
-	}
-
-	public Empreendimento getEmpreendimento() {
 		return empreendimento;
 	}
 
-	public void setEmpreendimento(Empreendimento empreendimento) {
-		this.empreendimento = empreendimento;
+	@Override
+	public Empreendimento empreendimentoEntrada() {
+
+		return empreendimento;
 	}
 
 }
