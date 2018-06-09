@@ -3,10 +3,10 @@ package br.com.app.util.gerador.codigo;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GereCodigoPacoteServico extends GeraCodigo {
+public class GeraCodigoPacoteServico extends GeraCodigo {
 
  
-	public GereCodigoPacoteServico() {
+	public GeraCodigoPacoteServico() {
 		
 		super(10000,99999);
 		

@@ -1,16 +1,6 @@
 package br.com.app.util.gerador.codigo;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import br.com.app.repository.almoxarifado.ProdutoRepository;
-
-@Service
-public class GeraCodigoProduto extends GeraCodigo {
-
-	@Autowired
-	private ProdutoRepository produtoRepository;
-	private Integer codigo = null;
+public class GeraCodigoProduto extends GeraCodigo implements Gera {
 
 	public GeraCodigoProduto() {
 
@@ -18,27 +8,9 @@ public class GeraCodigoProduto extends GeraCodigo {
 
 	}
 
-	public Integer gerarCodigoProduto()
-    {
-     	produtoRepository.existeCodigo(codigo);
-    	
-    	for(Integer tentativa = 0 ; tentativa <= 99999;)
-    	{
-    		 this.codigo = gerarNumero();
-    		 if(!produtoRepository.existeCodigo(codigo)) {
-    			 return this.codigo;
-    		 }
-    	}
-    	throw new GeraCodigoProdutoException("Não é possivel gerar um código para produto");
-    	
-    }
+	public Integer gerar() {
 
-	public String gerarCodigoBarra() {
-		return "0000000".concat(this.codigo.toString());
-	}
-
-	public String gerarCodigoBarra(Integer codigo) {
-		return "0000000".concat(codigo.toString());
+		return gerarNumero();
 	}
 
 }

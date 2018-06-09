@@ -11,7 +11,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import br.com.app.entity.Categoria;
-import br.com.app.util.gerador.codigo.GereCodigoPacoteServico;
+import br.com.app.util.gerador.codigo.GeraCodigoPacoteServico;
 import lombok.Data;
 
 @Data
@@ -46,7 +46,7 @@ public class PacoteServico {
 	private Double valor;
 
 	public void novoPacote() {
-		this.codigo = new GereCodigoPacoteServico().gerarNumeroPacote();
+		this.codigo = new GeraCodigoPacoteServico().gerarNumeroPacote();
 
 	}
 

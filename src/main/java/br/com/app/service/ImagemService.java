@@ -48,7 +48,7 @@ public class ImagemService {
 			}
 
 			in = Files.newInputStream(Paths.get(caminho));
-		} catch (IOException e) {
+		} catch (IOException|NullPointerException e) {
 			setDefaultProfile();
 		}
 		return in;

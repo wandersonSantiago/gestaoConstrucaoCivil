@@ -21,9 +21,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.app.entity.Empreendimento;
-import br.com.app.entity.Usuario;
 import br.com.app.enuns.StatusCotacao;
-import br.com.app.pojo.SessionUsuario;
 import lombok.Data;
 
 @Data
@@ -55,24 +53,11 @@ public class Cotacao {
 	@Column(name = "data_fechamento")
 	private Date dataFechamento;
 
-	public void abrir() {
-		this.dataCriacao = new Date();
-		this.statusCotacao = StatusCotacao.ABERTO;
-		Usuario usuarioSessao = SessionUsuario.getInstance().getUsuario();
-		this.empreendimento = usuarioSessao.getEmpreendimento();
-		adicionarCotacaoNoItem();
-	}
-
-	private void adicionarCotacaoNoItem() {
+	public void adicionarCotacaoNoItem() {
 
 		for (CotacaoItem item : itens) {
-			item.setContacao(this);
+			item.setCotacao(this);
 		}
-	}
-
-	public void fechar() {
-		this.statusCotacao = StatusCotacao.FECHADO;
-		this.dataFechamento = new Date();
 	}
 
 }

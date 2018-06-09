@@ -49,9 +49,7 @@ public class UsuarioRestController {
 	@ResponseBody
 	public Usuario user(Principal user, HttpSession session) {
 
-		Usuario usuario = (Usuario) session.getAttribute("usuario");
-
-		return usuario;
+		return (Usuario) session.getAttribute("usuario");
 	}
 
 	@ResponseStatus(HttpStatus.OK)
@@ -128,7 +126,7 @@ public class UsuarioRestController {
 			usuarioService.savePathFoto(usuario);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+		
 			throw new MensagemException("Não foi possivel salvar a foto" + e.getMessage());
 		}
 	}
