@@ -30,15 +30,15 @@ public class FabricanteRestController {
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping
-	public void salvar(@RequestBody Fabricante fabricante) {
-		fabricanteService.salvarOuEditar(fabricante);
+	public void insert(@RequestBody Fabricante fabricante) {
+		fabricanteService.insert(fabricante);
 
 	}
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PutMapping
-	public void alterar(@RequestBody Fabricante fabricante) {
-		fabricanteService.salvarOuEditar(fabricante);
+	public void update(@RequestBody Fabricante fabricante) {
+		fabricanteService.update(fabricante);
 
 	}
 	

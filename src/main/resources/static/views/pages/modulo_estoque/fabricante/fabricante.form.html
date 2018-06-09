@@ -2,40 +2,40 @@
 <form name="formFabricante" novalidate ng-submit="ctrl.submit()">
 
 	<div>
-		<h4>Cadastro</h4>          
+		<h4>{{ctrl.botao}}</h4>          
 		<hr>		
 	</div>	
 
 <label>Razão Social:</label>
-<p>{{::ctrl.empresa.razaoSocial}}</p>
+<p>{{ctrl.empresa.razaoSocial}}</p>
 <label>Nome Fantasia:</label>
-<p>{{::ctrl.empresa.nomeFantasia}}</p>
+<p>{{ctrl.empresa.nomeFantasia}}</p>
 <strong>CNPJ:</strong> 
-<p>{{::ctrl.empresa.cnpj | brCnpj}}</p>
+<p>{{ctrl.empresa.cnpj | brCnpj}}</p>
 
 <address>
 	<p>
 		<span class="glyphicon glyphicon-map-marker"></span>
-		{{::ctrl.empresa.endereco.logradouro}},
-		{{::ctrl.empresa.endereco.numero}} -
-		{{::ctrl.empresa.endereco.bairro}}
-		-{{::ctrl.empresa.endereco.cidade.nome}}
-		/{{::ctrl.empresa.endereco.estado.nome}} CEP:
-		{{::ctrl.empresa.endereco.cep}}
+		{{ctrl.empresa.endereco.logradouro}},
+		{{ctrl.empresa.endereco.numero}} -
+		{{ctrl.empresa.endereco.bairro}}
+		-{{ctrl.empresa.endereco.cidade.nome}}
+		/{{ctrl.empresa.endereco.estado.nome}} CEP:
+		{{ctrl.empresa.endereco.cep}}
 	</p>
-	<p>{{::ctrl.empresa.endereco.complemento}}</p>
+	<p>{{ctrl.empresa.endereco.complemento}}</p>
 	<p>
 		<abbr title="Telefone"><span class="glyphicon glyphicon-phone"></span></abbr>
-		{{::ctrl.empresa.telefone | brPhoneNumber}}
+		{{ctrl.empresa.telefone | brPhoneNumber}}
 	</p>
 	<p>
 		<abbr title="e-mail"><span class="glyphicon glyphicon-envelope"></span></abbr>
-		{{::ctrl.empresa.email}}
+		{{ctrl.empresa.email}}
 	</p>
 	<p>
 		<abbr title="endereço do site"><span
 			class="glyphicon glyphicon-cloud"></span></abbr>
-		{{::ctrl.empresa.site}}
+		{{ctrl.empresa.site}}
 	</p>
 </address>
 	
@@ -43,7 +43,7 @@
 	<div class="row ">
 		<div class="col-sm-4"></div>
 		<div class="col-sm-4">
-			<input type="submit" id="submit" value="Salvar" class="btn btn-lg btn-primary btn-block btn-signin">
+			<input type="submit" id="submit" value="{{ctrl.botao}}" class="btn btn-lg btn-primary btn-block btn-signin">
 		</div>
 	</div>
 

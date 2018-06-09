@@ -7,6 +7,7 @@ function FabricanteCadastarController (toastr, $scope, $location, $state, $state
 		 
 	var self = this;
 	$scope.submitted = false;
+	self.botao = "Cadastrar";
 	self.submit = submit;
 	self.empresa = $stateParams.empresa;
 	
@@ -73,12 +74,14 @@ function FabricanteEditarController($scope, $location, $stateParams, $state, Fab
 	var self = this;
 	var idFabricante = $stateParams.idFabricante;	
 	
+	self.submit = submit;
+	self.botao = "Editar";
 	buscarPorId(idFabricante);
 	
 	 function buscarPorId(id){
     	 FabricanteService.buscarPorId(id)
     	 .then(function(e){
-    		 self.fabricante = e;		    		    		
+    		 self.empresa = e.dadoEmpresa;		    		    		
        	 }, function(errResponse){
     	 	 });
     	 };	    	 
@@ -91,7 +94,8 @@ function FabricanteEditarController($scope, $location, $stateParams, $state, Fab
 			}
 		
 		 blockUI.start();
-    	 FabricanteService.alterar(self.Fabricante).
+		 self.fabricante = {dadoEmpresa : self.empresa};
+    	 FabricanteService.alterar(self.fabricante).
 			 then(function(response){
 				 self.Fabricante = null;
 				 toastr.success('dados alterado', 'Sucesso!!!');

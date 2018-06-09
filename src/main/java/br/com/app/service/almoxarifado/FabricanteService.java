@@ -23,10 +23,14 @@ public class FabricanteService {
 	
 	
 	@Transactional(readOnly = false)
-	public void salvarOuEditar(Fabricante fabricante){
+	public void insert(Fabricante fabricante){
 		if(existeCnpjCadastrado(fabricante.getDadoEmpresa().getCnpj())) {
 			throw new MensagemException("CNPJ ja consta cadastrado como uma fabricante");
 		}
+		fabricanteRepository.save(fabricante);
+	}
+	@Transactional(readOnly = false)
+	public void update(Fabricante fabricante){		
 		fabricanteRepository.save(fabricante);
 	}
 	
