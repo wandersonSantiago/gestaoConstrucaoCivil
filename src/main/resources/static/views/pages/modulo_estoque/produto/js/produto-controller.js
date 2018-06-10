@@ -2,13 +2,14 @@ app.controller("ProdutoCadastarController", ProdutoCadastarController);
 app.controller("ProdutoEditarController", ProdutoEditarController);
 app.controller("ProdutoListarController", ProdutoListarController);
 
-function ProdutoCadastarController(ProdutoService, toastr, $scope){
+function ProdutoCadastarController(ProdutoService,SubCategoriaService,FabricanteService, toastr, $scope){
 	
 	var self = this;	
 	
 	self.submit = submit;
-	self.insertObjeto = insertObjeto;
-	self.implementModal = implementModal;
+	unidadesMedida();
+	subCategoria();
+	fabricante();
 	
 	 function submit(produto){
 				ProdutoService.insert(self.produto).
@@ -20,15 +21,30 @@ function ProdutoCadastarController(ProdutoService, toastr, $scope){
 				});			
 		};
 		
-		function implementModal(objeto){
-			$scope.objeto = objeto;
-			$('.implementModal').modal('show');
-		}
+	 function unidadesMedida(){
+		 ProdutoService.findByUnidadesMedida().then(function(u){
+			 self.unidadesMedida = u;
+		 },function(erro){
+
+		 })
+	 };
+	 function subCategoria(){
+		SubCategoriaService.findBySubCategoriaByDescricao("").then(function(c){
+			self.subCategoria = c.content;
+		},function(erro){
+			console.log(erro); 
+		})
+	 };
+	 function fabricante(){
+		FabricanteService.buscarPorTexto("").then(function(f){
+			self.fabricante = f.content;
+		},function(erro){
+			console.log(erro); 
+		})
+	 };
 			
-		 function insertObjeto(objeto){
-			 $('.implementModal').modal('hide');
-			 toastr.success(objeto + " cadastrado");		
-		};
+		 	
+	 
 			
 }		
 

@@ -21,12 +21,6 @@
 			Código de Barras:
 				<input class="form-control" ng-model="ctrl.produto.codigoBarra" id="codigoBarra" placeholder="ex: 789456781 " type="text" >
 			</div>
-			<div class="col-sm-4" >
-				<a href="" class="fa fa-plus" ng-click="ctrl.implementModal(categoria)"></a>Categoria:
-				<select class="form-control select2" ng-model="ctrl.produto.categoria" 
-					ng-options="categoria.descricao for categoria in ctrl.categorias" required >
-				</select>
-			</div>
 			
 		</div>					
 		<br>			
@@ -34,7 +28,7 @@
 			<div class="col-sm-4">
 				<a href="" class="fa fa-plus"></a>Sub Categoria:
 				<select class="form-control select2" ng-model="ctrl.produto.subCategoria" 
-					ng-options="subCategoria.descricao for subCatgeoria in ctrl.subCategoria"  required >
+					ng-options="subCategoria.descricao for subCategoria in ctrl.subCategoria"  required >
 				</select>
 			</div>			
 			<div class="col-sm-4">		
@@ -57,31 +51,6 @@
 		</div>
 		
 	</form>				
-</div>
+</div>		
 
-		
-<!-- MODAL -->				
-		<div  class="modal fade modal-default implementModal" id="implementModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document" >
-		    <div class="modal-content">
-		      <div class="modal-header">
-		      Cadastrar
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		      </div>
-		      <div class="modal-body">				     		
-			     <div >
-			      Descrição:
-			      	<div class="col-md-12">
-						<input type="text" class="form-control select2" ng-model="objeto.descricao">
-					</div>
-				</div>			       
-		      </div><br><br>
-		      <div class="modal-footer ">
-			      <div class="col-md-4 col-md-offset-4">
-			     	 <input type="button" class="btn btn-lg btn-primary btn-block btn-signin" value="Salvar" ng-click="ctrl.insertObjeto(objeto)" >
-			      </div>
-		      </div>
-		    </div>
-		  </div>
-		</div>
 

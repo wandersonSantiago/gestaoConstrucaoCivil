@@ -37,6 +37,14 @@ app.factory('ProdutoService', function($rootScope, toastr, $http,$q){
 			},function(errResponse){
 				return $q.reject(errResponse);
 			});
+		},
+		findByUnidadesMedida: function(){
+			return $http.get(url + "/unidades-medida")
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				return $q.reject(errResponse);
+			});
 		}		
 	}
 });

@@ -1,5 +1,6 @@
 package br.com.app.web.controller.almoxarifado;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -19,10 +20,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.app.entity.almoxarifado.Produto;
+import br.com.app.enuns.UnidadeMedidaEnum;
 import br.com.app.service.almoxarifado.ProdutoService;
 
 @RestController
-@RequestMapping("/rest/almoxarifado/produto")
+@RequestMapping("/rest/estoque/produto")
 public class ProdutoRestController {
 
 	@Autowired
@@ -68,4 +70,11 @@ public class ProdutoRestController {
 	public void alterar(@RequestBody Produto produto) {
 		produtoService.salvarOuEditar(produto);
 	}
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value = "/unidades-medida")
+	public Collection<UnidadeMedidaEnum> unidadeMedida() {
+
+		return Arrays.asList(UnidadeMedidaEnum.values());
+	}
+	
 }
