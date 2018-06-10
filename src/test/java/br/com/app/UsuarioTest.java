@@ -1,5 +1,6 @@
 package br.com.app;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -35,7 +36,7 @@ public class UsuarioTest extends AbstractMvcTest {
 
 		Usuario usuario = new GenerateUsuario().gerar();
 		
-		mockMvc.perform(post(uriSave).content(objectForJson(usuario)).contentType(MediaType.APPLICATION_JSON))
+		mockMvc.perform(post(uriSave).content(Util.getInstance().objectForJson(usuario)).contentType(MediaType.APPLICATION_JSON))
 		.andExpect(status().isForbidden());
 	 
 	}
@@ -44,8 +45,8 @@ public class UsuarioTest extends AbstractMvcTest {
 
 		Usuario usuario = new GenerateUsuario().gerar();
 		
-		mockMvc.perform(post(uriSave).content(objectForJson(usuario)).with(httpBasic("root","123")).contentType(MediaType.APPLICATION_JSON))
-		.andExpect(status().isOk());
+		mockMvc.perform(post(uriSave).with(csrf()).content(Util.getInstance().objectForJson(usuario)).with(httpBasic("root","123")).contentType(MediaType.APPLICATION_JSON))
+		.andExpect(status().isCreated());
 	 
 	}
 	

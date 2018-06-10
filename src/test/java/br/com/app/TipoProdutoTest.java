@@ -1,6 +1,7 @@
 package br.com.app;
  
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -11,6 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.List;
 
 import org.hamcrest.core.IsNull;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.MediaType;
 
@@ -27,12 +29,18 @@ public class TipoProdutoTest  extends AbstractMvcTest {
 	private final String uriEdit = "/rest/almoxarifado/produto/tipo/altera";
 	private final String uriFindById = "/rest/almoxarifado/produto/tipo/buscaPorId/{id}";
 
+	@Before
+	public void set() throws Exception {
+		 
+		save();
+	}
+	
 	@Test
 	public void save() throws Exception {
 
 		TipoProduto tipoProduto = new GenerateTipoProduto().gerar();
 
-		mockMvc.perform(post(uriSave).content(objectForJson(tipoProduto)).contentType(MediaType.APPLICATION_JSON))
+		mockMvc.perform(post(uriSave).with(csrf()).content(Util.getInstance().objectForJson(tipoProduto)).contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isCreated());
 		 
 	}
@@ -55,7 +63,7 @@ public class TipoProdutoTest  extends AbstractMvcTest {
 		
 		tipoProdutoEdited.setDescricao("Tipo Produto Editado");
 
-		mockMvc.perform(put(uriEdit).content(objectForJson(tipoProdutoEdited)).contentType(MediaType.APPLICATION_JSON))
+		mockMvc.perform(put(uriEdit).with(csrf()).content(Util.getInstance().objectForJson(tipoProdutoEdited)).contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isCreated());
 
 		mockMvc.perform(get(uriFindById, tipoProdutoEdited.getId())).andExpect(status().isOk())
@@ -79,7 +87,7 @@ public class TipoProdutoTest  extends AbstractMvcTest {
 	@Test
 	public void findById() throws Exception {
 
-		String tipoProdutoJson = mockMvc.perform(get(uriList)).andExpect(status().isOk()).andReturn().getResponse()
+		String tipoProdutoJson = mockMvc.perform(get(uriList).with(csrf())).andExpect(status().isOk()).andReturn().getResponse()
 				.getContentAsString();
 
 		ObjectMapper mapper = new ObjectMapper();

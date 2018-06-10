@@ -1,5 +1,6 @@
 package br.com.app;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -27,18 +28,21 @@ public class CargoTest extends AbstractMvcTest {
 	private final String uriList = "/rest/recursosHumanos/cargo/lista";
 	private final String uriEdit = "/rest/recursosHumanos/cargo/altera";
 	private final String uriFindById = "/rest/recursosHumanos/cargo/buscaPorId/{id}";
-
+	
+	
 	@Before
-	public void setUp() throws Exception {
+	public void set() throws Exception {
+		 
 		save();
-		
 	}
+	 
 	@Test
 	public void save() throws Exception {
 
+		
 		Cargo cargo = new GenerateCharge().gerar();
 
-		mockMvc.perform(post(uriSave).content(objectForJson(cargo)).contentType(MediaType.APPLICATION_JSON))
+		mockMvc.perform(post(uriSave).with(csrf()).content(Util.getInstance().objectForJson(cargo)).contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isCreated());
 
 	}
@@ -61,7 +65,7 @@ public class CargoTest extends AbstractMvcTest {
 		
 		cargoEdited.setDescricao("Cargo Editado");
 
-		mockMvc.perform(put(uriEdit).content(objectForJson(cargoEdited)).contentType(MediaType.APPLICATION_JSON))
+		mockMvc.perform(put(uriEdit).with(csrf()).content(Util.getInstance().objectForJson(cargoEdited)).contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isCreated());
 
 		mockMvc.perform(get(uriFindById, cargoEdited.getId())).andExpect(status().isOk())
