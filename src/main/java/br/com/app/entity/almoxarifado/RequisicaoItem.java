@@ -11,8 +11,9 @@ import javax.persistence.Table;
 @Table(name = "requisicao_item", schema = "almoxarifado")
 public class RequisicaoItem extends Item implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-
+	
+	private static final long serialVersionUID = 3809274677351422452L;
+	
 	@ManyToOne
 	@JoinColumn(name = "id_requisicao")
 	private Requisicao requisicao;

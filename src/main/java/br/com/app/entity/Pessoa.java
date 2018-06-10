@@ -30,8 +30,8 @@ import lombok.Data;
 @Table(name = "pessoa" , schema = "communs")
 public abstract class Pessoa implements Serializable{
 
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -9083483781974164629L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pessoa_id_seq")
 	private Long id;

@@ -1,5 +1,6 @@
 package br.com.app.entity.almoxarifado;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +26,9 @@ import lombok.Data;
 @Entity
 @SequenceGenerator(name = "pedido_compra_id_seq", sequenceName = "pedido_compra_id_seq", allocationSize = 1, schema = "almoxarifado")
 @Table(name = "pedido_compra", schema = "almoxarifado")
-public class PedidoCompra {
+public class PedidoCompra implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pedido_compra_id_seq")

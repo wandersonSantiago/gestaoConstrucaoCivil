@@ -1,5 +1,7 @@
 package br.com.app.entity.almoxarifado;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -19,7 +21,9 @@ import lombok.Data;
 @Entity
 @SequenceGenerator(name = "cotacao_empresa_item_id_seq", sequenceName = "cotacao_empresa_item_id_seq", allocationSize = 1, schema = "almoxarifado")
 @Table(name = "cotacao_empresa_item", schema = "almoxarifado")
-public class CotacaoEmpresaItem {
+public class CotacaoEmpresaItem implements Serializable {
+
+	private static final long serialVersionUID = -446219769994472745L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cotacao_empresa_item_id_seq")

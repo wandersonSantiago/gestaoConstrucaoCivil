@@ -1,5 +1,6 @@
 package br.com.app.entity.servicos;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -20,7 +21,10 @@ import lombok.Data;
 @Entity
 @SequenceGenerator(name = "prestadora_servico_id_seq", sequenceName = "prestadora_servico_id_seq", allocationSize = 1, schema = "servicos")
 @Table(name = "prestadora_servico", schema = "servicos")
-public class PrestadoraServico {
+public class PrestadoraServico implements Serializable{
+
+	 
+	private static final long serialVersionUID = -4568451591344862134L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "prestadora_servico_id_seq")

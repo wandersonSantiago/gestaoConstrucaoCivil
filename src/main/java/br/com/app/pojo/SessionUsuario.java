@@ -20,12 +20,10 @@ public class SessionUsuario {
 		 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
 					.getRequest();
 		HttpSession session = request.getSession();
-		Usuario usuario = (Usuario) session.getAttribute("usuario");
-		
-		return usuario;
-	}
+		return (Usuario) session.getAttribute("usuario");
+   }
 
-	public synchronized static SessionUsuario getInstance() {
+	public static synchronized  SessionUsuario getInstance() {
 
 		if (instance == null) {
 			instance = new SessionUsuario();

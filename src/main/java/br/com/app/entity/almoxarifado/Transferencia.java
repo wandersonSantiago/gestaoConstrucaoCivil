@@ -83,13 +83,11 @@ public class Transferencia implements Serializable, EntradaOuBaixa<Transferencia
 
 	@Override
 	public Empreendimento empreendimentoSaida() {
-		// TODO Auto-generated method stub
 		return notaFiscal.getEmpreendimento();
 	}
 
 	@Override
 	public Empreendimento empreendimentoEntrada() {
-		// TODO Auto-generated method stub
 		return empreendimentoDestino;
 	}
 

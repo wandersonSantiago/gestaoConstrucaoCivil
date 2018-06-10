@@ -23,7 +23,7 @@ public class ExecuteGera {
 			if (!repository.existeCodigo(codigo)) {
 				CodigoGerado codigoGerado = new CodigoGerado();
 				codigoGerado.setCodigo(codigo.toString());
-				codigoGerado.setData_geracao(LocalDate.now());
+				codigoGerado.setDataGeracao(LocalDate.now());
 				repository.save(codigoGerado);
 				return codigo;
 			}

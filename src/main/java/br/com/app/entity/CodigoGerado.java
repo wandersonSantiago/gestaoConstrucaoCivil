@@ -23,5 +23,5 @@ public class CodigoGerado {
 	private Long id;
 	private String codigo;
 	@Column(name = "data_geracao")
-	private LocalDate data_geracao;
+	private LocalDate dataGeracao;
 }

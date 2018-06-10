@@ -2,7 +2,6 @@ package br.com.app.web.controller;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,7 +40,7 @@ public class DadoEmpresaRestController {
 
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/cnpj/{cnpj}")
-	public Optional<DadoEmpresa> findByCnpj(@PathVariable String cnpj) {
+	public DadoEmpresa findByCnpj(@PathVariable String cnpj) {
 		return dadoEmpresaService.findByCnpj(cnpj);
 	}
 	

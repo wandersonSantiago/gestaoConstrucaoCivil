@@ -1,5 +1,6 @@
 package br.com.app.entity.almoxarifado;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -27,7 +28,10 @@ import lombok.Data;
 @Entity
 @SequenceGenerator(name = "nota_fiscal_id_seq", sequenceName = "nota_fiscal_id_seq", allocationSize = 1, schema = "almoxarifado")
 @Table(name = "nota_fiscal", schema = "almoxarifado")
-public class NotaFiscal {
+public class NotaFiscal implements Serializable{
+
+	
+	private static final long serialVersionUID = 5220537450104744028L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "nota_fiscal_id_seq")

@@ -17,7 +17,7 @@ public class CancelamentoTransferencia implements EntradaOuBaixa<TransferenciaIt
 	}
 	@Override
 	public Collection<TransferenciaItem> getItens() {
-		// TODO Auto-generated method stub
+		 
 		return transferencia.getItens();
 	}
 	@Override

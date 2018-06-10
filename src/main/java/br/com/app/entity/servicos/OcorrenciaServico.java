@@ -22,7 +22,7 @@ import lombok.Data;
 @Table(name = "ocorrencia_servico", schema = "servicos")
 public class OcorrenciaServico implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 4115751645501990704L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ocorrencia_servico_id_seq")

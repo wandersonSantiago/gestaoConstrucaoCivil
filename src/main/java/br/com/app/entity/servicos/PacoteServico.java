@@ -1,5 +1,7 @@
 package br.com.app.entity.servicos;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +20,9 @@ import lombok.Data;
 @Entity
 @SequenceGenerator(name = "pacote_servico_id_seq", sequenceName = "pacote_servico_id_seq", allocationSize = 1, schema = "servicos")
 @Table(name = "pacote_servico", schema = "servicos")
-public class PacoteServico {
+public class PacoteServico implements Serializable{
+
+	private static final long serialVersionUID = -7752261115405853153L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pacote_servico_id_seq")

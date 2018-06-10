@@ -1,5 +1,6 @@
 package br.com.app.entity.almoxarifado;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -29,7 +30,9 @@ import lombok.Data;
 
 @SequenceGenerator(name = "nota_fiscal_produto_id_seq", sequenceName = "nota_fiscal_produto_id_seq", allocationSize = 1, schema = "almoxarifado")
 @Table(name = "nota_fiscal_produto", schema = "almoxarifado")
-public class NotaFiscalProduto implements EntradaOuBaixa<NotaFiscalItem> {
+public class NotaFiscalProduto implements Serializable ,EntradaOuBaixa<NotaFiscalItem> {
+
+	private static final long serialVersionUID = -5762609472513945182L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "nota_fiscal_produto_id_seq")
