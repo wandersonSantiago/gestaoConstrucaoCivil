@@ -22,22 +22,27 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				  }
 		})
 				
+			
 		.state('fornecedor.cadastrar', {
 			url : "/cadastrar",
-			templateUrl : "views/pages/modulo_estoque/fornecedor/fornecedor.form.html",
-			controller : "FornecedorCadastarController as ctrl",
+			params: {
+				empresa: null
+			  },
+			  templateUrl : "views/pages/modulo_estoque/fornecedor/fornecedor.form.html",
+			  controller : "FornecedorCadastarController as ctrl",
 			ncyBreadcrumb: {
 			 	parent: 'fornecedor.menu',
 			    label: 'Cadastrar'
 			  }
 		})
 		
+		
 		.state('fornecedor.editar', {
 			url : "/:idFornecedor/editar",
 			templateUrl : "views/pages/modulo_estoque/fornecedor/fornecedor.form.html",
 			controller : "FornecedorEditarController as ctrl",
 			ncyBreadcrumb: {
-				 	parent: 'fornecedor.listar',
+				 	parent: 'fornecedor.consultar',
 				    label: 'Editar'
 				  }
 		
@@ -46,12 +51,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		.state('fornecedor.visualizar', {
 			url : "/:idFornecedor",
 			templateUrl : "views/pages/modulo_estoque/fornecedor/fornecedor.show.html",
-			controller : "FornecedorController as ctrl",
+			controller : "FornecedorVisualizarController as ctrl",
 			ncyBreadcrumb: {
-				 	parent: 'fornecedor.listar',
+				 	parent: 'fornecedor.consultar',
 				    label: 'Visualizar'
 				  }
 		})
+		
 		.state('fornecedor.menu', {
 			requiresAuthentication: true,
 			url : "/produto/menu",

@@ -70,9 +70,8 @@ function EmpresaMatrizCadastarController (toastr, $scope, buscaCepService, $loca
 			  }
 		    	 EmpresaMatrizService.buscarPorCnpj(cnpj)
 		    	 .then(function(empresa){	
-		    		 empresa != null  ? $state.go(self.proximaPagina,{ empresa}) : $state.go('matriz.cadastrar',{ cnpj});	    		 
-		 			}, function(errResponse){
-		 				self.dadoEmpresa.cnpj = null;
+		    		 empresa != ""  ? $state.go(self.proximaPagina,{ empresa}) : $state.go('matriz.cadastrar',{ cnpj});	    		 
+		 			}, function(errResponse){		 				
 		    		 swal({ text : errResponse.data.message ,  type : "info", width: 200, higth: 100, padding: 20}).catch(swal.noop);
 		 			});
 		     };

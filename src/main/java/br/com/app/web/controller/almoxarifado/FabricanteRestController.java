@@ -45,7 +45,7 @@ public class FabricanteRestController {
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/{id}")
 	public Optional<Fabricante> buscarPorId(@PathVariable Long id) {
-		return fabricanteService.buscarPorId(id);
+		return fabricanteService.findById(id);
 	}
 
 	@ResponseStatus(HttpStatus.OK)

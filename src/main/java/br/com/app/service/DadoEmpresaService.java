@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.app.entity.DadoEmpresa;
-import br.com.app.exceptions.NotFoundException;
 import br.com.app.repository.DadoEmpresaRepository;
 
 @Service
@@ -30,8 +29,7 @@ public class DadoEmpresaService {
 	}
 
 	public DadoEmpresa findByCnpj(String cnpj) {
-		 return dadoEmpresaRepository.findByCnpj(cnpj).orElseThrow(
-				() -> new NotFoundException("Não foi possivel encontrar nenhuma empresa com o CNPJ: " + cnpj));
+		 return dadoEmpresaRepository.findByCnpj(cnpj);
 	
 	}
 

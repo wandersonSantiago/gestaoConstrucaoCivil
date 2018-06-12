@@ -24,17 +24,19 @@ public class FabricanteService {
 	
 	@Transactional(readOnly = false)
 	public void insert(Fabricante fabricante){
+		fabricante.setId(null);
 		if(existeCnpjCadastrado(fabricante.getDadoEmpresa().getCnpj())) {
 			throw new MensagemException("CNPJ ja consta cadastrado como uma fabricante");
 		}
 		fabricanteRepository.save(fabricante);
 	}
 	@Transactional(readOnly = false)
-	public void update(Fabricante fabricante){		
+	public void update(Fabricante fabricante){	
+		findById(fabricante.getId());
 		fabricanteRepository.save(fabricante);
 	}
 	
-	public Optional<Fabricante> buscarPorId(Long id) {		
+	public Optional<Fabricante> findById(Long id) {		
 		return fabricanteRepository.findById(id);
 	}
 	

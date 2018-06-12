@@ -7,7 +7,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			templateUrl : 'views/pages/modulo_estoque/empresa_matriz/empresa_matriz.index.html',
 			redirectTo : 'empresa.listar',
 			ncyBreadcrumb: {
-					parent: 'home',
+					parent: 'estoque.menu',
 				    label: 'Empresa Matriz'
 				  }
 		})
@@ -53,6 +53,19 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			ncyBreadcrumb: {
 				 	parent: 'matriz.listar',
 				    label: 'Visualizar'
+				  }
+		})
+		.state('matriz.identificar', {
+			requiresAuthentication: true,
+			url : "/empresa/identificar",
+			params: {
+				proximaPagina: null
+			  },
+			templateUrl : "views/pages/modulo_estoque/empresa_matriz/empresa.identificar.html",
+			controller : "EmpresaMatrizCadastarController as ctrl",
+			ncyBreadcrumb: {
+				 	parent: 'matriz',
+				    label: 'Empresa'
 				  }
 		})
 

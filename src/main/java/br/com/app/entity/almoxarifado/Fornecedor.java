@@ -2,7 +2,6 @@ package br.com.app.entity.almoxarifado;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,7 +33,7 @@ public class Fornecedor implements Serializable {
 	@Column(nullable = true, length = 50)
 	private String observacao;
 
-	@OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+	@OneToOne
 	@JoinColumn(name = "id_dado_empresa", nullable = false)
 	private DadoEmpresa dadoEmpresa;
 

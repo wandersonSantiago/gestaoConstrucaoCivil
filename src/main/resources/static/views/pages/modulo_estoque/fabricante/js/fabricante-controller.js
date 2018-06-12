@@ -58,6 +58,8 @@ function FabricanteCadastarController (toastr, $scope, $location, $state, $state
 	    			$state.go('fabricante.visualizar', { idFabricante});
 	    			}	    		 
 	 			}, function(errResponse){
+	 				var empresa = self.empresa;
+	 				$state.go('fabricante.cadastrar', {empresa});
 	    		 ;
 	 			});
 	     };
@@ -81,7 +83,7 @@ function FabricanteEditarController($scope, $location, $stateParams, $state, Fab
 	 function buscarPorId(id){
     	 FabricanteService.buscarPorId(id)
     	 .then(function(e){
-    		 self.empresa = e.dadoEmpresa;		    		    		
+    		 self.fabricante = e;		    		    		
        	 }, function(errResponse){
     	 	 });
     	 };	    	 
@@ -94,12 +96,11 @@ function FabricanteEditarController($scope, $location, $stateParams, $state, Fab
 			}
 		
 		 blockUI.start();
-		 self.fabricante = {dadoEmpresa : self.empresa};
     	 FabricanteService.alterar(self.fabricante).
 			 then(function(response){
 				 self.Fabricante = null;
 				 toastr.success('dados alterado', 'Sucesso!!!');
-				 $state.go("fabricante.listar");
+				 $state.go("fabricante.consultar");
 				 blockUI.stop();
 			 },
 			function(errResponse){
