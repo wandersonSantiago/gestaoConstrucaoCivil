@@ -32,7 +32,6 @@ function FornecedorCadastarController ($stateParams, toastr, $scope, buscaCepSer
 			return;
 		}			
 			 blockUI.start();
-			 self.fornecedor = {dadoEmpresa : self.empresa, contato : self.contato, observacao : self.observacao};
 	    	 FornecedorService.save(self.fornecedor).
 				 then(function(response){					
 					 blockUI.stop();
@@ -69,6 +68,8 @@ function FornecedorCadastarController ($stateParams, toastr, $scope, buscaCepSer
 		    			idFornecedor = e.id;
 		    			mensagem("Fornecedor ja esta cadastrada", "info");
 		    			$state.go('fornecedor.visualizar', { idFornecedor});
+		    			}else{
+		    				self.fornecedor= {dadoEmpresa : self.empresa};
 		    			}	    		 
 		 			}, function(errResponse){
 		 				var empresa = self.empresa;

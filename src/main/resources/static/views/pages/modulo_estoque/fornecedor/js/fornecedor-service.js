@@ -37,8 +37,8 @@ app.factory("FornecedorService", function($http,$rootScope, toastr, $q){
 			});
 		},
 		
-		buscarPorCNPJ : function(cnpj){
-			return $http.post(url + '/cnpj', cnpj)
+		buscarPorCNPJ: function(cnpj){
+			return $http.get(url + '/cnpj/' + cnpj)
 			.then(function(response){
 			   return response.data;
 			}, function(errResponse){

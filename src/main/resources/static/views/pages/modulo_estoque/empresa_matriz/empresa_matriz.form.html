@@ -33,7 +33,7 @@
 			
 			<div class="form-group col-sm-4" ng-class="{ 'has-error' : formMatriz.status.$invalid && formMatriz.$submitted}" >
 				<label>Status*:</label><br>
-				<select class="form-control select2 "  ng-model="ctrl.dadoEmpresa.status" ng-options="status  for status in ctrl.status" 
+				<select class="form-control select2 "  ng-model="ctrl.dadoEmpresa.status" ng-options="status  for status in ctrl.status track by status" 
 					name="status" style="width: 100%;" required ng-required="true">
 				</select>					
 			</div>	

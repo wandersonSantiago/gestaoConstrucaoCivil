@@ -1,5 +1,7 @@
 package br.com.app.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,4 +17,9 @@ public interface DadoEmpresaRepository extends JpaRepository<DadoEmpresa,Long>{
 	boolean existeIe(@Param("inscricaoEstadual") String inscricaoEstadual);
 
 	DadoEmpresa findByCnpj(String cnpj);
+
+	Page<DadoEmpresa> findByCnpjContaining(String descricao, Pageable page);
+
+	Page<DadoEmpresa> findByRazaoSocialIgnoreCaseContainingOrNomeFantasiaIgnoreCaseContaining(
+			String descricao, Pageable page);
 }

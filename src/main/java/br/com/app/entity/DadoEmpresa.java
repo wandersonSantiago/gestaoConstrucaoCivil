@@ -15,6 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import br.com.app.enuns.StatusEnum;
 import br.com.app.enuns.UfEnum;
 import lombok.Data;
 
@@ -47,5 +48,18 @@ public class DadoEmpresa implements Serializable {
 	private String telefone;
 	@Column(length = 40)
 	private String email;
+	@Column(length = 40)
+	private String site;
+	
+	private Integer status;
+	
+	
+	public void setStatus(StatusEnum status) {
+		this.status = status.getCodigo();
+	}
+	public StatusEnum getStatus() {
+		return StatusEnum.toEnum(status);
+	}
+	
 
 }

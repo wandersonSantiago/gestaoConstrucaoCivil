@@ -40,7 +40,7 @@ function EmpresaMatrizCadastarController (toastr, $scope, buscaCepService, $loca
 					 blockUI.stop();
 					 toastr.success('Empresa', 'Cadastrada!');
 					 clear();
-					 $state.go(self.proximaPagina,{response});
+					 $state.go("matriz.identificar");
 				 },
 				function(errResponse){					 
 					 blockUI.stop();
@@ -101,29 +101,50 @@ function EmpresaMatrizCadastarController (toastr, $scope, buscaCepService, $loca
 function EmpresaMatrizEditarController($scope, buscaCepService, $location, $stateParams, $state, EmpresaMatrizService, toastr, blockUI){
 	var self = this;
 	var idEmpresaMatriz = $stateParams.idEmpresaMatriz;	
+	$scope.submitted = false;
+	self.findCep = findCep;
+	self.submit = submit;
 	
 	buscarPorId(idEmpresaMatriz);
+	uf();
+	status();
 	
-	 function buscarPorId(id){
+	
+	
+	
+	function buscarPorId(id){
     	 EmpresaMatrizService.buscarPorId(id)
     	 .then(function(e){
-    		 self.EmpresaMatriz = e;		    		 	    		
+    		 self.dadoEmpresa = e;	
+    		 self.cnpj = e.cnpj;
+    		/* $scope.formMatriz.cepField.$error = false;
+    		 self.dadoEmpresa.endereco.cep = e.endereco.cep;*/
        	 }, function(errResponse){
     	 	 });
     	 };	    	 
-    	 
+    	  
 	
+	
+	function findCep() {
+		self.cep = self.dadoEmpresa.endereco.cep;
+			buscaCepService.get({'cep': self.cep}).$promise
+			.then(function success(result){				
+				self.cep = self.dadoEmpresa.endereco = result;				
+			}).catch(function error(msg) {
+			});				
+	    }
+    		
 	 function submit(){
-		 if($scope.formEntidade.$invalid){
+		 if($scope.formMatriz.$invalid){
 				sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
 				return;
 			}		 
 		 blockUI.start();
-    	 EmpresaMatrizService.alterar(self.EmpresaMatriz).
+    	 EmpresaMatrizService.alterar(self.dadoEmpresa).
 			 then(function(response){
 				 self.EmpresaMatriz = null;
 				 toastr.success('dados alterado', 'Sucesso!!!');
-				 $state.go("EmpresaMatriz.listar");
+				 $state.go("matriz.consultar");
 				 blockUI.stop();
 			 },
 			function(errResponse){
@@ -132,14 +153,31 @@ function EmpresaMatrizEditarController($scope, buscaCepService, $location, $stat
 			
 		 	});
 	       }
-	 
+	 function status(){			 
+    	 EmpresaMatrizService.status()
+    	 .then(function(e){	
+    		 self.status = e;
+ 			}, function(errResponse){
+    		 swal({ text : errResponse.data.message ,  type : "info", width: 200, higth: 100, padding: 20}).catch(swal.noop);
+ 			});
+     };
+     
+	 function uf(){			 
+		 EmpresaMatrizService.uf()
+		 .then(function(e){	
+			 self.ufs = e;
+				}, function(errResponse){
+			 swal({ text : errResponse.data.message ,  type : "info", width: 200, higth: 100, padding: 20}).catch(swal.noop);
+				});
+	 };    
+
 	
 }
 
 
 function EmpresaMatrizListarController(EmpresaMatrizService, blockUI, toastr, $scope){
 	var self = this;
-	self.EmpresaMatrizs = null;
+	self.empresas = null;
 	self.buscarPorTexto = buscarPorTexto;
 	self.totalElementos = {};
 	self.totalPaginas = null;
@@ -148,13 +186,12 @@ function EmpresaMatrizListarController(EmpresaMatrizService, blockUI, toastr, $s
 	buscarPorTexto('');
 	     
 	    function buscarPorTexto(texto){
-	    	$scope.mensagemErro = null;
-	    	 
+	    	$scope.mensagemErro = null;	    	 
 	    	 blockUI.start();
 	    	 EmpresaMatrizService.buscarPorTexto(texto, self.paginaCorrente).
 	    	 then(function(e){
 	    		 $scope.mensagemErro = null;
-	    		self.EmpresaMatrizs = e.content;	
+	    		self.empresas = e.content;	
 	    		 self.totalElementos = e.totalElements;
 	    		 self.totalPaginas = e.totalPages;
 	    		 blockUI.stop();

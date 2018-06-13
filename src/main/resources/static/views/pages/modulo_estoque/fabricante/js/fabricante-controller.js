@@ -56,7 +56,9 @@ function FabricanteCadastarController (toastr, $scope, $location, $state, $state
 	    			idFabricante = e.id;
 	    			mensagem("Fabricante ja esta cadastrada", "info");
 	    			$state.go('fabricante.visualizar', { idFabricante});
-	    			}	    		 
+	    			}	else{
+	    				self.fabricante = {dadoEmpresa : self.empresa};
+	    			}    		 
 	 			}, function(errResponse){
 	 				var empresa = self.empresa;
 	 				$state.go('fabricante.cadastrar', {empresa});

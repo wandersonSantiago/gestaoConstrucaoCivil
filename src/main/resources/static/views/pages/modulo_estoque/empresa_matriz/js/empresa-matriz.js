@@ -35,23 +35,23 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			  }
 		})
 		
-		.state('matriz.editar', {
-			url : "/:idMatriz/editar",
+		.state('matriz.editar', {			
+			url : "/:idEmpresaMatriz/editar",
 			templateUrl : "views/pages/modulo_estoque/empresa_matriz/empresa_matriz.form.html",
 			controller : "EmpresaMatrizEditarController as ctrl",
 			ncyBreadcrumb: {
-				 	parent: 'matriz.listar',
+				 	parent: 'matriz.consultar',
 				    label: 'Editar'
 				  }
 		
 		})
 		
 		.state('matriz.visualizar', {
-			url : "/:idMatriz",
+			url : "/:idEmpresaMatriz",
 			templateUrl : "views/pages/modulo_estoque/empresa_matriz/empresa_matriz.show.html",
 			controller : "EmpresaMatrizController as ctrl",
 			ncyBreadcrumb: {
-				 	parent: 'matriz.listar',
+				 	parent: 'matriz.consultar',
 				    label: 'Visualizar'
 				  }
 		})
