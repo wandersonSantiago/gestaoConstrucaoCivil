@@ -8,8 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.app.entity.almoxarifado.Fabricante;
 
-
-public interface FabricanteRepository extends JpaRepository<Fabricante,Long>{
+public interface FabricanteRepository extends JpaRepository<Fabricante, Long> {
 
 	Boolean existsByDadoEmpresaCnpj(String cnpj);
 
@@ -17,7 +16,7 @@ public interface FabricanteRepository extends JpaRepository<Fabricante,Long>{
 
 	Page<Fabricante> findByDadoEmpresaCnpjContaining(String descricao, Pageable page);
 
-	Page<Fabricante> findByDadoEmpresaRazaoSocialIgnoreCaseContainingOrDadoEmpresaNomeFantasiaIgnoreCaseContaining(
-			String descricao, Pageable page);
+	Page<Fabricante> findByDadoEmpresaRazaoSocialIgnoreCaseContaining(String descricao, Pageable page);
+
 
 }

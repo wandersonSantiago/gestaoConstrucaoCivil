@@ -1,5 +1,6 @@
 package br.com.app.web.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,5 +89,12 @@ public class CategoriaRestController {
 		}
 		
 		return ResponseEntity.ok().body(list);
+	}
+	
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping("/id/{id}")
+	public List<Categoria> findByCategoriaId(@PathVariable Long id) {
+
+		return categoriaService.findByCategoriaId(id);
 	}
 }

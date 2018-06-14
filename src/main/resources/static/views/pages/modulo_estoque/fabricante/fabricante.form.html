@@ -38,8 +38,24 @@
 		{{ctrl.fabricante.dadoEmpresa.site}}
 	</p>
 </address>
-	
-
+		<div class="row" ng-show="ctrl.fabricante.id">
+			<div class="col-sm-2">			
+				<label class="control-label" for="ativo"> Status  : </label>			
+				<input type="checkbox" ng-model="ctrl.fornecedor.ativo" >{{ctrl.fabricante.ativo ? 'Inativo' : 'Ativo'}}
+			</div>
+		</div>	
+	<div class="row">
+		<div class="col-sm-6">
+		<label>Contato:</label>
+			<input type="text" class="text-uppercase form-control" ng-model="ctrl.fabricante.contato" maxlength="50">
+		</div>
+		<div class="col-sm-6">
+		<label>Observação:</label>
+			<input type="text" class="text-uppercase form-control" ng-model="ctrl.fabricante.observacao" maxlength="50">
+		</div>
+	</div>	
+<br>
+<br>
 	<div class="row ">
 		<div class="col-sm-4"></div>
 		<div class="col-sm-4">

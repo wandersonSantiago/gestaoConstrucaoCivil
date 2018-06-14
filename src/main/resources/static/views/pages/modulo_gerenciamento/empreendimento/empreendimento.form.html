@@ -9,7 +9,7 @@
 			<div class="form-group col-sm-8"
 				ng-class="{ 'has-error' : formEmpreendimento.descricao.$invalid && formEmpreendimento.$submitted}">
 				<label>Descricao*:</label> 
-					<input type="text"	 class="form-control" id="descricao"
+					<input type="text"	 class="text-uppercase form-control" id="descricao"
 					name="descricao" ng-model="ctrl.empreendimento.descricao"
 					placeholder="Descricao" required ng-required="true">
 			</div>
@@ -58,7 +58,7 @@
 		<div class="row">
 			<div class="form-group col-sm-3"
 				ng-class="{ 'has-error' : formEmpreendimento.cepField.$invalid && formEmpreendimento.$submitted }">
-				<label>CEP*:</label> <input type="text" class="form-control"
+				<label>CEP*:</label> <input type="text" class="text-uppercase form-control"
 					id="cep" ng-blur="ctrl.findCep(ctrl.empreendimento.endereco.cep)"
 					onkeyup="if(this.value.length > 8) { numero.focus(); }"
 					name="cepField" placeholder="CEP"

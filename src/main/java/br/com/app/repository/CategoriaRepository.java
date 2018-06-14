@@ -1,5 +1,7 @@
 package br.com.app.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,6 +19,8 @@ public interface CategoriaRepository extends JpaRepository<Categoria,Long> {
 	Page<Categoria> findByCategoriaNotNull(Pageable page);
 
 	Page<Categoria> findByDescricaoContainingIgnoreCaseAndCategoriaNotNull(String descricao, Pageable page);
+
+	List<Categoria> findByCategoriaId(Long id);
 
 	
 	

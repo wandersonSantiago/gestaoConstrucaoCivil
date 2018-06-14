@@ -44,3 +44,20 @@
 	<label>Observações:</label>
 	<p>{{ctrl.fornecedor.observacao}}</p>
 
+<br>
+<hr>
+<div class="row">
+<div class="col-sm-12">
+<div align="center">
+<label>Produtos</label>
+</div>
+
+	<div ng-repeat="produto in ctrl.fornecedor.produtos | orderBy : 'descricao'">	
+			<div class="well card col-md-2 ">			
+				<div class="container" >							
+						<a href="" ui-sref="produto.visualizar({idProduto : produto.id})" title="consultar produto"><span>{{produto.descricao}}</span></a> 				
+				</div>				
+		</div>	
+	</div>
+</div>
+</div>

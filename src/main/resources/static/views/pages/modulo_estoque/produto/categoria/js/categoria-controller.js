@@ -2,11 +2,13 @@ app.controller("CategoriaCadastarController", CategoriaCadastarController);
 app.controller("CategoriaEditarController", CategoriaEditarController);
 app.controller("CategoriaListarController", CategoriaListarController);
 
-function CategoriaCadastarController(blockUI,CategoriaService, toastr, $scope) {
+function CategoriaCadastarController($stateParams, blockUI,CategoriaService, toastr, $scope, $state) {
 
 	var self = this;
 
 	self.submit = submit;
+	
+	$scope.backPage = $stateParams.backPage;
 	
 	function submit(form) {	
 		if(form.$invalid){
@@ -22,6 +24,9 @@ function CategoriaCadastarController(blockUI,CategoriaService, toastr, $scope) {
 				$scope.categoria = null;
 				$scope.form.$setPristine();
 				blockUI.stop();
+				if($scope.backPage){
+					$state.go($scope.backPage);
+				}
 			}, function(errResponse) {
 				blockUI.stop();
 				sweetAlert({

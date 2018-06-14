@@ -2,11 +2,12 @@ app.controller("SubCategoriaCadastarController", SubCategoriaCadastarController)
 app.controller("SubCategoriaEditarController", SubCategoriaEditarController);
 app.controller("SubCategoriaListarController", SubCategoriaListarController);
 
-function SubCategoriaCadastarController(Auth, SubCategoriaService, CategoriaService, toastr, $rootScope, $scope, blockUI) {
+function SubCategoriaCadastarController($stateParams, Auth, SubCategoriaService, CategoriaService, toastr, $rootScope, $scope, blockUI, $state) {
 
 
 	var self = this;
-
+	$scope.backPage = $stateParams.backPage;
+	
 	self.submit = submit;
 	self.submitCategoria = submitCategoria;
 	self.buscarPorTexto = buscarPorTexto;
@@ -26,6 +27,9 @@ function SubCategoriaCadastarController(Auth, SubCategoriaService, CategoriaServ
 				$scope.categoria = null;
 				$scope.form.$setPristine();
 				blockUI.stop();
+				if($scope.backPage){
+					$state.go($scope.backPage);
+				}
 			}, function(errResponse) {
 				blockUI.stop();
 				sweetAlert({
@@ -93,28 +97,41 @@ function SubCategoriaEditarController(SubCategoriaService, CategoriaService , Au
 	self.buscarPorTexto = buscarPorTexto;
 	self.implementModal = implementModal;
 
-	function submit(categoria) {
-			SubCategoriaService.alterar(self.categoria).then(function(response) {
-				toastr.info("SubCategoria Salvo!!!")
-				self.categoria = null;
+	function submit(form) {	
+		if(form.$invalid){
+			sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
+			return;
+		}	
+		$scope.categoria == null ?'' : self.categoria.categoria = $scope.categoria;
+		 blockUI.start();
+		 SubCategoriaService.update(self.categoria)
+			.then(function(response) {
+				toastr.success("Sub Categoria, editado")
+				$state.go('sub-categoria.consultar');
+				blockUI.stop();
+				if($scope.backPage){
+					$state.go($scope.backPage);
+				}
 			}, function(errResponse) {
+				blockUI.stop();
 				sweetAlert({
 					timer : 3000,
 					text : errResponse.data.message,
-					type : "info",
+					type : "error",
 					width : 300,
-					higth : 100,
+					higth : 300,
 					padding : 20
 				});
-
 			});
-		}
+		} 
 		
 	function buscarPorId(id) {
 		if (!id)
 			return;
-		SubCategoriaService.findById(id).then(function(p) {
+		SubCategoriaService.findById(id)
+		.then(function(p) {
 			self.categoria = p;
+			$scope.categoria = p.categoria;
 		}, function(errResponse) {
 		});
 	}
@@ -131,7 +148,7 @@ function SubCategoriaEditarController(SubCategoriaService, CategoriaService , Au
 		}	
 		categoria.categoria = null;
 		 blockUI.start();
-			CategoriaService.insert(categoria)
+			CategoriaService.update(categoria)
 			.then(function(response) {
 				toastr.success("Categoria, cadastrado")
 				$('.implementModal').modal('hide');

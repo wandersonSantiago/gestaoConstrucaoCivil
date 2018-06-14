@@ -3,35 +3,52 @@ app.controller("FornecedorEditarController", FornecedorEditarController);
 app.controller("FornecedorListarController", FornecedorListarController);
 app.controller("FornecedorVisualizarController", FornecedorVisualizarController);
 
-function FornecedorCadastarController ($stateParams, toastr, $scope, buscaCepService, $location, $state, FornecedorService, blockUI){
+function FornecedorCadastarController ($localStorage, $stateParams, toastr, $scope, buscaCepService, ProdutoService, $location, $state, FornecedorService, blockUI){
 		 
 	var self = this;
 	$scope.submitted = false;
-	self.findCep = findCep;
 	self.submit = submit;
 	self.botao = "Cadastrar";
 	self.empresa = $stateParams.empresa;
+	self.buscarPorTexto = buscarPorTexto;
+	$scope.produtos = [];
+	self.adicionaProduto = adicionaProduto;
+	self.removerProduto = removerProduto;
+	self.proximaPagina = proximaPagina;
 	
 	existeEmpresaCadatrada(self.empresa.cnpj);
+		
+	if($localStorage.fornecedor){
+		self.fornecedor = $localStorage.fornecedor;
+		$scope.produtos = self.fornecedor.produtos;
+	}
 	
+	function proximaPagina(proxima){
+		var backPage = 'fornecedor.consultar';
+		$state.go(proxima ,{backPage});
+		$localStorage.fornecedor = self.fornecedor;
+	}
 	
-	function findCep() {
-			self.cep = self.fornecedor.empresa.endereco.cep;
-				buscaCepService.get({'cep': self.cep}).$promise
-				.then(function success(result){				
-					self.cep = self.fornecedor.empresa.endereco = result;				
-				}).catch(function error(msg) {
-				});				
-		    }
+	function adicionaProduto(produto){
+		if(!produto.id){
+			return
+		}
+		$scope.produtos.push(produto);
+	}
 	
+	function removerProduto(produto){
+		var indice = $scope.produtos.indexOf(produto);
+		$scope.produtos.splice(indice,1)
+	}
+
 	
-	 		
 	function submit(){		
 		if($scope.formFornecedor.$invalid){
 			sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
 			return;
 		}			
 			 blockUI.start();
+			 self.fornecedor.produtos = $scope.produtos;
 	    	 FornecedorService.save(self.fornecedor).
 				 then(function(response){					
 					 blockUI.stop();
@@ -83,32 +100,71 @@ function FornecedorCadastarController ($stateParams, toastr, $scope, buscaCepSer
 		     }
     
   
-	          	
+		     function buscarPorTexto(texto){
+			     	return  ProdutoService.findByDescricao(texto).
+			     	 then(function(e){
+			     		return e.content;
+			     	 }, function(errResponse){
+			     	 });
+			     }  	
 }
 
-function FornecedorEditarController($scope, $location, $stateParams, $state, FornecedorService, toastr, blockUI){
+function FornecedorEditarController($localStorage, $scope, $location, $stateParams, $state, FornecedorService, ProdutoService, toastr, blockUI){
 	var self = this;
 	var idFornecedor = $stateParams.idFornecedor;	
-	
+	$scope.produtos = [];
+	self.buscarPorTexto = buscarPorTexto;
 	self.submit = submit;
 	self.botao = "Editar";
-	buscarPorId(idFornecedor);
+	self.adicionaProduto = adicionaProduto;
+	self.removerProduto = removerProduto;
+	self.proximaPagina = proximaPagina;
+			
+	if($localStorage.fornecedor){
+		self.fornecedor = $localStorage.fornecedor;
+		$scope.produtos = self.fornecedor.produtos;
+	}
+	
+	function proximaPagina(proxima){
+		var backPage = 'fornecedor.cadastrar';
+		$state.go(proxima ,{backPage});
+		$localStorage.fornecedor = self.fornecedor;
+	}
+	
+			
+	if(idFornecedor){
+		buscarPorId(idFornecedor);
+	}
 	
 	 function buscarPorId(id){
     	 FornecedorService.buscarPorId(id)
     	 .then(function(e){
     		 self.fornecedor = e;
+    		 $localStorage.storage = e;
+    		 $scope.produtos = e.produtos;
        	 }, function(errResponse){
     	 	 });
     	 };	    	 
     	 
+	function adicionaProduto(produto){
+		if(!produto.id){
+			return
+		}
+		$scope.produtos.push(produto);
+	}
 	
+	function removerProduto(produto){
+		var indice = $scope.produtos.indexOf(produto);
+		$scope.produtos.splice(indice,1)
+	}
+
 	 function submit(){
 		 if($scope.formFornecedor.$invalid){
 				sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
 				return;
 			}		
 		 blockUI.start();
+		 self.fornecedor.produtos = $scope.produtos;
     	 FornecedorService.alterar(self.fornecedor).
 			 then(function(response){
 				 self.Fornecedor = null;
@@ -122,7 +178,13 @@ function FornecedorEditarController($scope, $location, $stateParams, $state, For
 		 	});
 	       }
 	 
-	
+	 function buscarPorTexto(texto){
+	     	return  ProdutoService.findByDescricao(texto).
+	     	 then(function(e){
+	     		return e.content;
+	     	 }, function(errResponse){
+	     	 });
+	     }  	
 }
 
 

@@ -40,6 +40,14 @@ app.factory('SubCategoriaService', function($rootScope, toastr, $http,$q){
 			});
 		},
 		
+		findByCategoriaId: function(param){
+			return $http.get(url +"id/"+ param)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				return $q.reject(errResponse);
+			});
+		},
 		update: function(categoria){
 			return $http.put(url , categoria)
 			.then(function(response){

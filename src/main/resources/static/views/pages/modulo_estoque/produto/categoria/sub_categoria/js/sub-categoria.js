@@ -21,6 +21,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		.state('sub-categoria.cadastrar', {
 			requiresAuthentication: true,
 			url : "/cadastrar",
+			params: {
+				backPage: null
+			  },
 			templateUrl : "views/pages/modulo_estoque/produto/categoria/sub_categoria/sub.categoria.form.html",
 			controller : "SubCategoriaCadastarController as ctrl",
 			ncyBreadcrumb: {

@@ -2,6 +2,7 @@ package br.com.app.entity.almoxarifado;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,6 +26,11 @@ public class Fabricante implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fabricante_id_seq")
 	private Long id;
+	
+	@Column(length = 50)
+	private String contato;
+	@Column(length = 50)
+	private String observacao;
 	
 	@OneToOne
 	@JoinColumn(name = "id_dado_empresa", nullable = false)

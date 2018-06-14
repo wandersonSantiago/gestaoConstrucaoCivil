@@ -1,18 +1,17 @@
 package br.com.app.entity.almoxarifado;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
@@ -21,9 +20,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
 
 import br.com.app.entity.Categoria;
@@ -63,11 +60,10 @@ public class Produto implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "id_categoria", nullable = true)
 	private Categoria categoria;
-
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "produtos_fornecedores", schema = "almoxarifado", joinColumns = @JoinColumn(name = "id_produto"), inverseJoinColumns = @JoinColumn(name = "id_fornecedor"))
-	@Fetch(FetchMode.SUBSELECT)
-	private List<Fornecedor> fornecedores;
+			
+	@JsonIgnore
+	@ManyToMany(mappedBy="produtos")
+	private List<Fornecedor> fornecedores = new ArrayList<>();
 
 	@ManyToOne
 	@JoinColumn(name = "id_fabricante", nullable = true)

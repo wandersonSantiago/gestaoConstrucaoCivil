@@ -1,5 +1,6 @@
 package br.com.app.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,13 @@ public class CategoriaService {
 			return categorias;
 		}
 
+
+	public List<Categoria> findByCategoriaId(Long id) {
+		return categoriaRepository.findByCategoriaId(id);
+	}
+
+
+	
 
 	
 }

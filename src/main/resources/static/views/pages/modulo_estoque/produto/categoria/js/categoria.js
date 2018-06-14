@@ -22,6 +22,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		.state('categoria.cadastrar', {
 			requiresAuthentication: true,
 			url : "/cadastrar",
+			params: {
+				backPage: null
+			  },
 			templateUrl : "views/pages/modulo_estoque/produto/categoria/categoria.form.html",
 			controller : "CategoriaCadastarController as ctrl",
 			ncyBreadcrumb: {

@@ -4,13 +4,13 @@
 	<div class="row" ng-show="ctrl.categoria.id">
 		<div class="col-sm-3">		
 			<label>Status</label> <br>
-			<input type="checkbox" ng-model="ctrl.categoria.ativo">{{ctrl.categoria.ativo ? 'Ativado' : 'Desativado'}}
+			<input type="checkbox" ng-model="ctrl.categoria.ativo">{{ctrl.categoria.ativo ? 'Ativado' : 'Inativo'}}
 		</div>
 	</div>
 	<div class="row">	
 		<div class="col-sm-6" ng-class="{ 'has-error' : form.descricao.$invalid && form.$submitted }">
 		<label>Descrição:</label>
-			<input class="form-control" ng-model="ctrl.categoria.descricao" name="descricao"
+			<input class="text-uppercase form-control" ng-model="ctrl.categoria.descricao" name="descricao"
 				id="descricao" type="text" placeholder="ex: tubos e conexões "
 				maxlength="30" required>
 		</div>		

@@ -2,6 +2,8 @@ package br.com.app.repository.almoxarifado;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.EntityGraph.EntityGraphType;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -31,4 +33,8 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 	@EntityGraph(value = "Produto.detail", type = EntityGraphType.LOAD)
 	@Query("FROM Produto produto")
 	List<Produto> buscarTodos();
+
+	Page<Produto> findByCodigo(String descricao, Pageable page);
+
+	Page<Produto> findByDescricaoIgnoreCaseContaining(String descricao, Pageable page);
 }

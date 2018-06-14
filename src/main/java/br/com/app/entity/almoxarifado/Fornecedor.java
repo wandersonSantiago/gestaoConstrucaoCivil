@@ -1,6 +1,8 @@
 package br.com.app.entity.almoxarifado;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -28,13 +32,19 @@ public class Fornecedor implements Serializable {
 	private Long id;
 	@Column(nullable = false)
 	private boolean ativo;
-	@Column(nullable = false, length = 50)
+	@Column(length = 50)
 	private String contato;
-	@Column(nullable = true, length = 50)
+	@Column( length = 50)
 	private String observacao;
 
 	@OneToOne
 	@JoinColumn(name = "id_dado_empresa", nullable = false)
 	private DadoEmpresa dadoEmpresa;
+	
+	@ManyToMany
+	@JoinTable(name="tb_fornecedor_produto", 
+		joinColumns = @JoinColumn(name="fornecedor_id"), 
+		inverseJoinColumns = @JoinColumn(name="produto_id"))
+	private List<Produto> produtos = new ArrayList<>();
 
 }

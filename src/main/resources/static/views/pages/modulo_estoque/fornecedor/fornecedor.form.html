@@ -38,16 +38,59 @@
 		{{ctrl.fornecedor.dadoEmpresa.site}}
 	</p>
 </address>
+	<div class="row" ng-show="ctrl.fornecedor.id">
+			<div class="col-sm-2">			
+				<label class="control-label" for="ativo"> Status  : </label>			
+				<input type="checkbox" ng-model="ctrl.fornecedor.ativo" >{{ctrl.fornecedor.ativo ? 'Inativo' : 'Ativo'}}
+			</div>
+		</div>	
 	<div class="row">
 		<div class="col-sm-6">
-		<span>Contato:</span>
-			<input type="text" class="form-control" ng-model="ctrl.fornecedor.contato">
+		<label>Contato:</label>
+			<input type="text" class="text-uppercase form-control" ng-model="ctrl.fornecedor.contato" maxlength="50">
 		</div>
 		<div class="col-sm-6">
-		<span>Observação:</span>
-			<input type="text" class="form-control" ng-model="ctrl.fornecedor.observacao">
+		<label>Observação:</label>
+			<input type="text" class="text-uppercase form-control" ng-model="ctrl.fornecedor.observacao" maxlength="50">
 		</div>
 	</div>	
+<br>
+<div class="row">
+<div class="col-sm-6" >
+	 		<a href="" class="fa fa-plus" ng-click="ctrl.proximaPagina('produto.cadastrar')">Novo</a> | <label>Selecione o produto:</label>
+	 	<div class="input-group">
+		    <input type="text" ng-model="ctrl.produto"  placeholder="ex: Cano 3/4" id="produto" name="produto"
+		    uib-typeahead="produto as produto.descricao for produto in ctrl.buscarPorTexto($viewValue) | limitTo:8" 
+		    typeahead-template-url="customTemplate.html" class="form-control" typeahead-show-hint="true"  
+		    typeahead-loading="loading" typeahead-no-results="noResults" typeahead-min-length="0" ng-keyup="$event.keyCode == 13 && ctrl.adicionaProduto(ctrl.produto)">
+		    <span class="input-group-btn">
+		        <button class="btn btn-default" type="button" ng-click="ctrl.adicionaProduto(ctrl.produto)">adicionar</button>
+		     </span>		   
+	    </div>
+	     <i ng-show="loading" class="glyphicon glyphicon-refresh"></i>
+		    <div ng-show="noResults">
+		      <i class="glyphicon glyphicon-remove"></i> Nenhum resultado encontrado
+		    </div>
+	   </div>	
+	    <script type="text/ng-template" id="customTemplate.html">
+ 	 <a>
+     	 <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+  	</a>
+</script>
+</div>
+<br>
+<div class="row">
+<div class="col-sm-12">
+	<div ng-repeat="produto in produtos | orderBy : 'descricao'">	
+			<div class="well card col-md-2 ">			
+				<div class="container" >							
+						<a href="" ui-sref="produto.visualizar({idProduto : produto.id})" title="consultar produto"><span>{{produto.descricao}}</span></a> | 
+					<a href="" ng-click="ctrl.removerProduto(produto)"	class="fa fa-close" title="Remover produto da lista"></a>
+				</div>				
+		</div>	
+	</div>
+</div>
+</div>
 <br>
 <br>
 	<div class="row ">

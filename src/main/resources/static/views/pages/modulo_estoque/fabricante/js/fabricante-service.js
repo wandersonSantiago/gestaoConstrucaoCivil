@@ -3,7 +3,7 @@ app.factory("FabricanteService", function($http,$rootScope, toastr, $q){
 	return{
 			
 		buscarPorTexto: function(texto, pagina){
-			var config = {params: {page: pagina, descricao:texto}};
+			var config = {params: {page: pagina, descricao : texto}};
 			return $http.get(url + '/buscar', config)
 			.then(function(response){
 				return response.data;
