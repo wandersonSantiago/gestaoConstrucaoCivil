@@ -19,14 +19,29 @@ import br.com.app.enuns.TipoNotaEnum;
 import br.com.app.service.almoxarifado.NotaFiscalProdutoService;
 
 @RestController
-@RequestMapping("/rest/notaFiscalProduto")
+@RequestMapping("/rest/nota-fiscal-produto")
 public class NotaFiscalProtudoRestController {
 
 	@Autowired
 	private NotaFiscalProdutoService notaFiscalProdutoService;
 
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping
+	public void insert(@RequestBody NotaFiscalProduto notaFiscalProtudo) {		
+		notaFiscalProtudo.getNotaFiscal().setTipoNota(TipoNotaEnum.NOTA_FISCAL_ENTRADA);
+		notaFiscalProdutoService.salvarOuEditar(notaFiscalProtudo);
+		
+	}
+
+	@ResponseStatus(HttpStatus.CREATED)
+	@PutMapping
+	public void alterar(@RequestBody NotaFiscalProduto notaFiscalProtudo) {
+		notaFiscalProdutoService.salvarOuEditar(notaFiscalProtudo);
+		
+	}
+	
 	@ResponseStatus(HttpStatus.OK)
-	@GetMapping(value = "/lista")
+	@GetMapping
 	public Collection<NotaFiscalProduto> buscarTodos() {
 		return notaFiscalProdutoService.buscarTodos();
 	}
@@ -34,23 +49,8 @@ public class NotaFiscalProtudoRestController {
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/buscarPorNumeroNota/{numero}")
 	public  Optional<NotaFiscalProduto> buscarPorNumeroNota(@PathVariable Long numero) {
-
 		return  notaFiscalProdutoService.buscarPorId(numero);
 	}
 
-	@ResponseStatus(HttpStatus.CREATED)
-	@PostMapping(value = "/salva")
-	public void salvar(@RequestBody NotaFiscalProduto notaFiscalProtudo) {
-		
-		notaFiscalProtudo.getNotaFiscal().setTipoNota(TipoNotaEnum.NOTA_FISCAL_ENTRADA);
-		notaFiscalProdutoService.salvarOuEditar(notaFiscalProtudo);
-		
-	}
-
-	@ResponseStatus(HttpStatus.CREATED)
-	@PutMapping(value = "/altera")
-	public void alterar(@RequestBody NotaFiscalProduto notaFiscalProtudo) {
-		notaFiscalProdutoService.salvarOuEditar(notaFiscalProtudo);
-		
-	}
+	
 }

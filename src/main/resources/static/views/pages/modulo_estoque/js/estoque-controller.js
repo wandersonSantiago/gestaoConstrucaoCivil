@@ -1,216 +1,222 @@
-app.controller('estoqueController', function($scope,estoqueService, produtoService, $routeParams, $timeout, $q, $log){
+app.controller("EstoqueCadastarController", EstoqueCadastarController);
+app.controller("EstoqueEditarController", EstoqueEditarController);
+app.controller("EstoqueListarController", EstoqueListarController);
+
+function EstoqueCadastarController($localStorage, $state, $stateParams, EstoqueService, ProdutoService, FornecedorService, toastr, $scope){
+	
+	var self = this;	
+	
+	self.submit = submit;
+	self.produtos = produtos;
+	self.fornecedores = fornecedores;
+
+	$scope.produtos = [];
+	self.adicionaProduto = adicionaProduto;
+	self.removerProduto = removerProduto;
+	self.soma = soma;
+	self.somaUnitario = somaUnitario;
+	self.ativarExcluirLote = ativarExcluirLote;
+	self.apagarProdutos = apagarProdutos;
+	self.itens = [];
+	
+	$scope.backPage = $stateParams.backPage;
+	self.proximaPagina = proximaPagina;
+	
+	if($localStorage.estoque){
+		self.estoque = $localStorage.estoque;
+	}
+	
+	function proximaPagina(proxima){
+		var backPage = 'estoque.cadastrar';
+		$state.go(proxima ,{backPage});
+		$localStorage.estoque = self.estoque;
+	}
+	
+	function submit(form){
+		if(form.$invalid){
+			sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
+			return;
+		}
+			 self.notaFiscalProduto.itens = $scope.produtos;
+			 self.notaFiscalProduto.notaFiscal.valorTotal  = $scope.valorTotalNota;
+				EstoqueService.insert(self.notaFiscalProduto).
+				then(function(response){
+					toastr.success("Estoque, cadastrado")
+					self.estoque = null;
+					if($scope.backPage){
+						$state.go($scope.backPage);
+					}
+					clear(form);
+				}, function(errResponse){
+					sweetAlert({ timer : 3000,  text : errResponse.data.message,  type : "error", width: 300, higth: 300, padding: 20});
+				});			
+		};
+		
+	function clear(form){	    	 
+    	 form.$setPristine();
+    	 form.$setUntouched();   
+    	 self.estoque = null;
+    	 $localStorage.$reset()
+    	
+     }				
+	
+	
+	 function produtos(texto){
+	     	return  ProdutoService.findByDescricao(texto).
+	     	 then(function(e){
+	     		return e.content;
+	     	 }, function(errResponse){
+	     	 });
+	     } ;	 	
+     function fornecedores(texto){
+	     	return  FornecedorService.buscarPorTexto(texto).
+	     	 then(function(e){
+	     		return e.content;
+	     	 }, function(errResponse){
+	     	 });
+	     } ;	 	
+		 	 	
+	 function adicionaProduto(produto){
+		 self.estoque.produto = null;
+		 var indice = $scope.produtos.indexOf(produto);
+	 		if(indice > 0){
+	 			sweetAlert({title: "Produto Repetido", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
+	 			return
+	 		}
+	 		if(produto){
+	 			$scope.produtos.push({produto});
+	 		}
+	 		
+	 	}
+	 
+	
+	 	
+	 function removerProduto(produto){
+	 		var indice = $scope.produtos.indexOf(produto);
+	 		$scope.produtos.splice(indice,1)
+	 	}
+	 
+	 function soma(produtos){
+			var totalSoma = 0;
+			for(i =0; i < produtos.length ; i ++){
+				var total = produtos[i];
+				totalSoma += parseFloat(total.valorTotal);	
+				$scope.valorTotalNota = totalSoma;
+					}
+			}
+		
+	 function somaUnitario(quantidade, valorUnitario){
+			return $scope.valorTotal = quantidade * valorUnitario;
+		}
+		
+		
+		
+	 function ativarExcluirLote(produtos){
+			$scope.produtos.filter(function(f){
+			if(f.selecionado){
+				$scope.ativadoExcluirLote = true; }
+			});
+		}
+	 
+	 function apagarProdutos(produtos){
+			$scope.produtos = $scope.produtos.filter(function(f){
+			if(!f.selecionado) return f;
+			$scope.valorTotalNota -= f.valorTotal;
+			$scope.ativadoExcluirLote = false;
+		});
+	}
+}		
+
+function EstoqueEditarController($localStorage, $state, $stateParams, EstoqueService, SubCategoriaService, CategoriaService, FabricanteService, toastr, $scope){
 	
 	var self = this;
 	
-		self.listaProduto =[];
-		self.baixaEstoque = [];
-		self.listaProdutos = [];
-		self.getPage=0;
-		self.totalPages = 0;
-		self.totalElements = 0;
-		$scope.maxResults = 15;
-		$scope.verificado = false;
-		var idProdutoEstoque = $routeParams.idProdutoEstoque;
-		
-		self.editarProdutoEstoque = function(produtoEstoque){
-			verificaCampo();
-			if(!$scope.verificado){
-				estoqueService.editarProdutoEstoque(self.produtoEstoque)
-			}
-			$scope.verificado = false;
+	var idEstoque = $stateParams.idEstoque;
+	
+	self.submit = submit;
+	
+	self.proximaPagina = proximaPagina;
+	
+	
+	findById(idEstoque);
+	
+	if($localStorage.estoque){
+		self.estoque = $localStorage.estoque;
+	}
+	
+	function proximaPagina(proxima){
+		var backPage = 'estoque.editar';
+		$state.go(proxima ,{backPage});
+		$localStorage.estoque = self.estoque;
+	}
+	
+	function submit(form){
+		if(form.$invalid){
+			sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
+			return;
+		}
+				EstoqueService.update(self.estoque).
+				then(function(response){
+					toastr.success("Estoque, Editado")
+					self.estoque = null;
+					$state.go('estoque.consultar');
+					clear(form);
+				}, function(errResponse){
+					sweetAlert({ timer : 3000,  text : errResponse.data.message,  type : "error", width: 300, higth: 300, padding: 20});
+				});			
 		};
 		
-		verificaCampo = function(produtoEstoque){
-			if(self.produtoEstoque.quantidadeMinima == 0 || self.produtoEstoque.quantidadeMaxima == 0 ){
-				$scope.verificado = true;
-				sweetAlert({ timer : 10000, text :"Quantidade tem que ser maior que zero!", type : "info", width: 300, higth: 100, padding: 20});
-			}else if(self.produtoEstoque.quantidadeMinima >= self.produtoEstoque.quantidadeMaxima){
-				sweetAlert({ timer : 10000, text :"Quantidade miníma tem que ser menor que quantidade máxima!", type : "info", width: 300, higth: 100, padding: 20});
-				$scope.verificado = true;
-			}
-		}
-		self.lista = function(){
-			 produtoService.lista().
-				then(function(t){
-					self.produtos = t;
-					}, function(errResponse){
-				});
-			};
-			
-			self.buscaPorId = function(id){
-				if(!id)return;
-				estoqueService.buscaPorId(id).
-				then(function(p){
-					self.produtoEstoque = p;
-				}, function(errResponse){
-				});
-			};
-			
-			self.buscaPorCodigoBarras = function(codigoBarras){
-				estoqueService.buscaPorCodigoBarras(codigoBarras).
-				then(function(p){
-					self.listaProdutosComEstoques = p;
-					for(i = 0; i < self.listaProdutosComEstoques.length; i++ ){
-						
-						self.produto = self.listaProdutosComEstoques[i].produto;
-						self.quantidade = self.listaProdutosComEstoques[i].quantidade;
-					self.listaProdutos.push({
-								produto : self.produto,
-								quantidade : self.quantidade
-							
-						});
-					}
-				});
-			};
-			self.listaProdutosComEstoque = function(){	
-				estoqueService.listaProdutosComEstoque().
-					then(function(t){
-						self.listaProdutosComEstoques = t;	
-						$scope.ativaTabela = true;
-						for(i = 0; i < self.listaProdutosComEstoques.length; i++ ){						
-								self.produto = self.listaProdutosComEstoques[i].produto;
-								self.quantidade = self.listaProdutosComEstoques[i].quantidade;
-							self.listaProdutos.push({
-										produto : self.produto,
-										quantidade : self.quantidade									
-								});						
-						}						
-							}, function(errResponse){
-					});
-				};
-			self.listaProdutosComEstoqueBaixo = function(){	
-				estoqueService.listaProdutosComEstoqueBaixo().
-					then(function(t){
-						self.listaProdutosComEstoqueBaixo = t;
-						self.qtdProdutoEstoqueBaixo = t.length; 
-										
-							}, function(errResponse){
-					});
-				};
-				self.listaProdutosComEstoqueBaixo();
-				
-			self.listaProdutosComEstoqueAlto = function(){	
-				estoqueService.listaProdutosComEstoqueAlto().
-					then(function(t){
-						self.listaProdutosComEstoqueAlto = t;	
-						self.qtdProdutoEstoqueAlto = t.length;				
-							}, function(errResponse){
-					});
-				};
-				self.listaProdutosComEstoqueAlto();
-				self.listaProdutosComEstoqueComPaginacao = function(pages, maxResults){
-					self.totalPages = [];
-					self.getPage=pages;	
-					estoqueService.listaProdutosComEstoqueComPaginacao(pages, maxResults).
-						then(function(t){
-							self.listaProdutosComEstoques = t.content;
-							$scope.totalPages = t.totalPages;
-							self.totalElements = t.totalElements;
-							for(i = 0; i < $scope.totalPages ; i++){
-								self.totalPages.push(i);
-							}						
-							for(i = 0; i < self.listaProdutosComEstoques.length; i++ ){						
-									self.produto = self.listaProdutosComEstoques[i].produto;
-									self.quantidade = self.listaProdutosComEstoques[i].quantidade;
-								self.listaProdutos.push({
-											produto : self.produto,
-											quantidade : self.quantidade									
-									});						
-							}						
-								}, function(errResponse){
-						});
-					};
-				
+	function clear(form){	
+    	 $localStorage.$reset()
+    	
+     }
 		
-		if(idProdutoEstoque){
-			self.buscaPorId(idProdutoEstoque);
-		}
+	 function findById(id){
+		if(!id)return;
+		EstoqueService.findById(id).
+		then(function(p){
+			self.estoque = p;
+			$scope.categoria = p.categoria.categoria;
+			subCategoria(p.categoria.categoria.id)
+			}, function(errResponse){
+		});
+	};
 		
-		$scope.buscar = $scope.buscarPorDescricao;
-		
-		self.filtro = function(busca){
-			if(busca.descricao){
-				$scope.buscar = busca.descricao;
-			}else{
-				$scope.buscar = busca;
-			}
-			
-		}
-		
-		//===================================================RELATORIO=============================================================================
-		
-		 $scope.ativaTabela = false;
-	     $scope.ativaGrafico = false;
+}
+
+function EstoqueListarController(blockUI, EstoqueService, toastr, $scope){
+	
+	var self = this;
+	
+	self.buscarPorTexto = buscarPorTexto;
+	self.totalElementos = null;
+	self.totalPaginas = null;
+	self.paginaCorrente = 0;
+	
+	buscarPorTexto('');
+		 
 	     
-	     $scope.porTotal = true;
-	     $scope.porPeriodo = false;
 	     
-		self.exportar = function(tipoImpressao){ 
-		      switch(tipoImpressao){ 
-		          case 'pdf': $scope.$broadcast('export-pdf', {}); 
-		                      break; 
-		          case 'excel': $scope.$broadcast('export-excel', {}); 
-		                      break; 
-		          case 'doc': $scope.$broadcast('export-doc', {});
-		                      break; 
-		          default: console.log('no event caught'); 
-		       }
-			};
-			
-			 $scope.ativaBuscaRelatorio =  function(botao){
-		    	 if(botao == 'periodo'){
-		    		 $scope.porTotal = false;
-		    	     $scope.porPeriodo = true;
-		    	 }else if(botao == 'total'){
-		    		 $scope.porTotal = true;
-		    	     $scope.porPeriodo = false;;
-		    	 }
-		     };
-		     
-		     self.ativaBotaoTabelaGrafico =  function(botao){
-		    	 if(botao === false){
-		    		 $scope.ativaTabela = true;
-		    		 $scope.ativaGrafico = false;
-		    	 }else if(botao === true){
-		    		 $scope.ativaGrafico = true;
-		    		 $scope.ativaTabela = false;
-		    	 }
-		     };
-		     
-		     self.relatorioPorData = function(dataInicial , dataFinal){
-		    	 estoqueService.relatorioPorData(dataInicial, dataFinal).
-					then(function(f){
-						self.listaProdutosComEstoques = t;		
-						$scope.ativaTabela = true;
-						for(i = 0; i < self.listaProdutosComEstoques.length; i++ ){						
-								self.produto = self.listaProdutosComEstoques[i].produto;
-								self.quantidade = self.listaProdutosComEstoques[i].quantidade;
-							self.listaProdutos.push({
-										produto : self.produto,
-										quantidade : self.quantidade									
-								});						
-						}						
-							}, function(errResponse){
-					});
-		     };
-		     
-		     
-		     $scope.labels = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho"];
-		     $scope.series = ['Series A', 'Series B'];
-		     $scope.data = [
-		       [65, 59, 80, 81, 56, 55, 40],
-		       [28, 48, 40, 19, 86, 27, 90]
-		     ];
-		     $scope.onClick = function (points, evt) {
-		       console.log(points, evt);
-		     };
-		     
-		     // Simulate async data update 
-		     $timeout(function () {
-		       $scope.data = [
-		         [28, 48, 40, 19, 86, 27, 90],
-		         [65, 59, 80, 81, 56, 55, 40]
-		       ];
-		     }, 3000);
-		
-});
+	    function buscarPorTexto(texto){
+	    	$scope.mensagemErro = null;	    	 
+	    	 blockUI.start();
+	    	 self.paginaCorrente == '0'? self.paginaCorrente = 0 : self.paginaCorrente = self.paginaCorrente - 1;   
+	    	 EstoqueService.findByTextAndPagination(texto, self.paginaCorrente).
+	    	 then(function(e){
+	    		 $scope.mensagemErro = null;
+	    		 self.estoques = e.content;	
+	    		 self.totalElementos = e.totalElements;
+	    		 self.totalPaginas = e.totalPages;
+	    		 self.paginaCorrente = e.number + 1;
+	    		 blockUI.stop();
+	    	 }, function(errResponse){
+	    		 blockUI.stop();
+	    		 if(errResponse.status == 404){
+	    			 $scope.mensagemErro = errResponse.data.message;
+	    		 }else{
+	    			 $scope.mensagemErro =errResponse.data.message;
+	    		 }
+			 });
+	    }
+	
+}

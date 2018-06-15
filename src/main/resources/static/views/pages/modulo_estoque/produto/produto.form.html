@@ -23,14 +23,14 @@
 			</div>
 			<div class="col-sm-4">
 				<a href="" class="fa fa-plus" ng-click="ctrl.proximaPagina('categoria.cadastrar')">Novo</a> | <label>Selecione a Categoria:</label>
-					 	<div class="input-group">
-		    <input type="text"  ng-model="cat" placeholder="ex: Hidraulica" id="categorias" name="categorias"
-		    uib-typeahead="categoria as categoria.descricao for categoria in ctrl.categoria($viewValue) | limitTo:8" 
-		    typeahead-template-url="customTemplateC.html" class="form-control" typeahead-show-hint="true"  ng-blur="ctrl.subCategoria(cat.id)"
-		    typeahead-loading="loadingC" typeahead-no-results="noResultsC" typeahead-min-length="0" >
-		    <span class="input-group-btn">
-		        <button class="btn btn-default" type="button" ng-click="ctrl.subCategoria(cat.id)">adicionar</button>
-		     </span>		   
+				<div class="input-group">
+				    <input type="text"  ng-model="cat" placeholder="ex: Hidraulica" id="categorias" name="categorias"
+				    uib-typeahead="categoria as categoria.descricao for categoria in ctrl.categoria($viewValue) | limitTo:8" 
+				    typeahead-template-url="customTemplateC.html" class="form-control" typeahead-show-hint="true"  ng-blur="ctrl.subCategoria(cat.id)"
+				    typeahead-loading="loadingC" typeahead-no-results="noResultsC" typeahead-min-length="0" >
+				    <span class="input-group-btn">
+				        <button class="btn btn-default" type="button" ng-click="ctrl.subCategoria(cat.id)">adicionar</button>
+				     </span>		   
 			    </div>
 			     <i ng-show="loadingC" class="glyphicon glyphicon-refresh"></i>
 				    <div ng-show="noResultsC">
