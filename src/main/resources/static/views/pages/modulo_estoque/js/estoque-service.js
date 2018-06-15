@@ -2,8 +2,8 @@ app.factory('EstoqueService', function($rootScope, toastr, $http,$q){
 	
 	
 	return{
-		insert: function(estoque){	
-			return $http.post('/rest/nota-fiscal-produto', estoque)
+		insert: function(notaFiscalProduto){	
+			return $http.post('/rest/nota-fiscal-produto', notaFiscalProduto)
 			.then(function(response){
 			},function(errResponse){
 					return $q.reject(errResponse);

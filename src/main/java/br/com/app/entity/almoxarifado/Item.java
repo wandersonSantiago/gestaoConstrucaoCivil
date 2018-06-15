@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 import br.com.app.entity.almoxarifado.interfaces.IItem;
@@ -28,7 +28,7 @@ public abstract class Item implements Serializable, IItem {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_id_seq")
 	private Long id;
 
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name = "id_produto", nullable = false)
 	private Produto produto;
 
@@ -38,4 +38,5 @@ public abstract class Item implements Serializable, IItem {
 	@Column(nullable = false)
 	private Double valorUnitario;
 
+	
 }

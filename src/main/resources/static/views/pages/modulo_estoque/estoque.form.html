@@ -22,12 +22,12 @@
 						<div class="col-sm-4">							
 							<a href="" class="fa fa-plus" ng-click="ctrl.proximaPagina('produto.cadastrar')">Novo</a> | <label>Selecione a Produto:</label>		
 						<div class="input-group">			 	
-						    <input type="text" ng-model="ctrl.estoque.produto"  placeholder="ex: Cano 3/4" id="produto" name="produto"
-						    uib-typeahead="produto as produto.descricao for produto in ctrl.produtos($viewValue) | limitTo:8"  ng-blur="ctrl.adicionaProduto(ctrl.estoque.produto)"
+						    <input type="text" ng-model="ctrl.produto"  placeholder="ex: Cano 3/4" id="produto" name="produto"
+						    uib-typeahead="produto as produto.descricao for produto in ctrl.produtos($viewValue) | limitTo:8"  ng-blur="ctrl.adicionaProduto(ctrl.produto)"
 						    typeahead-template-url="customTemplateP.html" class="form-control" typeahead-show-hint="true" 
 						    typeahead-loading="loadingP" typeahead-no-results="noResultsP" typeahead-min-length="0" >	 		   
 						    <span class="input-group-btn">
-					     	   <button class="btn btn-default" type="button" ng-click="ctrl.adicionaProduto(ctrl.estoque.produto)">adicionar</button>
+					     	   <button class="btn btn-default" type="button" ng-click="ctrl.adicionaProduto(ctrl.produto)">adicionar</button>
 						     </span>		   
 					    </div>
 						     <i ng-show="loadingP" class="glyphicon glyphicon-refresh"></i>

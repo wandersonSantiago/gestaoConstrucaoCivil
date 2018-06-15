@@ -34,7 +34,6 @@ import lombok.Data;
 		@NamedAttributeNode("fabricante"), @NamedAttributeNode("tipoProduto") })
 
 @Table(name = "produto", schema = "almoxarifado")
-@JsonIgnoreType
 public class Produto implements Serializable {
 
 	private static final long serialVersionUID = 1L;

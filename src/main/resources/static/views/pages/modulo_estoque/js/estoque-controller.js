@@ -39,10 +39,12 @@ function EstoqueCadastarController($localStorage, $state, $stateParams, EstoqueS
 		}
 			 self.notaFiscalProduto.itens = $scope.produtos;
 			 self.notaFiscalProduto.notaFiscal.valorTotal  = $scope.valorTotalNota;
+			 console.log(self.notaFiscalProduto);
 				EstoqueService.insert(self.notaFiscalProduto).
 				then(function(response){
 					toastr.success("Estoque, cadastrado")
-					self.estoque = null;
+					self.notaFiscalProduto = null;
+					$scope.produtos = null;
 					if($scope.backPage){
 						$state.go($scope.backPage);
 					}
@@ -77,7 +79,7 @@ function EstoqueCadastarController($localStorage, $state, $stateParams, EstoqueS
 	     } ;	 	
 		 	 	
 	 function adicionaProduto(produto){
-		 self.estoque.produto = null;
+		 self.produto = null;
 		 var indice = $scope.produtos.indexOf(produto);
 	 		if(indice > 0){
 	 			sweetAlert({title: "Produto Repetido", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
