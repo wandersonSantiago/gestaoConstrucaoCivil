@@ -8,9 +8,9 @@ public class GeraCodigoProduto extends GeraCodigo implements Gera {
 
 	}
 
-	public Integer gerar() {
+	public String gerar() {
 
-		return gerarNumero();
+		return gerarNumero().toString() ;
 	}
 
 }

@@ -16,7 +16,7 @@ public abstract class GeraCodigo {
 	protected Integer gerarNumero()
 	{
 		Random random = new Random();
-		Integer codigo  = random.nextInt((maximo - minimo) + 1) + minimo;
-		return codigo;
+		return random.nextInt((maximo - minimo) + 1) + minimo;
+		 
 	}
 }
