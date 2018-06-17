@@ -28,7 +28,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@SequenceGenerator(name = "usuario_id_seq", sequenceName = "usuario_id_seq",schema="communs")
+@SequenceGenerator(name = "usuario_id_seq", sequenceName = "usuario_id_seq",allocationSize = 1,schema="communs")
 @Table(name = "usuario" , schema = "communs")
 public class Usuario implements Serializable{
 
@@ -64,7 +64,7 @@ public class Usuario implements Serializable{
     
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_cadastro")
-	private Date dataCadastro;
+	private Date dataCadastro  = new Date();
 	
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "usuario_permissoes", schema="communs", joinColumns = @JoinColumn(name = "id_usuario"), 
@@ -73,10 +73,6 @@ public class Usuario implements Serializable{
 	
 	@Transient
 	private boolean isRoot = false;
-	
-	public Usuario(){
-		dataCadastro = new Date();
-	}
 	
 	public boolean isRoot() {
 		if(login.equalsIgnoreCase("root")) {

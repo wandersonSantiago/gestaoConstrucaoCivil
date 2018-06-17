@@ -17,15 +17,16 @@ public class ImagemService {
 	private String profile = "/profile";
 	private String login = "";
 	private InputStream in;
-	private final String defaultProfile = "src/main/resources/static/public/img/avatar_2x.png";
+	private static final String defaultProfile = "src/main/resources/static/public/img/avatar_2x.png";
 
 	public void createPathAndSaveFile(MultipartFile file, String login) throws IOException {
 
 		this.login = login;
-		if (Files.notExists(Paths.get(this.path.concat(this.login)))) {
+		if (!Paths.get(this.path.concat(this.login)).toFile().exists()) {
 			Files.createDirectory(Paths.get(this.path.concat(login)));
 		}
-
+	
+		
 		Files.write(Paths.get(this.path.concat(this.login.concat(profile))), file.getBytes());
 
 	}
@@ -48,7 +49,7 @@ public class ImagemService {
 			}
 
 			in = Files.newInputStream(Paths.get(caminho));
-		} catch (IOException e) {
+		} catch (IOException|NullPointerException e) {
 			setDefaultProfile();
 		}
 		return in;
@@ -59,7 +60,7 @@ public class ImagemService {
 			in = Files.newInputStream(Paths.get(defaultProfile));
 		} catch (IOException e) {
 
-			e.printStackTrace();
+			System.err.println(e);
 		}
 	}
 }

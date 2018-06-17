@@ -1,49 +1,58 @@
-app.factory('CategoriaService', function($rootScope, toastr, $http,$q){
+app.factory('SubCategoriaService', function($rootScope, toastr, $http,$q){
 	
-	
+	var url = 'rest/almoxarifado/categoria/';
 	return{
-		salva: function(categoria){
-			return $http.post('rest/almoxarifado/categoria/salva',categoria)
+		
+		insert: function(categoria){
+			return $http.post(url,categoria)
 			.then(function(response){
-				toastr.info("Salvo com sucesso!!!");return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
+				return $q.reject(errResponse);
 				});
 		},
-		lista: function(){
-			return $http.get('rest/almoxarifado/categoria/lista')
-			.then(function(response){
-				return response.data;
-			},function(errResponse){
-				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
-					});
-		},
-		listaTipoCategoria: function(){
-			return $http.get('rest/almoxarifado/categoria/tipoCategoria')
-			.then(function(response){
-				return response.data;
-			},function(errResponse){
-				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
-					});
-		},
 		
-		buscaPorId: function(param){
-			return $http.get('rest/almoxarifado/categoria/buscaPorId/'+param)
+		findByDescricaoPagination: function(texto, pagina){
+			var config = {params: {page: pagina, descricao:texto}};
+			return $http.get(url + 'descricao', config)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
-					return $q.reject(errResponse);
+				return $q.reject(errResponse);
 			});
 		},
 		
-		altera: function(categoria){
-			return $http.put('rest/almoxarifado/categoria/altera', categoria)
+		findBySubCategoriaByDescricao: function(texto){
+			var config = {params: {descricao:texto}};
+			return $http.get(url + 'sub', config)
 			.then(function(response){
-				toastr.info("Alterado com sucesso!!!");return response.data;
+				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
-					return $q.reject(errResponse);
+				return $q.reject(errResponse);
+			});
+		},
+		
+		findById: function(param){
+			return $http.get(url + param)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				return $q.reject(errResponse);
+			});
+		},
+		
+		findByCategoriaId: function(param){
+			return $http.get(url +"id/"+ param)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				return $q.reject(errResponse);
+			});
+		},
+		update: function(categoria){
+			return $http.put(url , categoria)
+			.then(function(response){
+			},function(errResponse){
+			return $q.reject(errResponse);
 			});
 		},
 		

@@ -22,8 +22,8 @@ app.factory('ProdutoService', function($rootScope, toastr, $http,$q){
 		},
 		
 		findByTextAndPagination: function(text , page , maxResults){
-			var config = {params: {text : text, page: page , maxResults : maxResults}};
-			return $http.get(url, config)
+			var config = {params: {descricao : text, page: page , maxResults : maxResults}};
+			return $http.get(url + '/descricao', config)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
@@ -31,12 +31,29 @@ app.factory('ProdutoService', function($rootScope, toastr, $http,$q){
 			});
 		},
 		findById: function(param){
-			return $http.get(url + param)
+			return $http.get(url +'/'+ param)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
 				return $q.reject(errResponse);
 			});
-		}		
+		},
+		findByUnidadesMedida: function(){
+			return $http.get(url + "/unidades-medida")
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				return $q.reject(errResponse);
+			});
+		},	
+		findByDescricao: function(texto){
+			var config = {params: {descricao:texto}};
+			return $http.get(url + '/descricao', config)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				return $q.reject(errResponse);
+			});
+		},
 	}
 });

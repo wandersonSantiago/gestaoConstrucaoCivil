@@ -15,76 +15,71 @@ import br.com.app.pojo.CancelamentoTransferencia;
 import br.com.app.pojo.SessionUsuario;
 import br.com.app.repository.almoxarifado.TransferenciaRepository;
 
-
-
 @Service
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
 public class TransferenciaService {
-	
+
 	@Autowired
 	private TransferenciaRepository transferenciaRepository;
 	@Autowired
 	private BaixaEstoqueService baixarEstoque;
-	@Autowired 
+	@Autowired
 	private EntradaEstoqueService entradaEstoque;
-	
-	
+
 	@Transactional(readOnly = false)
 	public void salvarAlterar(Transferencia transferencia) {
 
-        transferencia.novaTransferencia();
-        baixarEstoque.baixar(transferencia);
+		transferencia.novaTransferencia();
+		baixarEstoque.baixar(transferencia);
 		transferenciaRepository.save(transferencia);
 	}
+
 	@Transactional(readOnly = false)
-	public void aceitarTransferencia(Long numeroNota)
-	{
-		Transferencia transferencia =  transferenciaRepository.buscarTransferenciaPorNumeroNota(numeroNota);
+	public void aceitarTransferencia(Long numeroNota) {
+		Transferencia transferencia = transferenciaRepository.buscarTransferenciaPorNumeroNota(numeroNota);
 		transferencia.aceitarTransferencia();
 		entradaEstoque.entradaEstoque(transferencia);
-	    transferenciaRepository.save(transferencia);
-	   
-	  
-	   
+		transferenciaRepository.save(transferencia);
+
 	}
+
 	@Transactional(readOnly = false)
-	public void rejeitarTransferencia(Long numeroNota)
-	{
-		Transferencia transferencia =  transferenciaRepository.buscarTransferenciaPorNumeroNota(numeroNota);
+	public void rejeitarTransferencia(Long numeroNota) {
+		Transferencia transferencia = transferenciaRepository.buscarTransferenciaPorNumeroNota(numeroNota);
 		transferencia.rejeitarTransferencia();
 		CancelamentoTransferencia cancelamento = new CancelamentoTransferencia(transferencia);
 		entradaEstoque.entradaEstoque(cancelamento);
 		transferenciaRepository.save(transferencia);
 	}
-	
-	public Collection<Transferencia> buscarTodos(){
+
+	public Collection<Transferencia> buscarTodos() {
 		return transferenciaRepository.findAll();
 	}
 
-	public Optional<Transferencia> buscaPorId(Long id){
+	public Optional<Transferencia> buscaPorId(Long id) {
 		return transferenciaRepository.findById(id);
 	}
-	
-	public Collection<Transferencia>  buscarTransferenciaRecebida() {
-		
+
+	public Collection<Transferencia> buscarTransferenciaRecebida() {
+
 		return transferenciaRepository
 				.buscarTransferenciaRecebidas(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId());
 	}
-	
-	public Collection<Transferencia>  buscarTransferenciaEnviada() {
-		
+
+	public Collection<Transferencia> buscarTransferenciaEnviada() {
+
 		return transferenciaRepository
 				.buscarTransferenciaEnviada(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId());
 	}
-	
+
 	public Page<Transferencia> buscarRecebidaComPaginacao(PageRequest pageRequest) {
-		return transferenciaRepository
-				.buscarTransferenciaRecebidasComPaginacao(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId(), pageRequest);
+		return transferenciaRepository.buscarTransferenciaRecebidasComPaginacao(
+				SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId(), pageRequest);
 	}
-	
+
 	public Page<Transferencia> buscarEnviadaComPaginacao(PageRequest pageRequest) {
-		return transferenciaRepository
-				.buscarTransferenciaEnviadaComPaginacao(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId(), pageRequest);
+		return transferenciaRepository.buscarTransferenciaEnviadaComPaginacao(
+				SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId(), pageRequest);
 	}
-	
+
 }

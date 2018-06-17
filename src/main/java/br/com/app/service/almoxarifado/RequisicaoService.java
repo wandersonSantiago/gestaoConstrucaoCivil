@@ -23,15 +23,15 @@ public class RequisicaoService {
 
 	@Autowired
 	private RequisicaoRepository requisicaoRepository;
-	/*@Autowired
-	private BaixaEstoqueService baixaEstoque;*/
+	@Autowired
+	private BaixaEstoqueService baixaEstoque;
 
 	@Transactional(readOnly = false)
 	public void aceitar(Integer  numeroRequisicao) {
 		
 		Requisicao requisicao = requisicaoRepository.findByNumeroRequisicao(numeroRequisicao);
 		if (requisicao.getStatusRequisicao() == StatusRequisicao.PENDENTE) {
-			//baixaEstoque.baixar(requisicao);
+			baixaEstoque.baixar(requisicao);
 			requisicao.setStatusRequisicao(StatusRequisicao.EFETUADO);
 			requisicao.setDataSaida(new Date());
 			requisicaoRepository.save(requisicao);

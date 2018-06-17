@@ -1,0 +1,46 @@
+<meta charset="UTF-8">
+
+	<div>
+		<h4>Visualização</h4>          
+		<hr>		
+	</div>	
+
+<label>Razão Social:</label>
+<p>{{::ctrl.fornecedor.dadoEmpresa.razaoSocial}}</p>
+<label>Nome Fantasia:</label>
+<p>{{::ctrl.fornecedor.dadoEmpresa.nomeFantasia}}</p>
+<strong>CNPJ:</strong> 
+<p>{{::ctrl.fornecedor.dadoEmpresa.cnpj | brCnpj}}</p>
+<br>
+<label>Endereço</label>
+<address>
+	<p>
+		<span class="glyphicon glyphicon-map-marker"></span>
+		{{::ctrl.fornecedor.dadoEmpresa.endereco.logradouro}},
+		{{::ctrl.fornecedor.dadoEmpresa.endereco.numero}} -
+		{{::ctrl.fornecedor.dadoEmpresa.endereco.bairro}}
+		-{{::ctrl.fornecedor.dadoEmpresa.endereco.cidade.nome}}
+		/{{::ctrl.fornecedor.dadoEmpresa.endereco.estado.nome}} CEP:
+		{{::ctrl.fornecedor.dadoEmpresa.endereco.cep}}
+	</p>
+	<p>{{::ctrl.fornecedor.dadoEmpresa.endereco.complemento}}</p>
+	<p>
+		<abbr title="Telefone"><span class="glyphicon glyphicon-phone"></span></abbr>
+		{{::ctrl.fornecedor.dadoEmpresa.telefone | brPhoneNumber}}
+	</p>
+	<p>
+		<abbr title="e-mail"><span class="glyphicon glyphicon-envelope"></span></abbr>
+		{{::ctrl.fornecedor.dadoEmpresa.email}}
+	</p>
+	<p>
+		<abbr title="endereço do site"><span
+			class="glyphicon glyphicon-cloud"></span></abbr>
+		{{::ctrl.fornecedor.dadoEmpresa.site}}
+	</p>
+</address>
+	<label>Contato:</label>
+	<p>{{ctrl.fornecedor.contato}}
+	<br>
+	<label>Observações:</label>
+	<p>{{ctrl.fornecedor.observacao}}</p>
+

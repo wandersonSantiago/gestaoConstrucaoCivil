@@ -15,13 +15,15 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import br.com.app.enuns.CotacaoEmpresaItemStatus;
+import lombok.Data;
 
+@Data
 @Entity
-@SequenceGenerator(name = "cotacao_empresa_item_id_seq", sequenceName = "cotacao_empresa_item_id_seq", schema = "almoxarifado")
+@SequenceGenerator(name = "cotacao_empresa_item_id_seq", sequenceName = "cotacao_empresa_item_id_seq", allocationSize = 1, schema = "almoxarifado")
 @Table(name = "cotacao_empresa_item", schema = "almoxarifado")
 public class CotacaoEmpresaItem implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -446219769994472745L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cotacao_empresa_item_id_seq")
@@ -42,53 +44,5 @@ public class CotacaoEmpresaItem implements Serializable {
 
 	@Enumerated(EnumType.STRING)
 	private CotacaoEmpresaItemStatus status;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public CotacaoItem getItem() {
-		return item;
-	}
-
-	public void setItem(CotacaoItem item) {
-		this.item = item;
-	}
-
-	public CotacaoEmpresaItemStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(CotacaoEmpresaItemStatus status) {
-		this.status = status;
-	}
-
-	public Double getValorUnitario() {
-		return valorUnitario;
-	}
-
-	public String getObservaocao() {
-		return observaocao;
-	}
-
-	public void setObservaocao(String observaocao) {
-		this.observaocao = observaocao;
-	}
-
-	public void setValorUnitario(Double valorUnitario) {
-		this.valorUnitario = valorUnitario;
-	}
-
-	public CotacaoEmpresa getCotacaoEmpresa() {
-		return cotacaoEmpresa;
-	}
-
-	public void setCotacaoEmpresa(CotacaoEmpresa cotacaoEmpresa) {
-		this.cotacaoEmpresa = cotacaoEmpresa;
-	}
 
 }

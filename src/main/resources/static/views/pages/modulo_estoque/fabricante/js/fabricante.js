@@ -24,6 +24,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				
 		.state('fabricante.cadastrar', {
 			url : "/cadastrar",
+			params: {
+				empresa: null
+			  },
 			templateUrl : "views/pages/modulo_estoque/fabricante/fabricante.form.html",
 			controller : "FabricanteCadastarController as ctrl",
 			ncyBreadcrumb: {
@@ -44,11 +47,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		})
 		
 		.state('fabricante.visualizar', {
-			url : "/:idFabricante",
+			url : "/visualizar/:idFabricante",
 			templateUrl : "views/pages/modulo_estoque/fabricante/fabricante.show.html",
-			controller : "FabricanteController as ctrl",
+			controller : "FabricanteVisualizarController as ctrl",
 			ncyBreadcrumb: {
-				 	parent: 'fabricante.listar',
+				 	parent: 'fabricante',
 				    label: 'Visualizar'
 				  }
 		})
@@ -56,6 +59,20 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			requiresAuthentication: true,
 			url : "/produto/menu",
 			templateUrl : "views/pages/modulo_estoque/fabricante/home.html",
+			ncyBreadcrumb: {
+				 	parent: 'estoque.menu',
+				    label: 'Fabricante'
+				  }
+		})
+		
+		.state('fabricante.identificar', {
+			requiresAuthentication: true,
+			url : "/fabricante/identificar",
+			params: {
+				proximaPagina: null
+			  },
+			templateUrl : "views/pages/modulo_estoque/empresa_matriz/empresa.identificar.html",
+			controller : "EmpresaMatrizCadastarController as ctrl",
 			ncyBreadcrumb: {
 				 	parent: 'estoque.menu',
 				    label: 'Fabricante'

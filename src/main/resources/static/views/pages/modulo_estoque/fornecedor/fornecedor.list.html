@@ -1,6 +1,11 @@
 <meta charset="UTF-8">
 
-
+<div class="row">
+	<div class="col-md-4">
+		<a class="fa fa-plus" href="" ui-sref="fornecedor.cadastrar" title="Cadastrar novo Fornecedor">Novo</a>|<label>Fornecedor</label>
+	</div>
+</div>
+<br>
 <div class="row">
   <div class="col-lg-6">
     <div class="input-group">
@@ -29,13 +34,13 @@
 			
 
 		</tr>
-		<tr ng-repeat="forndecedor in ctrl.fornecedores | filter: texto ">
-			<td>{{forndecedor.id}}</td>
-			<td><a ui-sref="forndecedor.visualizar({ idFornecedor: forndecedor.id})">{{forndecedor.dadoUnidade.razaoSocial}}</a></td>
-			<td>{{forndecedor.dadoUnidade.nomeFantasia}}</td>
-			<td>{{forndecedor.dadoUnidade.cnpj | brCnpj}}</td>
-			<td>{{forndecedor.dadoUnidade.telefone | brPhoneNumber}}</td>
-			<td><a ui-sref="forndecedor.editar({ idFornecedor: forndecedor.id})"><i class="glyphicon glyphicon-edit"></i></a></td>
+		<tr ng-repeat="fornecedor in ctrl.fornecedores | filter: texto ">
+			<td>{{fornecedor.id}}</td>
+			<td><a ui-sref="fornecedor.visualizar({ idFornecedor: fornecedor.id})">{{fornecedor.dadoEmpresa.razaoSocial}}</a></td>
+			<td>{{fornecedor.dadoEmpresa.nomeFantasia}}</td>
+			<td>{{fornecedor.dadoEmpresa.cnpj | brCnpj}}</td>
+			<td>{{fornecedor.dadoEmpresa.telefone | brPhoneNumber}}</td>
+			<td><a ui-sref="fornecedor.editar({ idFornecedor: fornecedor.id})"><i class="glyphicon glyphicon-edit"></i></a></td>
 		</tr>
 	</table>
 	<nav>

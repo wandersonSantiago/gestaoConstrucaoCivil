@@ -13,14 +13,16 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import br.com.app.entity.Categoria;
-import br.com.app.util.gerador.codigo.GereCodigoPacoteServico;
+import br.com.app.util.gerador.codigo.GeraCodigoPacoteServico;
+import lombok.Data;
 
+@Data
 @Entity
-@SequenceGenerator(name = "pacote_servico_id_seq", sequenceName = "pacote_servico_id_seq", schema = "servicos")
+@SequenceGenerator(name = "pacote_servico_id_seq", sequenceName = "pacote_servico_id_seq", allocationSize = 1, schema = "servicos")
 @Table(name = "pacote_servico", schema = "servicos")
-public class PacoteServico implements Serializable {
+public class PacoteServico implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -7752261115405853153L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pacote_servico_id_seq")
@@ -47,73 +49,9 @@ public class PacoteServico implements Serializable {
 	@Column(nullable = false)
 	private Double valor;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public void novoPacote() {
-		this.codigo = new GereCodigoPacoteServico().gerarNumeroPacote();
+		this.codigo = new GeraCodigoPacoteServico().gerarNumeroPacote();
 
-	}
-
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
-
-	public boolean isAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
-	}
-
-	public Integer getCodigoPacote() {
-		return codigo;
-	}
-
-	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
-	}
-
-	public String getServicosAtribuidos() {
-		return servicosAtribuidos;
-	}
-
-	public void setServicosAtribuidos(String servicosAtribuidos) {
-		this.servicosAtribuidos = servicosAtribuidos;
-	}
-
-	public String getCriterioServico() {
-		return criterioServico;
-	}
-
-	public void setCriterioServico(String criterioServico) {
-		this.criterioServico = criterioServico;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public Double getValor() {
-		return valor;
-	}
-
-	public void setValor(Double valor) {
-		this.valor = valor;
 	}
 
 }

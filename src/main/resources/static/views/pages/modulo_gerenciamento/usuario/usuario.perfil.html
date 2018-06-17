@@ -7,9 +7,10 @@
 			flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
 			class="ng-scope" flow-name="obj.flow">
 			<div ng-show="!$flow.files.length">
-			<div class="col-sm-3"></div>
+			<div class="thumbnail ">
 				<img ng-src="/rest/usuario/{{user.id}}/foto"
-				  class="img-circle" alt="User Image">
+				   alt="User Image">
+				  </div>
 			</div>
 			<div class="thumbnail " ng-show="$flow.files.length">
 				<img flow-img="$flow.files[0]">

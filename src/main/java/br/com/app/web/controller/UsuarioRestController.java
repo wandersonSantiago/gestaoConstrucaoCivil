@@ -34,6 +34,7 @@ import br.com.app.enuns.StatusUsuarioEnum;
 import br.com.app.pojo.MensagemException;
 import br.com.app.service.ImagemService;
 import br.com.app.service.UsuarioService;
+import javassist.NotFoundException;
 
 @RestController
 @RequestMapping("/rest/usuario")
@@ -49,9 +50,7 @@ public class UsuarioRestController {
 	@ResponseBody
 	public Usuario user(Principal user, HttpSession session) {
 
-		Usuario usuario = (Usuario) session.getAttribute("usuario");
-
-		return usuario;
+		return (Usuario) session.getAttribute("usuario");
 	}
 
 	@ResponseStatus(HttpStatus.OK)
@@ -128,16 +127,18 @@ public class UsuarioRestController {
 			usuarioService.savePathFoto(usuario);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+		
 			throw new MensagemException("Não foi possivel salvar a foto" + e.getMessage());
 		}
 	}
 
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/{id}/foto", produces = MediaType.IMAGE_JPEG_VALUE)
-	public InputStreamResource getFoto(@PathVariable Long id) throws IOException {
-		Usuario user = usuarioService.findById(id).get();
-
+	public InputStreamResource getFoto(@PathVariable Long id) throws IOException, NotFoundException {
+		
+		Usuario user = usuarioService.findById(id).orElseThrow(
+				() -> new NotFoundException("Usuário não foi encontrado"));
+		
 		return new InputStreamResource(imagemService.getFoto(user.getCaminhoFoto()));
 	}
 

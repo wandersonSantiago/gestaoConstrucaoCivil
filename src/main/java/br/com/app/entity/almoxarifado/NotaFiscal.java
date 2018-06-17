@@ -22,13 +22,16 @@ import br.com.app.entity.Usuario;
 import br.com.app.enuns.Situacao;
 import br.com.app.enuns.TipoNotaEnum;
 import br.com.app.pojo.SessionUsuario;
+import lombok.Data;
 
+@Data
 @Entity
-@SequenceGenerator(name = "nota_fiscal_id_seq", sequenceName = "nota_fiscal_id_seq", schema = "almoxarifado")
+@SequenceGenerator(name = "nota_fiscal_id_seq", sequenceName = "nota_fiscal_id_seq", allocationSize = 1, schema = "almoxarifado")
 @Table(name = "nota_fiscal", schema = "almoxarifado")
-public class NotaFiscal implements Serializable {
+public class NotaFiscal implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = 5220537450104744028L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "nota_fiscal_id_seq")
@@ -61,74 +64,6 @@ public class NotaFiscal implements Serializable {
 	@Column(nullable = false)
 	private Double valorTotal;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getNumero() {
-		return numero;
-	}
-
-	public Empreendimento getEmpreendimento() {
-		return empreendimento;
-	}
-
-	public void setEmpreendimento(Empreendimento empreendimento) {
-		this.empreendimento = empreendimento;
-	}
-
-	public void setNumero(Long numero) {
-		this.numero = numero;
-	}
-
-	public Date getDataNota() {
-		return dataNota;
-	}
-
-	public void setDataNota(Date dataNota) {
-		this.dataNota = dataNota;
-	}
-
-	public Date getDataVencimento() {
-		return dataVencimento;
-	}
-
-	public void setDataVencimento(Date dataVencimento) {
-		this.dataVencimento = dataVencimento;
-	}
-
-	public String getObservacao() {
-		return observacao;
-	}
-
-	public void setObservacao(String observacao) {
-		this.observacao = observacao;
-	}
-
-	public Double getValorTotal() {
-		return valorTotal;
-	}
-
-	public void setValorTotal(Double valorTotal) {
-		this.valorTotal = valorTotal;
-	}
-
-	public TipoNotaEnum getTipoNota() {
-		return tipoNota;
-	}
-
-	public void setTipoNota(TipoNotaEnum tipoNota) {
-		this.tipoNota = tipoNota;
-	}
-
-	public Situacao getSituacao() {
-		return situacao;
-	}
-
 	public void cancelarNota() {
 		this.situacao = Situacao.CANCELADA;
 	}
@@ -138,31 +73,6 @@ public class NotaFiscal implements Serializable {
 		Usuario usuarioSessao = SessionUsuario.getInstance().getUsuario();
 		this.empreendimento = usuarioSessao.getEmpreendimento();
 
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		NotaFiscal other = (NotaFiscal) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
 	}
 
 }

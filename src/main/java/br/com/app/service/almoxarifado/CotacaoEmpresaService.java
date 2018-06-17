@@ -19,7 +19,7 @@ public class CotacaoEmpresaService {
 
 	@Autowired
 	private CotacaoEmpresaRepository cotacaoEmpresaRepository;
-	
+
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(CotacaoEmpresa cotacaoEmpresa) {
 
@@ -40,20 +40,18 @@ public class CotacaoEmpresaService {
 
 		return cotacaoEmpresaRepository.findById(id);
 	}
-	public List<CotacaoEmpresa> ganhadores(Long idCotacao)
-	{
-		List<CotacaoEmpresa>  cotacoes = cotacaoEmpresaRepository.buscarGanhadores(idCotacao);
-		for(CotacaoEmpresa item :  cotacoes)
-		{
+
+	public List<CotacaoEmpresa> ganhadores(Long idCotacao) {
+		List<CotacaoEmpresa> cotacoes = cotacaoEmpresaRepository.buscarGanhadores(idCotacao);
+		for (CotacaoEmpresa item : cotacoes) {
 			item.removerItensPerdedores();
 		}
-		return  cotacoes;
-	
+		return cotacoes;
+
 	}
-	
-	public List<CotacaoEmpresa> concorrentes(Long idCotacao)
-	{
+
+	public List<CotacaoEmpresa> concorrentes(Long idCotacao) {
 		return cotacaoEmpresaRepository.buscarPorCotacao(idCotacao);
 	}
-	
+
 }

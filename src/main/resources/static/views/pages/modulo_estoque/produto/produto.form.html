@@ -2,86 +2,88 @@
 
 <div>
 <label>Cadastro</label>
-	<form role="form-vertical"  ng-submit="ctrl.salva()" >	
+	<form role="form-vertical" novalidate name="form" ng-submit="ctrl.submit(form)" >	
 					
 		<div class="row" ng-show="ctrl.produto.id">
-			<label class="col-sm-2 control-label" for="ativo"> Status</label>
-			<div class="col-sm-3">
-				<input type="checkbox" ng-model="ctrl.produto.ativo" >
+			<div class="">			
+				<label class="control-label" for="ativo"> Status  : </label>			
+				<input type="checkbox" ng-model="ctrl.produto.ativo" >{{ctrl.produto.ativo ? 'Inativo' : 'Ativo'}}
 			</div>
 		</div>		
 		<br>		
 		<div class="row">
-			<div class="col-sm-5">	
-				Descrição:					
-				<input class="form-control" ng-model="ctrl.produto.descricao" id="descricaoProduto" placeholder="ex: Cano PVC 3'" type="text" maxlength="50" required>
+			<div class="col-sm-5" ng-class="{ 'has-error' : form.descricao.$invalid && form.$submitted }">	
+				<label>Descrição*:</label>					
+				<input class="text-uppercase form-control" ng-model="ctrl.produto.descricao" id="descricao" name="descricao" placeholder="ex: Cano PVC 3'" type="text" maxlength="50" required>
 			</div>
 	
 			<div class="col-sm-3">						
-			Código de Barras:
-				<input class="form-control" ng-model="ctrl.produto.codigoBarra" id="codigoBarra" placeholder="ex: 789456781 " type="text" >
+			<label>Código de Barras:</label>
+				<input class="text-uppercase form-control" ng-model="ctrl.produto.codigoBarra" id="codigoBarra" placeholder="ex: 789456781 " type="text" >
 			</div>
-			<div class="col-sm-4" >
-				<a href="" class="fa fa-plus" ng-click="ctrl.implementModal(categoria)"></a>Categoria:
-				<select class="form-control select2" ng-model="ctrl.produto.categoria" 
-					ng-options="categoria.descricao for categoria in ctrl.categorias" required >
-				</select>
-			</div>
+			<div class="col-sm-4">
+				<a href="" class="fa fa-plus" ng-click="ctrl.proximaPagina('categoria.cadastrar')">Novo</a> | <label>Selecione a Categoria:</label>
+				<div class="input-group">
+				    <input type="text"  ng-model="cat" placeholder="ex: Hidraulica" id="categorias" name="categorias"
+				    uib-typeahead="categoria as categoria.descricao for categoria in ctrl.categoria($viewValue) | limitTo:8" 
+				    typeahead-template-url="customTemplateC.html" class="form-control" typeahead-show-hint="true"  ng-blur="ctrl.subCategoria(cat.id)"
+				    typeahead-loading="loadingC" typeahead-no-results="noResultsC" typeahead-min-length="0" >
+				    <span class="input-group-btn">
+				        <button class="btn btn-default" type="button" ng-click="ctrl.subCategoria(cat.id)">adicionar</button>
+				     </span>		   
+			    </div>
+			     <i ng-show="loadingC" class="glyphicon glyphicon-refresh"></i>
+				    <div ng-show="noResultsC">
+				      <i class="glyphicon glyphicon-remove"></i> Nenhum resultado encontrado
+				    </div>
+			   </div>	
+			    <script type="text/ng-template" id="customTemplateC.html">
+ 	 				<a>
+     				 <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+  					</a>
+				</script>	
 			
-		</div>					
+			</div>					
 		<br>			
 		<div class="row">
-			<div class="col-sm-4">
-				<a href="" class="fa fa-plus"></a>Sub Categoria:
-				<select class="form-control select2" ng-model="ctrl.produto.subCategoria" 
-					ng-options="subCategoria.descricao for subCatgeoria in ctrl.subCategoria"  required >
+			<div class="col-sm-4"  ng-class="{ 'has-error' : form.sub.$invalid && form.$submitted }">
+				<a href="" class="fa fa-plus"  ng-click="ctrl.proximaPagina('sub-categoria.cadastrar')" >Novo</a> | <label>Selecione a Sub Categoria:</label>
+				<select class="form-control select2" ng-model="ctrl.produto.categoria" id="sub" name="sub"
+					ng-options="subCategoria.descricao for subCategoria in ctrl.subCategorias track by subCategoria.id"  required >
 				</select>
 			</div>			
-			<div class="col-sm-4">		
-				Unidade de Medida:				
-				<select class="form-control select2" ng-model="ctrl.produto.unidadeMedida" 
+			<div class="col-sm-4"  ng-class="{ 'has-error' : form.unidade.$invalid && form.$submitted }">		
+				<label>Unidade de Medida*:</label>				
+				<select class="form-control select2" ng-model="ctrl.produto.unidadeMedida" id="unidade" name="unidade"
 					ng-options="unidadeMedida for unidadeMedida in ctrl.unidadesMedida track by unidadeMedida" required >
 				</select>
 			</div>
 			<div class="col-sm-4">
-			<a href="" class="fa fa-plus"></a>Fabricante:
-				<select class="form-control select2" ng-model="ctrl.produto.fabricante" 
-					ng-options="fabricante.dadoEmpresa.nomeFantasia for fabricante in ctrl.fabricantes"  required >
-				</select>
-			</div>
+				<a href="" class="fa fa-plus" ng-click="ctrl.proximaPagina('matriz.identificar')">Novo</a> | <label>Selecione a Fabricante:</label>					 	
+		    <input type="text" ng-model="ctrl.produto.fabricante"  placeholder="ex: Hidraulica" id="fabricante" name="fabricante"
+		    uib-typeahead="fabricante as fabricante.dadoEmpresa.nomeFantasia for fabricante in ctrl.fabricante($viewValue) | limitTo:8" 
+		    typeahead-template-url="customTemplate.html" class="form-control" typeahead-show-hint="true" 
+		    typeahead-loading="loading" typeahead-no-results="noResults" typeahead-min-length="0" >	 		   
+			    
+			     <i ng-show="loading" class="glyphicon glyphicon-refresh"></i>
+				    <div ng-show="noResults">
+				      <i class="glyphicon glyphicon-remove"></i> Nenhum resultado encontrado
+				    </div>
+			   </div>	
+			    <script type="text/ng-template" id="customTemplate.html">
+ 	 				<a>
+     				 <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+  					</a>
+				</script>	
 			
-		</div><br><br>				
+			</div>		
+		
+		<br><br>				
 		<div class="row col-md-4 col-md-offset-4">						
 				<input type="submit"  id="submit" value="Salvar" class="btn btn-lg btn-primary btn-block btn-signin">
 			
 		</div>
 		
 	</form>				
-</div>
-
-		
-<!-- MODAL -->				
-		<div  class="modal fade modal-default implementModal" id="implementModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document" >
-		    <div class="modal-content">
-		      <div class="modal-header">
-		      Cadastrar
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		      </div>
-		      <div class="modal-body">				     		
-			     <div >
-			      Descrição:
-			      	<div class="col-md-12">
-						<input type="text" class="form-control select2" ng-model="objeto.descricao">
-					</div>
-				</div>			       
-		      </div><br><br>
-		      <div class="modal-footer ">
-			      <div class="col-md-4 col-md-offset-4">
-			     	 <input type="button" class="btn btn-lg btn-primary btn-block btn-signin" value="Salvar" ng-click="ctrl.insertObjeto(objeto)" >
-			      </div>
-		      </div>
-		    </div>
-		  </div>
-		</div>
+</div>		
 

@@ -1,7 +1,5 @@
 package br.com.app.entity.chamado;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,20 +9,15 @@ import javax.persistence.Table;
 import br.com.app.enuns.chamado.TipoEquipamentoChamadoTi;
 
 @Entity
-@Table(name="chamado_ti", schema="chamado")
-public class ChamadoTi extends Chamado implements Serializable {
+@Table(name = "chamado_ti", schema = "chamado")
+public class ChamadoTi extends Chamado {
 
-
-	private static final long serialVersionUID = 1L;
-
-	@Column(name="descricao_servico")
+	@Column(name = "descricao_servico")
 	private String descricaoServico;
-	
+
 	@Enumerated(EnumType.STRING)
 	private TipoEquipamentoChamadoTi tipoEquipamento;
-	
-	
-	
+
 	public String getDescricaoServico() {
 		return descricaoServico;
 	}
@@ -40,7 +33,5 @@ public class ChamadoTi extends Chamado implements Serializable {
 	public void setTipoEquipamento(TipoEquipamentoChamadoTi tipoEquipamento) {
 		this.tipoEquipamento = tipoEquipamento;
 	}
-	
-	
-	
+
 }

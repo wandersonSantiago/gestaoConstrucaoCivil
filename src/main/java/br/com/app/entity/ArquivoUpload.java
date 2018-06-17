@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@SequenceGenerator(name = "arquivo_produto_id_seq", sequenceName = "arquivo_produto_id_seq",schema="communs")
+@SequenceGenerator(name = "arquivo_produto_id_seq", sequenceName = "arquivo_produto_id_seq",allocationSize = 1,schema="communs")
 @Table(name = "arquivo_upload" , schema = "communs")
 public class ArquivoUpload implements Serializable{
 

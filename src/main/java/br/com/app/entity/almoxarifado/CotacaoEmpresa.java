@@ -18,13 +18,15 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import br.com.app.enuns.CotacaoEmpresaItemStatus;
+import lombok.Data;
 
+@Data
 @Entity
-@SequenceGenerator(name = "cotacao_empresa_id_seq", sequenceName = "cotacao_empresa_id_seq", schema = "almoxarifado")
+@SequenceGenerator(name = "cotacao_empresa_id_seq", sequenceName = "cotacao_empresa_id_seq", allocationSize = 1, schema = "almoxarifado")
 @Table(name = "cotacao_empresa", schema = "almoxarifado")
-public class CotacaoEmpresa implements Serializable {
+public class CotacaoEmpresa implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 6241438706252943282L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cotacao_empresa_id_seq")
@@ -47,38 +49,6 @@ public class CotacaoEmpresa implements Serializable {
 
 	private Boolean ganhou;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Cotacao getCotacao() {
-		return cotacao;
-	}
-
-	public void setCotacao(Cotacao cotacao) {
-		this.cotacao = cotacao;
-	}
-
-	public Fornecedor getFornecedor() {
-		return fornecedor;
-	}
-
-	public void setFornecedor(Fornecedor fornecedor) {
-		this.fornecedor = fornecedor;
-	}
-
-	public List<CotacaoEmpresaItem> getItens() {
-		return itens;
-	}
-
-	public void setItens(List<CotacaoEmpresaItem> itens) {
-		this.itens = itens;
-	}
-
 	public void removerItensPerdedores() {
 		List<CotacaoEmpresaItem> itensParaRemover = new ArrayList<CotacaoEmpresaItem>();
 		itens.forEach(item -> {
@@ -88,7 +58,7 @@ public class CotacaoEmpresa implements Serializable {
 			}
 		});
 		itens.removeAll(itensParaRemover);
-		
+
 	}
 
 	public Integer getQuantidadeItensGanhos() {

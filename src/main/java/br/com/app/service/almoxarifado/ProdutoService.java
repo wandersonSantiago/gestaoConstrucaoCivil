@@ -1,18 +1,18 @@
 package br.com.app.service.almoxarifado;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.app.entity.almoxarifado.Produto;
+import br.com.app.exceptions.NotFoundException;
+import br.com.app.pojo.MensagemException;
 import br.com.app.repository.almoxarifado.ProdutoRepository;
-import br.com.app.util.gerador.codigo.GeraCodigoProduto;
+import br.com.app.util.gerador.codigo.ExecuteGera;
 
 @Service
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
@@ -20,48 +20,58 @@ public class ProdutoService {
 
 	@Autowired
 	private ProdutoRepository produtoRepository;
-    @Autowired
-    private GeraCodigoProduto gerar;
+	@Autowired
+	private ExecuteGera execute;
+
 	
-    public List<Produto> buscarTodos() {
-
-    	return produtoRepository.buscarTodos();
-	}
-    public List<Produto> buscarPorDescricao(String descricao)
-    {
-    	return null;
-    }
-	public Optional<Produto> buscaPorId(Long id) {
-
-		return produtoRepository.findById(id);
-	}
-
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(Produto produto) {
-		
-		
-		produto.setCodigo(gerar.gerarCodigoProduto());
-		
-		if(produto.isGeraCodigoBarra())
-		{
-		    produto.setCodigoBarra(gerar.gerarCodigoBarra());
-		}
-		
+
+		//Gera gerarCodigoProduto = new GeraCodigoProduto();
+
+		//Integer codigo = execute.gerar(gerarCodigoProduto);
+
+		//produto.setCodigo(codigo);
 		produtoRepository.save(produto);
 
 	}
-   public Produto buscarPorCodigoOuCodigoBarra(String codigoOuCodigoBarra) {
 
-	   return produtoRepository.findByCodigoOrCodigoBarra(codigoOuCodigoBarra);
-   }
-   public boolean existeCodigo(Integer codigo) {
+	public Produto buscarPorCodigoOuCodigoBarra(String codigoOuCodigoBarra) {
+
+		return produtoRepository.findByCodigoOrCodigoBarra(codigoOuCodigoBarra);
+	}
+
+	public boolean existeCodigo(Integer codigo) {
 		return produtoRepository.existeCodigo(codigo);
 	}
 
 	public boolean existeCodigoBarra(String codigoBarra) {
 		return produtoRepository.existeCodigoBarra(codigoBarra);
 	}
-	public Page<Produto> buscarTodosComPaginacao(PageRequest pageRequest) {
-		return produtoRepository.findAll(pageRequest);
+
+	public Page<Produto> findAll(PageRequest page) {
+		return produtoRepository.findAll(page);
+	}
+	
+	public Produto buscaPorId(Long id) {
+		Produto produto =  produtoRepository.findById(id).get();
+		if(produto == null) {
+			throw new NotFoundException("Produto não encontrado");
+		}
+		return produto;
+	}
+	
+	public Page<Produto> findByDescricaoIgnoreCase(String descricao, Pageable page) {
+		Page<Produto> list = null;
+		descricao = descricao.replaceAll("[./-]","");
+		if (descricao.matches("[0-9]+")) {
+			list = produtoRepository.findByCodigo(descricao, page);
+		}else {
+			list = produtoRepository.findByDescricaoIgnoreCaseContaining(descricao, page);
+		}
+		if(list == null || list.getNumberOfElements() < 1) {
+			throw new MensagemException("Não foi encontrado nenhuma resultado para a busca" + descricao);
+		}
+		return list;
 	}
 }

@@ -25,7 +25,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			templateUrl : "views/pages/modulo_estoque/estoque.form.html",
 			controller : "EstoqueCadastarController as ctrl",
 			ncyBreadcrumb: {
-			 	parent: 'estoque.menu',
+			 	parent: 'estoque.home',
 			    label: 'Cadastrar'
 			  }
 		})
@@ -47,6 +47,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			ncyBreadcrumb: {
 				 	parent: 'home',
 				    label: 'Estoque'
+				  }
+		})
+		
+		.state('estoque.home', {
+			requiresAuthentication: true,
+			url : "/home",
+			templateUrl : "views/pages/modulo_estoque/estoque.home.html",
+			ncyBreadcrumb: {
+				 	parent: 'estoque.menu',
+				    label: 'Menu'
 				  }
 		})
 

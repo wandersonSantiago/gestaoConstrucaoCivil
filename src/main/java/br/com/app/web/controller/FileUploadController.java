@@ -4,10 +4,10 @@ import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -22,14 +22,20 @@ public class FileUploadController {
 	@Autowired 
 	private ArquivoUploadService service;
 	
+	@ResponseStatus(HttpStatus.OK)
 	@PostMapping("/upload")
-	public ResponseEntity fileUpload(@RequestParam("file") MultipartFile file,
+	public void fileUpload(@RequestParam("file") MultipartFile file,
             Long proprietarioId,RedirectAttributes redirectAttributes) 
 	{
 		
 		if(file.isEmpty())
 		{
-			return new ResponseEntity(HttpStatus.BAD_REQUEST);
+			try {
+				throw new IOException("Erro");
+			} catch (IOException e) {
+ 				e.printStackTrace();
+			}
+		
 		}
 	
 		ArquivoUpload arquivo = new ArquivoUpload();
@@ -42,6 +48,6 @@ public class FileUploadController {
 		}
 		
 		service.salvar(arquivo);
-		return new ResponseEntity(HttpStatus.OK);
+		 
 	}
 }

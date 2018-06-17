@@ -21,6 +21,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		.state('produto.cadastrar', {
 			requiresAuthentication: true,
 			url : "/cadastrar",
+			params: {
+				backPage: null
+			  },
 			templateUrl : "views/pages/modulo_estoque/produto/produto.form.html",
 			controller : "ProdutoCadastarController as ctrl",
 			ncyBreadcrumb: {
@@ -34,7 +37,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			templateUrl : "views/pages/modulo_estoque/produto/produto.form.html",
 			controller : "ProdutoEditarController as ctrl",
 			ncyBreadcrumb: {
-				 	parent: 'produto.listar',
+				 	parent: 'produto.consultar',
 				    label: 'Editar'
 				  }
 		})

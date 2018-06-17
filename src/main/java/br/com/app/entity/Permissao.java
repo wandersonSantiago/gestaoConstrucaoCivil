@@ -15,7 +15,7 @@ import br.com.app.enuns.TipoModulo;
 import lombok.Data;
 
 @Entity
-@SequenceGenerator(name = "permissao_id_seq", sequenceName = "permissao_id_seq",schema="communs")
+@SequenceGenerator(name = "permissao_id_seq", sequenceName = "permissao_id_seq",allocationSize = 1,schema="communs")
 @Data
 @Table(name = "permissao" , schema = "communs")
 public class Permissao implements Serializable{

@@ -1,124 +1,77 @@
 <meta charset="UTF-8">
-<ol class="breadcrumb">
-   <li class="breadcrumb-item"><a href="#/">home</a></li>
-   <li class="breadcrumb-item"><a href="#/almoxarifado/home">menu almoxarifado</a></li>
-   <li class="breadcrumb-item" ><a href="#/estoque/listagem">lista</a></li>
-   <li class="breadcrumb-item active">entrada</li>
-  </ol>	
-<div  ng-controller="notaFiscalController as notaFiscalCtrl" >
-
-<div class="box box-primary" >
-		<!-- Default panel contents -->
-		<div class="box-header" >
-			<span class="lead">Entrada de Estoque  </span>
-		</div>
-		<div class="panel-body">
-
-			<div class="container col-sm-12 " >
-				<form role="form-vertical"  ng-submit="notaFiscalCtrl.salva()" >
-					
-			
-					
-					<br>
-		
-					<!--  <div layout-gt-sm="row">
-				          <md-input-container class="md-block" flex-gt-sm>
-					            <label>Numero nota fiscal</label>
-					            <input ng-model="notaFiscalCtrl.notaFiscal.numero">
-				          </md-input-container>
-				          
-				          <md-input-container class="md-block" flex-gt-sm>
-					            <label>Data nota fiscal</label>
-					            <input ng-model="notaFiscalCtrl.notaFiscal.dataNota">
-				          </md-input-container>
-				          
-				          <md-input-container class="md-block" flex-gt-sm>
-					            <label>vecimento nota fiscal</label>
-					            <input ng-model="notaFiscalCtrl.notaFiscal.dataVencimento">
-				          </md-input-container>
-					</div> -->
+<form role="form-vertical" name="form" novalidate  ng-submit="ctrl.submit(form)" >
+	
 				<div class="row">
 						<div class="col-sm-3">
+						<label>Número Nota Fiscal:</label>
 							<input class="form-control"  id="numeroNota" type="text" title="informe o numero da nota fiscal" placeholder="Numero nota fiscal" 
-							ng-model="notaFiscalCtrl.notaFiscal.numero" required>
+							ng-model="ctrl.notaFiscalProduto.notaFiscal.numero" required>
 						</div>			
 						<div class="col-sm-3">
-							<input class="form-control"  id="dataNota" type="date" ng-model="notaFiscalCtrl.notaFiscal.dataNota"  title="informe a data da nota fiscal"  placeholder="data nota fiscal" required>
+						<label>Data Nota Fiscal:</label>
+							<input class="form-control"  id="dataNota" type="date" ng-model="ctrl.notaFiscalProduto.notaFiscal.dataNota"  title="informe a data da nota fiscal"  placeholder="data nota fiscal" required>
 						</div>						
 						<div class="col-sm-3">
-							<input class="form-control"  id="vencimento"  type="date" ng-model="notaFiscalCtrl.notaFiscal.dataVencimento"  title="informe a data de vencimento da nota fiscal" placeholder="vecimento nota fiscal" required>
+						<label>Data Vencimento Nota Fiscal:</label>
+							<input class="form-control"  id="vencimento"  type="date" ng-model="ctrl.notaFiscalProduto.notaFiscal.dataVencimento"  title="informe a data de vencimento da nota fiscal" placeholder="vecimento nota fiscal" required>
 						</div>
 					</div> 
-					
-					<br>
-					<div ng-controller="produtoController as pCtrl">
-						<label class="radio-inline"  ><input type="checkbox"   ng-model="habilitaBuscaPorDescricao"  ng-click="pCtrl.lista()" name="optradio">Habilitar busca por descrição </label> 
-					<br>
+										
 					<br>
 					<div class="row">
-				          <div class="col-sm-4"  ng-show="!habilitaBuscaPorDescricao">
-					            <input class="form-control" ng-model="notaFiscalCtrl.produto" ng-blur="notaFiscalCtrl.buscaPorCodigoBarras(notaFiscalCtrl.produto)" onkeyup="if(this.value.length > 11) { quantidadeProduto.focus(); }" placeholder="Busca por código">
-				          </div>						
-							
-						
-						<div class="col-sm-4" ng-show="habilitaBuscaPorDescricao"  >
-							<br>
-							<md-autocomplete 
-							 	md-selected-item="notaFiscalCtrl.produto" 
-							 	md-search-text="pCtrl.searchText" 
-							 	md-selected-item-change="pCtrl.selectedItemChange(listaProduto)" 
-							 	md-items=" listaProduto in pCtrl.produtos | filter : pCtrl.searchText" 
-							 	md-item-text="listaProduto.descricao" 
-							 	md-min-length="0" placeholder="busca produto">
-       							 <md-item-template>
-          							<span md-highlight-text="pCtrl.searchText" md-highlight-flags="^i">{{listaProduto.descricao}}</span>
-       							 </md-item-template>        								
-     						 </md-autocomplete>
-							
-							
-						</div>
-							<div class="col-sm-2" ng-show="habilitaBuscaPorDescricao">
-							<br>
-							<input class="btn btn-lg btn-primary btn-block btn-signin" ng-disabled="!notaFiscalCtrl.produto"
-								ng-click="notaFiscalCtrl.adicionarProdutos(notaFiscalCtrl.produto )" value="adicionar"
-								title="pressione para adicionar a lista" type="button"  >
-						</div>
-						</div>
-					</div>
+						<div class="col-sm-4">							
+							<a href="" class="fa fa-plus" ng-click="ctrl.proximaPagina('produto.cadastrar')">Novo</a> | <label>Selecione a Produto:</label>		
+						<div class="input-group">			 	
+						    <input type="text" ng-model="ctrl.produto"  placeholder="ex: Cano 3/4" id="produto" name="produto"
+						    uib-typeahead="produto as produto.descricao for produto in ctrl.produtos($viewValue) | limitTo:8"  ng-blur="ctrl.adicionaProduto(ctrl.produto)"
+						    typeahead-template-url="customTemplateP.html" class="form-control" typeahead-show-hint="true" 
+						    typeahead-loading="loadingP" typeahead-no-results="noResultsP" typeahead-min-length="0" >	 		   
+						    <span class="input-group-btn">
+					     	   <button class="btn btn-default" type="button" ng-click="ctrl.adicionaProduto(ctrl.produto)">adicionar</button>
+						     </span>		   
+					    </div>
+						     <i ng-show="loadingP" class="glyphicon glyphicon-refresh"></i>
+							    <div ng-show="noResultsP">
+							      <i class="glyphicon glyphicon-remove"></i> Nenhum resultado encontrado
+							    </div>
+						   </div>	
+						    <script type="text/ng-template" id="customTemplateP.html">
+ 	 				    	<a>
+     							 <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+  							</a>
+							</script>	
+					
+					</div>		
 					<br>
-					<div class="table-responsive">
-					<table class="table table-hover " ng-show="visualizarTable">
+					<div class="table-responsive" ng-if="produtos.length > 0">
+					<table class="table table-hover ">
 					<thead>
 						<tr>
 							<th>selecione</th>
 							<th>Codigo de barras</th>
 							<th>Descrição</th>
-							<th>Quantidade</th>
-							<th>Preço unitario</th>
+							<th  ng-class="{ 'has-error' : form.quantidadeProduto.$invalid && form.$submitted }">Quantidade</th>
+							<th  ng-class="{ 'has-error' : form.valor.$invalid && form.$submitted }">Preço unitario</th>
 							<th>Preço total item</th>
 						</tr>
-					</thead>
-					
-					<tbody
-						ng-repeat=" f in notaFiscalCtrl.listaItensNota | filter : busca">
+					</thead>					
+					<tbody	ng-repeat=" f in produtos">
 						<tr>
-						<td><input type="checkbox" ng-model="f.selecionado"	ng-click="notaFiscalCtrl.ativarExcluirLote(listaItensNota)"></td>
-							<td><input class="form-control"  id="codigoBarras"  type="text" placeholder="Código de barras"
-							ng-model="f.produto.codigoBarra" disabled></td>
-							<td><input class="form-control"  id="descricaoProduto"  type="text" placeholder="descrição do Produto" 
-							ng-model="f.produto.descricao" disabled></td>
-							<td><input class="form-control"  id="quantidadeProduto" name="quantidadeProduto" type="text" placeholder="quantidade"
-							ng-model="f.quantidade" ui-number-mask="0" ng-blur="notaFiscalCtrl.SomaTotal(notaFiscalCtrl.listaItensNota)" required></td>
-							<td><input class="form-control"  id="valorProduto"  type="text"  placeholder="Preço" ui-money-mask
-							ng-model="f.valorUnitario" ng-blur="notaFiscalCtrl.SomaTotal(notaFiscalCtrl.listaItensNota)" required> </td>
-							<td>{{f.valorTotal = somaUnitario(f.quantidade, f.valorUnitario) | currency}}</td>
+						<td><input type="checkbox" ng-model="f.selecionado"	ng-click="ctrl.ativarExcluirLote(produtos)"></td>
+							<td>{{f.produto.codigo ? f.produto.codigo : f.produto.codigoBarra}}</td>
+							<td>{{f.produto.descricao}}</td>
+							<td  ng-class="{ 'has-error' : form.quantidadeProduto.$invalid && form.$submitted }"><input class="form-control"  id="quantidadeProduto" name="quantidadeProduto" type="text" placeholder="quantidade"
+							ng-model="f.quantidade" ui-number-mask="0" ng-blur="ctrl.soma(produtos)" required></td>
+							<td ng-class="{ 'has-error' : form.valor.$invalid && form.$submitted }"><input class="form-control"  id="valorProduto" name="valor"  type="text"  placeholder="Preço" ui-money-mask
+							ng-model="f.valorUnitario" ng-blur="ctrl.soma(produtos)"  required> </td>
+							<td>{{f.valorTotal = ctrl.somaUnitario(f.quantidade, f.valorUnitario) | currency}}</td>
 							
 						</tr>
 	
 					</tbody>
 					<tfoot>
 						<tr>
-							<th><input type="button" class="btn-danger" ng-if="ativadoExcluirLote"  value="excluir" name="apagar" ng-click="notaFiscalCtrl.apagarProdutos(listaItensNota)"></th>
+							<th><input type="button" class="btn-danger" ng-if="ativadoExcluirLote"  value="excluir" name="apagar" ng-click="ctrl.apagarProdutos(produtos)"></th>
 							<th></th>
 							<th></th>
 							<th></th>
@@ -131,32 +84,38 @@
 					</div>
 					<br>
 					<hr>
-					<h3>Fornecedor</h3>
-					<br>
-						
+				
+					<br>						
 					<div class="row">
-							<div class="col-sm-4" ng-controller="fornecedorController as forCtrl" ng-init="forCtrl.lista()" >
-							<select class="form-control select2" ng-model="notaFiscalCtrl.notaFiscalProduto.fornecedor" id="fornecedor"
-							ng-options="listaFornecedores.dadoEmpresa.nomeFantasia for listaFornecedores in forCtrl.listaFornecedor" 
-							  style=" width: 100%;" required>
-								<option value="">---Fornecedor---</option>
-							</select>
-						</div>
-					</div>
+							<div class="col-sm-4" ng-class="{ 'has-error' : form.fornecedor.$invalid && form.$submitted }">
+							<a href="" class="fa fa-plus" ng-click="ctrl.proximaPagina('matriz.identificar')">Novo</a> | <label>Selecione a Fornecedor:</label>					 	
+						    <input type="text" ng-model="ctrl.notaFiscalProduto.fornecedor"  placeholder="ex: Dicico" id="fornecedor" name="fornecedor"
+						    uib-typeahead="fornecedor as fornecedor.dadoEmpresa.nomeFantasia for fornecedor in ctrl.fornecedores($viewValue) | limitTo:8" 
+						    typeahead-template-url="customTemplate.html" class="form-control" typeahead-show-hint="true" 
+						    typeahead-loading="loading" typeahead-no-results="noResults" typeahead-min-length="0" required>	 		   
+						    
+						     <i ng-show="loading" class="glyphicon glyphicon-refresh"></i>
+							    <div ng-show="noResults">
+							      <i class="glyphicon glyphicon-remove"></i> Nenhum resultado encontrado
+							    </div>
+						   </div>	
+						    <script type="text/ng-template" id="customTemplate.html">
+ 	 				    	<a>
+     							 <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+  							</a>
+							</script>	
+					
+					</div>		
 						
 					<br>
 					<div class="row">
-					<!--  <md-input-container class="md-block" flex-gt-sm>
-					            <label>Observação</label>
-					            <input ng-model="notaFiscalCtrl.notaFiscal.observacao">
-				          </md-input-container> -->
 						<div class="col-sm-12">
-								<input class="form-control"  id="obs" type="text"  placeholder="Observação"	ng-model="notaFiscalCtrl.notaFiscal.observacao">
+								<input class="form-control"  id="obs" type="text"  placeholder="Observação"	ng-model="ctrl.notaFiscalProduto.notaFiscal.observacao">
 						</div> 
 					</div>
 					<br>
 					<div class="row ">
-						<div class="col-sm-12">
+						<div class="col-md-4 col-md-offset-4">
 							<input type="submit" id="submit"  value="Salvar"	class="btn btn-lg btn-primary btn-block btn-signin">
 						</div>
 					</div>
@@ -165,6 +124,3 @@
 			</div>
 
 		</div>
-		<div class="tablecontainer"></div>
-	</div>
-</div>

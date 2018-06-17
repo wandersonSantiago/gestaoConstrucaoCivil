@@ -2,17 +2,33 @@ app.controller("CategoriaCadastarController", CategoriaCadastarController);
 app.controller("CategoriaEditarController", CategoriaEditarController);
 app.controller("CategoriaListarController", CategoriaListarController);
 
-function CategoriaCadastarController(Auth, CategoriaService, toastr, $rootScope, $scope) {
+function CategoriaCadastarController($stateParams, blockUI,CategoriaService, toastr, $scope, $state) {
 
 	var self = this;
 
 	self.submit = submit;
-
-	function submit(categoria) {		
-			CategoriaService.salvar(self.categoria).then(function(response) {
+	
+	$scope.backPage = $stateParams.backPage;
+	
+	function submit(form) {	
+		if(form.$invalid){
+			sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
+			return;
+		}	
+		$scope.categoria == null ?'' : self.categoria.categoria = $scope.categoria;
+		 blockUI.start();
+			CategoriaService.insert(self.categoria)
+			.then(function(response) {
 				toastr.success("Categoria, cadastrado")
 				self.categoria = null;
+				$scope.categoria = null;
+				$scope.form.$setPristine();
+				blockUI.stop();
+				if($scope.backPage){
+					$state.go($scope.backPage);
+				}
 			}, function(errResponse) {
+				blockUI.stop();
 				sweetAlert({
 					timer : 3000,
 					text : errResponse.data.message,
@@ -35,9 +51,10 @@ function CategoriaEditarController(CategoriaService, Auth,	$stateParams, $state,
 	self.buscarPorId = buscarPorId;
 
 	function submit(categoria) {
-			CategoriaService.alterar(self.categoria).then(function(response) {
-				toastr.info("Categoria Salvo!!!")
+			CategoriaService.update(self.categoria).then(function(response) {
+				toastr.info("Categoria Alterada!!!")
 				self.categoria = null;
+				$state.go('categoria.consultar');
 			}, function(errResponse) {
 				sweetAlert({
 					timer : 3000,
@@ -54,7 +71,7 @@ function CategoriaEditarController(CategoriaService, Auth,	$stateParams, $state,
 	function buscarPorId(id) {
 		if (!id)
 			return;
-		CategoriaService.buscarPorId(id).then(function(p) {
+		CategoriaService.findById(id).then(function(p) {
 			self.categoria = p;
 		}, function(errResponse) {
 		});
@@ -66,8 +83,7 @@ function CategoriaEditarController(CategoriaService, Auth,	$stateParams, $state,
 	}
 }
 
-function CategoriaListarController(blockUI, $stateParams, $state, CategoriaService,
-		toastr, $rootScope, $scope) {
+function CategoriaListarController(blockUI, $stateParams, $state, CategoriaService,	toastr, $rootScope, $scope) {
 
 	var self = this;
 
@@ -76,36 +92,20 @@ function CategoriaListarController(blockUI, $stateParams, $state, CategoriaServi
 	self.totalPaginas = null;
 	self.paginaCorrente = 0;
 
-	listar();
-
-	function listar() {
-		blockUI.start();
-		CategoriaService.buscarPorTexto("", self.paginaCorrente).then(
-				function(e) {
-					$scope.mensagemErro = null;
-					self.categorias = e.content;
-					self.totalElementos = e.totalElements;
-					self.totalPaginas = e.totalPages;
-					blockUI.stop();
-				}, function(errResponse) {
-					blockUI.stop();
-				});
-	}
-	;
+	buscarPorTexto('');
+	
 
 	function buscarPorTexto(texto) {
 		$scope.mensagemErro = null;
-		if (!texto || texto.length < 3) {
-			$scope.mensagemErro = "Digite pelo menos 3 caracters";
-			return;
-		}
 		blockUI.start();
-		CategoriaService.buscarPorTexto(texto, self.paginaCorrente).then(
+		self.paginaCorrente == '0'? self.paginaCorrente = 0 : self.paginaCorrente = self.paginaCorrente - 1; 
+		CategoriaService.findByDescricaoPagination(texto, self.paginaCorrente).then(
 				function(e) {
 					$scope.mensagemErro = null;
 					self.categorias = e.content;
 					self.totalElementos = e.totalElements;
 					self.totalPaginas = e.totalPages;
+					self.paginaCorrente = e.number + 1;
 					blockUI.stop();
 				}, function(errResponse) {
 					blockUI.stop();

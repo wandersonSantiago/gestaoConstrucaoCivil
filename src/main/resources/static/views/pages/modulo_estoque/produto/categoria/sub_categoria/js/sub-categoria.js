@@ -11,7 +11,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		.state('sub-categoria.consultar', {
 			url : "/consultar",
 			templateUrl : "views/pages/modulo_estoque/produto/categoria/sub_categoria/sub.categoria.list.html",
-			controller : "CategoriaListarController as ctrl",
+			controller : "SubCategoriaListarController as ctrl",
 			ncyBreadcrumb: {
 				 	parent: 'sub-categoria.menu',
 				    label: 'Lista'
@@ -21,8 +21,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		.state('sub-categoria.cadastrar', {
 			requiresAuthentication: true,
 			url : "/cadastrar",
+			params: {
+				backPage: null
+			  },
 			templateUrl : "views/pages/modulo_estoque/produto/categoria/sub_categoria/sub.categoria.form.html",
-			controller : "CategoriaCadastarController as ctrl",
+			controller : "SubCategoriaCadastarController as ctrl",
 			ncyBreadcrumb: {
 			 	parent: 'sub-categoria.menu',
 			    label: 'Cadastrar'
@@ -31,8 +34,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		.state('sub-categoria.editar', {
 			requiresAuthentication: true,
 			url : "/:idCategoria/editar",
-			templateUrl : "views/pages/modulo_estoque/produto/categoria/sub-categoria/sub-categoria.form.html",
-			controller : "CategoriaEditarController as ctrl",
+			templateUrl : "views/pages/modulo_estoque/produto/categoria/sub_categoria/sub.categoria.form.html",
+			controller : "SubCategoriaEditarController as ctrl",
 			ncyBreadcrumb: {
 				 	parent: 'sub-categoria.consultar',
 				    label: 'Editar'
