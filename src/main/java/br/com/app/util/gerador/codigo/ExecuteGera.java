@@ -13,18 +13,15 @@ public class ExecuteGera {
 
 	@Autowired
 	private CodigoGeradoRepository repository;
-
-	public Integer gerar(Gera g) {
+	
+	public String gerar(Gera g) {
 
 		Integer tentativa = 0;
-		Integer codigo = 0;
+		String codigo = "";
 		while (tentativa <= 99999) {
 			codigo = g.gerar();
 			if (!repository.existeCodigo(codigo)) {
-				CodigoGerado codigoGerado = new CodigoGerado();
-				codigoGerado.setCodigo(codigo.toString());
-				codigoGerado.setDataGeracao(LocalDate.now());
-				repository.save(codigoGerado);
+				saveCodigo(codigo);
 				return codigo;
 			}
 			tentativa++;
@@ -32,4 +29,13 @@ public class ExecuteGera {
 		throw new GeraCodigoException("Não é possivel gerar um código");
 
 	}
+	 
+	private void saveCodigo(String codigo) {
+		CodigoGerado codigoGerado = new CodigoGerado();
+		codigoGerado.setCodigo(codigo.toString());
+		codigoGerado.setDataGeracao(LocalDate.now());
+		repository.save(codigoGerado);
+	}
+	
+	
 }

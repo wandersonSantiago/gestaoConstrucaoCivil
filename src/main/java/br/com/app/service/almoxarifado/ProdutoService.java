@@ -13,6 +13,8 @@ import br.com.app.exceptions.NotFoundException;
 import br.com.app.pojo.MensagemException;
 import br.com.app.repository.almoxarifado.ProdutoRepository;
 import br.com.app.util.gerador.codigo.ExecuteGera;
+import br.com.app.util.gerador.codigo.Gera;
+import br.com.app.util.gerador.codigo.GeraCodigoProduto;
 
 @Service
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
@@ -27,11 +29,11 @@ public class ProdutoService {
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(Produto produto) {
 
-		//Gera gerarCodigoProduto = new GeraCodigoProduto();
-
-		//Integer codigo = execute.gerar(gerarCodigoProduto);
-
-		//produto.setCodigo(codigo);
+		Gera  gerarCodigoProduto = new GeraCodigoProduto();
+		
+		String codigo = execute.gerar(gerarCodigoProduto);
+		produto.setAtivo(true);
+		produto.setCodigo(Integer.valueOf(codigo));
 		produtoRepository.save(produto);
 
 	}

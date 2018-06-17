@@ -64,7 +64,7 @@ public class EmpreendimentoService {
 		}else if(user.getEmpreendimento().isMatriz()){
 			empreendimentos =  empreendimentoRepository.findByMatriz_idAndDescricaoContainsIgnoreCase(user.getEmpreendimento().getId(),descricao,page);
 		}		
-		if(empreendimentos.getNumberOfElements() < 1  || empreendimentos == null) {
+		if(empreendimentos == null || empreendimentos.getNumberOfElements() < 1) {
 			throw new NotFoundException("Não foi possivel encontrar nenhuma empreendimento com esta descrição: " + descricao);
 		}
 		return empreendimentos;
@@ -83,7 +83,7 @@ public class EmpreendimentoService {
 			empreendimentos =  empreendimentoRepository.findByMatriz_id(user.getEmpreendimento().getId(),page);
 		}
 		
-		if(empreendimentos.getNumberOfElements() < 1 || empreendimentos == null) {
+		if( empreendimentos == null || empreendimentos.getNumberOfElements() < 1) {
 			throw new NotFoundException("Não existe empreendimento cadastrada");
 		}
 		return empreendimentos;
