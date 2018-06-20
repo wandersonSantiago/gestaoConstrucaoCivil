@@ -33,12 +33,14 @@ public interface EstoqueEmpreendimentoRepository extends JpaRepository<EstoqueEm
 	@Query("FROM EstoqueEmpreendimento estoque WHERE estoque.produto.id = "
 			+ "(SELECT produto.id  FROM Produto produto WHERE CAST(produto.codigo as string) = :codigoOuCodigoBarra or produto.codigoBarra = :codigoOuCodigoBarra)"
 	+ " AND estoque.empreendimento.id = :idEmpreendimento")
-	EstoqueEmpreendimento findByCodigoOrCodigoBarraEstoque(@Param("codigoOuCodigoBarra") String codigoOuCodigoBarra,@Param("idEmpreendimento") Long id);
+	Page<EstoqueEmpreendimento> findByCodigoOrCodigoBarraEstoque(@Param("codigoOuCodigoBarra") String codigoOuCodigoBarra,@Param("idEmpreendimento") Long id, Pageable page);
 
 	@Query("FROM EstoqueEmpreendimento estoque WHERE estoque.empreendimento.id = ?1 AND estoque.quantidade < estoque.quantidadeMinima ")
 	List<EstoqueEmpreendimento> produtoEstoqueBaixo(Long idEmpreendimento);
 
 	@Query("FROM EstoqueEmpreendimento estoque WHERE estoque.empreendimento.id = ?1 AND estoque.quantidade > estoque.quantidadeMaxima ")
 	List<EstoqueEmpreendimento> produtoEstoqueAlto(Long idEmpreendimento);
+
+	Page<EstoqueEmpreendimento> findByProdutoDescricaoIgnoreCaseContaining(String descricao, Pageable page);
 
 }

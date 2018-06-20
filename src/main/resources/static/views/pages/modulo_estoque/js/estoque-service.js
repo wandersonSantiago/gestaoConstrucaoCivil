@@ -1,5 +1,5 @@
 app.factory('EstoqueService', function($rootScope, toastr, $http,$q){
-	
+	var url = '/rest/estoque'
 	
 	return{
 		insert: function(notaFiscalProduto){	
@@ -11,7 +11,7 @@ app.factory('EstoqueService', function($rootScope, toastr, $http,$q){
 		},	
 		
 		buscaPorId: function(param){
-			return $http.get('/rest/produtoEstoque/buscaPorCodigo/'+param)
+			return $http.get('/rest/estoque/buscaPorCodigo/'+param)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
@@ -19,6 +19,14 @@ app.factory('EstoqueService', function($rootScope, toastr, $http,$q){
 					return $q.reject(errResponse);
 			});
 		},
-		
+		findByTextAndPagination: function(text , page , maxResults){
+			var config = {params: {descricao : text, page: page , maxResults : maxResults}};
+			return $http.get(url + '/buscar', config)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				return $q.reject(errResponse);
+			});
+		},
 	}
 });

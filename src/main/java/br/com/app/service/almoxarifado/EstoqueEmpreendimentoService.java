@@ -7,13 +7,16 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.app.entity.Empreendimento;
 import br.com.app.entity.almoxarifado.EstoqueEmpreendimento;
+import br.com.app.entity.almoxarifado.Fabricante;
 import br.com.app.pojo.InformacaoEntradaProduto;
+import br.com.app.pojo.MensagemException;
 import br.com.app.pojo.SessionUsuario;
 import br.com.app.repository.almoxarifado.EstoqueEmpreendimentoRepository;
 
@@ -33,22 +36,9 @@ public class EstoqueEmpreendimentoService {
 		estoqueRepository.save(produtoEstoque);
 	}
 
-	public List<EstoqueEmpreendimento> buscarTodos() {
-
-		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
-
-		List<EstoqueEmpreendimento> estoques = estoqueRepository.buscarTodosPorEmpreendimento(idEmpreendimento);
-
-		for (EstoqueEmpreendimento estoque : estoques) {
-			InformacaoEntradaProduto info = notaProdutoService.getInformacaoProduto(estoque.getProduto().getId());
-			estoque.setInforProduto(info);
-
-		}
-		return estoques;
-	}
-
+	
 	@Cacheable("instruments")
-	public Page<EstoqueEmpreendimento> buscarTodosComPaginacao(PageRequest pageRequest) {
+	public Page<EstoqueEmpreendimento> findAll(PageRequest pageRequest) {
 
 		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
 
@@ -63,13 +53,33 @@ public class EstoqueEmpreendimentoService {
 
 		return estoques;
 	}
+	
+	public Page<EstoqueEmpreendimento> findByDescricaoIgnoreCase(String descricao, Pageable page) {
+		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
+		Page<EstoqueEmpreendimento> estoques = null;
+		descricao = descricao.replaceAll("[./-]","");
+		if (descricao.matches("[0-9]+")) {
+			estoques = estoqueRepository.findByCodigoOrCodigoBarraEstoque(descricao, idEmpreendimento, page);
+		}else {
+			estoques = estoqueRepository.findByProdutoDescricaoIgnoreCaseContaining(descricao, page);
+		}
+		if(estoques == null || estoques.getNumberOfElements() < 1) {
+			throw new MensagemException("Não foi encontrado nenhuma resultado para a busca" + descricao);
+		}
+		for (EstoqueEmpreendimento estoque : estoques) {
+			InformacaoEntradaProduto info = notaProdutoService.getInformacaoProduto(estoque.getProduto().getId());
+			estoque.setInforProduto(info);
+
+		}
+		return estoques;
+	}
 
 	public boolean existeProduto(Long id) {
 		Empreendimento empreendimentoDoUsuario = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
 		return estoqueRepository.existeProduto(id, empreendimentoDoUsuario.getId());
 	}
 
-	public EstoqueEmpreendimento buscarPorCodigoOuCodigoBarraEstoque(String codigoOuCodigoBarra) {
+	/*public EstoqueEmpreendimento buscarPorCodigoOuCodigoBarraEstoque(String codigoOuCodigoBarra) {
 
 		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
 
@@ -79,7 +89,7 @@ public class EstoqueEmpreendimentoService {
 		estoque.setInforProduto(info);
 		return estoque;
 
-	}
+	}*/
 
 	public List<EstoqueEmpreendimento> produtoEstoqueBaixo() {
 		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
@@ -91,7 +101,5 @@ public class EstoqueEmpreendimentoService {
 		return estoqueRepository.produtoEstoqueAlto(idEmpreendimento);
 	}
 
-	public Page<EstoqueEmpreendimento> findAll(PageRequest pageRequest) {
-		return estoqueRepository.findAll(pageRequest);
-	}
+	
 }
