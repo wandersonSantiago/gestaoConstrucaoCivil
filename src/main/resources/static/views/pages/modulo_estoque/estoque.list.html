@@ -1,148 +1,61 @@
 <meta charset="UTF-8">
-<ol class="breadcrumb">
-   <li class="breadcrumb-item"><a href="#/">home</a></li>
-   <li class="breadcrumb-item"><a href="#/almoxarifado/home">menu almoxarifado</a></li>
-   <li class="breadcrumb-item" ><a href="#/estoque/entrada">entrada</a></li>
-   <li class="breadcrumb-item active">lista</li>
-  </ol>	
-<div 	ng-controller="estoqueController as estroqueCtrl">
-
-	<div class="box box-primary" ng-init="estroqueCtrl.listaProdutosComEstoqueComPaginacao(0 , 15)">
-		<div class="box-header">
-			<span class="lead">Estoque </span>
-		</div>
-		<div class="panel-body">
-		<div class="row ">
-				<div class="col-sm-2">
-			    <div class="dropdown">
-			        <button class="btn btn-warning btn-export dropdown-toggle" margin-right=46px type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-			            Exportar <span class="caret"></span>
-			        </button>			
-			        <ul class="table-export dropdown-menu"
-			        table-selector="'auxTable'"
-			        export-options="{type: 'pdf', escape: true, ignoreColumn : '[4]', tableName: 'listaEstoque' }"
-			        aria-labelledby="dropdownMenu1">
-			            <li >
-			                <a href="" ng-click="estroqueCtrl.exportar('pdf')">PDF</a>
-			            </li>
-			
-			            <li te-option te-value="'excel'" te-param="'type'">
-			                <a href="">Excel</a>
-			            </li>
-			
-			            <li te-option te-value="'csv'" te-param="'type'">
-			                <a href="">CSV</a>
-			            </li>
-			        </ul>
-			    </div>
-			    </div>
-			</div>
-		<div class="row">
-			
-			<input class="form-control" type="text" ng-model="buscar" >
-	
-		</div>
-		<div class="table-responsive">
-			<table class="export-table table  table-bordered " st-table="estroqueCtrl.listaProdutosComEstoques" st-filtered-collection="filteredCollection" class="table table-striped">
-				<thead>
-					<tr>						 
-						<th>Código</th>
-						<th>Descrição</th>
-						<th>Categoria</th>
-						<th>Tipo</th>
-						<th>Unidade Medida</th>						
-						<th>quantidade Estoque</th>
-						<th>Custo médio</th>
-						<th>Valor Total</th>
-					</tr>
-				</thead>
-				<tbody
-					ng-repeat=" lista in estroqueCtrl.listaProdutosComEstoques | filter : buscar | orderBy : 'id' ">
-					<tr>
-						<td>{{lista.produto.codigo}}</td>
-						<td>{{lista.produto.descricao}}</td>
-						<td>{{lista.produto.categoria.descricao}}</td>
-						<td>{{lista.produto.tipoProduto.descricao}}</td>
-						<td>{{lista.produto.unidadeMedida}}</td>
-						<td>{{lista.quantidade}}</td>
-						<td>{{lista.custoMedio | currency}}</td>
-					    <td>{{lista.valorTotal | currency}}</td>
-					
-						<td ng-if="ROLE_MODULO_ESTOQUE_ALTERA_LIMITE"><a href="#/estoque/alteracao/{{lista.produto.codigo}}"><i class="glyphicon glyphicon-edit"></i></a> 
-						
-					</tr>
-
-				</tbody>
-				<tfoot>
-				
-					
-				</tfoot>
-			</table>
-			<table id="auxTable" style="opacity: 0; position: absolute;" >
-				<thead>
-					<tr>						 
-						<th>Código</th>
-						<th>Descrição</th>
-						<th>Categoria</th>
-						<th>Tipo</th>
-						<th>Unidade Medida</th>						
-						<th>quantidade Estoque</th>
-						<th>Custo médio</th>
-						<th>Valor Total</th>
-					</tr>
-				</thead>
-				<tbody
-					ng-repeat=" lista in estroqueCtrl.listaProdutosComEstoques | filter : buscar | orderBy : 'id' ">
-					<tr>
-						<td>{{lista.produto.codigo}}</td>
-						<td>{{lista.produto.descricao}}</td>
-						<td>{{lista.produto.categoria.descricao}}</td>
-						<td>{{lista.produto.tipoProduto.descricao}}</td>
-						<td>{{lista.produto.unidadeMedida}}</td>
-						<td>{{lista.quantidade}}</td>
-						<td>{{lista.custoMedio | currency}}</td>
-					    <td>{{lista.valorTotal | currency}}</td>
-					
-						<td ng-if="ROLE_MODULO_ESTOQUE_ALTERA_LIMITE"><a href="#/estoque/alteracao/{{lista.produto.codigo}}"><i class="glyphicon glyphicon-edit"></i></a> 
-						
-					</tr>
-
-				</tbody>
-				<tfoot>
-				
-					
-				</tfoot>
-			</table>
-			</div>
-			<div class="row">
-				<div class="col-sm-5"></div>				
-				<div class="2">				
-					<nav>
-						<ul class="pagination">
-						
-							<li class="{{0==estroqueCtrl.getPage ?'disabled':''}}"><a
-								ng-if="0!=estroqueCtrl.getPage" ng-click="estroqueCtrl.listaProdutosComEstoqueComPaginacao(estroqueCtrl.getPage -1, maxResults)"
-								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-							</a> <a ng-if="0==estroqueCtrl.getPage" aria-label="Previous"> <span
-									aria-hidden="true">&laquo;</span></a></li>
-							<li ng-repeat="page in estroqueCtrl.totalPages"
-								class="{{page==estroqueCtrl.getPage ?'active':''}}"><a
-								ng-click="estroqueCtrl.listaProdutosComEstoqueComPaginacao(page , maxResults)">{{page + 1}}</a></li>
-							<li class="{{estroqueCtrl.getPage+1 == totalPages ?'disabled':''}}"><a
-								ng-if="estroqueCtrl.getPage+1 != totalPages"
-								ng-click="estroqueCtrl.listaProdutosComEstoqueComPaginacao(estroqueCtrl.getPage+1, maxResults)" aria-label="Next"> <span
-									aria-hidden="true">&raquo;</span>
-							</a> <a ng-if="estroqueCtrl.getPage+1==totalPages" aria-label="Next"> <span
-									aria-hidden="true">&raquo;</span>
-							</a></li>
-							
-						</ul>
-					</nav>
-				</div>
-			</div>
-			
-		</div>
+		
+	<div class="row">
+	<div class="col-md-4">
+		<a class="fa fa-plus" href="" ui-sref="estoque.cadastrar" title="Cadastrar novo estoque">Novo</a>|<label>Estoque</label>
 	</div>
 </div>
-
+<br>
+<div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Pesquisar pela descrição ou codigo" ng-model="texto" autofocus
+      	 ng-keyup="$event.keyCode == 13 && ctrl.buscarPorTexto(texto)">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-click="ctrl.paginaCorrente = 0; ctrl.buscarPorTexto(texto)">Pesquisar!</button>
+      </span>
+    </div>
+  </div>
+ </div>
+ 		<div ng-show="mensagemErro" class="alert alert-warning alert-dismissible">
+	         <h4><i class="icon fa fa-warning"></i>{{mensagemErro}}</h4>
+	   </div>
+		<div class="table-responsive">
+			<table class="export-table table  table-bordered " >
+				<thead>
+					<tr>						 
+						<th>Código</th>
+						<th>Descrição</th>
+						<th>Categoria</th>
+						<th>Unidade Medida</th>						
+						<th>quantidade Estoque</th>
+						<th>Custo médio</th>
+						<th>Valor Total</th>
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" estoque in ctrl.estoques | filter : buscar | orderBy : 'id' ">
+					<tr>
+						<td>{{estoque.produto.codigo}}</td>
+						<td>{{estoque.produto.descricao}}</td>
+						<td>{{estoque.produto.categoria.descricao}}</td>
+						<td>{{estoque.produto.unidadeMedida}}</td>
+						<td>{{estoque.quantidade}}</td>
+						<td>{{estoque.custoMedio | currency}}</td>
+					    <td>{{estoque.valorTotal | currency}}</td>					
+						<td><a href="#/estoque/alteracao/{{lista.produto.codigo}}"><i class="glyphicon glyphicon-edit"></i></a> 
+						
+					</tr>
+				</tbody>
+			</table>
+			<nav>
+				<ul uib-pagination total-items="ctrl.totalElementos" items-per-page="24"
+					ng-model="ctrl.paginaCorrente" max-size="5" class="pagination-sm"
+					boundary-link-numbers="true" ng-click="ctrl.buscarPorTexto(texto)"
+					previous-text="Anterior" last-text="Último" first-text="Primeiro"
+					next-text="Próximo">
+				</ul>
+			</nav>
+	</div>
+			
 
