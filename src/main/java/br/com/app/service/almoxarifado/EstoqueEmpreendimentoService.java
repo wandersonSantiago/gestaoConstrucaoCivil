@@ -31,9 +31,13 @@ public class EstoqueEmpreendimentoService {
 	private NotaFiscalProdutoService notaProdutoService;
 
 	@Transactional(readOnly = false)
-	public void salvarOuEditar(EstoqueEmpreendimento produtoEstoque) {
-
-		estoqueRepository.save(produtoEstoque);
+	public void updateConfiguration(EstoqueEmpreendimento estoque) {
+		
+		if(estoque.getQuantidadeMinima() > estoque.getQuantidadeMaxima()) {
+			throw new MensagemException("Quantidade mínma não pode ser maior que quantidade máxima, Favor refazer a operação");
+		}
+		
+		estoqueRepository.save(estoque);
 	}
 
 	
@@ -99,6 +103,11 @@ public class EstoqueEmpreendimentoService {
 	public List<EstoqueEmpreendimento> produtoEstoqueAlto() {
 		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
 		return estoqueRepository.produtoEstoqueAlto(idEmpreendimento);
+	}
+
+
+	public EstoqueEmpreendimento findById(Long id) {
+		return estoqueRepository.findById(id).get();
 	}
 
 	

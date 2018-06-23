@@ -9,16 +9,22 @@ app.factory('EstoqueService', function($rootScope, toastr, $http,$q){
 					return $q.reject(errResponse);
 			});
 		},	
-		
-		buscaPorId: function(param){
-			return $http.get('/rest/estoque/buscaPorCodigo/'+param)
+		updateConfiguration: function(estoque){	
+			return $http.put(url, estoque)
 			.then(function(response){
-				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
 					return $q.reject(errResponse);
 			});
 		},
+		findById: function(param){
+			return $http.get(url + '/'+param)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+					return $q.reject(errResponse);
+			});
+		},
+		
 		findByTextAndPagination: function(text , page , maxResults){
 			var config = {params: {descricao : text, page: page , maxResults : maxResults}};
 			return $http.get(url + '/buscar', config)

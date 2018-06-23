@@ -40,6 +40,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				  }
 		})
 	
+		.state('estoque.configuracao', {
+			requiresAuthentication: true,
+			url : "/:idEstoque/configuracao",
+			templateUrl : "views/pages/modulo_estoque/estoque.configuracao.html",
+			controller : "EstoqueConfiguracaoController as ctrl",
+			ncyBreadcrumb: {
+				 	parent: 'estoque.consultar',
+				    label: 'Configuração'
+				  }
+		})
+		
 		.state('estoque.menu', {
 			requiresAuthentication: true,
 			url : "/menu",
