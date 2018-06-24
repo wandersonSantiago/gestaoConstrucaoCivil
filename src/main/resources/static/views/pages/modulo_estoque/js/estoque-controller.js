@@ -1,6 +1,7 @@
 app.controller("EstoqueCadastarController", EstoqueCadastarController);
 app.controller("EstoqueEditarController", EstoqueEditarController);
 app.controller("EstoqueListarController", EstoqueListarController);
+app.controller("EstoqueConfiguracaoController", EstoqueConfiguracaoController);
 
 function EstoqueCadastarController($localStorage, $state, $stateParams, EstoqueService, ProdutoService, FornecedorService, toastr, $scope){
 	
@@ -222,3 +223,42 @@ function EstoqueListarController(blockUI, EstoqueService, toastr, $scope){
 	    }
 	
 }
+
+function EstoqueConfiguracaoController($state, $stateParams, EstoqueService, toastr, $scope){
+	
+	var self = this;	
+	
+	self.submit = submit;
+	var idEstoque = $stateParams.idEstoque;
+
+	findById(idEstoque);
+	
+	function submit(form){
+		if(form.$invalid){
+			sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
+			return;
+		}
+		if(self.estoque.quantidadeMinima > self.estoque.quantidadeMaxima){
+			sweetAlert({title: "Estoque mínimo não pode ser maior que o máximo, favor  refazer a operação", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
+			return;
+		}
+				EstoqueService.updateConfiguration(self.estoque).
+				then(function(response){
+					toastr.success("Configurações, editada");
+					$state.go('estoque.consultar');
+				}, function(errResponse){
+					sweetAlert({ timer : 3000,  text : errResponse.data.message,  type : "error", width: 300, higth: 300, padding: 20});
+				});			
+		};
+		
+
+	function findById(id){
+		if(!id)return;
+		EstoqueService.findById(id).
+		then(function(p){
+			self.estoque = p;
+			}, function(errResponse){
+		});
+	};
+	
+}		

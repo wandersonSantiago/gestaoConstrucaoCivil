@@ -24,13 +24,14 @@
 			<table class="export-table table  table-bordered " >
 				<thead>
 					<tr>						 
-						<th>Código</th>
+						<th><a href=""><i class="fa fa-sort-amount-asc"></i></a>Código <a hr><i class="fa fa-sort-amount-desc"></i></a></th>
 						<th>Descrição</th>
 						<th>Categoria</th>
 						<th>Unidade Medida</th>						
 						<th>quantidade Estoque</th>
 						<th>Custo médio</th>
 						<th>Valor Total</th>
+						<th>Opções</th>
 					</tr>
 				</thead>
 				<tbody
@@ -43,7 +44,8 @@
 						<td>{{estoque.quantidade}}</td>
 						<td>{{estoque.custoMedio | currency}}</td>
 					    <td>{{estoque.valorTotal | currency}}</td>					
-						<td><a href="#/estoque/alteracao/{{lista.produto.codigo}}"><i class="glyphicon glyphicon-edit"></i></a> 
+						<td title="Editar as configurações deste produto no estoque"
+						><a ui-sref="estoque.configuracao({idEstoque : estoque.id})"><i class="glyphicon glyphicon-edit"></i></a> 
 						
 					</tr>
 				</tbody>

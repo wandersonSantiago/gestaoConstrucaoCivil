@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.app.entity.almoxarifado.EstoqueEmpreendimento;
-import br.com.app.entity.almoxarifado.Fabricante;
 import br.com.app.service.almoxarifado.EstoqueEmpreendimentoService;
 
 @RestController
@@ -29,9 +28,9 @@ public class EstoqueEmpreendimentoRestController {
 	private EstoqueEmpreendimentoService estoqueService;
 
 	@ResponseStatus(HttpStatus.CREATED)
-	@PutMapping(value = "/alteraProduto")
-	public void salvar(@RequestBody EstoqueEmpreendimento estoqueEmpreendimento) {
-		estoqueService.salvarOuEditar(estoqueEmpreendimento);
+	@PutMapping
+	public void updateConfiguration(@RequestBody EstoqueEmpreendimento estoqueEmpreendimento) {
+		estoqueService.updateConfiguration(estoqueEmpreendimento);
 
 	}
 	
@@ -68,10 +67,10 @@ public class EstoqueEmpreendimentoRestController {
 	}
 
 	
-	/*@ResponseStatus(HttpStatus.OK)
-	@GetMapping(value = "/buscaPorCodigo/{codigo}")
-	public  EstoqueEmpreendimento buscarPorCodigo(@PathVariable String codigo) {
-		return estoqueService.buscarPorCodigoOuCodigoBarraEstoque(codigo);
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value = "/{id}")
+	public  EstoqueEmpreendimento buscarPorCodigo(@PathVariable Long id) {
+		return estoqueService.findById(id);
 
-	}*/
+	}
 }
