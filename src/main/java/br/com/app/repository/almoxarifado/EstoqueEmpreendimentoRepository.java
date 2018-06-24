@@ -42,5 +42,6 @@ public interface EstoqueEmpreendimentoRepository extends JpaRepository<EstoqueEm
 	List<EstoqueEmpreendimento> produtoEstoqueAlto(Long idEmpreendimento);
 
 	Page<EstoqueEmpreendimento> findByProdutoDescricaoIgnoreCaseContainingAndEmpreendimentoId(String descricao,Long idEmpreendimento, Pageable page);
-
+	
+	EstoqueEmpreendimento findByIdAndEmpreendimentoId(Long id,Long idEmpreendimento);
 }

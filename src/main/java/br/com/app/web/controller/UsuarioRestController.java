@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -101,7 +100,7 @@ public class UsuarioRestController {
 
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/{id}")
-	public Optional<Usuario> buscarPorId(@PathVariable Long id) {
+	public Usuario buscarPorId(@PathVariable Long id) {
 		return usuarioService.findById(id);
 	}
 
@@ -136,8 +135,7 @@ public class UsuarioRestController {
 	@GetMapping(value = "/{id}/foto", produces = MediaType.IMAGE_JPEG_VALUE)
 	public InputStreamResource getFoto(@PathVariable Long id) throws IOException, NotFoundException {
 		
-		Usuario user = usuarioService.findById(id).orElseThrow(
-				() -> new NotFoundException("Usuário não foi encontrado"));
+		Usuario user = usuarioService.findById(id);
 		
 		return new InputStreamResource(imagemService.getFoto(user.getCaminhoFoto()));
 	}
