@@ -1,7 +1,6 @@
 package br.com.app.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -78,8 +77,9 @@ public class UsuarioService {
 		usuarioRepository.save(user);
 	}
 
-	public Optional<Usuario> findById(Long id) {
-		return usuarioRepository.findById(id);
+	public Usuario findById(Long id) {
+		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
+		return usuarioRepository.findByIdAndEmpreendimentoId(id,idEmpreendimento);
 	}
 
 	public Usuario findByNome(String nomeUsuario) {

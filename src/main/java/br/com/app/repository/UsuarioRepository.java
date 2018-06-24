@@ -26,5 +26,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Long>{
 	Page<Usuario> findByNomeContainsIgnoreCaseAndEmpreendimento_matriz_id(String descricao, Long id, Pageable page);
 	
 	Page<Usuario> findByNomeContainsIgnoreCaseAndEmpreendimento_id(String descricao, Long id, Pageable page);
+
+	Usuario findByIdAndEmpreendimentoId(Long id,Long idEmpreendimento);
 	
 }
