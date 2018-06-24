@@ -118,7 +118,9 @@ public class EstoqueEmpreendimentoService {
 	}
 
 	public EstoqueEmpreendimento findById(Long id) {
-		return estoqueRepository.findById(id).get();
+		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
+		
+		return estoqueRepository.findByIdAndEmpreendimentoId(id, idEmpreendimento);
 	}
 
 }
