@@ -41,6 +41,6 @@ public interface EstoqueEmpreendimentoRepository extends JpaRepository<EstoqueEm
 	@Query("FROM EstoqueEmpreendimento estoque WHERE estoque.empreendimento.id = ?1 AND estoque.quantidade > estoque.quantidadeMaxima ")
 	List<EstoqueEmpreendimento> produtoEstoqueAlto(Long idEmpreendimento);
 
-	Page<EstoqueEmpreendimento> findByProdutoDescricaoIgnoreCaseContaining(String descricao, Pageable page);
+	Page<EstoqueEmpreendimento> findByProdutoDescricaoIgnoreCaseContainingAndEmpreendimentoId(String descricao,Long idEmpreendimento, Pageable page);
 
 }
