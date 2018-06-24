@@ -10,7 +10,7 @@ import br.com.app.entity.Usuario;
 
 public class SessionUsuario {
 
-	public static SessionUsuario instance;
+	private static SessionUsuario instance;
 
 	private SessionUsuario() {
 
@@ -22,8 +22,7 @@ public class SessionUsuario {
 		HttpSession session = request.getSession();
 		return (Usuario) session.getAttribute("usuario");
    }
-
-	public static synchronized  SessionUsuario getInstance() {
+    public static synchronized  SessionUsuario getInstance() {
 
 		if (instance == null) {
 			instance = new SessionUsuario();
