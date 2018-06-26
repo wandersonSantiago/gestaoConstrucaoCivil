@@ -70,5 +70,35 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				    label: 'Menu'
 				  }
 		})
+		
+		.state('estoque.nota-consultar', {
+			url : "/nota/consultar",
+			templateUrl : "views/pages/modulo_estoque/estoque.nota.list.html",
+			controller : "EstoqueNotaListarController as ctrl",
+			ncyBreadcrumb: {
+				 	parent: 'estoque.menu',
+				    label: 'Lista de Notas'
+				  }
+		})
 
+		.state('estoque.nota-editar', {
+			requiresAuthentication: true,
+			url : "/:idNota/nota/editar",
+			templateUrl : "views/pages/modulo_estoque/estoque.form.html",
+			controller : "EstoqueNotaEditarController as ctrl",
+			ncyBreadcrumb: {
+				 	parent: 'estoque.menu',
+				    label: 'Nota Editar'
+				  }
+		})
+		.state('estoque.nota-show', {
+			requiresAuthentication: true,
+			url : "/:idNota/show",
+			templateUrl : "views/pages/modulo_estoque/estoque.nota.show.html",
+			controller : "EstoqueNotaShowController as ctrl",
+			ncyBreadcrumb: {
+				 	parent: 'estoque.menu',
+				    label: 'Nota Show'
+				  }
+		})
 });

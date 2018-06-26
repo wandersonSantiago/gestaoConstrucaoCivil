@@ -25,4 +25,16 @@ public interface TransferenciaRepository extends JpaRepository<Transferencia, Lo
 	
 	@Query("FROM Transferencia trans WHERE trans.notaFiscal.empreendimento.id = ?1")
 	Page<Transferencia> buscarTransferenciaEnviadaComPaginacao(Long id, Pageable page);
+
+	Page<Transferencia> findByNotaFiscalNumeroAndNotaFiscalEmpreendimentoId(Long long1, Long idEmpreendimento,
+			Pageable page);
+
+	Page<Transferencia> findByNotaFiscalEmpreendimentoId(Long idEmpreendimento, Pageable page);
+
+	Page<Transferencia> findByEmpreendimentoDestinoId(Long idEmpreendimento, Pageable page);
+
+	Page<Transferencia> findByNotaFiscalNumeroAndEmpreendimentoDestinoId(Long long1, Long idEmpreendimento,
+			Pageable page);
+	
+	
 }

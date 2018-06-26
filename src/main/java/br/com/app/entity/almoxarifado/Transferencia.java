@@ -50,6 +50,15 @@ public class Transferencia implements Serializable, EntradaOuBaixa<Transferencia
 	@OneToMany(mappedBy = "transferencia", cascade = CascadeType.ALL)
 	private List<TransferenciaItem> itens;
 
+	
+	public double getValorTotal() {
+		double valor = 0.0;
+		for(TransferenciaItem x : itens) {
+			valor = valor + x.getValorTotal();
+		}
+		return valor;
+	}
+	
 	public void setItens(List<TransferenciaItem> itens) {
 		this.itens = itens;
 

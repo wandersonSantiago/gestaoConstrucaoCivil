@@ -25,13 +25,32 @@ app.factory('EstoqueService', function($rootScope, toastr, $http,$q){
 			});
 		},
 		
-		findByTextAndPagination: function(text , page , maxResults){
-			var config = {params: {descricao : text, page: page , maxResults : maxResults}};
+		findByTextAndPagination: function(text , page ,  orderBy, direction , maxResults){
+			var config = {params: {descricao : text, page: page , maxResults : maxResults, orderBy : orderBy, direction : direction}};
 			return $http.get(url + '/buscar', config)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
 				return $q.reject(errResponse);
+			});
+		},
+		
+		findByNotaTextAndPagination: function(text , page ,  orderBy, direction , maxResults){
+			var config = {params: {descricao : text, page: page , maxResults : maxResults, orderBy : orderBy, direction : direction}};
+			return $http.get('/rest/nota-fiscal-produto/buscar', config)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				return $q.reject(errResponse);
+			});
+		},
+		
+		findByNotaId: function(param){
+			return $http.get('/rest/nota-fiscal-produto/'+param)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+					return $q.reject(errResponse);
 			});
 		},
 	}

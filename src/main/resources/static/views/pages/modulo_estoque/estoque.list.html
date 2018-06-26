@@ -20,22 +20,24 @@
  		<div ng-show="mensagemErro" class="alert alert-warning alert-dismissible">
 	         <h4><i class="icon fa fa-warning"></i>{{mensagemErro}}</h4>
 	   </div>
+	   <br>
+	   <br>
 		<div class="table-responsive">
 			<table class="export-table table  table-bordered " >
 				<thead>
 					<tr>						 
-						<th><a href=""><i class="glyphicon glyphicon-sort"></i></a>Código</th>
-						<th><a href=""><i class="glyphicon glyphicon-sort"></i></a>Descrição</th>
-						<th><a href=""><i class="glyphicon glyphicon-sort"></i></a>Categoria</th>
-						<th><a href=""><i class="glyphicon glyphicon-sort"></i></a>Unidade Medida</th>						
-						<th><a href=""><i class="glyphicon glyphicon-sort"></i></a>quantidade Estoque</th>
-						<th><a href=""><i class="glyphicon glyphicon-sort"></i></a>Custo médio</th>
-						<th><a href=""><i class="glyphicon glyphicon-sort"></i></a>Valor Total</th>
+						<th><a href="" ng-click="ctrl.sort('produto.codigo')"><i class="glyphicon glyphicon-sort"></i></a>Código</th>
+						<th><a href="" ng-click="ctrl.sort('produto.descricao')"><i class="glyphicon glyphicon-sort"></i></a>Descrição</th>
+						<th><a href=""ng-click="ctrl.sort('produto.categoria.descricao')"><i class="glyphicon glyphicon-sort"></i></a>Categoria</th>
+						<th><a href=""ng-click="ctrl.sort('produto.unidadeMedida')"><i class="glyphicon glyphicon-sort"></i></a>Unidade Medida</th>						
+						<th>quantidade Estoque</th>
+						<th>Custo médio</th>
+						<th>Valor Total</th>
 						<th>Opções</th>
 					</tr>
 				</thead>
 				<tbody
-					ng-repeat=" estoque in ctrl.estoques | filter : buscar | orderBy : 'id' ">
+					ng-repeat=" estoque in ctrl.estoques">
 					<tr>
 						<td>{{estoque.produto.codigo}}</td>
 						<td>{{estoque.produto.descricao}}</td>

@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "nota_fiscal_item" , schema="almoxarifado")
 public class NotaFiscalItem  extends Item implements Serializable{
@@ -19,11 +21,12 @@ public class NotaFiscalItem  extends Item implements Serializable{
 	private Double valorTotal;
 
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "id_nota_fiscal")
 	private NotaFiscalProduto notaFiscalProduto;
 
 	
-	public Double getValorTotal() {
+	public double getValorTotal() {
 		return valorTotal;
 	}
 
