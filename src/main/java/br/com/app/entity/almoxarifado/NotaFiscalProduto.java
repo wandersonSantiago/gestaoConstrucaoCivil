@@ -49,6 +49,15 @@ public class NotaFiscalProduto implements Serializable ,EntradaOuBaixa<NotaFisca
 	@OneToMany(mappedBy = "notaFiscalProduto", cascade = CascadeType.ALL)
 	@Fetch(FetchMode.SUBSELECT)
 	private List<NotaFiscalItem> itens;
+	
+	
+	public double getValorTotal() {
+		double valor = 0.0;
+		for(NotaFiscalItem x : itens) {
+			valor = valor + x.getValorTotal();
+		}
+		return valor;
+	}
 
 	public List<NotaFiscalItem> getItens() {
 		return itens;

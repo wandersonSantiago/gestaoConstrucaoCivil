@@ -1,12 +1,13 @@
 package br.com.app.web.controller.almoxarifado;
 
-import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,56 +28,38 @@ public class TransferenciaRestController {
 	private TransferenciaService transferenciaService;
 
 	@ResponseStatus(HttpStatus.CREATED)
-	@PostMapping(value = "/salva")
+	@PostMapping
 	public void salvar(@RequestBody Transferencia transferencia) {
 		transferenciaService.salvarAlterar(transferencia);
 
 	}
 
-	@ResponseStatus(HttpStatus.OK)
-	@GetMapping(value = "/lista")
-	public Collection<Transferencia> buscarTodos() {
+	@GetMapping(value = "/buscar")
+	public ResponseEntity<Page<Transferencia>> findByDescricao(
+			@RequestParam(value="page", defaultValue="0") Integer page, 
+			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
+			@RequestParam(value="orderBy", defaultValue="statusTransferencia") String orderBy, 
+			@RequestParam(value="direction", defaultValue="DESC") String direction,
+			@RequestParam(value="descricao", required = false , defaultValue="")String descricao,
+			@RequestParam(value="tipo", required = true) String tipo) {
 
-		return transferenciaService.buscarTodos();
+		Page<Transferencia> list = null;
+		
+		if(descricao.isEmpty() || descricao.equalsIgnoreCase("")) {
+			list = transferenciaService.findAll(tipo,PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy));
+		}else {
+			list = transferenciaService.findByCodigo(tipo,descricao, PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy));
+		}		
+		return ResponseEntity.ok().body(list);
 	}
-
+	
 	@ResponseStatus(HttpStatus.OK)
-	@GetMapping(value = "/recebida/paginacao")
-	public Page<Transferencia> recebida(@RequestParam(defaultValue = "0", required = false) int page,
-			@RequestParam(defaultValue = "0", required = false) int maxResults) {
-		return transferenciaService.buscarRecebidaComPaginacao(new PageRequest(page, maxResults));
-	}
-
-	@ResponseStatus(HttpStatus.OK)
-	@GetMapping(value = "/enviada/paginacao")
-	public Page<Transferencia> enviada(@RequestParam(defaultValue = "0", required = false) int page,
-			@RequestParam(defaultValue = "0", required = false) int maxResults) {
-		return transferenciaService.buscarEnviadaComPaginacao(new PageRequest(page, maxResults));
-
-	}
-
-	@ResponseStatus(HttpStatus.OK)
-	@GetMapping(value = "/buscaPorId/{id}")
-	public Optional<Transferencia> buscarPorId(@PathVariable Long id) {
-
+	@GetMapping(value = "/{id}")
+	public Optional<Transferencia> findById(@PathVariable Long id) {
 		return transferenciaService.buscaPorId(id);
 	}
 
-	@ResponseStatus(HttpStatus.OK)
-	@GetMapping(value = "/recebida")
-	public Collection<Transferencia> buscarTransferenciaRecebida() {
 
-		return transferenciaService.buscarTransferenciaRecebida();
-
-	}
-
-	@ResponseStatus(HttpStatus.OK)
-	@GetMapping(value = "/enviada")
-	public Collection<Transferencia> buscarTransferenciaEnviada() {
-
-		return transferenciaService.buscarTransferenciaEnviada();
-
-	}
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(value = "/aceitar")

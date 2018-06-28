@@ -38,5 +38,7 @@ public abstract class Item implements Serializable, IItem {
 	@Column(nullable = false)
 	private Double valorUnitario;
 
-	
+	public double getValorTotal() {
+		return quantidade * valorUnitario;
+	}
 }

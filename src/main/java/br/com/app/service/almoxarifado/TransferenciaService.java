@@ -6,12 +6,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.app.entity.almoxarifado.Transferencia;
 import br.com.app.pojo.CancelamentoTransferencia;
+import br.com.app.pojo.MensagemException;
 import br.com.app.pojo.SessionUsuario;
 import br.com.app.repository.almoxarifado.TransferenciaRepository;
 
@@ -36,7 +38,12 @@ public class TransferenciaService {
 
 	@Transactional(readOnly = false)
 	public void aceitarTransferencia(Long numeroNota) {
+		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
 		Transferencia transferencia = transferenciaRepository.buscarTransferenciaPorNumeroNota(numeroNota);
+		
+		if(!idEmpreendimento.equals(transferencia.getEmpreendimentoDestino().getId())) {
+			throw new MensagemException("Somente o Empreendimento " + transferencia.getEmpreendimentoDestino().getDescricao() + " pode aceitar a transferencia" );
+		}
 		transferencia.aceitarTransferencia();
 		entradaEstoque.entradaEstoque(transferencia);
 		transferenciaRepository.save(transferencia);
@@ -45,41 +52,51 @@ public class TransferenciaService {
 
 	@Transactional(readOnly = false)
 	public void rejeitarTransferencia(Long numeroNota) {
+		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
 		Transferencia transferencia = transferenciaRepository.buscarTransferenciaPorNumeroNota(numeroNota);
+		
+		if(!idEmpreendimento.equals(transferencia.getEmpreendimentoDestino().getId())) {
+			throw new MensagemException("Somente o Empreendimento " + transferencia.getEmpreendimentoDestino().getDescricao() + " pode rejeitar a transferencia" );
+		}		
 		transferencia.rejeitarTransferencia();
 		CancelamentoTransferencia cancelamento = new CancelamentoTransferencia(transferencia);
 		entradaEstoque.entradaEstoque(cancelamento);
 		transferenciaRepository.save(transferencia);
 	}
 
-	public Collection<Transferencia> buscarTodos() {
-		return transferenciaRepository.findAll();
-	}
-
+	
 	public Optional<Transferencia> buscaPorId(Long id) {
 		return transferenciaRepository.findById(id);
 	}
 
-	public Collection<Transferencia> buscarTransferenciaRecebida() {
+	
 
-		return transferenciaRepository
-				.buscarTransferenciaRecebidas(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId());
+	public Page<Transferencia> findAll(String tipo, Pageable page) {
+		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
+		if(tipo.equalsIgnoreCase("ENVIADOS")) {
+			return	transferenciaRepository.findByNotaFiscalEmpreendimentoId(idEmpreendimento, page);
+		}else {
+			return transferenciaRepository.findByEmpreendimentoDestinoId(idEmpreendimento, page);
+		}		
 	}
 
-	public Collection<Transferencia> buscarTransferenciaEnviada() {
+	public Page<Transferencia> findByCodigo(String tipo,String descricao, Pageable page) {
+		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
+		Page<Transferencia> estoques = null;
+		descricao = descricao.replaceAll("[./-]", "");
 
-		return transferenciaRepository
-				.buscarTransferenciaEnviada(SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId());
+		if(tipo.equalsIgnoreCase("ENVIADOS")) {
+			estoques = transferenciaRepository.findByNotaFiscalNumeroAndNotaFiscalEmpreendimentoId(new Long(descricao),
+					idEmpreendimento, page);
+		}else {
+			estoques = transferenciaRepository.findByNotaFiscalNumeroAndEmpreendimentoDestinoId(new Long(descricao),
+					idEmpreendimento, page);
+		}	
+		
+			if(estoques.getNumberOfElements() < 1) {
+				throw new MensagemException("Nota fiscal não encontrada, com o código: " +  descricao);
+			}
+			
+		return estoques;
 	}
-
-	public Page<Transferencia> buscarRecebidaComPaginacao(PageRequest pageRequest) {
-		return transferenciaRepository.buscarTransferenciaRecebidasComPaginacao(
-				SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId(), pageRequest);
-	}
-
-	public Page<Transferencia> buscarEnviadaComPaginacao(PageRequest pageRequest) {
-		return transferenciaRepository.buscarTransferenciaEnviadaComPaginacao(
-				SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId(), pageRequest);
-	}
-
 }

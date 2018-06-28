@@ -1,0 +1,143 @@
+<meta charset="UTF-8">
+				<h3>Dados Nota de Transferencia</h3>
+				<hr>
+				<div class="row">
+						<div class="col-sm-3">
+						<label>Número Nota Fiscal:</label>
+							{{ctrl.transferencia.notaFiscal.numero}} 
+						</div>			
+						<div class="col-sm-3">
+						<label>Data Nota Fiscal:</label>
+							{{ctrl.transferencia.notaFiscal.dataNota | date : 'dd/MM/yyyy'}}
+						</div>						
+						<div class="col-sm-3">
+						<label>Data Vencimento Nota Fiscal:</label>
+							{{ctrl.transferencia.notaFiscal.dataVencimento | date : 'dd/MM/yyyy'}}
+						</div>
+					</div> <br>
+					<div class="row">
+						<div class="col-sm-3">
+						<label>Status:</label>
+							{{ctrl.transferencia.statusTransferencia}} 
+						</div>			
+						<div class="col-sm-3">
+						<label>Tipo de Nota:</label>
+							{{ctrl.transferencia.notaFiscal.tipoNota}}
+						</div>						
+						<div class="col-sm-3">
+						<label>Situação:</label>
+							{{ctrl.transferencia.notaFiscal.situacao}}
+						</div>
+					</div> 					
+					<hr>
+					<h3>Produtos</h3>
+					<div class="panel panel-default table-responsive" ng-if="produtos.length > 0">
+					<table class="table table-bordered table-striped ">
+					<thead>
+						<tr>
+							<th>Codigo de barras</th>
+							<th>Descrição</th>
+							<th >Quantidade</th>
+							<th>Preço unitario</th>
+							<th>Preço total item</th>
+						</tr>
+					</thead>					
+					<tbody	ng-repeat=" f in produtos">
+						<tr>
+							<td>{{f.produto.codigo ? f.produto.codigo : f.produto.codigoBarra}}</td>
+							<td>{{f.produto.descricao}}</td>
+							<td>{{f.quantidade}}</td>
+							<td>{{f.valorUnitario | currency}}</td>
+							<td>{{f.valorTotal | currency}}</td>
+							
+						</tr>
+	
+					</tbody>
+					<tfoot>
+						<tr>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th> Valor Total</th>
+							<th>{{ctrl.transferencia.valorTotal | currency}}</th>
+	
+						</tr>
+					</tfoot>
+				</table>
+					</div>
+					<br>
+					<hr>
+				<h3>Dados Empreendimento</h3>
+					<br>						
+					<div class="row">
+						<div class="col-sm-4">
+							<label>Nome:</label>
+									{{ctrl.transferencia.empreendimentoDestino.descricao}}
+						</div>	
+						<div class="col-sm-4">
+							<label>Status:</label>
+									{{ctrl.transferencia.empreendimentoDestino.status}}
+						</div>						
+					</div>
+					
+					<div class="row">
+						<div class="col-sm-4">
+							<label>Telefone:</label>
+									{{ctrl.transferencia.empreendimentoDestino.telefone}}
+						</div>							
+					</div>
+					<h4>Endereço:</h4>
+					<div class="row">
+						<div class="col-sm-2">
+							<label>CEP:</label>
+									{{ctrl.transferencia.empreendimentoDestino.endereco.cep}}
+						</div>	
+						<div class="col-sm-10">
+							<label>Rua:</label>
+									{{ctrl.transferencia.empreendimentoDestino.endereco.logradouro}}
+						</div>							
+					</div>
+					<div class="row">
+						<div class="col-sm-2">
+							<label>Numero:</label>
+									{{ctrl.transferencia.empreendimentoDestino.endereco.numero}}
+						</div>	
+						<div class="col-sm-10">
+							<label>Comlemento:</label>
+									{{ctrl.transferencia.empreendimentoDestino.endereco.complemento}}
+						</div>							
+					</div>
+					<div class="row">
+						<div class="col-sm-2">
+							<label>Bairro:</label>
+									{{ctrl.transferencia.empreendimentoDestino.endereco.bairro}}
+						</div>	
+						<div class="col-sm-10">
+							<label>Cidade:</label>
+									{{ctrl.transferencia.empreendimentoDestino.endereco.localidade}}
+						</div>	
+						<div class="col-sm-10">
+							<label>Estado:</label>
+									{{ctrl.transferencia.empreendimentoDestino.endereco.uf}}
+						</div>							
+					</div>
+					<br>
+					<hr>
+					<h3>Complementos</h3>
+					<div class="row">
+						<div class="col-sm-12">
+						<label>Observação:</label>
+								{{ctrl.transferencia.notaFiscal.observacao}}
+						</div> 
+					</div>
+					<div class="row">
+					<div class="col-sm-3"></div>
+						<div class="col-sm-3">
+							<input ng-if="ctrl.transferencia.statusTransferencia == 'PENDENTE' && user.empreendimento.id == ctrl.transferencia.empreendimentoDestino.id" 
+							 class="btn btn-lg btn-primary btn-block" type="button" ng-click="ctrl.aceitarTransferencia(ctrl.transferencia.notaFiscal.numero)" value="Aceitar">
+						</div>
+						<div class="col-sm-3">
+							<input ng-if="ctrl.transferencia.statusTransferencia == 'PENDENTE' && user.empreendimento.id == ctrl.transferencia.empreendimentoDestino.id"
+							 class="btn btn-lg btn-warning btn-block" type="button" ng-click="ctrl.rejeitarTransferencia(ctrl.transferencia.notaFiscal.numero)" value="Rejeitar">
+						</div>
+					</div>

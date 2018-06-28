@@ -1,0 +1,102 @@
+<meta charset="UTF-8">
+				<h3>Dados Nota</h3>
+				<hr>
+				<div class="row">
+						<div class="col-sm-3">
+						<label>Número Nota Fiscal:</label>
+							{{ctrl.notaFiscalProduto.notaFiscal.numero}} 
+						</div>			
+						<div class="col-sm-3">
+						<label>Data Nota Fiscal:</label>
+							{{ctrl.notaFiscalProduto.notaFiscal.dataNota | date : 'dd/MM/yyyy'}}
+						</div>						
+						<div class="col-sm-3">
+						<label>Data Vencimento Nota Fiscal:</label>
+							{{ctrl.notaFiscalProduto.notaFiscal.dataVencimento | date : 'dd/MM/yyyy'}}
+						</div>
+					</div> 				
+					<br>
+					<hr>
+					<h3>Produtos</h3>
+					<div class="panel panel-default table-responsive" ng-if="produtos.length > 0">
+					<table class="table table-bordered table-striped ">
+					<thead>
+						<tr>
+							<th>Codigo de barras</th>
+							<th>Descrição</th>
+							<th >Quantidade</th>
+							<th>Preço unitario</th>
+							<th>Preço total item</th>
+						</tr>
+					</thead>					
+					<tbody	ng-repeat=" f in produtos">
+						<tr>
+							<td>{{f.produto.codigo ? f.produto.codigo : f.produto.codigoBarra}}</td>
+							<td>{{f.produto.descricao}}</td>
+							<td>{{f.quantidade}}</td>
+							<td>{{f.valorUnitario | currency}}</td>
+							<td>{{f.valorTotal | currency}}</td>
+							
+						</tr>
+	
+					</tbody>
+					<tfoot>
+						<tr>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th> Valor Total</th>
+							<th>{{ctrl.notaFiscalProduto.valorTotal | currency}}</th>
+	
+						</tr>
+					</tfoot>
+				</table>
+					</div>
+					<br>
+					<hr>
+				<h3>Dados Fornecedor</h3>
+					<br>						
+					<div class="row">
+						<div class="col-sm-4">
+							<label>Nome Fantasia:</label>
+									{{ctrl.notaFiscalProduto.fornecedor.dadoEmpresa.nomeFantasia}}
+						</div>	
+						<div class="col-sm-4">
+							<label>Razão Social:</label>
+									{{ctrl.notaFiscalProduto.fornecedor.dadoEmpresa.razaoSocial}}
+						</div>		
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<label>CNPJ:</label>
+									{{ctrl.notaFiscalProduto.fornecedor.dadoEmpresa.cnpj}}
+						</div>	
+						<div class="col-sm-4">
+							<label>INscrição Estadual:</label>
+									{{ctrl.notaFiscalProduto.fornecedor.dadoEmpresa.inscricaoEstadual}}
+						</div>		
+					</div>
+					<label>Contatos:</label>
+					<div class="row">
+						<div class="col-sm-4">
+							<label>Telefone:</label>
+									{{ctrl.notaFiscalProduto.fornecedor.dadoEmpresa.cnpj}}
+						</div>	
+						<div class="col-sm-4">
+							<label>Email:</label>
+									{{ctrl.notaFiscalProduto.fornecedor.dadoEmpresa.inscricaoEstadual}}
+						</div>	
+						<div class="col-sm-4">
+							<label>Contato:</label>
+									{{ctrl.notaFiscalProduto.fornecedor.contato}}
+						</div>		
+					</div>
+					<br>
+					<hr>
+					<h3>Complementos</h3>
+					<div class="row">
+						<div class="col-sm-12">
+						<label>Observação:</label>
+								{{ctrl.notaFiscalProduto.notaFiscal.observacao}}
+						</div> 
+					</div>

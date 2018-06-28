@@ -61,9 +61,14 @@ public class EmpreendimentoService {
 		Usuario user = SessionUsuario.getInstance().getUsuario();
 		if(user.isRoot()) {
 			empreendimentos =  empreendimentoRepository.findByDescricaoContainsIgnoreCaseAndMatrizIsNull(descricao, page);
-		}else if(user.getEmpreendimento().isMatriz()){
+		}else
+			/*if(user.getEmpreendimento().isMatriz()){
 			empreendimentos =  empreendimentoRepository.findByMatriz_idAndDescricaoContainsIgnoreCase(user.getEmpreendimento().getId(),descricao,page);
-		}		
+		}		*/
+		{
+			empreendimentos =  empreendimentoRepository.findByDescricaoContainsIgnoreCase(descricao,page);
+		}
+			
 		if(empreendimentos == null || empreendimentos.getNumberOfElements() < 1) {
 			throw new NotFoundException("Não foi possivel encontrar nenhuma empreendimento com esta descrição: " + descricao);
 		}
@@ -79,10 +84,13 @@ public class EmpreendimentoService {
 		Usuario user = SessionUsuario.getInstance().getUsuario();
 		if(user.isRoot()) {
 			empreendimentos =  empreendimentoRepository.findByMatrizIsNull(page);
-		}else if(user.getEmpreendimento().isMatriz()){
+		}else {
+			empreendimentos =  empreendimentoRepository.findAll(page);
+		}
+			/*if(user.getEmpreendimento().isMatriz()){
 			empreendimentos =  empreendimentoRepository.findByMatriz_id(user.getEmpreendimento().getId(),page);
 		}
-		
+		*/
 		if( empreendimentos == null || empreendimentos.getNumberOfElements() < 1) {
 			throw new NotFoundException("Não existe empreendimento cadastrada");
 		}

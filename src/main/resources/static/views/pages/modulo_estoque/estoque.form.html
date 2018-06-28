@@ -2,18 +2,18 @@
 <form role="form-vertical" name="form" novalidate  ng-submit="ctrl.submit(form)" >
 	
 				<div class="row">
-						<div class="col-sm-3">
+						<div class="col-sm-3" ng-class="{ 'has-error' : form.numeroNota.$invalid && form.$submitted }">
 						<label>Número Nota Fiscal:</label>
-							<input class="form-control"  id="numeroNota" type="text" title="informe o numero da nota fiscal" placeholder="Numero nota fiscal" 
+							<input class="form-control"  id="numeroNota" name="numeroNota" type="text" title="informe o numero da nota fiscal" placeholder="Numero nota fiscal" 
 							ng-model="ctrl.notaFiscalProduto.notaFiscal.numero" required>
 						</div>			
-						<div class="col-sm-3">
+						<div class="col-sm-3" ng-class="{ 'has-error' : form.dataNota.$invalid && form.$submitted }">
 						<label>Data Nota Fiscal:</label>
-							<input class="form-control"  id="dataNota" type="date" ng-model="ctrl.notaFiscalProduto.notaFiscal.dataNota"  title="informe a data da nota fiscal"  placeholder="data nota fiscal" required>
+							<input class="form-control"  id="dataNota" name="dataNota" type="date" ng-model="ctrl.notaFiscalProduto.notaFiscal.dataNota"  title="informe a data da nota fiscal"  placeholder="data nota fiscal" dateInput required>
 						</div>						
-						<div class="col-sm-3">
+						<div class="col-sm-3" ng-class="{ 'has-error' : form.vencimento.$invalid && form.$submitted }">
 						<label>Data Vencimento Nota Fiscal:</label>
-							<input class="form-control"  id="vencimento"  type="date" ng-model="ctrl.notaFiscalProduto.notaFiscal.dataVencimento"  title="informe a data de vencimento da nota fiscal" placeholder="vecimento nota fiscal" required>
+							<input class="form-control"  id="vencimento" name="vencimento"  type="date" ng-model="ctrl.notaFiscalProduto.notaFiscal.dataVencimento"  title="informe a data de vencimento da nota fiscal" placeholder="vecimento nota fiscal" dateInput required>
 						</div>
 					</div> 
 										
@@ -43,8 +43,8 @@
 					
 					</div>		
 					<br>
-					<div class="table-responsive" ng-if="produtos.length > 0">
-					<table class="table table-hover ">
+					<div class="panel panel-default table-responsive" ng-if="produtos.length > 0">
+					<table class="table table-bordered table-striped ">
 					<thead>
 						<tr>
 							<th>selecione</th>
@@ -120,7 +120,3 @@
 						</div>
 					</div>
 			</form>
-				
-			</div>
-
-		</div>

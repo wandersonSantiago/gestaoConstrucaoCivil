@@ -5,13 +5,18 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.app.entity.almoxarifado.EstoqueEmpreendimento;
 import br.com.app.entity.almoxarifado.NotaFiscalItem;
 import br.com.app.entity.almoxarifado.NotaFiscalProduto;
 import br.com.app.pojo.InformacaoEntradaProduto;
+import br.com.app.pojo.MensagemException;
 import br.com.app.pojo.SessionUsuario;
 import br.com.app.repository.almoxarifado.NotaFiscalProdutoRepository;
 import br.com.app.service.EmpreendimentoService;
@@ -30,13 +35,7 @@ public class NotaFiscalProdutoService {
 	@Autowired
     private EmpreendimentoService empreendimentoService;
     
-    
-	public List<NotaFiscalProduto> buscarTodos() {
-
-		return notaFiscalProdutoRepository.findAll();
-	}
-
-	@Cacheable("instruments")
+  
 	@Transactional(readOnly = false)
 	public void salvarOuEditar(NotaFiscalProduto notaFiscalProduto) {
 
@@ -47,10 +46,6 @@ public class NotaFiscalProdutoService {
       
      }
 
-	public Optional<NotaFiscalProduto> buscarPorId(Long id) {
-
-		return notaFiscalProdutoRepository.findById(id);
-	}
 	public InformacaoEntradaProduto getInformacaoProduto(Long idProduto) {
 
 		return gerarInformacao(idProduto);
@@ -84,4 +79,28 @@ public class NotaFiscalProdutoService {
 		nota.getNotaFiscal().cancelarNota();
 		notaFiscalProdutoRepository.save(nota);
 	}
+
+	public Page<NotaFiscalProduto> findAll(PageRequest page) {
+		return notaFiscalProdutoRepository.findAll(page);
+	}
+
+	public Page<NotaFiscalProduto> findByCodigo(String descricao, Pageable page) {
+		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
+		Page<NotaFiscalProduto> estoques = null;
+		descricao = descricao.replaceAll("[./-]", "");
+
+			estoques = notaFiscalProdutoRepository.findByNotaFiscalNumeroAndNotaFiscalEmpreendimentoId(new Long(descricao),
+					idEmpreendimento, page);
+			
+			if(estoques.getNumberOfElements() < 1) {
+				throw new MensagemException("Nota fiscal não encontrada, com o código: " +  descricao);
+			}
+			
+		return estoques;
+	}
+
+	public Optional<NotaFiscalProduto> findById(Long id) {
+		return notaFiscalProdutoRepository.findById(id);
+	}
+
 }
