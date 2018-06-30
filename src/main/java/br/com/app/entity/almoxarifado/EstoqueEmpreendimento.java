@@ -15,7 +15,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import br.com.app.entity.Empreendimento;
-import br.com.app.pojo.InformacaoEntradaProduto;
 import lombok.Data;
 
 @Data
@@ -54,16 +53,6 @@ public class EstoqueEmpreendimento {
 	private Double custoMedio;
 	@Transient
 	private Double valorTotal;
-
-	public void setInforProduto(InformacaoEntradaProduto inforProduto) {
-
-		custoMedio = (inforProduto.getValorTotal() / inforProduto.getQuantidadeTotalNota());
-		valorTotal = (inforProduto.getValorTotal() / inforProduto.getQuantidadeTotalNota()) * getQuantidade();
-
-		if (custoMedio.isNaN()) {
-			custoMedio = 0.0;
-		}
-	}
 
 	public boolean isNegativo() {
 		return quantidade >= 0;
