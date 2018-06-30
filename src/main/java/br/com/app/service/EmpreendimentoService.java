@@ -98,26 +98,6 @@ public class EmpreendimentoService {
 	}
 	
 
-	@Transactional(readOnly = false)
-	public void adcionarValorGasto(Double valorGasto) {
-		Long idEmpeendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
-
-		Empreendimento empreendimento = empreendimentoRepository.findById(idEmpeendimento).get();
-
-		empreendimento.setValoresGastos(empreendimento.getValoresGastos() + valorGasto);
-		empreendimentoRepository.save(empreendimento);
-
-	}
-
-	@Transactional(readOnly = false)
-	public void removerValorGasto(Double valorGasto) {
-		Long idEmpeendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
-
-		Empreendimento empreendimento = empreendimentoRepository.findById(idEmpeendimento).get();
-
-		empreendimento.setValoresGastos(empreendimento.getValoresGastos() - valorGasto);
-		empreendimentoRepository.save(empreendimento);
-
-	}
+	
 
 }

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -12,14 +11,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.app.entity.almoxarifado.EstoqueEmpreendimento;
 import br.com.app.entity.almoxarifado.NotaFiscalItem;
 import br.com.app.entity.almoxarifado.NotaFiscalProduto;
 import br.com.app.pojo.InformacaoEntradaProduto;
 import br.com.app.pojo.MensagemException;
 import br.com.app.pojo.SessionUsuario;
 import br.com.app.repository.almoxarifado.NotaFiscalProdutoRepository;
-import br.com.app.service.EmpreendimentoService;
+import br.com.app.service.GastoEmpreendimentoService;
 
 @Service
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
@@ -31,17 +29,15 @@ public class NotaFiscalProdutoService {
 	private EntradaEstoqueService entradaEstoque;
 	@Autowired
 	private BaixaEstoqueService baixarEstoque;
-	
 	@Autowired
-    private EmpreendimentoService empreendimentoService;
-    
-  
-	@Transactional(readOnly = false)
+	private GastoEmpreendimentoService gastoEmpreendimento;
+	
+  	@Transactional(readOnly = false)
 	public void salvarOuEditar(NotaFiscalProduto notaFiscalProduto) {
 
 		notaFiscalProduto.novaNotaProduto();
 		notaFiscalProdutoRepository.save(notaFiscalProduto);
-		empreendimentoService.adcionarValorGasto(notaFiscalProduto.getNotaFiscal().getValorTotal());
+		gastoEmpreendimento.adicionarValorGasto(notaFiscalProduto.getNotaFiscal().getValorTotal());
 	    entradaEstoque.entradaEstoque(notaFiscalProduto);
       
      }
@@ -75,7 +71,7 @@ public class NotaFiscalProdutoService {
 	{
 		NotaFiscalProduto nota = notaFiscalProdutoRepository.buscarPorNumero(numeroEntrada);
 		baixarEstoque.baixar(nota);
-		empreendimentoService.removerValorGasto(nota.getNotaFiscal().getValorTotal());
+		gastoEmpreendimento.removerValorGasto(nota.getNotaFiscal().getValorTotal());
 		nota.getNotaFiscal().cancelarNota();
 		notaFiscalProdutoRepository.save(nota);
 	}
