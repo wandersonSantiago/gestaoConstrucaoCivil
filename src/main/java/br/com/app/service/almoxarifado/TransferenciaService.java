@@ -1,17 +1,16 @@
 package br.com.app.service.almoxarifado;
 
-import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.app.entity.almoxarifado.Transferencia;
+import br.com.app.enuns.StatusTransferencia;
 import br.com.app.pojo.CancelamentoTransferencia;
 import br.com.app.pojo.MensagemException;
 import br.com.app.pojo.SessionUsuario;
@@ -27,7 +26,7 @@ public class TransferenciaService {
 	private BaixaEstoqueService baixarEstoque;
 	@Autowired
 	private EntradaEstoqueService entradaEstoque;
-
+	 
 	@Transactional(readOnly = false)
 	public void salvarAlterar(Transferencia transferencia) {
 
@@ -44,9 +43,10 @@ public class TransferenciaService {
 		if(!idEmpreendimento.equals(transferencia.getEmpreendimentoDestino().getId())) {
 			throw new MensagemException("Somente o Empreendimento " + transferencia.getEmpreendimentoDestino().getDescricao() + " pode aceitar a transferencia" );
 		}
-		transferencia.aceitarTransferencia();
+		transferencia.setStatusTransferencia(StatusTransferencia.EFETUADO);	
 		entradaEstoque.entradaEstoque(transferencia);
 		transferenciaRepository.save(transferencia);
+		
 
 	}
 

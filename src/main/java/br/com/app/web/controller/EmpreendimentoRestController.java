@@ -55,9 +55,8 @@ public class EmpreendimentoRestController {
 
 		
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Optional<Empreendimento>> buscarPorId(@PathVariable Long id) {
-		Optional<Empreendimento> empreendimento = empreendimentoService.findById(id);
-		return ResponseEntity.ok().body(empreendimento);
+	public ResponseEntity<Empreendimento> buscarPorId(@PathVariable Long id) {
+		return ResponseEntity.ok().body(empreendimentoService.findById(id));
 	}
 
 	

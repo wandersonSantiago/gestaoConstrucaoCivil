@@ -68,7 +68,7 @@ public class UsuarioService {
 	@Transactional(readOnly = false)
 	public void updateEmpreendimento(Long idEmpreendimento) {
 		Usuario user = SessionUsuario.getInstance().getUsuario();
-		Empreendimento empreendimento = empreendimentoService.findById(idEmpreendimento).get();
+		Empreendimento empreendimento = empreendimentoService.findById(idEmpreendimento);
 		user.setEmpreendimento(empreendimento);
 		usuarioRepository.save(user);
 	}

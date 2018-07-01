@@ -31,13 +31,10 @@ public class DadoEmpresaService {
 		return dadoEmpresaRepository.save(empresa);
 	}
 
+ 
 	public DadoEmpresa findById(Long id) {
-		DadoEmpresa empresa = dadoEmpresaRepository.findById(id).get();
-		
-		if(empresa == null) {
-			throw new NotFoundException("Empresa não encontrada");
-		}
-		return empresa;
+		return dadoEmpresaRepository.findById(id).orElseThrow(
+				() -> new NotFoundException("Empresa não encontrada"));
 	}
 	
 	public boolean existeCnpjCadastrado(String cnpj) {

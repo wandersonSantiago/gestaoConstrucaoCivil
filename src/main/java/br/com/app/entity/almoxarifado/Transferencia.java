@@ -81,9 +81,7 @@ public class Transferencia implements Serializable, EntradaOuBaixa<Transferencia
 
 	}
 
-	public void aceitarTransferencia() {
-		statusTransferencia = StatusTransferencia.EFETUADO;
-	}
+	
 
 	public void rejeitarTransferencia() {
 		statusTransferencia = StatusTransferencia.RECUSADO;

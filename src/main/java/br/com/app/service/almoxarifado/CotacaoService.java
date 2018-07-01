@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.app.entity.almoxarifado.Cotacao;
 import br.com.app.enuns.StatusCotacao;
+import br.com.app.exceptions.NotFoundException;
 import br.com.app.pojo.SessionUsuario;
 import br.com.app.repository.almoxarifado.CotacaoRepository;
 
@@ -44,7 +45,8 @@ public class CotacaoService {
 
 	@Transactional(readOnly = false)
 	public void fecharCotacao(Long idCotacao) {
-		Cotacao cotacao = cotacaoRepository.findById(idCotacao).get();
+		Cotacao cotacao = cotacaoRepository.findById(idCotacao).orElseThrow(
+				() -> new NotFoundException("Cotação não encontrada"));
 		cotacao.setStatusCotacao(StatusCotacao.FECHADO);
 		cotacao.setDataFechamento(new Date());
 		verificarItens.verificarGanhadores(cotacao);
