@@ -44,14 +44,10 @@ public class EmpreendimentoService {
 	}
 	
 	
-	public Optional<Empreendimento> findById(Long id){
+	public Empreendimento findById(Long id){
 		
-		Optional<Empreendimento> empreendimento = empreendimentoRepository.findById(id);
-		
-		if(empreendimento == null) {
-			throw new NotFoundException("Não foi possivel encontrar nenhuma empreendimento com o ID: " + id);
-		}
-		return empreendimento;
+		return empreendimentoRepository.findById(id).orElseThrow(
+				() -> new NotFoundException("Não foi possivel encontrar nenhuma empreendimento com o ID: " + id));
 	}
 
 	
