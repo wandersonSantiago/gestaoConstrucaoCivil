@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -12,10 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.app.entity.Empreendimento;
 import br.com.app.entity.almoxarifado.EstoqueEmpreendimento;
-import br.com.app.pojo.InformacaoEntradaProduto;
 import br.com.app.pojo.MensagemException;
 import br.com.app.pojo.SessionUsuario;
 import br.com.app.repository.almoxarifado.EstoqueEmpreendimentoRepository;
+import br.com.app.service.CalculaEstoqueService;
 
 @Service
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
@@ -25,8 +26,8 @@ public class EstoqueEmpreendimentoService {
 	@Autowired
 	private EstoqueEmpreendimentoRepository estoqueRepository;
 	@Autowired
-	private NotaFiscalProdutoService notaProdutoService;
-
+	private CalculaEstoqueService calculaEstoques;
+	
 	@Transactional(readOnly = false)
 	public void updateConfiguration(EstoqueEmpreendimento estoque) {
 
@@ -45,8 +46,10 @@ public class EstoqueEmpreendimentoService {
 
 		Page<EstoqueEmpreendimento> estoques = estoqueRepository
 				.buscarTodosPorEmpreendimentoComPaginacao(idEmpreendimento, pageRequest);
-		calcularEstoque(estoques);
-		return estoques;
+		List<EstoqueEmpreendimento> estoquesCalculado = calculaEstoques.calcular(estoques.getContent());
+		 
+		
+		return new PageImpl<>(estoquesCalculado);
 	}
 
 	public Page<EstoqueEmpreendimento> findByDescricaoIgnoreCase(String descricao, Pageable page) {
@@ -61,8 +64,11 @@ public class EstoqueEmpreendimentoService {
 					idEmpreendimento, page);
 		}
 		foundEstoque(estoques, descricao);
-		calcularEstoque(estoques);
-		return estoques;
+		List<EstoqueEmpreendimento> estoquesCalculado = calculaEstoques.calcular(estoques.getContent());
+		
+		return new PageImpl<>(estoquesCalculado);
+		
+		 
 	}
 
 	private Boolean isCodigoOrCodigoBarra(String descricao) {
@@ -75,38 +81,13 @@ public class EstoqueEmpreendimentoService {
 		}
 
 	}
-
-	private void calcularEstoque(Page<EstoqueEmpreendimento> estoques) {
-
-		for (EstoqueEmpreendimento estoque : estoques) {
-			InformacaoEntradaProduto info = notaProdutoService.getInformacaoProduto(estoque.getProduto().getId());
-			estoque.setInforProduto(info);
-
-		}
-
-	}
-
+ 
 	public boolean existeProduto(Long id) {
 		Empreendimento empreendimentoDoUsuario = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
 		return estoqueRepository.existeProduto(id, empreendimentoDoUsuario.getId());
 	}
 
-	/*
-	 * public EstoqueEmpreendimento buscarPorCodigoOuCodigoBarraEstoque(String
-	 * codigoOuCodigoBarra) {
-	 * 
-	 * Long idEmpreendimento =
-	 * SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
-	 * 
-	 * EstoqueEmpreendimento estoque =
-	 * estoqueRepository.findByCodigoOrCodigoBarraEstoque(codigoOuCodigoBarra,
-	 * idEmpreendimento); InformacaoEntradaProduto info =
-	 * notaProdutoService.getInformacaoProduto(estoque.getProduto().getId());
-	 * estoque.setInforProduto(info); return estoque;
-	 * 
-	 * }
-	 */
-
+	 
 	public List<EstoqueEmpreendimento> produtoEstoqueBaixo() {
 		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
 		return estoqueRepository.produtoEstoqueBaixo(idEmpreendimento);
