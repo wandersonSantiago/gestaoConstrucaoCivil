@@ -62,6 +62,6 @@ public class ServicoEmpresa implements Serializable{
 	private Usuario usuarioCadastro;
 
 	@OneToMany(mappedBy = "servicoEmpresa", cascade = CascadeType.ALL)
-	protected List<OcorrenciaServico> ocorrencias;
+	private List<OcorrenciaServico> ocorrencias;
 
 }
