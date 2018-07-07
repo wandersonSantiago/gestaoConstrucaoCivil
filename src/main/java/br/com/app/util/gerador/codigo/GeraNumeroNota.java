@@ -7,7 +7,6 @@ public class GeraNumeroNota extends GeraCodigo {
 
 	public GeraNumeroNota() {
 		super(100000, 999999);
-		// TODO Auto-generated constructor stub
 	}
 
 	public Integer gerarNumeroNota() {
