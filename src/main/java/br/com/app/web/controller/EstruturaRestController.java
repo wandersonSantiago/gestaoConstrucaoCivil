@@ -2,7 +2,6 @@ package br.com.app.web.controller;
 
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -49,9 +48,8 @@ public class EstruturaRestController {
 
 		
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Optional<Estrutura>> buscarPorId(@PathVariable Long id) {
-		Optional<Estrutura> estrutura = estruturaService.findById(id);
-		return ResponseEntity.ok().body(estrutura);
+	public ResponseEntity<Estrutura> buscarPorId(@PathVariable Long id) {
+		return ResponseEntity.ok().body(estruturaService.findById(id));
 	}
 
 	@GetMapping(value = "/folhas/{id}")

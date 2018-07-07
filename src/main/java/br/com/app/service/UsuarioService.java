@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.app.entity.Empreendimento;
 import br.com.app.entity.Usuario;
 import br.com.app.enuns.StatusUsuarioEnum;
+import br.com.app.exceptions.NotFoundException;
 import br.com.app.pojo.SessionUsuario;
 import br.com.app.repository.UsuarioRepository;
 
@@ -24,7 +25,6 @@ public class UsuarioService {
 	private UsuarioRepository usuarioRepository;
 	@Autowired
 	private EmpreendimentoService empreendimentoService;
-	
 
 	@Transactional(readOnly = false)
 	public Usuario insert(Usuario usuario) {
@@ -49,7 +49,8 @@ public class UsuarioService {
 			if (usuario.getEmpreendimento() == null) {
 				usuario.setEmpreendimento(userSession.getEmpreendimento());
 			}
-			Usuario user = usuarioRepository.findById(usuario.getId()).get();
+			Usuario user = usuarioRepository.findById(usuario.getId())
+					.orElseThrow(() -> new NotFoundException("Usuário não foi encontrado!"));
 			String hash = user.getSenha();
 			usuario.setSenha(hash);
 			return usuarioRepository.save(usuario);
@@ -59,7 +60,8 @@ public class UsuarioService {
 
 	@Transactional(readOnly = false)
 	public void updatePassword(Long idUsuario, String senhaValidacao, String novaSenha) {
-		Usuario usuario = usuarioRepository.findById(idUsuario).get();
+		Usuario usuario = usuarioRepository.findById(idUsuario)
+				.orElseThrow(() -> new NotFoundException("Usuário não foi encontrado!"));
 		String newHash = new BCryptPasswordEncoder().encode(novaSenha);
 		usuario.setSenha(newHash);
 		usuarioRepository.save(usuario);
@@ -72,6 +74,7 @@ public class UsuarioService {
 		user.setEmpreendimento(empreendimento);
 		usuarioRepository.save(user);
 	}
+
 	@Transactional(readOnly = false)
 	public void savePathFoto(Usuario user) {
 		usuarioRepository.save(user);
@@ -79,7 +82,7 @@ public class UsuarioService {
 
 	public Usuario findById(Long id) {
 		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
-		return usuarioRepository.findByIdAndEmpreendimentoId(id,idEmpreendimento);
+		return usuarioRepository.findByIdAndEmpreendimentoId(id, idEmpreendimento);
 	}
 
 	public Usuario findByNome(String nomeUsuario) {
