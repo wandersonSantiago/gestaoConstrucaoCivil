@@ -15,7 +15,7 @@ import br.com.app.repository.almoxarifado.CotacaoEmpresaItemRepository;
 @Service
 public class VerificaItensGanhadores {
 
-	private List<CotacaoEmpresaItem> itensVerifica = new ArrayList<CotacaoEmpresaItem>();
+	private List<CotacaoEmpresaItem> itensVerifica = new ArrayList<>();
 	
 	private Integer chamada = 0;
 	
@@ -46,7 +46,7 @@ public class VerificaItensGanhadores {
 		
 	}
 
-	@Transactional(readOnly = false)
+	
 	private void verficarCotacaoEmpresa()
 	{
 		for(CotacaoEmpresaItem item: itensVerifica)
@@ -60,7 +60,7 @@ public class VerificaItensGanhadores {
 			}
 		}
 	}
-	@Transactional(readOnly = false)
+	 
 	private void verificarItens() {
 
 		CotacaoEmpresaItem itemGanhador = itensVerifica.get(0);

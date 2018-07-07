@@ -25,7 +25,7 @@ public class NotaFiscalItem  extends Item implements Serializable{
 	@JoinColumn(name = "id_nota_fiscal")
 	private NotaFiscalProduto notaFiscalProduto;
 
-	
+	@Override
 	public double getValorTotal() {
 		return valorTotal;
 	}

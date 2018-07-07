@@ -19,32 +19,25 @@ import br.com.app.service.ArquivoUploadService;
 @RequestMapping("/rest/file")
 public class FileUploadController {
 
-	@Autowired 
+	@Autowired
 	private ArquivoUploadService service;
-	
+
 	@ResponseStatus(HttpStatus.OK)
 	@PostMapping("/upload")
 	public void fileUpload(@RequestParam("file") MultipartFile file,
             Long proprietarioId,RedirectAttributes redirectAttributes) 
 	{
-		
-		if(file.isEmpty())
-		{
-			try {
-				throw new IOException("Erro");
-			} catch (IOException e) {
- 				e.printStackTrace();
-			}
-		
-		}
-	
 		ArquivoUpload arquivo = new ArquivoUpload();
-		try
-		{
+		try {
+		
+		if(file.isEmpty()){
+			
+			throw new IOException("Erro");
+		}
 		arquivo.setFile(file.getBytes());
 		arquivo.setProprietarioId(proprietarioId);
 		}catch (IOException e) {
-			e.printStackTrace();
+			System.err.println(e.getMessage());
 		}
 		
 		service.salvar(arquivo);
