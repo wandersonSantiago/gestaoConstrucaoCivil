@@ -1,7 +1,6 @@
 package br.com.app.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,10 +24,12 @@ public class EstruturaService {
 
 	@Transactional(readOnly = false)
 	public Estrutura insert(Estrutura estrutura) {
-		Usuario user = SessionUsuario.getInstance().getUsuario();		
-		if(!user.getEmpreendimento().isMatriz()) {
+		Usuario user = SessionUsuario.getInstance().getUsuario();
+		if (!user.getEmpreendimento().isMatriz()) {
 			if (estrutura.getRaiz() != null) {
-				Estrutura raiz = estruturaRepository.findById(estrutura.getRaiz().getId()).get();				
+
+				Estrutura raiz = estruturaRepository.findById(estrutura.getRaiz().getId())
+						.orElseThrow(() -> new NotFoundException("Não foi encontrado nenhum Empreendimento!"));
 				estrutura.setRaiz(raiz);
 			}
 			estrutura.setIdEmpreendimento(user.getEmpreendimento().getId());
@@ -37,20 +38,18 @@ public class EstruturaService {
 		throw new NotFoundException("Este empreendimento não pode ter uma estrutura: ");
 	}
 
-	public Optional<Estrutura> findById(Long id) {
+	public Estrutura findById(Long id) {
 		Usuario user = SessionUsuario.getInstance().getUsuario();
-		Optional<Estrutura> estrutura = estruturaRepository.findByIdAndIdEmpreendimento(id, user.getEmpreendimento().getId());
+		return estruturaRepository.findByIdAndIdEmpreendimento(id, user.getEmpreendimento().getId()).orElseThrow(
+				() -> new NotFoundException("Não foi possivel encontrar nenhuma estrutura com o ID: ".concat(id.toString())));
 
-		if (estrutura == null) {
-			throw new NotFoundException("Não foi possivel encontrar nenhuma estrutura com o ID: " + id);
-		}
-		return estrutura;
 	}
 
 	public Page<Estrutura> findByDescricaoIgnoreCase(String descricao, Pageable page) {
 		Usuario user = SessionUsuario.getInstance().getUsuario();
-		
-		Page<Estrutura> estruturas = estruturaRepository.findByDescricaoContainsIgnoreCaseAndIdEmpreendimento(descricao, user.getEmpreendimento().getId(), page);
+
+		Page<Estrutura> estruturas = estruturaRepository.findByDescricaoContainsIgnoreCaseAndIdEmpreendimento(descricao,
+				user.getEmpreendimento().getId(), page);
 
 		if (estruturas == null || estruturas.getNumberOfElements() < 1) {
 			throw new NotFoundException(
@@ -62,9 +61,9 @@ public class EstruturaService {
 
 	public Page<Estrutura> findAll(Pageable page) {
 		Usuario user = SessionUsuario.getInstance().getUsuario();
-		
-		Page<Estrutura> estruturas = estruturaRepository.findByIdEmpreendimento(user.getEmpreendimento().getId(),page);
-		if (estruturas.getNumberOfElements() < 1 || estruturas == null) {
+
+		Page<Estrutura> estruturas = estruturaRepository.findByIdEmpreendimento(user.getEmpreendimento().getId(), page);
+		if (estruturas == null || estruturas.getNumberOfElements() < 1) {
 			throw new NotFoundException("Não existe estrutura cadastrada");
 		}
 		return estruturas;
@@ -72,14 +71,14 @@ public class EstruturaService {
 
 	public List<Estrutura> findByEstruturasFolhas(Long id) {
 		Usuario user = SessionUsuario.getInstance().getUsuario();
-		
-		List<Estrutura> estruturas = null;		
-		if(id > 0) {
-			estruturas =  estruturaRepository.findByRaizIdAndIdEmpreendimento(id, user.getEmpreendimento().getId());
-		}else {
-			estruturas =  estruturaRepository.findByRaizIsNullAndIdEmpreendimento(user.getEmpreendimento().getId());
+
+		List<Estrutura> estruturas = null;
+		if (id > 0) {
+			estruturas = estruturaRepository.findByRaizIdAndIdEmpreendimento(id, user.getEmpreendimento().getId());
+		} else {
+			estruturas = estruturaRepository.findByRaizIsNullAndIdEmpreendimento(user.getEmpreendimento().getId());
 		}
-		if(estruturas.isEmpty() || estruturas == null) {
+		if (estruturas == null || estruturas.isEmpty() ) {
 			throw new NotFoundException("Não existe estrutura filhas");
 		}
 		return estruturas;
