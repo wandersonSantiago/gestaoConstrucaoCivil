@@ -2,10 +2,10 @@ package br.com.app.enuns;
 
 public enum EstadoCivilEnum {
 
-	Solteiro,
-	Casado,
-	Divorciado,
-	Viúvo,
-	Separado,
-	Companheiro,
+	SOLTEIRO,
+	CASADO,
+	DIVORCIADO,
+	VIUVO,
+	SEPARADO,
+	COMPANHEIRO,
 }
