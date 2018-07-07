@@ -56,11 +56,7 @@ public class ProdutoService {
 	}
 	
 	public Produto buscaPorId(Long id) {
-		Produto produto =  produtoRepository.findById(id).get();
-		if(produto == null) {
-			throw new NotFoundException("Produto não encontrado");
-		}
-		return produto;
+		return  produtoRepository.findById(id).orElseThrow(() -> new NotFoundException("Produto não encontrado"));
 	}
 	
 	public Page<Produto> findByDescricaoIgnoreCase(String descricao, Pageable page) {
