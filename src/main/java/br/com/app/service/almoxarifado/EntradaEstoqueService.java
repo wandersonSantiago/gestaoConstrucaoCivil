@@ -31,9 +31,6 @@ public class EntradaEstoqueService {
 				adicionarQuantidade(item.getProduto(), item.getQuantidade(), entrada.empreendimentoEntrada().getId());
 			} else {
 
-				//testar depois isso
-				/*EstoqueEmpreendimento e = new EstoqueBuilder().produto(item.getProduto())
-						.quantidade(item.getQuantidade()).build();*/
 				estoqueRepository.save(criarNovoEstoque(item.getProduto(), item.getQuantidade()));
 
 			}
@@ -41,11 +38,8 @@ public class EntradaEstoqueService {
 		}
 	}
 
-	@Transactional(readOnly = false)
 	private void adicionarQuantidade(Produto produto, Integer quantidade, Long idEmpreendimento) {
 
-		// Empreendimento empreendimentoDoUsuario =
-		// SessionUsuario.getInstance().getUsuario().getEmpreendimento();
 		EstoqueEmpreendimento estoque = estoqueRepository.estoque(idEmpreendimento, produto.getId());
 		estoque.setQuantidade(estoque.getQuantidade() + quantidade);
 		estoqueRepository.save(estoque);
