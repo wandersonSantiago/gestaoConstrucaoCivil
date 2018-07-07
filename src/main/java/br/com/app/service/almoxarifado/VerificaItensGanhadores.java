@@ -16,9 +16,9 @@ import br.com.app.repository.almoxarifado.CotacaoEmpresaItemRepository;
 public class VerificaItensGanhadores {
 
 	private List<CotacaoEmpresaItem> itensVerifica = new ArrayList<>();
-	
+
 	private Integer chamada = 0;
-	
+
 	@Autowired
 	private CotacaoEmpresaItemRepository cotaEmpresaItemReposi;
 
@@ -27,8 +27,7 @@ public class VerificaItensGanhadores {
 		List<CotacaoEmpresaItem> itens = cotaEmpresaItemReposi.buscarItensPorIdCotacao(cotacao.getId());
 
 		Integer cont = 0;
-		
-		
+
 		while (cotacao.getItens().size() > this.chamada) {
 			CotacaoEmpresaItem itemASerVerificado = itens.get(cont);
 
@@ -43,58 +42,49 @@ public class VerificaItensGanhadores {
 			verficarCotacaoEmpresa();
 			itensVerifica.clear();
 		}
-		
+
 	}
 
-	
-	private void verficarCotacaoEmpresa()
-	{
-		for(CotacaoEmpresaItem item: itensVerifica)
-		{
-			if(item.getCotacaoEmpresa().getQuantidadeItensGanhos() <= 0)
-			{
+	private void verficarCotacaoEmpresa() {
+		for (CotacaoEmpresaItem item : itensVerifica) {
+			if (item.getCotacaoEmpresa().getQuantidadeItensGanhos() <= 0) {
 				item.getCotacaoEmpresa().perdeu();
-			}else
-			{
+			} else {
 				item.getCotacaoEmpresa().ganhou();
 			}
 		}
 	}
-	 
+
 	private void verificarItens() {
 
 		CotacaoEmpresaItem itemGanhador = itensVerifica.get(0);
 		itemGanhador.setStatus(CotacaoEmpresaItemStatus.GANHOU);
 
 		for (CotacaoEmpresaItem item : itensVerifica) {
-			
+
 			if (!itemGanhador.equals(item)) {
-				
+
 				if (itemGanhador.getValorUnitario() > item.getValorUnitario()) {
-					
+
 					itemGanhador.setStatus(CotacaoEmpresaItemStatus.PERDEU);
 					item.setStatus(CotacaoEmpresaItemStatus.GANHOU);
 					itemGanhador = item;
-				
+
 				} else if (itemGanhador.getValorUnitario().equals(item.getValorUnitario())) {
-					
-					if(itemGanhador.getCotacaoEmpresa().getQuantidadeItensGanhos() >= item.getCotacaoEmpresa().getQuantidadeItensGanhos())
-					{
-						item.setStatus(CotacaoEmpresaItemStatus.PERDEU);
-					}else
-					{
+
+					if (itemGanhador.getCotacaoEmpresa().getQuantidadeItensGanhos() >= item.getCotacaoEmpresa()
+							.getQuantidadeItensGanhos()) {
 						item.setStatus(CotacaoEmpresaItemStatus.PERDEU);
 					}
-					
+
 				} else {
 					item.setStatus(CotacaoEmpresaItemStatus.PERDEU);
 				}
 			}
 		}
-		
-		
+
 		chamada++;
 
 	}
-	
+
 }
