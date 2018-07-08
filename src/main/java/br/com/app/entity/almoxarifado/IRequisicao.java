@@ -4,8 +4,10 @@ import java.util.List;
 
 import br.com.app.entity.almoxarifado.interfaces.EntradaOuBaixa;
 
-public interface IRequisicao<E> extends EntradaOuBaixa<E>{
+public interface IRequisicao<E> extends EntradaOuBaixa<E> {
 
-	public List<E> getItens();
-	public Requisicao getInformacaoRequisicao();
+	List<E> getItens();
+
+	Requisicao getInformacaoRequisicao();
+
 }

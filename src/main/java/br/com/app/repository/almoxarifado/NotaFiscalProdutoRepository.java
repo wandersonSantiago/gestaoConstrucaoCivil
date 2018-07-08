@@ -11,15 +11,16 @@ import org.springframework.data.jpa.repository.Query;
 
 import br.com.app.entity.almoxarifado.NotaFiscalProduto;
 
-public interface NotaFiscalProdutoRepository extends JpaRepository<NotaFiscalProduto,Long> {
+public interface NotaFiscalProdutoRepository extends JpaRepository<NotaFiscalProduto, Long> {
 
 	@EntityGraph(value = "NotaFiscalProduto.detail", type = EntityGraphType.LOAD)
-    @Query("FROM NotaFiscalProduto notaProduto  WHERE notaProduto.notaFiscal.empreendimento.id = ?1")
-	public List<NotaFiscalProduto> buscarNotaPorEmpreendimento(Long idEmpreendimento);
-	
-	@Query("FROM NotaFiscalProduto nota WHERE nota.notaFiscal.numero = ?1")
-	public NotaFiscalProduto buscarPorNumero(Long numero);
+	@Query("FROM NotaFiscalProduto notaProduto  WHERE notaProduto.notaFiscal.empreendimento.id = ?1")
+	List<NotaFiscalProduto> buscarNotaPorEmpreendimento(Long idEmpreendimento);
 
-	public Page<NotaFiscalProduto> findByNotaFiscalNumeroAndNotaFiscalEmpreendimentoId(Long descricao,
-			Long idEmpreendimento, Pageable page);
+	@Query("FROM NotaFiscalProduto nota WHERE nota.notaFiscal.numero = ?1")
+	NotaFiscalProduto buscarPorNumero(Long numero);
+
+	Page<NotaFiscalProduto> findByNotaFiscalNumeroAndNotaFiscalEmpreendimentoId(Long descricao, Long idEmpreendimento,
+			Pageable page);
+
 }

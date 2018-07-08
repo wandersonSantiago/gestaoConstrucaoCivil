@@ -6,7 +6,9 @@ import br.com.app.entity.Empreendimento;
 
 public interface EntradaOuBaixa<E> {
 
-	public Collection<E> getItens();
-	public Empreendimento empreendimentoSaida();
-	public Empreendimento empreendimentoEntrada();
+	Collection<E> getItens();
+
+	Empreendimento empreendimentoSaida();
+
+	Empreendimento empreendimentoEntrada();
 }
