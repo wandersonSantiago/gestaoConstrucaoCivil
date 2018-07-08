@@ -139,7 +139,7 @@
               </ul>
             </li>
             <li>
-              <a href=""><img ng-src="public/img/icones/supplier.png">Fornecedor
+              <a href=""><img ng-src="public/img/icones/delivery-truck.png">Fornecedor
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
@@ -151,7 +151,7 @@
               </ul>
             </li>
             <li>
-              <a href=""><img ng-src="public/img/icones/manufactoring.png">Fabricante
+              <a href=""><img ng-src="public/img/icones/fabrication.png">Fabricante
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
@@ -160,6 +160,42 @@
                 <li ><a href="" ui-sref="matriz.identificar({proximaPagina : 'fabricante.cadastrar'})"><img ng-src="public/img/icones/plus.png">Cadastrar</a></li>
                 <li ><a href="" ui-sref="fabricante.consultar"><img ng-src="public/img/icones/list.png">Consultar</a></li>
                 
+              </ul>
+            </li>
+            <li>
+              <a href=""><img ng-src="public/img/icones/stock.png">Estoque
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li ><a href="" ui-sref="estoque.cadastrar"><img ng-src="public/img/icones/plus.png">Cadastrar</a></li>
+                <li ><a href="" ui-sref="estoque.consultar"><img ng-src="public/img/icones/list.png">Consultar</a></li>
+                
+              </ul>
+            </li>
+            <li>
+              <a href=""><img ng-src="public/img/icones/requ.png">Requisição
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li ><a href="" ui-sref="requisicao.cadastrar"><img ng-src="public/img/icones/plus.png">Cadastrar</a></li>
+                <li ><a href="" ui-sref="requisicao.minhas({tipo : 'MINHA_REQUISICAO'})"><img ng-src="public/img/icones/list.png">Enviados</a></li>
+                <li ><a href="" ui-sref="requisicao.full({tipo : 'LIBERAR'})"><img ng-src="public/img/icones/list.png">Recebidos</a></li>                
+              </ul>
+            </li>
+            <li>
+              <a href=""><img ng-src="public/img/icones/transfer.png">Transferencia
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li ><a href="" ui-sref="transferencia.cadastrar"><img ng-src="public/img/icones/plus.png">Cadastrar</a></li>
+                <li ><a href="" ui-sref="transferencia.enviados({tipo : 'ENVIADOS'})"><img ng-src="public/img/icones/list.png">Enviados</a></li>
+                <li ><a href="" ui-sref="transferencia.enviados({tipo : 'RECEBIDOS'})"><img ng-src="public/img/icones/list.png">Recebidos</a></li>                
               </ul>
             </li>
           </ul>

@@ -15,8 +15,14 @@ public interface RequisicaoRepository extends JpaRepository<Requisicao, Long>{
 	Requisicao findByNumeroRequisicao(Integer numeroRequisicao);
 	
 	@Query("FROM Requisicao requisicao WHERE requisicao.empreendimento.id = ?1")
-	Collection<Requisicao> findByEmpreendimento(Long empreendimento);
+	Collection<Requisicao> findByEmpreendimento(Long idEmpreendimento);
 
 	@Query("FROM Requisicao requisicao WHERE requisicao.empreendimento.id = ?1")
 	Page<Requisicao> buscarTodasRequisicoesComPaginacao(Long id, Pageable pages);
+
+	Page<Requisicao> findByNumeroRequisicaoAndEmpreendimentoIdAndIdUsuario(Integer numero, Long idEmpreendimento, Long idUsuario, Pageable page);
+
+	Page<Requisicao> findByNumeroRequisicaoAndEmpreendimentoId(Integer numero, Long idEmpreendimento, Pageable page);
+
+	Requisicao findByIdAndEmpreendimentoId(Long idRequisicao, Long idEmpreendimento);
 }

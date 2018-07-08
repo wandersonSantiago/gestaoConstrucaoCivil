@@ -1,0 +1,80 @@
+<meta charset="UTF-8">
+				<h3>Dados da Requisicao</h3>
+				<hr>
+				<div class="row">
+						<div class="col-sm-3">
+						<label>Número Nota Fiscal:</label>
+							{{ctrl.requisicao.numeroRequisicao}} 
+						</div>			
+						<div class="col-sm-3">
+						<label>Data Emissão:</label>
+							{{ctrl.requisicao.dataCriacao | date : 'dd/MM/yyyy'}}
+						</div>						
+						<div class="col-sm-3" ng-show="ctrl.requisicao.dataSaida">
+						<label>Data Saída:</label>
+							{{ctrl.requisicao.dataSaida | date : 'dd/MM/yyyy'}}
+						</div>
+						<div class="col-sm-3">
+						<label>Status:</label>
+							{{ctrl.requisicao.statusRequisicao}} 
+						</div>							
+					</div> 					
+					<hr>
+					<h3>Produtos</h3>
+					<div class="panel panel-default table-responsive" ng-if="produtos.length > 0">
+					<table class="table table-bordered table-striped ">
+					<thead>
+						<tr>
+							<th>Codigo de barras</th>
+							<th>Descrição</th>
+							<th >Quantidade</th>
+							<th>Categoria</th>
+							<th>SubCategoria</th>
+						</tr>
+					</thead>					
+					<tbody	ng-repeat=" f in produtos">
+						<tr>
+							<td>{{f.produto.codigo ? f.produto.codigo : f.produto.codigoBarra}}</td>
+							<td>{{f.produto.descricao}}</td>
+							<td>{{f.quantidade}}</td>
+							<td>{{f.produto.categoria.categoria.descricao}}</td>			
+							<td>{{f.produto.categoria.descricao}}</td>					
+						</tr>
+	
+					</tbody>					
+				</table>
+					</div>
+					<br>
+					<hr>
+				<h3>Estrutura</h3>
+					<br>						
+					<div class="row">
+						<div class="col-sm-12">
+							<label>Descrição:</label><br>
+							<h4>	{{ctrl.requisicao.estrutura.raiz.raiz.raiz.raiz.raiz.raiz.raiz.descricao}} - {{ctrl.requisicao.estrutura.raiz.raiz.raiz.raiz.raiz.raiz.descricao}}-
+								{{ctrl.requisicao.estrutura.raiz.raiz.raiz.raiz.raiz.descricao}}-{{ctrl.requisicao.estrutura.raiz.raiz.raiz.raiz.descricao}}-
+								{{ctrl.requisicao.estrutura.raiz.raiz.raiz.descricao}}-{{ctrl.requisicao.estrutura.raiz.raiz.descricao}}-
+								{{ctrl.requisicao.estrutura.raiz.descricao}}-{{ctrl.requisicao.estrutura.descricao}}</h4>
+						</div>											
+					</div>			
+							
+					<br>
+					<hr>
+					<h3>Complementos</h3>
+					<div class="row">
+						<div class="col-sm-12">
+						<label>Observação:</label>
+								{{ctrl.requisicao.observacao}}
+						</div> 
+					</div>
+					<div class="row" ng-if="ctrl.titulo !== 'MINHA_REQUISICAO'">
+					<div class="col-sm-3"></div>
+						<div class="col-sm-3">
+							<input ng-if="ctrl.requisicao.statusRequisicao == 'PENDENTE'" 
+							 class="btn btn-lg btn-primary btn-block" type="button" ng-click="ctrl.aceitarRequisicao(ctrl.requisicao.id)" value="Aceitar">
+						</div>
+						<div class="col-sm-3">
+							<input ng-if="ctrl.requisicao.statusRequisicao == 'PENDENTE'"
+							 class="btn btn-lg btn-warning btn-block" type="button" ng-click="ctrl.rejeitarRequisicao(ctrl.requisicao.id)" value="Rejeitar">
+						</div>
+					</div>
