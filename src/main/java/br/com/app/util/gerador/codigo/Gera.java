@@ -2,5 +2,5 @@ package br.com.app.util.gerador.codigo;
 
 public interface Gera{
 
-	public String gerar();
+	String gerar();
 }

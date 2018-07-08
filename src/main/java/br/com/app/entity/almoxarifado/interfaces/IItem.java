@@ -4,6 +4,7 @@ import br.com.app.entity.almoxarifado.Produto;
 
 public interface IItem {
 
-	public Produto getProduto();
-	public Integer getQuantidade();
+	Produto getProduto();
+
+	Integer getQuantidade();
 }

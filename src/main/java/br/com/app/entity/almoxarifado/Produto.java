@@ -21,7 +21,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
 
 import br.com.app.entity.Categoria;
 import br.com.app.enuns.UnidadeMedidaEnum;

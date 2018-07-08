@@ -7,9 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 
 import br.com.app.entity.almoxarifado.PedidoCompra;
 
-public interface PedidoCompraRepository extends JpaRepository<PedidoCompra, Long>{
+public interface PedidoCompraRepository extends JpaRepository<PedidoCompra, Long> {
 
-	
 	@Query("From PedidoCompra p where p.empreendimento.id = ?1")
-	public Collection<PedidoCompra> buscaTodos(Long idEmpreendimento);
+	Collection<PedidoCompra> buscaTodos(Long idEmpreendimento);
 }
