@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.app.entity.almoxarifado.Fabricante;
 import br.com.app.entity.almoxarifado.Fornecedor;
 import br.com.app.service.almoxarifado.FornecedorService;
 

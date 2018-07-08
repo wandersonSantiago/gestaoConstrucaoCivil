@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -20,6 +21,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.app.entity.Empreendimento;
+import br.com.app.entity.Estrutura;
 import br.com.app.entity.almoxarifado.interfaces.EntradaOuBaixa;
 import br.com.app.enuns.StatusRequisicao;
 import lombok.Data;
@@ -55,8 +57,16 @@ public class Requisicao implements Serializable, EntradaOuBaixa<RequisicaoItem> 
 	@JoinColumn(name = "id_empreendimento")
 	private Empreendimento empreendimento;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private Collection<RequisicaoItem> itens;
+	
+	@ManyToOne
+	@JoinColumn(name="id_estrutura")
+	private Estrutura estrutura;
+	
+	private Long idUsuario;
+	
+	private String observacao;
 
 	@Override
 	public Empreendimento empreendimentoSaida() {
