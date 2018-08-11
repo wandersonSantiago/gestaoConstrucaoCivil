@@ -81,10 +81,28 @@ public class UsuarioService {
 	}
 
 	public Usuario findById(Long id) {
-		Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
-		return usuarioRepository.findByIdAndEmpreendimentoId(id, idEmpreendimento);
+		
+		Boolean hasEmpreendimento = SessionUsuario.getInstance().getEmpreendimentoId() != null;
+		
+		if(hasEmpreendimento) {
+			Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
+			return usuarioRepository.findByIdAndEmpreendimentoId(id, idEmpreendimento);
+		}else {
+			
+			Usuario usuarioSession = SessionUsuario.getInstance().getUsuario();
+			if(usuarioSession.isRoot()) {
+				return usuarioRepository.findById(id).orElseThrow(() -> new NotFoundException("Usuário não foi encontrado!"));
+			}
+		}
+		throw new NotFoundException("Usuário não foi encontrado! ");
+		
+		
+		
+	
 	}
-
+	public Usuario findByIdAndEmpreendimento(Long usuarioId,Long empreendimentoId) {
+		return usuarioRepository.findByIdAndEmpreendimentoId(usuarioId, empreendimentoId);
+	}
 	public Usuario findByNome(String nomeUsuario) {
 		return usuarioRepository.findByNome(nomeUsuario);
 	}

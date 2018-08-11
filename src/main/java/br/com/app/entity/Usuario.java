@@ -15,6 +15,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -29,6 +32,8 @@ import lombok.Data;
 @Data
 @Entity
 @SequenceGenerator(name = "usuario_id_seq", sequenceName = "usuario_id_seq",allocationSize = 1,schema="communs")
+@NamedEntityGraph(name = "Usuario.detail",attributeNodes = {@NamedAttributeNode(value = "empreendimento", subgraph = "empreendimento"),@NamedAttributeNode("permissoes") }, 
+subgraphs = @NamedSubgraph(name = "empreendimento", attributeNodes = @NamedAttributeNode("endereco")))
 @Table(name = "usuario" , schema = "communs")
 public class Usuario implements Serializable{
 
