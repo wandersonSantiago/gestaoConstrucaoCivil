@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.EntityGraph.EntityGraphType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import br.com.app.entity.Usuario;
 import br.com.app.entity.almoxarifado.NotaFiscalProduto;
 
 public interface NotaFiscalProdutoRepository extends JpaRepository<NotaFiscalProduto, Long> {
