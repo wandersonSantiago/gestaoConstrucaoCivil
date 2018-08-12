@@ -82,7 +82,7 @@ public class UsuarioService {
 
 	public Usuario findById(Long id) {
 		
-		Boolean hasEmpreendimento = SessionUsuario.getInstance().getEmpreendimentoId() != null;
+		Boolean hasEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento()  != null;
 		
 		if(hasEmpreendimento) {
 			Long idEmpreendimento = SessionUsuario.getInstance().getUsuario().getEmpreendimento().getId();
