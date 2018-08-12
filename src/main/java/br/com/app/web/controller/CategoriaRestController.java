@@ -34,7 +34,7 @@ public class CategoriaRestController {
 	
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping("/{id}")
-	public Optional<Categoria> findById(@PathVariable Long id) {
+	public Categoria findById(@PathVariable Long id) {
 
 		return categoriaService.findById(id);
 	}

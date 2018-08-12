@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -17,6 +19,7 @@ import lombok.Data;
 @Data
 @Entity
 @SequenceGenerator(name = "categoria_id_seq", sequenceName = "categoria_id_seq",allocationSize = 1, schema = "communs")
+@NamedEntityGraph(name = "Categoria.detail",attributeNodes = {@NamedAttributeNode(value = "categoria")})
 @Table(name = "categoria", schema = "communs")
 public class Categoria implements Serializable {
 
