@@ -17,33 +17,27 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 import br.com.app.entity.Empreendimento;
 import br.com.app.entity.almoxarifado.interfaces.EntradaOuBaixa;
 import lombok.Data;
 
 @Data
 @Entity
-/*@NamedEntityGraph(name = "NotaFiscalProduto.detail", attributeNodes = { @NamedAttributeNode("notaFiscal"),
-		@NamedAttributeNode("fornecedor") })*/
+@NamedEntityGraph(name = "NotaFiscalProduto.detail", attributeNodes = {
+		@NamedAttributeNode(value = "fornecedor", subgraph = "fornecedor"),
+		@NamedAttributeNode(value = "itens", subgraph = "itens"),
+		@NamedAttributeNode(value = "notaFiscal", subgraph = "notaFiscal") },
 
-@NamedEntityGraph(name = "NotaFiscalProduto.detail",attributeNodes = {
-					@NamedAttributeNode(value = "fornecedor", subgraph = "fornecedor"),
-					@NamedAttributeNode(value = "itens",subgraph = "itens"),
-					@NamedAttributeNode(value = "notaFiscal",subgraph = "notaFiscal")}, 
+		subgraphs = { @NamedSubgraph(name = "fornecedor", attributeNodes = @NamedAttributeNode("dadoEmpresa")),
+				@NamedSubgraph(name = "itens", attributeNodes = @NamedAttributeNode("notaFiscalProduto")),
 
-subgraphs = 	  {@NamedSubgraph(name = "fornecedor", attributeNodes = @NamedAttributeNode("dadoEmpresa")),
-		 @NamedSubgraph(name = "itens", attributeNodes = @NamedAttributeNode("notaFiscalProduto")),
-		
-				  @NamedSubgraph(name = "itens", attributeNodes = @NamedAttributeNode("produto")),
-			  	  @NamedSubgraph(name = "notaFiscal", attributeNodes = @NamedAttributeNode("empreendimento"))} )
+				@NamedSubgraph(name = "itens", attributeNodes = @NamedAttributeNode("produto")),
+				@NamedSubgraph(name = "notaFiscal", attributeNodes = @NamedAttributeNode("empreendimento")) })
 
 @SequenceGenerator(name = "nota_fiscal_produto_id_seq", sequenceName = "nota_fiscal_produto_id_seq", allocationSize = 1, schema = "almoxarifado")
 @Table(name = "nota_fiscal_produto", schema = "almoxarifado")
-public class NotaFiscalProduto implements Serializable ,EntradaOuBaixa<NotaFiscalItem> {
-	
+public class NotaFiscalProduto implements Serializable, EntradaOuBaixa<NotaFiscalItem> {
+
 	private static final long serialVersionUID = -5762609472513945182L;
 
 	@Id
@@ -60,11 +54,10 @@ public class NotaFiscalProduto implements Serializable ,EntradaOuBaixa<NotaFisca
 
 	@OneToMany(mappedBy = "notaFiscalProduto", cascade = CascadeType.ALL)
 	private List<NotaFiscalItem> itens;
-	
-	
+
 	public double getValorTotal() {
 		double valor = 0.0;
-		for(NotaFiscalItem x : itens) {
+		for (NotaFiscalItem x : itens) {
 			valor = valor + x.getValorTotal();
 		}
 		return valor;
