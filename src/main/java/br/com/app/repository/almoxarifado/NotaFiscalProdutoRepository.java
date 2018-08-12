@@ -22,5 +22,7 @@ public interface NotaFiscalProdutoRepository extends JpaRepository<NotaFiscalPro
 
 	Page<NotaFiscalProduto> findByNotaFiscalNumeroAndNotaFiscalEmpreendimentoId(Long descricao, Long idEmpreendimento,
 			Pageable page);
-
+	
+	@EntityGraph(value = "NotaFiscalProduto.detail", type = EntityGraphType.FETCH)
+	Page<NotaFiscalProduto> findAll(Pageable pageable);
 }

@@ -2,8 +2,11 @@ package br.com.app.repository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.EntityGraph.EntityGraphType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+ 
 import org.springframework.data.repository.query.Param;
 
 import br.com.app.entity.Usuario;
@@ -29,4 +32,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Long>{
 
 	Usuario findByIdAndEmpreendimentoId(Long id,Long idEmpreendimento);
 	
+	@EntityGraph(value = "Usuario.detail", type = EntityGraphType.FETCH)
+	Page<Usuario> findAll(Pageable pageable);
 }
