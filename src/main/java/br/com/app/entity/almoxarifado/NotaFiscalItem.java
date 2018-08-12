@@ -10,11 +10,13 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
-@Table(name = "nota_fiscal_item" , schema="almoxarifado")
-public class NotaFiscalItem  extends Item implements Serializable{
+import lombok.EqualsAndHashCode;
 
-	
+@EqualsAndHashCode(callSuper=false)
+@Entity
+@Table(name = "nota_fiscal_item", schema = "almoxarifado")
+public class NotaFiscalItem extends Item implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Column(nullable = false)
@@ -41,6 +43,4 @@ public class NotaFiscalItem  extends Item implements Serializable{
 	public void setNotaFiscalProduto(NotaFiscalProduto notaFiscalProduto) {
 		this.notaFiscalProduto = notaFiscalProduto;
 	}
-
-   
 }

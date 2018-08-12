@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -25,13 +26,24 @@ import lombok.Data;
 
 @Data
 @Entity
-@NamedEntityGraph(name = "NotaFiscalProduto.detail", attributeNodes = { @NamedAttributeNode("notaFiscal"),
-		@NamedAttributeNode("fornecedor") })
+/*@NamedEntityGraph(name = "NotaFiscalProduto.detail", attributeNodes = { @NamedAttributeNode("notaFiscal"),
+		@NamedAttributeNode("fornecedor") })*/
+
+@NamedEntityGraph(name = "NotaFiscalProduto.detail",attributeNodes = {
+					@NamedAttributeNode(value = "fornecedor", subgraph = "fornecedor"),
+					@NamedAttributeNode(value = "itens",subgraph = "itens"),
+					@NamedAttributeNode(value = "notaFiscal",subgraph = "notaFiscal")}, 
+
+subgraphs = 	  {@NamedSubgraph(name = "fornecedor", attributeNodes = @NamedAttributeNode("dadoEmpresa")),
+		 @NamedSubgraph(name = "itens", attributeNodes = @NamedAttributeNode("notaFiscalProduto")),
+		
+				  @NamedSubgraph(name = "itens", attributeNodes = @NamedAttributeNode("produto")),
+			  	  @NamedSubgraph(name = "notaFiscal", attributeNodes = @NamedAttributeNode("empreendimento"))} )
 
 @SequenceGenerator(name = "nota_fiscal_produto_id_seq", sequenceName = "nota_fiscal_produto_id_seq", allocationSize = 1, schema = "almoxarifado")
 @Table(name = "nota_fiscal_produto", schema = "almoxarifado")
 public class NotaFiscalProduto implements Serializable ,EntradaOuBaixa<NotaFiscalItem> {
-
+	
 	private static final long serialVersionUID = -5762609472513945182L;
 
 	@Id
@@ -47,7 +59,6 @@ public class NotaFiscalProduto implements Serializable ,EntradaOuBaixa<NotaFisca
 	private Fornecedor fornecedor;
 
 	@OneToMany(mappedBy = "notaFiscalProduto", cascade = CascadeType.ALL)
-	@Fetch(FetchMode.SUBSELECT)
 	private List<NotaFiscalItem> itens;
 	
 	
