@@ -37,4 +37,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 	Page<Produto> findByCodigo(String descricao, Pageable page);
 
 	Page<Produto> findByDescricaoIgnoreCaseContaining(String descricao, Pageable page);
+	
+	@EntityGraph(value = "Produto.detail", type = EntityGraphType.FETCH)
+	Page<Produto> findAll(Pageable page); 
 }
