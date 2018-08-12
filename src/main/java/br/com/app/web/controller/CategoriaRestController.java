@@ -1,7 +1,6 @@
 package br.com.app.web.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -34,7 +33,7 @@ public class CategoriaRestController {
 	
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping("/{id}")
-	public Optional<Categoria> findById(@PathVariable Long id) {
+	public Categoria findById(@PathVariable Long id) {
 
 		return categoriaService.findById(id);
 	}
