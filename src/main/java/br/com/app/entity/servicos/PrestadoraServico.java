@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,7 +31,12 @@ public class PrestadoraServico implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "prestadora_servico_id_seq")
 	private Long id;
 
-	@OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+	@Column(length = 50)
+	private String contato;
+	@Column(length = 50)
+	private String observacao;
+	
+	@OneToOne
 	@JoinColumn(name = "id_dado_empresa", nullable = false)
 	private DadoEmpresa dadoEmpresa;
 

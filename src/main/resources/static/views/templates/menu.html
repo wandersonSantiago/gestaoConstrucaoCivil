@@ -199,8 +199,52 @@
               </ul>
             </li>
           </ul>
-        </li>
+        </li>			
 			
+		<li class="treeview">
+          <a href="">
+            <img ng-src="public/img/icones/stock.png"> <span>Serviços</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+             <li>
+              <a href=""><img ng-src="public/img/icones/product.png">Prestadora
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="" ui-sref="prestadora.identificar({proximaPagina : 'prestadora.cadastrar'})" ><img ng-src="public/img/icones/plus.png">Cadastrar</a></li>
+                <li><a href="" ui-sref="prestadora.consultar"><img ng-src="public/img/icones/list.png">Consultar</a></li>
+                              
+              </ul>
+            </li>
+            <li>
+              <a href=""><img ng-src="public/img/icones/supplier.png">Pacotes
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li ><a href="" ui-sref="pacote.cadastrar"><img ng-src="public/img/icones/list.png">Cadastrar</a></li>
+                 <li ><a href="" ui-sref="pacote.consultar"><img ng-src="public/img/icones/list.png">Consultar</a></li>               
+              </ul>
+            </li>
+            <li>
+              <a href=""><img ng-src="public/img/icones/supplier.png">Vincular
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li ><a href="" ui-sref="vincular.cadastrar"><img ng-src="public/img/icones/list.png">Cadastrar</a></li>
+                 <li ><a href="" ui-sref="vincular.consultar"><img ng-src="public/img/icones/list.png">Consultar</a></li>               
+              </ul>
+            </li>
+            </ul>
+        </li>
    
 		</ul>
 		<script type="text/javascript">

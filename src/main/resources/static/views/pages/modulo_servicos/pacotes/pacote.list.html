@@ -2,14 +2,14 @@
 
 <div class="row">
 	<div class="col-md-4">
-		<a class="fa fa-plus" href="" ui-sref="matriz.identificar({proximaPagina : 'fabricante.cadastrar'})" title="Cadastrar novo Fabricante">Novo</a>|<label>Fabricante</label>
+		<a class="fa fa-plus" href="" ui-sref="pacote.cadastrar" title="Cadastrar novo Pacote">Novo</a>|<label>Pacote</label>
 	</div>
 </div>
 <br>
 	<div class="row">
   <div class="col-lg-6">
     <div class="input-group">
-      <input type="text" class="form-control" placeholder="Digite o nome ou CNPJ" ng-model="texto" autofocus
+      <input type="text" class="form-control" placeholder="Digite o código ou descrição" ng-model="texto" autofocus
       	 ng-keyup="$event.keyCode == 13 && ctrl.buscarPorTexto(texto)">
       <span class="input-group-btn">
         <button class="btn btn-default" type="button" ng-click="ctrl.paginaCorrente = 0; ctrl.buscarPorTexto(texto)">Ir!</button>
@@ -21,26 +21,26 @@
 	                <h4><i class="icon fa fa-warning"></i>{{mensagemErro}}</h4>
 	              </div> <br>
 
-<div class="table-responsive" ng-if="ctrl.fabricantes.length">
+<div class="table-responsive" ng-if="ctrl.pacotes.length">
 	<table class="table table-hover" >
 		<tr>
 
-			<th>Id</th>
-			<th>Razão Social</th>
-			<th>Nome Fantasia</th>
-			<th>CNPJ</th>
-			<th>Telefone</th>
+			<th>Código</th>
+			<th>Descrição</th>
+			<th>Serviços</th>
+			<th>Categoria</th>
+			<th>Valor</th>
 			<th>Editar</th>
 			
 
 		</tr>
-		<tr ng-repeat="fabricante in ctrl.fabricantes">
-			<td>{{fabricante.id}}</td>
-			<td><a ui-sref="fabricante.visualizar({ idFabricante: fabricante.id})">{{fabricante.dadoEmpresa.razaoSocial}}</a></td>
-			<td>{{fabricante.dadoEmpresa.nomeFantasia}}</td>
-			<td>{{fabricante.dadoEmpresa.cnpj | brCnpj}}</td>
-			<td>{{fabricante.dadoEmpresa.telefone | brPhoneNumber}}</td>
-			<td><a ui-sref="fabricante.editar({ idFabricante: fabricante.id})"><i class="glyphicon glyphicon-edit"></i></a></td>
+		<tr ng-repeat="pacote in ctrl.pacotes">
+			<td>{{pacote.codigo}}</td>
+			<td><a ui-sref="pacote.visualizar({ idPacote: pacote.id})">{{pacote.descricao}}</a></td>
+			<td>{{pacote.servicosAtribuidos}}</td>
+			<td>{{pacote.categoria.descricao}}</td>
+			<td>{{pacote.valor | currency}}</td>
+			<td><a ui-sref="pacote.editar({ idPacote: pacote.id})"><i class="glyphicon glyphicon-edit"></i></a></td>
 		</tr>
 	</table>
 	<nav>

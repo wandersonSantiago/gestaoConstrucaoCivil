@@ -2,7 +2,7 @@
 
 <div class="row">
 	<div class="col-md-4">
-		<a class="fa fa-plus" href="" ui-sref="matriz.identificar({proximaPagina : 'fabricante.cadastrar'})" title="Cadastrar novo Fabricante">Novo</a>|<label>Fabricante</label>
+		<a class="fa fa-plus" href="" ui-sref="prestadora.identificar({proximaPagina : 'prestadora.cadastrar'})" title="Cadastrar novo Prestadora">Novo</a>|<label>Prestadora</label>
 	</div>
 </div>
 <br>
@@ -21,7 +21,7 @@
 	                <h4><i class="icon fa fa-warning"></i>{{mensagemErro}}</h4>
 	              </div> <br>
 
-<div class="table-responsive" ng-if="ctrl.fabricantes.length">
+<div class="table-responsive" ng-if="ctrl.prestadoras.length">
 	<table class="table table-hover" >
 		<tr>
 
@@ -34,13 +34,13 @@
 			
 
 		</tr>
-		<tr ng-repeat="fabricante in ctrl.fabricantes">
-			<td>{{fabricante.id}}</td>
-			<td><a ui-sref="fabricante.visualizar({ idFabricante: fabricante.id})">{{fabricante.dadoEmpresa.razaoSocial}}</a></td>
-			<td>{{fabricante.dadoEmpresa.nomeFantasia}}</td>
-			<td>{{fabricante.dadoEmpresa.cnpj | brCnpj}}</td>
-			<td>{{fabricante.dadoEmpresa.telefone | brPhoneNumber}}</td>
-			<td><a ui-sref="fabricante.editar({ idFabricante: fabricante.id})"><i class="glyphicon glyphicon-edit"></i></a></td>
+		<tr ng-repeat="prestadora in ctrl.prestadoras">
+			<td>{{prestadora.id}}</td>
+			<td><a ui-sref="prestadora.visualizar({ idPrestadora: prestadora.id})">{{prestadora.dadoEmpresa.razaoSocial}}</a></td>
+			<td>{{prestadora.dadoEmpresa.nomeFantasia}}</td>
+			<td>{{prestadora.dadoEmpresa.cnpj | brCnpj}}</td>
+			<td>{{prestadora.dadoEmpresa.telefone | brPhoneNumber}}</td>
+			<td><a ui-sref="prestadora.editar({ idPrestadora: prestadora.id})"><i class="glyphicon glyphicon-edit"></i></a></td>
 		</tr>
 	</table>
 	<nav>
