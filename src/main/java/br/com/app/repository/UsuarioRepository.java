@@ -14,7 +14,7 @@ import br.com.app.entity.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario,Long>{
             
 	Usuario findByNome(String nome);
-	
+	@EntityGraph(value = "Usuario.detail", type = EntityGraphType.FETCH)
 	Usuario findByLogin(String login);
 	
 	@Query("SELECT CASE WHEN COUNT(login) > 0 THEN true ELSE false END FROM Usuario u WHERE u.login = :login")

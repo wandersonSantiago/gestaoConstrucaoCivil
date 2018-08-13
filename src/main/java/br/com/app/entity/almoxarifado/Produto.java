@@ -16,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedSubgraph;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -29,9 +30,10 @@ import lombok.Data;
 @Data
 @Entity
 @SequenceGenerator(name = "produto_id_seq", sequenceName = "produto_id_seq", allocationSize = 1, schema = "almoxarifado")
-@NamedEntityGraph(name = "Produto.detail", attributeNodes = { @NamedAttributeNode("categoria"),
-		@NamedAttributeNode("fabricante"), @NamedAttributeNode("tipoProduto") })
-
+@NamedEntityGraph(name = "Produto.detail", attributeNodes = {
+		@NamedAttributeNode(value = "categoria", subgraph = "categoria"),
+		@NamedAttributeNode("tipoProduto") }, subgraphs = {
+				@NamedSubgraph(name = "categoria", attributeNodes = @NamedAttributeNode("categoria")) })
 @Table(name = "produto", schema = "almoxarifado")
 public class Produto implements Serializable {
 
@@ -58,9 +60,9 @@ public class Produto implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "id_categoria", nullable = true)
 	private Categoria categoria;
-			
+
 	@JsonIgnore
-	@ManyToMany(mappedBy="produtos")
+	@ManyToMany(mappedBy = "produtos")
 	private List<Fornecedor> fornecedores = new ArrayList<>();
 
 	@ManyToOne

@@ -1,4 +1,4 @@
- package br.com.app.entity;
+package br.com.app.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -31,11 +31,14 @@ import lombok.Data;
 
 @Data
 @Entity
-@SequenceGenerator(name = "usuario_id_seq", sequenceName = "usuario_id_seq",allocationSize = 1,schema="communs")
-@NamedEntityGraph(name = "Usuario.detail",attributeNodes = {@NamedAttributeNode(value = "empreendimento", subgraph = "empreendimento"),@NamedAttributeNode("permissoes") }, 
-subgraphs = @NamedSubgraph(name = "empreendimento", attributeNodes = @NamedAttributeNode("endereco")))
-@Table(name = "usuario" , schema = "communs")
-public class Usuario implements Serializable{
+@SequenceGenerator(name = "usuario_id_seq", sequenceName = "usuario_id_seq", allocationSize = 1, schema = "communs")
+@NamedEntityGraph(name = "Usuario.detail", attributeNodes = {
+		@NamedAttributeNode(value = "empreendimento", subgraph = "empreendimento"),
+		@NamedAttributeNode("permissoes") }, subgraphs = {
+				@NamedSubgraph(name = "empreendimento", attributeNodes = @NamedAttributeNode("matriz")),
+				@NamedSubgraph(name = "empreendimento", attributeNodes = @NamedAttributeNode("endereco"))})
+@Table(name = "usuario", schema = "communs")
+public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -44,43 +47,42 @@ public class Usuario implements Serializable{
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name="id_empreendimento",nullable = true)
+	@JoinColumn(name = "id_empreendimento", nullable = true)
 	private Empreendimento empreendimento;
-	
+
 	@Column(length = 50)
-	@NotNull(message="campo nome obrigatório")
+	@NotNull(message = "campo nome obrigatório")
 	private String nome;
-	@Column(length = 50,unique = false)
-	@NotNull(message="campo login obrigatório")
+	@Column(length = 50, unique = false)
+	@NotNull(message = "campo login obrigatório")
 	private String login;
 	@Column(length = 40)
-	@NotNull(message="campo e-mail obrigatório")
+	@NotNull(message = "campo e-mail obrigatório")
 	private String email;
 	@Column(length = 256)
-	@NotNull(message="campo senha obrigatório")
+	@NotNull(message = "campo senha obrigatório")
 	private String senha;
 	@Column(nullable = false)
 	private boolean ativo;
-	
-	private String  caminhoFoto;
-    
-    @Enumerated(EnumType.STRING)
-    private StatusUsuarioEnum status;
-    
+
+	private String caminhoFoto;
+
+	@Enumerated(EnumType.STRING)
+	private StatusUsuarioEnum status;
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_cadastro")
-	private Date dataCadastro  = new Date();
-	
+	private Date dataCadastro = new Date();
+
 	@OneToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "usuario_permissoes", schema="communs", joinColumns = @JoinColumn(name = "id_usuario"), 
-	inverseJoinColumns = @JoinColumn(name = "id_permissoes"))	
+	@JoinTable(name = "usuario_permissoes", schema = "communs", joinColumns = @JoinColumn(name = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_permissoes"))
 	private Set<Permissao> permissoes;
-	
+
 	@Transient
 	private boolean isRoot = false;
-	
+
 	public boolean isRoot() {
-		if(login.equalsIgnoreCase("root")) {
+		if (login.equalsIgnoreCase("root")) {
 			isRoot = true;
 			return true;
 		}
