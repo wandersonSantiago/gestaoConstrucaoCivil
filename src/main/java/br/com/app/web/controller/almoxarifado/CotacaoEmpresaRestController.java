@@ -17,14 +17,14 @@ import br.com.app.entity.almoxarifado.CotacaoEmpresa;
 import br.com.app.service.almoxarifado.CotacaoEmpresaService;
 
 @RestController
-@RequestMapping("/rest/almoxarifado/estoque/cotacao")
+@RequestMapping("/rest/almoxarifado/cotacao/empresa")
 public class CotacaoEmpresaRestController {
 
 	@Autowired
 	private CotacaoEmpresaService cotacaoEmpresaService;
 	
 	@ResponseStatus(HttpStatus.CREATED)
-	@PostMapping(value = "/salva")
+	@PostMapping
 	public void salvar(@RequestBody CotacaoEmpresa cotacaoEmpresa){
 		cotacaoEmpresaService.salvarOuEditar(cotacaoEmpresa);
 		 				
@@ -38,7 +38,7 @@ public class CotacaoEmpresaRestController {
 	}
 	
 	@ResponseStatus(HttpStatus.OK)
-	@GetMapping(value = "/buscaPorId/{id}")
+	@GetMapping(value = "/{id}")
 	public Optional<CotacaoEmpresa> buscarPorId(@PathVariable Long id) {
 
 		return cotacaoEmpresaService.buscarPorId(id);

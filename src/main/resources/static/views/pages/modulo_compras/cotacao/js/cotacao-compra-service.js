@@ -1,86 +1,102 @@
-app.factory('cotacaoCompraService', function($rootScope, toastr, $http,$q){
+app.factory('CotacaoEmpresaService', function($rootScope, toastr, $http,$q){
 	
+	var url = "/rest/almoxarifado/cotacao";
 	
 	return{
-		salvaCotacaoEmpresa : function(cotacaoEmpresa){
-			return $http.post('/rest/almoxarifado/estoque/cotacao/salva', cotacaoEmpresa)
-			.then(function(response){
-				toastr.info("Salvo com sucesso!!!");
-				return response.data;
-			},function(errResponse){
-				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
-					return $q.reject(errResponse);
-			});
-		},
-	
-		salva: function(cotacao){	
-			return $http.post('/rest/almoxarifado/cotacao/salva', cotacao)
-			.then(function(response){
-				toastr.info("Salvo com sucesso!!!");
-				return response.data;
-			},function(errResponse){
-				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
-					return $q.reject(errResponse);
-			});
-		},
-		altera: function(cotacao){			
-			return $http.put('/rest/almoxarifado/cotacao/salva', cotacao)
-			.then(function(response){
-				toastr.info("Alterado com sucesso!!!");return response.data;
-			},function(errResponse){
-				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
-					return $q.reject(errResponse);
-			});
-		},
-		lista: function(){
-			return $http.get('/rest/almoxarifado/cotacao/lista')
+		insert: function(cotacaoEmpresa){	
+			return $http.post(url, cotacaoEmpresa)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
-					return $q.reject(errResponse);
+				return $q.reject(errResponse);
 			});
 		},
 		
-		listaConcorrentes: function(id){
-			return $http.get('/rest/almoxarifado/estoque/cotacao/concorrentes/' +id)
+		update: function(cotacaoEmpresa){			
+			return $http.put(url, cotacaoEmpresa)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
-					return $q.reject(errResponse);
+				return $q.reject(errResponse);
 			});
 		},
 		
-		listaVencedores: function(id){
-			return $http.get('/rest/almoxarifado/estoque/cotacao/buscaGanhdores/' +id)
+		launch: function(cotacaoEmpresa){	
+			return $http.post(url +"/empresa", cotacaoEmpresa)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
-					return $q.reject(errResponse);
-			});
-		},
-		fecharCotacao: function(idCotacao){
-			console.log(idCotacao);
-			return $http.put('/rest/almoxarifado/cotacao/fecharCotacao/'+idCotacao)
-			.then(function(response){
-				toastr.info("Cotação Encerrada!!!");	return response.data;
-			},function(errResponse){
-				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
-					return $q.reject(errResponse);
+				return $q.reject(errResponse);
 			});
 		},
 		
-		buscaPorCotacaoId: function(param){
-			return $http.get('rest/almoxarifado/cotacao/buscaPorId/'+param)
+		findByConcorrentes: function(idCotacao){	
+			return $http.get(url +"/empresa/concorrentes/" + idCotacao)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
-				sweetAlert({ timer : 30000,  text : errResponse.data.message , type : "info", width: 300, higth: 100, padding: 20});
-					return $q.reject(errResponse);
+				return $q.reject(errResponse);
 			});
 		},
 		
+		findByVencedores: function(idCotacao){	
+			return $http.get(url +"/empresa/buscaGanhdores/"+ idCotacao)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				return $q.reject(errResponse);
+			});
+		},
+		
+		findByTextAndPagination: function(text , page ,  orderBy, direction , maxResults){
+			var config = {params: {tema : text, page: page , maxResults : maxResults, orderBy : orderBy, direction : direction}};
+			return $http.get(url + '/buscar', config)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				return $q.reject(errResponse);
+			});
+		},
+		findById: function(param){
+			return $http.get(url +'/'+ param)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				return $q.reject(errResponse);
+			});
+		},
+		findByCotacaoEmpresaId: function(param){
+			return $http.get(url +'/empresa/'+ param)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				return $q.reject(errResponse);
+			});
+		},
+		findByDescricao: function(texto){
+			var config = {params: {tema:texto}};
+			return $http.get(url + '/buscar', config)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				return $q.reject(errResponse);
+			});
+		},
+		status: function(){
+			return $http.get(url +'/status')
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				return $q.reject(errResponse);
+			});
+		},
+		closeCotacao: function(idCotacao){
+			return $http.put(url + '/close/' + idCotacao)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				return $q.reject(errResponse);
+			});
+		},
 	}
 });
