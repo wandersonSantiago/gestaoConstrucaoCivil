@@ -2,7 +2,10 @@ package br.com.app.web.controller.almoxarifado;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,12 +20,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.app.entity.almoxarifado.Cotacao;
 import br.com.app.enuns.StatusCotacao;
-import br.com.app.enuns.UnidadeMedidaEnum;
+import br.com.app.exceptions.NotFoundException;
+import br.com.app.jasper.JasperReportsService;
+import br.com.app.jasper.RelatorioUtil;
 import br.com.app.repository.filter.CotacaoFilter;
 import br.com.app.service.almoxarifado.CotacaoService;
 
@@ -32,7 +38,11 @@ public class CotacaoRestController {
 
 	@Autowired
 	private CotacaoService cotacaoService;
-
+	@Autowired
+	private JasperReportsService jasperReportsService;
+	@Autowired
+	private RelatorioUtil relatorioUtil;
+	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping
 	public void salvar(@RequestBody Cotacao cotacao) {
@@ -59,36 +69,31 @@ public class CotacaoRestController {
 		return Arrays.asList(StatusCotacao.values());
 	}
 	
-	@GetMapping(value = "/filtro")
-	public ResponseEntity<Page<Cotacao>> filtro(
-			@RequestParam(value="page", defaultValue="0") Integer page, 
-			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
-			@RequestParam(value="orderBy", defaultValue="tema") String orderBy, 
-			@RequestParam(value="direction", defaultValue="ASC") String direction,
-			@RequestParam(value="cotacaoFilter", required = true )CotacaoFilter filter) {
+	@PostMapping(value = "/filter")
+	public ResponseEntity<Page<Cotacao>> filtro(@RequestBody CotacaoFilter cotacaoFilter) {
 
-		Page<Cotacao> list = cotacaoService.filter(filter, PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy));
-		
+		Page<Cotacao> list = cotacaoService.pageFilter(cotacaoFilter, PageRequest.of(
+				cotacaoFilter.getPage().getPage(), cotacaoFilter.getPage().getLinesPerPage(), Direction.valueOf(cotacaoFilter.getPage().getDirection()), cotacaoFilter.getPage().getOrderBy()));
 		
 		return ResponseEntity.ok().body(list);
 	}
 	
-	@GetMapping(value = "/buscar")
-	public ResponseEntity<Page<Cotacao>> findByDescricao(
-			@RequestParam(value="page", defaultValue="0") Integer page, 
-			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
-			@RequestParam(value="orderBy", defaultValue="tema") String orderBy, 
-			@RequestParam(value="direction", defaultValue="ASC") String direction,
-			@RequestParam(value="tema", required = false , defaultValue="")String tema) {
-
-		Page<Cotacao> list = null;
+	
+	@PostMapping(value = "/imprimir")
+	@ResponseBody
+	public byte[] filtroPdf(@RequestBody CotacaoFilter cotacaoFilter, HttpServletResponse response) {
 		
-		if(tema.isEmpty() || tema.equalsIgnoreCase("")) {
-			list = cotacaoService.findAll(PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy));
-		}else {
-			list = cotacaoService.findByTemaIgnoreCase(tema, PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy));
-		}  
+		response.setHeader("Content-Disposition", "inline; filename=file.pdf");
+	    response.setContentType("application/pdf");
+	    
+	    List<Cotacao> cotacoes = (List<Cotacao>) cotacaoService.listFilter(cotacaoFilter);
+	try {	
+		return jasperReportsService.generateReport(cotacoes, relatorioUtil.caminhoArquivoCotacao() , relatorioUtil.caminhoMapaDeLogos() );	
 		
-		return ResponseEntity.ok().body(list);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new NotFoundException("Erro ao gerar pdf: " + e.getMessage());
+		}		
+		
 	}
 }

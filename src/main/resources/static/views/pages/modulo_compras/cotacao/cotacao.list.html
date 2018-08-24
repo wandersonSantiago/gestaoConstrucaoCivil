@@ -14,10 +14,10 @@
 	<div class="row" ng-if="!filtros">
 	  <div class="col-lg-6">
 	    <div class="input-group">
-	      <input type="text" class="form-control" placeholder="Pesquisar pela descrição ou codigo" ng-model="texto" autofocus
-	      	 ng-keyup="$event.keyCode == 13 && ctrl.buscarPorTexto(texto)">
+	      <input type="text" class="form-control" placeholder="Pesquisar pelo tema" ng-model="cotacaoFilter.tema" autofocus
+	      	 ng-keyup="$event.keyCode == 13 && filter(cotacaoFilter)">
 	      <span class="input-group-btn">
-	        <button class="btn btn-default" type="button" ng-click="ctrl.paginaCorrente = 0; ctrl.buscarPorTexto(texto)">Pesquisar!</button>
+	        <button class="btn btn-default" type="button" ng-click="cotacaoFilter.page.page = 0; filter(cotacaoFilter)">Pesquisar!</button>
 	      </span>
 	    </div>
 	  </div>
@@ -39,15 +39,11 @@
 				</div>
 			</div>
 			<div class="row">				
-			<div class="form-group  col-sm-6">
-					<label for="valorMinimo">Valor total</label>
-					<div class="form-inline">
-						<input type="text" class="form-control" id="valorMinimo" ng-model="cotacaoFilter.valorMinimo"/>
-						<label for="valorMaximo">até</label>
-						<input type="text" class="form-control" id="valorMaximo" ng-model="cotacaoFilter.valorMaximo"/>
-					</div>
+			<div class="form-group  col-sm-3">
+					<label for="valorMinimo">Descrição item</label>
+					<input type="text" class="form-control" id="item" ng-model="cotacaoFilter.descricaoItem"/>
 				</div>
-				<div class="form-group  col-sm-6">
+				<div class="form-group  col-sm-3">
 					<label for="dataCadastro">Data cadastro</label>
 					<div class="form-inline">
 						<input type="date" class="form-control" id="dataCadastroDe" ng-model="cotacaoFilter.dataCadastroDe" />
@@ -55,10 +51,8 @@
 						<input type="date" class="form-control" id="dataCadastroAte" ng-model="cotacaoFilter.dataCadastroAte" />
 					</div>
 				</div>
-		</div>
-			
-			<div class="row">
-				<div class="form-group  col-sm-6">
+		
+				<div class="form-group  col-sm-3">
 					<label for="dataLimite">Data Limite</label>
 					<div class="form-inline">
 						<input type="date" class="form-control" id="dataLimiteDe" ng-model="cotacaoFilter.dataLimiteDe" />
@@ -66,7 +60,7 @@
 						<input type="date" class="form-control" id="dataLimiteAte" ng-model="cotacaoFilter.dataLimiteAte" />
 					</div>
 				</div>
-				<div class="form-group  col-sm-6">
+				<div class="form-group  col-sm-3">
 					<label for="dataFechamento">Data Fechamento</label>
 					<div class="form-inline">
 						<input type="date" class="form-control" id="dataFechamentoDe" ng-model="cotacaoFilter.dataFechamentoDe" />
@@ -75,8 +69,17 @@
 					</div>
 				</div>						
 			</div>
-		
-			<button type="submit" class="btn  btn-primary col-sm-4">Pesquisar</button>
+				<div class="col-sm-2">
+		<label>Opção de visualização:</label><br>
+				<label class="radio-inline">
+					<input  type="radio" name="radioImprimir" ng-model="imprimir" value="PAGINA">Página
+				</label> 
+				<label class="radio-inline">
+					<input  type="radio" name="radioImprimir" ng-model="imprimir" 	value="PDF">PDF
+				</label>
+				</div>
+		<br>
+			<button type="submit" class="btn  btn-primary col-sm-2" ng-click="pesquisar(cotacaoFilter,imprimir)">Pesquisar</button>
 		</div>
 		<div ng-show="mensagemErro" class="alert alert-warning alert-dismissible">
 	         <h4><i class="icon fa fa-warning"></i>{{mensagemErro}}</h4>
@@ -116,9 +119,9 @@
 				</tbody>
 			</table>
 			<nav>
-				<ul uib-pagination total-items="ctrl.totalElementos" items-per-page="24"
-					ng-model="ctrl.paginaCorrente" max-size="5" class="pagination-sm"
-					boundary-link-numbers="true" ng-click="ctrl.buscarPorTexto(texto)"
+				<ul uib-pagination total-items="cotacaoFilter.page.totalElementos" items-per-page="cotacaoFilter.page.linesPerPage"
+					ng-model="cotacaoFilter.page.page" max-size="5" class="pagination-sm"
+					boundary-link-numbers="true" ng-click="filter(cotacaoFilter)"
 					previous-text="Anterior" last-text="Último" first-text="Primeiro"
 					next-text="Próximo">
 				</ul>

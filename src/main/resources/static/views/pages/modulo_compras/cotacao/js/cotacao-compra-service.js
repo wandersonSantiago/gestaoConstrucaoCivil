@@ -57,6 +57,23 @@ app.factory('CotacaoEmpresaService', function($rootScope, toastr, $http,$q){
 				return $q.reject(errResponse);
 			});
 		},
+		filter: function(cotacaoFilter){
+			return $http.post(url + '/filter', cotacaoFilter)
+			.then(function(response){
+				return response.data;
+			},function(errResponse){
+				return $q.reject(errResponse);
+			});
+		},
+		pdf: function(cotacaoFilter){
+			var config =  {cotacaoFilter : cotacaoFilter, responseType: 'arraybuffer'};
+				return $http.post(url + '/imprimir',cotacaoFilter, { responseType: 'arraybuffer'} )
+				.then(function(response){
+					return response.data;
+				},function(errResponse){
+					return $q.reject(errResponse);
+				});			
+		},
 		findById: function(param){
 			return $http.get(url +'/'+ param)
 			.then(function(response){

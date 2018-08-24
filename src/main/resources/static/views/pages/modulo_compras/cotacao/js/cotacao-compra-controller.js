@@ -404,39 +404,45 @@ function CotacaoEmpresaListarController(blockUI, CotacaoEmpresaService, toastr, 
 	
 	var self = this;
 	
-	self.sort = sort;
-	self.buscarPorTexto = buscarPorTexto;
-	self.totalElementos = null;
-	self.totalPaginas = null;
-	self.paginaCorrente = 0;
-	
+	self.sort = sort;	
 	self.closeCotacao = closeCotacao;
+	$scope.filter = filter;
+	$scope.pesquisar = pesquisar;
+	self.page = {page : 0 ,linesPerPage : 24 , orderBy : 'id' , direction : 'ASC'};
+	$scope.cotacaoFilter = {page : self.page}
+	$scope.imprimir = 'PAGINA';
 	
-	buscarPorTexto('');
-	status();	 
-	$scope.direction = 'ASC';
+	status();
+	filter($scope.cotacaoFilter);
 	
 	
-	
-	buscarPorTexto('', null, null);
-	
+		
 	function sort(orderBy){		
-		$scope.direction == 'ASC' ? $scope.direction = 'DESC' : $scope.direction = 'ASC';
-		buscarPorTexto($scope.texto, orderBy,  $scope.direction);
+		$scope.cotacaoFilter.page.orderBy = orderBy;
+		$scope.cotacaoFilter.page.direction == 'ASC' ? $scope.cotacaoFilter.page.direction = 'DESC' : $scope.cotacaoFilter.page.direction = 'ASC';
+		filter($scope.cotacaoFilter);
 	}
-	     
-	     
-	    function buscarPorTexto(texto, orderBy,  direction){
+	
+	function pesquisar(cotacaoFilter, imprimir){
+		if(imprimir == 'PAGINA'){
+			filter(cotacaoFilter);
+		}else{
+			pdf(cotacaoFilter);
+		}
+	}
+	
+	    	    
+	    function filter(cotacaoFilter){
 	    	$scope.mensagemErro = null;	    	 
 	    	 blockUI.start();
-	    	 self.paginaCorrente == '0'? self.paginaCorrente = 0 : self.paginaCorrente = self.paginaCorrente - 1;   
-	    	 CotacaoEmpresaService.findByTextAndPagination(texto, self.paginaCorrente, orderBy, direction).
+	    	 cotacaoFilter.page.page == '0'? cotacaoFilter.page.page = 0 : cotacaoFilter.page.page = cotacaoFilter.page.page - 1;   
+	    	 CotacaoEmpresaService.filter(cotacaoFilter).
 	    	 then(function(e){
 	    		 $scope.mensagemErro = null;
 	    		 self.cotacaoEmpresa = e.content;	
-	    		 self.totalElementos = e.totalElements;
-	    		 self.totalPaginas = e.totalPages;
-	    		 self.paginaCorrente = e.number + 1;
+	    		 $scope.cotacaoFilter.page.totalElementos = e.totalElements;
+	    		 $scope.cotacaoFilter.page.totalPaginas = e.totalPages;
+	    		 $scope.cotacaoFilter.page.page = e.number + 1;
 	    		 blockUI.stop();
 	    	 }, function(errResponse){
 	    		 blockUI.stop();
@@ -448,6 +454,20 @@ function CotacaoEmpresaListarController(blockUI, CotacaoEmpresaService, toastr, 
 			 });
 	    }
 	    
+	    function pdf(cotacaoFilter){	
+	    	$scope.mensagemErro = null;	    	 
+	    	 blockUI.start();
+	    	 cotacaoFilter.page.page == '0'? cotacaoFilter.page.page = 0 : cotacaoFilter.page.page = cotacaoFilter.page.page - 1;  
+	    	 CotacaoEmpresaService.pdf(cotacaoFilter)
+	   	 .then(function(d){
+	   		var file = new Blob([d],{type: 'application/pdf'});
+	   		var fileURL = URL.createObjectURL(file);
+	   		blockUI.stop();
+	   	    window.open(fileURL);
+	   	 	 }).catch(function error(msg) {			 	   	 		 
+	    	});
+     };	     
+     
 	    function status(){
 			CotacaoEmpresaService.status().
 			then(function(p){
