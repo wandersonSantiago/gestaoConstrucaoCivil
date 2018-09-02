@@ -14,6 +14,7 @@ public interface PrestadoraServicoRepository extends JpaRepository<PrestadoraSer
 
 	Page<PrestadoraServico> findByDadoEmpresaRazaoSocialIgnoreCaseContaining(String descricao, Pageable page);
 
+	 
 	Boolean existsByDadoEmpresaCnpj(String cnpj);
 
 	Optional<PrestadoraServico> findByDadoEmpresaCnpj(String cnpj);

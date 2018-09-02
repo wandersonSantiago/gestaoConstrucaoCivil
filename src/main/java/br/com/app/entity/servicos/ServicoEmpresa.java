@@ -19,7 +19,6 @@ import javax.persistence.Table;
 
 import br.com.app.entity.Empreendimento;
 import br.com.app.entity.Estrutura;
-import br.com.app.entity.Usuario;
 import lombok.Data;
 
 @Data
