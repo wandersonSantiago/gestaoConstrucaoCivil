@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.app.entity.almoxarifado.Fabricante;
+ 
 import br.com.app.entity.servicos.PrestadoraServico;
 import br.com.app.pojo.MensagemException;
 import br.com.app.repository.servicos.PrestadoraServicoRepository;
@@ -23,13 +23,13 @@ public class PrestadoraServicoService {
 
 	
 	@Transactional(readOnly = false)
-	public void salvarOuEditar(PrestadoraServico prestadoraServico) {
+	public void insert(PrestadoraServico prestadoraServico) {
 		prestadoraServicoRepository.save(prestadoraServico);
 	}
 
-	public Optional<PrestadoraServico> buscarPorId(Long id) {
+	public PrestadoraServico findById(Long id) {
 
-		return prestadoraServicoRepository.findById(id);
+		return prestadoraServicoRepository.findById(id).get();
 	}
 
 	

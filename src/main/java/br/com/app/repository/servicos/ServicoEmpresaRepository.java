@@ -15,5 +15,7 @@ public interface ServicoEmpresaRepository extends JpaRepository<ServicoEmpresa,L
 
 	//@Query("From ServicoEmpresa servico where servico.prestadoraServico.id = ?1 AND servico.dataFechamento != null")
 	Collection<ServicoEmpresa> findByPrestadoraServico_idAndDataFechamentoNotNullAndDataPagamentoNull(Long id);
+	
+	Collection<ServicoEmpresa> findByEmpreendimentoId(Long id);
 
 }

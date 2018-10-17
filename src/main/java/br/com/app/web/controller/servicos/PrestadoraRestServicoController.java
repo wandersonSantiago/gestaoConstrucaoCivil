@@ -1,6 +1,5 @@
 package br.com.app.web.controller.servicos;
 
-import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.app.entity.almoxarifado.Fabricante;
 import br.com.app.entity.servicos.PrestadoraServico;
 import br.com.app.service.servicos.PrestadoraServicoService;
 
@@ -33,22 +31,22 @@ public class PrestadoraRestServicoController {
 	
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/{id}")
-	public Optional<PrestadoraServico> buscarPorId(@PathVariable Long id) {
-		return prestadoraServicoService.buscarPorId(id);
+	public PrestadoraServico buscarPorId(@PathVariable Long id) {
+		return prestadoraServicoService.findById(id);
 	}
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping
-	public void salvar(@RequestBody PrestadoraServico prestadoraServico) {
+	public void insert(@RequestBody PrestadoraServico prestadoraServico) {
 
-		prestadoraServicoService.salvarOuEditar(prestadoraServico);
+		prestadoraServicoService.insert(prestadoraServico);
 	}
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PutMapping
-	public void alterar(@RequestBody PrestadoraServico prestadoraServico) {
+	public void update(@RequestBody PrestadoraServico prestadoraServico) {
 
-		prestadoraServicoService.salvarOuEditar(prestadoraServico);
+		prestadoraServicoService.insert(prestadoraServico);
 	}
 	
 	@ResponseStatus(HttpStatus.OK)
