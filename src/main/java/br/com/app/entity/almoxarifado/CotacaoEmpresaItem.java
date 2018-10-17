@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.app.enuns.CotacaoEmpresaItemStatus;
 import lombok.Data;
 
@@ -38,6 +40,7 @@ public class CotacaoEmpresaItem implements Serializable {
 	@Column(nullable = false)
 	private Double valorUnitario;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "id_cotacao_empresa", nullable = false)
 	private CotacaoEmpresa cotacaoEmpresa;

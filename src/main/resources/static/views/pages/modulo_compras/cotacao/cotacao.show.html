@@ -1,0 +1,69 @@
+<meta charset="UTF-8">
+<div class="row">
+	<div class="col-md-4">
+		<a class="fa fa-search 	" href="" ui-sref="cotacao.consultar" title="Consultar cotações">Pesquisar</a>|<label>Cotacao</label>
+	</div>
+</div>
+<br>
+					
+					<div class="row">
+						<div class="col-sm-12 text-center"> 
+						<label>Tema da cotação:</label>
+							<h3>{{ctrl.cotacao.tema}}</h3>			
+						</div>
+					</div>
+					<br>
+					<div class="row">
+					<div class="col-sm-3">
+						<label>Status:</label>
+							<h3>{{ctrl.cotacao.statusCotacao}}</h3>
+						</div>							
+						<div class="col-sm-3">
+						<label>Data Criação:</label>
+							<h3>{{ctrl.cotacao.dataCriacao | date : 'dd/MM/yyyy'}}</h3>
+						</div>
+						<div class="col-sm-3">
+						<label>Data Limite:</label>
+							<h3>{{ctrl.cotacao.dataLimite | date : 'dd/MM/yyyy'}}</h3>
+						</div>
+						<div class="col-sm-3" ng-if="ctrl.cotacao.statusCotacao == 'FECHADO'">
+						<label>Data Fechamento:</label>
+							<h3>{{ctrl.cotacao.fechamento | date : 'dd/MM/yyyy'}}</h3>
+						</div>						
+					</div>
+					<br>
+					<br>				
+					<div class="text-primary text-center">
+						<h2>{{ctrl.titulo}}</h2>
+					</div>	
+					<table class="table table-hover ">
+					<thead>
+						<tr>
+							<th>ID</th>						
+							<th>Forndecedor</th>
+							<th ng-if="ctrl.cotacao.statusCotacao == 'FECHADO'">Quantidade itens Ganho</th>
+							<th>Valor Total</th>
+							<th ng-if="ctrl.cotacao.statusCotacao == 'FECHADO'">Valor total itens ganhos</th>
+							<th>Opções</th>
+							
+						</tr>
+					</thead>
+					
+					<tbody
+						ng-repeat=" e in ctrl.empresas">
+						<tr>
+							<td>{{e.id}}</td>	
+							<td>{{e.fornecedor.dadoEmpresa.nomeFantasia}}</td>
+							<td ng-if="ctrl.cotacao.statusCotacao == 'FECHADO'">{{e.quantidadeItensGanhos}}</td>
+							<td>{{e.valorTotal | currency}}</td>
+							<td ng-if="ctrl.cotacao.statusCotacao == 'FECHADO'">{{e.valorGanho | currency}}</td>
+							<td>
+								<a ng-if="ctrl.cotacao.statusCotacao === 'ABERTO'" title="Editar esta cotação" ui-sref="cotacao.editar-empresa({idCotacaoEmpresa : e.id})" class="btn btn-success">Editar</a> 
+								<a ng-if="ctrl.cotacao.statusCotacao === 'FECHADO'"  class="btn btn-info" ng-click="ctrl.closeCotacao(cotacao.id)">Imprimir</a>
+							</td>
+						</tr>
+	
+					</tbody>					
+				</table>
+					
+					

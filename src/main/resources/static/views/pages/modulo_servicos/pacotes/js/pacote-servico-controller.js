@@ -1,138 +1,213 @@
-app.controller('pacoteServicoController', function($scope, pacoteServicoService, $location,  $routeParams, $timeout){
-	
+app.controller("PacoteCadastarController", PacoteCadastarController);
+app.controller("PacoteEditarController", PacoteEditarController);
+app.controller("PacoteListarController", PacoteListarController);
+app.controller("PacoteVisualizarController", PacoteVisualizarController);
+
+function PacoteCadastarController (toastr, $scope, $location, $localStorage, $state, $stateParams,  PacoteService, CategoriaService, SubCategoriaService, blockUI){
+		 
 	var self = this;
-	self.getPage=0;
-	self.totalPages = 0;
-	self.totalElements = 0;
-	$scope.maxResults = 15;	
-	var idPacoteServico = $routeParams.idPacoteServico;
+	self.botao = "Cadastrar";
+	self.submit = submit;	
+		 		
+	self.subCategoria = subCategoria;
+	self.categoria = categoria;
 	
+	$scope.backPage = $stateParams.backPage;
+	self.proximaPagina = proximaPagina;
 	
-	
-	 self.salva = function(pacoteServico){
-		 pacoteServicoService.salva(self.pacoteServico).
-			then(function(response){
-				self.pacoteServico = null;
-				}, function(errResponse){
-			});
-		 
+	if($localStorage.pacote){
+		self.pacote = $localStorage.pacote;
 	}
-	 
-	 self.altera = function(pacoteServico){
-		 pacoteServicoService.altera(self.pacoteServico).
-			then(function(response){
-				self.pacoteServico = null;
-				$location.path('/servicos/pacotes/lista');
-				}, function(errResponse){
-			});
-		 
-	}	 
-	 
-		self.buscaTodosComPaginacao = function(pages, maxResults){
-			self.totalPages = [];
-			self.getPage=pages;			
-			pacoteServicoService.buscaTodosComPaginacao(pages, maxResults).
-			then(function(e){			
-				self.listaPacoteServicos = e.content;
-				$scope.totalPages = e.totalPages;
-				self.totalElements = e.totalElements;
-				for(i = 0; i < $scope.totalPages ; i++){
-					self.totalPages.push(i);
-				}
-			}, function(errResponse){
-			});
-		};
-		
-		self.lista = function(){					
-			pacoteServicoService.lista().
-			then(function(e){			
-				self.listaPacoteServicos = e;		
-				 $scope.ativaTabela = true;
-			}, function(errResponse){
-			});
-		};
-		self.buscaPorId = function(id){
-			if(!id)return;
-			pacoteServicoService.buscaPorId(id).
-			then(function(p){
-				self.pacoteServico = p;
-				}, function(errResponse){
-			});
-		};
-		
 	
-		if(idPacoteServico){
-			
-			self.buscaPorId(idPacoteServico);
-		}
-		
-		//==============================RELATORIO======================================================
-		
-		 $scope.ativaTabela = false;
-	     $scope.ativaGrafico = false;
-	     
-	     $scope.porTotal = true;
-	     $scope.porPeriodo = false;
-	     
-		self.exportar = function(tipoImpressao){ 
-		      switch(tipoImpressao){ 
-		          case 'pdf': $scope.$broadcast('export-pdf', {}); 
-		                      break; 
-		          case 'excel': $scope.$broadcast('export-excel', {}); 
-		                      break; 
-		          case 'doc': $scope.$broadcast('export-doc', {});
-		                      break; 
-		          default: console.log('no event caught'); 
-		       }
-			};
-			
-			 $scope.ativaBuscaRelatorio =  function(botao){
-		    	 if(botao == 'periodo'){
-		    		 $scope.porTotal = false;
-		    	     $scope.porPeriodo = true;
-		    	 }else if(botao == 'total'){
-		    		 $scope.porTotal = true;
-		    	     $scope.porPeriodo = false;;
-		    	 }
-		     };
-		     
-		     self.ativaBotaoTabelaGrafico =  function(botao){
-		    	 if(botao === false){
-		    		 $scope.ativaTabela = true;
-		    		 $scope.ativaGrafico = false;
-		    	 }else if(botao === true){
-		    		 $scope.ativaGrafico = true;
-		    		 $scope.ativaTabela = false;
-		    	 }
-		     };
-		     
-		     self.relatorioPorData = function(dataInicial , dataFinal){
-		    	 pacoteServicoService.relatorioPorData(dataInicial, dataFinal).
-					then(function(f){
-						self.listaPacoteServicos = t;
-						 $scope.ativaTabela = true;
-							}, function(errResponse){
-					});
-		     };
-		     
-		     
-		     $scope.labels = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho"];
-		     $scope.series = ['Series A', 'Series B'];
-		     $scope.data = [
-		       [65, 59, 80, 81, 56, 55, 40],
-		       [28, 48, 40, 19, 86, 27, 90]
-		     ];
-		     $scope.onClick = function (points, evt) {
-		       console.log(points, evt);
-		     };
-		     
-		     // Simulate async data update 
-		     $timeout(function () {
-		       $scope.data = [
-		         [28, 48, 40, 19, 86, 27, 90],
-		         [65, 59, 80, 81, 56, 55, 40]
-		       ];
-		     }, 3000);
-		
+	function proximaPagina(proxima){
+		var backPage = 'pacote.cadastrar';
+		$state.go(proxima ,{backPage});
+		$localStorage.pacote = self.pacote;
+	}
 	
-});
+	function submit(form){		
+		if(form.$invalid){
+			sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
+			return;
+		}			
+			 blockUI.start();
+	    	 PacoteService.save(self.pacoteServico).
+				 then(function(response){					
+					 blockUI.stop();
+					 toastr.success('Pacote', 'Cadastrada!');
+					 
+					 if($scope.backPage){
+							$state.go($scope.backPage);
+						}
+					 clear();
+				 },
+				function(errResponse){					 
+					 blockUI.stop();
+					 if(errResponse.data.errors != null){
+						 for (var i = 0; i < errResponse.data.errors.length; i++) {
+								var erros = errResponse.data.errors[i].defaultMessage
+							}
+					 }else{
+						 var erros = errResponse.data.message;
+					 }					
+					 mensagem(erros, "error");										 
+			 	});
+		 }
+
+	     function clear(){	    	 
+	    	 $scope.form.$setPristine();
+	    	 $scope.form.$setUntouched();   
+	    	 self.pacote = null;	    	
+	     }
+	     
+	     function subCategoria(idCategoria){
+	 		if(!idCategoria){
+	 			return
+	 		}
+	 		self.subCategorias = null;
+	 		SubCategoriaService.findByCategoriaId(idCategoria).then(function(c){
+	 			self.subCategorias = c;
+	 		},function(erro){
+	 		})
+	 	 };
+	 			 
+	 	 function categoria(texto){
+	 	     	return  CategoriaService.findByDescricao(texto).
+	 	     	 then(function(e){
+	 	     		return e.content;
+	 	     	 }, function(errResponse){
+	 	     	 });
+	 	     } ; 	
+	 	 
+	 	    function categoria(texto){
+	 	     	return  CategoriaService.findByDescricao(texto).
+	 	     	 then(function(e){
+	 	     		return e.content;
+	 	     	 }, function(errResponse){
+	 	     	 });
+	 	     } ; 	
+    
+	 	     
+	     function mensagem(texto, tipo){
+	    	 swal({ text : texto ,  type : tipo, width: 200, higth: 100, padding: 20}).catch(swal.noop)
+	     }
+  
+	          	
+}
+
+
+function PacoteEditarController($scope, $location, $stateParams, $state, PacoteService, toastr, blockUI, CategoriaService, SubCategoriaService){
+	var self = this;
+	var idPacote = $stateParams.idPacote;	
+	
+	self.subCategoria = subCategoria;
+	self.categoria = categoria;
+	
+	self.submit = submit;
+	self.botao = "Editar";
+	buscarPorId(idPacote);
+	
+	 function buscarPorId(id){
+    	 PacoteService.buscarPorId(id)
+    	 .then(function(e){
+    		 self.pacoteServico = e;	
+       	 }, function(errResponse){
+    	 	 });
+    	 };	    	 
+    	 
+	
+	 function submit(){
+		 if($scope.form.$invalid){
+				sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
+				return;
+			}
+		
+		 blockUI.start();
+    	 PacoteService.alterar(self.pacoteServico).
+			 then(function(response){
+				 self.Pacote = null;
+				 toastr.success('dados alterado', 'Sucesso!!!');
+				 $state.go("pacote.consultar");
+				 blockUI.stop();
+			 },
+			function(errResponse){
+				 blockUI.stop();
+				 sweetAlert({text:JSON.stringify(errResponse.data), 	type : "error", timer : 100000,   width: 500,  padding: 20});
+			
+		 	});
+	       }
+	 function subCategoria(idCategoria){
+	 		if(!idCategoria){
+	 			return
+	 		}
+	 		self.subCategorias = null;
+	 		SubCategoriaService.findByCategoriaId(idCategoria).then(function(c){
+	 			self.subCategorias = c;
+	 		},function(erro){
+	 		})
+	 	 };
+	 			 
+	 	 function categoria(texto){
+	 	     	return  CategoriaService.findByDescricao(texto).
+	 	     	 then(function(e){
+	 	     		return e.content;
+	 	     	 }, function(errResponse){
+	 	     	 });
+	 	     } ; 	
+	 	 
+	
+}
+
+
+function PacoteListarController(PacoteService, blockUI, toastr, $scope){
+	var self = this;
+	self.Pacotes = null;
+	self.buscarPorTexto = buscarPorTexto;
+	self.totalElementos = {};
+	self.totalPaginas = null;
+	self.paginaCorrente = 0;
+	
+	buscarPorTexto('');
+	     
+	    function buscarPorTexto(texto){
+	    	$scope.mensagemErro = null;
+	    	 blockUI.start();
+	    	 self.paginaCorrente == '0'? self.paginaCorrente = 0 : self.paginaCorrente = self.paginaCorrente - 1; 
+	 		 PacoteService.buscarPorTexto(texto, self.paginaCorrente).
+	    	 then(function(e){
+	    		 $scope.mensagemErro = null;
+	    		self.pacotes = e.content;	
+	    		 self.totalElementos = e.totalElements;
+	    		 self.totalPaginas = e.totalPages;
+	    		 self.paginaCorrente = e.number + 1;
+	    		 blockUI.stop();
+	    	 }, function(errResponse){
+	    		 blockUI.stop();
+	    		 if(errResponse.status == 404){
+	    			 toastr.error('Nenhum registro encontrado', 'Not found!');
+	    			 $scope.mensagemErro = errResponse.data.message;
+	    		 }else{
+	    		    swal({ text : errResponse.data.message ,  type : "info", width: 200, higth: 100, padding: 20}).catch(swal.noop);
+	    		 }
+			 });
+	    }
+}
+
+function PacoteVisualizarController($scope, $stateParams, $state, PacoteService, toastr, blockUI){
+	var self = this;
+	var idPacote = $stateParams.idPacote;	
+	
+	
+	buscarPorId(idPacote);	
+		  
+	  function buscarPorId(id){
+	    	 PacoteService.buscarPorId(id)
+	    	 .then(function(e){
+	    		 self.pacote = e;
+	       	 }, function(errResponse){
+	    	 	 });
+	    	 };
+	    	 
+	  
+    		
+}

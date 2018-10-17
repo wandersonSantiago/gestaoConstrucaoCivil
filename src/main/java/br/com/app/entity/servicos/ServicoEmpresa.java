@@ -18,7 +18,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import br.com.app.entity.Empreendimento;
-import br.com.app.entity.Usuario;
+import br.com.app.entity.Estrutura;
 import lombok.Data;
 
 @Data
@@ -59,7 +59,7 @@ public class ServicoEmpresa implements Serializable{
 
 	@ManyToOne
 	@JoinColumn(name = "id_usuario")
-	private Usuario usuarioCadastro;
+	private Estrutura estrutura;
 
 	@OneToMany(mappedBy = "servicoEmpresa", cascade = CascadeType.ALL)
 	private List<OcorrenciaServico> ocorrencias;

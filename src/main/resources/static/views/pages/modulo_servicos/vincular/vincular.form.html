@@ -1,0 +1,169 @@
+<meta charset="UTF-8">
+<form role="form-vertical" name="form" novalidate  ng-submit="ctrl.submit(form)" >
+					<br>
+					<div class="row">
+						<div class="col-sm-2">
+						<br>
+					    <a href=""  data-toggle="modal" data-target="#estrutura"  class="btn btn-primary btn-flat">Adicionar Estrutura</a>
+					    </div>
+					    
+					    <div class="col-sm-5">
+					    <label>Selecione a empresa:</label>		
+									 	
+						    <input type="text" ng-model="ctrl.servicoEmpresa.prestadoraServico"  placeholder="ex: Serviços e Pinturas Ltda" id="prestadora" name="prestadora"
+						    uib-typeahead="prestadora as prestadora.dadoEmpresa.nomeFantasia for prestadora in ctrl.prestadoraServico($viewValue) | limitTo:8" 
+						    typeahead-template-url="customTemplate.html" class="form-control" typeahead-show-hint="true" 
+						    typeahead-loading="loading" typeahead-no-results="noResults" typeahead-min-length="0" >	  		    		   
+					 
+						     <i ng-show="loading" class="glyphicon glyphicon-refresh"></i>
+							    <div ng-show="noResults">
+							      <i class="glyphicon glyphicon-remove"></i> Nenhum resultado encontrado
+							    </div>
+						   </div>
+						    <script type="text/ng-template" id="customTemplate.html">
+ 	 				    	<a>
+     							 <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+  							</a>
+							</script>
+							
+					    <div class="col-sm-5">
+					    <label>Selecione o Pacote de serviço:</label>		
+									 	
+						    <input type="text" ng-model="ctrl.servicoEmpresa.pacoteServico"  placeholder="ex: pintura externa" id="produto" name="produto"
+						    uib-typeahead="pacote as pacote.descricao for pacote in ctrl.pacotes($viewValue) | limitTo:8" 
+						    typeahead-template-url="customTemplateP.html" class="form-control" typeahead-show-hint="true" 
+						    typeahead-loading="loadingP" typeahead-no-results="noResultsP" typeahead-min-length="0" >	  		    		   
+					 
+						     <i ng-show="loadingP" class="glyphicon glyphicon-refresh"></i>
+							    <div ng-show="noResultsP">
+							      <i class="glyphicon glyphicon-remove"></i> Nenhum resultado encontrado
+							    </div>
+						   </div>
+						    <script type="text/ng-template" id="customTemplateP.html">
+ 	 				    	<a>
+     							 <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+  							</a>
+							</script>
+							
+					 </div>   
+		             <br>
+		             
+		             <div class="row">
+		             	<div class="jumbotron col-md-3 col-md-offset-1" ng-if="ctrl.titulo">
+						  <div class="container" align="center">
+						    <h4>Estrutura Selecionada</h4><br>
+						    <label>{{ctrl.titulo}}</label><br><br>
+						  </div>
+						</div>
+						<div class="jumbotron col-md-3 col-md-offset-1" ng-if="ctrl.servicoEmpresa.prestadoraServico">
+						  <div class="container" align="center">
+						    <h4>Empresa Selecionada</h4>
+						    <label>{{ctrl.servicoEmpresa.prestadoraServico.dadoEmpresa.nomeFantasia}}</label>	<br>
+						   CNPJ : {{ctrl.servicoEmpresa.prestadoraServico.dadoEmpresa.cnpj | brCnpj}}	<br><br>
+						  </div>
+						</div>
+						<div class="jumbotron col-md-3 col-md-offset-1" ng-if="ctrl.servicoEmpresa.pacoteServico">
+						  <div class="container" align="center">
+						    <h4>Serviço Selecionado</h4>
+						    <label>{{ctrl.servicoEmpresa.pacoteServico.descricao}}</label>	<br>
+						    {{ctrl.servicoEmpresa.pacoteServico.categoria.categoria.descricao}}	<br>
+						  	{{ctrl.servicoEmpresa.pacoteServico.valor | currency}}	
+						  </div>
+						</div>
+		             </div>
+		             
+					<br>
+					<!-- <div class="row" ng-if="ctrl.servicoEmpresa.pacoteServico">	
+						<div class="col-sm-2">
+							<label>Serviço Selecionado -</label>		
+						</div>
+						<div class="col-sm-4">	
+						<label>Descrição:</label>
+						{{ctrl.servicoEmpresa.pacoteServico.descricao}}
+						</div>
+						<div class="col-sm-4">	
+						<label>Categoria:</label>
+						{{ctrl.servicoEmpresa.pacoteServico.categoria.categoria.descricao}}
+						</div>
+						<div class="col-sm-2">	
+						<label>Valor:</label>
+						{{ctrl.servicoEmpresa.pacoteServico.valor | currency}}
+						</div>
+					</div>	
+					<br>	 -->
+					<div class="row">
+						<div class="col-md-4">
+						<label>Valor Adicional:</label>
+							<input type="text" class="form-control" ng-model="ctrl.servicoEmpresa.valorAdicional" ui-money-mask="2">
+						</div>
+						<div class="col-md-4">
+						<label>Valor desconto: 	</label>
+							<input type="text" class="form-control" ng-model="ctrl.servicoEmpresa.valorDesconto" ui-money-mask="2"	>
+						</div>
+						<div class="col-md-4">
+						<label>Valor total: 	</label><br>
+							{{ctrl.servicoEmpresa.pacoteServico.valor + ctrl.servicoEmpresa.valorAdicional - ctrl.servicoEmpresa.valorDesconto | currency}}
+						</div>
+					</div>
+					<hr>
+						
+									
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+						<label>Observação:</label>
+								<input class="form-control"  id="obs" type="text"  placeholder="Observação"	ng-model="ctrl.servicoEmpresa.observacao">
+						</div> 
+					</div>
+					<br>
+					<div class="row ">
+						<div class="col-md-4 col-md-offset-4">
+							<input type="submit" id="submit"  value="{{titulo}}"	class="btn btn-lg btn-primary btn-block btn-signin">
+						</div>
+					</div>
+			</form>
+			
+			 <!-- MODAL -->				
+				<div  class="modal fade modal-primary" id="estrutura" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+				  <div class="modal-dialog modal-lg" role="document" >
+				    <div class="modal-content " ng-controller="UsuarioEditarController as userCtrl">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">Selecione a estrutura</h4>
+				      </div>
+				      <div class="modal-body">				     		
+					   <div class="row">
+						<ul class="breadcrumb col-sm-2">
+							<li><a href="" ng-click="ctrl.listaRaiz('0')">estrutura	inicial</a></li>
+						</ul>
+						<div ng-repeat="geral in estruturaGeral">
+							<ul class="breadcrumb col-sm-2">
+								<li><a href="" ng-click="ctrl.removerFilhas(geral)">{{geral.descricao}}</a></li>
+							</ul>
+						</div>
+					</div>
+					 <div class="row">
+					<h3>Estrutura Selecionada- {{ctrl.titulo}}</h3>	
+					</div>
+					 <div class="row">				
+					<div ng-repeat="estrutura in estruturas | orderBy : 'descricao'">	
+							<div class="well card col-md-3 ">
+							
+								<div class="container">	
+									<a  href="" ng-click="ctrl.buscarFilhas(estrutura)">			
+										<b>{{estrutura.descricao}}</b>				
+									</a>								
+								</div>								
+							</div>	
+					</div>			
+					</div>       
+				      </div>
+				      			
+
+			
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>				        
+				      </div>
+				    </div>
+				  </div>
+				</div>
