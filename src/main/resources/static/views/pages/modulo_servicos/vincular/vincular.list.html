@@ -22,24 +22,79 @@
 	              </div> <br>
 
 <div class="table-responsive" ng-if="ctrl.vinculars.length">
-	<table class="table table-hover" >
-		<tr>
+<div align="center">
+			<div class="small-box bg-aqua">
+				<div class="inner" align="center">
+					<h4>Serviços vinculados</h4>					
+				</div>
+			</div>
+		</div>	
+	<table class="table table table-striped table-bordered" >
+		<tr >
 
 			<th>Id</th>
-			<th>Razão Social</th>
-			<th>Nome Fantasia</th>
-			<th>CNPJ</th>
-			<th>Telefone</th>
+			<th>Prestadora de serviço</th>
+			<th>Pacote de serviço</th>
+			<th>Data Cadastro</th>
+			<th>Previsão Termino</th>
+			<th>Valor</th>
+			<th>Ocorrencias</th>
 			<th>Editar</th>
 			
 
 		</tr>
-		<tr ng-repeat="vincular in ctrl.vinculars">
+		<tr ng-repeat="vincular in ctrl.vinculars" >
 			<td>{{vincular.id}}</td>
-			<td><a ui-sref="vincular.visualizar({ idVincular: vincular.id})">{{vincular.dadoEmpresa.razaoSocial}}</a></td>
-			<td>{{vincular.dadoEmpresa.nomeFantasia}}</td>
-			<td>{{vincular.dadoEmpresa.cnpj | brCnpj}}</td>
-			<td>{{vincular.dadoEmpresa.telefone | brPhoneNumber}}</td>
+			<td>			
+			<a ui-sref="prestadora.visualizar({ idPrestadora: vincular.prestadoraServico.id})" uib-popover-template="dynamicPopoverEmpresa.templateUrl" popover-title="{{'Dados Empresa'}}"  popover-trigger="'mouseenter'">
+				 {{vincular.prestadoraServico.dadoEmpresa.nomeFantasia}}</a>
+				<script type="text/ng-template"  id="myPopoverTemplateEmpresa.html">      		 
+			  		<div align="center">
+						<div>Razão Social</div>{{vincular.prestadoraServico.dadoEmpresa.razaoSocial}}
+						<div>CNPJ</div>{{vincular.prestadoraServico.dadoEmpresa.cnpj}}
+					</div> 			 
+   			 	</script>			
+			</td>
+			<td >			
+			<a uib-popover-template="dynamicPopoverPacote.templateUrl" popover-title="{{'Pacote de Serviço'}}"  popover-trigger="'mouseenter'">
+				 {{vincular.pacoteServico.descricao}}</a>
+				<script type="text/ng-template"  id="myPopoverTemplatePacote.html">      		 
+			  		<div align="center">
+						<div>Descrição : </div>{{vincular.pacoteServico.descricao}}
+						<div>Servicos Atribuidos</div>{{vincular.pacoteServico.servicosAtribuidos}}
+						<div>Preço : </div>{{vincular.pacoteServico.valor | currency}}
+					</div> 			 
+   			 	</script>			
+			</td>
+			<td>{{vincular.dataCadastro | date :'dd/MM/yyyy'}}</td>
+			<td>{{vincular.dataPrevisaoTermino | date :'dd/MM/yyyy'}}</td>
+			<td align="center" >			
+			<a uib-popover-template="dynamicPopoverValor.templateUrl" popover-title="{{'Valores'}}"  popover-trigger="'mouseenter'">
+				 {{vincular.valorPacoteServico  + vincular.valorAdicional - vincular.valorDesconto | currency}}</a>
+				<script type="text/ng-template"  id="myPopoverTemplateValor.html">      		 
+			  		<div align="center">
+						<div>Valor Pacote</div>{{vincular.valorPacoteServico | currency}}
+						<div>Valor Desconto</div>{{vincular.valorDesconto | currency}}
+						<div>Valor Adicional</div>{{vincular.valorAdicional | currency}}
+						<div>Valor Total</div>{{vincular.valorPacoteServico  + vincular.valorAdicional - vincular.valorDesconto | currency}}
+					</div> 			 
+   			 	</script>
+			
+			</td>
+			<td align="center" >			
+			<a class="{{vincular.ocorrencias.length === 0 ? 'label label-primary':'label label-warning'}}"
+				 uib-popover-template="dynamicPopover.templateUrl" popover-title="{{'Ocorrência'}}"  popover-trigger="'mouseenter'">
+				 {{vincular.ocorrencias.length}}</a>
+				<script type="text/ng-template"  id="myPopoverTemplate.html">      		 
+			  		<div align="center">
+						<div ng-if="vincular.ocorrencias.length === 0">Não consta ocorrências</div>
+						<div ng-if="vincular.ocorrencias.length > 0" ng-repeat="ocorrencia in vincular.ocorrencias">
+							{{ocorrencia.ocorrencia}}
+						</div>
+					</div> 			 
+   			 	</script>
+			
+			</td>
 			<td><a ui-sref="vincular.editar({ idVincular: vincular.id})"><i class="glyphicon glyphicon-edit"></i></a></td>
 		</tr>
 	</table>

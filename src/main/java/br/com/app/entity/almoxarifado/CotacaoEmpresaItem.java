@@ -36,7 +36,7 @@ public class CotacaoEmpresaItem implements Serializable {
 	private CotacaoItem item;
 
 	@Column(name = "observacao")
-	private String observaocao;
+	private String observacao;
 	@Column(nullable = false)
 	private Double valorUnitario;
 
@@ -47,5 +47,9 @@ public class CotacaoEmpresaItem implements Serializable {
 
 	@Enumerated(EnumType.STRING)
 	private CotacaoEmpresaItemStatus status;
+	
+	public Double getValorTotalItem() {
+		return item.getQuantidade() * valorUnitario;
+	}
 
 }

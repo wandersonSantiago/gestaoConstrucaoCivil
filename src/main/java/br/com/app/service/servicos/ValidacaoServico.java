@@ -16,11 +16,11 @@ public class ValidacaoServico {
 
 	public void verificarExistePacoteParaEmpresa(ServicoEmpresa servico) {
 
-		Collection<ServicoEmpresa> servicosEmpresa = servicoRepository.findAll();
+		Collection<ServicoEmpresa> servicosEmpresa = servicoRepository.findByEstrutura(servico.getEstrutura());
 
 		for (ServicoEmpresa s : servicosEmpresa) {
 
-			if (servico.getEstrutura().equals(s.getEstrutura())) {
+			if (servico.getPacoteServico().equals(s.getPacoteServico())) {
 				throw new ServicoException("Este serviço já esta cadastrado neste local");
 			}
 

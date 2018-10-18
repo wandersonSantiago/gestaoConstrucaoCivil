@@ -74,6 +74,25 @@ app.factory('CotacaoEmpresaService', function($rootScope, toastr, $http,$q){
 					return $q.reject(errResponse);
 				});			
 		},
+		
+		imprimirVencedores: function(idCotacao){
+				return $http.get(url + '/empresa/imprimir/vencedores/'+ idCotacao, { responseType: 'arraybuffer'} )
+				.then(function(response){
+					return response.data;
+				},function(errResponse){
+					return $q.reject(errResponse);
+				});			
+		},
+		
+		imprimirCotacaoEmpresa: function(idCotacaoEmpresa){
+				return $http.get(url + '/empresa/imprimir/'+ idCotacaoEmpresa, { responseType: 'arraybuffer'} )
+				.then(function(response){
+					return response.data;
+				},function(errResponse){
+					return $q.reject(errResponse);
+				});			
+		},
+		
 		findById: function(param){
 			return $http.get(url +'/'+ param)
 			.then(function(response){

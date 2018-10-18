@@ -53,16 +53,16 @@ public class CotacaoEmpresa implements Serializable{
 	private double valorTotal;
 
 	public void removerItensPerdedores() {
-		/*List<CotacaoEmpresaItem> itensParaRemover = new ArrayList<CotacaoEmpresaItem>();
+		List<CotacaoEmpresaItem> itensParaRemover = new ArrayList<CotacaoEmpresaItem>();
 		itens.forEach(item -> {
 
 			if (item.getStatus().equals(CotacaoEmpresaItemStatus.PERDEU)) {
 				itensParaRemover.add(item);
 			}
 		});
-		itens.removeAll(itensParaRemover);*/
+		itens.removeAll(itensParaRemover);
 		
-		itens.removeIf((CotacaoEmpresaItem item) -> item.getStatus().equals(CotacaoEmpresaItemStatus.PERDEU));
+		//itens.removeIf((CotacaoEmpresaItem item) -> item.getStatus().equals(CotacaoEmpresaItemStatus.PERDEU));
 
 	}
 
@@ -80,7 +80,7 @@ public class CotacaoEmpresa implements Serializable{
 	public double getValorGanho() {
 		itens.forEach(item -> {
 			if (item.getStatus().equals(CotacaoEmpresaItemStatus.GANHOU)) {
-				valorTotal =+ item.getValorUnitario();
+				valorTotal = valorTotal + (item.getItem().getQuantidade() * item.getValorUnitario());
 			}
 		});
 		return valorTotal;
@@ -88,7 +88,7 @@ public class CotacaoEmpresa implements Serializable{
 	
 	public double getValorTotal() {
 		itens.forEach(item -> {
-				valorTotal =+ item.getValorUnitario();
+				valorTotal =  valorTotal + (item.getItem().getQuantidade() * item.getValorUnitario());
 		});
 		return valorTotal;
 	}

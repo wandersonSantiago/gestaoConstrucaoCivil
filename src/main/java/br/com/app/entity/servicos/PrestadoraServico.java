@@ -15,6 +15,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.app.entity.DadoEmpresa;
 import lombok.Data;
 
@@ -40,6 +42,7 @@ public class PrestadoraServico implements Serializable{
 	@JoinColumn(name = "id_dado_empresa", nullable = false)
 	private DadoEmpresa dadoEmpresa;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "prestadoraServico", cascade = CascadeType.ALL)
 	private List<ServicoEmpresa> servicos;
 

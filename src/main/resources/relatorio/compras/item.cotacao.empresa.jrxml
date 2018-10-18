@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.3.final using JasperReports Library version 6.4.3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="item.cotacao.vencedores" pageWidth="560" pageHeight="150" whenNoDataType="NoDataSection" columnWidth="560" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4e88b058-c244-4ba3-8a79-16eb450f709a">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="src\main\resources\relatorio\Adapter.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="item" class="br.com.app.entity.almoxarifado.CotacaoItem">
+		<fieldDescription><![CDATA[item]]></fieldDescription>
+	</field>
+	<field name="valorUnitario" class="java.lang.Double">
+		<fieldDescription><![CDATA[valorUnitario]]></fieldDescription>
+	</field>
+	<field name="valorTotalItem" class="java.lang.Double">
+		<fieldDescription><![CDATA[valorTotalItem]]></fieldDescription>
+	</field>
+	<field name="status" class="br.com.app.enuns.CotacaoEmpresaItemStatus">
+		<fieldDescription><![CDATA[status]]></fieldDescription>
+	</field>
+	<field name="observacao" class="java.lang.String">
+		<fieldDescription><![CDATA[observacao]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="-1" width="559" height="24" uuid="b617d345-0b67-4d12-b7b5-31b31dae463b"/>
+			</rectangle>
+			<textField>
+				<reportElement x="30" y="-1" width="160" height="22" uuid="17167c1c-ee0e-4b67-8b24-ecfa51788f18"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{item}.getDescricao()]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00#;¤-#,##0.00#">
+				<reportElement x="420" y="1" width="70" height="22" uuid="c2070b29-9845-4238-a4eb-ccd076b87b26"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{valorUnitario}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="490" y="1" width="70" height="22" uuid="bda06a1d-ab37-420c-83d6-baba3233726c"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{valorTotalItem}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="-1" width="110" height="22" uuid="f7498ca4-9101-4f2e-8976-9b8adb5b2957"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{observacao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="1" width="50" height="22" uuid="c0cc97d9-7892-4e84-bd3c-6883c9f30df1"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{item}.getQuantidade()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="30" height="22" uuid="9f3cca09-f9e4-49c7-80a2-fea60221068a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="2" width="60" height="22" uuid="94c2ca06-f614-4699-9120-a4be65142919"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

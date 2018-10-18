@@ -7,10 +7,14 @@
 <br>
 					
 					<div class="row">
-						<div class="col-sm-12 text-center"> 
-						<label>Tema da cotação:</label>
-							<h3>{{ctrl.cotacao.tema}}</h3>			
-						</div>
+						<div class="col-sm-4 col-sm-offset-4 text-center">
+							<div class="small-box bg-aqua">
+								<div class="inner" align="center">
+									<label>Tema da cotação:</label>
+									<h3>{{ctrl.cotacao.tema}}</h3>					
+								</div>
+							</div>
+						</div>						
 					</div>
 					<br>
 					<div class="row">
@@ -32,15 +36,21 @@
 						</div>						
 					</div>
 					<br>
-					<br>				
-					<div class="text-primary text-center">
-						<h2>{{ctrl.titulo}}</h2>
-					</div>	
-					<table class="table table-hover ">
+					<br>	
+					<div align="center">
+						<div class="small-box bg-aqua">
+							<div class="inner" align="center">
+								<h3>{{ctrl.titulo}}</h3>					
+							</div>
+						</div>
+					</div>			
+				<div class="table-responsive">
+					<table class="table table-hover table-bordered">
 					<thead>
 						<tr>
 							<th>ID</th>						
 							<th>Forndecedor</th>
+							<th>Quantidade</th>
 							<th ng-if="ctrl.cotacao.statusCotacao == 'FECHADO'">Quantidade itens Ganho</th>
 							<th>Valor Total</th>
 							<th ng-if="ctrl.cotacao.statusCotacao == 'FECHADO'">Valor total itens ganhos</th>
@@ -49,21 +59,80 @@
 						</tr>
 					</thead>
 					
-					<tbody
-						ng-repeat=" e in ctrl.empresas">
+					<tbody	ng-repeat=" e in ctrl.empresas">
 						<tr>
-							<td>{{e.id}}</td>	
+							<td>{{$index +1}}</td>	
 							<td>{{e.fornecedor.dadoEmpresa.nomeFantasia}}</td>
-							<td ng-if="ctrl.cotacao.statusCotacao == 'FECHADO'">{{e.quantidadeItensGanhos}}</td>
+							<td>{{e.quantidade}}</td>
+							<td ng-if="ctrl.cotacao.statusCotacao == 'FECHADO'">{{e.quantidadeItensGanhos}}</td>						
 							<td>{{e.valorTotal | currency}}</td>
-							<td ng-if="ctrl.cotacao.statusCotacao == 'FECHADO'">{{e.valorGanho | currency}}</td>
+							<td ng-if="ctrl.cotacao.statusCotacao == 'FECHADO'">{{e.valorGanho | currency}}</td>											
+							
 							<td>
 								<a ng-if="ctrl.cotacao.statusCotacao === 'ABERTO'" title="Editar esta cotação" ui-sref="cotacao.editar-empresa({idCotacaoEmpresa : e.id})" class="btn btn-success">Editar</a> 
-								<a ng-if="ctrl.cotacao.statusCotacao === 'FECHADO'"  class="btn btn-info" ng-click="ctrl.closeCotacao(cotacao.id)">Imprimir</a>
+								<a ng-if="ctrl.cotacao.statusCotacao === 'FECHADO'"  class="btn btn-info" ng-click="ctrl.imprimirCotacaoEmpresa(e.id)">Imprimir</a>
+								<a class="btn btn-success"  data-toggle="modal"	data-target=".modalCotacao" ng-click="ctrl.visualizarItem(e)">Vizualizar Item</a>
 							</td>
+							
 						</tr>
 	
 					</tbody>					
 				</table>
-					
+			</div>
+			
+			<div class="modal fade modalCotacao" tabindex="-1" role="dialog">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" title="Fechar"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button><br>
+							<div align="center">
+							<div class="small-box bg-aqua">
+								<div class="inner" align="center">
+									<h3>Itens da Empresa {{item.fornecedor.dadoEmpresa.nomeFantasia}}</h3>					
+								</div>
+							</div>
+						</div>		
+						</div>
+						<div class="modal-body">
+								<div class="table-responsive">
+									<table class="table table-hover table-bordered">
+										<thead>
+											<tr>
+												<th>ID</th>						
+												<th>descricao</th>
+												<th>observacao</th>
+												<th>status</th>
+												<th ng-if="ctrl.cotacao.statusCotacao == 'FECHADO'">Quantidade</th>											
+												<th ng-if="ctrl.cotacao.statusCotacao == 'FECHADO'">Valor itens</th>											
+												<th>Valor total itens</th>
+												
+											</tr>
+										</thead>
+										
+										<tbody	ng-repeat=" iten in item.itens">
+											<tr>
+												<td>{{$index +1}}</td>	
+												<td>{{iten.item.descricao}}</td>
+												<td>{{iten.observacao}}</td>
+												<td class="{{iten.status === 'GANHOU' ? 'blue' : 'red'}}">{{iten.status}}</td>
+												<td>{{iten.item.quantidade}}</td>
+												<td>{{iten.valorUnitario | currency}}</td>
+												<td>{{iten.valorTotalItem | currency}}</td>											
+											</tr>											
+										</tbody>
+										<tbody>
+											<tr><td></td><td></td><td></td><td></td><td></td><td>Total</td>
+												<td>{{item.valorTotal | currency}}</td>
+											</tr>
+										</tbody>					
+									</table>
+								</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>		
 					

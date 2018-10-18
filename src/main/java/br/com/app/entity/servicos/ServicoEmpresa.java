@@ -39,6 +39,7 @@ public class ServicoEmpresa implements Serializable{
 	private PrestadoraServico prestadoraServico;
 
 	private Double porcentagem;
+	private Date dataPrevisaoTermino;
 	private Date dataCadastro;
 	private Date dataFechamento;
 	private Date dataPagamento;
@@ -58,7 +59,7 @@ public class ServicoEmpresa implements Serializable{
 	private Empreendimento empreendimento;
 
 	@ManyToOne
-	@JoinColumn(name = "id_usuario")
+	@JoinColumn(name = "id_estrutura")
 	private Estrutura estrutura;
 
 	@OneToMany(mappedBy = "servicoEmpresa", cascade = CascadeType.ALL)

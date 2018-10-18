@@ -1,7 +1,11 @@
 package br.com.app.web.controller.almoxarifado;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,10 +14,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.app.entity.almoxarifado.CotacaoEmpresa;
+import br.com.app.exceptions.NotFoundException;
+import br.com.app.jasper.JasperReportsService;
+import br.com.app.jasper.RelatorioUtil;
 import br.com.app.service.almoxarifado.CotacaoEmpresaService;
 
 @RestController
@@ -22,6 +30,11 @@ public class CotacaoEmpresaRestController {
 
 	@Autowired
 	private CotacaoEmpresaService cotacaoEmpresaService;
+	@Autowired
+	private JasperReportsService jasperReportsService;
+	@Autowired
+	private RelatorioUtil relatorioUtil;
+	
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping
@@ -39,8 +52,7 @@ public class CotacaoEmpresaRestController {
 	
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/{id}")
-	public Optional<CotacaoEmpresa> buscarPorId(@PathVariable Long id) {
-
+	public CotacaoEmpresa buscarPorId(@PathVariable Long id) {
 		return cotacaoEmpresaService.buscarPorId(id);
 	}
 	
@@ -57,4 +69,40 @@ public class CotacaoEmpresaRestController {
 
 		return  cotacaoEmpresaService.concorrentes(idCotacao);
 	} 
+	
+	@GetMapping(value = "/imprimir/vencedores/{idCotacao}")
+	@ResponseBody
+	public byte[] imprimirVencedores(@PathVariable Long idCotacao, HttpServletResponse response) {
+		
+		response.setHeader("Content-Disposition", "inline; filename=file.pdf");
+	    response.setContentType("application/pdf");
+	    
+	    List<CotacaoEmpresa> cotacoes = cotacaoEmpresaService.ganhadores(idCotacao);
+	try {	
+		return jasperReportsService.generateReport(cotacoes, relatorioUtil.caminhoArquivoCotacaoVencedores() , relatorioUtil.caminhoMapaDeLogos() );	
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new NotFoundException("Erro ao gerar pdf: " + e.getMessage());
+		}		
+		
+	}
+	
+	@GetMapping(value = "/imprimir/{idCotacaoEmpresa}")
+	@ResponseBody
+	public byte[] imprimir(@PathVariable Long idCotacaoEmpresa, HttpServletResponse response) {
+		
+		response.setHeader("Content-Disposition", "inline; filename=file.pdf");
+	    response.setContentType("application/pdf");
+	    
+	    CotacaoEmpresa cotacoes = cotacaoEmpresaService.buscarPorId(idCotacaoEmpresa);
+	try {	
+		return jasperReportsService.generateReport(Arrays.asList(cotacoes), relatorioUtil.caminhoArquivoCotacaoEmpresa() , relatorioUtil.caminhoMapaDeLogos() );	
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new NotFoundException("Erro ao gerar pdf: " + e.getMessage());
+		}		
+		
+	}
 }

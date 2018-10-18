@@ -406,6 +406,7 @@ function CotacaoEmpresaListarController(blockUI, CotacaoEmpresaService, toastr, 
 	
 	self.sort = sort;	
 	self.closeCotacao = closeCotacao;
+	self.imprimirVencedores =imprimirVencedores;
 	$scope.filter = filter;
 	$scope.pesquisar = pesquisar;
 	self.page = {page : 0 ,linesPerPage : 24 , orderBy : 'id' , direction : 'ASC'};
@@ -488,21 +489,36 @@ function CotacaoEmpresaListarController(blockUI, CotacaoEmpresaService, toastr, 
 				}).then(function () {
 					CotacaoEmpresaService.closeCotacao(id).
 			then(function(response){				
-				buscarPorTexto('');
+				filter($scope.cotacaoFilter);
 				toastr.success("Cotacao, Encerrada")
 			});
 		})
 	}
+	   
+	   function imprimirVencedores(idCotacao){	
+	    	 blockUI.start();
+	    	 CotacaoEmpresaService.imprimirVencedores(idCotacao)
+	   	 .then(function(d){
+	   		var file = new Blob([d],{type: 'application/pdf'});
+	   		var fileURL = URL.createObjectURL(file);
+	   		blockUI.stop();
+	   	    window.open(fileURL);
+	   	 	 }).catch(function error(msg) {			 	   	 		 
+	    	});
+    };	     
 	
 }
 
 
-function CotacaoEmpresaShowController( $state, $stateParams, CotacaoEmpresaService, $scope){
+function CotacaoEmpresaShowController( $state, $stateParams, CotacaoEmpresaService, $scope, blockUI){
 	
 	var self = this;
 	
 	var idCotacao = $stateParams.idCotacao;
+	self.visualizarItem = visualizarItem;
+	self.imprimirCotacaoEmpresa = imprimirCotacaoEmpresa;
 	
+	$scope.visualizarItem = false;
 	findById(idCotacao);
 	
 	function findById(id){
@@ -538,5 +554,22 @@ function CotacaoEmpresaShowController( $state, $stateParams, CotacaoEmpresaServi
 			}, function(errResponse){
 		});
 	};
+	
+	function visualizarItem(item){
+		$scope.item = item;
+		$scope.visualizarItem == true ? $scope.visualizarItem = false : $scope.visualizarItem = true;
+	}
+	
+	 function imprimirCotacaoEmpresa(idCotacaoEmpresa){	
+    	 blockUI.start();
+    	 CotacaoEmpresaService.imprimirCotacaoEmpresa(idCotacaoEmpresa)
+   	 .then(function(d){
+   		var file = new Blob([d],{type: 'application/pdf'});
+   		var fileURL = URL.createObjectURL(file);
+   		blockUI.stop();
+   	    window.open(fileURL);
+   	 	 }).catch(function error(msg) {			 	   	 		 
+    	});
+};	     
 }
 
