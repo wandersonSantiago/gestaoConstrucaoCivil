@@ -1,7 +1,10 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
+encoding//src/main/resources/relatorio/compras/cotacao.empresa.jrxml=UTF-8
 encoding//src/main/resources/relatorio/compras/cotacao.jrxml=UTF-8
+encoding//src/main/resources/relatorio/compras/cotacao.vencedores.jrxml=UTF-8
+encoding//src/main/resources/relatorio/compras/item.cotacao.empresa.jrxml=UTF-8
+encoding//src/main/resources/relatorio/compras/item.cotacao.vencedores.jrxml=UTF-8
 encoding//src/test/java=UTF-8
-encoding//target/generated-sources/java=UTF-8
 encoding/<project>=UTF-8
