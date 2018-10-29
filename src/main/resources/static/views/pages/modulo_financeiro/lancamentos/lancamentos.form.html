@@ -1,0 +1,48 @@
+<meta charset="UTF-8">
+<form role="form-vertical" name="form" novalidate  ng-submit="ctrl.submit(form)" >
+	
+				<div class="row">
+			      <div class="col-md-6">
+			       <label for="tipo" class="control-label">Tipo:</label>
+					<select id="tipo" class="form-control" ng-model="ctrl.lancamento.tipo" ng-options="tipo for tipo in ctrl.tipos">	               
+			              </select>
+			      </div>
+			      <div class="col-md-6">
+			       <label for="categoria" class="control-label">Categoria:</label>
+					<select id="categoria" class="form-control" ng-model="ctrl.lancamento.categoria" ng-options="categoria for categoria in ctrl.categorias">	               
+			              </select>
+			      </div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3" ng-class="{ 'has-error' : form.vencimento.$invalid && form.$submitted }">
+					<label>Vencimento:</label>
+						<input class="form-control"  id="vencimento" name="vencimento" type="date" title="informe a data de vencimento" 
+						ng-model="ctrl.lancamento.dataVencimento" required>
+					</div>			
+					<div class="col-sm-3" ng-class="{ 'has-error' : form.dataPagamento.$invalid && form.$submitted }">
+					<label>Data{{ctrl.lancamento.tipo == 'DEBITO' ? ' Pagamento' : 'Recebimento'}}:</label>
+						<input class="form-control"  id="dataPagamento" name="dataPagamento" type="date" ng-model="ctrl.lancamento.dataPagamentoOuRecebimento"  title="informe a data do {{ctrl.lancamento.tipo == 'DEBITO' ? ' Pagamento' : 'Recebimento'}}" dateInput required>
+					</div>					
+				</div> 
+				<div class="row">
+			      <div class="col-md-12" ng-class="{ 'has-error' : form.descricao.$invalid && form.$submitted }">
+			        <label>Descrição:</label>
+			        <input  type="text" name="descricao" id="descricao" class="form-control" ng-model="ctrl.lancamento.descricao" required>
+			      </div>
+				</div>
+				<div class="row">
+			      <div class="col-md-6" ng-class="{ 'has-error' : form.valor.$invalid && form.$submitted }">
+			        <label>Valor:</label>
+			        <input  type="text" name="valor" id="valor" placeholder="0,00" ui-money-mask="2"  class="form-control"  ng-model="ctrl.lancamento.valor" required>
+			      </div>      
+				</div>
+				<div class="row">
+			      <div class="col-md-12">
+			        <label>Observação:</label>
+			        <textarea  rows="3" name="observacao" class="form-control" ng-model="ctrl.lancamento.observacao"></textarea>
+			      </div>
+				</div><br>
+				<div class="row col-md-4 col-md-offset-4">						
+					<input type="submit"  id="submit" value="Salvar" class="btn btn-lg btn-primary btn-block btn-signin">			
+				</div>
+  </form>

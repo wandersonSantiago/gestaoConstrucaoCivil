@@ -287,6 +287,10 @@ function TransferenciaListarController(blockUI, TransferenciaService, toastr, $s
 	self.totalElementos = null;
 	self.totalPaginas = null;
 	self.paginaCorrente = 0;
+	self.visualizar = visualizar;
+	
+	self.aceitarTransferencia = aceitarTransferencia;
+	self.rejeitarTransferencia = rejeitarTransferencia;
 	
 	self.titulo = tipo;
 	
@@ -320,6 +324,34 @@ function TransferenciaListarController(blockUI, TransferenciaService, toastr, $s
 	    		 }
 			 });
 	    }
+	    
+
+	    function visualizar(transferencia) {
+			self.transferencia = transferencia;
+			$scope.produtos = transferencia.itens;
+		}
+	    
+	    function aceitarTransferencia(numero){
+			if(!numero)return;
+			TransferenciaService.aceitarTransferencia(numero).
+			then(function(p){
+				toastr.info("Transferencia, Aceita")
+				findById(idTransferencia);
+				}, function(errResponse){
+					sweetAlert({title: errResponse.data.message, 	type : "info", timer : 100000,   width: 500,  padding: 20});	
+			});
+		};
+		
+		function rejeitarTransferencia(numero){
+			if(!numero)return;
+			TransferenciaService.rejeitarTransferencia(numero).
+			then(function(p){
+				toastr.info("Transferencia, Rejeitada")
+				findById(idTransferencia);
+				}, function(errResponse){
+					sweetAlert({title: errResponse.data.message, 	type : "info", timer : 100000,   width: 500,  padding: 20});	
+			});
+		};
 	
 }
 function TransferenciaShowController($stateParams, TransferenciaService,  toastr, $scope){

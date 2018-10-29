@@ -42,8 +42,8 @@
 						<td title="Visualizar nota"><a ui-sref="estoque.nota-show({idNota : nota.id})">{{nota.notaFiscal.numero}}</a></td>
 						<td>{{nota.fornecedor.dadoEmpresa.nomeFantasia}}</td>
 						<td>{{nota.notaFiscal.situacao}}</td>
-						<td>{{nota.notaFiscal.dataNota}}</td>
-						<td>{{nota.notaFiscal.dataVencimento}}</td>
+						<td>{{nota.notaFiscal.dataNota | date : 'dd/MM/yyyy'}}</td>
+						<td>{{nota.notaFiscal.dataVencimento | date : 'dd/MM/yyyy'}}</td>
 						<td>{{nota.notaFiscal.valorTotal  | currency}}</td>										
 						<td title="Editar a Nota"
 						><a ui-sref="estoque.nota-editar({idNota : nota.id})"><i class="glyphicon glyphicon-edit"></i></a> 						

@@ -78,6 +78,7 @@ public class CotacaoEmpresa implements Serializable{
 	}
 
 	public double getValorGanho() {
+		valorTotal = 0.0;
 		itens.forEach(item -> {
 			if (item.getStatus().equals(CotacaoEmpresaItemStatus.GANHOU)) {
 				valorTotal = valorTotal + (item.getItem().getQuantidade() * item.getValorUnitario());
@@ -87,6 +88,7 @@ public class CotacaoEmpresa implements Serializable{
 	}
 	
 	public double getValorTotal() {
+		valorTotal = 0.0;
 		itens.forEach(item -> {
 				valorTotal =  valorTotal + (item.getItem().getQuantidade() * item.getValorUnitario());
 		});

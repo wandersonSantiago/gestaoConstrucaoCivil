@@ -260,6 +260,11 @@ function VincularListarController(blockUI, VincularService, toastr, $scope, $sta
     		    templateUrl: 'myPopoverTemplate.html',
     		    title: 'Title'
     		  };
+	    $scope.dynamicPopoverEstruturas = {
+    		    content: '',
+    		    templateUrl: 'myPopoverTemplateEstruturas.html',
+    		    title: 'Title'
+    		  };
 	    $scope.dynamicPopoverValor = {
     		    content: '',
     		    templateUrl: 'myPopoverTemplateValor.html',

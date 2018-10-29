@@ -24,7 +24,7 @@ public class CotacaoEmpresaService {
 	public void salvarOuEditar(CotacaoEmpresa cotacaoEmpresa) {
 
 		for (CotacaoEmpresaItem item : cotacaoEmpresa.getItens()) {
-			item.setId(null);
+			//item.setId(null);
 			item.setStatus(CotacaoEmpresaItemStatus.PENDENTE);
 			item.setCotacaoEmpresa(cotacaoEmpresa);
 		}

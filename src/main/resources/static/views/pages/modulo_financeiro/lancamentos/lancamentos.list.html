@@ -1,0 +1,154 @@
+<meta charset="UTF-8">
+	<div class="row">
+		<div class="col-md-4">
+			<a class="fa fa-plus" href="" ui-sref="lancamentos.cadastrar" title="Cadastrar novo lançamento">Novo</a>|<label>Lançamento</label> | 
+			<a href=""  ng-click="filtros === true ? filtros = false : filtros = true">{{filtros === true ? "Menos" : "Mais"}} Filtros</a>  
+		</div>
+	</div>
+	<br>
+	<div class="row" ng-if="!filtros">
+	  <div class="col-lg-6">
+	    <div class="input-group">
+	      <input type="text" class="form-control" placeholder="Pesquisar pelo tema" ng-model="lancamentoFilter.tema" autofocus
+	      	 ng-keyup="$event.keyCode == 13 && filter(lancamentoFilter)">
+	      <span class="input-group-btn">
+	        <button class="btn btn-default" type="button" ng-click="lancamentoFilter.page.page = 0; filter(lancamentoFilter)">Pesquisar!</button>
+	      </span>
+	    </div>
+	  </div>
+	 </div>
+ 		
+	 
+	<div class="container-fluid" ng-if="filtros">		
+			<div class="row">
+				<div class="form-group  col-sm-6">
+					<label class="control-label" for="descricao">Descrição:</label>
+					<input type="text" class="form-control" id="descricao" autofocus="autofocus" ng-model="lancamentoFilter.descricao"/>
+				</div>
+				
+				<div class="form-group  col-sm-3">
+					<label>Tipo:</label><br>
+					<select class="form-control "  ng-model="lancamentoFilter.tipo" ng-options="tipo  for tipo in ctrl.tipos" 
+						name="status" >
+					</select>	
+				</div>
+				<div class="form-group  col-sm-3">
+					<label>Categoria:</label><br>
+					<select class="form-control "  ng-model="lancamentoFilter.categoria" ng-options="categoria  for categoria in ctrl.categorias" 
+						name="categorias" >
+					</select>	
+				</div>
+			</div>
+			<div class="row">				
+				<div class="form-group  col-sm-5">
+					<label for="valorMinimo">Observação:</label>
+					<input type="text" class="form-control" id="item" ng-model="lancamentoFilter.observacao"/>
+				</div>
+				<div class="form-group  col-sm-5">
+				<label for="dataCadastro">Valor:</label>
+					<div class="form-inline">
+						<input type="text" class="form-control" id="valorDe" ui-money-mask="2" ng-model="lancamentoFilter.valorDe"/>
+						<label for="dataCriacaoFinal">até</label>
+						<input type="text" class="form-control" id="valorAte" ui-money-mask="2" ng-model="lancamentoFilter.valorAte"/>
+					</div>
+				</div>
+				<div class="form-group  col-sm-2">
+					<label>Status:</label><br>
+					<select class="form-control "  ng-model="lancamentoFilter.status" ng-options="status  for status in ctrl.status" 
+						name="status" >
+					</select>	
+				</div>					
+			</div>	
+			<div class="row">
+				<div class="form-group  col-sm-4">
+					<label for="dataCadastro">Data cadastro:</label>
+					<div class="form-inline">
+						<input type="date" class="form-control" id="dataCadastroDe" ng-model="lancamentoFilter.dataCadastroDe" />
+						<label for="dataCriacaoFinal">até</label>
+						<input type="date" class="form-control" id="dataCadastroAte" ng-model="lancamentoFilter.dataCadastroAte" />
+					</div>
+				</div>
+		
+				<div class="form-group  col-sm-4">
+					<label for="dataLimite">Data Vencimento:</label>
+					<div class="form-inline">
+						<input type="date" class="form-control" id="dataVencimentoDe" ng-model="lancamentoFilter.dataVencimentoDe" />
+						<label for="dataLimite" >até</label>
+						<input type="date" class="form-control" id="dataVencimentoAte" ng-model="lancamentoFilter.dataVencimentoAte" />
+					</div>
+				</div>
+				<div class="form-group  col-sm-4">
+					<label for="dataFechamento">Data Pagamento ou Recebimento:</label>
+					<div class="form-inline">
+						<input type="date" class="form-control" id="dataPagamentoDe" ng-model="lancamentoFilter.dataPagamentoOuRecebimentoDe" />
+						<label for="dataFechamento" >até</label>
+						<input type="date" class="form-control" id="dataPagamentoAte" ng-model="lancamentoFilter.dataPagamentoOuRecebimentoAte" />
+					</div>
+				</div>						
+			</div>
+				<div class="col-sm-2">
+		<label>Opção de visualização:</label><br>
+				<label class="radio-inline">
+					<input  type="radio" name="radioImprimir" ng-model="imprimir" value="PAGINA">Página
+				</label> 
+				<label class="radio-inline">
+					<input  type="radio" name="radioImprimir" ng-model="imprimir" 	value="PDF">PDF
+				</label>
+				</div>
+		<br>
+			<button type="submit" class="btn  btn-primary col-sm-2" ng-click="pesquisar(lancamentoFilter,imprimir)">Pesquisar</button>
+			<button type="submit" class="btn  btn-default col-sm-2" ng-click="lancamentoFilter == null">Limpar Formulario</button>
+		</div>
+		<div ng-show="mensagemErro" class="alert alert-warning alert-dismissible">
+	         <h4><i class="icon fa fa-warning"></i>{{mensagemErro}}</h4>
+	   </div>
+
+	   <br>
+	   <br>
+	   
+	   <div align="center">
+			<div class="small-box bg-aqua">
+				<div class="inner" align="center">
+					<h4>Pesquisa de Lançamentos</h4>					
+				</div>
+			</div>
+		</div>
+		<div class="table-responsive">
+			<table class="table table-bordered table-hover" >
+				<thead>
+					<tr >						 
+						<th ><a href="" ng-click="ctrl.sort('id')"><i class="glyphicon glyphicon-sort"></i></a>Id</th>
+						<th ><a href="" ng-click="ctrl.sort('descricao')"><i class="glyphicon glyphicon-sort"></i></a>Descrição</th>
+						<th ><a href=""ng-click="ctrl.sort('dataVencimento')"><i class="glyphicon glyphicon-sort"></i></a>Vencimento</th>
+						<th ><a href=""ng-click="ctrl.sort('dataPagamentoOuRecebimento')"><i class="glyphicon glyphicon-sort"></i></a>Data Pagt/Recebimento</th>	
+						<th ><a href=""ng-click="ctrl.sort('tipo')"><i class="glyphicon glyphicon-sort"></i></a>Tipo</th>
+						<th >Valor</th>
+						<th >Status</th>
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" lancamento in ctrl.lancamentos">
+					<tr>
+						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.id}}</td>
+						<td><a class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}" title="Visualizar este lançamento" ui-sref="lancamento.show({idLancamento : lancamento.id})">{{lancamento.descricao}}</a></td>
+						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.dataVencimento | date : 'dd/MM/yyyy'}}</td>
+						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.dataPagamentoOuRecebimento | date : 'dd/MM/yyyy'}}</td>	
+						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.tipo}}</td>			
+						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.valor | currency}}</td>	
+						<td class="{{lancamento.dataPagamentoOuRecebimento == null ? 'red' : 'blue'}}">{{lancamento.status}}</td>	
+				
+					</tr>
+				</tbody>						
+			</table>
+					<nav>
+						<ul uib-pagination total-items="lancamentoFilter.page.totalElementos" items-per-page="lancamentoFilter.page.linesPerPage"
+							ng-model="lancamentoFilter.page.page" max-size="5" class="pagination-sm"
+							boundary-link-numbers="true" ng-click="filter(lancamentoFilter)"
+							previous-text="Anterior" last-text="Último" first-text="Primeiro"
+							next-text="Próximo">
+						</ul>
+					</nav>	
+			
+	</div>
+			
+

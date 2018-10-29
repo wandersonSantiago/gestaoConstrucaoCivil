@@ -1,4 +1,4 @@
-app.factory('VincularService', function($rootScope, toastr, $http,$q){
+app.factory('VistoriaService', function($rootScope, toastr, $http,$q){
 	
 	var url = '/rest/servicos/vincular';
 	return{

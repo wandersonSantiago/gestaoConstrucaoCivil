@@ -1,0 +1,344 @@
+app.controller("LancamentosCadastarController", LancamentosCadastarController);
+app.controller("LancamentosEditarController", LancamentosEditarController);
+app.controller("LancamentosListarController", LancamentosListarController);
+app.controller("LancamentosShowController", LancamentosShowController);
+app.controller("LancamentosEstatisticaController", LancamentosEstatisticaController);
+
+function LancamentosCadastarController($localStorage, $state, $stateParams, LancamentosService, SubCategoriaService, CategoriaService, FabricanteService, toastr, $scope){
+	
+	var self = this;	
+	
+	self.submit = submit;
+		
+	tipos();
+	categorias();
+	
+	function submit(form){
+		if(form.$invalid){
+			sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
+			return;
+		}
+			LancamentosService.insert(self.lancamento).
+			then(function(response){
+				toastr.success("Lancamento, cadastrado");		
+				clear(form);
+			}, function(errResponse){
+				sweetAlert({ timer : 3000,  text : errResponse.data.message,  type : "error", width: 300, higth: 300, padding: 20});
+			});			
+		};
+		
+	function tipos(){
+		LancamentosService.tipos().
+		then(function(p){
+			self.tipos = p;
+			}, function(errResponse){
+		});
+	};
+	
+	function categorias(){
+		LancamentosService.categorias().
+		then(function(p){
+			self.categorias = p;
+			}, function(errResponse){
+		});
+	};
+	
+	function clear(form){	    	 
+    	 form.$setPristine();
+    	 form.$setUntouched();   
+    	 self.lancamento = null;    	
+     }
+		
+	 	 
+			
+}		
+
+function LancamentosEditarController($localStorage, $state, $stateParams, LancamentosService, SubCategoriaService, CategoriaService, FabricanteService, toastr, $scope){
+	
+	var self = this;
+	
+	var idLancamentos = $stateParams.idLancamentos;
+	
+	self.submit = submit;
+	self.itens = [];
+	self.lancamentos = {itens : self.itens};
+	self.adicionarProdutos = adicionarProdutos;
+	self.ativarExcluirLote = ativarExcluirLote;
+	self.apagarProdutos = apagarProdutos;
+	$scope.backPage = $stateParams.backPage;
+
+	
+	self.proximaPagina = proximaPagina;
+	findById(idLancamentos);
+	
+	if($localStorage.lancamentos){
+		self.lancamentos = $localStorage.lancamentos;
+	}
+	
+	function proximaPagina(proxima){
+		var backPage = 'lancamentos.editar';
+		$state.go(proxima ,{backPage});
+		$localStorage.lancamentos = self.lancamentos;
+	}
+	
+	function submit(form){
+		if(form.$invalid){
+			sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
+			return;
+		}
+		if(self.itens.length < 1){
+			sweetAlert({title: "É Obrigatório pelo menos 1 item", 	type : "info", timer : 100000,   width: 500,  padding: 20});	
+			return;
+		}
+				self.lancamentos.itens = self.itens;
+				LancamentosService.update(self.lancamentos).
+				then(function(response){
+					toastr.success("Lancamentos, Alterada")
+					self.lancamentos = null;
+					if($scope.backPage){
+						$state.go($scope.backPage);
+					}else{
+						$state.go('lancamentos.consultar');
+					}
+					clear(form);
+				}, function(errResponse){
+					sweetAlert({ timer : 3000,  text : errResponse.data.message,  type : "error", width: 300, higth: 300, padding: 20});
+				});			
+		};
+		
+		
+	function adicionarProdutos(descricao , quantidade){
+		self.itens.push({
+			descricao : descricao,
+			quantidade : quantidade	
+		})
+	}
+	
+	
+	function ativarExcluirLote(itens){
+		self.itens.filter(function(f){
+		if(f.selecionado){
+			$scope.ativadoExcluirLote = true; }
+		});
+	}
+		
+	function apagarProdutos(itens){
+			self.itens = self.itens.filter(function(f){
+			if(!f.selecionado) return f;
+			$scope.ativadoExcluirLote = false;
+		});
+	}
+		
+	function clear(form){	    	 
+    	 form.$setPristine();
+    	 form.$setUntouched();   
+    	 self.lancamentos = null;
+    	 $localStorage.$reset()
+    	
+     }
+	
+	function findById(id){
+		if(!id)return;
+		LancamentosService.findById(id).
+		then(function(p){
+			self.lancamentos = p;
+			self.itens = p.itens;
+			self.lancamentos.dataLimite = new Date(p.dataLimite);
+			}, function(errResponse){
+		});
+	};
+		
+}
+
+function LancamentosListarController(blockUI, LancamentosService, toastr, $scope){
+	
+	var self = this;
+	
+	self.sort = sort;	
+	$scope.filter = filter;
+	$scope.pesquisar = pesquisar;
+	self.page = {page : 0 ,linesPerPage : 24 , orderBy : 'id' , direction : 'ASC'};
+	$scope.lancamentoFilter = {page : self.page}
+	$scope.imprimir = 'PAGINA';
+	
+	filter($scope.lancamentoFilter);
+	tipos();
+	categorias();
+	status();
+		
+	function sort(orderBy){		
+		$scope.lancamentoFilter.page.orderBy = orderBy;
+		$scope.lancamentoFilter.page.direction == 'ASC' ? $scope.lancamentoFilter.page.direction = 'DESC' : $scope.lancamentoFilter.page.direction = 'ASC';
+		filter($scope.lancamentoFilter);
+	}
+	
+	function pesquisar(lancamentoFilter, imprimir){
+		if(imprimir == 'PAGINA'){
+			filter(lancamentoFilter);
+		}else{
+			pdf(lancamentoFilter);
+		}
+	}
+	
+	    	    
+	    function filter(lancamentoFilter){
+	    	$scope.mensagemErro = null;	    	 
+	    	 blockUI.start();
+	    	 lancamentoFilter.page.page == '0'? lancamentoFilter.page.page = 0 : lancamentoFilter.page.page = lancamentoFilter.page.page - 1;   
+	    	 LancamentosService.filter(lancamentoFilter).
+	    	 then(function(e){
+	    		 $scope.mensagemErro = null;
+	    		 self.lancamentos = e.content;	
+	    		 $scope.lancamentoFilter.page.totalElementos = e.totalElements;
+	    		 $scope.lancamentoFilter.page.totalPaginas = e.totalPages;
+	    		 $scope.lancamentoFilter.page.page = e.number + 1;
+	    		 blockUI.stop();
+	    	 }, function(errResponse){
+	    		 blockUI.stop();
+	    		 if(errResponse.status == 404){
+	    			 $scope.mensagemErro = errResponse.data.message;
+	    		 }else{
+	    			 $scope.mensagemErro =errResponse.data.message;
+	    		 }
+			 });
+	    }
+	    
+	    function pdf(lancamentoFilter){	
+	    	$scope.mensagemErro = null;	    	 
+	    	 blockUI.start();
+	    	 lancamentoFilter.page.page == '0'? lancamentoFilter.page.page = 0 : lancamentoFilter.page.page = lancamentoFilter.page.page - 1;  
+	    	 LancamentosService.pdf(lancamentoFilter)
+	   	 .then(function(d){
+	   		var file = new Blob([d],{type: 'application/pdf'});
+	   		var fileURL = URL.createObjectURL(file);
+	   		blockUI.stop();
+	   	    window.open(fileURL);
+	   	 	 }).catch(function error(msg) {			 	   	 		 
+	    	});
+     };	     
+     
+     function tipos(){
+ 		LancamentosService.tipos().
+ 		then(function(p){
+ 			self.tipos = p;
+ 			}, function(errResponse){
+ 		});
+ 	};
+ 	
+ 	function status(){
+ 		LancamentosService.status().
+ 		then(function(p){
+ 			self.status = p;
+ 			}, function(errResponse){
+ 		});
+ 	};
+ 	
+ 	function categorias(){
+ 		LancamentosService.categorias().
+ 		then(function(p){
+ 			self.categorias = p;
+ 			}, function(errResponse){
+ 		});
+ 	};
+	  
+	   function closeLancamentos(id) {
+			swal({ 
+				  title: 'Encerrar!!!',
+				  text: "Tem certeza que deseja encerrar esta cotação ?",
+				  type: 'info',
+				  showCancelButton: true,
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: 'Encerrar!'
+				}).then(function () {
+					LancamentosService.closeLancamentos(id).
+			then(function(response){				
+				filter($scope.lancamentoFilter);
+				toastr.success("Lancamentos, Encerrada")
+			});
+		})
+	}
+	 	
+}
+
+
+function LancamentosShowController( $state, $stateParams, LancamentosService, $scope, blockUI){
+	
+	var self = this;
+	
+	var idLancamentos = $stateParams.idLancamentos;
+	self.visualizarItem = visualizarItem;
+	self.imprimirLancamentos = imprimirLancamentos;
+	
+	$scope.visualizarItem = false;
+	findById(idLancamentos);
+	
+	function findById(id){
+		if(!id)return;
+		LancamentosService.findById(id).
+		then(function(p){
+			self.lancamentos = p;
+			if(p.statusLancamentos == 'FECHADO'){
+					findByVencedores(idLancamentos);
+					self.titulo = 'Vencedores';
+				}else{
+					findByConcorrentes(idLancamentos);
+					self.titulo = 'Concorrentes';
+				}
+			}, function(errResponse){
+		});
+	};
+	
+	function findByConcorrentes(idLancamentos){
+		if(!idLancamentos)return;
+		LancamentosService.findByConcorrentes(idLancamentos).
+		then(function(p){
+			self.empresas = p;
+			}, function(errResponse){
+		});
+	};
+	
+	function findByVencedores(idLancamentos){
+		if(!idLancamentos)return;
+		LancamentosService.findByVencedores(idLancamentos).
+		then(function(p){
+			self.empresas = p;
+			}, function(errResponse){
+		});
+	};
+	
+	function visualizarItem(item){
+		$scope.item = item;
+		$scope.visualizarItem == true ? $scope.visualizarItem = false : $scope.visualizarItem = true;
+	}
+	
+	 function imprimirLancamentos(idLancamentos){	
+    	 blockUI.start();
+    	 LancamentosService.imprimirLancamentos(idLancamentos)
+   	 .then(function(d){
+   		var file = new Blob([d],{type: 'application/pdf'});
+   		var fileURL = URL.createObjectURL(file);
+   		blockUI.stop();
+   	    window.open(fileURL);
+   	 	 }).catch(function error(msg) {			 	   	 		 
+    	});
+};	     
+}
+
+function LancamentosEstatisticaController(blockUI, LancamentosService, toastr, $scope){
+	
+	var self = this;
+	
+	estatistica();
+ 	
+ 	function estatistica(){
+ 		LancamentosService.estatistica().
+ 		then(function(p){
+ 			self.estatistica = p;
+ 			}, function(errResponse){
+ 		});
+ 	};
+ 	 	
+}
+
+

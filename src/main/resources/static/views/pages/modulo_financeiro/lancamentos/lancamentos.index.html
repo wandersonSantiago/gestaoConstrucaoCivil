@@ -1,0 +1,53 @@
+<meta charset="UTF-8">
+
+<div class="row"  ng-controller="LancamentosEstatisticaController as ctrl">
+        <div class="col-md-2">
+            <div class=" bg-aqua text-center">
+              <span class="info-box-tex t">Saldo</span>
+              <span class="info-box-number">{{ctrl.estatistica.saldo | currency}}</span>
+          </div>
+        </div>
+        <div class="col-md-2">
+            <div class=" bg-green text-center">
+              <span class="info-box-text">Entrada</span>
+              <span class="info-box-number">{{ctrl.estatistica.entrada | currency}}</span>
+          </div>
+        </div>
+        <div class="col-md-2">
+            <div class=" bg-yellow text-center">
+              <span class="info-box-text">Saida</span>
+              <span class="info-box-number">{{ctrl.estatistica.saida | currency}}</span>
+          </div>
+        </div>
+         <div class="col-md-2">
+            <div class=" bg-green text-center">
+              <span class="info-box-text">Entradas Futuras</span>
+              <span class="info-box-number">{{ctrl.estatistica.entradaFutura | currency}}</span>
+          </div>
+        </div>
+        <div class="col-md-2">
+            <div class=" bg-yellow text-center">
+              <span class="info-box-text">Saídas Futuras</span>
+              <span class="info-box-number">{{ctrl.estatistica.saidaFutura | currency}}</span>
+          </div>
+        </div>
+         <div class="col-md-2">
+            <div class=" bg-aqua text-center">
+              <span class="info-box-text">Saldo Previsto Futuras</span>
+              <span class="info-box-number">{{ctrl.estatistica.saldoPrevisto | currency}}</span>
+          </div>
+        </div>
+</div><br>
+      
+<div class="row">	
+       <div class="col-sm-12">     
+			<div class="box box-primary" >	
+					<div class="box-header">Lançamentos</div>
+					<div class="panel-body">
+						<div class="ui-view"></div>
+					</div>
+			</div>
+		</div>
+		
+</div>
+

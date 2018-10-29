@@ -35,4 +35,8 @@ public class Estrutura implements Serializable {
 		return raiz == null;
 		 
 	}
+	
+	public void setDescricao(String descricao) {
+		this.descricao = descricao.toUpperCase();		
+	}
 }

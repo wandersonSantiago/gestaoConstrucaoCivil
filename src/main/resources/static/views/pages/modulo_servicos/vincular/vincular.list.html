@@ -33,6 +33,7 @@
 		<tr >
 
 			<th>Id</th>
+			<th>Estrutra</th>
 			<th>Prestadora de serviço</th>
 			<th>Pacote de serviço</th>
 			<th>Data Cadastro</th>
@@ -45,6 +46,15 @@
 		</tr>
 		<tr ng-repeat="vincular in ctrl.vinculars" >
 			<td>{{vincular.id}}</td>
+			<td >			
+			<a uib-popover-template="dynamicPopoverEstruturas.templateUrl" popover-title="{{'Estruturas'}}"  popover-trigger="'mouseenter'">
+				 {{vincular.estrutura.descricao}}</a>
+				<script type="text/ng-template"  id="myPopoverTemplateEstruturas.html">      		 
+			  		<div align="center" ng-repeat="v in vincular.estruturas">
+						<b>{{v.descricao}}</b><br>
+					</div> 			 
+   			 	</script>			
+			</td>
 			<td>			
 			<a ui-sref="prestadora.visualizar({ idPrestadora: vincular.prestadoraServico.id})" uib-popover-template="dynamicPopoverEmpresa.templateUrl" popover-title="{{'Dados Empresa'}}"  popover-trigger="'mouseenter'">
 				 {{vincular.prestadoraServico.dadoEmpresa.nomeFantasia}}</a>

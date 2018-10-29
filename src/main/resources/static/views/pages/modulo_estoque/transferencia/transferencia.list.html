@@ -41,6 +41,7 @@
 				<table class="table table-bordered table-striped ">
 				<thead>
 					<tr>						 
+						<th>ID</th>
 						<th><a href="" ng-click="ctrl.sort('notaFiscal.numero')"><i class="glyphicon glyphicon-sort"></i></a>Numero</th>
 						<th><a href="" ng-click="ctrl.sort('empreendimentoDestino.descricao')"><i class="glyphicon glyphicon-sort"></i></a>Empreendimento</th>
 						<th><a href="" ng-click="ctrl.sort('statusTransferencia')"><i class="glyphicon glyphicon-sort"></i></a>Status</th>
@@ -54,6 +55,7 @@
 				<tbody
 					ng-repeat=" transferencia in ctrl.transferencias">
 					<tr>
+						<td title="Visualizar Transferencia"><a href="" data-toggle="modal"	data-target=".modalEstrutura" ng-click="ctrl.visualizar(transferencia)">{{transferencia.id}}</td>
 						<td title="Visualizar Transferencia"><a ui-sref="transferencia.show({idTransferencia : transferencia.id})">{{transferencia.notaFiscal.numero}}</a></td>
 						<td>{{transferencia.empreendimentoDestino.descricao}}</td>
 						<td class="{{transferencia.statusTransferencia == 'PENDENTE' ? 'red':'blue'}}">{{transferencia.statusTransferencia}}</td>
@@ -74,5 +76,21 @@
 				</ul>
 			</nav>
 	</div>
+<div class="modal fade modalEstrutura" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">{{ctrl.titulo}}</h4>
+			</div>
+			<div class="modal-body">
+				<div ng-include="'views/pages/modulo_estoque/transferencia/transferencia.show.html'"></div>
+			</div>
 			
+		</div>
+	</div>
+</div>		
 

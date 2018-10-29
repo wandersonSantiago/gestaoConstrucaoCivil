@@ -18,6 +18,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import br.com.app.enuns.StatusEmpreendimento;
 import lombok.Data;
@@ -64,6 +65,8 @@ public class Empreendimento implements Serializable{
     @OneToOne
     private Empreendimento matriz;
     
+    @OneToOne
+    private ConfiguracaoEmpreendimento conf;
     
     public boolean isMatriz() {
     	return matriz == null;
@@ -71,5 +74,8 @@ public class Empreendimento implements Serializable{
     }
     
  
+    public ConfiguracaoEmpreendimentoFinanceiro getConfFinanceiro() {
+    	return (ConfiguracaoEmpreendimentoFinanceiro) conf;
+    }
 	
 }

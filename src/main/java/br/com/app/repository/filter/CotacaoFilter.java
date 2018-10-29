@@ -33,7 +33,6 @@ public class CotacaoFilter {
 	private Date dataFechamentoAte;
 	
 	@Getter @Setter
-	@OneToOne
 	private Page page;
 	
 	

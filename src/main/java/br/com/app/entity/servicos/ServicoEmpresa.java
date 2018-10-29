@@ -1,8 +1,11 @@
 package br.com.app.entity.servicos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -16,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import br.com.app.entity.Empreendimento;
 import br.com.app.entity.Estrutura;
@@ -64,5 +68,20 @@ public class ServicoEmpresa implements Serializable{
 
 	@OneToMany(mappedBy = "servicoEmpresa", cascade = CascadeType.ALL)
 	private List<OcorrenciaServico> ocorrencias;
-
+	
+	@Transient
+	private List<Estrutura> estruturas = new ArrayList<>();
+	
+	public List<Estrutura> getEstruturas(){
+		return addEstrutura(estrutura);
+	}
+	
+	public List<Estrutura> addEstrutura(Estrutura estrutura){			
+		estruturas.add(estrutura);
+		if(estrutura.getRaiz() != null) {
+			return addEstrutura(estrutura.getRaiz());
+		}
+		
+		return estruturas.stream().sorted((e1,e2)-> e1.getId().compareTo(e2.getId())).collect(Collectors.toList());
+	}
 }
