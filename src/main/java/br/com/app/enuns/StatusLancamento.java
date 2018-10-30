@@ -5,7 +5,8 @@ public enum StatusLancamento {
 	
 	PENDENTE(1,"Pendente"),
 	PAGO(2,"Pago"),
-	VENCIDO(3, "Vencido");
+	VENCIDO(3, "Vencido"),
+	RECEBIDO(4, "Recebido");
 	
 	private int codigo;
 	private String descricao;

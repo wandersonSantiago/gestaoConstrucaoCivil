@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.3.final using JasperReports Library version 6.4.3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9fb15988-3661-45c3-b0f8-44d2626085d6">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="valorEntrada" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[valorEntrada]]></fieldDescription>
+	</field>
+	<field name="observacao" class="java.lang.String">
+		<fieldDescription><![CDATA[observacao]]></fieldDescription>
+	</field>
+	<field name="tipo" class="br.com.app.enuns.TipoLancamentoEnum">
+		<fieldDescription><![CDATA[tipo]]></fieldDescription>
+	</field>
+	<field name="editavel" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[editavel]]></fieldDescription>
+	</field>
+	<field name="categoria" class="br.com.app.enuns.CategoriaEnum">
+		<fieldDescription><![CDATA[categoria]]></fieldDescription>
+	</field>
+	<field name="valor" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[valor]]></fieldDescription>
+	</field>
+	<field name="objeto" class="java.lang.String">
+		<fieldDescription><![CDATA[objeto]]></fieldDescription>
+	</field>
+	<field name="descricao" class="java.lang.String">
+		<fieldDescription><![CDATA[descricao]]></fieldDescription>
+	</field>
+	<field name="idObjeto" class="java.lang.Long">
+		<fieldDescription><![CDATA[idObjeto]]></fieldDescription>
+	</field>
+	<field name="valorSaida" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[valorSaida]]></fieldDescription>
+	</field>
+	<field name="dataVencimento" class="java.util.Date">
+		<fieldDescription><![CDATA[dataVencimento]]></fieldDescription>
+	</field>
+	<field name="dataPagamentoOuRecebimento" class="java.util.Date">
+		<fieldDescription><![CDATA[dataPagamentoOuRecebimento]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="dataCadastro" class="java.util.Date">
+		<fieldDescription><![CDATA[dataCadastro]]></fieldDescription>
+	</field>
+	<field name="status" class="br.com.app.enuns.StatusLancamento">
+		<fieldDescription><![CDATA[status]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

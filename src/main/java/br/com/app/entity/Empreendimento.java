@@ -21,6 +21,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import br.com.app.enuns.StatusEmpreendimento;
+import br.com.app.pojo.MensagemException;
 import lombok.Data;
 
 @Entity
@@ -65,17 +66,9 @@ public class Empreendimento implements Serializable{
     @OneToOne
     private Empreendimento matriz;
     
-    @OneToOne
-    private ConfiguracaoEmpreendimento conf;
-    
     public boolean isMatriz() {
     	return matriz == null;
     	
-    }
+    }    
     
- 
-    public ConfiguracaoEmpreendimentoFinanceiro getConfFinanceiro() {
-    	return (ConfiguracaoEmpreendimentoFinanceiro) conf;
-    }
-	
 }

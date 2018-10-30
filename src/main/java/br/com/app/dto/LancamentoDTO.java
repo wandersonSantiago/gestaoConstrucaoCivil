@@ -27,7 +27,9 @@ public class LancamentoDTO implements Serializable {
 	private String objeto;
 	private Long idObjeto;
 	private StatusLancamento status;
-	
+	private boolean editavel;
+	private BigDecimal ValorEntrada;
+	private BigDecimal valorSaida;
 	
 	public LancamentoDTO(Lancamento obj) {
 		super();
@@ -41,6 +43,9 @@ public class LancamentoDTO implements Serializable {
 		this.valor = obj.getValor();
 		this.observacao = obj.getObservacao();
 		this.status = obj.getStatus();
+		this.editavel = dataPagamentoOuRecebimento == null;
+		this.ValorEntrada = obj.getTipo() == TipoLancamentoEnum.CREDITO ? obj.getValor() : null;
+		this.valorSaida = obj.getTipo() == TipoLancamentoEnum.DEBITO ? obj.getValor() : null;
 	}
 
  

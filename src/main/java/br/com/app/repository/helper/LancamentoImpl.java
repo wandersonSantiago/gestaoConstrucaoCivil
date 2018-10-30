@@ -6,11 +6,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 
 import br.com.app.dto.SaldoLancamentoDTO;
+import br.com.app.entity.Empreendimento;
 import br.com.app.entity.Lancamento;
 import br.com.app.entity.QLancamento;
 import br.com.app.entity.Usuario;
@@ -77,19 +79,45 @@ public class LancamentoImpl{
 			BooleanExpression tipoEquals = qLancamento.tipo.eq(filter.getTipo());
 			geral.add(tipoEquals);
 		}
+		
 		return geral;
 	}
 
-	public SaldoLancamentoDTO estatistica(Date dataInicial, Date dataFinal) {		
+	public SaldoLancamentoDTO estatistica(Date dataInicial, Date dataFinal, Empreendimento emp) {		
 		
 		return new SaldoLancamentoDTO(
-				lancamentoRepository.somaSaldoDataInicioEDataFinal(TipoLancamentoEnum.CREDITO), 
-				lancamentoRepository.somaSaldoDataInicioEDataFinal(TipoLancamentoEnum.DEBITO),
-				lancamentoRepository.somaSaldoDataInicioEDataFinalPagoOuRecebido(TipoLancamentoEnum.CREDITO,dataInicial,dataFinal),
-				lancamentoRepository.somaSaldoDataInicioEDataFinalPagoOuRecebido(TipoLancamentoEnum.DEBITO,dataInicial,dataFinal),
-				lancamentoRepository.somaSaldoDataInicioEDataFinalNaoPagoOuNaoRecebido(TipoLancamentoEnum.CREDITO,dataInicial,dataFinal),
-				lancamentoRepository.somaSaldoDataInicioEDataFinalNaoPagoOuNaoRecebido(TipoLancamentoEnum.DEBITO,dataInicial,dataFinal),
+				lancamentoRepository.somaSaldoDataInicioEDataFinal(TipoLancamentoEnum.CREDITO, emp.getId()), 
+				lancamentoRepository.somaSaldoDataInicioEDataFinal(TipoLancamentoEnum.DEBITO, emp.getId()),
+				lancamentoRepository.somaSaldoDataInicioEDataFinalPagoOuRecebido(TipoLancamentoEnum.CREDITO,dataInicial,dataFinal, emp.getId()),
+				lancamentoRepository.somaSaldoDataInicioEDataFinalPagoOuRecebido(TipoLancamentoEnum.DEBITO,dataInicial,dataFinal, emp.getId()),
+				lancamentoRepository.somaSaldoDataInicioEDataFinalNaoPagoOuNaoRecebido(TipoLancamentoEnum.CREDITO,dataInicial,dataFinal, emp.getId()),
+				lancamentoRepository.somaSaldoDataInicioEDataFinalNaoPagoOuNaoRecebido(TipoLancamentoEnum.DEBITO,dataInicial,dataFinal, emp.getId()),
+				lancamentoRepository.somaSaldoVencidaAPagar(emp.getId(), new Date(), TipoLancamentoEnum.DEBITO),
+				lancamentoRepository.somaSaldoVencidaAReceber(emp.getId(), new Date(), TipoLancamentoEnum.CREDITO),
 				dataInicial, dataFinal);
+	}
+	
+	public Page<Lancamento> filterAndType(Date dataInicial, Date dataFinal, Empreendimento emp, String tipo, Pageable pageable){
+		Page<Lancamento> page = null;
+		if(tipo.equalsIgnoreCase("ENTRADA")) {
+			page = lancamentoRepository.findByTipoAndDataVencimentoBetweenAndEmpreendimentoIdAndDataPagamentoOuRecebimentoIsNotNull(TipoLancamentoEnum.CREDITO,dataInicial,dataFinal, emp.getId(), pageable);
+		}
+		if(tipo.equalsIgnoreCase("SAIDA")) {
+			page = lancamentoRepository.findByTipoAndDataVencimentoBetweenAndEmpreendimentoIdAndDataPagamentoOuRecebimentoIsNotNull(TipoLancamentoEnum.DEBITO,dataInicial,dataFinal, emp.getId(), pageable);
+		}
+		if(tipo.equalsIgnoreCase("ENTRADA_FUTURA")) {
+			page = lancamentoRepository.findByTipoAndDataVencimentoBetweenAndEmpreendimentoIdAndDataPagamentoOuRecebimentoIsNull(TipoLancamentoEnum.CREDITO, dataInicial, dataFinal, emp.getId(), pageable);
+		}
+		if(tipo.equalsIgnoreCase("SAIDA_FUTURA")) {
+			page = lancamentoRepository.findByTipoAndDataVencimentoBetweenAndEmpreendimentoIdAndDataPagamentoOuRecebimentoIsNull(TipoLancamentoEnum.DEBITO, dataInicial, dataFinal, emp.getId(), pageable);
+		}
+		if(tipo.equalsIgnoreCase("VENCIDAS_A_RECEBER")) {
+			page = lancamentoRepository.findByTipoAndDataVencimentoBeforeAndEmpreendimentoIdAndDataPagamentoOuRecebimentoIsNull(TipoLancamentoEnum.CREDITO,new Date(), emp.getId(), pageable);
+		}
+		if(tipo.equalsIgnoreCase("VENCIDAS_A_PAGAR")) {
+			page = lancamentoRepository.findByTipoAndDataVencimentoBeforeAndEmpreendimentoIdAndDataPagamentoOuRecebimentoIsNull(TipoLancamentoEnum.DEBITO,new Date(), emp.getId(), pageable);
+		}
+		return page;
 	}
 
 }

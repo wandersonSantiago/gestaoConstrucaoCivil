@@ -6,5 +6,7 @@ encoding//src/main/resources/relatorio/compras/cotacao.jrxml=UTF-8
 encoding//src/main/resources/relatorio/compras/cotacao.vencedores.jrxml=UTF-8
 encoding//src/main/resources/relatorio/compras/item.cotacao.empresa.jrxml=UTF-8
 encoding//src/main/resources/relatorio/compras/item.cotacao.vencedores.jrxml=UTF-8
+encoding//src/main/resources/relatorio/financeiro/item.lancamentos.jrxml=UTF-8
+encoding//src/main/resources/relatorio/financeiro/lancamentos.jrxml=UTF-8
 encoding//src/test/java=UTF-8
 encoding/<project>=UTF-8

@@ -33,5 +33,7 @@ public class LancamentoFilter implements Serializable {
 	private String objeto;
 	private Long idObjeto;
 
+	private String adicional;
+	
 	private Page page;
 }

@@ -17,11 +17,11 @@
 					<div class="col-sm-3" ng-class="{ 'has-error' : form.vencimento.$invalid && form.$submitted }">
 					<label>Vencimento:</label>
 						<input class="form-control"  id="vencimento" name="vencimento" type="date" title="informe a data de vencimento" 
-						ng-model="ctrl.lancamento.dataVencimento" required>
+						ng-model="ctrl.lancamento.dataVencimento" required date-input>
 					</div>			
 					<div class="col-sm-3" ng-class="{ 'has-error' : form.dataPagamento.$invalid && form.$submitted }">
 					<label>Data{{ctrl.lancamento.tipo == 'DEBITO' ? ' Pagamento' : 'Recebimento'}}:</label>
-						<input class="form-control"  id="dataPagamento" name="dataPagamento" type="date" ng-model="ctrl.lancamento.dataPagamentoOuRecebimento"  title="informe a data do {{ctrl.lancamento.tipo == 'DEBITO' ? ' Pagamento' : 'Recebimento'}}" dateInput required>
+						<input class="form-control"  id="dataPagamento" name="dataPagamento" type="date" ng-model="ctrl.lancamento.dataPagamentoOuRecebimento"  title="informe a data do {{ctrl.lancamento.tipo == 'DEBITO' ? ' Pagamento' : 'Recebimento'}}" date-input>
 					</div>					
 				</div> 
 				<div class="row">

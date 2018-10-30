@@ -1,40 +1,52 @@
 <meta charset="UTF-8">
 
-<div class="row"  ng-controller="LancamentosEstatisticaController as ctrl">
-        <div class="col-md-2">
-            <div class=" bg-aqua text-center">
-              <span class="info-box-tex t">Saldo</span>
-              <span class="info-box-number">{{ctrl.estatistica.saldo | currency}}</span>
-          </div>
+<div ng-controller="LancamentosEstatisticaController as ctrl">
+	<div align="center">
+		<label>Periodo de {{estatistica.dataInicial | date : 'dd/MM/yyyy'}} a {{estatistica.dataFinal | date : 'dd/MM/yyyy'}}.</label>
+	</div>
+	<div class="row">
+        <div class="col-md-2">        	
+	            <div class=" bg-aqua text-center">
+	              <span class="info-box-tex t">Saldo</span>
+	              <span class="info-box-number">{{estatistica.saldo | currency}}</span>
+	          </div>        
         </div>
         <div class="col-md-2">
-            <div class=" bg-green text-center">
-              <span class="info-box-text">Entrada</span>
-              <span class="info-box-number">{{ctrl.estatistica.entrada | currency}}</span>
-          </div>
+        	<a href=""  ng-click="visualizar('ENTRADA')">
+	            <div class=" bg-green text-center">
+	              <span class="info-box-text">Entrada</span>
+	              <span class="info-box-number">{{estatistica.entrada | currency}}</span>
+	          </div>
+            </a>
         </div>
         <div class="col-md-2">
-            <div class=" bg-yellow text-center">
-              <span class="info-box-text">Saida</span>
-              <span class="info-box-number">{{ctrl.estatistica.saida | currency}}</span>
-          </div>
+        	<a href=""  ng-click="visualizar('SAIDA')">
+	            <div class=" bg-yellow text-center">
+	              <span class="info-box-text">Saida</span>
+	              <span class="info-box-number">{{estatistica.saida | currency}}</span>
+	          </div>
+	         </a> 
         </div>
          <div class="col-md-2">
-            <div class=" bg-green text-center">
-              <span class="info-box-text">Entradas Futuras</span>
-              <span class="info-box-number">{{ctrl.estatistica.entradaFutura | currency}}</span>
-          </div>
+         	<a href=""  ng-click="visualizar('ENTRADA_FUTURA')">
+	            <div class=" bg-green text-center">
+	              <span class="info-box-text">Entradas Futuras</span>
+	              <span class="info-box-number">{{estatistica.entradaFutura | currency}}</span>
+	          </div>
+	         </a>
         </div>
         <div class="col-md-2">
+       	 <a href=""  ng-click="visualizar('SAIDA_FUTURA')">
             <div class=" bg-yellow text-center">
               <span class="info-box-text">Saídas Futuras</span>
-              <span class="info-box-number">{{ctrl.estatistica.saidaFutura | currency}}</span>
+              <span class="info-box-number">{{estatistica.saidaFutura | currency}}</span>
           </div>
+         </a>
         </div>
          <div class="col-md-2">
             <div class=" bg-aqua text-center">
               <span class="info-box-text">Saldo Previsto Futuras</span>
-              <span class="info-box-number">{{ctrl.estatistica.saldoPrevisto | currency}}</span>
+              <span class="info-box-number">{{estatistica.saldoPrevisto | currency}}</span>
           </div>
         </div>
 </div><br>
@@ -49,5 +61,26 @@
 			</div>
 		</div>
 		
+</div>
+<div class="row">
+	<div class="col-sm-12"> 
+     	<div class="col-sm-12" ng-if="estatistica.contasAPagarVencidas > 0">
+     	<a href=""  ng-click="visualizar('VENCIDAS_A_PAGAR')">
+         <div class="callout callout-warning ">
+                <h4>Contas a pagar Vencidas!</h4>
+                <h3>Valor: {{estatistica.contasAPagarVencidas | currency}}</h3>
+          </div>
+          </a>
+         </div>  
+         <div class="col-sm-12 " ng-if="estatistica.contasAReceberVencidas > 0">  	
+         <a href=""  ng-click="visualizar('VENCIDAS_A_RECEBER')">
+          <div class="callout callout-info ">
+                <h4>Contas a receber Vencidas!</h4>
+                 <h3>Valor: {{estatistica.contasAReceberVencidas | currency}}</h3>
+          </div>
+          </a>
+          </div>
+     </div>  
+</div>
 </div>
 

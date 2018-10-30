@@ -4,7 +4,7 @@ app.controller("LancamentosListarController", LancamentosListarController);
 app.controller("LancamentosShowController", LancamentosShowController);
 app.controller("LancamentosEstatisticaController", LancamentosEstatisticaController);
 
-function LancamentosCadastarController($localStorage, $state, $stateParams, LancamentosService, SubCategoriaService, CategoriaService, FabricanteService, toastr, $scope){
+function LancamentosCadastarController($localStorage, $state, $stateParams, LancamentosService, SubCategoriaService, CategoriaService, FabricanteService, toastr, $scope, $rootScope){
 	
 	var self = this;	
 	
@@ -13,6 +13,11 @@ function LancamentosCadastarController($localStorage, $state, $stateParams, Lanc
 	tipos();
 	categorias();
 	
+	$rootScope.visualizar = visualizar;
+	function visualizar(param){
+ 		$state.go('lancamentos.list', {Tipo});
+ 	};
+ 	
 	function submit(form){
 		if(form.$invalid){
 			sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
@@ -20,6 +25,7 @@ function LancamentosCadastarController($localStorage, $state, $stateParams, Lanc
 		}
 			LancamentosService.insert(self.lancamento).
 			then(function(response){
+				estatistica();
 				toastr.success("Lancamento, cadastrado");		
 				clear(form);
 			}, function(errResponse){
@@ -46,125 +52,120 @@ function LancamentosCadastarController($localStorage, $state, $stateParams, Lanc
 	function clear(form){	    	 
     	 form.$setPristine();
     	 form.$setUntouched();   
-    	 self.lancamento = null;    	
+    	 self.lancamento = null; 
+    	
      }
-		
+	
+	function estatistica(){
+ 		LancamentosService.estatistica().
+ 		then(function(p){
+ 			$scope.$evalAsync(function () {
+   	    	 $rootScope.estatistica = p;  
+   		  });
+ 			}, function(errResponse){
+ 		});
+ 	};
 	 	 
 			
 }		
 
-function LancamentosEditarController($localStorage, $state, $stateParams, LancamentosService, SubCategoriaService, CategoriaService, FabricanteService, toastr, $scope){
+function LancamentosEditarController($localStorage, $state, $stateParams, LancamentosService, toastr, $scope, $rootScope){
 	
 	var self = this;
 	
 	var idLancamentos = $stateParams.idLancamentos;
 	
 	self.submit = submit;
-	self.itens = [];
-	self.lancamentos = {itens : self.itens};
-	self.adicionarProdutos = adicionarProdutos;
-	self.ativarExcluirLote = ativarExcluirLote;
-	self.apagarProdutos = apagarProdutos;
-	$scope.backPage = $stateParams.backPage;
-
-	
-	self.proximaPagina = proximaPagina;
+	tipos();
+	categorias();	 
 	findById(idLancamentos);
+	$rootScope.visualizar = visualizar;
 	
-	if($localStorage.lancamentos){
-		self.lancamentos = $localStorage.lancamentos;
-	}
 	
-	function proximaPagina(proxima){
-		var backPage = 'lancamentos.editar';
-		$state.go(proxima ,{backPage});
-		$localStorage.lancamentos = self.lancamentos;
-	}
-	
+	function visualizar(param){
+ 		$state.go('lancamentos.list', {Tipo});
+ 	};
+ 	
 	function submit(form){
 		if(form.$invalid){
 			sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
 			return;
 		}
-		if(self.itens.length < 1){
-			sweetAlert({title: "É Obrigatório pelo menos 1 item", 	type : "info", timer : 100000,   width: 500,  padding: 20});	
-			return;
-		}
-				self.lancamentos.itens = self.itens;
-				LancamentosService.update(self.lancamentos).
-				then(function(response){
-					toastr.success("Lancamentos, Alterada")
-					self.lancamentos = null;
-					if($scope.backPage){
-						$state.go($scope.backPage);
-					}else{
-						$state.go('lancamentos.consultar');
-					}
-					clear(form);
-				}, function(errResponse){
-					sweetAlert({ timer : 3000,  text : errResponse.data.message,  type : "error", width: 300, higth: 300, padding: 20});
-				});			
-		};
+			LancamentosService.update(self.lancamento, self.lancamento.id).
+			then(function(response){
+				toastr.success("Lancamento, Alterado");		
+				clear(form);
+			}, function(errResponse){
+				sweetAlert({ timer : 3000,  text : errResponse.data.message,  type : "error", width: 300, higth: 300, padding: 20});
+			});			
+	};
 		
-		
-	function adicionarProdutos(descricao , quantidade){
-		self.itens.push({
-			descricao : descricao,
-			quantidade : quantidade	
-		})
-	}
-	
-	
-	function ativarExcluirLote(itens){
-		self.itens.filter(function(f){
-		if(f.selecionado){
-			$scope.ativadoExcluirLote = true; }
+	function tipos(){
+		LancamentosService.tipos().
+		then(function(p){
+			self.tipos = p;
+			}, function(errResponse){
 		});
-	}
-		
-	function apagarProdutos(itens){
-			self.itens = self.itens.filter(function(f){
-			if(!f.selecionado) return f;
-			$scope.ativadoExcluirLote = false;
+	};
+	
+	function categorias(){
+		LancamentosService.categorias().
+		then(function(p){
+			self.categorias = p;
+			}, function(errResponse){
 		});
-	}
-		
+	};
+	
 	function clear(form){	    	 
     	 form.$setPristine();
     	 form.$setUntouched();   
-    	 self.lancamentos = null;
-    	 $localStorage.$reset()
+    	 self.lancamento = null;  
+    	 $state.go("lancamentos.consultar");
     	
      }
-	
+		
+	 	 
 	function findById(id){
 		if(!id)return;
 		LancamentosService.findById(id).
 		then(function(p){
-			self.lancamentos = p;
-			self.itens = p.itens;
-			self.lancamentos.dataLimite = new Date(p.dataLimite);
+			self.lancamento = p;
 			}, function(errResponse){
 		});
 	};
+	
 		
+	
 }
 
-function LancamentosListarController(blockUI, LancamentosService, toastr, $scope){
+function LancamentosListarController(blockUI, LancamentosService, toastr, $scope, $rootScope, $stateParams, $state){
 	
 	var self = this;
 	
+	var tipo = $stateParams.Tipo;
+	self.page = {page : 0 ,linesPerPage : 24 , orderBy : 'id' , direction : 'ASC'};
+	$scope.lancamentoFilter = {page : self.page};
+	$rootScope.visualizar = visualizar;
+	$scope.titulo = 'TODOS';
+	if(tipo){
+		$scope.titulo = tipo;
+	   var adicional = tipo;
+	   $scope.lancamentoFilter = {page : self.page, adicional : adicional};
+	}
+
 	self.sort = sort;	
 	$scope.filter = filter;
 	$scope.pesquisar = pesquisar;
-	self.page = {page : 0 ,linesPerPage : 24 , orderBy : 'id' , direction : 'ASC'};
-	$scope.lancamentoFilter = {page : self.page}
+	
 	$scope.imprimir = 'PAGINA';
 	
 	filter($scope.lancamentoFilter);
 	tipos();
 	categorias();
 	status();
+	estatistica();
+	
+	
 		
 	function sort(orderBy){		
 		$scope.lancamentoFilter.page.orderBy = orderBy;
@@ -240,6 +241,16 @@ function LancamentosListarController(blockUI, LancamentosService, toastr, $scope
  			}, function(errResponse){
  		});
  	};
+ 	
+ 	function estatistica(){
+ 		LancamentosService.estatistica().
+ 		then(function(p){
+ 			 $scope.$evalAsync(function () {
+    	    	 $rootScope.estatistica = p;  
+    		  });
+ 			}, function(errResponse){
+ 		});
+ 	};
 	  
 	   function closeLancamentos(id) {
 			swal({ 
@@ -258,6 +269,12 @@ function LancamentosListarController(blockUI, LancamentosService, toastr, $scope
 			});
 		})
 	}
+	   
+	   function visualizar(param){
+		   $scope.titulo = param;
+		   $scope.lancamentoFilter = {page : self.page, adicional : param};
+		   filter($scope.lancamentoFilter);
+	 	};
 	 	
 }
 
@@ -325,18 +342,23 @@ function LancamentosShowController( $state, $stateParams, LancamentosService, $s
 };	     
 }
 
-function LancamentosEstatisticaController(blockUI, LancamentosService, toastr, $scope){
+function LancamentosEstatisticaController(blockUI, LancamentosService, toastr, $scope, $rootScope, $state){
 	
 	var self = this;
 	
 	estatistica();
+	$rootScope.visualizar = visualizar;
  	
  	function estatistica(){
  		LancamentosService.estatistica().
  		then(function(p){
- 			self.estatistica = p;
+ 			$rootScope.estatistica = p;
  			}, function(errResponse){
  		});
+ 	};
+ 	
+ 	function visualizar(param){
+ 		$state.go('lancamentos.list', {Tipo});
  	};
  	 	
 }

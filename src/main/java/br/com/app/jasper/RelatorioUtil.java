@@ -1,5 +1,6 @@
 package br.com.app.jasper;
 
+import java.net.URL;
 import java.util.HashMap;
 
 import org.springframework.stereotype.Service;
@@ -16,15 +17,32 @@ public class RelatorioUtil {
 		return "/relatorio/compras/cotacao.vencedores.jrxml";
 	}
 
+	public String caminhoArquivoCotacaoVencedoresItens() {
+		URL url = getClass().getResource("/relatorio/compras/item.cotacao.vencedores.jrxml");
+		return url.toString();
+	}
+	
 	public String caminhoArquivoCotacaoEmpresa() {
 		return "/relatorio/compras/cotacao.empresa.jrxml";
+	}
+	
+	public String caminhoArquivoCotacaoEmpresaItens() {
+		URL url = getClass().getResource("/relatorio/compras/item.cotacao.empresa.jrxml");
+		return url.toString();
+	}
+	
+	public String caminhoArquivoLancamentos() {
+		return "/relatorio/financeiro/lancamentos.jrxml";
+	}
+	
+	public String caminhoArquivoLancamentosItens() {
+		URL url = getClass().getResource("/relatorio/financeiro/lancamentos.jrxml");
+		return url.toString();
 	}
 	
 	public  HashMap<String, Object> caminhoMapaDeLogos() {
 		HashMap<String, Object> hashMap = new HashMap<>();
 		return hashMap;
 	}
-
-	
 
 }

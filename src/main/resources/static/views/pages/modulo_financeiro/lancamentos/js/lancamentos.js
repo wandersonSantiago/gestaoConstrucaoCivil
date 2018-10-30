@@ -19,6 +19,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				  }
 		})
 		
+		.state('lancamentos.list', {
+			url : "/:Tipo/tipos",
+			templateUrl : "views/pages/modulo_financeiro/lancamentos/lancamentos.list.html",
+			controller : "LancamentosListarController as ctrl",
+			ncyBreadcrumb: {
+				 	parent: 'lancamentos.menu',
+				    label: 'Pesquisa'
+				  }
+		})
+		
 		.state('lancamentos.cadastrar', {
 			requiresAuthentication: true,
 			url : "/cadastrar",

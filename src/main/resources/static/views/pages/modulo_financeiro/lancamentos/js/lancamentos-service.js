@@ -12,8 +12,8 @@ app.factory('LancamentosService', function($rootScope, toastr, $http,$q){
 			});
 		},
 		
-		update: function(lancamento, idLancamento){			
-			return $http.put(url + "/" + idLancamento, lancamento)
+		update: function(lancamento, id){			
+			return $http.put(url + "/" + id, lancamento)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){

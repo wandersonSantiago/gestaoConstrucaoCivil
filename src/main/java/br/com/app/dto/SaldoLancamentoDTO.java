@@ -23,55 +23,50 @@ public class SaldoLancamentoDTO {
 	private BigDecimal saidaFutura;
 	private Date dataInicial;
     private Date dataFinal;
+    private BigDecimal contasAPagarVencidas;
+    private BigDecimal contasAReceberVencidas;
     private List<Lancamento> lancamentos = new ArrayList<>();
-    public int qtdAPagarVencidas;
-    public int qtdAReceberVencidas;
     
     
 	public SaldoLancamentoDTO(BigDecimal totalEntrada,BigDecimal totalsaida, BigDecimal entrada, BigDecimal saida, BigDecimal entradaFutura,
-			BigDecimal saidaFutura, Date dataInicial, Date dataFinal) {
+			BigDecimal saidaFutura,BigDecimal contasAPagarVencidas, BigDecimal contasAReceberVencidas, Date dataInicial, Date dataFinal) {
 		super();
-		this.saldo = totalEntrada.subtract(totalsaida);
+		this.saldo = Optional.ofNullable(totalEntrada).orElse(BigDecimal.ZERO).subtract(Optional.ofNullable(totalsaida).orElse(BigDecimal.ZERO));
 		this.entrada = entrada;
 		this.saida = saida;
 		this.entradaFutura = entradaFutura;
 		this.saidaFutura = saidaFutura;
 		this.dataInicial = dataInicial;
 		this.dataFinal = dataFinal;
+		this.contasAPagarVencidas = contasAPagarVencidas;
+		this.contasAReceberVencidas = contasAReceberVencidas;
 	}
     
+
+
 	public BigDecimal getSaldoPrevisto() {
 		return saldo.add(Optional.ofNullable(entradaFutura).orElse(BigDecimal.ZERO))
 				.subtract(Optional.ofNullable(saidaFutura).orElse(BigDecimal.ZERO));
 	}
-    
+	/* 
 	public BigDecimal getContasAPagarVencidas() {
-		return calculaValorDaLista(TipoLancamentoEnum.DEBITO);	
+		return calculaValorDaLista(lancamentos,TipoLancamentoEnum.DEBITO);	
 	}
     
 	public BigDecimal getContasAReceberVencidas() {
-		return calculaValorDaLista(TipoLancamentoEnum.CREDITO);
+		return calculaValorDaLista(lancamentos, TipoLancamentoEnum.CREDITO);
 	}
 	
-	public BigDecimal calculaValorDaLista(TipoLancamentoEnum tipo) {
-		lancamentos.removeIf((Lancamento item) -> item.getTipo().equals(tipo));
-		List<Lancamento> itens = lancamentos;
-		adicionaAQuantidadePorTipo(itens, tipo);
+	public BigDecimal calculaValorDaLista(List<Lancamento> lanc , TipoLancamentoEnum tipo) {
+		lanc.removeIf((Lancamento item) -> !item.getTipo().equals(tipo));
+		List<Lancamento> itens = lanc;
 		return itens.stream()
 				.map(Lancamento::getValor)
 				.reduce(BigDecimal::add)
 				.orElse(BigDecimal.ZERO);
-	}
+	}*/
 	
 	
-    public void adicionaAQuantidadePorTipo(List<Lancamento> itens, TipoLancamentoEnum  tipo) {    	
-		if(tipo.equals(TipoLancamentoEnum.CREDITO)) {
-			qtdAReceberVencidas = itens.size();
-		}else {
-			qtdAPagarVencidas = itens.size();
-		}
-    }
-
 	public BigDecimal getSaldo() {
 		if(saldo == null) {
 			return BigDecimal.ZERO;

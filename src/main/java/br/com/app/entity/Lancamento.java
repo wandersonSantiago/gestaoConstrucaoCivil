@@ -75,10 +75,13 @@ public class Lancamento implements Serializable {
 	
 	public StatusLancamento getStatus() {
 		if(dataPagamentoOuRecebimento == null) {
-			if(dataVencimento.after(new Date())) {				
+			if(dataVencimento.before(new Date())) {				
 			return StatusLancamento.VENCIDO;
 			}
 			return StatusLancamento.PENDENTE;
+		}
+		if(tipo.equals(TipoLancamentoEnum.CREDITO)) {
+			return StatusLancamento.RECEBIDO;
 		}
 			return StatusLancamento.PAGO;		
 	}

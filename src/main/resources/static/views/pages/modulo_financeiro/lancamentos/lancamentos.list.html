@@ -10,9 +10,9 @@
 	  <div class="col-lg-6">
 	    <div class="input-group">
 	      <input type="text" class="form-control" placeholder="Pesquisar pelo tema" ng-model="lancamentoFilter.tema" autofocus
-	      	 ng-keyup="$event.keyCode == 13 && filter(lancamentoFilter)">
+	      	 ng-keyup="$event.keyCode == 13 && lancamentoFilter.adicional = null; && filter(lancamentoFilter)">
 	      <span class="input-group-btn">
-	        <button class="btn btn-default" type="button" ng-click="lancamentoFilter.page.page = 0; filter(lancamentoFilter)">Pesquisar!</button>
+	        <button class="btn btn-default" type="button" ng-click="lancamentoFilter.page.page = 0; lancamentoFilter.adicional = null; filter(lancamentoFilter)">Pesquisar!</button>
 	      </span>
 	    </div>
 	  </div>
@@ -40,11 +40,11 @@
 				</div>
 			</div>
 			<div class="row">				
-				<div class="form-group  col-sm-5">
+				<div class="form-group  col-sm-8">
 					<label for="valorMinimo">Observação:</label>
 					<input type="text" class="form-control" id="item" ng-model="lancamentoFilter.observacao"/>
 				</div>
-				<div class="form-group  col-sm-5">
+				<div class="form-group  col-sm-4">
 				<label for="dataCadastro">Valor:</label>
 					<div class="form-inline">
 						<input type="text" class="form-control" id="valorDe" ui-money-mask="2" ng-model="lancamentoFilter.valorDe"/>
@@ -52,12 +52,12 @@
 						<input type="text" class="form-control" id="valorAte" ui-money-mask="2" ng-model="lancamentoFilter.valorAte"/>
 					</div>
 				</div>
-				<div class="form-group  col-sm-2">
+				<!-- <div class="form-group  col-sm-3">
 					<label>Status:</label><br>
 					<select class="form-control "  ng-model="lancamentoFilter.status" ng-options="status  for status in ctrl.status" 
 						name="status" >
 					</select>	
-				</div>					
+				</div>	 -->				
 			</div>	
 			<div class="row">
 				<div class="form-group  col-sm-4">
@@ -86,18 +86,18 @@
 					</div>
 				</div>						
 			</div>
-				<div class="col-sm-2">
-		<label>Opção de visualização:</label><br>
+			<div class="col-sm-2">
+				<label>Opção de visualização:</label><br>
 				<label class="radio-inline">
 					<input  type="radio" name="radioImprimir" ng-model="imprimir" value="PAGINA">Página
 				</label> 
 				<label class="radio-inline">
 					<input  type="radio" name="radioImprimir" ng-model="imprimir" 	value="PDF">PDF
 				</label>
-				</div>
+			</div>
 		<br>
-			<button type="submit" class="btn  btn-primary col-sm-2" ng-click="pesquisar(lancamentoFilter,imprimir)">Pesquisar</button>
-			<button type="submit" class="btn  btn-default col-sm-2" ng-click="lancamentoFilter == null">Limpar Formulario</button>
+			<button type="submit" class="btn  btn-primary col-sm-2" ng-click="lancamentoFilter.page.page = 0; lancamentoFilter.adicional = null; pesquisar(lancamentoFilter,imprimir)">Pesquisar</button>
+			<button type="submit" class="btn  btn-default col-sm-2" ng-click="(lancamentoFilter = null)">Limpar Formulario</button>
 		</div>
 		<div ng-show="mensagemErro" class="alert alert-warning alert-dismissible">
 	         <h4><i class="icon fa fa-warning"></i>{{mensagemErro}}</h4>
@@ -109,7 +109,7 @@
 	   <div align="center">
 			<div class="small-box bg-aqua">
 				<div class="inner" align="center">
-					<h4>Pesquisa de Lançamentos</h4>					
+					<h4>Pesquisa de Lançamentos {{titulo}}</h4>					
 				</div>
 			</div>
 		</div>
@@ -121,9 +121,11 @@
 						<th ><a href="" ng-click="ctrl.sort('descricao')"><i class="glyphicon glyphicon-sort"></i></a>Descrição</th>
 						<th ><a href=""ng-click="ctrl.sort('dataVencimento')"><i class="glyphicon glyphicon-sort"></i></a>Vencimento</th>
 						<th ><a href=""ng-click="ctrl.sort('dataPagamentoOuRecebimento')"><i class="glyphicon glyphicon-sort"></i></a>Data Pagt/Recebimento</th>	
+						<th ><a href=""ng-click="ctrl.sort('categoria')"><i class="glyphicon glyphicon-sort"></i></a>Categoria</th>
 						<th ><a href=""ng-click="ctrl.sort('tipo')"><i class="glyphicon glyphicon-sort"></i></a>Tipo</th>
 						<th >Valor</th>
 						<th >Status</th>
+						<th >Opções</th>
 					</tr>
 				</thead>
 				<tbody
@@ -133,9 +135,11 @@
 						<td><a class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}" title="Visualizar este lançamento" ui-sref="lancamento.show({idLancamento : lancamento.id})">{{lancamento.descricao}}</a></td>
 						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.dataVencimento | date : 'dd/MM/yyyy'}}</td>
 						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.dataPagamentoOuRecebimento | date : 'dd/MM/yyyy'}}</td>	
+						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.categoria}}</td>	
 						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.tipo}}</td>			
 						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.valor | currency}}</td>	
 						<td class="{{lancamento.dataPagamentoOuRecebimento == null ? 'red' : 'blue'}}">{{lancamento.status}}</td>	
+						<td class="text-center"><a  title="Editar" ng-if="lancamento.editavel" ui-sref="lancamentos.editar({idLancamentos : lancamento.id})"><i class="glyphicon glyphicon-edit"></i></a></td>
 				
 					</tr>
 				</tbody>						

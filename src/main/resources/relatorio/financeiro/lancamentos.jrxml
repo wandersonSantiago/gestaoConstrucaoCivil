@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.3.final using JasperReports Library version 6.4.3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cotacao" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6d82f1cf-27bf-421c-be60-c7844d92fd79">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<property name="com.jaspersoft.studio.report.description" value=""/>
+	<parameter name="SUBREPORT_ITENS" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="valorEntrada" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[valorEntrada]]></fieldDescription>
+	</field>
+	<field name="observacao" class="java.lang.String">
+		<fieldDescription><![CDATA[observacao]]></fieldDescription>
+	</field>
+	<field name="tipo" class="br.com.app.enuns.TipoLancamentoEnum">
+		<fieldDescription><![CDATA[tipo]]></fieldDescription>
+	</field>
+	<field name="editavel" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[editavel]]></fieldDescription>
+	</field>
+	<field name="categoria" class="br.com.app.enuns.CategoriaEnum">
+		<fieldDescription><![CDATA[categoria]]></fieldDescription>
+	</field>
+	<field name="valor" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[valor]]></fieldDescription>
+	</field>
+	<field name="objeto" class="java.lang.String">
+		<fieldDescription><![CDATA[objeto]]></fieldDescription>
+	</field>
+	<field name="descricao" class="java.lang.String">
+		<fieldDescription><![CDATA[descricao]]></fieldDescription>
+	</field>
+	<field name="idObjeto" class="java.lang.Long">
+		<fieldDescription><![CDATA[idObjeto]]></fieldDescription>
+	</field>
+	<field name="valorSaida" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[valorSaida]]></fieldDescription>
+	</field>
+	<field name="dataVencimento" class="java.util.Date">
+		<fieldDescription><![CDATA[dataVencimento]]></fieldDescription>
+	</field>
+	<field name="dataPagamentoOuRecebimento" class="java.util.Date">
+		<fieldDescription><![CDATA[dataPagamentoOuRecebimento]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="dataCadastro" class="java.util.Date">
+		<fieldDescription><![CDATA[dataCadastro]]></fieldDescription>
+	</field>
+	<field name="status" class="br.com.app.enuns.StatusLancamento">
+		<fieldDescription><![CDATA[status]]></fieldDescription>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="7f43929d-bc2d-4590-95ac-72ba64385573"/>
+				<staticText>
+					<reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF" uuid="fb668273-d909-47d0-9ae0-da494f16e557"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Lançamentos]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="340" y="40" width="225" height="23" forecolor="#FFFFFF" uuid="49a45662-2be2-4a3c-a8e4-39d69f138968"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Sistema Gestão Construção Civil]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="48">
+			<staticText>
+				<reportElement x="80" y="18" width="400" height="30" uuid="7f0ad11a-5bd1-4c69-9796-fdf14dc41b88"/>
+				<textElement textAlignment="Center">
+					<font size="22"/>
+				</textElement>
+				<text><![CDATA[Pesquisa de Lançamentos]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="5c8d5d31-da54-4cbc-81c4-1beb226576a8"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="0" width="47" height="20" uuid="458c8b8f-2082-4e97-9e5f-980a03691600"/>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="2" width="73" height="17" uuid="259d010c-15ce-4c22-a464-3b3338ba9103"/>
+				<text><![CDATA[Vencimento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="1" width="70" height="17" uuid="1fa8c19f-793c-4c5d-a105-5edfd6e9c1ba"/>
+				<text><![CDATA[Pagamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="2" width="60" height="17" uuid="7990e814-1d5d-4fb5-9f4e-dceaaf57cca9"/>
+				<text><![CDATA[Tipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="0" width="49" height="20" uuid="0fb9c042-cc02-438e-b9fb-5c12586b699b"/>
+				<text><![CDATA[Status:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="-1" width="49" height="20" uuid="8190e4d1-8ad1-4f5e-acba-3a6d1cc4cf59"/>
+				<text><![CDATA[Credito]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="501" y="-1" width="49" height="20" uuid="30e10b53-48ba-4c26-9765-0d8d97889a3f"/>
+				<text><![CDATA[Debito]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="263">
+			<textField>
+				<reportElement x="0" y="0" width="170" height="31" uuid="92171d21-0acc-4194-94a1-6601da342599"/>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="d/M/yy">
+				<reportElement x="170" y="-4" width="80" height="20" uuid="c37af8a0-8a19-472f-9f1b-97aadc75489d"/>
+				<textFieldExpression><![CDATA[$F{dataVencimento}]]></textFieldExpression>
+			</textField>
+			<textField pattern="d/M/yy">
+				<reportElement x="250" y="-2" width="70" height="20" uuid="e45d875a-3ac6-4119-9179-d8149b18c6cc"/>
+				<textFieldExpression><![CDATA[$F{dataPagamentoOuRecebimento} == null ? "" : $F{dataPagamentoOuRecebimento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="-2" width="60" height="20" uuid="a390e642-da28-47ce-852f-44819fe4680a"/>
+				<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="0" width="60" height="20" uuid="8f5a9b99-f9e3-42bc-80d8-ef1c262eb979"/>
+				<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="440" y="0" width="61" height="20" uuid="5e99e9e5-4948-4aa0-9708-2f191e8164fb"/>
+				<textFieldExpression><![CDATA[$F{valorEntrada} == null ? "" : $F{valorEntrada}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="505" y="0" width="50" height="20" uuid="134c64e8-1169-4b79-b114-1e0171a3aa62"/>
+				<textFieldExpression><![CDATA[$F{valorSaida} == null ? "" : $F{valorSaida}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="0" y="40" width="555" height="40" uuid="95662234-0fb1-4f09-bdaa-a3082306313b"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource() ]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_ITENS}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="926ef50f-7dbe-414c-8bf2-4d7ec9e3a5b3"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="e22e8b90-6958-4303-a95d-eeb2dc25bc90"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="210" height="13" uuid="a48c9085-8187-443d-be7b-62ad36b8e1e2"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="-1" width="555" height="1" uuid="f94124de-18c9-46dc-b1bb-1b0a4b48ba01"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
