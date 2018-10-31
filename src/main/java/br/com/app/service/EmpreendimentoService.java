@@ -7,10 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.app.entity.ConfiguracaoEmpreendimento;
 import br.com.app.entity.Empreendimento;
 import br.com.app.entity.Usuario;
 import br.com.app.exceptions.NotFoundException;
 import br.com.app.pojo.SessionUsuario;
+import br.com.app.repository.ConfiguracaoEmpreendimentoRepository;
 import br.com.app.repository.EmpreendimentoRepository;
 
 @Service
@@ -19,7 +21,9 @@ public class EmpreendimentoService {
 
 	@Autowired
 	private EmpreendimentoRepository empreendimentoRepository;
-
+	@Autowired
+	private ConfiguracaoEmpreendimentoRepository configuracaoEmpreendimentoRepository;
+	
 	@Transactional(readOnly = false)
 	public Empreendimento insert(Empreendimento empreendimento) {
 		Usuario usuario = SessionUsuario.getInstance().getUsuario();
@@ -32,8 +36,17 @@ public class EmpreendimentoService {
 			}
 			empreendimento.setMatriz(usuario.getEmpreendimento());
 		}
+		 empreendimentoRepository.save(empreendimento);
+		 salvarConfiguracaoPadaro(empreendimento);
+		return empreendimento;
+	}
 
-		return empreendimentoRepository.save(empreendimento);
+	private void salvarConfiguracaoPadaro(Empreendimento empreendimento) {
+		ConfiguracaoEmpreendimento config = new ConfiguracaoEmpreendimento();
+		config.setDataBaseFinanceiro(7);
+		config.setEmpreendimento(empreendimento);
+		configuracaoEmpreendimentoRepository.save(config);
+		
 	}
 
 	public Empreendimento findById(Long id) {
