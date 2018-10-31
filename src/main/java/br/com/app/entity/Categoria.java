@@ -32,7 +32,16 @@ public class Categoria implements Serializable {
 	private boolean ativo;
 	@NotNull
 	private String descricao;
-	
 	@ManyToOne
 	private Categoria categoria;
+	
+	public Categoria() {		
+	}
+	
+	public Categoria(Long id, String descricao, Categoria categoria) {
+		this.id = id;
+		this.ativo = true;
+		this.descricao = descricao;
+		this.categoria = categoria;
+	}
 }

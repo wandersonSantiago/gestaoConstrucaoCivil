@@ -3,6 +3,7 @@ package br.com.app.web.controller;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.app.dto.CorpoPdfDTO;
 import br.com.app.dto.LancamentoDTO;
 import br.com.app.dto.SaldoLancamentoDTO;
 import br.com.app.entity.Lancamento;
@@ -104,10 +106,15 @@ public class LancamentoRestController {
 		response.setHeader("Content-Disposition", "inline; filename=file.pdf");
 	    response.setContentType("application/pdf");
 	    
+	    filters.getPage().setLinesPerPage(100000);
 	    Page<Lancamento>  list = lancamentoService.filters(filters);
 	    List<LancamentoDTO> listDTO = list.stream().map(obj -> new LancamentoDTO(obj)).collect(Collectors.toList());
 	try {	
-		return jasperReportsService.generateReport(listDTO, relatorioUtil.caminhoArquivoLancamentos() , relatorioUtil.caminhoMapaDeLogos() );	
+		HashMap<String, Object> hashMap = new HashMap<>();
+		hashMap.put("SUB_REPORT_DIR", relatorioUtil.caminhoArquivoLancamentosItens());
+		return jasperReportsService.generateReport(Arrays.asList(new CorpoPdfDTO("relatório", listDTO)), 
+				relatorioUtil.caminhoArquivoLancamentos() ,
+				relatorioUtil.caminhoMapaDeLogos(hashMap) );	
 		
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -131,7 +138,7 @@ public class LancamentoRestController {
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/categorias")
 	public Collection<CategoriaEnum> categorias() {
-		return Arrays.asList(CategoriaEnum.DIVERSOS);
+		return Arrays.asList(CategoriaEnum.values());
 	}
 	
 	@GetMapping(value="/estatistica")

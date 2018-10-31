@@ -18,7 +18,7 @@ public class RelatorioUtil {
 	}
 
 	public String caminhoArquivoCotacaoVencedoresItens() {
-		URL url = getClass().getResource("/relatorio/compras/item.cotacao.vencedores.jrxml");
+		URL url = getClass().getResource("/relatorio/compras/item.cotacao.vencedores.jasper");
 		return url.toString();
 	}
 	
@@ -27,7 +27,7 @@ public class RelatorioUtil {
 	}
 	
 	public String caminhoArquivoCotacaoEmpresaItens() {
-		URL url = getClass().getResource("/relatorio/compras/item.cotacao.empresa.jrxml");
+		URL url = getClass().getResource("/relatorio/compras/item.cotacao.empresa.jasper");
 		return url.toString();
 	}
 	
@@ -36,12 +36,12 @@ public class RelatorioUtil {
 	}
 	
 	public String caminhoArquivoLancamentosItens() {
-		URL url = getClass().getResource("/relatorio/financeiro/lancamentos.jrxml");
+		URL url = getClass().getResource("/relatorio/financeiro/item.lancamentos.jasper");
 		return url.toString();
 	}
 	
-	public  HashMap<String, Object> caminhoMapaDeLogos() {
-		HashMap<String, Object> hashMap = new HashMap<>();
+	public  HashMap<String, Object> caminhoMapaDeLogos(HashMap<String, Object> hashMap) {
+		
 		return hashMap;
 	}
 

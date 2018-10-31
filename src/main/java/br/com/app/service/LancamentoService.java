@@ -39,12 +39,14 @@ public class LancamentoService {
 		lancamento.setEmpreendimento(user.getEmpreendimento());
 		lancamento.setUsuario(user);
 		lancamento.setDataCadastro(new Date());
+		lancamento.setValorTotal(lancamento.somaValorTotal());
 		return lancamentoRepository.save(lancamento);
 	}
 
 	@Transactional(readOnly = false)
 	public void update(Lancamento obj, Long id) {
 		findById(id);
+		obj.setValorTotal(obj.somaValorTotal());
 		lancamentoRepository.save(obj);
 	}
 	

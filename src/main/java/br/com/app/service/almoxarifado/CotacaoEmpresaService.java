@@ -1,7 +1,6 @@
 package br.com.app.service.almoxarifado;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,16 @@ public class CotacaoEmpresaService {
 	public void salvarOuEditar(CotacaoEmpresa cotacaoEmpresa) {
 
 		for (CotacaoEmpresaItem item : cotacaoEmpresa.getItens()) {
-			//item.setId(null);
+			item.setId(null);
+			item.setStatus(CotacaoEmpresaItemStatus.PENDENTE);
+			item.setCotacaoEmpresa(cotacaoEmpresa);
+		}
+		cotacaoEmpresaRepository.save(cotacaoEmpresa);
+	}
+	
+	@Transactional(readOnly = false)
+	public void update(CotacaoEmpresa cotacaoEmpresa) {
+		for (CotacaoEmpresaItem item : cotacaoEmpresa.getItens()) {
 			item.setStatus(CotacaoEmpresaItemStatus.PENDENTE);
 			item.setCotacaoEmpresa(cotacaoEmpresa);
 		}

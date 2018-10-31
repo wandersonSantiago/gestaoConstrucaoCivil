@@ -29,5 +29,19 @@ public class TipoProduto implements Serializable{
 
 	@Column(nullable = false, length = 30)
 	private String descricao;
+	
+
+	public TipoProduto(Long id, boolean ativo, String descricao) {
+		super();
+		this.id = id;
+		this.ativo = ativo;
+		this.descricao = descricao;
+	}
+	
+	public TipoProduto() {
+		super();
+	}
+	
+	
 
 }

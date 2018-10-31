@@ -22,7 +22,7 @@
 					</select>
 			</div>
 					
-			<div class="col-sm-2">
+			<div class="col-sm-2" ng-class="{ 'has-error' : iefield.cnpj.$invalid && formMatriz.$submitted }">
 			<label for="cnpj">Inscrição Estadual*:</label>
 				<input class="form-control" name="iefield"  placeholder="Inscrição Estadual" 
 					 ng-model="ctrl.dadoEmpresa.inscricaoEstadual" ng-blur="verificaCtrl.verificaIe(ctrl.dadoEmpresa.inscricaoEstadual)"

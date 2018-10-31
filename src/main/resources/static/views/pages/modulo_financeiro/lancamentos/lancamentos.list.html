@@ -120,11 +120,14 @@
 						<th ><a href="" ng-click="ctrl.sort('id')"><i class="glyphicon glyphicon-sort"></i></a>Id</th>
 						<th ><a href="" ng-click="ctrl.sort('descricao')"><i class="glyphicon glyphicon-sort"></i></a>Descrição</th>
 						<th ><a href=""ng-click="ctrl.sort('dataVencimento')"><i class="glyphicon glyphicon-sort"></i></a>Vencimento</th>
-						<th ><a href=""ng-click="ctrl.sort('dataPagamentoOuRecebimento')"><i class="glyphicon glyphicon-sort"></i></a>Data Pagt/Recebimento</th>	
-						<th ><a href=""ng-click="ctrl.sort('categoria')"><i class="glyphicon glyphicon-sort"></i></a>Categoria</th>
-						<th ><a href=""ng-click="ctrl.sort('tipo')"><i class="glyphicon glyphicon-sort"></i></a>Tipo</th>
-						<th >Valor</th>
+						<th ><a href=""ng-click="ctrl.sort('dataPagamentoOuRecebimento')"><i class="glyphicon glyphicon-sort"></i></a>Pagt/Receb.</th>	
+						<th ><a href=""ng-click="ctrl.sort('categoria')"><i class="glyphicon glyphicon-sort"></i></a>Categoria</th><!-- 
+						<th ><a href=""ng-click="ctrl.sort('tipo')"><i class="glyphicon glyphicon-sort"></i></a>Tipo</th> -->
 						<th >Status</th>
+						<th >Valor</th>
+						<th >Juros</th>
+						<th >Descontos</th>
+						<th >Total</th>						
 						<th >Opções</th>
 					</tr>
 				</thead>
@@ -135,10 +138,13 @@
 						<td><a class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}" title="Visualizar este lançamento" ui-sref="lancamento.show({idLancamento : lancamento.id})">{{lancamento.descricao}}</a></td>
 						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.dataVencimento | date : 'dd/MM/yyyy'}}</td>
 						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.dataPagamentoOuRecebimento | date : 'dd/MM/yyyy'}}</td>	
-						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.categoria}}</td>	
-						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.tipo}}</td>			
-						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.valor | currency}}</td>	
-						<td class="{{lancamento.dataPagamentoOuRecebimento == null ? 'red' : 'blue'}}">{{lancamento.status}}</td>	
+						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.categoria}}</td>	<!-- 
+						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.tipo}}</td>	 -->
+						<td class="{{lancamento.dataPagamentoOuRecebimento == null ? 'red' : 'blue'}}">{{lancamento.status}}</td>
+						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.valor | currency}}</td>			
+						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.juros | currency}}</td>	
+						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.desconto | currency}}</td>						
+						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.total | currency}}</td>		
 						<td class="text-center"><a  title="Editar" ng-if="lancamento.editavel" ui-sref="lancamentos.editar({idLancamentos : lancamento.id})"><i class="glyphicon glyphicon-edit"></i></a></td>
 				
 					</tr>

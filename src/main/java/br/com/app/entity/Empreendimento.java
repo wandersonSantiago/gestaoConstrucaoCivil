@@ -69,6 +69,29 @@ public class Empreendimento implements Serializable{
     public boolean isMatriz() {
     	return matriz == null;
     	
-    }    
+    }
+    
+    public Empreendimento() {
+	}    
+
+	public Empreendimento(Long id, Endereco endereco, String descricao, String telefone, Double valorMaximoGastar,
+			Double valoresGastos, Double porcentagem, Date dataAbertura, Date datafechamento,
+			StatusEmpreendimento status, Empreendimento matriz) {
+		super();
+		this.id = id;
+		this.endereco = endereco;
+		this.descricao = descricao;
+		this.telefone = telefone;
+		this.valorMaximoGastar = valorMaximoGastar;
+		this.valoresGastos = valoresGastos;
+		this.porcentagem = porcentagem;
+		this.dataAbertura = dataAbertura;
+		this.datafechamento = datafechamento;
+		this.status = status;
+		this.matriz = matriz;
+	}
+
+	
+    
     
 }

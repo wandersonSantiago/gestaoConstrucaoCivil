@@ -15,6 +15,7 @@ function LancamentosCadastarController($localStorage, $state, $stateParams, Lanc
 	
 	$rootScope.visualizar = visualizar;
 	function visualizar(param){
+		var Tipo = param;
  		$state.go('lancamentos.list', {Tipo});
  	};
  	
@@ -83,6 +84,7 @@ function LancamentosEditarController($localStorage, $state, $stateParams, Lancam
 	
 	
 	function visualizar(param){
+		var Tipo = param;
  		$state.go('lancamentos.list', {Tipo});
  	};
  	
@@ -197,9 +199,9 @@ function LancamentosListarController(blockUI, LancamentosService, toastr, $scope
 	    	 }, function(errResponse){
 	    		 blockUI.stop();
 	    		 if(errResponse.status == 404){
-	    			 $scope.mensagemErro = errResponse.data.message;
+	    			 $scope.mensagemErro = errResponse.data.mensagem;
 	    		 }else{
-	    			 $scope.mensagemErro =errResponse.data.message;
+	    			 $scope.mensagemErro = errResponse.data.mensagem;
 	    		 }
 			 });
 	    }
@@ -347,7 +349,13 @@ function LancamentosEstatisticaController(blockUI, LancamentosService, toastr, $
 	var self = this;
 	
 	estatistica();
+	
 	$rootScope.visualizar = visualizar;
+	function visualizar(param){
+		console.log(param);
+ 		var Tipo = param;
+ 		$state.go('lancamentos.list', {Tipo});
+ 	};
  	
  	function estatistica(){
  		LancamentosService.estatistica().
@@ -357,9 +365,7 @@ function LancamentosEstatisticaController(blockUI, LancamentosService, toastr, $
  		});
  	};
  	
- 	function visualizar(param){
- 		$state.go('lancamentos.list', {Tipo});
- 	};
+ 	
  	 	
 }
 

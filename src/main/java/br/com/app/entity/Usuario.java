@@ -88,4 +88,25 @@ public class Usuario implements Serializable {
 		}
 		return false;
 	}
+
+	public Usuario() {
+	}
+	public Usuario(Long id, Empreendimento empreendimento, String nome,	 String login, String email, String senha, boolean ativo, String caminhoFoto,
+			StatusUsuarioEnum status, Date dataCadastro) {
+		super();
+		this.id = id;
+		this.empreendimento = empreendimento;
+		this.nome = nome;
+		this.login = login;
+		this.email = email;
+		this.senha = senha;
+		this.ativo = ativo;
+		this.caminhoFoto = caminhoFoto;
+		this.status = status;
+		this.dataCadastro = dataCadastro;
+	}
+
+	
+	
+	
 }

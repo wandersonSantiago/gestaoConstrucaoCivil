@@ -76,4 +76,28 @@ public class Produto implements Serializable {
 	@Transient
 	private boolean geraCodigoBarra = true;
 
+	public Produto() {
+	}
+	
+	public Produto(Long id, Integer codigo, String codigoBarra, String descricao, boolean ativo,
+			UnidadeMedidaEnum unidadeMedida, Categoria categoria, Fabricante fabricante,
+			TipoProduto tipoProduto, boolean geraCodigoBarra) {
+		super();
+		this.id = id;
+		this.codigo = codigo;
+		this.codigoBarra = codigoBarra;
+		this.descricao = descricao;
+		this.ativo = ativo;
+		this.unidadeMedida = unidadeMedida;
+		this.categoria = categoria;
+		this.fabricante = fabricante;
+		this.tipoProduto = tipoProduto;
+		this.geraCodigoBarra = geraCodigoBarra;
+	}
+
+
+	
+	
+	
+
 }

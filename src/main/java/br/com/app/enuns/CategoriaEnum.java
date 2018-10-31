@@ -4,7 +4,9 @@ public enum CategoriaEnum {
 
 	SERVICOS(1,"Serviços"),
 	ESTOQUE(2, "Estoque"),
-	DIVERSOS(3, "Diversos");
+	DIVERSOS(3, "Diversos"),
+	COMPRAS(4, "Compras"),
+	RECURSOS_HUMANOS(5, "Recursos Humanos");
 	
 	private int codigo;
 	private String descricao;

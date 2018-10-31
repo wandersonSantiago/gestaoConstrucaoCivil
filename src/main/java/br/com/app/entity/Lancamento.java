@@ -4,6 +4,7 @@ package br.com.app.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Optional;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -63,8 +64,11 @@ public class Lancamento implements Serializable {
 	private Usuario usuario;
 	
 	@NotNull(message="valor é obrigatório!")
-	private BigDecimal valor;
-	
+	private BigDecimal valor = BigDecimal.ZERO;
+	private BigDecimal juros = BigDecimal.ZERO;
+	private BigDecimal desconto = BigDecimal.ZERO;
+	private BigDecimal valorTotal = BigDecimal.ZERO;
+		
 	private String observacao;
 	private String objeto;
 	private Long idObjeto;
@@ -72,7 +76,7 @@ public class Lancamento implements Serializable {
 	@Transient
 	private StatusLancamento status;
 	
-	
+		
 	public StatusLancamento getStatus() {
 		if(dataPagamentoOuRecebimento == null) {
 			if(dataVencimento.before(new Date())) {				
@@ -86,4 +90,9 @@ public class Lancamento implements Serializable {
 			return StatusLancamento.PAGO;		
 	}
 
+	public BigDecimal somaValorTotal() {
+		return Optional.ofNullable(valor).orElse(BigDecimal.ZERO)
+						.subtract(Optional.ofNullable(desconto).orElse(BigDecimal.ZERO)).
+						add(Optional.ofNullable(juros).orElse(BigDecimal.ZERO));
+	}
 }

@@ -2,6 +2,7 @@ package br.com.app.web.controller.almoxarifado;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -88,7 +89,8 @@ public class CotacaoRestController {
 	    
 	    List<Cotacao> cotacoes = (List<Cotacao>) cotacaoService.listFilter(cotacaoFilter);
 	try {	
-		return jasperReportsService.generateReport(cotacoes, relatorioUtil.caminhoArquivoCotacao() , relatorioUtil.caminhoMapaDeLogos() );	
+	
+		return jasperReportsService.generateReport(cotacoes, relatorioUtil.caminhoArquivoCotacao() , relatorioUtil.caminhoMapaDeLogos(new HashMap<>()) );	
 		
 		} catch (Exception e) {
 			e.printStackTrace();

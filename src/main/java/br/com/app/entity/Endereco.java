@@ -31,7 +31,7 @@ public class Endereco implements Serializable  {
 	@Column(nullable = false,length = 50)
 	private String localidade;
 	@Column(nullable = false)
-	private Integer numero;
+	private String numero;
 	@Column(nullable = false)
 	private String uf;
 	@Column(nullable = false,length = 9)

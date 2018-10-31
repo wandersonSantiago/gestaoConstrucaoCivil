@@ -3,6 +3,7 @@ package br.com.app.dto;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Optional;
 
 import br.com.app.entity.Lancamento;
 import br.com.app.enuns.CategoriaEnum;
@@ -21,15 +22,18 @@ public class LancamentoDTO implements Serializable {
 	private Date dataCadastro;
 	private Date dataPagamentoOuRecebimento;
 	private CategoriaEnum categoria;
-	private TipoLancamentoEnum tipo;
-	private BigDecimal valor;	
+	private TipoLancamentoEnum tipo;	
 	private String observacao;
 	private String objeto;
 	private Long idObjeto;
 	private StatusLancamento status;
 	private boolean editavel;
-	private BigDecimal ValorEntrada;
-	private BigDecimal valorSaida;
+	private BigDecimal valor = BigDecimal.ZERO;	
+	private BigDecimal ValorEntrada = BigDecimal.ZERO;
+	private BigDecimal valorSaida = BigDecimal.ZERO;
+	private BigDecimal juros = BigDecimal.ZERO;
+	private BigDecimal desconto = BigDecimal.ZERO;
+	private BigDecimal total = BigDecimal.ZERO;
 	
 	public LancamentoDTO(Lancamento obj) {
 		super();
@@ -46,7 +50,18 @@ public class LancamentoDTO implements Serializable {
 		this.editavel = dataPagamentoOuRecebimento == null;
 		this.ValorEntrada = obj.getTipo() == TipoLancamentoEnum.CREDITO ? obj.getValor() : null;
 		this.valorSaida = obj.getTipo() == TipoLancamentoEnum.DEBITO ? obj.getValor() : null;
+		this.juros = Optional.ofNullable(obj.getJuros()).orElse(BigDecimal.ZERO);
+		this.desconto = Optional.ofNullable(obj.getDesconto()).orElse(BigDecimal.ZERO);
+		this.total = obj.getValorTotal();
+		/*calculaTotal();*/
 	}
 
- 
+	/*public void calculaTotal() {
+		total = total.add(valor.subtract(desconto).add(juros));
+		if(tipo.equals(TipoLancamentoEnum.CREDITO)) {
+			total = total.add(valor.subtract(desconto).add(juros));
+		}else {
+			total = total.add(valor.subtract(juros).add(desconto));
+		}
+	}*/
 }
