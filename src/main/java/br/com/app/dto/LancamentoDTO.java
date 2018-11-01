@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Optional;
 
 import br.com.app.entity.Lancamento;
+import br.com.app.entity.Usuario;
 import br.com.app.enuns.CategoriaEnum;
 import br.com.app.enuns.StatusLancamento;
 import br.com.app.enuns.TipoLancamentoEnum;
@@ -34,6 +35,9 @@ public class LancamentoDTO implements Serializable {
 	private BigDecimal juros = BigDecimal.ZERO;
 	private BigDecimal desconto = BigDecimal.ZERO;
 	private BigDecimal total = BigDecimal.ZERO;
+	private BigDecimal porcentagemJuros = BigDecimal.ZERO;
+	private BigDecimal porcentagemDesconto = BigDecimal.ZERO;
+	private Usuario usuario;
 	
 	public LancamentoDTO(Lancamento obj) {
 		super();
@@ -53,15 +57,10 @@ public class LancamentoDTO implements Serializable {
 		this.juros = Optional.ofNullable(obj.getJuros()).orElse(BigDecimal.ZERO);
 		this.desconto = Optional.ofNullable(obj.getDesconto()).orElse(BigDecimal.ZERO);
 		this.total = obj.getValorTotal();
-		/*calculaTotal();*/
+		this.porcentagemDesconto = obj.getPorcentagemDesconto();
+		this.porcentagemJuros = obj.getPorcentagemJuros();
+		this.usuario = obj.getUsuario();
 	}
 
-	/*public void calculaTotal() {
-		total = total.add(valor.subtract(desconto).add(juros));
-		if(tipo.equals(TipoLancamentoEnum.CREDITO)) {
-			total = total.add(valor.subtract(desconto).add(juros));
-		}else {
-			total = total.add(valor.subtract(juros).add(desconto));
-		}
-	}*/
+
 }

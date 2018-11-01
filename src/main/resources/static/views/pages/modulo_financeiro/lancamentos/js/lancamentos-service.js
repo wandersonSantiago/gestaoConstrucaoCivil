@@ -11,7 +11,16 @@ app.factory('LancamentosService', function($rootScope, toastr, $http,$q){
 				return $q.reject(errResponse);
 			});
 		},
-		
+		insert: function(form){
+			return $http.post(url , form, {
+	            transformRequest: angular.identity,
+	            headers: {'Content-Type': undefined}
+	        }).then(function(response){
+				return response.data;
+			},function(errResponse){
+			return $q.reject(errResponse);
+			});
+		},
 		update: function(lancamento, id){			
 			return $http.put(url + "/" + id, lancamento)
 			.then(function(response){

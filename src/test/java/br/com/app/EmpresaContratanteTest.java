@@ -1,7 +1,7 @@
 package br.com.app;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class EmpresaContratanteTest extends AbstractMvcTest{
 

@@ -15,7 +15,7 @@ public class GenerateEndereco {
 		 endereco.setCep("13070-060");
 		 endereco.setUf("SP");
 		 endereco.setLogradouro("Rua Presidente João Goulart");
-		 endereco.setNumero(random.nextInt(1000));
+		 endereco.setNumero("1000");
 		 return endereco;
 	}
 }

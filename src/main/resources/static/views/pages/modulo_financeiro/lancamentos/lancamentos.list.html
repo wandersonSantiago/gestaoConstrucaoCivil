@@ -135,7 +135,7 @@
 					ng-repeat=" lancamento in ctrl.lancamentos">
 					<tr>
 						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.id}}</td>
-						<td><a class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}" title="Visualizar este lançamento" ui-sref="lancamento.show({idLancamento : lancamento.id})">{{lancamento.descricao}}</a></td>
+						<td><a class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}" title="Visualizar este lançamento" data-toggle="modal" href=""	data-target=".modalEstrutura" ng-click="ctrl.show(lancamento)"">{{lancamento.descricao}}</a></td>
 						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.dataVencimento | date : 'dd/MM/yyyy'}}</td>
 						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.dataPagamentoOuRecebimento | date : 'dd/MM/yyyy'}}</td>	
 						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.categoria}}</td>	<!-- 
@@ -161,4 +161,23 @@
 			
 	</div>
 			
+
+<div class="modal fade modalEstrutura" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">{{ctrl.titulo}}</h4>
+			</div>
+			<div class="modal-body">
+				<div ng-include="'views/pages/modulo_financeiro/lancamentos/lancamentos.show.html'"></div>
+			</div>
+			
+		</div>
+	</div>
+</div>		
+
 

@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Optional;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -16,9 +17,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import br.com.app.enuns.CategoriaEnum;
 import br.com.app.enuns.StatusLancamento;
@@ -40,10 +46,19 @@ public class Lancamento implements Serializable {
 	@NotBlank(message="Descricao não pode ser em branco")
 	private String descricao;
 	
+	@Column(name="comprovante_base_64", columnDefinition="text")
+	private String comprovanteBase64;
+	
 	@NotNull(message="data de vencimento é obrigatória!")
 	private Date dataVencimento;
 	
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCadastro;
+	
+	@UpdateTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataAlteracao;
 	
 	private Date dataPagamentoOuRecebimento;
 	
@@ -94,5 +109,21 @@ public class Lancamento implements Serializable {
 		return Optional.ofNullable(valor).orElse(BigDecimal.ZERO)
 						.subtract(Optional.ofNullable(desconto).orElse(BigDecimal.ZERO)).
 						add(Optional.ofNullable(juros).orElse(BigDecimal.ZERO));
+	}
+	
+	public BigDecimal getValorTotal() {
+		this.valorTotal =  somaValorTotal();
+		return this.valorTotal;
+	}
+	public BigDecimal getPorcentagemJuros() {
+		return Optional.ofNullable(juros).orElse(BigDecimal.ZERO).
+				divide(Optional.ofNullable(valor).orElse(BigDecimal.ZERO))
+				.multiply(new BigDecimal(100));
+	}
+	
+	public BigDecimal getPorcentagemDesconto() {
+		return Optional.ofNullable(desconto).orElse(BigDecimal.ZERO).
+				divide(Optional.ofNullable(valor).orElse(BigDecimal.ZERO))
+				.multiply(new BigDecimal(100));
 	}
 }

@@ -1,5 +1,6 @@
 package br.com.app.web.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.Arrays;
@@ -121,6 +122,7 @@ public class UsuarioRestController {
 	public void recebeImagem(@RequestPart("file") MultipartFile file, @RequestPart("usuario") Usuario usuario) {
 
 		try {
+			
 			imagemService.createPathAndSaveFile(file, usuario.getLogin());
 			usuario.setCaminhoFoto(imagemService.getPath());
 			usuarioService.savePathFoto(usuario);

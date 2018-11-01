@@ -1,5 +1,6 @@
 package br.com.app.web.controller;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Collection;
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -22,9 +24,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.app.dto.CorpoPdfDTO;
@@ -54,7 +58,15 @@ public class LancamentoRestController {
 	private RelatorioUtil relatorioUtil;
 	
 	@PostMapping
-	public ResponseEntity<Void> insert(@Valid @RequestBody Lancamento obj){
+	public ResponseEntity<Void> insert(@RequestPart(value="file", required = false )  MultipartFile file, @RequestPart("lancamento")  Lancamento obj){
+		try {
+			if(file != null && !file.isEmpty()) {
+				String base64 = Base64.encodeBase64String(file.getBytes());
+				obj.setComprovanteBase64(base64);
+			}			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		obj = lancamentoService.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();

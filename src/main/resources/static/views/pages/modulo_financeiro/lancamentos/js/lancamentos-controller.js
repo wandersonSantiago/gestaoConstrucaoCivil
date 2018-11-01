@@ -12,6 +12,7 @@ function LancamentosCadastarController($localStorage, $state, $stateParams, Lanc
 		
 	tipos();
 	categorias();
+	$scope.obj = {};
 	
 	$rootScope.visualizar = visualizar;
 	function visualizar(param){
@@ -19,7 +20,7 @@ function LancamentosCadastarController($localStorage, $state, $stateParams, Lanc
  		$state.go('lancamentos.list', {Tipo});
  	};
  	
-	function submit(form){
+/*	function submit(form){
 		if(form.$invalid){
 			sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
 			return;
@@ -32,8 +33,34 @@ function LancamentosCadastarController($localStorage, $state, $stateParams, Lanc
 			}, function(errResponse){
 				sweetAlert({ timer : 3000,  text : errResponse.data.message,  type : "error", width: 300, higth: 300, padding: 20});
 			});			
-		};
+		};*/
 		
+		  function submit(form){
+			  if(form.$invalid){
+					sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
+					return;
+				}
+			 	var file = $scope.obj.flow.files[0]
+		    	var form = new FormData();
+			 	if(file){
+			 		form.append('file', file.file);	
+			 	}		    	    	
+		    	form.append('lancamento',new Blob([JSON.stringify(self.lancamento)], {
+		            type: "application/json"
+		        }) )		        
+				LancamentosService.insert(form)
+			   	 .then(function(response){
+			   		estatistica();
+					toastr.success("Lancamento, cadastrado");
+					$scope.obj.flow.cancel();
+					clear(form);		
+			   	 	},
+				function(errResponse){		
+					 swal({ timer : 30000, text: errResponse.data.message ,  type : "error", width: 500, higth: 100, padding: 20}).catch(swal.noop);
+					 });
+			  };
+			  
+			  
 	function tipos(){
 		LancamentosService.tipos().
 		then(function(p){
@@ -50,11 +77,10 @@ function LancamentosCadastarController($localStorage, $state, $stateParams, Lanc
 		});
 	};
 	
-	function clear(form){	    	 
+	function clear(form){
+		 self.lancamento = {};
     	 form.$setPristine();
-    	 form.$setUntouched();   
-    	 self.lancamento = null; 
-    	
+    	 form.$setUntouched();       	
      }
 	
 	function estatistica(){
@@ -158,7 +184,7 @@ function LancamentosListarController(blockUI, LancamentosService, toastr, $scope
 	self.sort = sort;	
 	$scope.filter = filter;
 	$scope.pesquisar = pesquisar;
-	
+	self.show = show;
 	$scope.imprimir = 'PAGINA';
 	
 	filter($scope.lancamentoFilter);
@@ -278,6 +304,9 @@ function LancamentosListarController(blockUI, LancamentosService, toastr, $scope
 		   filter($scope.lancamentoFilter);
 	 	};
 	 	
+ 	 function show(lancamento) {
+			$scope.lancamento = lancamento;
+		}
 }
 
 

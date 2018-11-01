@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.app.entity.ConfiguracaoEmpreendimento;
+import br.com.app.entity.DadoEmpresa;
 import br.com.app.entity.Empreendimento;
 import br.com.app.entity.Endereco;
 import br.com.app.entity.Usuario;
@@ -42,19 +43,10 @@ public class DBService {
 		endereco.setNumero("789456");
 		endereco.setUf("SP");
 		
-		Endereco ende = new Endereco();
-		ende.setId(null);
-		ende.setBairro("Jardins das Palmeiras");
-		ende.setCep("13174371");
-		ende.setComplemento("Cidade velha");
-		ende.setLocalidade("Sumaré");
-		ende.setLogradouro("Rua Antonio Anastasia");
-		ende.setNumero("789456");
-		ende.setUf("SP");
-		
+			
 		Empreendimento empMatriz = empreendimentoRepository.save(new Empreendimento(null,endereco,"KLP Construções", "199895045", 5000000.0, 0.0, 0.0 , new Date(), new Date(), StatusEmpreendimento.EM_ANDAMENTO, null));
-		
-		Empreendimento emp = empreendimentoRepository.save(new Empreendimento(null,ende,"Obra Sara",  "199895045", 5000000.0, 0.0,0.0,new Date(),new Date(), StatusEmpreendimento.EM_ANDAMENTO,empMatriz)); 
+		endereco.setId(null);
+		Empreendimento emp = empreendimentoRepository.save(new Empreendimento(null,endereco,"Obra Sara",  "199895045", 5000000.0, 0.0,0.0,new Date(),new Date(), StatusEmpreendimento.EM_ANDAMENTO,empMatriz)); 
 		
 		Usuario userPrincipal = new Usuario(null, empMatriz, "root", "root", "root@root.com", pe.encode("root"), true, null, StatusUsuarioEnum.INDISPONIVEL, new Date());
 		Usuario user= new Usuario(null, emp, "Wanderson", "Wanderson", "wandersonsantiago@gmail.com", pe.encode("123456"), true, null, StatusUsuarioEnum.INDISPONIVEL, new Date());

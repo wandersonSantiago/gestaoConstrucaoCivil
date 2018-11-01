@@ -46,6 +46,8 @@ public class LancamentoService {
 	@Transactional(readOnly = false)
 	public void update(Lancamento obj, Long id) {
 		findById(id);
+		Usuario user = SessionUsuario.getInstance().getUsuario();
+		obj.setUsuario(user);
 		obj.setValorTotal(obj.somaValorTotal());
 		lancamentoRepository.save(obj);
 	}

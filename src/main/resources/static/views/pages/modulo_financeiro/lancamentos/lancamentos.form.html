@@ -31,25 +31,51 @@
 			      </div>
 				</div>
 				<div class="row">
-			      <div class="col-md-4" ng-class="{ 'has-error' : form.valor.$invalid && form.$submitted }">
+			      <div class="col-md-3" ng-class="{ 'has-error' : form.valor.$invalid && form.$submitted }">
 			        <label>Valor:</label>
 			        <input  type="text" name="valor" id="valor" placeholder="0,00" ui-money-mask="2"  class="form-control"  ng-model="ctrl.lancamento.valor" required>
 			      </div>    
-			       <div class="col-md-4" ng-if="ctrl.lancamento.id">
+			       <div class="col-md-3" ng-if="ctrl.lancamento.id">
 			        <label>Juros:</label>
 			        <input  type="text" name="valor" id="valor" placeholder="0,00" ui-money-mask="2"  class="form-control"  ng-model="ctrl.lancamento.juros" >
 			      </div>
-			       <div class="col-md-4" ng-if="ctrl.lancamento.id">
+			       <div class="col-md-3" ng-if="ctrl.lancamento.id">
 			        <label>Desconto:</label>
 			        <input  type="text" name="valor" id="valor" placeholder="0,00" ui-money-mask="2"  class="form-control"  ng-model="ctrl.lancamento.desconto" >
+			      </div>
+			      <div class="col-md-3" ng-if="ctrl.lancamento.id">
+			        <label>Valor Total:</label>
+			        <h4>{{ctrl.lancamento.valor +  ctrl.lancamento.juros - ctrl.lancamento.desconto| currency}}</h4>
 			      </div>  
 				</div>
 				<div class="row">
-			      <div class="col-md-12">
+			      <div class="col-md-10">
 			        <label>Observação:</label>
-			        <textarea  rows="3" name="observacao" class="form-control" ng-model="ctrl.lancamento.observacao"></textarea>
+			        <textarea  rows="4" name="observacao" class="form-control" ng-model="ctrl.lancamento.observacao"></textarea>
 			      </div>
-				</div><br>
+			      <div class="col-sm-2" flow-init="{singleFile:true}"
+						flow-file-added="!!{png:1,pdf:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
+						class="ng-scope" flow-name="obj.flow">
+						<div class="thumbnail " ng-show="$flow.files.length">
+							<img flow-img="$flow.files[0]">
+						</div>
+						<div><br ng-show="!$flow.files.length">
+							<span class="btn btn-primary col-sm-12" ng-show="!$flow.files.length"
+								flow-btn="">Selecione uma imagem<input type="file"
+								style="visibility: hidden; position: absolute;">
+								</span>
+								<span class="btn btn-info col-sm-6 " ng-show="$flow.files.length"
+								flow-btn="">Trocar<input type="file"
+								style="visibility: hidden; position: absolute;">
+								</span>
+								<span class="btn btn-danger col-sm-6 " ng-show="$flow.files.length"
+								ng-click="$flow.cancel()"> Remover </span>
+						</div>
+					</div>
+				</div>
+				
+		
+		<br ng-show="!$flow.files.length">
 				<div class="row col-md-4 col-md-offset-4">						
 					<input type="submit"  id="submit" value="Salvar" class="btn btn-lg btn-primary btn-block btn-signin">			
 				</div>
