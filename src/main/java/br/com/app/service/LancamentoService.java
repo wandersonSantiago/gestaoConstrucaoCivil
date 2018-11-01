@@ -38,7 +38,6 @@ public class LancamentoService {
 		Usuario user = SessionUsuario.getInstance().getUsuario();
 		lancamento.setEmpreendimento(user.getEmpreendimento());
 		lancamento.setUsuario(user);
-		lancamento.setDataCadastro(new Date());
 		lancamento.setValorTotal(lancamento.somaValorTotal());
 		return lancamentoRepository.save(lancamento);
 	}
@@ -57,6 +56,7 @@ public class LancamentoService {
 		lancamentoRepository.deleteById(id);
 	}
 	
+	@Transactional(readOnly = false)
 	public Lancamento findById(Long id) {
 		return lancamentoRepository.findById(id)
 				.orElseThrow(() -> new MensagemException("Não encontrado!"));

@@ -38,6 +38,8 @@ public class LancamentoDTO implements Serializable {
 	private BigDecimal porcentagemJuros = BigDecimal.ZERO;
 	private BigDecimal porcentagemDesconto = BigDecimal.ZERO;
 	private Usuario usuario;
+	private String comprovanteBase64;
+	private String comprovanteBase64Path;
 	
 	public LancamentoDTO(Lancamento obj) {
 		super();
@@ -60,6 +62,8 @@ public class LancamentoDTO implements Serializable {
 		this.porcentagemDesconto = obj.getPorcentagemDesconto();
 		this.porcentagemJuros = obj.getPorcentagemJuros();
 		this.usuario = obj.getUsuario();
+		this.comprovanteBase64 = obj.getComprovanteBase64();
+		this.comprovanteBase64Path = obj.getComprovanteBase64Path();
 	}
 
 

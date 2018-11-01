@@ -2,14 +2,14 @@
 <form role="form-vertical" name="form" novalidate  ng-submit="ctrl.submit(form)" >
 	
 				<div class="row">
-			      <div class="col-md-6">
+			      <div class="col-md-6" ng-class="{ 'has-error' : form.tipo.$invalid && form.$submitted }">
 			       <label for="tipo" class="control-label">Tipo:</label>
-					<select id="tipo" class="form-control" ng-model="ctrl.lancamento.tipo" ng-options="tipo for tipo in ctrl.tipos">	               
+					<select id="tipo" name="tipo" class="form-control" ng-model="ctrl.lancamento.tipo" ng-options="tipo for tipo in ctrl.tipos">	               
 			              </select>
 			      </div>
-			      <div class="col-md-6">
+			      <div class="col-md-6" ng-class="{ 'has-error' : form.categoria.$invalid && form.$submitted }">
 			       <label for="categoria" class="control-label">Categoria:</label>
-					<select id="categoria" class="form-control" ng-model="ctrl.lancamento.categoria" ng-options="categoria for categoria in ctrl.categorias">	               
+					<select id="categoria" name="categoria" class="form-control" ng-model="ctrl.lancamento.categoria" ng-options="categoria for categoria in ctrl.categorias">	               
 			              </select>
 			      </div>
 				</div>
@@ -57,7 +57,10 @@
 						flow-file-added="!!{png:1,pdf:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
 						class="ng-scope" flow-name="obj.flow">
 						<div class="thumbnail " ng-show="$flow.files.length">
-							<img flow-img="$flow.files[0]">
+							<img  flow-img="$flow.files[0]">
+						</div>
+						<div class="thumbnail " ng-show="ctrl.lancamento.comprovanteBase64 != null && !$flow.files.length">
+							<img ng-src="{{ctrl.lancamento.comprovanteBase64Path}}" >
 						</div>
 						<div><br ng-show="!$flow.files.length">
 							<span class="btn btn-primary col-sm-12" ng-show="!$flow.files.length"

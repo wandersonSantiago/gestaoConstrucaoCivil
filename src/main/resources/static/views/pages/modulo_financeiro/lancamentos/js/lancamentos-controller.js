@@ -51,8 +51,7 @@ function LancamentosCadastarController($localStorage, $state, $stateParams, Lanc
 				LancamentosService.insert(form)
 			   	 .then(function(response){
 			   		estatistica();
-					toastr.success("Lancamento, cadastrado");
-					$scope.obj.flow.cancel();
+					toastr.success("Lancamento, cadastrado");					
 					clear(form);		
 			   	 	},
 				function(errResponse){		
@@ -78,9 +77,10 @@ function LancamentosCadastarController($localStorage, $state, $stateParams, Lanc
 	};
 	
 	function clear(form){
+		 $scope.obj.flow.cancel();
 		 self.lancamento = {};
-    	 form.$setPristine();
-    	 form.$setUntouched();       	
+		 $scope.form.$setPristine();
+		 $scope.form.$setUntouched();   	
      }
 	
 	function estatistica(){
@@ -103,6 +103,7 @@ function LancamentosEditarController($localStorage, $state, $stateParams, Lancam
 	var idLancamentos = $stateParams.idLancamentos;
 	
 	self.submit = submit;
+	$scope.obj = {};
 	tipos();
 	categorias();	 
 	findById(idLancamentos);
@@ -113,21 +114,35 @@ function LancamentosEditarController($localStorage, $state, $stateParams, Lancam
 		var Tipo = param;
  		$state.go('lancamentos.list', {Tipo});
  	};
- 	
-	function submit(form){
-		if(form.$invalid){
-			sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
-			return;
-		}
-			LancamentosService.update(self.lancamento, self.lancamento.id).
-			then(function(response){
-				toastr.success("Lancamento, Alterado");		
-				clear(form);
-			}, function(errResponse){
-				sweetAlert({ timer : 3000,  text : errResponse.data.message,  type : "error", width: 300, higth: 300, padding: 20});
-			});			
-	};
-		
+	
+	  function submit(form){
+		  if(form.$invalid){
+				sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
+				return;
+			}
+		 	var file = $scope.obj.flow.files[0];
+	    	var form = new FormData();
+		 	if(file){
+		 		form.append('file', file.file);	
+		 	}
+			form.append('id',new Blob([JSON.stringify(self.lancamento.id)], {
+	            type: "application/json"
+	        }) )
+	    	form.append('lancamento',new Blob([JSON.stringify(self.lancamento)], {
+	            type: "application/json"
+	        }) )		        
+			LancamentosService.update(form)
+		   	 .then(function(response){
+		   		estatistica();
+				toastr.success("Lancamento, alterado");
+				$scope.obj.flow.cancel();
+				clear(form);		
+		   	 	},
+			function(errResponse){		
+				 swal({ timer : 30000, text: errResponse.data.message ,  type : "error", width: 500, higth: 100, padding: 20}).catch(swal.noop);
+				 });
+		  };
+		  
 	function tipos(){
 		LancamentosService.tipos().
 		then(function(p){
@@ -144,9 +159,7 @@ function LancamentosEditarController($localStorage, $state, $stateParams, Lancam
 		});
 	};
 	
-	function clear(form){	    	 
-    	 form.$setPristine();
-    	 form.$setUntouched();   
+	function clear(form){	    	
     	 self.lancamento = null;  
     	 $state.go("lancamentos.consultar");
     	
@@ -162,7 +175,15 @@ function LancamentosEditarController($localStorage, $state, $stateParams, Lancam
 		});
 	};
 	
-		
+	function estatistica(){
+ 		LancamentosService.estatistica().
+ 		then(function(p){
+ 			$scope.$evalAsync(function () {
+   	    	 $rootScope.estatistica = p;  
+   		  });
+ 			}, function(errResponse){
+ 		});
+ 	};
 	
 }
 
@@ -180,11 +201,12 @@ function LancamentosListarController(blockUI, LancamentosService, toastr, $scope
 	   var adicional = tipo;
 	   $scope.lancamentoFilter = {page : self.page, adicional : adicional};
 	}
-
+	self.deleteById = deleteById;
 	self.sort = sort;	
 	$scope.filter = filter;
 	$scope.pesquisar = pesquisar;
 	self.show = show;
+	self.modalComprovante = modalComprovante;
 	$scope.imprimir = 'PAGINA';
 	
 	filter($scope.lancamentoFilter);
@@ -280,20 +302,21 @@ function LancamentosListarController(blockUI, LancamentosService, toastr, $scope
  		});
  	};
 	  
-	   function closeLancamentos(id) {
+	   function deleteById(id) {
 			swal({ 
-				  title: 'Encerrar!!!',
-				  text: "Tem certeza que deseja encerrar esta cotação ?",
+				  title: 'Deletar!!!',
+				  text: "Tem certeza que deseja deletar este lançamento ?",
 				  type: 'info',
 				  showCancelButton: true,
 				  confirmButtonColor: '#3085d6',
 				  cancelButtonColor: '#d33',
-				  confirmButtonText: 'Encerrar!'
+				  confirmButtonText: 'Excluir!'
 				}).then(function () {
-					LancamentosService.closeLancamentos(id).
+					LancamentosService.deleteById(id).
 			then(function(response){				
-				filter($scope.lancamentoFilter);
-				toastr.success("Lancamentos, Encerrada")
+				filter($scope.lancamentoFilter);				
+				toastr.success("Lancamentos, Excluido");
+				estatistica()
 			});
 		})
 	}
@@ -307,6 +330,10 @@ function LancamentosListarController(blockUI, LancamentosService, toastr, $scope
  	 function show(lancamento) {
 			$scope.lancamento = lancamento;
 		}
+ 	 
+ 	 function modalComprovante(lancamento){
+ 		$scope.lancamento = lancamento;
+ 	 	}
 }
 
 

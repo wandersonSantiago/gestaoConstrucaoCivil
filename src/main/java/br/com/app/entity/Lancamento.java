@@ -126,4 +126,9 @@ public class Lancamento implements Serializable {
 				divide(Optional.ofNullable(valor).orElse(BigDecimal.ZERO))
 				.multiply(new BigDecimal(100));
 	}
+	
+
+	public String getComprovanteBase64Path() {
+		return comprovanteBase64 = "data:image/jpeg;base64," + comprovanteBase64;
+	}
 }

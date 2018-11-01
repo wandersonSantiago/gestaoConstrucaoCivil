@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import br.com.app.enuns.DataBaseEnum;
 import br.com.app.pojo.util.DateUtils;
 import lombok.Data;
 
@@ -27,7 +28,7 @@ public class ConfiguracaoEmpreendimento implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "configuracao_id_seq")
 	private Long id;
 	
-	private Integer dataBaseFinanceiro = 1;
+	private Integer dataBaseFinanceiro;
 		
 	@OneToOne
 	private Empreendimento empreendimento;
@@ -39,9 +40,18 @@ public class ConfiguracaoEmpreendimento implements Serializable{
 	
 	public Date getDataBaseFinal() {
 		LocalDate hoje = LocalDate.now();
-		dataBaseFinanceiro = (dataBaseFinanceiro == 0 || dataBaseFinanceiro ==1 )  ? 28 : dataBaseFinanceiro -1;		
-		LocalDate localDate = DateUtils.addMonthAndDayToDate( hoje.getMonthValue() + 1,dataBaseFinanceiro);		
+		int data = (dataBaseFinanceiro == 0 || dataBaseFinanceiro ==1 )  ? 31 : dataBaseFinanceiro -1;		
+		LocalDate localDate = DateUtils.addMonthAndDayToDate( hoje.getMonthValue() + 1,data);		
 		return DateUtils.convertLocalDateToDate(localDate);
 	}
+	
+	public DataBaseEnum getDataBaseFinanceiro() {
+		return DataBaseEnum.getEnum(dataBaseFinanceiro);
+	}
+	
+	public void setDataBaseFinanceiro(DataBaseEnum dataBase) {
+		this.dataBaseFinanceiro= dataBase.getId();
+	}
+	
 	
 }

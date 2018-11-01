@@ -55,6 +55,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				    label: 'Visualizar'
 				  }
 		})
+		.state('empreendimento.configuracao', {
+			url : "/:idEmpreendimento/configuracao",
+			templateUrl : "views/pages/modulo_gerenciamento/empreendimento/empreendimento.config.html",
+			controller : "EmpreendimentoConfigController as ctrl",
+			ncyBreadcrumb: {
+				 	parent: 'empreendimento.consultar',
+				    label: 'Visualizar'
+				  }
+		})
 		.state('empreendimento.menu', {
 			requiresAuthentication: true,
 			url : "/gerenciamento/menu",

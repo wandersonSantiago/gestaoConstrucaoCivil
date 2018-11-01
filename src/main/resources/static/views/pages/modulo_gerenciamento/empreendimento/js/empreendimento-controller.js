@@ -2,6 +2,7 @@ app.controller("EmpreendimentoCadastarController", EmpreendimentoCadastarControl
 app.controller("EmpreendimentoEditarController", EmpreendimentoEditarController);
 app.controller("EmpreendimentoListarController", EmpreendimentoListarController);
 app.controller("EmpreendimentoShowController", EmpreendimentoShowController);
+app.controller("EmpreendimentoConfigController", EmpreendimentoConfigController);
 
 function EmpreendimentoCadastarController (toastr, $scope, buscaCepService, $location, $state, EmpreendimentoService, blockUI){
 		 
@@ -213,4 +214,49 @@ function EmpreendimentoShowController($scope, $stateParams, $state, Empreendimen
     	 
     	
     		
+}
+
+function EmpreendimentoConfigController($scope, $stateParams, $state, EmpreendimentoService, toastr, blockUI){
+	var self = this;
+	var idEmpreendimento = $stateParams.idEmpreendimento;	
+	$scope.submitted = false;
+	self.submit = submit;
+	buscarPorId(idEmpreendimento);	
+	dataBase();	  
+	  
+    	 function buscarPorId(id){
+	    	 EmpreendimentoService.findByConfigEmpreendimentoId(id)
+	    	 .then(function(e){
+	    		 self.configuracaoEmpreendimento = e;
+	       	 }, function(errResponse){
+	    	 	 });
+	    	 };	
+    		
+    	 function dataBase(){
+	    	 EmpreendimentoService.dataBase()
+	    	 .then(function(e){
+	    		 self.dataBase = e;
+	       	 }, function(errResponse){
+	    	 	 });
+	    	 };	
+	    	 
+	    	 
+	    	 function submit(form){		
+	    			if(form.$invalid){
+	    				sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
+	    				return;
+	    			}			
+				 blockUI.start();
+		    	 EmpreendimentoService.insertOrUpdateConfiguracaoFinanceiro(self.configuracaoEmpreendimento).
+					 then(function(response){					
+						 blockUI.stop();
+						 toastr.success('Configuração', 'Alterada!');
+					 },
+					function(errResponse){					 
+						 blockUI.stop();					
+						 var erros = errResponse.data.message;
+						 sweetAlert({text: erros, 	type : "error", timer : 100000,   width: 500,  padding: 20});
+											 
+				 	});
+			 }
 }

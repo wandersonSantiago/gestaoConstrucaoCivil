@@ -2,15 +2,7 @@ app.factory('LancamentosService', function($rootScope, toastr, $http,$q){
 	
 	var url = "/rest/lancamentos";
 	
-	return{
-		insert: function(lancamento){	
-			return $http.post(url, lancamento)
-			.then(function(response){
-				return response.data;
-			},function(errResponse){
-				return $q.reject(errResponse);
-			});
-		},
+	return{		
 		insert: function(form){
 			return $http.post(url , form, {
 	            transformRequest: angular.identity,
@@ -21,14 +13,18 @@ app.factory('LancamentosService', function($rootScope, toastr, $http,$q){
 			return $q.reject(errResponse);
 			});
 		},
-		update: function(lancamento, id){			
-			return $http.put(url + "/" + id, lancamento)
-			.then(function(response){
+		
+		update: function(form){
+			return $http.put(url , form, {
+	            transformRequest: angular.identity,
+	            headers: {'Content-Type': undefined}
+	        }).then(function(response){
 				return response.data;
 			},function(errResponse){
-				return $q.reject(errResponse);
+			return $q.reject(errResponse);
 			});
 		},
+		
 		pdf: function(filter){
 			var config =  {filter : filter, responseType: 'arraybuffer'};
 				return $http.post(url + '/imprimir',filter, { responseType: 'arraybuffer'} )
@@ -89,7 +85,7 @@ app.factory('LancamentosService', function($rootScope, toastr, $http,$q){
 			});
 		},
 		deleteById: function(idLancamento){
-			return $http.put(url + '/' + idLancamento)
+			return $http.delete(url + '/' + idLancamento)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){

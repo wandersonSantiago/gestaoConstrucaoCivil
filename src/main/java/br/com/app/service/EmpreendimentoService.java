@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.app.entity.ConfiguracaoEmpreendimento;
 import br.com.app.entity.Empreendimento;
 import br.com.app.entity.Usuario;
+import br.com.app.enuns.DataBaseEnum;
 import br.com.app.exceptions.NotFoundException;
 import br.com.app.pojo.SessionUsuario;
 import br.com.app.repository.ConfiguracaoEmpreendimentoRepository;
@@ -43,7 +44,7 @@ public class EmpreendimentoService {
 
 	private void salvarConfiguracaoPadaro(Empreendimento empreendimento) {
 		ConfiguracaoEmpreendimento config = new ConfiguracaoEmpreendimento();
-		config.setDataBaseFinanceiro(7);
+		config.setDataBaseFinanceiro(DataBaseEnum._1);
 		config.setEmpreendimento(empreendimento);
 		configuracaoEmpreendimentoRepository.save(config);
 		

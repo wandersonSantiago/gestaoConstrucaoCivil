@@ -73,8 +73,19 @@ public class LancamentoRestController {
 		return ResponseEntity.created(uri).build();
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<Void> update(@Valid @RequestBody Lancamento obj, @PathVariable Long id){
+	@PutMapping
+	public ResponseEntity<Void> update(@RequestPart(value="file", required = false )  MultipartFile file, 
+			@RequestPart("lancamento")  Lancamento obj , @RequestPart("id")  Long id){
+		try {
+			if(file != null && !file.isEmpty()) {
+				String base64 = Base64.encodeBase64String(file.getBytes());
+				obj.setComprovanteBase64(base64);
+			}else {
+				obj.setComprovanteBase64(null);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		lancamentoService.update(obj, id);		
 		return ResponseEntity.noContent().build();
 	}

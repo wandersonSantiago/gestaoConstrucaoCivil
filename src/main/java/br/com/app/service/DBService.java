@@ -8,10 +8,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.app.entity.ConfiguracaoEmpreendimento;
-import br.com.app.entity.DadoEmpresa;
 import br.com.app.entity.Empreendimento;
 import br.com.app.entity.Endereco;
 import br.com.app.entity.Usuario;
+import br.com.app.enuns.DataBaseEnum;
 import br.com.app.enuns.StatusEmpreendimento;
 import br.com.app.enuns.StatusUsuarioEnum;
 import br.com.app.repository.ConfiguracaoEmpreendimentoRepository;
@@ -52,12 +52,12 @@ public class DBService {
 		Usuario user= new Usuario(null, emp, "Wanderson", "Wanderson", "wandersonsantiago@gmail.com", pe.encode("123456"), true, null, StatusUsuarioEnum.INDISPONIVEL, new Date());
 		
 		ConfiguracaoEmpreendimento config = new ConfiguracaoEmpreendimento();
-		config.setDataBaseFinanceiro(7);
+		config.setDataBaseFinanceiro(DataBaseEnum._1);
 		config.setEmpreendimento(empMatriz);
 		configRepository.save(config);
 		
 		ConfiguracaoEmpreendimento config2 = new ConfiguracaoEmpreendimento();
-		config2.setDataBaseFinanceiro(1);
+		config2.setDataBaseFinanceiro(DataBaseEnum._7);
 		config2.setEmpreendimento(emp);
 		configRepository.save(config2);
 		

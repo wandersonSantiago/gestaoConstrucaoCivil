@@ -1,0 +1,36 @@
+<meta charset="UTF-8">
+<div class="page-header">
+	<h3 align="center">
+		<strong>Configuração do Empreendimento {{ctrl.configuracaoEmpreendimento.empreendimento.descricao}}</strong>
+	</h3>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="nav-tabs-custom">
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="" data-toggle="tab"	data-target=".financeiro">Financeiro</a></li>
+				<li><a href="" data-toggle="tab" data-target=".recursosHumanos">Recursos Humanos</a></li>
+				<li><a href="" data-toggle="tab" data-target=".servicos">Serviços</a></li>
+				<li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+			</ul>
+			<div class="ui-view"></div>
+			<div class="tab-content">
+				<div class="tab-pane active financeiro" id="financeiro">
+					<div ng-include="'views/pages/modulo_gerenciamento/empreendimento/config/config.financeiro.html'"></div>
+				</div>
+				<div class="tab-pane recursosHumanos" id="recursosHumanos">					
+					<div ng-include="'views/pages/modulo_gerenciamento/empreendimento/config/config.recursos.humanos.html'"></div>
+				</div>
+				<div class="tab-pane servicos" id="servicos">
+					<div ng-include="'views/pages/modulo_gerenciamento/empreendimento/config/config.servicos.html'"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
