@@ -1,189 +1,131 @@
 <meta charset="UTF-8">
-	<div class="box box-primary">
-		<div class="box-header">
-			<span class="lead"> Vistoria Serviços </span>
-		</div>
-		<div class="panel-body">
-			<div class="container col-sm-12 ">
-				<form role="form-vertical" >		
-						<label ng-if="!tipoEmpreendimento"  class="radio-inline"><input type="radio"  ng-model="tipo.tipo" value="casa" ng-click="servicoCtrl.tipoConf()" name="optradio">Casa</label>
-						<label ng-if="tipoEmpreendimento" class="radio-inline"><input type="radio"  ng-model="tipo.tipo" value="edificio" ng-click="servicoCtrl.tipoConf()" name="optradio">Edificio</label>
-						<label class="radio-inline"><input type="radio"   ng-model="tipo.tipo" value="comunitaria" ng-click="servicoCtrl.tipoConf()" name="optradio">Edificações Comunitaria</label> 
+<form role="form-vertical" novalidate  name="form"  ng-submit="ctrl.submit(form)" >
+					<br>		             
+		             <div class="row" align="center">
+		             	<div class="col-sm-10 col-sm-offset-1">
+		             	<div class="jumbotron col-md-3 ">
+						  <div class="container" align="center">
+						    <h4>Estrutura Selecionada</h4><br>
+						    	 <div class="row">				
+									<div align="center" ng-repeat="v in ctrl.servicoEmpresa.estruturas">
+										<b>{{v.descricao}}</b><br>
+									</div> 	
+								</div>
+						  </div>
+						</div>
+						<div class="jumbotron col-md-3 col-md-offset-1">
+						  <div class="container" align="center">
+						    <h4>Empresa Selecionada</h4>
+						    <label>{{ctrl.servicoEmpresa.prestadoraServico.dadoEmpresa.nomeFantasia}}</label>	<br>
+						   CNPJ : {{ctrl.servicoEmpresa.prestadoraServico.dadoEmpresa.cnpj | brCnpj}}	<br><br>
+						  </div>
+						</div>
+						<div class="jumbotron col-md-3 col-md-offset-1">
+						  <div class="container" align="center">
+						    <h4>Serviço Selecionado</h4>
+						    <label>{{ctrl.servicoEmpresa.pacoteServico.descricao}}</label>	<br>
+						    {{ctrl.servicoEmpresa.pacoteServico.categoria.categoria.descricao}}	<br>
+						  	{{ctrl.servicoEmpresa.pacoteServico.valor | currency}}	
+						  </div>
+						</div>
+		             </div>
+		             </div>
 					<br>
-					<br>
-					<br>
-					<div class="row" ng-if="casa" ng-controller="configEmpreendimentoController as configCtrl" ng-init="configCtrl.quantidadeCasa()">
-						
-						<div class="col-sm-4"  >
-							<select class="form-control select2" style=" width: 100%;" ng-model="casa" 
-							ng-options="lista for lista in configCtrl.qtdeCasa.quantidadeCasa" required>
-								<option value="">---Casa---</option>
-							</select>
+					<div class="row">
+						<div class="col-md-6">
+							<h3>
+								<label>Data prevista para o término:</label>
+								<span class="label label-default">{{ctrl.servicoEmpresa.dataPrevisaoTermino | date : 'dd/MM/yyyy'}}</span>
+							</h3>							
 						</div>
-							<div class="col-sm-4"  >
-							<select class="form-control select2" style=" width: 100%;" ng-model="andar"  
-							ng-options="lista for lista in configCtrl.qtdeCasa.quantidadeAndarCasa" required>
-								<option value="">---Andar---</option>
-							</select>
-						</div>
-						<button type="button" name="salvar" ng-click="servicoCtrl.consultarServicoCasa(casa , andar)" class="btn  btn-primary ">Consultar</button>
-					</div>					
-					
-					
-					<div ng-if="edificio" class="row" ng-controller="configEmpreendimentoController as configCtrl" ng-init="configCtrl.quantidadeEdificio()">
-							<div class="col-sm-3"  >
-							<select class="form-control select2" style=" width: 100%;"  ng-model="torre"
-							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeTorres" 
-							 title="Selecione a torre a qual será atribuido a saida do produto" required>
-								<option value="">---Torre---</option>
-							</select>
-						</div>
-
-						
-						<div class="col-sm-3"  >
-							<select class="form-control select2" style=" width: 100%;"  ng-model="andar"
-							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeAndares"
-							 title="Selecione o andar a qual será atribuido a saída do produto" required>
-								<option value="">---Andar---</option>
-							</select>
-						</div>
-	
-						<div class="col-sm-3"  >
-							<select class="form-control select2" style=" width: 100%;"  ng-model="apartamento"
-							 ng-options="lista for lista in configCtrl.qtdeEdificio.quantidadeApartamentos" 
-							 title="Selecione o apartamento a qual será atribuido a saída do produto" required>
-								<option value="">---Apartamento---</option>
-							</select>
-						</div>
-						<button  type="button" name="consulta" ng-click="servicoCtrl.consultarServicoEdificio(torre, andar, apartamento)" class="btn  btn-primary ">Consultar</button>
-					</div>									
-					
-								
-					<div class="row" ng-if="comunitaria">
-						<div class="col-sm-5"  ng-controller="configEmpreendimentoController as configCtrl" ng-init="configCtrl.listaOutros()">
-							<select class="form-control select2" style=" width: 100%;" ng-model="outros" 
-							 ng-options="lista.descricao for lista in configCtrl.listaOutros" required>
-								<option value="">---Outros imoveis---</option>
-							</select>			
 					</div>
-							<button type="button" name="salvar" ng-click="servicoCtrl.consultarServicoEdificacoesComunitaria(outros)" class="btn  btn-primary ">Consultar</button>
-					
+					<div class="row">
+						<div class="col-md-6">
+								<label>Descrição dos serviços:</label>
+								{{ctrl.servicoEmpresa.pacoteServico.servicosAtribuidos}}
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+								<label>Critério dos serviços:</label>
+								{{ctrl.servicoEmpresa.pacoteServico.criterioServico}}
+						</div>
 					</div>
 					<br>
-				
-				
-						<div ng-if="listaEdificio">					
-							<div class="table-responsive">
-							<input class="form-control" type="text" placeholder="Buscar" ng-model="buscaPacotes" >
-							<table class="table table-hover table-bordered"">
-								<thead>
-									<tr>
-										<th>Pacote de serviço</th>
-										<th>Prestadora de serviço</th>
-										<th>Categoria</th>
-										<th>Torre</th>
-										<th>Andar</th>
-										<th>Apartamento</th>
-										<th>Valor</th>	
-										<th>Término</th>										
-									</tr>
-								</thead>
-								<tbody
-									ng-repeat=" edificio in listaEdificio | filter : buscaPacotes">
-									<tr>
-									<td>{{ edificio.pacoteServico.descricao }}</td>
-										<td>{{ edificio.prestadoraServico.dadoEmpresa.nomeFantasia }}</td>
-										<td>{{ edificio.pacoteServico.categoria.descricao }}</td>
-										<td>{{ edificio.torre }}</td>
-										<td>{{ edificio.andar}}</td>
-										<td>{{ edificio.apartamento}}</td>
-										<td>{{ edificio.pacoteServico.valor | currency}}</td>	
-										<td ng-if="edificio.dataFechamento"><a class="label label-success ">{{ edificio.dataFechamento | date : 'dd/MM/yyyy'}}</a></td>
-										<td ng-if="!edificio.dataFechamento"><a class="label label-warning">em andamento...</a></td>								
-										<td><a href="#/servicos/vistoria/visualizar/edificio/{{edificio.id}}"><i class="glyphicon glyphicon-edit"></i></a> 												
-										</tr>			
-								</tbody>
-								<tfoot>
-									<tr>					
-									</tr>
-								</tfoot>
-							</table>							
-						</div>						
-						</div>
-						<div ng-if="listaCasa" >
-						<div class="table-responsive">							
-							<input class="form-control" type="text" placeholder="Buscar" ng-model="buscaPacotes" >
-							<table class="table table-hover table-bordered" >
-								<thead>
-									<tr>
-										<th>Pacote de serviço</th>
-										<th>Prestadora de serviço</th>
-										<th>Categoria</th>
-										<th>Número</th>
-										<th>Andar</th>
-										<th>Valor</th>										
-									</tr>
-								</thead>
-								<tbody
-									ng-repeat=" casa in listaCasa | filter : buscaPacotes">
-									<tr>
-										<td>{{ casa.pacoteServico.descricao }}</td>
-										<td>{{ casa.prestadoraServico.dadoEmpresa.nomeFantasia }}</td>
-										<td>{{ casa.pacoteServico.categoria.descricao }}</td>
-										<td>{{ casa.numero }}</td>
-										<td>{{ casa.andar}}</td>
-										<td>{{ casa.pacoteServico.valor | currency}}</td>										
-										<td ng-if="casa.dataFechamento"><a class="label label-success ">{{ casa.dataFechamento | date : 'dd/MM/yyyy'}}</a></td>
-										<td ng-if="!casa.dataFechamento"><a class="label label-warning">em andamento...</a></td>										
-										<td><a href="#/servicos/vistoria/visualizar/casa/{{casa.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 							
-										</tr>				
-								</tbody>
-								<tfoot>
-									<tr>					
-									</tr>
-								</tfoot>
-							</table>							
-						</div>
-						
-							</div>
+					<div class="row">
+						<div class="col-sm-12">
+						<label>Observação:</label><br>
+								{{ctrl.servicoEmpresa.observacao}}
+						</div> 
+					</div>
+					<br>
+					  <div class="row">					  				 	
+						  <div class="col-sm-2">	
+						   <label>Porcentagem de conclusão:</label>			       
+				       		<input  class="form-control" type="text" ng-model="ctrl.servicoEmpresa.porcentagem">     	 
+				       </div>
+				       <div class="col-sm-10"><br><br>
+						  	<uib-progressbar class="progress-striped" value="ctrl.servicoEmpresa.porcentagem" type="success">{{ctrl.servicoEmpresa.porcentagem}}%</uib-progressbar>
+						  </div>
+				  	 </div>
+					<br>
+					<div class="row">
+						<div class="col-md-2">
 						<br>
-						<hr>
-						<br>							
-						<div ng-if="listaEdificacoesComunitaria" class="table-responsive">
-						
-							<input class="form-control" type="text" placeholder="Buscar" ng-model="buscaPacotes" >
-							<table class="table table-hover table-bordered" >
-								<thead>
-									<tr>
-										<th>Pacote de serviço</th>
-										<th>Prestadora de serviço</th>
-										<th>Categoria</th>
-										<th>Edif. Comunitária</th>
-										<th>Valor</th>										
-									</tr>
-								</thead>
-								<tbody
-									ng-repeat=" comunitario in listaEdificacoesComunitaria | filter : buscaPacotes">
-									<tr>
-										<td>{{ comunitario.pacoteServico.descricao }}</td>
-										<td>{{ comunitario.prestadoraServico.dadoEmpresa.nomeFantasia }}</td>
-										<td>{{ comunitario.pacoteServico.categoria.descricao }}</td>
-										<td>{{ comunitario.descricao }}</td>
-										<td>{{ comunitario.pacoteServico.valor | currency}}</td>
-										<td ng-if="comunitario.dataFechamento"><a class="label label-success ">{{ comunitario.dataFechamento | date : 'dd/MM/yyyy'}}</a></td>
-										<td ng-if="!comunitario.dataFechamento"><a class="label label-warning">em andamento...</a></td>										
-										<td ><a href="#//servicos/vistoria/visualizar/comunitario/{{comunitario.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
-										</tr>				
-								</tbody>
-								<tfoot>
-									<tr>					
-									</tr>
-								</tfoot>
-							</table>				
-						
-						</div>					
-				</form>
-			</div>
-			<div class="tablecontainer"></div>
-		</div>
-	</div>
+					    	<a href=""  data-toggle="modal" data-target="#estrutura"  class="btn btn-warning btn-flat">Registrar Ocorrencia</a>
+					  </div>
+					 </div>
+					<div class="row ">
+						<div class="col-md-4 col-md-offset-4">
+							<input type="submit" id="submit"  value="{{titulo}}"	class="btn btn-lg btn-primary btn-block btn-signin">
+						</div>
+					</div>
+			</form>
+			
+			 <!-- MODAL -->				
+				<div  class="modal fade modal-warning" id="estrutura" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+				  <div class="modal-dialog modal-lg" role="document" >
+				    <div class="modal-content " ng-controller="UsuarioEditarController as userCtrl">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">Registrar Ocorrencias</h4>
+				      </div>
+				      <div class="modal-body">				     		
+					   		<div class="row">
+						      <div class="col-md-12">
+						        <label>Observação:</label>
+						        <textarea  rows="4" name="observacao" class="form-control" ng-model="ocorrencia.ocorrencia"></textarea>
+						      </div>
+						    </div>
+						    <div class="row">
+						      <div class="col-sm-12" flow-init="{singleFile:false}"
+									flow-file-added="!!{png:1,pdf:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
+									class="ng-scope" flow-name="obj.flow">
+									<span class="btn btn-primary col-sm-12" 
+											flow-btn="">Selecione uma imagem<input type="file"
+											style="visibility: hidden; position: absolute;">
+									</span>
+									<div ng-repeat="file in $flow.files">
+										<div class="col-sm-4">
+											<div class="thumbnail" ng-show="$flow.files.length">
+												<img  flow-img="file">											      
+											</div>
+											<label >Observação:</label>
+						       				<textarea  rows="4" name="observacao" ng-init="file.name = null" class="form-control" ng-model="file.name"></textarea>
+											<div>
+												<br ng-show="!$flow.files.length">												
+												<span class="btn btn-danger col-sm-12 " ng-show="$flow.files.length"
+												ng-click="file.cancel()"> Remover </span>
+											</div>
+										</div>
+									</div>
+								</div>									
+						</div>
+				      </div>
+				      <div class="modal-footer">
+				     	<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="ctrl.ocorrencia()">Gravar</button>	
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>				        
+				      </div>
+				    </div>
+				  </div>
+				</div>

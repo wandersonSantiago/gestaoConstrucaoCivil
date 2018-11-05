@@ -42,7 +42,7 @@ public class ServicoEmpresa implements Serializable{
 	@JoinColumn(name = "id_prestadora_servico", nullable = false)
 	private PrestadoraServico prestadoraServico;
 
-	private Double porcentagem;
+	private Double porcentagem = 0.0;
 	private Date dataPrevisaoTermino;
 	private Date dataCadastro;
 	private Date dataFechamento;
@@ -67,7 +67,7 @@ public class ServicoEmpresa implements Serializable{
 	private Estrutura estrutura;
 
 	@OneToMany(mappedBy = "servicoEmpresa", cascade = CascadeType.ALL)
-	private List<OcorrenciaServico> ocorrencias;
+	private List<OcorrenciaServico> ocorrencias = new ArrayList<>();
 	
 	@Transient
 	private List<Estrutura> estruturas = new ArrayList<>();

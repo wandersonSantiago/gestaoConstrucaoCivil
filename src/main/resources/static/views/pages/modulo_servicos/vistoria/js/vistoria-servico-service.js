@@ -3,11 +3,22 @@ app.factory('VistoriaService', function($rootScope, toastr, $http,$q){
 	var url = '/rest/servicos/vincular';
 	return{
 		insert: function(obj){
-			return $http.post(url, obj)
+			return $http.post(url + "/vistoria", obj)
 			.then(function(response){
 				return response.data;
 			},function(errResponse){
 					return $q.reject(errResponse);
+			});
+		},
+		
+		ocorrencia: function(form){
+			return $http.post(url + "/vistoria/ocorrencia", form, {
+	            transformRequest: angular.identity,
+	            headers: {'Content-Type': undefined}
+	        }).then(function(response){
+				return response.data;
+			},function(errResponse){
+			return $q.reject(errResponse);
 			});
 		},
 		

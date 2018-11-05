@@ -6,98 +6,50 @@ app.controller("VistoriaShowController", VistoriaShowController);
 function VistoriaCadastarController(blockUI, $localStorage, $state, $stateParams, PrestadoraService, VistoriaService, EstruturaService, PacoteService, toastr, $scope){
 	
 	var self = this;	
-	
 	self.submit = submit;
-	
-	self.itens = [];
-	self.removerFilhas = removerFilhas;
+	self.ocorrencia = ocorrencia;
+	$scope.obj = {};
 	self.vistoria = {};
-	self.pacotes = pacotes;
-	self.prestadoraServico = prestadoraServico;
-	self.listaRaiz = listaRaiz;
-	self.buscarFilhas = buscarFilhas;
-	$scope.titulo = 'Vistoria';
-	$scope.estruturaGeral = [];
-	buscarListaFilhas(0);
+	$scope.titulo = 'Cadastrar';
 	
 	
-	function submit(form){
-		if(form.$invalid){
-			sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "info", timer : 100000,   width: 500,  padding: 20});	
-			return;
-		}
-		
-		if($scope.raiz == null){
-			sweetAlert({title: "Por favor Selecione pelo menos uma estrutura", 	type : "info", timer : 100000,   width: 500,  padding: 20});	
-			return;
-		}
-			 	self.servicoEmpresa.estrutura = $scope.raiz;
+			function submit(form){
+				if(form.$invalid){
+					sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "info", timer : 100000,   width: 500,  padding: 20});	
+					return;
+				}	
 				VistoriaService.insert(self.servicoEmpresa).
 				then(function(response){
-					toastr.success("Vistoria, enviada");					
-					clear(form);
+					toastr.success("Vistoria, enviada");	
 				}, function(errResponse){
 					sweetAlert({ timer : 3000,  text : errResponse.data.message,  type : "error", width: 300, higth: 300, padding: 20});
 				});			
-		};
+			};
 		
-	function clear(form){	    	 
-    	 form.$setPristine();
-    	 form.$setUntouched();   
-    	 self.servicoEmpresa = {};
-    	 $localStorage.$reset()
-    	// listaRaiz('0');
-     }				
+			
+			function ocorrencia(form){
+				  if(form.$invalid){
+						sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
+						return;
+					}
+				 	var file = $scope.obj.flow.files[0]
+			    	var form = new FormData();
+				 	if(file){
+				 		form.append('file', file.file);	
+				 	}		    	    	
+			    	form.append('servicoEmpresa',new Blob([JSON.stringify(self.servicoEmpresa)], {
+			            type: "application/json"
+			        }) )		        
+					LancamentosService.insert(form)
+				   	 .then(function(response){
+						toastr.success("Lancamento, cadastrado");			
+				   	 	},
+					function(errResponse){		
+						 swal({ timer : 30000, text: errResponse.data.message ,  type : "error", width: 500, higth: 100, padding: 20}).catch(swal.noop);
+						 });
+				  };
+			
 	
-	
-	 function pacotes(texto){
-	     	return  PacoteService.buscarPorTexto(texto).
-	     	 then(function(e){
-	     		return e.content;
-	     	 }, function(errResponse){
-	     	 });
-	     } ;	 	
-	     
-     function prestadoraServico(texto){
-	     	return  PrestadoraService.buscarPorTexto(texto).
-	     	 then(function(e){
-	     		return e.content;
-	     	 }, function(errResponse){
-	     	 });
-	     } ;	
-	 	
-	 
-	 function removerFilhas(estrutura){		
-			$scope.estruturaGeral.splice($scope.estruturaGeral.indexOf(estrutura),$scope.estruturaGeral.length - $scope.estruturaGeral.indexOf(estrutura));
-			buscarFilhas(estrutura);		
-		}
-	 
-	 function buscarFilhas(estrutura){
-			$scope.estruturaGeral.push(estrutura);
-			$scope.raiz = estrutura;
-			self.titulo = estrutura.descricao;
-			buscarListaFilhas(estrutura.id);
-		}
-	 
-	 function listaRaiz(zero){
-			self.titulo ="Inicial";
-			$scope.estruturaGeral = [];
-			buscarListaFilhas(zero);
-		}
-	 
-	 function buscarListaFilhas(idEstruturaRaiz){
-		  blockUI.start();
-	    	 EstruturaService.buscarListaFolhas(idEstruturaRaiz).
-	    	 then(function(e){
-	    		 	$scope.mensagemErro = null;
-		    		$scope.estruturas = e;	
-		    		 blockUI.stop();
-	    	 }, function(errResponse){
-	    		 blockUI.stop();
-	    		 $scope.mensagemErro = "Não existem estruturas Filhas";
-		    	 $scope.estruturas = [];
-	    	 });
-	     };
 }		
 
 function VistoriaEditarController(EstruturaService, blockUI, $localStorage, $state, $stateParams, VistoriaService, EstoqueService,  toastr, $scope){
@@ -107,98 +59,51 @@ function VistoriaEditarController(EstruturaService, blockUI, $localStorage, $sta
 	var idVistoria = $stateParams.idVistoria;
 	
 	self.submit = submit;
-	
-	self.itens = [];
-	self.removerFilhas = removerFilhas;
+	$scope.ocorrencia = {}
+	self.ocorrencias = [];
+	self.ocorrencia = ocorrencia;
+	$scope.obj = {};
 	self.vistoria = {};
-	self.pacotes = pacotes;
-	self.prestadoraServico = prestadoraServico;
-	self.listaRaiz = listaRaiz;
-	self.buscarFilhas = buscarFilhas;
-	$scope.titulo = 'Vistoria';
-	$scope.estruturaGeral = [];
-	buscarListaFilhas(0);
+	$scope.titulo = 'Cadastrar';
 	
 	
-	function submit(form){
-		if(form.$invalid){
-			sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "info", timer : 100000,   width: 500,  padding: 20});	
-			return;
-		}
-		
-		if($scope.raiz == null){
-			sweetAlert({title: "Por favor Selecione pelo menos uma estrutura", 	type : "info", timer : 100000,   width: 500,  padding: 20});	
-			return;
-		}
-			 	self.servicoEmpresa.estrutura = $scope.raiz;
-				VistoriaService.update(self.servicoEmpresa).
+			function submit(form){
+				if(form.$invalid){
+					sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "info", timer : 100000,   width: 500,  padding: 20});	
+					return;
+				}	
+				VistoriaService.insert(self.servicoEmpresa).
 				then(function(response){
-					toastr.success("Serviço, editada");	
-					$state.go('vistoria.consultar');
-					clear(form);
+					toastr.success("Vistoria, enviada");	
 				}, function(errResponse){
 					sweetAlert({ timer : 3000,  text : errResponse.data.message,  type : "error", width: 300, higth: 300, padding: 20});
 				});			
-		};
+			};
 		
-	function clear(form){	    	 
-    	 form.$setPristine();
-    	 form.$setUntouched();   
-    	 self.servicoEmpresa = {};
-    	 $localStorage.$reset()
-    	// listaRaiz('0');
-     }				
-	
-	
-	 function pacotes(texto){
-	     	return  PacoteService.buscarPorTexto(texto).
-	     	 then(function(e){
-	     		return e.content;
-	     	 }, function(errResponse){
-	     	 });
-	     } ;	 	
-	     
-     function prestadoraServico(texto){
-	     	return  PrestadoraService.buscarPorTexto(texto).
-	     	 then(function(e){
-	     		return e.content;
-	     	 }, function(errResponse){
-	     	 });
-	     } ;	
-	 	
-	 
-	 function removerFilhas(estrutura){		
-			$scope.estruturaGeral.splice($scope.estruturaGeral.indexOf(estrutura),$scope.estruturaGeral.length - $scope.estruturaGeral.indexOf(estrutura));
-			buscarFilhas(estrutura);		
-		}
-	 
-	 function buscarFilhas(estrutura){
-			$scope.estruturaGeral.push(estrutura);
-			$scope.raiz = estrutura;
-			self.titulo = estrutura.descricao;
-			buscarListaFilhas(estrutura.id);
-		}
-	 
-	 function listaRaiz(zero){
-			self.titulo ="Inicial";
-			$scope.estruturaGeral = [];
-			buscarListaFilhas(zero);
-		}
-	 
-	 function buscarListaFilhas(idEstruturaRaiz){
-		  blockUI.start();
-	    	 EstruturaService.buscarListaFolhas(idEstruturaRaiz).
-	    	 then(function(e){
-	    		 	$scope.mensagemErro = null;
-		    		$scope.estruturas = e;	
-		    		 blockUI.stop();
-	    	 }, function(errResponse){
-	    		 blockUI.stop();
-	    		 $scope.mensagemErro = "Não existem estruturas Filhas";
-		    	 $scope.estruturas = [];
-	    	 });
-	     };
-	
+			
+			function ocorrencia(){
+				 	var files = $scope.obj.flow.files;
+			    	var form = new FormData();
+			    	var fomrFiles = [];
+				 	if(files){
+				 		angular.forEach(files, function(file, key) {
+				 			form.append('file', file.file);
+				 			});				 		
+				 	}						 	
+			    	form.append('servicoEmpresa',new Blob([JSON.stringify(self.servicoEmpresa)], {
+			            type: "application/json"
+			        }) )
+			        form.append('ocorrencia',new Blob([JSON.stringify($scope.ocorrencia)], {
+			            type: "application/json"
+			        }) )
+					VistoriaService.ocorrencia(form)
+				   	 .then(function(response){
+						toastr.success("Ocorrencia, registrada");			
+				   	 	},
+					function(errResponse){		
+						 swal({ timer : 30000, text: errResponse.data.message ,  type : "error", width: 500, higth: 100, padding: 20}).catch(swal.noop);
+						 });
+				  };
 	
 	findById(idVistoria);
 		
@@ -207,8 +112,7 @@ function VistoriaEditarController(EstruturaService, blockUI, $localStorage, $sta
 		if(!id)return;
 		VistoriaService.findById(id).
 		then(function(p){
-			self.servicoEmpresa = p;
-			buscarFilhas(p.estrutura);			
+			self.servicoEmpresa = p;	
 			}, function(errResponse){
 		});
 	};	

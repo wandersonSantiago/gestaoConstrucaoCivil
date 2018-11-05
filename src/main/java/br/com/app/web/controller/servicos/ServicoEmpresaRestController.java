@@ -1,7 +1,16 @@
 package br.com.app.web.controller.servicos;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collection;
+import java.util.List;
 
+import javax.imageio.ImageIO;
+
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,10 +24,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
-import br.com.app.entity.servicos.PacoteServico;
+import br.com.app.entity.Imagens;
+import br.com.app.entity.servicos.OcorrenciaServico;
 import br.com.app.entity.servicos.ServicoEmpresa;
 import br.com.app.service.servicos.ServicoEmpresaService;
 
@@ -69,11 +81,53 @@ public class ServicoEmpresaRestController {
 	}
 
 	@ResponseStatus(HttpStatus.CREATED)
-	@PutMapping(value = "/vistoria")
+	@PostMapping(value = "/vistoria")
 	public void alteraVistoria(@RequestBody ServicoEmpresa servico) {
 		servicoService.salvarOuEditarVistoria(servico);
 	}
-
+	
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping(value = "/vistoria/ocorrencia")
+	public void insert(@RequestPart(value="file", required = false )  List<MultipartFile> files, @RequestPart("servicoEmpresa")  ServicoEmpresa obj, @RequestPart("ocorrencia")  OcorrenciaServico ocorrencia){
+	
+			files.forEach(file ->{
+				String base64;
+				try {
+					System.out.println(file.getContentType());
+					byte[]  bit = resizeImage(file.getBytes(), 1280 , 720 , "png");
+					System.out.println(bit.length);
+					base64 = Base64.encodeBase64String(bit);
+					Imagens img = new Imagens();
+					img.setDescricao(file.getOriginalFilename());
+					img.setImagemBase64(base64);
+					img.setOcorrencia(ocorrencia);
+					ocorrencia.getImagens().add(img);
+					ocorrencia.setArquivo(base64);
+					obj.getOcorrencias().add(ocorrencia);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+			});	
+		 servicoService.salvarOuEditarVistoria(obj);
+	}
+	private static byte[] resizeImage(byte[] imageByte, int width, int height, String type) throws IOException {
+	    try (InputStream inputImage = new ByteArrayInputStream(imageByte);) {
+	        BufferedImage image = ImageIO.read(inputImage);
+	        BufferedImage imgResized = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+	        imgResized.getGraphics().drawImage(image, 0, 0, width, height, null);
+	        return imageToByte(imgResized, type);
+	    }
+	}
+	private static byte[] imageToByte(BufferedImage img, String type) throws IOException {
+		 try (ByteArrayOutputStream baos = new ByteArrayOutputStream();) {
+		        ImageIO.write(img, type, baos);
+		        baos.flush();
+		        return baos.toByteArray();
+		    }
+	}
+	
+	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(value = "/pagamento/salvar")
 	public void salvarPagamento(@RequestBody ServicoEmpresa servico) {

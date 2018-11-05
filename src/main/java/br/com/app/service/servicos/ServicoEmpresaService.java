@@ -36,10 +36,8 @@ public class ServicoEmpresaService {
 	}
 	
 	@Transactional(readOnly = false)
-	public void update(ServicoEmpresa servico) {
-		
-		ServicoEmpresa servicoRecuperado = servicoRepository.getOne(servico.getId());
-		
+	public void update(ServicoEmpresa servico) {		
+		ServicoEmpresa servicoRecuperado = servicoRepository.getOne(servico.getId());		
 		if(!servico.getEstrutura().equals(servicoRecuperado.getEstrutura()) || !servico.getPacoteServico().equals(servicoRecuperado.getPacoteServico())) {
 			validacao.verificarExistePacoteParaEmpresa(servico);
 		}		

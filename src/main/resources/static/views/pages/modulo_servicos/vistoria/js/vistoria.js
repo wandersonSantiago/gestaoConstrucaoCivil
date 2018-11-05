@@ -7,7 +7,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			templateUrl : 'views/pages/modulo_servicos/vistoria/vistoria.index.html',
 			redirectTo : 'servico.menu',
 			ncyBreadcrumb: {
-				parent: 'servico',
+				parent: 'servico.menu',
 				    label: 'Vistoria'
 				  }
 		})
@@ -42,8 +42,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			ncyBreadcrumb: {
 				 	parent: 'vistoria.consultar',
 				    label: 'Editar'
-				  }
-		
+				  }		
 		})
 		
 		.state('vistoria.visualizar', {
@@ -51,19 +50,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			templateUrl : "views/pages/modulo_servicos/vistoria/vistoria.show.html",
 			controller : "VistoriaVisualizarController as ctrl",
 			ncyBreadcrumb: {
-				 	parent: 'vistoria.menu',
+				 	parent: 'vistoria.consultar',
 				    label: 'Visualizar'
 				  }
 		})
-		.state('vistoria.menu', {
-			requiresAuthentication: true,
-			url : "/produto/menu",
-			templateUrl : "views/pages/modulo_servicos/vistoria/home.html",
-			ncyBreadcrumb: {
-				 	parent: 'servicos',
-				    label: 'Vistoria'
-				  }
-		})
-		
+				
 
 });
