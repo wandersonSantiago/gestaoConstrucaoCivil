@@ -20,7 +20,6 @@ import br.com.app.entity.almoxarifado.QCotacao;
 import br.com.app.enuns.StatusCotacao;
 import br.com.app.exceptions.NotFoundException;
 import br.com.app.pojo.SessionUsuario;
-import br.com.app.repository.almoxarifado.CotacaoItemRepository;
 import br.com.app.repository.almoxarifado.CotacaoRepository;
 import br.com.app.repository.filter.CotacaoFilter;
 
