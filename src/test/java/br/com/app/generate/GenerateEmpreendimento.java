@@ -1,4 +1,4 @@
-package br.com.app.generate;
+/*package br.com.app.generate;
 
 import java.util.Date;
 import java.util.Random;
@@ -22,3 +22,4 @@ public class GenerateEmpreendimento {
 		return emp;
 	}
 }
+*/

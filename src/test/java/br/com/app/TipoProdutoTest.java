@@ -1,4 +1,4 @@
-package br.com.app;
+/*package br.com.app;
  
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -106,3 +106,4 @@ public class TipoProdutoTest  extends AbstractMvcTest {
 	
 	 
 }
+*/

@@ -1,4 +1,4 @@
-package br.com.app;
+/*package br.com.app;
 
 import java.io.IOException;
 
@@ -32,3 +32,4 @@ public class Util {
 		return mapper.readValue(jsonStringResponse, classe);
 	}
 }
+*/

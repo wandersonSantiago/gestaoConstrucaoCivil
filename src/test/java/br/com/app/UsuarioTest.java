@@ -1,4 +1,4 @@
-package br.com.app;
+/*package br.com.app;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
@@ -72,3 +72,4 @@ public class UsuarioTest extends AbstractMvcTest {
 	
 	 
 }
+*/

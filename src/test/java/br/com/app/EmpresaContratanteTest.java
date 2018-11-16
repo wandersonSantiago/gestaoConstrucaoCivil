@@ -1,4 +1,4 @@
-package br.com.app;
+/*package br.com.app;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,3 +37,4 @@ public class EmpresaContratanteTest extends AbstractMvcTest{
 
 	}
 }
+*/

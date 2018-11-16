@@ -1,4 +1,4 @@
-package br.com.app.generate;
+/*package br.com.app.generate;
 
 import java.util.Random;
 
@@ -14,3 +14,4 @@ public class GenerateTipoProduto {
 		return tipoProduto;
 	}
 }
+*/

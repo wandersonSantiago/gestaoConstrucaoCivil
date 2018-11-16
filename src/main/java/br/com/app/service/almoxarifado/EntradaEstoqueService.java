@@ -22,6 +22,7 @@ public class EntradaEstoqueService {
 	@Autowired
 	private EstoqueEmpreendimentoRepository estoqueRepository;
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Transactional(readOnly = false)
 	public void entradaEstoque(EntradaOuBaixa entrada) {
 		Collection<IItem> t = entrada.getItens();

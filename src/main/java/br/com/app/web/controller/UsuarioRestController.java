@@ -1,6 +1,5 @@
 package br.com.app.web.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.Arrays;

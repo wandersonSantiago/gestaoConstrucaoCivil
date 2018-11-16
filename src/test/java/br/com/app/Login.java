@@ -1,4 +1,4 @@
-package br.com.app;
+/*package br.com.app;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -27,3 +27,4 @@ public class Login extends AbstractMvcTest {
 	
 	
 }
+*/

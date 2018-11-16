@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -35,14 +33,12 @@ import br.com.app.dto.CorpoPdfDTO;
 import br.com.app.dto.LancamentoDTO;
 import br.com.app.dto.SaldoLancamentoDTO;
 import br.com.app.entity.Lancamento;
-import br.com.app.entity.almoxarifado.Cotacao;
 import br.com.app.enuns.CategoriaEnum;
 import br.com.app.enuns.StatusLancamento;
 import br.com.app.enuns.TipoLancamentoEnum;
 import br.com.app.exceptions.NotFoundException;
 import br.com.app.jasper.JasperReportsService;
 import br.com.app.jasper.RelatorioUtil;
-import br.com.app.repository.filter.CotacaoFilter;
 import br.com.app.repository.filter.LancamentoFilter;
 import br.com.app.service.LancamentoService;
 

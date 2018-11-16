@@ -20,6 +20,7 @@ public class BaixaEstoqueService {
 	private EstoqueEmpreendimentoRepository estoqueRepository;
 	
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Transactional(readOnly = false)
 	public void baixar(EntradaOuBaixa baixa) {
 		Collection<IItem> t = baixa.getItens();

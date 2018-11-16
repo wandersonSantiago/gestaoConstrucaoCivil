@@ -34,7 +34,7 @@ public class MoradorRestController {
 	@GetMapping
 	public Page<Morador> lista(@RequestParam(defaultValue = "0", required = false) int page,
 			@RequestParam(defaultValue = "0", required = false) int maxResults) {
-		return clienteMoradorService.buscarTodos(new PageRequest(page, maxResults));
+		return clienteMoradorService.buscarTodos(PageRequest.of(page, maxResults));
 
 	}
  

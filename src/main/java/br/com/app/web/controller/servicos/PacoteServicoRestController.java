@@ -1,6 +1,5 @@
 package br.com.app.web.controller.servicos;
 
-import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.app.entity.servicos.PacoteServico;
-import br.com.app.entity.servicos.PrestadoraServico;
 import br.com.app.service.servicos.PacoteServicoService;
 
 @RestController

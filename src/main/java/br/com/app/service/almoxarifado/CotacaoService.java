@@ -31,8 +31,6 @@ public class CotacaoService {
 	@Autowired
 	private CotacaoRepository cotacaoRepository;
 	@Autowired
-	private CotacaoItemRepository cotacaoItemRepository;
-	@Autowired
 	private VerificaItensGanhadores verificarItens;
 
 	@Transactional(readOnly = false)

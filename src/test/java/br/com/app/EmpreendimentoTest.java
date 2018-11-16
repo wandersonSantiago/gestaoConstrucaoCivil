@@ -1,4 +1,4 @@
-package br.com.app;
+/*package br.com.app;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -29,10 +29,10 @@ public class EmpreendimentoTest extends AbstractMvcTest {
 	public void save() throws Exception {
 
 		 
-	/*	Empreendimento empreendimento = new GenerateEmpreendimento().gerar();
+		Empreendimento empreendimento = new GenerateEmpreendimento().gerar();
 
 		mockMvc.perform(post(uriSave).content(objectForJson(empreendimento)).contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isCreated());*/
+				.andExpect(status().isCreated());
 		
 	}
 
@@ -51,3 +51,4 @@ public class EmpreendimentoTest extends AbstractMvcTest {
 
 	}
 }
+*/

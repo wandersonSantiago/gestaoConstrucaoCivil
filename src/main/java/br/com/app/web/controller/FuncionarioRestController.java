@@ -48,7 +48,7 @@ public class FuncionarioRestController {
 	@GetMapping
 	public Page<Funcionario> listaComPaginacao(@RequestParam(defaultValue = "0", required = false) int page,
 			@RequestParam(defaultValue = "0", required = false) int maxResults) {
-		return funcionarioService.listaComPaginacao(new PageRequest(page, maxResults));
+		return funcionarioService.listaComPaginacao(PageRequest.of(page, maxResults));
 
 	}
 

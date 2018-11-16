@@ -43,7 +43,7 @@ public class CargoRestController {
 	@GetMapping(value = "/lista/paginacao/", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Page<Cargo> listaComPaginacao(@RequestParam(defaultValue = "0", required = false) int page,
 			@RequestParam(defaultValue = "0", required = false) int maxResults) {
-		return cargoServices.listaComPaginacao(new PageRequest(page, maxResults));
+		return cargoServices.listaComPaginacao(PageRequest.of(page, maxResults));
 	}
 
 	@ResponseStatus(HttpStatus.OK)

@@ -1,4 +1,4 @@
-package br.com.app;
+/*package br.com.app;
 
 import br.com.app.entity.Cargo;
 
@@ -25,3 +25,4 @@ public class CargoBuilder {
 		return cargo;
 	}
 }
+*/
