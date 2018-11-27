@@ -1,3 +1,4 @@
+﻿
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2125cb1ed72b47788a76b61c5a85c63a)](https://www.codacy.com/app/eduardo.gf/gestaoConstrucaoCivil?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=wandersonSantiago/gestaoConstrucaoCivil&amp;utm_campaign=Badge_Grade)
 
 # Gestão Construcão Civil
