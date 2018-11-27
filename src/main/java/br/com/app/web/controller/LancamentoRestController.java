@@ -40,6 +40,7 @@ import br.com.app.exceptions.NotFoundException;
 import br.com.app.jasper.JasperReportsService;
 import br.com.app.jasper.RelatorioUtil;
 import br.com.app.repository.filter.LancamentoFilter;
+import br.com.app.service.ImagemService;
 import br.com.app.service.LancamentoService;
 
 @RestController
@@ -52,12 +53,15 @@ public class LancamentoRestController {
 	private JasperReportsService jasperReportsService;
 	@Autowired
 	private RelatorioUtil relatorioUtil;
+	@Autowired
+	private ImagemService imagemService;
 	
 	@PostMapping
 	public ResponseEntity<Void> insert(@RequestPart(value="file", required = false )  MultipartFile file, @RequestPart("lancamento")  Lancamento obj){
 		try {
 			if(file != null && !file.isEmpty()) {
-				String base64 = Base64.encodeBase64String(file.getBytes());
+				byte[] bytes = imagemService.resizeImage(file.getBytes(), 600, 480);
+				String base64 = Base64.encodeBase64String(bytes);
 				obj.setComprovanteBase64(base64);
 			}			
 		} catch (IOException e) {
@@ -74,7 +78,8 @@ public class LancamentoRestController {
 			@RequestPart("lancamento")  Lancamento obj , @RequestPart("id")  Long id){
 		try {
 			if(file != null && !file.isEmpty()) {
-				String base64 = Base64.encodeBase64String(file.getBytes());
+				byte[] bytes = imagemService.resizeImage(file.getBytes(), 600, 480);
+				String base64 = Base64.encodeBase64String(bytes);
 				obj.setComprovanteBase64(base64);
 			}else {
 				obj.setComprovanteBase64(null);

@@ -25,6 +25,7 @@ public class FabricanteService {
 	@Transactional(readOnly = false)
 	public void insert(Fabricante fabricante){
 		fabricante.setId(null);
+		fabricante.setAtivo(true);
 		if(existeCnpjCadastrado(fabricante.getDadoEmpresa().getCnpj())) {
 			throw new MensagemException("CNPJ ja consta cadastrado como uma fabricante");
 		}

@@ -39,7 +39,7 @@ public class DadoEmpresa implements Serializable {
 	@Column(nullable = true)
 	@Enumerated(EnumType.STRING)
 	protected UfEnum ufIe;
-	@Column(nullable = false, length = 20, unique = true)
+	@Column(nullable = true, length = 20, unique = true)
 	private String inscricaoEstadual;
 	@OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
 	@JoinColumn(name = "id_endereco", nullable = false)
@@ -61,5 +61,11 @@ public class DadoEmpresa implements Serializable {
 		return StatusEnum.toEnum(status);
 	}
 	
-
+	public void setRazaoSocial(String razaoSocial) {
+		this.razaoSocial = razaoSocial.toUpperCase();
+	}
+	
+	public void setNomeFantasia(String nomeFantasia) {
+		this.nomeFantasia = nomeFantasia.toUpperCase();
+	}
 }

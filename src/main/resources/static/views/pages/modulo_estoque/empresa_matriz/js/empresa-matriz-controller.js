@@ -39,8 +39,9 @@ function EmpresaMatrizCadastarController (toastr, $scope, buscaCepService, $loca
 				 then(function(response){					
 					 blockUI.stop();
 					 toastr.success('Empresa', 'Cadastrada!');
+					 $state.go(self.proximaPagina,{ empresa : response});
+					 //$state.go("matriz.identificar");
 					 clear();
-					 $state.go("matriz.identificar");
 				 },
 				function(errResponse){					 
 					 blockUI.stop();
@@ -70,7 +71,7 @@ function EmpresaMatrizCadastarController (toastr, $scope, buscaCepService, $loca
 			  }
 		    	 EmpresaMatrizService.buscarPorCnpj(cnpj)
 		    	 .then(function(empresa){	
-		    		 empresa != ""  ? $state.go(self.proximaPagina,{ empresa}) : $state.go('matriz.cadastrar',{ cnpj});	    		 
+		    		 empresa != ""  ? $state.go(self.proximaPagina,{ empresa}) : $state.go('matriz.cadastrar',{ cnpj : cnpj, proximaPagina :  self.proximaPagina});	    		 
 		 			}, function(errResponse){		 				
 		    		 swal({ text : errResponse.data.message ,  type : "info", width: 200, higth: 100, padding: 20}).catch(swal.noop);
 		 			});

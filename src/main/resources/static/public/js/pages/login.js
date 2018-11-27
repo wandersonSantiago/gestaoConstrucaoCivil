@@ -7,10 +7,10 @@ app.controller('LoginController', function($rootScope, $scope, $location, $http,
 		  blockUI.start();
 		  Auth.login($scope.user, function() {
 	        if ($rootScope.authenticated) {
-	          $scope.error = false;
+	          $scope.mensagemErro = false;
 	          $state.go("home");
 	        } else {
-	          $scope.error = true;
+	          $scope.mensagemErro = true;
 	          $state.go("login");
 	        }
 	        blockUI.stop();

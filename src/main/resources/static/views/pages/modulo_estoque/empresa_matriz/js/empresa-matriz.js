@@ -25,7 +25,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		.state('matriz.cadastrar', {
 			url : "/cadastrar",
 			params: {
-				cnpj: null
+				cnpj: null,
+				proximaPagina: null
 			  },
 			templateUrl : "views/pages/modulo_estoque/empresa_matriz/empresa_matriz.form.html",
 			controller : "EmpresaMatrizCadastarController as ctrl",

@@ -65,6 +65,7 @@ public class Usuario implements Serializable {
 	@Column(nullable = false)
 	private boolean ativo;
 
+	@Column(name="foto_base_64", columnDefinition="text")
 	private String caminhoFoto;
 
 	@Enumerated(EnumType.STRING)
@@ -106,7 +107,9 @@ public class Usuario implements Serializable {
 		this.dataCadastro = dataCadastro;
 	}
 
-	
+	public String getImageBase64Path() {
+		return caminhoFoto = "data:image/jpeg;base64," + caminhoFoto;
+	}
 	
 	
 }
