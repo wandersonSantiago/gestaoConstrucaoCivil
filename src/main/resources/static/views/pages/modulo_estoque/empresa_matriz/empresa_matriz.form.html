@@ -16,18 +16,17 @@
 			</div>
 			
 			<div  class="col-sm-2">
-			<label for="cnpj">Estado*:</label>
+			<label for="cnpj">Estado:</label>
 					<select class="form-control"  ng-model="ctrl.dadoEmpresa.ufIe" ng-options="uf for uf in ctrl.ufs">
 						<option value="">Estado</option>
 					</select>
 			</div>
 					
-			<div class="col-sm-2" ng-class="{ 'has-error' : iefield.cnpj.$invalid && formMatriz.$submitted }">
-			<label for="cnpj">Inscrição Estadual*:</label>
+			<div class="col-sm-2">
+			<label for="cnpj">Inscrição Estadual:</label>
 				<input class="form-control" name="iefield"  placeholder="Inscrição Estadual" 
 					 ng-model="ctrl.dadoEmpresa.inscricaoEstadual" ng-blur="verificaCtrl.verificaIe(ctrl.dadoEmpresa.inscricaoEstadual)"
-					id="inscricaoEstadual" type="text" ui-br-ie-mask='ctrl.dadoEmpresa.ufIe'
-					required>
+					id="inscricaoEstadual" type="text" ui-br-ie-mask='ctrl.dadoEmpresa.ufIe'>
 			 <p ng-show="formMatriz.iefield.$error.ie"	class="alert alert-warning ">Digite uma inscrição estadual válida</p>
 			</div>	
 			

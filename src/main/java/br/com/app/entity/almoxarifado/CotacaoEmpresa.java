@@ -53,16 +53,16 @@ public class CotacaoEmpresa implements Serializable{
 	private double valorTotal;
 
 	public void removerItensPerdedores() {
-		List<CotacaoEmpresaItem> itensParaRemover = new ArrayList<CotacaoEmpresaItem>();
+	/*	List<CotacaoEmpresaItem> itensParaRemover = new ArrayList<CotacaoEmpresaItem>();
 		itens.forEach(item -> {
 
-			if (item.getStatus().equals(CotacaoEmpresaItemStatus.PERDEU)) {
+			if (item.getStatus().equals(CotacaoEmpresaItemStatus.PERDEU) || item.getStatus().equals(CotacaoEmpresaItemStatus.PENDENTE)) {
 				itensParaRemover.add(item);
 			}
 		});
-		itens.removeAll(itensParaRemover);
+		itens.removeAll(itensParaRemover);*/
 		
-		//itens.removeIf((CotacaoEmpresaItem item) -> item.getStatus().equals(CotacaoEmpresaItemStatus.PERDEU));
+		itens.removeIf((CotacaoEmpresaItem item) -> item.getStatus().equals(CotacaoEmpresaItemStatus.PERDEU) || item.getStatus().equals(CotacaoEmpresaItemStatus.PENDENTE));
 
 	}
 

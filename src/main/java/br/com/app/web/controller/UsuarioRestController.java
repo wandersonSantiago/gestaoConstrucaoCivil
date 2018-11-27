@@ -7,6 +7,7 @@ import java.util.Collection;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
@@ -121,10 +122,18 @@ public class UsuarioRestController {
 	public void recebeImagem(@RequestPart("file") MultipartFile file, @RequestPart("usuario") Usuario usuario) {
 
 		try {
-			
+				if(file != null && !file.isEmpty()) {
+					byte[] bytes = imagemService.resizeImage(file.getBytes(), 300, 400);
+					String base64 = Base64.encodeBase64String(bytes);
+					usuario.setCaminhoFoto(base64);
+				}else {
+					usuario.setCaminhoFoto(null);
+				}
+		/*	
 			imagemService.createPathAndSaveFile(file, usuario.getLogin());
 			usuario.setCaminhoFoto(imagemService.getPath());
-			usuarioService.savePathFoto(usuario);
+			usuarioService.savePathFoto(usuario);*/
+				usuarioService.savePathFoto(usuario);
 
 		} catch (Exception e) {
 		

@@ -2,6 +2,7 @@ package br.com.app.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -11,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.apache.lucene.store.Lock.With;
 
 import br.com.app.enuns.DataBaseEnum;
 import br.com.app.pojo.util.DateUtils;
@@ -40,9 +43,11 @@ public class ConfiguracaoEmpreendimento implements Serializable{
 	
 	public Date getDataBaseFinal() {
 		LocalDate hoje = LocalDate.now();
-		int data = (dataBaseFinanceiro == 0 || dataBaseFinanceiro ==1 )  ? 31 : dataBaseFinanceiro -1;		
-		LocalDate localDate = DateUtils.addMonthAndDayToDate( hoje.getMonthValue() + 1,data);		
-		return DateUtils.convertLocalDateToDate(localDate);
+		  LocalDate dia = LocalDate.now().withMonth(hoje.getMonthValue()).with(TemporalAdjusters.lastDayOfMonth());
+		int data = (dataBaseFinanceiro == 0 || dataBaseFinanceiro ==1 )  ? dia.getDayOfMonth() : dataBaseFinanceiro -1;		
+		int mes = (dataBaseFinanceiro == 0 || dataBaseFinanceiro ==1 )  ? hoje.getMonthValue() : hoje.getMonthValue() + 1;
+		LocalDate localDate = DateUtils.addMonthAndDayToDate(mes,data);		
+ 		return DateUtils.convertLocalDateToDate(localDate);
 	}
 	
 	public DataBaseEnum getDataBaseFinanceiro() {

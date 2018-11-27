@@ -46,20 +46,17 @@ public class DBService {
 			
 		Empreendimento empMatriz = empreendimentoRepository.save(new Empreendimento(null,endereco,"KLP Construções", "199895045", 5000000.0, 0.0, 0.0 , new Date(), new Date(), StatusEmpreendimento.EM_ANDAMENTO, null));
 		endereco.setId(null);
-		Empreendimento emp = empreendimentoRepository.save(new Empreendimento(null,endereco,"Obra Sara",  "199895045", 5000000.0, 0.0,0.0,new Date(),new Date(), StatusEmpreendimento.EM_ANDAMENTO,empMatriz)); 
+		//Empreendimento emp = empreendimentoRepository.save(new Empreendimento(null,endereco,"Obra Sara",  "199895045", 5000000.0, 0.0,0.0,new Date(),new Date(), StatusEmpreendimento.EM_ANDAMENTO,empMatriz)); 
 		
-		Usuario userPrincipal = new Usuario(null, empMatriz, "root", "root", "root@root.com", pe.encode("root"), true, null, StatusUsuarioEnum.INDISPONIVEL, new Date());
-		Usuario user= new Usuario(null, emp, "Wanderson", "Wanderson", "wandersonsantiago@gmail.com", pe.encode("123456"), true, null, StatusUsuarioEnum.INDISPONIVEL, new Date());
+		Usuario userPrincipal = new Usuario(null, null, "root", "root", "root@root.com", pe.encode("root"), true, null, StatusUsuarioEnum.INDISPONIVEL, new Date());
+		Usuario user= new Usuario(null, empMatriz, "Wanderson", "Wanderson", "wandersonsantiago@gmail.com", pe.encode("123456"), true, null, StatusUsuarioEnum.INDISPONIVEL, new Date());
 		
 		ConfiguracaoEmpreendimento config = new ConfiguracaoEmpreendimento();
 		config.setDataBaseFinanceiro(DataBaseEnum._1);
 		config.setEmpreendimento(empMatriz);
 		configRepository.save(config);
 		
-		ConfiguracaoEmpreendimento config2 = new ConfiguracaoEmpreendimento();
-		config2.setDataBaseFinanceiro(DataBaseEnum._7);
-		config2.setEmpreendimento(emp);
-		configRepository.save(config2);
+
 		
 		usuarioRepository.save(userPrincipal);
 		usuarioRepository.save(user);

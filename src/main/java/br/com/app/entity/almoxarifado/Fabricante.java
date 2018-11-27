@@ -26,7 +26,8 @@ public class Fabricante implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fabricante_id_seq")
 	private Long id;
-	
+	@Column(nullable = false)
+	private boolean ativo;
 	@Column(length = 50)
 	private String contato;
 	@Column(length = 50)

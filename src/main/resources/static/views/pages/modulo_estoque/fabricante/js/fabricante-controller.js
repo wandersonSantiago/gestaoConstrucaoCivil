@@ -19,7 +19,7 @@ function FabricanteCadastarController (toastr, $scope, $location, $state, $state
 			return;
 		}			
 			 blockUI.start();
-			 self.fabricante = {dadoEmpresa : self.empresa};
+			// self.fabricante = {dadoEmpresa : self.empresa};
 	    	 FabricanteService.save(self.fabricante).
 				 then(function(response){					
 					 blockUI.stop();

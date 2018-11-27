@@ -75,7 +75,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		.state('cotacao.menu', {
 			requiresAuthentication: true,
 			url : "/menu",
-			templateUrl : "views/pages/modulo_compras/home.html",
+			templateUrl : "views/pages/modulo_compras/cotacao/home.html",
 			ncyBreadcrumb: {
 				 	parent: 'home',
 				    label: 'Cotacao'
