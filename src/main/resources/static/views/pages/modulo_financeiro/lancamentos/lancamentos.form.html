@@ -2,16 +2,22 @@
 <form role="form-vertical" name="form" novalidate  ng-submit="ctrl.submit(form)" >
 	
 				<div class="row">
-			      <div class="col-md-6" ng-class="{ 'has-error' : form.tipo.$invalid && form.$submitted }">
-			       <label for="tipo" class="control-label">Tipo:</label>
-					<select id="tipo" name="tipo" class="form-control" ng-model="ctrl.lancamento.tipo" ng-options="tipo for tipo in ctrl.tipos">	               
+			      <div class="col-md-4" ng-class="{ 'has-error' : form.tipo.$invalid && form.$submitted }">
+			       <label for="tipo" class="control-label">Operação:</label>
+					<select id="tipo" name="tipo" class="form-control" ng-model="ctrl.lancamento.tipo" ng-options="operacao for operacao in ctrl.operacoes">	               
 			              </select>
 			      </div>
-			      <div class="col-md-6" ng-class="{ 'has-error' : form.categoria.$invalid && form.$submitted }">
-			       <label for="categoria" class="control-label">Categoria:</label>
-					<select id="categoria" name="categoria" class="form-control" ng-model="ctrl.lancamento.categoria" ng-options="categoria for categoria in ctrl.categorias">	               
+			      <div class="col-md-4" ng-class="{ 'has-error' : form.categoriaTipo.$invalid && form.$submitted }">
+			       <label for="categoria" class="control-label">tipo:</label>
+					<select id="categoriaTipo" name="categoriaTipo" class="form-control" ng-model="ctrl.categoria.tipo" 
+					ng-options="tipo for tipo in ctrl.tipos" ng-change="ctrl.findAllIdTipo(ctrl.categoria.tipo)">	               
 			              </select>
 			      </div>
+			      	<div class="form-group  col-sm-4" ng-class="{ 'has-error' : form.categoria.$invalid && form.$submitted }">
+			 		<a href="" class="fa fa-plus" ui-sref="categoriaFinancerio.cadastrar">Novo</a> | <label>Categoria:</label>
+				   	<select id="categoria" name="categoria" class="text-uppercase form-control" ng-model="ctrl.lancamento.categoria" ng-options="categoria.descricao for categoria in ctrl.categorias">	               
+			              </select>
+			    </div>
 				</div>
 				<div class="row">
 					<div class="col-sm-3" ng-class="{ 'has-error' : form.vencimento.$invalid && form.$submitted }">
@@ -24,12 +30,7 @@
 						<input class="form-control"  id="dataPagamento" name="dataPagamento" type="date" ng-model="ctrl.lancamento.dataPagamentoOuRecebimento"  title="informe a data do {{ctrl.lancamento.tipo == 'DEBITO' ? ' Pagamento' : 'Recebimento'}}" date-input>
 					</div>					
 				</div> 
-				<div class="row">
-			      <div class="col-md-12" ng-class="{ 'has-error' : form.descricao.$invalid && form.$submitted }">
-			        <label>Descrição:</label>
-			        <input  type="text" name="descricao" id="descricao" class="form-control" ng-model="ctrl.lancamento.descricao" required>
-			      </div>
-				</div>
+				
 				<div class="row">
 			      <div class="col-md-3" ng-class="{ 'has-error' : form.valor.$invalid && form.$submitted }">
 			        <label>Valor:</label>

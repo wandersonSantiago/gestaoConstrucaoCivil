@@ -4,72 +4,65 @@ app.controller("LancamentosListarController", LancamentosListarController);
 app.controller("LancamentosShowController", LancamentosShowController);
 app.controller("LancamentosEstatisticaController", LancamentosEstatisticaController);
 
-function LancamentosCadastarController($localStorage, $state, $stateParams, LancamentosService, SubCategoriaService, CategoriaService, FabricanteService, toastr, $scope, $rootScope){
+function LancamentosCadastarController($localStorage, $state, $stateParams, LancamentosService, CategoriaFinanceiroService, toastr, $scope, $rootScope){
 	
 	var self = this;	
-	
+	self.findAllIdTipo = findAllIdTipo;
 	self.submit = submit;
+	
 		
 	tipos();
-	categorias();
+	operacoes();
+	
 	$scope.obj = {};
 	
 	$rootScope.visualizar = visualizar;
 	function visualizar(param){
 		var Tipo = param;
  		$state.go('lancamentos.list', {Tipo});
- 	};
- 	
-/*	function submit(form){
-		if(form.$invalid){
-			sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
-			return;
-		}
-			LancamentosService.insert(self.lancamento).
-			then(function(response){
-				estatistica();
-				toastr.success("Lancamento, cadastrado");		
-				clear(form);
-			}, function(errResponse){
-				sweetAlert({ timer : 3000,  text : errResponse.data.message,  type : "error", width: 300, higth: 300, padding: 20});
-			});			
-		};*/
-		
-		  function submit(form){
-			  if(form.$invalid){
-					sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
-					return;
-				}
-			 	var file = $scope.obj.flow.files[0]
-		    	var form = new FormData();
-			 	if(file){
-			 		form.append('file', file.file);	
-			 	}		    	    	
-		    	form.append('lancamento',new Blob([JSON.stringify(self.lancamento)], {
-		            type: "application/json"
-		        }) )		        
-				LancamentosService.insert(form)
-			   	 .then(function(response){
-			   		estatistica();
-					toastr.success("Lancamento, cadastrado");					
-					clear(form);		
-			   	 	},
-				function(errResponse){		
-					 swal({ timer : 30000, text: errResponse.data.message ,  type : "error", width: 500, higth: 100, padding: 20}).catch(swal.noop);
-					 });
-			  };
+ 	};		
+	  function submit(form){
+		  if(form.$invalid){
+				sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
+				return;
+			}
+		 	var file = $scope.obj.flow.files[0]
+	    	var form = new FormData();
+		 	if(file){
+		 		form.append('file', file.file);	
+		 	}		    	    	
+	    	form.append('lancamento',new Blob([JSON.stringify(self.lancamento)], {
+	            type: "application/json"
+	        }) )		        
+			LancamentosService.insert(form)
+		   	 .then(function(response){
+		   		estatistica();
+				toastr.success("Lancamento, cadastrado");					
+				clear(form);		
+		   	 	},
+			function(errResponse){		
+				 swal({ timer : 30000, text: errResponse.data.message ,  type : "error", width: 500, higth: 100, padding: 20}).catch(swal.noop);
+				 });
+		  };
 			  
-			  
+	  function operacoes(){
+			LancamentosService.tipos().
+			then(function(p){
+				self.operacoes = p;
+				}, function(errResponse){
+			});
+		};
+				
 	function tipos(){
-		LancamentosService.tipos().
+		CategoriaFinanceiroService.tipos().
 		then(function(p){
 			self.tipos = p;
 			}, function(errResponse){
 		});
 	};
 	
-	function categorias(){
-		LancamentosService.categorias().
+	function findAllIdTipo(idTipo){
+		CategoriaFinanceiroService.findAllIdTipo(idTipo).
 		then(function(p){
 			self.categorias = p;
 			}, function(errResponse){
@@ -96,16 +89,17 @@ function LancamentosCadastarController($localStorage, $state, $stateParams, Lanc
 			
 }		
 
-function LancamentosEditarController($localStorage, $state, $stateParams, LancamentosService, toastr, $scope, $rootScope){
+function LancamentosEditarController($localStorage, $state, $stateParams, CategoriaFinanceiroService, LancamentosService, toastr, $scope, $rootScope){
 	
 	var self = this;
 	
 	var idLancamentos = $stateParams.idLancamentos;
 	
 	self.submit = submit;
+	self.findAllIdTipo = findAllIdTipo;
 	$scope.obj = {};
-	tipos();
-	categorias();	 
+	tipos(); 
+	operacoes();
 	findById(idLancamentos);
 	$rootScope.visualizar = visualizar;
 	
@@ -115,49 +109,58 @@ function LancamentosEditarController($localStorage, $state, $stateParams, Lancam
  		$state.go('lancamentos.list', {Tipo});
  	};
 	
-	  function submit(form){
-		  if(form.$invalid){
-				sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
-				return;
-			}
-		 	var file = $scope.obj.flow.files[0];
-	    	var form = new FormData();
-		 	if(file){
-		 		form.append('file', file.file);	
-		 	}
-			form.append('id',new Blob([JSON.stringify(self.lancamento.id)], {
-	            type: "application/json"
-	        }) )
-	    	form.append('lancamento',new Blob([JSON.stringify(self.lancamento)], {
-	            type: "application/json"
-	        }) )		        
-			LancamentosService.update(form)
-		   	 .then(function(response){
-		   		estatistica();
-				toastr.success("Lancamento, alterado");
-				$scope.obj.flow.cancel();
-				clear(form);		
-		   	 	},
-			function(errResponse){		
-				 swal({ timer : 30000, text: errResponse.data.message ,  type : "error", width: 500, higth: 100, padding: 20}).catch(swal.noop);
-				 });
-		  };
-		  
+  function submit(form){
+	  if(form.$invalid){
+			sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
+			return;
+		}
+	 	var file = $scope.obj.flow.files[0];
+    	var form = new FormData();
+	 	if(file){
+	 		form.append('file', file.file);	
+	 	}
+		form.append('id',new Blob([JSON.stringify(self.lancamento.id)], {
+            type: "application/json"
+        }) )
+    	form.append('lancamento',new Blob([JSON.stringify(self.lancamento)], {
+            type: "application/json"
+        }) )		        
+		LancamentosService.update(form)
+	   	 .then(function(response){
+	   		estatistica();
+			toastr.success("Lancamento, alterado");
+			$scope.obj.flow.cancel();
+			clear(form);		
+	   	 	},
+		function(errResponse){		
+			 swal({ timer : 30000, text: errResponse.data.message ,  type : "error", width: 500, higth: 100, padding: 20}).catch(swal.noop);
+			 });
+	  };
+	  
+	  function operacoes(){
+			LancamentosService.tipos().
+			then(function(p){
+				self.operacoes = p;
+				}, function(errResponse){
+			});
+		};
+					
 	function tipos(){
-		LancamentosService.tipos().
+		CategoriaFinanceiroService.tipos().
 		then(function(p){
 			self.tipos = p;
 			}, function(errResponse){
 		});
 	};
 	
-	function categorias(){
-		LancamentosService.categorias().
+	function findAllIdTipo(idTipo){
+		CategoriaFinanceiroService.findAllIdTipo(idTipo).
 		then(function(p){
 			self.categorias = p;
 			}, function(errResponse){
 		});
 	};
+	
 	
 	function clear(form){	    	
     	 self.lancamento = null;  
@@ -171,6 +174,7 @@ function LancamentosEditarController($localStorage, $state, $stateParams, Lancam
 		LancamentosService.findById(id).
 		then(function(p){
 			self.lancamento = p;
+			findAllIdTipo(p.categoria.tipo);
 			}, function(errResponse){
 		});
 	};
@@ -245,6 +249,7 @@ function LancamentosListarController(blockUI, LancamentosService, toastr, $scope
 	    		 $scope.lancamentoFilter.page.page = e.number + 1;
 	    		 blockUI.stop();
 	    	 }, function(errResponse){
+	    		 self.lancamentos = [];
 	    		 blockUI.stop();
 	    		 if(errResponse.status == 404){
 	    			 $scope.mensagemErro = errResponse.data.mensagem;

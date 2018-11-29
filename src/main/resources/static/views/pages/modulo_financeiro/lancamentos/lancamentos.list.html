@@ -34,7 +34,7 @@
 				</div>
 				<div class="form-group  col-sm-3">
 					<label>Categoria:</label><br>
-					<select class="form-control "  ng-model="lancamentoFilter.categoria" ng-options="categoria  for categoria in ctrl.categorias" 
+					<select class="form-control "  ng-model="lancamentoFilter.categoria.tipo" ng-options="categoria  for categoria in ctrl.categorias" 
 						name="categorias" >
 					</select>	
 				</div>
@@ -118,10 +118,11 @@
 				<thead>
 					<tr >						 
 						<th ><a href="" ng-click="ctrl.sort('id')"><i class="glyphicon glyphicon-sort"></i></a>Comprovante</th>
-						<th ><a href="" ng-click="ctrl.sort('descricao')"><i class="glyphicon glyphicon-sort"></i></a>Descrição</th>
+						<th ><a href="" ng-click="ctrl.sort('categoria.descricao')"><i class="glyphicon glyphicon-sort"></i></a>Descrição</th>
+						<th ><a href=""ng-click="ctrl.sort('categoria.tipo')"><i class="glyphicon glyphicon-sort"></i></a>Tipo</th>
 						<th ><a href=""ng-click="ctrl.sort('dataVencimento')"><i class="glyphicon glyphicon-sort"></i></a>Vencimento</th>
 						<th ><a href=""ng-click="ctrl.sort('dataPagamentoOuRecebimento')"><i class="glyphicon glyphicon-sort"></i></a>Pagt/Receb.</th>	
-						<th ><a href=""ng-click="ctrl.sort('categoria')"><i class="glyphicon glyphicon-sort"></i></a>Categoria</th><!-- 
+						<!-- 
 						<th ><a href=""ng-click="ctrl.sort('tipo')"><i class="glyphicon glyphicon-sort"></i></a>Tipo</th> -->
 						<th >Status</th>
 						<th >Valor</th>
@@ -135,10 +136,11 @@
 					ng-repeat=" lancamento in ctrl.lancamentos">
 					<tr>
 						<td><a title="Visualizar comprovante" data-toggle="modal" href=""	data-target=".modalComprovante" ng-click="ctrl.modalComprovante(lancamento)" ng-if="lancamento.comprovanteBase64">comprovante</a></td>
-						<td><a  title="Visualizar este lançamento" data-toggle="modal" href=""	data-target=".modalEstrutura" ng-click="ctrl.show(lancamento)"">{{lancamento.descricao}}</a></td>
+						<td><a  title="Visualizar este lançamento" data-toggle="modal" href=""	data-target=".modalEstrutura" ng-click="ctrl.show(lancamento)"">{{lancamento.categoria.descricao}}</a></td>
+						<td >{{lancamento.categoria.tipo}}</td>	
 						<td >{{lancamento.dataVencimento | date : 'dd/MM/yyyy'}}</td>
 						<td >{{lancamento.dataPagamentoOuRecebimento | date : 'dd/MM/yyyy'}}</td>	
-						<td >{{lancamento.categoria}}</td>	<!-- 
+						<!-- 
 						<td >{{lancamento.tipo}}</td>	 -->
 						<td class="{{lancamento.dataPagamentoOuRecebimento == null ? 'red' : 'blue'}}">{{lancamento.status}}</td>
 						<td >{{lancamento.valor | currency}}</td>			

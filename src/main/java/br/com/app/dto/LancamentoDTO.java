@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Optional;
 
+import br.com.app.entity.CategoriaFinanceiro;
 import br.com.app.entity.Lancamento;
 import br.com.app.entity.Usuario;
 import br.com.app.enuns.CategoriaEnum;
@@ -22,7 +23,7 @@ public class LancamentoDTO implements Serializable {
 	private Date dataVencimento;
 	private Date dataCadastro;
 	private Date dataPagamentoOuRecebimento;
-	private CategoriaEnum categoria;
+	private CategoriaFinanceiro categoria;
 	private TipoLancamentoEnum tipo;	
 	private String observacao;
 	private String objeto;

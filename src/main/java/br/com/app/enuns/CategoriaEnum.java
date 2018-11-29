@@ -2,11 +2,10 @@ package br.com.app.enuns;
 
 public enum CategoriaEnum {
 
-	SERVICOS(1,"Serviços"),
-	ESTOQUE(2, "Estoque"),
-	DIVERSOS(3, "Diversos"),
-	COMPRAS(4, "Compras"),
-	RECURSOS_HUMANOS(5, "Recursos Humanos");
+	CUSTOS_DESPESAS_FIXAS(1,"Custos e Despesas Fixos"),
+	CUSTOS_DESPESAS_VARIAVEIS(2, "Custos e Despesas Variáveis"),
+	OPERACOES_FINANCERIAS(3, "Operações Financeiras"),
+	RECEITAS(4, "Receitas");
 	
 	private int codigo;
 	private String descricao;

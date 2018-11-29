@@ -5,9 +5,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.OneToOne;
-
-import br.com.app.enuns.CategoriaEnum;
+import br.com.app.entity.CategoriaFinanceiro;
 import br.com.app.enuns.TipoLancamentoEnum;
 import br.com.app.pojo.Page;
 import lombok.Data;
@@ -25,7 +23,7 @@ public class LancamentoFilter implements Serializable {
 	private Date dataPagamentoOuRecebimentoAte;
 	private Date dataCadastroDe;
 	private Date dataCadastroAte;
-	private CategoriaEnum categoria;
+	private CategoriaFinanceiro categoria;
 	private TipoLancamentoEnum tipo;
 	private BigDecimal valorDe;
 	private BigDecimal valorAte;

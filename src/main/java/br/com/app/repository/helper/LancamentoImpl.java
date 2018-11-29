@@ -67,12 +67,12 @@ public class LancamentoImpl{
 			BooleanExpression valorEquals = qLancamento.valor.between(filter.getValorDe(), filter.getValorAte());
 			geral.add(valorEquals);
 		}
-		if(filter.getCategoria()!= null) {
-			BooleanExpression categoriaEquals = qLancamento.categoria.eq(filter.getCategoria());
+		if(filter.getCategoria() != null && filter.getCategoria().getDescricao()!= null) {
+			BooleanExpression categoriaEquals = qLancamento.categoria.descricao.containsIgnoreCase(filter.getCategoria().getDescricao());
 			geral.add(categoriaEquals);
 		}
-		if(filter.getDescricao()!= null) {
-			BooleanExpression descricaoEquals = qLancamento.descricao.containsIgnoreCase(filter.getDescricao());
+		if(filter.getCategoria() != null &&  filter.getCategoria().getTipo()!= null) {
+			BooleanExpression descricaoEquals = qLancamento.categoria.tipo.eq(filter.getCategoria().getTipo());
 			geral.add(descricaoEquals);
 		}
 		if(filter.getTipo() != null) {

@@ -15,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -43,8 +45,12 @@ public class Lancamento implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "lancamento_id_seq")
 	private Long id;
 	
-	@NotBlank(message="Descricao não pode ser em branco")
+	//@NotBlank(message="Descricao não pode ser em branco")
 	private String descricao;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_categoria", nullable = true)
+	private CategoriaFinanceiro categoria;
 	
 	@Column(name="comprovante_base_64", columnDefinition="text")
 	private String comprovanteBase64;
@@ -62,9 +68,6 @@ public class Lancamento implements Serializable {
 	
 	private Date dataPagamentoOuRecebimento;
 	
-	@NotNull(message="Categoria é obrigatório!")
-	@Enumerated(EnumType.STRING)
-	private CategoriaEnum categoria;
 	
 	@NotNull(message="tipo de lançamento é obrigatória!")
 	@Enumerated(EnumType.STRING)
@@ -130,5 +133,11 @@ public class Lancamento implements Serializable {
 
 	public String getComprovanteBase64Path() {
 		return comprovanteBase64 = "data:image/jpeg;base64," + comprovanteBase64;
+	}
+	
+	@PrePersist
+	@PreUpdate
+	public void addDescricao() {
+		descricao = categoria.getDescricao();
 	}
 }

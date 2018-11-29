@@ -6,7 +6,7 @@
 	</div>
 	<div class="row">
         <div class="col-md-2">        	
-	            <div class=" bg-aqua text-center">
+	            <div class="{{estatistica.saldo < '0.0' ? 'bg-red' : 'bg-aqua'}}  text-center">
 	              <span class="info-box-tex t">Saldo</span>
 	              <span class="info-box-number">{{estatistica.saldo | currency}}</span>
 	          </div>        
@@ -44,7 +44,7 @@
          </a>
         </div>
          <div class="col-md-2">
-            <div class=" bg-aqua text-center">
+               <div class="{{estatistica.saldoPrevisto< '0.0' ? 'bg-red' : 'bg-aqua'}}  text-center">
               <span class="info-box-text">Saldo Previsto Futuras</span>
               <span class="info-box-number">{{estatistica.saldoPrevisto | currency}}</span>
           </div>
