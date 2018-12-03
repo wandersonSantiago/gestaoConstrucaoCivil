@@ -2,10 +2,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
 	$stateProvider
 		.state('categoriaFinanceiro', {
+			abstract : true,
 			url : '/categoriaFinanceiro',
 			templateUrl : 'views/pages/modulo_financeiro/categoria/categoria.index.html',
 			ncyBreadcrumb: {
-				parent: 'lancamento.menu'
+				parent: 'lancamentos',
+			    label: 'Categoria'
 				  }
 		})
 		.state('categoriaFinanceiro.consultar', {
@@ -13,8 +15,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			templateUrl : "views/pages/modulo_financeiro/categoria/categoria.list.html",
 			controller : "CategoriaFinanceiroListarController as ctrl",
 			ncyBreadcrumb: {
-				 	parent: 'categoriaFinanceiro.menu',
-				    label: 'Lista'
+				 	parent: 'categoriaFinanceiro',
+				    label: 'Categoria / Lista'
 				  }
 		})
 		
@@ -27,8 +29,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			templateUrl : "views/pages/modulo_financeiro/categoria/categoria.form.html",
 			controller : "CategoriaFinanceiroCadastarController as ctrl",
 			ncyBreadcrumb: {
-			 	parent: 'categoriaFinanceiro.menu',
-			    label: 'Cadastrar'
+			 	parent: 'categoriaFinanceiro',
+			    label: 'Categoria / Cadastrar'
 			  }
 		})
 		.state('categoriaFinanceiro.editar', {
@@ -48,7 +50,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			templateUrl : "views/pages/modulo_financeiro/categoria/home.html",
 			ncyBreadcrumb: {
 				 	parent: 'categoriaFinanceiro',
-				    label: 'categoriaFinanceiro'
+				    label: 'categoria'
 				  }
 		})
 
