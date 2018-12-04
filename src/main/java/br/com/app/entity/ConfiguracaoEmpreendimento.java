@@ -46,6 +46,9 @@ public class ConfiguracaoEmpreendimento implements Serializable{
 		  LocalDate dia = LocalDate.now().withMonth(hoje.getMonthValue()).with(TemporalAdjusters.lastDayOfMonth());
 		int data = (dataBaseFinanceiro == 0 || dataBaseFinanceiro ==1 )  ? dia.getDayOfMonth() : dataBaseFinanceiro -1;		
 		int mes = (dataBaseFinanceiro == 0 || dataBaseFinanceiro ==1 )  ? hoje.getMonthValue() : hoje.getMonthValue() + 1;
+		if(mes == 13) {
+			mes = 1;
+		}
 		LocalDate localDate = DateUtils.addMonthAndDayToDate(mes,data);		
  		return DateUtils.convertLocalDateToDate(localDate);
 	}
