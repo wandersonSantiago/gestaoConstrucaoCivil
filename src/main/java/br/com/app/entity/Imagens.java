@@ -48,4 +48,8 @@ public class Imagens implements Serializable {
 	@JoinColumn(name = "ocorrenciaServico")
 	private OcorrenciaServico ocorrencia;
 
+	public String getImagemBase64Path() {
+		return imagemBase64 = "data:image/jpeg;base64," + imagemBase64;
+	}
+	
 }

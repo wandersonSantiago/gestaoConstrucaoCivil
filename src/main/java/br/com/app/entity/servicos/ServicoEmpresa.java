@@ -84,4 +84,8 @@ public class ServicoEmpresa implements Serializable{
 		
 		return estruturas.stream().sorted((e1,e2)-> e1.getId().compareTo(e2.getId())).collect(Collectors.toList());
 	}
+	
+	public List<OcorrenciaServico> getOcorrencias(){
+		return ocorrencias.stream().sorted((e1,e2)-> e1.getId().compareTo(e2.getId())).collect(Collectors.toList());
+	}
 }

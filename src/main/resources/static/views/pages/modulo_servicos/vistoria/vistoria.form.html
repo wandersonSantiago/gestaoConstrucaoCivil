@@ -74,17 +74,30 @@
 						<br>
 					    	<a href=""  data-toggle="modal" data-target="#estrutura"  class="btn btn-warning btn-flat">Nova Ocorrencia</a>
 					  </div>
-					 </div>
-					 <div ng-repeat="ocorrencia in ctrl.servicoEmpresa.ocorrencias">
-					 	<div class="thumbnail">
-					 	<img  ng-src="{{ocorrencia.imageBase64Path}}">									      
-							</div>
-					 </div>
+					 </div>					 
 					<div class="row ">
 						<div class="col-md-4 col-md-offset-4">
 							<input type="submit" id="submit"  value="{{titulo}}"	class="btn btn-lg btn-primary btn-block btn-signin">
 						</div>
 					</div>
+					<hr>
+					<div align="center">
+						<h2>Histórico de Ocorrências</h2>
+					</div>
+					<hr>
+					
+					<div ng-repeat="ocorrencia in ctrl.servicoEmpresa.ocorrencias">
+						<label>Código : </label>{{ocorrencia.id  }}     <label> Data :</label>{{ocorrencia.data | date : 'dd/MM/yyyy HH:mm'}}
+						<label>Status ; </label>{{ocorrencia.status === true ? 'Aberto' : 'Fechado'}}<br> 
+						<label>Observação: </label>{{ocorrencia.ocorrencia}}
+						 <div ng-repeat="imagem in ocorrencia.imagens">						
+						 	<div class="thumbnail col-sm-4">
+						 		<label>Código : </label> {{imagem.id}}
+						 		<img  ng-src="{{imagem.imagemBase64Path}}">	
+						 		<label>Descrição : </label>{{imagem.descricao}}								      
+							</div>
+						 </div>
+					 </div>
 			</form>
 			
 			 <!-- MODAL -->				
