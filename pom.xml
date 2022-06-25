@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>br.com.app</groupId>
@@ -111,6 +111,15 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<source>11</source>
+					<target>11</target>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
@@ -138,11 +147,12 @@
 	</build>
 
 	<repositories>
-			<!-- JasperSoft, they modified a standard library for their own special 
+		<!-- JasperSoft, they modified a standard library for their own special 
 			needs -->
 		<repository>
 			<id>jaspersoft-third-party</id>
-			<url>https://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/</url>
+			<url>https://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/
+			</url>
 		</repository>
 		<repository>
 			<id>central maven repo</id>
@@ -158,14 +168,15 @@
 			</snapshots>
 		</repository>
 	</repositories>
-	
-	
+
+
 	<pluginRepositories>
 		<!-- JasperSoft, they modified a standard library for their own special 
 			needs -->
 		<pluginRepository>
 			<id>jaspersoft-third-party</id>
-			<url>https://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/</url>
+			<url>https://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/
+			</url>
 		</pluginRepository>
 	</pluginRepositories>
 
