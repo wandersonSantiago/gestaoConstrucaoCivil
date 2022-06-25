@@ -1,0 +1,145 @@
+<meta charset="UTF-8">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-4">
+					<a class="fa fa-plus" href="" ui-sref="cotacao.cadastrar" title="Cadastrar novo cotacao">Novo</a>|<label>Cotacao</label> | 
+					<a href=""  ng-click="filtros === true ? filtros = false : filtros = true">{{filtros === true ? "Menos" : "Mais"}} Filtros</a>  
+				</div>
+			</div>
+			<br>
+			<div class="row" ng-if="!filtros">
+			  <div class="col-lg-6">
+			    <div class="input-group">
+			      <input type="text" class="form-control input-sm" placeholder="Pesquisar pelo tema" ng-model="cotacaoFilter.tema" autofocus
+			      	 ng-keyup="$event.keyCode == 13 && filter(cotacaoFilter)">
+			      <span class="input-group-btn">
+			        <button class="btn btn-default input-sm" type="button" ng-click="cotacaoFilter.page.page = 0; filter(cotacaoFilter)">Pesquisar!</button>
+			      </span>
+			    </div>
+			  </div>
+		 </div>
+ 		
+	 
+		<div ng-if="filtros">		
+				<div class="row">
+					<div class="form-group  col-sm-4">
+						<label class="control-label" for="tema">Tema</label>
+						<input type="text" class="form-control input-sm" id="tema" autofocus="autofocus" ng-model="cotacaoFilter.tema"/>
+					</div>
+					
+					<div class="col-sm-4">
+						<label>Status:</label><br>
+						<select class="form-control input-sm"  ng-model="cotacaoFilter.status" ng-options="status  for status in ctrl.status" 
+							name="status" >
+						</select>	
+					</div>
+					<div class="col-sm-4">
+						<label for="valorMinimo">Descrição item</label>
+						<input type="text" class="form-control input-sm" id="item" ng-model="cotacaoFilter.descricaoItem"/>
+					</div>
+				</div>
+				<div class="row">				
+					<div class="col-sm-4">
+						<label for="dataCadastro">Data cadastro</label>
+						<div class="form-inline">
+							<input type="date" class="form-control input-sm" id="dataCadastroDe" ng-model="cotacaoFilter.dataCadastroDe" />
+							<label for="dataCriacaoFinal">até</label>
+							<input type="date" class="form-control input-sm " id="dataCadastroAte" ng-model="cotacaoFilter.dataCadastroAte" />
+						</div>
+					</div>
+			
+					<div class="col-sm-4">
+						<label for="dataLimite">Data Limite</label>
+						<div class="form-inline">
+							<input type="date" class="form-control input-sm" id="dataLimiteDe" ng-model="cotacaoFilter.dataLimiteDe" />
+							<label for="dataLimite" >até</label>
+							<input type="date" class="form-control input-sm" id="dataLimiteAte" ng-model="cotacaoFilter.dataLimiteAte" />
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<label for="dataFechamento">Data Fechamento</label>
+						<div class="form-inline">
+							<input type="date" class="form-control input-sm" id="dataFechamentoDe" ng-model="cotacaoFilter.dataFechamentoDe" />
+							<label for="dataFechamento" >até</label>
+							<input type="date" class="form-control input-sm" id="dataFechamentoAte" ng-model="cotacaoFilter.dataFechamentoAte" />
+						</div>
+					</div>						
+				</div>
+				<br>
+				<div class="row" >		
+					<div class="col-sm-2">
+						<label class="radio-inline">
+							<input  type="radio" name="radioImprimir" ng-model="imprimir" value="PAGINA">Página
+						</label> 
+						<label class="radio-inline">
+							<input  type="radio" name="radioImprimir" ng-model="imprimir" 	value="PDF">PDF
+						</label>
+					</div>
+					<div class="col-md-1">	
+						<button type="submit" class="btn btn-xs btn-default btn-flat btn-block col-sm-1" ng-click="ctrl.clear()"><i class="glyphicon glyphicon-erase"></i>Limpar</button>
+					</div>
+					<div class="col-md-1">	
+						<button type="submit" class="btn btn-xs btn-primary btn-flat btn-block" ng-click="cotacaoFilter.page.page = 0; pesquisar(cotacaoFilter,imprimir)"><i class="glyphicon glyphicon-search"></i>Pesquisar</button>
+					</div>	
+				</div>
+		
+			</div>
+			<div ng-show="mensagemErro" class="alert alert-warning alert-dismissible">
+		         <h4><i class="icon fa fa-warning"></i>{{mensagemErro}}</h4>
+		   </div>
+		</div>
+	</div>
+	   <br>		
+		<div class="panel panel-default">
+			<div class="panel-heading">Pesquisa de Cotações</div>				
+			<div class="panel-body">
+				<div ng-show="ctrl.cotacaoEmpresa.length == 0" class="alert alert-info alert-dismissible">
+			         <h4><i class="icon fa fa-info"></i>Sem Resultado!!</h4>
+			   </div>
+				<div class="table-responsive" ng-show="ctrl.cotacaoEmpresa.length > 0">
+					<table class="table table-bordered table-hover" >
+						<thead>
+							<tr >						 
+								<th ><a href="" ng-click="ctrl.sort('id')"><i class="glyphicon glyphicon-sort"></i></a>Id</th>
+								<th ><a href="" ng-click="ctrl.sort('tema')"><i class="glyphicon glyphicon-sort"></i></a>Tema</th>
+								<th ><a href=""ng-click="ctrl.sort('dataCriacao')"><i class="glyphicon glyphicon-sort"></i></a>Data Cadastro</th>
+								<th ><a href=""ng-click="ctrl.sort('dataLimite')"><i class="glyphicon glyphicon-sort"></i></a>Data Limite</th>	
+								<th ><a href=""ng-click="ctrl.sort('statusCotacao')"><i class="glyphicon glyphicon-sort"></i></a>Status</th>
+													
+								<th class="col-sm-2">Opções</th>
+							</tr>
+						</thead>
+						<tbody
+							ng-repeat=" cotacao in ctrl.cotacaoEmpresa">
+							<tr>
+								<td>{{cotacao.id}}</td>
+								<td><a title="Visualizar esta cotação" ui-sref="cotacao.show({idCotacao : cotacao.id})">{{cotacao.tema}}</a></td>
+								<td>{{cotacao.dataCriacao | date : 'dd/MM/yyyy'}}</td>
+								<td>{{cotacao.dataLimite | date : 'dd/MM/yyyy'}}</td>	
+								<td>{{cotacao.statusCotacao}}</td>			
+								<td>
+								<a ng-if="cotacao.statusCotacao === 'ABERTO'" title="Editar esta cotação" ui-sref="cotacao.editar({idCotacao : cotacao.id})" class="btn btn-xs btn-flat btn-success">Editar</a> 
+								<a ng-if="cotacao.statusCotacao === 'ABERTO'"  title="realizar o lançamento desta cotação" ui-sref="cotacao.lancar({idCotacao : cotacao.id})" class="btn btn-xs btn-flat btn-primary" >Lançar</a>
+								<a ng-if="cotacao.statusCotacao === 'ABERTO'"  class="btn btn-xs btn-flat btn-danger" ng-click="ctrl.closeCotacao(cotacao.id)">Encerrar</a>
+								<a ng-if="cotacao.statusCotacao === 'FECHADO'"  class="btn btn-xs btn-flat btn-info" ng-click="ctrl.imprimirVencedores(cotacao.id)">Imprimir Vencedores</a>
+								</td>
+								
+							</tr>
+						</tbody>						
+					</table>
+							<nav>
+								<ul uib-pagination total-items="cotacaoFilter.page.totalElementos" items-per-page="cotacaoFilter.page.linesPerPage"
+									ng-model="cotacaoFilter.page.page" max-size="5" class="pagination-sm"
+									boundary-link-numbers="true" ng-click="filter(cotacaoFilter)"
+									previous-text="Anterior" last-text="Último" first-text="Primeiro"
+									next-text="Próximo">
+								</ul>
+							</nav>	
+					
+			</div>
+			</div>
+		</div>
+		
+			
+

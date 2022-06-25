@@ -54,7 +54,6 @@
 <div class="row">	
        <div class="col-sm-12">     
 			<div class="box box-primary" >	
-					<div class="box-header">Lançamentos</div>
 					<div class="panel-body">
 						<div class="ui-view"></div>
 					</div>
@@ -67,16 +66,16 @@
      	<div class="col-sm-12" ng-if="estatistica.contasAPagarVencidas > 0">
      	<a href=""  ng-click="visualizar('VENCIDAS_A_PAGAR')">
          <div class="callout callout-warning ">
-                <h4>Contas a pagar Vencidas!</h4>
-                <h3>Valor: {{estatistica.contasAPagarVencidas | currency}}</h3>
+                <h7>Contas a pagar Vencidas!</h7>
+                <h5>Valor: {{estatistica.contasAPagarVencidas | currency}}</h5>
           </div>
           </a>
          </div>  
          <div class="col-sm-12 " ng-if="estatistica.contasAReceberVencidas > 0">  	
          <a href=""  ng-click="visualizar('VENCIDAS_A_RECEBER')">
           <div class="callout callout-info ">
-                <h4>Contas a receber Vencidas!</h4>
-                 <h3>Valor: {{estatistica.contasAReceberVencidas | currency}}</h3>
+                <h7>Contas a receber Vencidas!</h7>
+                 <h5>Valor: {{estatistica.contasAReceberVencidas | currency}}</h5>
           </div>
           </a>
           </div>

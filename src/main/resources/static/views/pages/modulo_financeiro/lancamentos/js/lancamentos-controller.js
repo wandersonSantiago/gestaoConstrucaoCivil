@@ -9,6 +9,7 @@ function LancamentosCadastarController($localStorage, $state, $stateParams, Lanc
 	var self = this;	
 	
 	self.submit = submit;
+	self.clear = clear;
 		
 	tipos();
 	categorias();
@@ -20,44 +21,19 @@ function LancamentosCadastarController($localStorage, $state, $stateParams, Lanc
  		$state.go('lancamentos.list', {Tipo});
  	};
  	
-/*	function submit(form){
-		if(form.$invalid){
+		
+  function submit(form){
+	  if(form.$invalid){
 			sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
 			return;
-		}
-			LancamentosService.insert(self.lancamento).
-			then(function(response){
-				estatistica();
-				toastr.success("Lancamento, cadastrado");		
-				clear(form);
-			}, function(errResponse){
-				sweetAlert({ timer : 3000,  text : errResponse.data.message,  type : "error", width: 300, higth: 300, padding: 20});
-			});			
-		};*/
-		
-		  function submit(form){
-			  if(form.$invalid){
-					sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
-					return;
-				}
-			 	var file = $scope.obj.flow.files[0]
-		    	var form = new FormData();
-			 	if(file){
-			 		form.append('file', file.file);	
-			 	}		    	    	
-		    	form.append('lancamento',new Blob([JSON.stringify(self.lancamento)], {
-		            type: "application/json"
-		        }) )		        
-				LancamentosService.insert(form)
-			   	 .then(function(response){
-			   		estatistica();
-					toastr.success("Lancamento, cadastrado");					
-					clear(form);		
-			   	 	},
-				function(errResponse){		
-					 swal({ timer : 30000, text: errResponse.data.message ,  type : "error", width: 500, higth: 100, padding: 20}).catch(swal.noop);
-					 });
-			  };
+			}	        
+	 LancamentosService.insert(self.lancamento)
+   	 .then(function(response){
+   		estatistica();
+		toastr.success("Lancamento, cadastrado");					
+		clear(form);		   	 	
+ 		})
+ 	};
 			  
 			  
 	function tipos(){
@@ -77,7 +53,6 @@ function LancamentosCadastarController($localStorage, $state, $stateParams, Lanc
 	};
 	
 	function clear(form){
-		 $scope.obj.flow.cancel();
 		 self.lancamento = {};
 		 $scope.form.$setPristine();
 		 $scope.form.$setUntouched();   	
@@ -103,7 +78,7 @@ function LancamentosEditarController($localStorage, $state, $stateParams, Lancam
 	var idLancamentos = $stateParams.idLancamentos;
 	
 	self.submit = submit;
-	$scope.obj = {};
+	self.clear = clear;
 	tipos();
 	categorias();	 
 	findById(idLancamentos);
@@ -119,28 +94,13 @@ function LancamentosEditarController($localStorage, $state, $stateParams, Lancam
 		  if(form.$invalid){
 				sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
 				return;
-			}
-		 	var file = $scope.obj.flow.files[0];
-	    	var form = new FormData();
-		 	if(file){
-		 		form.append('file', file.file);	
-		 	}
-			form.append('id',new Blob([JSON.stringify(self.lancamento.id)], {
-	            type: "application/json"
-	        }) )
-	    	form.append('lancamento',new Blob([JSON.stringify(self.lancamento)], {
-	            type: "application/json"
-	        }) )		        
-			LancamentosService.update(form)
+			}	        
+			LancamentosService.update(self.lancamento)
 		   	 .then(function(response){
 		   		estatistica();
 				toastr.success("Lancamento, alterado");
-				$scope.obj.flow.cancel();
 				clear(form);		
-		   	 	},
-			function(errResponse){		
-				 swal({ timer : 30000, text: errResponse.data.message ,  type : "error", width: 500, higth: 100, padding: 20}).catch(swal.noop);
-				 });
+		   	 	})
 		  };
 		  
 	function tipos(){
@@ -208,6 +168,7 @@ function LancamentosListarController(blockUI, LancamentosService, toastr, $scope
 	self.show = show;
 	self.modalComprovante = modalComprovante;
 	$scope.imprimir = 'PAGINA';
+	self.clear = clear;
 	
 	filter($scope.lancamentoFilter);
 	tipos();
@@ -334,6 +295,12 @@ function LancamentosListarController(blockUI, LancamentosService, toastr, $scope
  	 function modalComprovante(lancamento){
  		$scope.lancamento = lancamento;
  	 	}
+ 	 	
+ 	 function clear(){	
+			self.lancamentos = {};
+			$scope.lancamentoFilter = null;
+			$scope.titulo = null;
+		}	
 }
 
 

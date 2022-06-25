@@ -9,85 +9,79 @@
 	<div class="row" ng-if="!filtros">
 	  <div class="col-lg-6">
 	    <div class="input-group">
-	      <input type="text" class="form-control" placeholder="Pesquisar pelo tema" ng-model="lancamentoFilter.tema" autofocus
+	      <input type="text" class="form-control input-sm" placeholder="Pesquisar pela Descrição" ng-model="lancamentoFilter.descricao" autofocus
 	      	 ng-keyup="$event.keyCode == 13 && lancamentoFilter.adicional = null; && filter(lancamentoFilter)">
 	      <span class="input-group-btn">
-	        <button class="btn btn-default" type="button" ng-click="lancamentoFilter.page.page = 0; lancamentoFilter.adicional = null; filter(lancamentoFilter)">Pesquisar!</button>
+	        <button class="btn btn-default input-sm" type="button" ng-click="lancamentoFilter.page.page = 0; lancamentoFilter.adicional = null; filter(lancamentoFilter)">Pesquisar!</button>
 	      </span>
 	    </div>
 	  </div>
 	 </div>
  		
 	 
-	<div class="container-fluid" ng-if="filtros">		
+	<div ng-if="filtros">		
 			<div class="row">
-				<div class="form-group  col-sm-6">
+				<div class="col-sm-2">
 					<label class="control-label" for="descricao">Descrição:</label>
-					<input type="text" class="form-control" id="descricao" autofocus="autofocus" ng-model="lancamentoFilter.descricao"/>
+					<input type="text" class="form-control  input-sm" id="descricao" autofocus="autofocus" ng-model="lancamentoFilter.descricao"/>
 				</div>
 				
-				<div class="form-group  col-sm-3">
+				<div class="col-sm-2">
 					<label>Tipo:</label><br>
-					<select class="form-control "  ng-model="lancamentoFilter.tipo" ng-options="tipo  for tipo in ctrl.tipos" 
+					<select class="form-control  input-sm "  ng-model="lancamentoFilter.tipo" ng-options="tipo  for tipo in ctrl.tipos" 
 						name="status" >
 					</select>	
 				</div>
-				<div class="form-group  col-sm-3">
+				<div class="col-sm-2">
 					<label>Categoria:</label><br>
-					<select class="form-control "  ng-model="lancamentoFilter.categoria" ng-options="categoria  for categoria in ctrl.categorias" 
+					<select class="form-control  input-sm "  ng-model="lancamentoFilter.categoria" ng-options="categoria  for categoria in ctrl.categorias" 
 						name="categorias" >
 					</select>	
 				</div>
-			</div>
-			<div class="row">				
-				<div class="form-group  col-sm-8">
+				<div class="col-sm-2">
 					<label for="valorMinimo">Observação:</label>
-					<input type="text" class="form-control" id="item" ng-model="lancamentoFilter.observacao"/>
-				</div>
-				<div class="form-group  col-sm-4">
+					<input type="text" class="form-control  input-sm" id="item" ng-model="lancamentoFilter.observacao"/>
+				</div>		
+				
+				<div class="col-sm-4">
 				<label for="dataCadastro">Valor:</label>
 					<div class="form-inline">
-						<input type="text" class="form-control" id="valorDe" ui-money-mask="2" ng-model="lancamentoFilter.valorDe"/>
+						<input type="text" class="form-control  input-sm" id="valorDe" ui-money-mask="2" ng-model="lancamentoFilter.valorDe"/>
 						<label for="dataCriacaoFinal">até</label>
-						<input type="text" class="form-control" id="valorAte" ui-money-mask="2" ng-model="lancamentoFilter.valorAte"/>
+						<input type="text" class="form-control  input-sm" id="valorAte" ui-money-mask="2" ng-model="lancamentoFilter.valorAte"/>
 					</div>
-				</div>
-				<!-- <div class="form-group  col-sm-3">
-					<label>Status:</label><br>
-					<select class="form-control "  ng-model="lancamentoFilter.status" ng-options="status  for status in ctrl.status" 
-						name="status" >
-					</select>	
-				</div>	 -->				
+				</div>				
 			</div>	
 			<div class="row">
-				<div class="form-group  col-sm-4">
+				<div class="col-sm-4">
 					<label for="dataCadastro">Data cadastro:</label>
 					<div class="form-inline">
-						<input type="date" class="form-control" id="dataCadastroDe" ng-model="lancamentoFilter.dataCadastroDe" />
+						<input type="date" class="form-control  input-sm" id="dataCadastroDe" ng-model="lancamentoFilter.dataCadastroDe" />
 						<label for="dataCriacaoFinal">até</label>
-						<input type="date" class="form-control" id="dataCadastroAte" ng-model="lancamentoFilter.dataCadastroAte" />
+						<input type="date" class="form-control  input-sm" id="dataCadastroAte" ng-model="lancamentoFilter.dataCadastroAte" />
 					</div>
 				</div>
 		
-				<div class="form-group  col-sm-4">
+				<div class="col-sm-4">
 					<label for="dataLimite">Data Vencimento:</label>
 					<div class="form-inline">
-						<input type="date" class="form-control" id="dataVencimentoDe" ng-model="lancamentoFilter.dataVencimentoDe" />
+						<input type="date" class="form-control  input-sm" id="dataVencimentoDe" ng-model="lancamentoFilter.dataVencimentoDe" />
 						<label for="dataLimite" >até</label>
-						<input type="date" class="form-control" id="dataVencimentoAte" ng-model="lancamentoFilter.dataVencimentoAte" />
+						<input type="date" class="form-control  input-sm" id="dataVencimentoAte" ng-model="lancamentoFilter.dataVencimentoAte" />
 					</div>
 				</div>
-				<div class="form-group  col-sm-4">
+				<div class="col-sm-4">
 					<label for="dataFechamento">Data Pagamento ou Recebimento:</label>
 					<div class="form-inline">
-						<input type="date" class="form-control" id="dataPagamentoDe" ng-model="lancamentoFilter.dataPagamentoOuRecebimentoDe" />
+						<input type="date" class="form-control  input-sm" id="dataPagamentoDe" ng-model="lancamentoFilter.dataPagamentoOuRecebimentoDe" />
 						<label for="dataFechamento" >até</label>
-						<input type="date" class="form-control" id="dataPagamentoAte" ng-model="lancamentoFilter.dataPagamentoOuRecebimentoAte" />
+						<input type="date" class="form-control  input-sm" id="dataPagamentoAte" ng-model="lancamentoFilter.dataPagamentoOuRecebimentoAte" />
 					</div>
 				</div>						
 			</div>
+			<br>
+		<div class="row" >		
 			<div class="col-sm-2">
-				<label>Opção de visualização:</label><br>
 				<label class="radio-inline">
 					<input  type="radio" name="radioImprimir" ng-model="imprimir" value="PAGINA">Página
 				</label> 
@@ -95,10 +89,14 @@
 					<input  type="radio" name="radioImprimir" ng-model="imprimir" 	value="PDF">PDF
 				</label>
 			</div>
-		<br>
-			<button type="submit" class="btn  btn-primary col-sm-2" ng-click="lancamentoFilter.page.page = 0; lancamentoFilter.adicional = null; pesquisar(lancamentoFilter,imprimir)">Pesquisar</button>
-			<button type="submit" class="btn  btn-default col-sm-2" ng-click="(lancamentoFilter = null)">Limpar Formulario</button>
+			<div class="col-md-1">	
+				<button type="submit" class="btn btn-xs btn-default btn-flat btn-block col-sm-1" ng-click="ctrl.clear()"><i class="glyphicon glyphicon-erase"></i>Limpar</button>
+			</div>
+			<div class="col-md-1">	
+				<button type="submit" class="btn btn-xs btn-primary btn-flat btn-block" ng-click="lancamentoFilter.page.page = 0; lancamentoFilter.adicional = null; pesquisar(lancamentoFilter,imprimir)"><i class="glyphicon glyphicon-search"></i>Pesquisar</button>
+			</div>	
 		</div>
+	</div>
 		<div ng-show="mensagemErro" class="alert alert-warning alert-dismissible">
 	         <h4><i class="icon fa fa-warning"></i>{{mensagemErro}}</h4>
 	   </div>
@@ -106,73 +104,76 @@
 	   <br>
 	   <br>
 	   
-	   <div align="center">
-			<div class="small-box bg-aqua">
-				<div class="inner" align="center">
-					<h4>Pesquisa de Lançamentos {{titulo}}</h4>					
-				</div>
+	   	<div class="box box-default" >	
+	   			<h4>Pesquisa de Lançamentos {{titulo}}</h4>	
+					<div class="panel-body">					
+						<div ng-show="ctrl.lancamentos.length == 0" class="alert alert-info alert-dismissible">
+					         <h4><i class="icon fa fa-info"></i>Sem Resultado!!</h4>
+					   </div>
+	   
+						<div class="table-responsive" ng-show="ctrl.lancamentos.length > 0">
+							<table class="table table-bordered table-hover" >
+								<thead>
+									<tr >						 
+										<th ><a href="" ng-click="ctrl.sort('descricao')"><i class="glyphicon glyphicon-sort"></i></a>Descrição</th>
+										<th ><a href=""ng-click="ctrl.sort('dataVencimento')"><i class="glyphicon glyphicon-sort"></i></a>Vencimento</th>
+										<th ><a href=""ng-click="ctrl.sort('dataPagamentoOuRecebimento')"><i class="glyphicon glyphicon-sort"></i></a>Pagt/Receb.</th>	
+										<th ><a href=""ng-click="ctrl.sort('categoria')"><i class="glyphicon glyphicon-sort"></i></a>Categoria</th><!-- 
+										<th ><a href=""ng-click="ctrl.sort('tipo')"><i class="glyphicon glyphicon-sort"></i></a>Tipo</th> -->
+										<th >Status</th>
+										<th >Valor</th>
+										<th >Juros</th>
+										<th >Descontos</th>
+										<th >Total</th>						
+										<th >Opções</th>
+									</tr>
+								</thead>
+								<tbody
+									ng-repeat=" lancamento in ctrl.lancamentos">
+									<tr>
+										<td><a  title="Visualizar este lançamento" data-toggle="modal" href=""	data-target=".modalEstrutura" ng-click="ctrl.show(lancamento)"">{{lancamento.descricao}}</a></td>
+										<td >{{lancamento.dataVencimento | date : 'dd/MM/yyyy'}}</td>
+										<td >{{lancamento.dataPagamentoOuRecebimento | date : 'dd/MM/yyyy'}}</td>	
+										<td >{{lancamento.categoria}}</td>	<!-- 
+										<td >{{lancamento.tipo}}</td>	 -->
+										<td class="{{lancamento.dataPagamentoOuRecebimento == null ? 'red' : 'blue'}}">{{lancamento.status}}</td>
+										<td >{{lancamento.valor | currency}}</td>			
+										<td >{{lancamento.juros | currency}}</td>	
+										<td >{{lancamento.desconto | currency}}</td>						
+										<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.total | currency}}</td>		
+										<td class="text-center"><a  title="Editar" ng-if="lancamento.editavel" ui-sref="lancamentos.editar({idLancamentos : lancamento.id})"><i class="glyphicon glyphicon-edit"></i></a>
+											<a  title="Excluir" href="" ng-if="lancamento.editavel" ng-click="ctrl.deleteById(lancamento.id)"><i class="glyphicon glyphicon-remove-circle"></i></a>
+										</td>
+								
+									</tr>
+								</tbody>						
+							</table>
+							<nav>
+								<ul uib-pagination total-items="lancamentoFilter.page.totalElementos" items-per-page="lancamentoFilter.page.linesPerPage"
+									ng-model="lancamentoFilter.page.page" max-size="5" class="pagination-sm"
+									boundary-link-numbers="true" ng-click="filter(lancamentoFilter)"
+									previous-text="Anterior" last-text="Último" first-text="Primeiro"
+									next-text="Próximo">
+								</ul>
+							</nav>								
+						</div>					
+					</div>
 			</div>
-		</div>
-		<div class="table-responsive">
-			<table class="table table-bordered table-hover" >
-				<thead>
-					<tr >						 
-						<th ><a href="" ng-click="ctrl.sort('id')"><i class="glyphicon glyphicon-sort"></i></a>Comprovante</th>
-						<th ><a href="" ng-click="ctrl.sort('descricao')"><i class="glyphicon glyphicon-sort"></i></a>Descrição</th>
-						<th ><a href=""ng-click="ctrl.sort('dataVencimento')"><i class="glyphicon glyphicon-sort"></i></a>Vencimento</th>
-						<th ><a href=""ng-click="ctrl.sort('dataPagamentoOuRecebimento')"><i class="glyphicon glyphicon-sort"></i></a>Pagt/Receb.</th>	
-						<th ><a href=""ng-click="ctrl.sort('categoria')"><i class="glyphicon glyphicon-sort"></i></a>Categoria</th><!-- 
-						<th ><a href=""ng-click="ctrl.sort('tipo')"><i class="glyphicon glyphicon-sort"></i></a>Tipo</th> -->
-						<th >Status</th>
-						<th >Valor</th>
-						<th >Juros</th>
-						<th >Descontos</th>
-						<th >Total</th>						
-						<th >Opções</th>
-					</tr>
-				</thead>
-				<tbody
-					ng-repeat=" lancamento in ctrl.lancamentos">
-					<tr>
-						<td><a title="Visualizar comprovante" data-toggle="modal" href=""	data-target=".modalComprovante" ng-click="ctrl.modalComprovante(lancamento)" ng-if="lancamento.comprovanteBase64">comprovante</a></td>
-						<td><a  title="Visualizar este lançamento" data-toggle="modal" href=""	data-target=".modalEstrutura" ng-click="ctrl.show(lancamento)"">{{lancamento.descricao}}</a></td>
-						<td >{{lancamento.dataVencimento | date : 'dd/MM/yyyy'}}</td>
-						<td >{{lancamento.dataPagamentoOuRecebimento | date : 'dd/MM/yyyy'}}</td>	
-						<td >{{lancamento.categoria}}</td>	<!-- 
-						<td >{{lancamento.tipo}}</td>	 -->
-						<td class="{{lancamento.dataPagamentoOuRecebimento == null ? 'red' : 'blue'}}">{{lancamento.status}}</td>
-						<td >{{lancamento.valor | currency}}</td>			
-						<td >{{lancamento.juros | currency}}</td>	
-						<td >{{lancamento.desconto | currency}}</td>						
-						<td class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.total | currency}}</td>		
-						<td class="text-center"><a  title="Editar" ng-if="lancamento.editavel" ui-sref="lancamentos.editar({idLancamentos : lancamento.id})"><i class="glyphicon glyphicon-edit"></i></a>
-							<a  title="Excluir" href="" ng-if="lancamento.editavel" ng-click="ctrl.deleteById(lancamento.id)"><i class="glyphicon glyphicon-remove-circle"></i></a>
-						</td>
-				
-					</tr>
-				</tbody>						
-			</table>
-					<nav>
-						<ul uib-pagination total-items="lancamentoFilter.page.totalElementos" items-per-page="lancamentoFilter.page.linesPerPage"
-							ng-model="lancamentoFilter.page.page" max-size="5" class="pagination-sm"
-							boundary-link-numbers="true" ng-click="filter(lancamentoFilter)"
-							previous-text="Anterior" last-text="Último" first-text="Primeiro"
-							next-text="Próximo">
-						</ul>
-					</nav>	
-			
-	</div>
+		
+		
 			
 
 <div class="modal fade modalEstrutura" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
-			<div class="modal-header">
+			<div class="modal-header small-box bg-aqua">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">{{ctrl.titulo}}</h4>
+				</button>					
+			      <div class="col-md-12 text-center">
+			       <h4>{{lancamento.descricao}}</h4>
+			      </div>
 			</div>
 			<div class="modal-body">
 				<div ng-include="'views/pages/modulo_financeiro/lancamentos/lancamentos.show.html'"></div>

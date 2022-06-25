@@ -64,9 +64,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		.state('lancamentos.menu', {
 			requiresAuthentication: true,
 			url : "/menu",
-			templateUrl : "views/pages/modulo_financeiro/home.html",
+			templateUrl : "views/pages/modulo_financeiro/lancamentos/home.html",
 			ncyBreadcrumb: {
-				 	parent: 'home',
+				 	parent: 'fincanceiro',
 				    label: 'Lancamentos'
 				  }
 		})

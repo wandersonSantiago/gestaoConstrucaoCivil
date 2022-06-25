@@ -5,8 +5,8 @@ import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.app.entity.CodigoGerado;
-import br.com.app.repository.CodigoGeradoRepository;
+import br.com.app.commons.domain.model.CodigoGerado;
+import br.com.app.commons.domain.repository.CodigoGeradoRepository;
 
 @Service
 public class ExecuteGera {
