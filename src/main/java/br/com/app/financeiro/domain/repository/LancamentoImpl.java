@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import br.com.app.commons.domain.model.Empreendimento;
 import br.com.app.commons.domain.model.Usuario;
 import br.com.app.financeiro.api.v1.dto.SaldoLancamentoDTO;
+import br.com.app.financeiro.domain.enuns.StatusLancamento;
 import br.com.app.financeiro.domain.enuns.TipoLancamentoEnum;
 import br.com.app.financeiro.domain.model.Lancamento;
 import br.com.app.infraestructure.security.SessionUsuario;
@@ -81,11 +82,31 @@ public class LancamentoImpl {
 			if (filter.getCategoria() != null) {
 				predicates.add(builder.equal(root.get("categoria"), filter.getCategoria()));
 			}
-			
+
 			if (filter.getTipo() != null) {
 				predicates.add(builder.equal(root.get("tipo"), filter.getTipo()));
 			}
 
+			if (filter.getStatus() != null) {
+				if (filter.getStatus().equals(StatusLancamento.PAGO)) {
+					predicates.add(builder.isNotNull(root.get("dataPagamentoOuRecebimento")));
+					predicates.add(builder.equal(root.get("tipo"), TipoLancamentoEnum.DEBITO));
+				}
+				if (filter.getStatus().equals(StatusLancamento.RECEBIDO)) {
+					predicates.add(builder.isNotNull(root.get("dataPagamentoOuRecebimento")));
+					predicates.add(builder.equal(root.get("tipo"), TipoLancamentoEnum.CREDITO));
+				}
+				if (filter.getStatus().equals(StatusLancamento.PENDENTE)) {
+					predicates.add(builder.isNull(root.get("dataPagamentoOuRecebimento")));
+					predicates.add(builder.greaterThan(root.get("dataVencimento"), new Date()));
+				}
+				if (filter.getStatus().equals(StatusLancamento.VENCIDO)) {
+					predicates.add(builder.isNull(root.get("dataPagamentoOuRecebimento")));
+					predicates.add(builder.lessThan(root.get("dataVencimento"), new Date()));
+				}
+
+			}
+			
 			return builder.and(predicates.toArray(new Predicate[0]));
 		};
 	}

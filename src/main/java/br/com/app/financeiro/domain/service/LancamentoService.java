@@ -10,10 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.app.commons.domain.model.ConfiguracaoEmpreendimento;
 import br.com.app.commons.domain.model.Empreendimento;
 import br.com.app.commons.domain.model.Usuario;
-import br.com.app.commons.domain.repository.ConfiguracaoEmpreendimentoRepository;
 import br.com.app.financeiro.api.v1.dto.SaldoLancamentoDTO;
 import br.com.app.financeiro.domain.model.Lancamento;
 import br.com.app.financeiro.domain.repository.LancamentoFilter;
@@ -30,8 +28,8 @@ public class LancamentoService {
 	private LancamentoRepository lancamentoRepository;
 	@Autowired
 	private LancamentoImpl lancamentoImpl;
-	@Autowired
-	private ConfiguracaoEmpreendimentoRepository configuracaoRepository;
+//	@Autowired
+//	private ConfiguracaoEmpreendimentoRepository configuracaoRepository;
 
 	@Transactional(readOnly = false)
 	public  Lancamento insert(Lancamento lancamento) {
@@ -76,17 +74,17 @@ public class LancamentoService {
 
 	public SaldoLancamentoDTO estatistica() {
 		Empreendimento emp = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
-		ConfiguracaoEmpreendimento config = configuracaoRepository.findByEmpreendimentoId(emp.getId());
-		Date dataInicial = config.getDataBaseInicial();
-	    Date dataFinal = config.getDataBaseFinal();
+		//ConfiguracaoEmpreendimento config = configuracaoRepository.findByEmpreendimentoId(emp.getId());
+		Date dataInicial = emp.getDataAbertura();
+	    Date dataFinal = emp.getDatafechamento();
 		return lancamentoImpl.estatistica(dataInicial, dataFinal, emp);	
 	}
 
 	public Page<Lancamento> filterAndType(String tipo, Pageable page) {
 		Empreendimento emp = SessionUsuario.getInstance().getUsuario().getEmpreendimento();
-		ConfiguracaoEmpreendimento config = configuracaoRepository.findByEmpreendimentoId(emp.getId());
-		Date dataInicial = config.getDataBaseInicial();
-	    Date dataFinal = config.getDataBaseFinal();
+		//ConfiguracaoEmpreendimento config = configuracaoRepository.findByEmpreendimentoId(emp.getId());
+		Date dataInicial = emp.getDataAbertura();
+	    Date dataFinal = emp.getDatafechamento();
 		return lancamentoImpl.filterAndType(dataInicial, dataFinal, emp, tipo, page);	
 	}
 

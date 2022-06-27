@@ -54,7 +54,6 @@ public class CotacaoEmpresaService {
 			item.removerItensPerdedores();
 		}
 		return cotacoes;
-
 	}
 
 	public List<CotacaoEmpresa> concorrentes(Long idCotacao) {

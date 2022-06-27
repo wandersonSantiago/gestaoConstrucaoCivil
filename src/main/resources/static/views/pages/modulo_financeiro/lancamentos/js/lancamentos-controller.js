@@ -4,7 +4,7 @@ app.controller("LancamentosListarController", LancamentosListarController);
 app.controller("LancamentosShowController", LancamentosShowController);
 app.controller("LancamentosEstatisticaController", LancamentosEstatisticaController);
 
-function LancamentosCadastarController($localStorage, $state, $stateParams, LancamentosService, SubCategoriaService, CategoriaService, FabricanteService, toastr, $scope, $rootScope){
+function LancamentosCadastarController($localStorage, $state, blockUI, $stateParams, LancamentosService, SubCategoriaService, CategoriaService, FabricanteService, toastr, $scope, $rootScope){
 	
 	var self = this;	
 	
@@ -27,12 +27,22 @@ function LancamentosCadastarController($localStorage, $state, $stateParams, Lanc
 			sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
 			return;
 			}	        
+	 	blockUI.start();
 	 LancamentosService.insert(self.lancamento)
    	 .then(function(response){
-   		estatistica();
-		toastr.success("Lancamento, cadastrado");					
-		clear(form);		   	 	
- 		})
+			blockUI.stop();
+	   		estatistica();
+			toastr.success("Lancamento, cadastrado");					
+			self.lancamento.valor = null;
+			self.lancamento.juros = null;
+			self.lancamento.desconto = null;
+			self.lancamento.descricao = null;	
+			$scope.form.$setPristine();
+			$scope.form.$setUntouched(); 
+		}, function(errResponse){
+			toastr.danger("Lancamento, não realizado");	
+		  blockUI.stop();	
+ 		});
  	};
 			  
 			  
@@ -71,7 +81,7 @@ function LancamentosCadastarController($localStorage, $state, $stateParams, Lanc
 			
 }		
 
-function LancamentosEditarController($localStorage, $state, $stateParams, LancamentosService, toastr, $scope, $rootScope){
+function LancamentosEditarController($localStorage, $state, $stateParams, LancamentosService, toastr, $scope, $rootScope, blockUI){
 	
 	var self = this;
 	
@@ -95,12 +105,17 @@ function LancamentosEditarController($localStorage, $state, $stateParams, Lancam
 				sweetAlert({title: "Por favor preencha os campos obrigatorios", 	type : "error", timer : 100000,   width: 500,  padding: 20});	
 				return;
 			}	        
+		 	blockUI.start();
 			LancamentosService.update(self.lancamento)
 		   	 .then(function(response){
+			 	blockUI.stop();
 		   		estatistica();
 				toastr.success("Lancamento, alterado");
 				clear(form);		
-		   	 	})
+		   	 	}, function(errResponse){
+				toastr.danger("Lancamento, não realizado");	
+			 	 blockUI.stop();	
+	 		});
 		  };
 		  
 	function tipos(){

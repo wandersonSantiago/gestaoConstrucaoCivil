@@ -2,6 +2,7 @@ package br.com.app.financeiro.domain.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 import java.util.Optional;
 
@@ -119,12 +120,12 @@ public class Lancamento implements Serializable {
 
 	public BigDecimal getPorcentagemJuros() {
 		return Optional.ofNullable(juros).orElse(BigDecimal.ZERO)
-				.divide(Optional.ofNullable(valor).orElse(BigDecimal.ZERO)).multiply(new BigDecimal(100));
+				.divide(Optional.ofNullable(valor).orElse(BigDecimal.ZERO), RoundingMode.HALF_EVEN).multiply(new BigDecimal(100));
 	}
 
 	public BigDecimal getPorcentagemDesconto() {
 		return Optional.ofNullable(desconto).orElse(BigDecimal.ZERO)
-				.divide(Optional.ofNullable(valor).orElse(BigDecimal.ZERO)).multiply(new BigDecimal(100));
+				.divide(Optional.ofNullable(valor).orElse(BigDecimal.ZERO), RoundingMode.HALF_EVEN).multiply(new BigDecimal(100));
 	}
 
 	public String getComprovanteBase64Path() {

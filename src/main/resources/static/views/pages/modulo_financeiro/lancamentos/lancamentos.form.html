@@ -46,7 +46,8 @@
 				<div class="row">
 			      <div class="col-md-3" ng-class="{ 'has-error' : form.valor.$invalid && form.$submitted }">
 			        <label>Valor:</label>
-			        <input  type="text" name="valor" id="valor" placeholder="0,00" ui-money-mask="2"  class="form-control input-sm"  ng-model="ctrl.lancamento.valor" required>
+			        <input  type="text" name="valor" id="valor" placeholder="0,00" ui-money-mask="2"  class="form-control input-sm"  ng-model="ctrl.lancamento.valor"
+			         ng-keyup="$event.keyCode == 13 && ctrl.submit(form)" required>
 			      </div>    
 			       <div class="col-md-3" ng-if="ctrl.lancamento.id">
 			        <label>Juros:</label>

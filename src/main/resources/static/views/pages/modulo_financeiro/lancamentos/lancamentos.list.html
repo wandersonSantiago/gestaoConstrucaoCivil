@@ -21,7 +21,7 @@
 	 
 	<div ng-if="filtros">		
 			<div class="row">
-				<div class="col-sm-2">
+				<div class="col-sm-3">
 					<label class="control-label" for="descricao">Descrição:</label>
 					<input type="text" class="form-control  input-sm" id="descricao" autofocus="autofocus" ng-model="lancamentoFilter.descricao"/>
 				</div>
@@ -39,10 +39,18 @@
 					</select>	
 				</div>
 				<div class="col-sm-2">
+					<label>Status:</label><br>
+					<select class="form-control  input-sm "  ng-model="lancamentoFilter.status" ng-options="status  for status in ctrl.status" 
+						name="status" >
+					</select>	
+				</div>
+				<div class="col-sm-3">
 					<label for="valorMinimo">Observação:</label>
 					<input type="text" class="form-control  input-sm" id="item" ng-model="lancamentoFilter.observacao"/>
-				</div>		
-				
+				</div>					
+					
+			</div>	
+			<div class="row">
 				<div class="col-sm-4">
 				<label for="dataCadastro">Valor:</label>
 					<div class="form-inline">
@@ -50,17 +58,7 @@
 						<label for="dataCriacaoFinal">até</label>
 						<input type="text" class="form-control  input-sm" id="valorAte" ui-money-mask="2" ng-model="lancamentoFilter.valorAte"/>
 					</div>
-				</div>				
-			</div>	
-			<div class="row">
-				<div class="col-sm-4">
-					<label for="dataCadastro">Data cadastro:</label>
-					<div class="form-inline">
-						<input type="date" class="form-control  input-sm" id="dataCadastroDe" ng-model="lancamentoFilter.dataCadastroDe" />
-						<label for="dataCriacaoFinal">até</label>
-						<input type="date" class="form-control  input-sm" id="dataCadastroAte" ng-model="lancamentoFilter.dataCadastroAte" />
-					</div>
-				</div>
+				</div>			
 		
 				<div class="col-sm-4">
 					<label for="dataLimite">Data Vencimento:</label>
@@ -110,7 +108,12 @@
 						<div ng-show="ctrl.lancamentos.length == 0" class="alert alert-info alert-dismissible">
 					         <h4><i class="icon fa fa-info"></i>Sem Resultado!!</h4>
 					   </div>
-	   
+				   		<div class="row">
+							<div class="col-sm-2">
+								<label class="control-label" for="descricao">Filtro:</label>
+								<input type="text" class="form-control  input-sm" id="descricao" autofocus="autofocus" ng-model="filtro"/>
+							</div>
+	   					</div>
 						<div class="table-responsive" ng-show="ctrl.lancamentos.length > 0">
 							<table class="table table-bordered table-hover" >
 								<thead>
@@ -129,7 +132,7 @@
 									</tr>
 								</thead>
 								<tbody
-									ng-repeat=" lancamento in ctrl.lancamentos">
+									ng-repeat=" lancamento in ctrl.lancamentos | filter : filtro">
 									<tr>
 										<td><a  title="Visualizar este lançamento" data-toggle="modal" href=""	data-target=".modalEstrutura" ng-click="ctrl.show(lancamento)"">{{lancamento.descricao}}</a></td>
 										<td >{{lancamento.dataVencimento | date : 'dd/MM/yyyy'}}</td>

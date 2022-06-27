@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import br.com.app.estoque.domain.enuns.CategoriaEnum;
+import br.com.app.financeiro.domain.enuns.StatusLancamento;
 import br.com.app.financeiro.domain.enuns.TipoLancamentoEnum;
 import br.com.app.infraestructure.util.Page;
 import lombok.Data;
@@ -29,6 +30,7 @@ public class LancamentoFilter implements Serializable {
 	private String observação;
 	private String objeto;
 	private Long idObjeto;
+	private StatusLancamento status;
 
 	private String adicional;
 

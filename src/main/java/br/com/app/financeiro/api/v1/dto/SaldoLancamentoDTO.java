@@ -35,7 +35,7 @@ public class SaldoLancamentoDTO {
 				.subtract(Optional.ofNullable(totalsaida).orElse(BigDecimal.ZERO));
 		this.entrada = entrada;
 		this.saida = saida;
-		this.entradaFutura = entradaFutura;
+		this.entradaFutura = Optional.ofNullable(entradaFutura).orElse(BigDecimal.ZERO);
 		this.saidaFutura = saidaFutura;
 		this.dataInicial = dataInicial;
 		this.dataFinal = dataFinal;

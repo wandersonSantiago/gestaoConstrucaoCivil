@@ -5,7 +5,7 @@ app.controller("CotacaoEmpresaLancarController", CotacaoEmpresaLancarController)
 app.controller("CotacaoEmpresaLancarEditarController", CotacaoEmpresaLancarEditarController);
 app.controller("CotacaoEmpresaShowController", CotacaoEmpresaShowController);
 
-function CotacaoEmpresaCadastarController($localStorage, $state, $stateParams, CotacaoEmpresaService, ProdutoService, toastr, $scope){
+function CotacaoEmpresaCadastarController($localStorage, blockUI, $state, $stateParams, CotacaoEmpresaService, ProdutoService, toastr, $scope){
 	
 	var self = this;	
 	
@@ -40,6 +40,7 @@ function CotacaoEmpresaCadastarController($localStorage, $state, $stateParams, C
 			sweetAlert({title: "É Obrigatório pelo menos 1 item", 	type : "info", timer : 100000,   width: 500,  padding: 20});	
 			return;
 		}
+		 blockUI.start();
 				self.cotacao.itens = self.itens;
 				CotacaoEmpresaService.insert(self.cotacao).
 				then(function(response){
@@ -48,8 +49,10 @@ function CotacaoEmpresaCadastarController($localStorage, $state, $stateParams, C
 					if($scope.backPage){
 						$state.go($scope.backPage);
 					}
+					 blockUI.stop();
 					clear(form);
 				}, function(errResponse){
+					 blockUI.stop();
 					sweetAlert({ timer : 3000,  text : errResponse.data.message,  type : "error", width: 300, higth: 300, padding: 20});
 				});			
 		};
@@ -102,7 +105,7 @@ function CotacaoEmpresaCadastarController($localStorage, $state, $stateParams, C
 			
 }		
 
-function CotacaoEmpresaEditarController($localStorage, $state, $stateParams, CotacaoEmpresaService, ProdutoService, toastr, $scope){
+function CotacaoEmpresaEditarController($localStorage, blockUI, $state, $stateParams, CotacaoEmpresaService, ProdutoService, toastr, $scope){
 	
 	var self = this;
 	
@@ -140,9 +143,11 @@ function CotacaoEmpresaEditarController($localStorage, $state, $stateParams, Cot
 			sweetAlert({title: "É Obrigatório pelo menos 1 item", 	type : "info", timer : 100000,   width: 500,  padding: 20});	
 			return;
 		}
+		 blockUI.start();
 				self.cotacao.itens = self.itens;
 				CotacaoEmpresaService.update(self.cotacao).
 				then(function(response){
+					 blockUI.stop();
 					toastr.success("Cotacao, Alterada")
 					self.cotacao = null;
 					if($scope.backPage){
@@ -152,6 +157,7 @@ function CotacaoEmpresaEditarController($localStorage, $state, $stateParams, Cot
 					}
 					clear(form);
 				}, function(errResponse){
+					 blockUI.stop();
 					sweetAlert({ timer : 3000,  text : errResponse.data.message,  type : "error", width: 300, higth: 300, padding: 20});
 				});			
 		};
@@ -207,7 +213,7 @@ function CotacaoEmpresaEditarController($localStorage, $state, $stateParams, Cot
 	};
 		
 }
-function CotacaoEmpresaLancarController($localStorage, $state, $stateParams, FornecedorService, CotacaoEmpresaService, SubCategoriaService, CategoriaService, FabricanteService, toastr, $scope){
+function CotacaoEmpresaLancarController($localStorage, blockUI, $state, $stateParams, FornecedorService, CotacaoEmpresaService, SubCategoriaService, CategoriaService, FabricanteService, toastr, $scope){
 	
 	var self = this;
 	
@@ -246,9 +252,11 @@ function CotacaoEmpresaLancarController($localStorage, $state, $stateParams, For
 			sweetAlert({title: "É Obrigatório pelo menos 1 item", 	type : "info", timer : 100000,   width: 500,  padding: 20});	
 			return;
 		}
+		 blockUI.start();
 				self.cotacaoEmpresa.itens = self.itens;
 				CotacaoEmpresaService.launch(self.cotacaoEmpresa).
 				then(function(response){
+					 blockUI.stop();
 					toastr.success("Cotacao, Cadastrada para o fornecedor : " + self.cotacaoEmpresa.fornecedor.dadoEmpresa.nomeFantasia)
 					self.cotacaoEmpresa = null;
 					if($scope.backPage){
@@ -258,6 +266,7 @@ function CotacaoEmpresaLancarController($localStorage, $state, $stateParams, For
 					}
 					clear(form);
 				}, function(errResponse){
+					 blockUI.stop();
 					sweetAlert({ timer : 3000,  text : errResponse,  type : "error", width: 300, higth: 300, padding: 20});
 				});			
 		};
@@ -325,7 +334,7 @@ function CotacaoEmpresaLancarController($localStorage, $state, $stateParams, For
 		
 }
 
-function CotacaoEmpresaLancarEditarController($localStorage, $state, $stateParams, FornecedorService, CotacaoEmpresaService, SubCategoriaService, CategoriaService, FabricanteService, toastr, $scope){
+function CotacaoEmpresaLancarEditarController($localStorage, blockUI, $state, $stateParams, FornecedorService, CotacaoEmpresaService, SubCategoriaService, CategoriaService, FabricanteService, toastr, $scope){
 	
 	var self = this;
 	
@@ -359,9 +368,11 @@ function CotacaoEmpresaLancarEditarController($localStorage, $state, $stateParam
 			sweetAlert({title: "É Obrigatório pelo menos 1 item", 	type : "info", timer : 100000,   width: 500,  padding: 20});	
 			return;
 		}
+		 blockUI.start();
 				self.cotacaoEmpresa.itens = self.itens;
 				CotacaoEmpresaService.launch(self.cotacaoEmpresa).
 				then(function(response){
+					 blockUI.stop();
 					toastr.success("Cotacao, Cadastrada para o fornecedor : " + self.cotacaoEmpresa.fornecedor.dadoEmpresa.nomeFantasia)
 					self.cotacaoEmpresa = null;
 					if($scope.backPage){
@@ -371,6 +382,7 @@ function CotacaoEmpresaLancarEditarController($localStorage, $state, $stateParam
 					}
 					clear(form);
 				}, function(errResponse){
+					 blockUI.stop();
 					sweetAlert({ timer : 3000,  text : errResponse,  type : "error", width: 300, higth: 300, padding: 20});
 				});			
 		};
