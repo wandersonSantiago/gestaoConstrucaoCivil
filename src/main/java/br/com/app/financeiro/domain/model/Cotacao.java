@@ -55,6 +55,8 @@ public class Cotacao implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_fechamento")
 	private Date dataFechamento;
+	@Column(nullable = false)
+	private boolean porItem = true;
 
 	public void adicionarCotacaoNoItem() {
 

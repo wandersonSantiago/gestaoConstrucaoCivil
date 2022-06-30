@@ -40,7 +40,7 @@ public class ConfiguracaoEmpreendimento implements Serializable{
 	
 	public Date getDataBaseFinal() {
 		LocalDate hoje = LocalDate.now();
-		var proximoMes = LocalDate.now().plusMonths(1);
+		LocalDate proximoMes = LocalDate.now().plusMonths(1);
 		int data = (dataBaseFinanceiro == 0 || dataBaseFinanceiro ==1 )  ? proximoMes.lengthOfMonth() : dataBaseFinanceiro -1;		
 		LocalDate localDate = DateUtils.addMonthAndDayToDate( hoje.getMonthValue() + 1,data);		
 		return DateUtils.convertLocalDateToDate(localDate);

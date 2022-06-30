@@ -16,7 +16,16 @@
 					<div class="col-md-3" ng-class="{ 'has-error' : form.data.$invalid && form.$submitted }">
 					<label>Data Limite:</label>
 						<input class="form-control input-sm" type="date" ng-model="ctrl.cotacao.dataLimite" id="data" name="data" dateInput placeholder="data limite"  title="escolha uma data limite para o encerramento desta cotação" required> 
-					</div>						
+					</div>	
+				 	<div class="col-sm-2">
+				 		<label>Calcular pelo menor valor do:</label><br>
+						<label class="radio-inline">
+							<input  type="radio" name="radioItem" ng-model="ctrl.cotacao.porItem" ng-value="true">Item
+						</label> 
+						<label class="radio-inline">
+							<input  type="radio" name="radioItem" ng-model="ctrl.cotacao.porItem" 	ng-value="false">Fornecedor
+						</label>
+					</div>					
 				</div>
 			</div>
 		</div>

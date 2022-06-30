@@ -1,0 +1,62 @@
+<meta charset="UTF-8">
+				
+			
+				<div class="row">
+			      <div class="col-md-4">
+			       <label for="tipo" class="control-label">Tipo:</label>
+					<h4 class="{{lancamento.tipo == 'DEBITO' ? 'red' : 'blue'}}">{{lancamento.tipo}}</h4>
+			      </div>
+			      <div class="col-md-4">
+			       <label for="categoria" class="control-label">Categoria:</label>
+					<h4>{{lancamento.categoria}}</h4>
+			      </div>
+			      <div class="col-md-4">
+			       <label for="categoria" class="control-label">Status:</label>
+					<h4>{{lancamento.status}}</h4>
+			      </div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+					<label>Vencimento:</label>
+						<h4>{{lancamento.dataVencimento | date : 'dd/MM/yyyy'}}</h4>
+					</div>			
+					<div class="col-sm-3">
+					<label>Data{{lancamento.tipo == 'DEBITO' ? ' Pagamento' : 'Recebimento'}}:</label>
+						<h4>{{lancamento.dataPagamentoOuRecebimento | date : 'dd/MM/yyyy'}}</h4>
+					</div>					
+				</div> 
+				
+				<div class="row">
+			      <div class="col-md-3">
+			        <label>Valor:</label>
+			        <h4>{{lancamento.valor | currency}}</h4>
+			      </div>    
+			       <div class="col-md-3">
+			        <label>Juros:</label>
+			        <h4>{{lancamento.porcentagemJuros}}% - {{lancamento.juros | currency}}</h4>
+			      </div>			       
+			       <div class="col-md-3">
+			        <label>Desconto:</label>
+			        <h4>{{lancamento.porcentagemDesconto}}% - {{lancamento.desconto | currency}}</h4>
+			      </div> 
+			       <div class="col-md-3">
+			        <label>Valor total:</label>
+			         <h4>{{lancamento.valorTotal | currency}}</h4>
+			      </div> 
+				</div>
+				<div class="row">
+			      <div class="col-md-12">
+			        <label>Observação:</label>
+			        <h4>{{lancamento.observacao}}</h4>
+			      </div>
+				</div><br>
+				<hr>
+				<h4>Dados da transação</h4><br>
+				<div class="row">
+			      <div class="col-md-12">
+			        <h4>Usuario:{{lancamento.usuario.nome}}</h4>
+			      </div>
+			      <div class="col-md-12">
+			        <h4>Data:{{lancamento.dataCadastro | date : 'dd/MM/yyyy HH:mm:ss'}}</h4>
+			      </div>
+				</div>

@@ -1,0 +1,80 @@
+<meta charset="UTF-8">
+
+			<div class="container col-sm-12 ">
+				<form role="form-vertical"	ng-submit="ctrl.submit()">
+				<div ng-if="ctrl.usuario.id">
+					<input type="checkbox" ng-model="ctrl.usuario.ativo">{{ctrl.usuario.ativo ? 'Inativar': 'Ativar'}}
+				</div>
+				<div class="row" ng-if="!user.empreendimento.matriz || user.root">
+		 		<div class="form-group  col-sm-12">
+			 		<label>Selecione o Empreendimento:</label>
+				    <input type="text" ng-model="ctrl.usuario.empreendimento" placeholder="Digite nome do empreendimento" 
+				    uib-typeahead="empreendimento as empreendimento.descricao for empreendimento in ctrl.buscarPorTexto($viewValue) | limitTo:8" 
+				    typeahead-template-url="customTemplate.html" class="form-control" typeahead-show-hint="true"  
+				    typeahead-loading="loadingEmpreendimentos" typeahead-no-results="noResults" typeahead-min-length="3">
+				    <i ng-show="loadingEmpreendie=mentos" class="glyphicon glyphicon-refresh"></i>
+				    <div ng-show="noResults">
+				      <i class="glyphicon glyphicon-remove"></i> Nenhum resultado encontrado
+				    </div>
+			    </div>
+	   			 </div>
+				<div class="row">					
+						<div class="col-sm-6">
+						Nome:
+							<input type="text" class="text-uppercase form-control" id="nome" ng-model="ctrl.usuario.nome"  placeholder="Ex: João da Silva Santos"
+								title="Digite o nome completo do usuario" maxlength="50"	required>
+						</div>				
+							
+					<div>	
+						<div class="col-sm-6" >
+						E-mail:
+								<input type="email" class="form-control" id="email" ng-model="ctrl.usuario.email"  placeholder="Ex: joao_silva@email.com"
+								title="Digite o email do usuario" maxlength="50"	required>
+							</div>		
+						</div>	
+						<div>	
+						
+						</div>	
+					</div>							
+								
+					<br>
+					<div class="row" >					
+						<div class="col-sm-6">
+						Login:
+							<input type="text" class="form-control" id="login" ng-model="ctrl.usuario.login" ng-blur="ctrl.existeLogin(ctrl.usuario.login)" placeholder="Ex: joaoSilvaSantos"
+								title="digite um login para o usuario" maxlength="50"	required>
+						</div>						
+					
+	
+						<div class="col-sm-3">
+						Senha:
+							<input type="password" class="form-control" id="senha" ng-model="ctrl.senha" placeholder="Senha"
+								title="Digite uma senha"maxlength="12">
+						</div>
+						Repita a senha:
+						<div class="col-sm-3">
+							<input type="password" class="form-control" id="repitaSenha" ng-model="ctrl.senhaRepitida" placeholder="Repita a Senha"
+								title="repita a senha">
+						</div>
+						
+					</div>
+					<br> <br>
+					
+					<div class="row ">
+					<div class="col-sm-4"></div>
+							<div class="col-sm-3">
+								<button type="submit" name="submit" class="btn btn-lg btn-primary btn-block btn-signin">Cadastrar</button>
+							</div>
+						</div>
+				</form>
+				
+			</div>
+			
+<script type="text/ng-template" id="customTemplate.html">
+  <a>
+      <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span> <span ng-if="!match.model.matriz"> - <b>Matriz</b></span><br/>
+	  <span>{{match.model.endereco.cidade}}-{{match.model.endereco.estado}}</span>
+  </a>
+</script>
+			
+		

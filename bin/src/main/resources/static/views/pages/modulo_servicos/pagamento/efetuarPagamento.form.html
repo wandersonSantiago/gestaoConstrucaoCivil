@@ -1,0 +1,115 @@
+<meta charset="UTF-8">
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/servicos/home">menu serviços</a></li>
+   <li class="breadcrumb-item" ><a href="#/servicos/vincular/listagem">listar</a></li>
+   <li class="breadcrumb-item active">vistoria</li>
+  </ol>
+<div ng-controller="servicoEmpresaController as servicoCtrl">
+	<div class="box box-primary">
+		<div class="box-header">
+			<span class="lead"> Efetuar Pagamento</span>
+		</div>
+		<div class="panel-body">
+		<form role="form-vertical" >
+		
+			<div class="container col-sm-12 ">			
+			<div class="row">				
+				<div class="col-sm-4" ng-controller="prestadoraServicoController as ctrlPrestadora" ng-init="ctrlPrestadora.lista()">
+							<br>Prestadora de Serviços:
+							<md-autocomplete 
+							 	md-selected-item="servicoCtrl.prestadoraServico" 
+							 	md-search-text="pCtrl.searchText" 
+							 	md-selected-item-change="pCtrl.selectedItemChange(prestadora)" 
+							 	md-items=" prestadora in ctrlPrestadora.prestadoraServicos | filter : pCtrl.searchText" 
+							 	md-item-text="prestadora.dadoEmpresa.nomeFantasia" 
+							 	md-min-length="0" placeholder="buscar...">
+       							<md-item-template>
+          							<span md-highlight-text="pCtrl.searchText" md-highlight-flags="^i">{{prestadora.dadoEmpresa.nomeFantasia}}</span>
+       							 </md-item-template>        								
+     						 </md-autocomplete>
+							
+						</div>
+						<div class="col-sm-2">
+							<br><br>
+							<input class="btn btn-lg btn-primary "
+								ng-click="servicoCtrl.buscarServicosPagamentoLiberadoDaPrestadora(servicoCtrl.prestadoraServico.id)" value="adicionar"
+								title="pressione para adicionar a lista" type="button"  >
+						</div>
+				
+			</div>				<br><br>
+							<div ng-if="servicosliberados" class="row ">
+								<div class="col-sm-2">
+							    <div class="dropdown">
+							        <button class="btn btn-warning btn-export dropdown-toggle" margin-right=46px type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+							            Exportar <span class="caret"></span>
+							        </button>			
+							        <ul class="table-export dropdown-menu"
+							        table-selector="'auxTable'"
+							        export-options="{type: 'pdf', escape: true, ignoreColumn : '[4]', tableName: 'listaEstoque' }"
+							        aria-labelledby="dropdownMenu1">
+							            <li >
+							                <a href="" ng-click="servicoCtrl.exportar('pdf')">PDF</a>
+							            </li>
+							
+							            <li te-option te-value="'excel'" te-param="'type'">
+							                <a href="">Excel</a>
+							            </li>
+							
+							            <li te-option te-value="'csv'" te-param="'type'">
+							                <a href="">CSV</a>
+							            </li>
+							        </ul>
+							    </div>
+							    </div>
+							</div>				
+							<div ng-show="servicosliberados" class="table-responsive">
+							<table st-table="servicosliberados" st-filtered-collection="filteredCollection" class="export-table table  table-bordered table-striped ">
+							
+								<thead>
+									<tr>
+										<th>Pacote de serviço</th>
+										<th>Categoria</th>
+										<th>Local</th>
+										<th>Valor do serviço</th>
+										<th>Adicional</th>
+										<th>Desconto</th>
+										<th>Total Pago</th>									
+									</tr>
+								</thead>
+								
+								<tbody
+									ng-repeat=" servico in servicosliberados | filter : buscaPacotes">
+									<tr>
+										<td>{{ servico.pacoteServico.descricao }}</td>
+										<td>{{ servico.pacoteServico.categoria.descricao }}</td>
+										<td ng-if="servico.torre">{{ servico.torre }}-{{ servico.andar}}-{{ servico.apartamento}}</td>
+										<td ng-if="servico.numeroCasa">{{ servico.numeroCasa}}-{{ servico.andar}}</td>
+										<td ng-if="servico.descricao">{{ servico.descricao}}</td>
+										<td>{{ servico.valorPacoteServico | currency}}</td>	
+										<td>{{ servico.valorAdicional | currency}}</td>	
+										<td>{{ servico.valorDesconto | currency}}</td>	
+										<td>{{ servico.valorTotalPago | currency}}</td>	
+										</tr>			
+								</tbody>
+								<tfoot>
+									<tr>					
+									</tr>
+								</tfoot>
+							</table>
+												
+									
+						</div>
+						</div>	
+						<div ng-show="servicosliberados" class="row ">
+						<div class="col-sm-4"></div>
+						<div class="col-sm-4">
+							<input type="button" id="submit" ng-click="servicoCtrl.efetuarPagamento(servicoCtrl.prestadoraServico.id)" value="pagar"	class="btn btn-lg btn-primary btn-block btn-signin">
+						</div>
+					</div>				
+				</form>
+			</div>
+			<div class="tablecontainer"></div>
+		</div>
+	</div>
+	</div>

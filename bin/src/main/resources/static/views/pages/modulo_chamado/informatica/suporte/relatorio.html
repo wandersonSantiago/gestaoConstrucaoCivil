@@ -1,0 +1,202 @@
+<meta charset="UTF-8">
+<div ng-controller="chamadoTiController as chamadoCtr">
+
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/chamado/home">menu chamado</a></li>
+   <li class="breadcrumb-item" ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_USUARIO"><a href="#/chamado/informatica/cadastrar">Abrir</a></li>
+   <li class="breadcrumb-item" ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_USUARIO"><a href="#/chamado/informatica/lista">Lista</a></li>
+   <li class="breadcrumb-item" ng-if="ROLE_MODULO_CHAMADO_INFORMATICA_SUPORTE"><a href="#/chamado/informatica/suporte/lista">Suporte</a></li>
+   <li class="breadcrumb-item active">Relatório</li>
+ </ol>	 
+	  
+	<div class="panel panel-default"></div>
+	<div class="panel panel-default" ng-init="chamadoCtr.relatorioChamadoSuporte(0 , 10)">
+		<div class="panel-heading">
+			<span class="lead">Relátorio Chamado </span>
+		</div>
+			<div>		
+				<div class="row">
+					<div class="col-sm-1"></div>
+					<div class="btn-group" role="group" aria-label="...">
+					  <button type="button" ng-click="ativaBuscaRelatorio('titulo')" class="btn btn-default">Titulo</button>
+					  <button type="button" ng-click="ativaBuscaRelatorio('periodo')"  class="btn btn-default">Peridodo</button>
+					</div>				
+				</div>
+				<br>
+				<div ng-show="porTitulo" class="row">
+						<div class="col-sm-1"></div>
+					<div class="col-sm-2"  >
+					Tipo Equipamento
+						<select class="form-control " ng-model="equipamento" id="tipo" ng-click="verificaEquipamento(equipamento)"
+						ng-options="tipoEquipamento for tipoEquipamento in tipoEquipamentos" >
+							<option  value="">Tipo Equipamento</option>
+						</select>
+					</div>											
+						<div >	
+						<div ng-show="computador" class="col-sm-2"   >
+						Titulo
+							<select class="form-control select2" ng-model="titulo" id="titulo"
+							ng-options="titulo for titulo in titulos" >
+								<option value="">Titulo</option>
+							</select>
+						</div>						
+						<div ng-show="impressora" class="col-sm-2"   >
+						Titulo
+							<select class="form-control " ng-model="titulo" id="tituloImpressora"
+							ng-options="tituloImpressora for tituloImpressora in tituloImpressoras" >
+								<option value="">Titulo</option>
+							</select>
+						</div>							
+					</div>										
+						
+				<div class="col-sm-2">
+				Data inicial:
+						<input class="form-control" ng-model="dataInicial" id="dataInicial" type="date" 
+						title="Data pesquisa inicial" required>
+				</div>
+				<div class="col-sm-2">
+				Data final:
+						<input class="form-control" ng-model="dataFinal"  id="dataFinal" type="date" 
+						title="Data pesquisa final">
+					</div>											
+					<div class="col-sm-2">
+					<br>
+						<input type="button" id="buscar" value="Buscar" ng-click="chamadoCtr.relatorioPorDataPorTitulo(dataInicial, dataFinal, titulo)"	class="btn btn-lg btn-primary btn-block btn-signin">
+					</div>				
+				</div>
+				
+				<div ng-show="porPeriodo" class="row">
+					<div class="col-sm-1"></div>	
+					<div class="col-sm-2">
+					Data inicial:
+							<input class="form-control" ng-model="dataInicial" id="dataInicial" type="date" 
+							title="Data pesquisa inicial" required>
+					</div>
+					<div class="col-sm-2">
+					Data final:
+							<input class="form-control" ng-model="dataFinal"  id="dataFinal" type="date" 
+							title="Data pesquisa final">
+						</div>											
+						<div class="col-sm-2">
+							<input type="button" id="buscar" value="Buscar" ng-click="chamadoCtr.relatorioPorData(dataInicial, dataFinal)"	class="btn btn-lg btn-primary btn-block btn-signin">
+						</div>				
+					</div>
+				<br>
+				<br>
+				<br>
+		</div>	
+	</div>						
+			<div class="row">
+				<div  ng-if="ativaTabela" class="col-sm-2">
+					<input type="button" id="buscar" value="Gráfico" ng-click="chamadoCtr.ativaBotaoTabelaGrafico(ativaTabela)"	class="btn btn-lg btn-success btn-block btn-signin">
+				</div>
+				<div  ng-if="ativaGrafico" class="col-sm-2">
+					<input type="button" id="buscar" value="Lista" ng-click="chamadoCtr.ativaBotaoTabelaGrafico(ativaTabela)"	class="btn btn-lg btn-success btn-block btn-signin">
+				</div>
+			</div>	
+				<br>
+				<br>
+				
+			<div ng-if="ativaTabela" class="panel panel-default">
+				<div class="panel-heading">
+					<span class="lead">Lista </span>
+				</div>															
+					<input class="form-control" autofocus="autofocus" name="criterioBusca" type="text" ng-model="criterioDeBusca"	placeholder="Busca..." />
+					<table class="table table-hover table-bordered " >
+				<thead>
+					<tr>
+					<th>
+						<div  ng-init="chamadoCtr.titulo()" >
+								<select class="form-control" ng-model="titulo"  ng-click="chamadoCtr.buscaDinamicaTitulo(titulo)"
+								ng-options="titulo for titulo in chamadoCtr.titulos" 
+								  style=" width: 100%;" required >
+									<option value="">Titulo</option>
+								</select>
+							</div>	
+				  		</th>
+				  		
+						<th>
+							<div  ng-init="chamadoCtr.usuarioLista()" >
+								<select class="form-control" ng-model="usuario"  ng-click="chamadoCtr.buscaDinamicaUsuario(usuario)"
+								ng-options="usuario.nome for usuario in chamadoCtr.usuarios" 
+								  style=" width: 100%;" required >
+									<option value="">Solicitante</option>
+								</select>
+							</div>	
+						</th>
+						
+						
+						
+						<th>
+							<div  ng-init="chamadoCtr.status()" >
+								<select class="form-control" ng-model="status"  ng-click="chamadoCtr.buscaDinamicaStatus(status)"
+								ng-options="status for status in chamadoCtr.listaStatus" 
+								  style=" width: 100%;" required >
+									<option value="">Status</option>
+								</select>
+							</div>	
+						</th>						
+						<th>Data de abertura
+							<input class="form-control" type="date"  ng-model="data" ng-blur="chamadoCtr.buscaDinamicaData(data)" placeholder="Data">
+						</th>							
+						<th>Horário</th>					
+						<th>Opções</th>
+					</tr>
+				</thead>
+				<tbody	ng-repeat=" chamado in relatorioChamadoSuporte | filter : buscaChamado | orderBy : '-id'  ">
+					<tr>
+						<td>{{ chamado.titulo }}</td>
+						<td>{{ chamado.usuarioSolicitante.nome }}</td>
+						<td>{{ chamado.status }}</td>	
+						<td>{{ chamado.dataAbertura | date : 'dd/MM/yyyy'}}</td>
+						<td>{{ chamado.dataAbertura | date : 'HH:mm:ss' }}</td>									
+						<td><a href="#/chamado/informatica/suporte/atendimento/{{chamado.id}}"><i class="glyphicon glyphicon-search"></i></a> 
+					
+				</tr>
+				</tbody>
+				<tfoot>
+				</tfoot>				
+			</table>	
+					<div class="row">
+						<div class="col-sm-5"></div>				
+						<div class="2">				
+							<nav>
+								<ul class="pagination">
+								
+									<li class="{{0==chamadoCtr.getPage ?'disabled':''}}"><a
+										ng-if="0!=chamadoCtr.getPage" ng-click="chamadoCtr.relatorioChamadoSuporte(chamadoCtr.getPage -1, maxResults)"
+										aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+									</a> <a ng-if="0==chamadoCtr.getPage" aria-label="Previous"> <span
+											aria-hidden="true">&laquo;</span></a></li>
+									<li ng-repeat="page in chamadoCtr.totalPages"
+										class="{{page==chamadoCtr.getPage ?'active':''}}"><a
+										ng-click="chamadoCtr.relatorioChamadoSuporte(page , maxResults)">{{page + 1}}</a></li>
+									<li class="{{chamadoCtr.getPage+1 == totalPages ?'disabled':''}}"><a
+										ng-if="chamadoCtr.getPage+1 != totalPages"
+										ng-click="chamadoCtr.relatorioChamadoSuporte(chamadoCtr.getPage+1, maxResults)" aria-label="Next"> <span
+											aria-hidden="true">&raquo;</span>
+									</a> <a ng-if="chamadoCtr.getPage+1==totalPages" aria-label="Next"> <span
+											aria-hidden="true">&raquo;</span>
+									</a></li>
+									
+								</ul>
+							</nav>
+						</div>
+					</div>					
+			</div>						
+			<div ng-if="ativaGrafico" class="panel panel-default">
+				<div class="panel-heading">
+					<span class="lead">Gráfico </span>
+				</div>		
+					
+					<canvas id="line" class="chart chart-line" chart-data="data"
+						chart-labels="labels" chart-series="series" chart-options="options"
+						chart-dataset-override="datasetOverride" chart-click="onClick">
+						</canvas>	
+							
+			</div>
+
+			
+</div>
+					

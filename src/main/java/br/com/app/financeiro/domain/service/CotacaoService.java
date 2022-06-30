@@ -2,6 +2,7 @@ package br.com.app.financeiro.domain.service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.criteria.Predicate;
 
@@ -86,7 +87,7 @@ public class CotacaoService {
 
 			Usuario user = SessionUsuario.getInstance().getUsuario();
 
-			var predicates = new ArrayList<Predicate>();
+			List<Predicate> predicates = new ArrayList<Predicate>();
 
 			predicates.add(builder.equal(root.get("empreendimento"), user.getEmpreendimento()));
 

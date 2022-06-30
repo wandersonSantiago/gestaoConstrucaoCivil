@@ -1,0 +1,80 @@
+<meta charset="UTF-8">
+
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/cadastros/home">menu cadastros</a></li>
+   <li class="breadcrumb-item"><a href="#/produto/categoria/cadastro">Cadastro Categoria</a></li>
+   <li class="breadcrumb-item active">Lista de Categoria</li>
+ </ol>
+<div ng-controller="categoriaController as catCtr">
+
+	<div class="box box-primary" ng-init="catCtr.lista()">
+	
+		<div class="box-header">
+			<span class="lead">Lista de Categorias </span>
+		</div>
+		<div class="panel-body">
+		<input type="text" class="form-control" ng-model="buscarCategoria" placeholder="buscar">
+			<div class="table-responsive">
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+					
+						
+						<th>Descrição</th>
+						<th>Categoria</th>
+						<th ng-if="ROLE_MODULO_CADASTROS_PRODUTO_CATEGORIA_ALTERAR">Editar</th>
+						
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" categoria in catCtr.categorias | filter : buscaCategoria ">
+					<tr>
+						
+						
+						<td>{{ categoria.descricao }}</td>
+						<td>{{ categoria.tipoCategoria }}</td>
+					
+						<td ng-if="ROLE_MODULO_CADASTROS_PRODUTO_CATEGORIA_ALTERAR"><a href="#/produto/categoria/edita/{{categoria.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						
+					</tr>
+
+				</tbody>
+				<tfoot>
+				
+					
+				</tfoot>
+			</table>
+			</div>
+			<div class="row">
+				<div class="col-sm-5"></div>
+				<div class="3">			
+				<nav aria-label="Page navigation">
+					  <ul class="pagination">
+					    <li>
+					      <a href="#" aria-label="Previous">
+					        <span aria-hidden="true">&laquo;</span>
+					      </a>
+							    </li>
+							    <li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>
+							    <li><a href="#">2</a></li>
+							    <li><a href="#">3</a></li>
+							    <li><a href="#">4</a></li>
+							    <li><a href="#">5</a></li>
+							    <li>
+					      <a href="#" aria-label="Next">
+					        <span aria-hidden="true">&raquo;</span>
+					      </a>
+					    </li>
+					  </ul>
+				</nav>
+				</div>
+			</div>
+		</div>
+		<!-- /.box-body -->
+	</div>
+	<!-- /.box -->
+</div>
+<!-- /.col -->
+</div>
+<!-- /.row -->

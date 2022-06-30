@@ -1,6 +1,7 @@
 package br.com.app.financeiro.domain.service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,20 +29,34 @@ public class VerificaItensGanhadores {
 
 		Integer cont = 0;
 
-		while (cotacao.getItens().size() > this.chamada) {
-			CotacaoEmpresaItem itemASerVerificado = itens.get(cont);
-
-			for (CotacaoEmpresaItem item : itens) {
-				if (itemASerVerificado.getItem().getId() == item.getItem().getId()) {
-
-					itensVerifica.add(item);
+		if(!cotacao.isPorItem()) {
+			
+			CotacaoEmpresaItem item = itens.stream()
+					.min(Comparator.comparing(CotacaoEmpresaItem::getValorTotalEmpresa))
+					.orElse(null);	
+			item.getCotacaoEmpresa().ganhou();
+			item.getCotacaoEmpresa().getItens().forEach(i -> i.setStatus(CotacaoEmpresaItemStatus.GANHOU));
+		}else {
+			
+			while (cotacao.getItens().size() > this.chamada) {
+				CotacaoEmpresaItem itemASerVerificado = itens.get(cont);
+	
+				for (CotacaoEmpresaItem item : itens) {
+					if (itemASerVerificado.getItem().getId() == item.getItem().getId()) {
+	
+						itensVerifica.add(item);
+					}
 				}
+				cont++;
+				verificarItens();
+				
+				verficarCotacaoEmpresa();
+							
+				itensVerifica.clear();
 			}
-			cont++;
-			verificarItens();
-			verficarCotacaoEmpresa();
-			itensVerifica.clear();
 		}
+		
+
 
 	}
 

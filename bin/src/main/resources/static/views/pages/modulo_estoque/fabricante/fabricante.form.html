@@ -1,0 +1,67 @@
+<meta charset="UTF-8">
+<form name="formFabricante" novalidate ng-submit="ctrl.submit()">
+
+	<div>
+		<h4>{{ctrl.botao}}</h4>          
+		<hr>		
+	</div>	
+
+<label>Razão Social:</label>
+<p>{{ctrl.fabricante.dadoEmpresa.razaoSocial}}</p>
+<label>Nome Fantasia:</label>
+<p>{{ctrl.fabricante.dadoEmpresa.nomeFantasia}}</p>
+<strong>CNPJ:</strong> 
+<p>{{ctrl.fabricante.dadoEmpresa.cnpj | brCnpj}}</p>
+
+<address>
+	<p>
+		<span class="glyphicon glyphicon-map-marker"></span>
+		{{ctrl.fabricante.dadoEmpresa.endereco.logradouro}},
+		{{ctrl.fabricante.dadoEmpresa.endereco.numero}} -
+		{{ctrl.fabricante.dadoEmpresa.endereco.bairro}}
+		-{{ctrl.fabricante.dadoEmpresa.endereco.cidade.nome}}
+		/{{ctrl.fabricante.dadoEmpresa.endereco.estado.nome}} CEP:
+		{{ctrl.fabricante.dadoEmpresa.endereco.cep}}
+	</p>
+	<p>{{ctrl.fabricante.dadoEmpresa.endereco.complemento}}</p>
+	<p>
+		<abbr title="Telefone"><span class="glyphicon glyphicon-phone"></span></abbr>
+		{{ctrl.fabricante.dadoEmpresa.telefone | brPhoneNumber}}
+	</p>
+	<p>
+		<abbr title="e-mail"><span class="glyphicon glyphicon-envelope"></span></abbr>
+		{{ctrl.fabricante.dadoEmpresa.email}}
+	</p>
+	<p>
+		<abbr title="endereço do site"><span
+			class="glyphicon glyphicon-cloud"></span></abbr>
+		{{ctrl.fabricante.dadoEmpresa.site}}
+	</p>
+</address>
+		<div class="row" ng-show="ctrl.fabricante.id">
+			<div class="col-sm-2">			
+				<label class="control-label" for="ativo"> Status  : </label>			
+				<input type="checkbox" ng-model="ctrl.fornecedor.ativo" >{{ctrl.fabricante.ativo ? 'Inativo' : 'Ativo'}}
+			</div>
+		</div>	
+	<div class="row">
+		<div class="col-sm-6">
+		<label>Contato:</label>
+			<input type="text" class="text-uppercase form-control" ng-model="ctrl.fabricante.contato" maxlength="50">
+		</div>
+		<div class="col-sm-6">
+		<label>Observação:</label>
+			<input type="text" class="text-uppercase form-control" ng-model="ctrl.fabricante.observacao" maxlength="50">
+		</div>
+	</div>	
+<br>
+<br>
+	<div class="row ">
+		<div class="col-sm-4"></div>
+		<div class="col-sm-4">
+			<input type="submit" id="submit" value="{{ctrl.botao}}" class="btn btn-lg btn-primary btn-block btn-signin">
+		</div>
+	</div>
+
+</form>
+

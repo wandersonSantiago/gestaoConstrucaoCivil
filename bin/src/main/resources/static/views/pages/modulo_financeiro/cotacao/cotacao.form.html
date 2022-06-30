@@ -1,0 +1,119 @@
+<meta charset="UTF-8">
+	<div class="row">
+		<div class="col-md-4">
+			<a class="fa fa-search 	" href="" ui-sref="cotacao.consultar" title="Consultar cotações">Pesquisar</a>|<label>Cotacao</label>
+		</div>
+	</div>
+	<form role="form-vertical" name="form" ng-submit="ctrl.submit(form)" >
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-6" ng-class="{ 'has-error' : form.tema.$invalid && form.$submitted }"> 
+					<label>Tema da cotação:</label>
+						<input class="form-control input-sm " ng-model="ctrl.cotacao.tema" placeholder="Encanamentos" name="tema" id="tema"							 
+							title="Tema para a cotação" required >					
+					</div>
+					<div class="col-md-3" ng-class="{ 'has-error' : form.data.$invalid && form.$submitted }">
+					<label>Data Limite:</label>
+						<input class="form-control input-sm" type="date" ng-model="ctrl.cotacao.dataLimite" id="data" name="data" dateInput placeholder="data limite"  title="escolha uma data limite para o encerramento desta cotação" required> 
+					</div>						
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="row" >			
+					<div class="col-md-6" >
+					<label>Descrição:</label>
+							<input class="form-control input-sm" ng-model="ctrl.descricao" placeholder="Cano 3/4 " id="descricao"							 
+							 title="descrição do produto">
+						
+					</div>
+					<div class="col-sm-2"">		
+						<label>Unidade de Medida*:</label>				
+						<select class="form-control  input-sm" ng-model="ctrl.unidadeMedida"
+							ng-options="unidadeMedida for unidadeMedida in ctrl.unidadesMedida track by unidadeMedida" >
+						</select>
+					</div>
+					<div class="col-md-2" >
+					<label>Quantidade:</label>
+							<input class="form-control input-sm" ng-model="ctrl.quantidade" placeholder="100" ui-number-mask="0" id="quantidade"							 
+							title="quantidade de produtos para a cotação" >
+						
+					</div>
+					
+					<div class="col-md-1">			
+											<br>
+							<button class="btn btn-xs btn-primary btn-flat btn-block" ng-disabled="!ctrl.quantidade || !ctrl.descricao || !ctrl.unidadeMedida"
+								ng-click="ctrl.adicionarProdutos(ctrl.descricao, ctrl.quantidade, ctrl.unidadeMedida)"
+								title="pressione para adicionar a lista" type="button" ng-disabled="!ctrl.produto" >
+								<i class="glyphicon glyphicon-plus"></i> Adicionar
+							</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	<div class="panel panel-default">
+		<div class="panel-body">
+				<div ng-show="ctrl.itens.length == 0" class="alert alert-info alert-dismissible">
+			         <h4><i class="icon fa fa-info"></i>Nenhum Item Adicionado!!!</h4>
+			   </div>
+			<table class="table table-hover " ng-show="ctrl.itens.length > 0">
+				<thead>
+					<tr>
+						<th></th>							
+						<th>Descrição</th>
+						<th>Unidade de Medida</th>
+						<th>Quantidade</th>
+						
+					</tr>
+				</thead>
+			
+				<tbody
+					ng-repeat=" f in ctrl.itens | filter : busca">
+					<tr>
+					<td><input type="checkbox" ng-model="f.selecionado"	ng-click="ctrl.ativarExcluirLote(itens)"></td>
+						<td><input class="form-control input-sm"  id="descricaoProduto"  type="text" placeholder="descrição do Produto" 
+						ng-model="f.descricao" disabled></td>
+						<td><input class="form-control input-sm"  id="unidadeMedida"  type="text" placeholder="Unidade de Medida" 
+						ng-model="f.unidadeMedida" disabled></td>
+						<td><input class="form-control input-sm"  id="quantidadeProduto"  type="text" placeholder="quantidade"
+						ng-model="f.quantidade" ui-number-mask="0" disabled></td>							
+					</tr>
+		
+				</tbody>
+				<tfoot>
+					<tr>
+						<th>
+							<button" class="btn btn-xs btn-danger btn-flat" 
+									ng-if="ativadoExcluirLote"   
+									ng-click="ctrl.apagarProdutos(itens)">
+										<i class="glyphicon glyphicon-trash"></i> Excluir
+									</button>
+						</th>
+						<th></th>
+						<th></th>
+						<th></th>			
+		
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+		
+		<br>
+				<div class="row" >		
+					<div class="col-md-1 col-md-offset-10">				
+						<button  id="clear" class="btn btn-xs btn-default btn-flat btn-block" ng-click="ctrl.clear()" >	
+							<i class="glyphicon glyphicon-erase"></i>	{{ctrl.cotacao.id ? 'Cancelar' : 'Limpar'}}
+						</button>					
+					</div>					
+					
+					<div class="col-md-1">				
+						<button  id="submit" class="btn btn-xs btn-primary btn-flat btn-block" formnovalidate>	
+							<i class="glyphicon glyphicon-floppy-disk"></i>	Salvar	
+						</button>					
+					</div>
+				</div>
+
+	</form>

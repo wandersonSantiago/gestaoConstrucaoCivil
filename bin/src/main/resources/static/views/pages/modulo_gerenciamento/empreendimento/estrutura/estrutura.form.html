@@ -1,0 +1,73 @@
+<meta charset="UTF-8">
+
+<div class="row">
+	<ul class="breadcrumb col-sm-2">
+		<li><a href="" ng-click="ctrl.listaRaiz('0')">estrutura	inicial</a></li>
+	</ul>
+	<div ng-repeat="geral in estruturaGeral">
+		<ul class="breadcrumb col-sm-2">
+			<li><a href="" ng-click="ctrl.removerFilhas(geral)">{{geral.descricao}}</a></li>
+		</ul>
+	</div>
+</div>
+<h3>Estrutura - {{ctrl.titulo}}</h3>
+<div class="well">
+	<button type="button" class="btn btn-primary"  data-toggle="modal"	data-target=".modalEstrutura">Nova estrutura filha para {{ctrl.titulo}}</button>
+</div>
+				<div ng-show="estruturas.length < 1" class="alert alert-warning alert-dismissible">
+	                <h4><i class="icon fa fa-warning"></i>{{mensagemErro}}</h4>
+	              </div> <br>
+	              
+<div ng-repeat="estrutura in estruturas | orderBy : 'descricao'">	
+		<div class="well card col-md-3 ">
+		
+			<div class="container">	
+			<h4>
+				<a  href="" ng-click="ctrl.buscarFilhas(estrutura)">			
+					<b>{{estrutura.descricao}}</b>				
+				</a>
+			</h4>
+				<a href="" ng-click="ctrl.editar(estrutura)"
+				class="glyphicon glyphicon-edit"></a>
+			</div>
+			
+		</div>	
+</div>
+
+<div class="modal fade modalEstrutura" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">Cadastrar nova estrutura filha para {{ctrl.titulo}}</h4>
+			</div>
+			<div class="modal-body">
+				<form name="formEstrutura" novalidate ng-submit="ctrl.submit()">
+					<div class="row">
+						<div class="form-group col-sm-12"
+							ng-class="{ 'has-error' : formEstrutura.descricao.$invalid && formEstrutura.$submitted}">
+							<label>Descricao*:</label> <input type="text"
+								class="text-uppercase form-control" id="descricao" name="descricao"
+								ng-model="ctrl.estrutura.descricao" placeholder="Insira a descrição"
+								required ng-required="true">
+						</div>
+					</div>
+					<div class="row ">
+						<div class="col-sm-4"></div>
+						<div class="col-sm-4">
+							<input type="submit" id="submit" value="Salvar" 
+								class="btn btn-lg btn-primary btn-block btn-signin">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+			</div>
+		</div>
+	</div>
+</div>
+

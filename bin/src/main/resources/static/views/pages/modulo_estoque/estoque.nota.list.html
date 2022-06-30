@@ -1,0 +1,63 @@
+<meta charset="UTF-8">
+		
+	<div class="row">
+	<div class="col-md-4">
+		<a class="fa fa-plus" href="" ui-sref="estoque.cadastrar" title="Cadastrar novo estoque">Novo</a>|<label>Estoque</label>
+	</div>
+</div>
+<br>
+<div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Pesquisar pelo codigo" ng-model="texto" autofocus
+      	 ng-keyup="$event.keyCode == 13 && ctrl.buscarPorTexto(texto)">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-click="ctrl.paginaCorrente = 0; ctrl.buscarPorTexto(texto)">Pesquisar!</button>
+      </span>
+    </div>
+  </div>
+ </div>
+ 		<div ng-show="mensagemErro" class="alert alert-warning alert-dismissible">
+	         <h4><i class="icon fa fa-warning"></i>{{mensagemErro}}</h4>
+	   </div>
+	   <br>
+	   <br>
+		<div class="panel panel-default table-responsive">
+				<table class="table table-bordered table-striped ">
+				<thead>
+					<tr>						 
+						<th><a href="" ng-click="ctrl.sort('notaFiscal.numero')"><i class="glyphicon glyphicon-sort"></i></a>Numero</th>
+						<th><a href="" ng-click="ctrl.sort('fornecedor.dadoEmpresa.nomeFantasia')"><i class="glyphicon glyphicon-sort"></i></a>Fornecedor</th>
+						<th><a href="" ng-click="ctrl.sort('notaFiscal.situacao')"><i class="glyphicon glyphicon-sort"></i></a>Status</th>
+						<th><a href=""ng-click="ctrl.sort('notaFiscal.dataNota')"><i class="glyphicon glyphicon-sort"></i></a>Data Nota</th>
+						<th><a href=""ng-click="ctrl.sort('notaFiscal.dataVencimento')"><i class="glyphicon glyphicon-sort"></i></a>Data Vencimento</th>	
+						<th><a href=""ng-click="ctrl.sort('notaFiscal.valorTotal')"><i class="glyphicon glyphicon-sort"></i></a>Valor</th>						
+	
+						<th>Opções</th>
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" nota in ctrl.notas">
+					<tr>
+						<td title="Visualizar nota"><a ui-sref="estoque.nota-show({idNota : nota.id})">{{nota.notaFiscal.numero}}</a></td>
+						<td>{{nota.fornecedor.dadoEmpresa.nomeFantasia}}</td>
+						<td>{{nota.notaFiscal.situacao}}</td>
+						<td>{{nota.notaFiscal.dataNota | date : 'dd/MM/yyyy'}}</td>
+						<td>{{nota.notaFiscal.dataVencimento | date : 'dd/MM/yyyy'}}</td>
+						<td>{{nota.notaFiscal.valorTotal  | currency}}</td>										
+						<td title="Editar a Nota"
+						><a ui-sref="estoque.nota-editar({idNota : nota.id})"><i class="glyphicon glyphicon-edit"></i></a> 						
+					</tr>
+				</tbody>
+			</table>
+			<nav>
+				<ul uib-pagination total-items="ctrl.totalElementos" items-per-page="24"
+					ng-model="ctrl.paginaCorrente" max-size="5" class="pagination-sm"
+					boundary-link-numbers="true" ng-click="ctrl.buscarPorTexto(texto)"
+					previous-text="Anterior" last-text="Último" first-text="Primeiro"
+					next-text="Próximo">
+				</ul>
+			</nav>
+	</div>
+			
+

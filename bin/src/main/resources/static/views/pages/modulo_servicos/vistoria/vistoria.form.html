@@ -1,0 +1,131 @@
+<meta charset="UTF-8">
+<form role="form-vertical" novalidate  name="form"  ng-submit="ctrl.submit(form)" >
+					<br>		             
+		             <div class="row" align="center">
+		             	<div class="col-sm-10 col-sm-offset-1">
+		             	<div class="jumbotron col-md-3 ">
+						  <div class="container" align="center">
+						    <h4>Estrutura Selecionada</h4><br>
+						    	 <div class="row">				
+									<div align="center" ng-repeat="v in ctrl.servicoEmpresa.estruturas">
+										<b>{{v.descricao}}</b><br>
+									</div> 	
+								</div>
+						  </div>
+						</div>
+						<div class="jumbotron col-md-3 col-md-offset-1">
+						  <div class="container" align="center">
+						    <h4>Empresa Selecionada</h4>
+						    <label>{{ctrl.servicoEmpresa.prestadoraServico.dadoEmpresa.nomeFantasia}}</label>	<br>
+						   CNPJ : {{ctrl.servicoEmpresa.prestadoraServico.dadoEmpresa.cnpj | brCnpj}}	<br><br>
+						  </div>
+						</div>
+						<div class="jumbotron col-md-3 col-md-offset-1">
+						  <div class="container" align="center">
+						    <h4>Serviço Selecionado</h4>
+						    <label>{{ctrl.servicoEmpresa.pacoteServico.descricao}}</label>	<br>
+						    {{ctrl.servicoEmpresa.pacoteServico.categoria.categoria.descricao}}	<br>
+						  	{{ctrl.servicoEmpresa.pacoteServico.valor | currency}}	
+						  </div>
+						</div>
+		             </div>
+		             </div>
+					<br>
+					<div class="row">
+						<div class="col-md-6">
+							<h3>
+								<label>Data prevista para o término:</label>
+								<span class="label label-default">{{ctrl.servicoEmpresa.dataPrevisaoTermino | date : 'dd/MM/yyyy'}}</span>
+							</h3>							
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+								<label>Descrição dos serviços:</label>
+								{{ctrl.servicoEmpresa.pacoteServico.servicosAtribuidos}}
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+								<label>Critério dos serviços:</label>
+								{{ctrl.servicoEmpresa.pacoteServico.criterioServico}}
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+						<label>Observação:</label><br>
+								{{ctrl.servicoEmpresa.observacao}}
+						</div> 
+					</div>
+					<br>
+					  <div class="row">					  				 	
+						  <div class="col-sm-2">	
+						   <label>Porcentagem de conclusão:</label>			       
+				       		<input  class="form-control" type="text" ng-model="ctrl.servicoEmpresa.porcentagem">     	 
+				       </div>
+				       <div class="col-sm-10"><br><br>
+						  	<uib-progressbar class="progress-striped" value="ctrl.servicoEmpresa.porcentagem" type="success">{{ctrl.servicoEmpresa.porcentagem}}%</uib-progressbar>
+						  </div>
+				  	 </div>
+					<br>
+					<div class="row">
+						<div class="col-md-2">
+						<br>
+					    	<a href=""  data-toggle="modal" data-target="#estrutura"  class="btn btn-warning btn-flat">Registrar Ocorrencia</a>
+					  </div>
+					 </div>
+					<div class="row ">
+						<div class="col-md-4 col-md-offset-4">
+							<input type="submit" id="submit"  value="{{titulo}}"	class="btn btn-lg btn-primary btn-block btn-signin">
+						</div>
+					</div>
+			</form>
+			
+			 <!-- MODAL -->				
+				<div  class="modal fade modal-warning" id="estrutura" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+				  <div class="modal-dialog modal-lg" role="document" >
+				    <div class="modal-content " ng-controller="UsuarioEditarController as userCtrl">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">Registrar Ocorrencias</h4>
+				      </div>
+				      <div class="modal-body">				     		
+					   		<div class="row">
+						      <div class="col-md-12">
+						        <label>Observação:</label>
+						        <textarea  rows="4" name="observacao" class="form-control" ng-model="ocorrencia.ocorrencia"></textarea>
+						      </div>
+						    </div>
+						    <div class="row">
+						      <div class="col-sm-12" flow-init="{singleFile:false}"
+									flow-file-added="!!{png:1,pdf:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
+									class="ng-scope" flow-name="obj.flow">
+									<span class="btn btn-primary col-sm-12" 
+											flow-btn="">Selecione uma imagem<input type="file"
+											style="visibility: hidden; position: absolute;">
+									</span>
+									<div ng-repeat="file in $flow.files">
+										<div class="col-sm-4">
+											<div class="thumbnail" ng-show="$flow.files.length">
+												<img  flow-img="file">											      
+											</div>
+											<label >Observação:</label>
+						       				<textarea  rows="4" name="observacao" ng-init="file.name = null" class="form-control" ng-model="file.name"></textarea>
+											<div>
+												<br ng-show="!$flow.files.length">												
+												<span class="btn btn-danger col-sm-12 " ng-show="$flow.files.length"
+												ng-click="file.cancel()"> Remover </span>
+											</div>
+										</div>
+									</div>
+								</div>									
+						</div>
+				      </div>
+				      <div class="modal-footer">
+				     	<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="ctrl.ocorrencia()">Gravar</button>	
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>				        
+				      </div>
+				    </div>
+				  </div>
+				</div>

@@ -1,0 +1,51 @@
+<meta charset="UTF-8">
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/cadastros/home">menu cadastros</a></li>
+   <li class="breadcrumb-item"><a href="#/produto/tipo/cadastro">Cadastro Tipo Produto</a></li>
+   <li class="breadcrumb-item"><a href="#/produto/tipo/lista">Lista de Tipo Produto</a></li>
+   <li class="breadcrumb-item active">Editar</li>
+ </ol>
+<div  ng-controller="tipoProdutoController as tipoCtrl" >
+
+	<div class="box box-primary" >
+		<!-- Default panel contents -->
+		<div class="box-header" >
+			<span class="lead">Cadastrar Tipo do Produto </span>
+		</div>
+		<div class="panel-body">
+			<div class="container col-sm-12 ">
+				<form role="form-vertical" ng-submit="tipoCtrl.altera()" >
+					<div class="row">
+					<label class="col-sm-2 control-label" for="ativo"> Ativo</label>	
+					<div class="col-sm-3">
+						<input type="checkbox" ng-model="tipoCtrl.tipoProduto.ativo">
+					</div>							
+					<div class="col-sm-8">
+						<input class="form-control" ng-model="tipoCtrl.tipoProduto.descricao" id="descricao" type="text" title="Cadastrar o tipo do produto" placeholder="cadastrar o tipo do produto" maxlength="30" required>
+					</div>
+					</div>
+					<br>
+					<br>					
+					
+							
+					<div class="row ">
+						<div class="col-sm-3"></div>
+						<div class="col-sm-3">
+							<input type="submit" id="submit" value="Salvar"
+								class="btn btn-lg btn-primary btn-block btn-signin">
+						</div>
+						<div class="col-sm-3">
+							<a class="btn btn-lg btn-success btn-block btn-signin" href="#/">Menu Principal</a>
+							
+						</div>
+					</div>
+
+
+				</form>
+			</div>
+
+		</div>
+		<div class="tablecontainer"></div>
+	</div>
+</div>

@@ -1,0 +1,82 @@
+<meta charset="UTF-8">
+
+	<div class="row">
+		<div class="col-md-4">
+			<a class="fa fa-search" href="" ui-sref="lancamentos.consultar" title="Pesquisar Lançamentos">Pesquisar</a>|<label>Lançamento</label>
+		</div>
+	</div>
+	
+<form role="form-vertical" name="form"  ng-submit="ctrl.submit(form)" >
+	
+				<div class="row">
+			      <div class="col-md-6" ng-class="{ 'has-error' : form.tipo.$invalid && form.$submitted }">
+			       <label for="tipo" class="control-label">Tipo:</label>
+					<select id="tipo" name="tipo" class="form-control input-sm" ng-model="ctrl.lancamento.tipo" ng-options="tipo for tipo in ctrl.tipos" required>	               
+			              </select>
+			      </div>
+			      <div class="col-md-6" ng-class="{ 'has-error' : form.categoria.$invalid && form.$submitted }">
+			       <label for="categoria" class="control-label">Categoria:</label>
+					<select id="categoria" name="categoria" class="form-control input-sm" ng-model="ctrl.lancamento.categoria" ng-options="categoria for categoria in ctrl.categorias" required>	               
+			              </select>
+			      </div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3" ng-class="{ 'has-error' : form.vencimento.$invalid && form.$submitted }">
+					<label>Vencimento:</label>
+						<input class="form-control input-sm"  id="vencimento" name="vencimento" type="date" title="informe a data de vencimento" 
+						ng-model="ctrl.lancamento.dataVencimento" required date-input>
+					</div>			
+					<div class="col-sm-3" ng-class="{ 'has-error' : form.dataPagamento.$invalid && form.$submitted }" ng-if="ctrl.lancamento.id">
+					<label>Data{{ctrl.lancamento.tipo == 'DEBITO' ? ' Pagamento' : 'Recebimento'}}:</label>
+						<input class="form-control input-sm"  id="dataPagamento" name="dataPagamento" type="date" ng-model="ctrl.lancamento.dataPagamentoOuRecebimento"  title="informe a data do {{ctrl.lancamento.tipo == 'DEBITO' ? ' Pagamento' : 'Recebimento'}}" date-input>
+					</div>					
+				</div> 
+				
+				<div class="row">
+			      <div class="col-sm-6" ng-class="{ 'has-error' : form.descricao.$invalid && form.$submitted }">
+			        <label>Descrição:</label>
+			        <input  type="text" name="descricao" id="descricao" class="form-control input-sm" ng-model="ctrl.lancamento.descricao" required>
+			      </div>
+			      <div class="col-sm-6">
+			        <label>Observação:</label>
+			        <textarea  rows="1" name="observacao" class="form-control input-sm" ng-model="ctrl.lancamento.observacao"></textarea>
+			      </div>
+				</div>
+				
+				<div class="row">
+			      <div class="col-md-3" ng-class="{ 'has-error' : form.valor.$invalid && form.$submitted }">
+			        <label>Valor:</label>
+			        <input  type="text" name="valor" id="valor" placeholder="0,00" ui-money-mask="2"  class="form-control input-sm"  ng-model="ctrl.lancamento.valor"
+			         ng-keyup="$event.keyCode == 13 && ctrl.submit(form)" required>
+			      </div>    
+			       <div class="col-md-3" ng-if="ctrl.lancamento.id">
+			        <label>Juros:</label>
+			        <input  type="text" name="valor" id="valor" placeholder="0,00" ui-money-mask="2"  class="form-control input-sm"  ng-model="ctrl.lancamento.juros" >
+			      </div>
+			       <div class="col-md-3" ng-if="ctrl.lancamento.id">
+			        <label>Desconto:</label>
+			        <input  type="text" name="valor" id="valor" placeholder="0,00" ui-money-mask="2"  class="form-control input-sm"  ng-model="ctrl.lancamento.desconto" >
+			      </div>
+			      <div class="col-md-3" ng-if="ctrl.lancamento.id">
+			        <label>Valor Total:</label>
+			        <h4>{{ctrl.lancamento.valor +  ctrl.lancamento.juros - ctrl.lancamento.desconto| currency}}</h4>
+			      </div>  
+				</div>
+				
+				
+				<br>
+				
+				<div class="row" >		
+					<div class="col-md-1 col-md-offset-10">				
+						<button  id="clear" class="btn btn-xs btn-default btn-flat btn-block" ng-click="ctrl.clear()" >	
+							<i class="glyphicon glyphicon-erase"></i>	{{ctrl.lancamento.id ? 'Cancelar' : 'Limpar'}}
+						</button>					
+					</div>					
+					
+					<div class="col-md-1">				
+						<button  id="submit" class="btn btn-xs btn-primary btn-flat btn-block" formnovalidate>	
+							<i class="glyphicon glyphicon-floppy-disk"></i>	Salvar	
+						</button>					
+					</div>
+				</div>
+ </form>

@@ -1,0 +1,119 @@
+<meta charset="UTF-8">
+
+<div class="row">
+	<div class="col-md-4">
+		<a class="fa fa-plus" href="" ui-sref="vincular.cadastrar" title="Cadastrar novo Vincular">Novo</a>|<label>Vincular</label>
+	</div>
+</div>
+<br>
+	<div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Digite o nome ou CNPJ" ng-model="texto" autofocus
+      	 ng-keyup="$event.keyCode == 13 && ctrl.buscarPorTexto(texto)">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-click="ctrl.paginaCorrente = 0; ctrl.buscarPorTexto(texto)">Ir!</button>
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+  </div>
+  <div ng-show="mensagemErro" class="alert alert-warning alert-dismissible">
+	                <h4><i class="icon fa fa-warning"></i>{{mensagemErro}}</h4>
+	              </div> <br>
+
+<div class="table-responsive" ng-if="ctrl.vinculars.length">
+<div align="center">
+			<div class="small-box bg-aqua">
+				<div class="inner" align="center">
+					<h4>Serviços vinculados</h4>					
+				</div>
+			</div>
+		</div>	
+	<table class="table table table-striped table-bordered" >
+		<tr >
+
+			<th>Id</th>
+			<th>Estrutra</th>
+			<th>Prestadora de serviço</th>
+			<th>Pacote de serviço</th>
+			<th>Data Cadastro</th>
+			<th>Previsão Termino</th>
+			<th>Valor</th>
+			<th>Ocorrencias</th>
+			<th>Editar</th>
+			
+
+		</tr>
+		<tr ng-repeat="vincular in ctrl.vinculars" >
+			<td>{{vincular.id}}</td>
+			<td >			
+			<a uib-popover-template="dynamicPopoverEstruturas.templateUrl" popover-title="{{'Estruturas'}}"  popover-trigger="'mouseenter'">
+				 {{vincular.estrutura.descricao}}</a>
+				<script type="text/ng-template"  id="myPopoverTemplateEstruturas.html">      		 
+			  		<div align="center" ng-repeat="v in vincular.estruturas">
+						<b>{{v.descricao}}</b><br>
+					</div> 			 
+   			 	</script>			
+			</td>
+			<td>			
+			<a ui-sref="prestadora.visualizar({ idPrestadora: vincular.prestadoraServico.id})" uib-popover-template="dynamicPopoverEmpresa.templateUrl" popover-title="{{'Dados Empresa'}}"  popover-trigger="'mouseenter'">
+				 {{vincular.prestadoraServico.dadoEmpresa.nomeFantasia}}</a>
+				<script type="text/ng-template"  id="myPopoverTemplateEmpresa.html">      		 
+			  		<div align="center">
+						<div>Razão Social</div>{{vincular.prestadoraServico.dadoEmpresa.razaoSocial}}
+						<div>CNPJ</div>{{vincular.prestadoraServico.dadoEmpresa.cnpj}}
+					</div> 			 
+   			 	</script>			
+			</td>
+			<td >			
+			<a uib-popover-template="dynamicPopoverPacote.templateUrl" popover-title="{{'Pacote de Serviço'}}"  popover-trigger="'mouseenter'">
+				 {{vincular.pacoteServico.descricao}}</a>
+				<script type="text/ng-template"  id="myPopoverTemplatePacote.html">      		 
+			  		<div align="center">
+						<div>Descrição : </div>{{vincular.pacoteServico.descricao}}
+						<div>Servicos Atribuidos</div>{{vincular.pacoteServico.servicosAtribuidos}}
+						<div>Preço : </div>{{vincular.pacoteServico.valor | currency}}
+					</div> 			 
+   			 	</script>			
+			</td>
+			<td>{{vincular.dataCadastro | date :'dd/MM/yyyy'}}</td>
+			<td>{{vincular.dataPrevisaoTermino | date :'dd/MM/yyyy'}}</td>
+			<td align="center" >			
+			<a uib-popover-template="dynamicPopoverValor.templateUrl" popover-title="{{'Valores'}}"  popover-trigger="'mouseenter'">
+				 {{vincular.valorPacoteServico  + vincular.valorAdicional - vincular.valorDesconto | currency}}</a>
+				<script type="text/ng-template"  id="myPopoverTemplateValor.html">      		 
+			  		<div align="center">
+						<div>Valor Pacote</div>{{vincular.valorPacoteServico | currency}}
+						<div>Valor Desconto</div>{{vincular.valorDesconto | currency}}
+						<div>Valor Adicional</div>{{vincular.valorAdicional | currency}}
+						<div>Valor Total</div>{{vincular.valorPacoteServico  + vincular.valorAdicional - vincular.valorDesconto | currency}}
+					</div> 			 
+   			 	</script>
+			
+			</td>
+			<td align="center" >			
+			<a class="{{vincular.ocorrencias.length === 0 ? 'label label-primary':'label label-warning'}}"
+				 uib-popover-template="dynamicPopover.templateUrl" popover-title="{{'Ocorrência'}}"  popover-trigger="'mouseenter'">
+				 {{vincular.ocorrencias.length}}</a>
+				<script type="text/ng-template"  id="myPopoverTemplate.html">      		 
+			  		<div align="center">
+						<div ng-if="vincular.ocorrencias.length === 0">Não consta ocorrências</div>
+						<div ng-if="vincular.ocorrencias.length > 0" ng-repeat="ocorrencia in vincular.ocorrencias">
+							{{ocorrencia.ocorrencia}}
+						</div>
+					</div> 			 
+   			 	</script>
+			
+			</td>
+			<td><a ui-sref="vincular.editar({ idVincular: vincular.id})"><i class="glyphicon glyphicon-edit"></i></a></td>
+		</tr>
+	</table>
+	<nav>
+		<ul uib-pagination total-items="ctrl.totalElementos" items-per-page="24" ng-model="ctrl.paginaCorrente" max-size="10" class="pagination-sm"  
+		boundary-link-numbers="true" ng-change="ctrl.buscarPorTexto(texto)"
+		previous-text="Anterior" last-text="Último" first-text="Primeiro" next-text="Próximo"></ul>
+	</nav>
+</div>
+
+	
+

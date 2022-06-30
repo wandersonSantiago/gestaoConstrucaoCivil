@@ -1,0 +1,72 @@
+<meta charset="UTF-8">
+			<div class="container col-sm-12 ">
+				<form role="form-vertical" novalidate name="form" ng-submit="ctrl.submit(form)">
+				
+				<div class="row">
+					<div class="col-sm-12" ng-class="{ 'has-error' : form.nome.$invalid && form.$submitted }">
+						<label>Descrição:</label>
+							<input  class="form-control" id="nome" name="nome" type="text" ng-model="ctrl.pacoteServico.descricao" placeholder="Nome" required >
+						</div>
+				</div>
+				<br>
+					<div class="row">									
+						<div class="col-sm-6" ng-class="{ 'has-error' : form.categorias.$invalid && form.$submitted }">
+							<a href="" class="fa fa-plus" ng-click="ctrl.proximaPagina('categoria.cadastrar')">Novo</a> | <label>Selecione a Categoria:</label>
+							<div class="input-group">
+							    <input type="text"  ng-model="cat" placeholder="ex: Hidraulica" id="categorias" name="categorias"
+							    uib-typeahead="categoria as categoria.descricao for categoria in ctrl.categoria($viewValue) | limitTo:8" 
+							    typeahead-template-url="customTemplateC.html" class="form-control" typeahead-show-hint="true"  ng-blur="ctrl.subCategoria(cat.id)"
+							    typeahead-loading="loadingC" typeahead-no-results="noResultsC" typeahead-min-length="0"  required>
+							    <span class="input-group-btn">
+							        <button class="btn btn-default" type="button" ng-click="ctrl.subCategoria(cat.id)">adicionar</button>
+							     </span>		   
+						    </div>
+						     <i ng-show="loadingC" class="glyphicon glyphicon-refresh"></i>
+							    <div ng-show="noResultsC">
+							      <i class="glyphicon glyphicon-remove"></i> Nenhum resultado encontrado
+							    </div>
+						   </div>	
+						    <script type="text/ng-template" id="customTemplateC.html">
+ 	 						<a>
+     						 <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+  							</a>
+
+							</script>	
+						<div class="col-sm-6"  ng-class="{ 'has-error' : form.sub.$invalid && form.$submitted }">
+							<a href="" class="fa fa-plus"  ng-click="ctrl.proximaPagina('sub-categoria.cadastrar')" >Novo</a> | <label>Selecione a Sub Categoria:</label>
+							<select class="form-control select2" ng-model="ctrl.pacoteServico.categoria" id="sub" name="sub"
+								ng-options="subCategoria.descricao for subCategoria in ctrl.subCategorias track by subCategoria.id"  required >
+							</select>
+						</div>	
+					</div>
+					<br>					
+						
+			
+					<div class="row">
+						<div class="col-sm-6" ng-class="{ 'has-error' : form.servicos.$invalid && form.$submitted }">
+						<label>Serviços atribuidos:</label>
+					      <textarea class="textarea form-control" ng-model="ctrl.pacoteServico.servicosAtribuidos" id="servicos" name="servicos"  placeholder="Serviços Atribuidos" required ></textarea>
+            	   	</div>	
+						<div class="col-sm-6" ng-class="{ 'has-error' : form.criterio.$invalid && form.$submitted }">
+							<label>Critério dos serviços:</label>
+				     		 <textarea class="textarea form-control"  ng-model="ctrl.pacoteServico.criterioServico" placeholder="Critérios" id="criterio" name="criterio" required></textarea>
+            	   		</div>	
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-4" ng-class="{ 'has-error' : form.valor.$invalid && form.$submitted }">
+						<label>Valor:</label>
+							<input  class="form-control" id="valor" name="valor" type="text" ng-model="ctrl.pacoteServico.valor" placeholder="Valor" ui-money-mask="2"  required >
+						</div>
+					</div>
+							<br>
+							<br>
+											
+							<div class="row col-md-4 col-md-offset-4">						
+									<input type="submit"  id="submit" value="{{ctrl.botao}}" class="btn btn-lg btn-primary btn-block btn-signin">
+								
+							</div>
+											
+				</form>
+			</div>
+		

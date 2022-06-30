@@ -1,0 +1,87 @@
+<meta charset="UTF-8">
+
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/cadastros/home">menu cadastros</a></li>
+   <li class="breadcrumb-item"><a href="#/produto/cadastro">Cadastro Produto</a></li>
+   <li class="breadcrumb-item active">Lista de Produto</li>
+ </ol>
+<div 	ng-controller="produtoController as produtoCtrl">
+
+	<div class="box box-primary" ng-init="produtoCtrl.listaComPaginacao(0 , 15)">
+	
+		<div class="box-header">
+			<span class="lead">Lista de Produtos </span>
+		</div>
+		<div class="panel-body">
+		<input type="text" class="form-control" ng-model="buscaProduto" placeholder="buscar">
+			<div class="table-responsive">
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+					
+						<th>Status</th>
+						<th>Descrição</th>
+						<th>Unidade Medida</th>
+						<th>Categoria</th>
+						<th>Tipo do Produto</th>
+						<th ng-if="ROLE_MODULO_CADASTROS_PRODUTO_ALTERAR">Editar</th>
+									
+						
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" produto in produtoCtrl.produtos | filter : buscaProduto ">
+					<tr>
+						
+						<td>{{ produto.ativo }}</td>
+						<td>{{ produto.descricao }}</td>
+						<td>{{ produto.unidadeMedida }}</td>
+						<td>{{ produto.categoria.descricao }}</td>
+						<td>{{ produto.tipoProduto.descricao }}</td>
+					
+						<td ng-if="ROLE_MODULO_CADASTROS_PRODUTO_ALTERAR"><a href="#/produto/edita/{{produto.id}}"><i class="glyphicon glyphicon-pencil"></i></a> 
+						
+					</tr>
+
+				</tbody>
+				<tfoot>
+				
+					
+				</tfoot>
+			</table>
+			</div>
+			<div class="row">
+				<div class="col-sm-5"></div>				
+				<div class="2">				
+					<nav>
+						<ul class="pagination">
+						
+							<li class="{{0==produtoCtrl.getPage ?'disabled':''}}"><a
+								ng-if="0!=produtoCtrl.getPage" ng-click="produtoCtrl.listaComPaginacao(produtoCtrl.getPage -1, maxResults)"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a> <a ng-if="0==produtoCtrl.getPage" aria-label="Previous"> <span
+									aria-hidden="true">&laquo;</span></a></li>
+							<li ng-repeat="page in produtoCtrl.totalPages"
+								class="{{page==produtoCtrl.getPage ?'active':''}}"><a
+								ng-click="produtoCtrl.listaComPaginacao(page , maxResults)">{{page + 1}}</a></li>
+							<li class="{{produtoCtrl.getPage+1 == totalPages ?'disabled':''}}"><a
+								ng-if="produtoCtrl.getPage+1 != totalPages"
+								ng-click="produtoCtrl.listaComPaginacao(produtoCtrl.getPage+1, maxResults)" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a> <a ng-if="produtoCtrl.getPage+1==totalPages" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a></li>
+							
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+		<!-- /.box-body -->
+	</div>
+	<!-- /.box -->
+</div>
+<!-- /.col -->
+</div>
+<!-- /.row -->

@@ -43,22 +43,36 @@ public class CotacaoEmpresa implements Serializable{
 
 	@OneToMany(mappedBy = "cotacaoEmpresa", cascade = CascadeType.ALL)
 	@Column(nullable = false)
-	private List<CotacaoEmpresaItem> itens;
+	private List<CotacaoEmpresaItem> itens = new ArrayList<>();
+
+	@Transient
+	private List<CotacaoEmpresaItem> itensTotal = new ArrayList<>();
 
 	@Transient
 	private Integer quantidade = 0;
+	
+	@Transient
+	private Integer quantidadeTotal = 0;
 
 	private Boolean ganhou;
 	
 	@Transient
 	private double valorTotal;
+	
+	@Transient
+	private double valorTotalGanho;
 
+	
 	public void removerItensPerdedores() {
+		this.quantidadeTotal = this.itens.size();
+		this.itensTotal.addAll(itens);
 		List<CotacaoEmpresaItem> itensParaRemover = new ArrayList<CotacaoEmpresaItem>();
 		itens.forEach(item -> {
 
-			if (item.getStatus().equals(CotacaoEmpresaItemStatus.PERDEU)) {
-				itensParaRemover.add(item);
+			if (!item.getStatus().equals(CotacaoEmpresaItemStatus.GANHOU)) {
+				if(item.getCotacaoEmpresa().getCotacao().isPorItem()) {
+					itensParaRemover.add(item);
+				}
 			}
 		});
 		itens.removeAll(itensParaRemover);
@@ -79,21 +93,26 @@ public class CotacaoEmpresa implements Serializable{
 	}
 
 	public double getValorGanho() {
-		valorTotal = 0.0;
+		valorTotalGanho = 0.0;
 		itens.forEach(item -> {
 			if (item.getStatus().equals(CotacaoEmpresaItemStatus.GANHOU)) {
-				valorTotal = valorTotal + (item.getItem().getQuantidade() * item.getValorUnitario());
+				valorTotalGanho = valorTotalGanho + (item.getItem().getQuantidade() * item.getValorUnitario());
 			}
 		});
-		return valorTotal;
+		return valorTotalGanho;
 	}
 	
 	public double getValorTotal() {
 		valorTotal = 0.0;
-		itens.forEach(item -> {
+		itensTotal = itensTotal.size() == 0 ? itens : itensTotal;
+		itensTotal.forEach(item -> {
 				valorTotal =  valorTotal + (item.getItem().getQuantidade() * item.getValorUnitario());
 		});
 		return valorTotal;
+	}
+	
+	public int getQuantidade() {
+		return quantidadeTotal == 0 ? this.itens.size() : quantidadeTotal;
 	}
 	
 	public void perdeu() {

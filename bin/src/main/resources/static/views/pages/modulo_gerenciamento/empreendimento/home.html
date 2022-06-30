@@ -1,0 +1,66 @@
+<meta charset="UTF-8">
+<section class="content">
+
+	<div class="row">
+		<div class="col-lg-4 " ng-if="!user.empreendimento.matriz || user.root">
+			<a href="" ui-sref="empreendimento.cadastrar">
+				<div class="small-box bg-aqua">
+					<div class="inner" align="center">
+						<br>
+						<br>
+						<h3>Cadastrar</h3>
+						<br>
+						<br>
+					</div>
+				</div>
+			</a>
+		</div>
+
+
+		<div class="col-lg-4 " ng-if="!user.empreendimento.matriz || user.root">
+			<a href="" ui-sref="empreendimento.consultar">
+				<div class="small-box bg-green">
+					<div class="inner" align="center">
+
+						<br>
+						<br>
+						<h3>Consultar</h3>
+						<br>
+						<br>
+
+					</div>
+				</div>
+			</a>
+		</div>	
+		<div class="col-lg-4 " ng-if="user.empreendimento.matriz">
+			<a href="" ui-sref="estrutura.cadastrar">
+				<div class="small-box bg-blue">
+					<div class="inner" align="center">
+
+						<br>
+						<br>
+						<h3>Estrutura</h3>
+						<br>
+						<br>
+
+					</div>
+				</div>
+			</a>
+		</div>	
+		<div class="col-lg-4 ">
+			<a href="" ui-sref="empreendimento.configuracao({idEmpreendimento : user.empreendimento.id})">
+				<div class="small-box bg-orange">
+					<div class="inner" align="center">
+
+						<br>
+						<br>
+						<h3>Configuração</h3>
+						<br>
+						<br>
+
+					</div>
+				</div>
+			</a>
+		</div>		
+	</div>
+</section>

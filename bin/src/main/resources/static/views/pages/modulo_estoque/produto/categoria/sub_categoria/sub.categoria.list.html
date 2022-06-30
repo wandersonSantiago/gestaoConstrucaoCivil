@@ -1,0 +1,47 @@
+<meta charset="UTF-8">
+<div class="row">
+	<div class="col-md-4">
+		<a class="fa fa-plus" href="" ui-sref="sub-categoria.cadastrar" title="Cadastrar nova categoria!">Nova</a>|<label>Sub-Categoria:</label>
+	</div>
+</div>
+<br>
+<div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Digite uma descrição" ng-model="texto" autofocus
+      	 ng-keyup="$event.keyCode == 13 && ctrl.buscarPorTexto(texto)">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-click="ctrl.paginaCorrente = 0; ctrl.buscarPorTexto(texto)">Ir!</button>
+      </span>
+    </div>
+  </div>
+ </div>
+  <div ng-show="mensagemErro" class="alert alert-warning alert-dismissible">
+	                <h4><i class="icon fa fa-warning"></i>{{mensagemErro}}</h4>
+ </div> <br>
+ 
+<div class="table-responsive" ng-if="ctrl.categorias.length > 0">
+	<table class="table table-hover table-bordered">
+		<thead>
+			<tr>				
+				<th>Descrição</th>
+				<th>Categoria</th>
+				<th>Editar</th>				
+			</tr>
+		</thead>
+		<tbody ng-repeat=" categoria in ctrl.categorias | filter : buscaCategoria ">
+			<tr>				
+				<td>{{ categoria.descricao }}</td>
+				<td>{{ categoria.categoria.descricao }}</td>			
+				<td ><a href="" ui-sref="sub-categoria.editar({idCategoria : categoria.id})"><i class="glyphicon glyphicon-edit"></i></a> 				
+			</tr>
+		</tbody>
+		<tfoot>			
+		</tfoot>
+	</table>
+	<nav>
+		<ul uib-pagination total-items="ctrl.totalElementos" items-per-page="24" ng-model="ctrl.paginaCorrente" max-size="10" class="pagination-sm"  
+		boundary-link-numbers="true" ng-change="ctrl.buscarPorTexto(texto)"
+		previous-text="Anterior" last-text="Último" first-text="Primeiro" next-text="Próximo"></ul>
+	</nav>
+</div>

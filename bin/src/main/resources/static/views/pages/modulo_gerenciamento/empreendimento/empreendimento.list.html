@@ -1,0 +1,66 @@
+<meta charset="UTF-8">
+
+
+<div class="row">
+	<div class="col-lg-6">
+		<div class="input-group">
+			<input type="text" class="form-control"
+				placeholder="Digite o nome"
+				ng-model="texto" autofocus
+				ng-keyup="$event.keyCode == 13 && ctrl.buscarPorTexto(texto)">
+			<span class="input-group-btn">
+				<button class="btn btn-default" type="button"
+					ng-click="ctrl.paginaCorrente = 0; ctrl.buscarPorTexto(texto)">Ir!</button>
+			</span>
+		</div>
+		<!-- /input-group -->
+	</div>
+	<!-- /.col-lg-6 -->
+</div>
+<div ng-show="mensagemErro"
+	class="alert alert-warning alert-dismissible">
+	<h4>
+		<i class="icon fa fa-warning"></i>{{mensagemErro}}
+	</h4>
+</div>
+<br>
+
+	<div class="panel panel-default table-responsive" ng-if="empreendimentos.length">
+			<table class="table table-bordered">
+		<tr>
+
+			<th>Nome</th>
+			<th>Data Inicio</th>
+			<th>Data Término</th>
+			<th>Valor Total</th>
+			<th>Valor Gasto</th>
+			<th>Opções</th>
+
+
+		</tr>
+		<tbody
+			ng-repeat=" empreendimento in empreendimentos | filter : buscaEmpreendimento ">
+			<tr>
+				<td><a title="Visualizar informações do empreendimento" href="" ui-sref="empreendimento.show({idEmpreendimento: empreendimento.id})">{{ empreendimento.descricao }}</a></td>
+				<td>{{ empreendimento.dataAbertura | date : 'dd/MM/yyyy'}}</td>
+				<td>{{ empreendimento.datafechamento | date : 'dd/MM/yyyy'}}</td>
+				<td>{{ empreendimento.valorMaximoGastar | currency }}</td>
+				<td>{{ empreendimento.valoresGastos | currency }}</td>
+				<td>
+					<a  title="Editar Empreendimento" ui-sref="empreendimento.editar({ idEmpreendimento: empreendimento.id})" class="glyphicon glyphicon-edit"></a>
+					<a	ui-sref="empreendimento.configuracao({ idEmpreendimento: empreendimento.id})"	class="glyphicon glyphicon-asterisk"></a>
+			    </td>
+			</tr>
+		</tbody>
+	</table>
+	<nav >
+		<ul uib-pagination total-items="ctrl.totalPaginas" 
+			ng-model="ctrl.paginaCorrente" max-size="10" class="pagination-sm"
+			boundary-link-numbers="true" ng-change="ctrl.buscarPorTexto(texto)"
+			previous-text="Anterior" last-text="Último" first-text="Primeiro"
+			next-text="Próximo"></ul>
+	</nav>
+</div>
+
+
+

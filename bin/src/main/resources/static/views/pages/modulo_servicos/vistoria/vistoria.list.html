@@ -1,0 +1,95 @@
+<meta charset="UTF-8">
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Pesquisar..." ng-model="texto" autofocus
+      	 ng-keyup="$event.keyCode == 13 && ctrl.buscarPorTexto(texto)">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-click="ctrl.paginaCorrente = 0; ctrl.buscarPorTexto(texto)">Ir!</button>
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+  </div>
+  <div ng-show="mensagemErro" class="alert alert-warning alert-dismissible">
+	                <h4><i class="icon fa fa-warning"></i>{{mensagemErro}}</h4>
+	              </div> <br>
+
+<div class="table-responsive" ng-if="ctrl.vistorias.length">
+<div align="center">
+			<div class="small-box bg-aqua">
+				<div class="inner" align="center">
+					<h4>Vistoria dos Serviços</h4>					
+				</div>
+			</div>
+		</div>	
+	<table class="table table table-striped table-bordered" >
+		<tr>
+			<th>Id</th>
+			<th>Estrutura</th>
+			<th>Prestadora de serviço</th>
+			<th>Pacote de serviço</th>
+			<th>Previsão Termino</th>
+			<th>Porcentagem</th>
+			<th>Ocorrencias</th>
+			<th>Opções</th>
+		</tr>
+		<tr ng-repeat="vistoria in ctrl.vistorias" >
+			<td>{{vistoria.id}}</td>
+			<td >			
+			<a uib-popover-template="dynamicPopoverEstruturas.templateUrl" popover-title="{{'Estruturas'}}"  popover-trigger="'mouseenter'">
+				 {{vistoria.estrutura.descricao}}</a>
+				<script type="text/ng-template"  id="myPopoverTemplateEstruturas.html">      		 
+			  		<div align="center" ng-repeat="v in vistoria.estruturas">
+						<b>{{v.descricao}}</b><br>
+					</div> 			 
+   			 	</script>			
+			</td>
+			<td>			
+			<a ui-sref="prestadora.visualizar({ idPrestadora: vistoria.prestadoraServico.id})" uib-popover-template="dynamicPopoverEmpresa.templateUrl" popover-title="{{'Dados Empresa'}}"  popover-trigger="'mouseenter'">
+				 {{vistoria.prestadoraServico.dadoEmpresa.nomeFantasia}}</a>
+				<script type="text/ng-template"  id="myPopoverTemplateEmpresa.html">      		 
+			  		<div align="center">
+						<div>Razão Social</div>{{vistoria.prestadoraServico.dadoEmpresa.razaoSocial}}
+						<div>CNPJ</div>{{vistoria.prestadoraServico.dadoEmpresa.cnpj}}
+					</div> 			 
+   			 	</script>			
+			</td>
+			<td >			
+			<a uib-popover-template="dynamicPopoverPacote.templateUrl" popover-title="{{'Pacote de Serviço'}}"  popover-trigger="'mouseenter'">
+				 {{vistoria.pacoteServico.descricao}}</a>
+				<script type="text/ng-template"  id="myPopoverTemplatePacote.html">      		 
+			  		<div align="center">
+						<div>Descrição : </div>{{vistoria.pacoteServico.descricao}}
+						<div>Servicos Atribuidos</div>{{vistoria.pacoteServico.servicosAtribuidos}}
+						<div>Preço : </div>{{vistoria.pacoteServico.valor | currency}}
+					</div> 			 
+   			 	</script>			
+			</td>
+			<td>{{vistoria.dataPrevisaoTermino | date :'dd/MM/yyyy'}}</td>
+			<td>{{vistoria.porcentagem}}</td>
+			<td align="center" >			
+			<a class="{{vistoria.ocorrencias.length === 0 ? 'label label-primary':'label label-warning'}}"
+				 uib-popover-template="dynamicPopover.templateUrl" popover-title="{{'Ocorrência'}}"  popover-trigger="'mouseenter'">
+				 {{vistoria.ocorrencias.length}}</a>
+				<script type="text/ng-template"  id="myPopoverTemplate.html">      		 
+			  		<div align="center">
+						<div ng-if="vistoria.ocorrencias.length === 0">Não consta ocorrências</div>
+						<div ng-if="vistoria.ocorrencias.length > 0" ng-repeat="ocorrencia in vistoria.ocorrencias">
+							{{ocorrencia.ocorrencia}}
+						</div>
+					</div> 			 
+   			 	</script>			
+			</td>
+			<td><a ui-sref="vistoria.editar({ idVistoria: vistoria.id})" class="btn btn-block btn-success">Vistoriar</a></td>
+		</tr>
+	</table>
+	<nav>
+		<ul uib-pagination total-items="ctrl.totalElementos" items-per-page="24" ng-model="ctrl.paginaCorrente" max-size="10" class="pagination-sm"  
+		boundary-link-numbers="true" ng-change="ctrl.buscarPorTexto(texto)"
+		previous-text="Anterior" last-text="Último" first-text="Primeiro" next-text="Próximo"></ul>
+	</nav>
+</div>
+
+	
+

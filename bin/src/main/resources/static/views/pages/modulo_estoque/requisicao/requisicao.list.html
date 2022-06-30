@@ -1,0 +1,98 @@
+<meta charset="UTF-8">
+<div class="row">
+		<div align="center">
+			<div class="small-box bg-aqua col-sm-4 col-sm-offset-4">
+				<div class="inner" align="center">
+					<h3>{{ctrl.titulo}}</h3>					
+				</div>
+			</div>
+		</div>	
+</div>		
+<div class="row">
+	<div class="col-md-4">
+		<a class="fa fa-plus" href="" ui-sref="requisicao.cadastrar" title="Cadastrar novo estoque">Nova</a>|<label>Requisicao</label>
+	</div>
+</div>
+<br>
+<div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Pesquisar pelo codigo" ng-model="texto" autofocus
+      	 ng-keyup="$event.keyCode == 13 && ctrl.buscarPorTexto(texto)">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-click="ctrl.paginaCorrente = 0; ctrl.buscarPorTexto(texto)">Pesquisar!</button>
+      </span>
+    </div>
+  </div>
+ </div>
+ 		<div ng-show="mensagemErro" class="alert alert-warning alert-dismissible">
+	         <h4><i class="icon fa fa-warning"></i>{{mensagemErro}}</h4>
+	   </div>
+	   <br>
+	   <br>
+	   <div align="center">
+			<div class="small-box bg-aqua">
+				<div class="inner" align="center">
+					<h3>Requisições</h3>					
+				</div>
+			</div>
+		</div>	
+		<div class="panel panel-default table-responsive">
+				<table class="table table-bordered table-striped ">
+				<thead>
+					<tr>						 
+						<th><a href="" ng-click="ctrl.sort('numeroRequisicao')"><i class="glyphicon glyphicon-sort"></i></a>Numero</th>
+						<th><a href="" ng-click="ctrl.sort('estrutura.descricao')"><i class="glyphicon glyphicon-sort"></i></a>estrutura</th>
+						<th><a href="" ng-click="ctrl.sort('statusRequisicao')"><i class="glyphicon glyphicon-sort"></i></a>Status</th>
+						<th><a href=""ng-click="ctrl.sort('dataCriacao')"><i class="glyphicon glyphicon-sort"></i></a>Data Emissão</th>
+						<th><a href=""ng-click="ctrl.sort('dataSaida')"><i class="glyphicon glyphicon-sort"></i></a>Data Saída</th>							
+	
+						<th ng-if="ctrl.tipo == 'ENVIADOS' && requisicao.statusRequisicao == 'PENDENTE'">Opções</th>
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" requisicao in ctrl.requisicaos">
+					<tr>
+						<td title="Visualizar Requisicao"><a href="" data-toggle="modal"	data-target=".modalEstrutura" ng-click="ctrl.visualizar(requisicao)">{{requisicao.numeroRequisicao}}</a></td>
+						<td>{{requisicao.estrutura.raiz.raiz.raiz.raiz.raiz.descricao}}-{{requisicao.estrutura.raiz.raiz.raiz.raiz.descricao}}-{{requisicao.estrutura.raiz.raiz.raiz.descricao}}-
+						{{requisicao.estrutura.raiz.raiz.descricao}}-{{requisicao.estrutura.raiz.descricao}} - {{requisicao.estrutura.descricao}}</td>
+						<td class="{{requisicao.statusRequisicao == 'PENDENTE' ? 'red':'blue'}}">{{requisicao.statusRequisicao}}</td>
+						<td>{{requisicao.dataCriacao | date : 'dd/MM/yyyy'}}</td>
+						<td>{{requisicao.dataSaida | date : 'dd/MM/yyyy'}}</td>								
+						<td title="Editar a Requisição" ng-if="ctrl.titulo == 'MINHA_REQUISICAO' && requisicao.statusRequisicao == 'PENDENTE'"
+						><a ui-sref="requisicao.editar({idRequisicao : requisicao.id})"><i class="glyphicon glyphicon-edit"></i></a> </td>
+						<td title="Receber a Requisição" ng-if="ctrl.titulo != 'MINHA_REQUISICAO' && requisicao.statusRequisicao == 'PENDENTE'"
+						><a class="btn btn-success" ui-sref="requisicao.show({idRequisicao : requisicao.id})">Visualizar</a> </td>						
+					</tr>
+				</tbody>
+			</table>
+			<nav ng-show="ctrl.totalElementos > 24">
+				<ul uib-pagination total-items="ctrl.totalElementos" items-per-page="24"
+					ng-model="ctrl.paginaCorrente" max-size="5" class="pagination-sm"
+					boundary-link-numbers="true" ng-click="ctrl.buscarPorTexto(texto)"
+					previous-text="Anterior" last-text="Último" first-text="Primeiro"
+					next-text="Próximo">
+				</ul>
+			</nav>
+	</div>
+	
+	
+	
+<div class="modal fade modalEstrutura" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">{{ctrl.titulo}}</h4>
+			</div>
+			<div class="modal-body">
+				<div ng-include="'views/pages/modulo_estoque/requisicao/requisicao.show.html'"></div>
+			</div>
+			
+		</div>
+	</div>
+</div>		
+

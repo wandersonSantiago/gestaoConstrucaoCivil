@@ -14,5 +14,9 @@ public interface CotacaoEmpresaRepository extends JpaRepository<CotacaoEmpresa, 
 	
 	@Query("SELECT c FROM CotacaoEmpresa c WHERE c.cotacao.id = ?1 AND c.ganhou = true")
 	List<CotacaoEmpresa> buscarGanhadores(Long idCotacao);
+
+	boolean existsByIdAndCotacaoId(Long cotacaoEmpresaId, Long cotacaoId);
+
+	boolean existsByFornecedorIdAndCotacaoId(Long fornecedorId, Long cotacaoId);
 	
 }

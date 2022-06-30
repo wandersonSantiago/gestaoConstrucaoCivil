@@ -84,8 +84,8 @@ app.factory('CotacaoEmpresaService', function($rootScope, toastr, $http,$q){
 				});			
 		},
 		
-		imprimirCotacaoEmpresa: function(idCotacaoEmpresa){
-				return $http.get(url + '/empresa/imprimir/'+ idCotacaoEmpresa, { responseType: 'arraybuffer'} )
+		imprimirCotacaoEmpresa: function(idCotacaoEmpresa, soGanhador){
+				return $http.get(url + '/empresa/imprimir/'+ idCotacaoEmpresa+'/somente-itens-ganhador/' + soGanhador, { responseType: 'arraybuffer'} )
 				.then(function(response){
 					return response.data;
 				},function(errResponse){

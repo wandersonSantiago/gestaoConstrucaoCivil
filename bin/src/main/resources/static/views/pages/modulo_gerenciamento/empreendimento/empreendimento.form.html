@@ -1,0 +1,141 @@
+<meta charset="UTF-8">
+<form name="formEmpreendimento" novalidate ng-submit="ctrl.submit()">
+
+	<div>
+		<h4>{{ctrl.titulo}}</h4>
+		<hr>
+		
+		<div class="row">
+			<div class="form-group col-sm-8"
+				ng-class="{ 'has-error' : formEmpreendimento.descricao.$invalid && formEmpreendimento.$submitted}">
+				<label>Descricao*:</label> 
+					<input type="text"	 class="text-uppercase form-control" id="descricao"
+					name="descricao" ng-model="ctrl.empreendimento.descricao"
+					placeholder="Descricao" required ng-required="true">
+			</div>
+			<div class="form-group col-sm-2"
+				ng-class="{ 'has-error' : formEmpreendimento.inicio.$invalid && formEmpreendimento.$submitted}">
+				<label>Previsão de início*:</label> 
+					<input type="date"	 class="form-control" id="inicio" 
+					name="inicio" ng-model="ctrl.empreendimento.dataAbertura" required ng-required="true">
+			</div>
+			<div class="form-group col-sm-2"
+				ng-class="{ 'has-error' : formEmpreendimento.termino.$invalid && formEmpreendimento.$submitted}">
+				<label>Previsão de término*:</label> 
+					<input type="date"	 class="form-control" id="termino" 
+					name="termino" ng-model="ctrl.empreendimento.datafechamento" required ng-required="true">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-sm-4"
+				ng-class="{ 'has-error' : formEmpreendimento.status.$invalid && formEmpreendimento.$submitted}">
+				<label>Status*:</label><br> <select
+					class="form-control select2 " ng-model="ctrl.empreendimento.status"
+					ng-options="status  for status in ctrl.status" name="status"
+					style="width: 100%;" required ng-required="true">
+				</select>
+			</div>
+			<div class="form-group col-sm-4"
+				ng-class="{ 'has-error' : formEmpreendimento.valor.$invalid && formEmpreendimento.$submitted }">
+			<label>Valor total previsto*:</label>
+				<input ng-model="ctrl.empreendimento.valorMaximoGastar"
+					placeholder="Valor Máximo" class="form-control" id="valor" name="valor"
+					id="valorMaximoGastar" type="text" ui-money-mask="2" required>
+			</div>
+			
+			<div class="form-group col-sm-4">
+				<label>Fone:</label> <input type="text" class="form-control"
+					id="fone" name="fone" ng-model="ctrl.empreendimento.telefone"
+					placeholder="Telefone" ui-br-phone-number >
+			</div>
+		</div>
+
+		<br>
+		<h4>Endereço</h4>
+		<hr>
+		<div class="row">
+			<div class="form-group col-sm-3"
+				ng-class="{ 'has-error' : formEmpreendimento.cepField.$invalid && formEmpreendimento.$submitted }">
+				<label>CEP*:</label> <input type="text" class="text-uppercase form-control"
+					id="cep" ng-blur="ctrl.findCep(ctrl.empreendimento.endereco.cep)"
+					onkeyup="if(this.value.length > 8) { numero.focus(); }"
+					name="cepField" placeholder="CEP"
+					ng-model="ctrl.empreendimento.endereco.cep" ui-br-cep-mask required
+					ng-required="true">
+
+				<p ng-show="formEmpreendimento.cepField.$error.cep"
+					class="alert alert-warning ">Digite um CEP Válido</p>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="form-group col-sm-12"
+				ng-class="{ 'has-error' : formEmpreendimento.rua.$invalid && formEmpreendimento.$submitted }">
+				<label>Rua*:</label> <input type="text"
+					class="text-uppercase form-control" id="rua" name="rua"
+					placeholder="Rua"
+					ng-model="ctrl.empreendimento.endereco.logradouro" required
+					ng-required="true">
+			</div>
+
+		</div>
+		<div class="row">
+			<div class="form-group col-sm-2"
+				ng-class="{ 'has-error' : formEmpreendimento.numero.$invalid && formEmpreendimento.$submitted }">
+				<label>Numero*:</label> <input type="text" class="form-control"
+					id="numero" name="numero" placeholder="N°"
+					ng-model="ctrl.empreendimento.endereco.numero" required
+					ng-required="true">
+			</div>
+			<div class="form-group col-sm-5">
+				<label>Complemento:</label> <input type="text"
+					class="text-uppercase form-control" placeholder="Complemento"
+					name="complemento"
+					ng-model="ctrl.empreendimento.endereco.complemento">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-sm-6"
+				ng-class="{ 'has-error' : formEmpreendimento.bairro.$invalid && formEmpreendimento.$submitted }">
+				<label>Bairro*:</label> <input type="text"
+					class="text-uppercase form-control" id="bairro" name="bairro"
+					placeholder="Bairro" ng-model="ctrl.empreendimento.endereco.bairro"
+					required ng-required="true">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-sm-4"
+				ng-class="{ 'has-error' : formEmpreendimento.estado.$invalid && formEmpreendimento.$submitted}">
+				<label>Estado*:</label> <input type="text"
+					class="form-control select2" id="estado" name="estado"
+					ng-model="ctrl.empreendimento.endereco.uf" style="width: 100%;"
+					required ng-required="true">
+			</div>
+
+			<div class="form-group col-sm-5"
+				ng-class="{ 'has-error' : formEmpreendimento.cidade.$invalid && formEmpreendimento.$submitted }">
+				<label>Cidade*:</label> <input type="text"
+					class="form-control select2" for="cidade" name="cidade"
+					ng-model="ctrl.empreendimento.endereco.localidade"
+					style="width: 100%;" required ng-required="true">
+			</div>
+		</div>
+		<br>
+	</div>
+
+
+
+	<div class="row ">
+		<div class="col-sm-4"></div>
+		<div class="col-sm-4">
+			<input type="submit" id="submit" value="Salvar"
+				class="btn btn-lg btn-primary btn-block btn-signin">
+		</div>
+	</div>
+
+</form>
+

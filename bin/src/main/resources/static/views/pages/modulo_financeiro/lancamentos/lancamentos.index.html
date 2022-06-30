@@ -1,0 +1,109 @@
+<meta charset="UTF-8">
+
+<div ng-controller="LancamentosEstatisticaController as ctrl">
+	<div align="center">
+		<label>Periodo de {{estatistica.dataInicial | date : 'dd/MM/yyyy'}} a {{estatistica.dataFinal | date : 'dd/MM/yyyy'}}.</label>
+	</div>
+	<div class="row">
+        <div class="col-md-2">        	
+	            <div class=" bg-aqua text-center">
+	              <span class="info-box-tex t">Saldo</span>
+	              <span class="info-box-number">{{estatistica.saldo | currency}}</span>
+	          </div>        
+        </div>
+        <div class="col-md-2">
+        	<a href=""  ng-click="visualizar('ENTRADA')">
+	            <div class=" bg-green text-center">
+	              <span class="info-box-text">Entrada</span>
+	              <span class="info-box-number">{{estatistica.entrada | currency}}</span>
+	          </div>
+            </a>
+        </div>
+        <div class="col-md-2">
+        	<a href=""  ng-click="visualizar('SAIDA')">
+	            <div class=" bg-yellow text-center">
+	              <span class="info-box-text">Saida</span>
+	              <span class="info-box-number">{{estatistica.saida | currency}}</span>
+	          </div>
+	         </a> 
+        </div>
+         <div class="col-md-2">
+         	<a href=""  ng-click="visualizar('ENTRADA_FUTURA')">
+	            <div class=" bg-green text-center">
+	              <span class="info-box-text">Entradas Futuras</span>
+	              <span class="info-box-number">{{estatistica.entradaFutura | currency}}</span>
+	          </div>
+	         </a>
+        </div>
+        <div class="col-md-2">
+       	 <a href=""  ng-click="visualizar('SAIDA_FUTURA')">
+            <div class=" bg-yellow text-center">
+              <span class="info-box-text">Saídas Futuras</span>
+              <span class="info-box-number">{{estatistica.saidaFutura | currency}}</span>
+          </div>
+         </a>
+        </div>
+         <div class="col-md-2">        
+         <a  data-toggle="modal" href=""	data-target=".modalSaldoTotal">
+            <div class=" bg-aqua text-center">
+              <span class="info-box-text">Saldo Previsto Futuras</span>
+              <span class="info-box-number">{{estatistica.saldoPrevisto | currency}}</span>
+          </div>
+          </a>
+        </div>
+</div><br>
+      
+<div class="row">	
+       <div class="col-sm-12">     
+			<div class="box box-primary" >	
+					<div class="panel-body">
+						<div class="ui-view"></div>
+					</div>
+			</div>
+		</div>
+		
+</div>
+<div class="row">
+	<div class="col-sm-12"> 
+     	<div class="col-sm-12" ng-if="estatistica.contasAPagarVencidas > 0">
+     	<a href=""  ng-click="visualizar('VENCIDAS_A_PAGAR')">
+         <div class="callout callout-warning ">
+                <h7>Contas a pagar Vencidas!</h7>
+                <h5>Valor: {{estatistica.contasAPagarVencidas | currency}}</h5>
+          </div>
+          </a>
+         </div>  
+         <div class="col-sm-12 " ng-if="estatistica.contasAReceberVencidas > 0">  	
+         <a href=""  ng-click="visualizar('VENCIDAS_A_RECEBER')">
+          <div class="callout callout-info ">
+                <h7>Contas a receber Vencidas!</h7>
+                 <h5>Valor: {{estatistica.contasAReceberVencidas | currency}}</h5>
+          </div>
+          </a>
+          </div>
+     </div>  
+</div>
+</div>
+
+
+<div class="modal fade modalSaldoTotal" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header small-box bg-aqua">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>					
+			      <div class="col-md-12 text-center">
+			       <h4>Detalhes do total</h4>
+			      </div>
+			</div>
+			<div class="modal-body">
+				<h3>Total Entrada (atual + futuro ) = <b>{{estatistica.entrada + estatistica.entradaFutura | currency }}</b></h3>
+				<h3>Total Saida (atual + futuro ) = <b>{{estatistica.saida + estatistica.saidaFutura | currency }}</b></h3>
+				<h3>Total Previsão de Saldo (atual + futuro ) = <b>{{(estatistica.entrada + estatistica.entradaFutura) - (estatistica.saida + estatistica.saidaFutura) | currency }}</b></h3>
+			</div>
+			
+		</div>
+	</div>
+</div>	

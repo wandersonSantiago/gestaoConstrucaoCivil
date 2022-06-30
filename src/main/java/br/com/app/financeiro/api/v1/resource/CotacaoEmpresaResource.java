@@ -98,14 +98,14 @@ public class CotacaoEmpresaResource {
 		
 	}
 	
-	@GetMapping(value = "/imprimir/{idCotacaoEmpresa}")
+	@GetMapping(value = "/imprimir/{idCotacaoEmpresa}/somente-itens-ganhador/{somenteItensGanhador}")
 	@ResponseBody
-	public byte[] imprimir(@PathVariable Long idCotacaoEmpresa, HttpServletResponse response) {
+	public byte[] imprimir(@PathVariable Long idCotacaoEmpresa, @PathVariable boolean somenteItensGanhador, HttpServletResponse response) {
 		
 		response.setHeader("Content-Disposition", "inline; filename=file.pdf");
 	    response.setContentType("application/pdf");
 	    
-	    CotacaoEmpresa cotacoes = cotacaoEmpresaService.buscarPorId(idCotacaoEmpresa);
+	    CotacaoEmpresa cotacoes = cotacaoEmpresaService.buscarPorId(idCotacaoEmpresa, somenteItensGanhador);
 	try {	
 		HashMap<String, Object> hashMap = new HashMap<>();
 		hashMap.put("SUB_REPORT_DIR", relatorioUtil.caminhoArquivoCotacaoEmpresaItens());

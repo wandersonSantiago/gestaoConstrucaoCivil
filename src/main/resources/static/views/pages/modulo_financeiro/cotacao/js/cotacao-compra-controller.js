@@ -11,7 +11,7 @@ function CotacaoEmpresaCadastarController($localStorage, blockUI, $state, $state
 	
 	self.submit = submit;
 	self.itens = [];
-	self.cotacao = {itens : self.itens};
+	self.cotacao = {itens : self.itens, porItem : true};
 	self.adicionarProdutos = adicionarProdutos;
 	self.ativarExcluirLote = ativarExcluirLote;
 	self.apagarProdutos = apagarProdutos;
@@ -92,9 +92,9 @@ function CotacaoEmpresaCadastarController($localStorage, blockUI, $state, $state
 	function clear(form){	    	 
     	 form.$setPristine();
     	 form.$setUntouched();   
-    	 self.cotacao = null;
     	 $localStorage.$reset();
     	 self.itens = [];
+    	 self.cotacao = {itens : self.itens, porItem : true};
     	 self.quantidade = null;
     	 self.descricao = null;
     	 self.unidadeMedida = null;
@@ -267,7 +267,7 @@ function CotacaoEmpresaLancarController($localStorage, blockUI, $state, $statePa
 					clear(form);
 				}, function(errResponse){
 					 blockUI.stop();
-					sweetAlert({ timer : 3000,  text : errResponse,  type : "error", width: 300, higth: 300, padding: 20});
+					sweetAlert({ timer : 15000,  text : errResponse.data.userMessage,  type : "error", width: 300, higth: 300, padding: 20});
 				});			
 		};
 		
@@ -383,7 +383,7 @@ function CotacaoEmpresaLancarEditarController($localStorage, blockUI, $state, $s
 					clear(form);
 				}, function(errResponse){
 					 blockUI.stop();
-					sweetAlert({ timer : 3000,  text : errResponse,  type : "error", width: 300, higth: 300, padding: 20});
+					sweetAlert({ timer : 15000,  text : errResponse.data.userMessage,  type : "error", width: 300, higth: 300, padding: 20});
 				});			
 		};
 		
@@ -560,6 +560,8 @@ function CotacaoEmpresaShowController( $state, $stateParams, CotacaoEmpresaServi
 	var idCotacao = $stateParams.idCotacao;
 	self.visualizarItem = visualizarItem;
 	self.imprimirCotacaoEmpresa = imprimirCotacaoEmpresa;
+	self.findByVencedores = findByVencedores;
+	self.findByConcorrentes = findByConcorrentes;
 	
 	$scope.visualizarItem = false;
 	findById(idCotacao);
@@ -571,30 +573,36 @@ function CotacaoEmpresaShowController( $state, $stateParams, CotacaoEmpresaServi
 			self.cotacao = p;
 			if(p.statusCotacao == 'FECHADO'){
 					findByVencedores(idCotacao);
-					self.titulo = 'Vencedores';
 				}else{
 					findByConcorrentes(idCotacao);
-					self.titulo = 'Concorrentes';
 				}
 			}, function(errResponse){
 		});
 	};
 	
 	function findByConcorrentes(idCotacao){
+		 blockUI.start();
 		if(!idCotacao)return;
 		CotacaoEmpresaService.findByConcorrentes(idCotacao).
 		then(function(p){
+			self.titulo = 'Concorrentes';
 			self.empresas = p;
+			blockUI.stop();
 			}, function(errResponse){
+				blockUI.stop();
 		});
 	};
 	
 	function findByVencedores(idCotacao){
+		 blockUI.start();
 		if(!idCotacao)return;
 		CotacaoEmpresaService.findByVencedores(idCotacao).
 		then(function(p){
+			self.titulo = 'Vencedores';
 			self.empresas = p;
+			blockUI.stop();
 			}, function(errResponse){
+				blockUI.stop();
 		});
 	};
 	
@@ -605,7 +613,11 @@ function CotacaoEmpresaShowController( $state, $stateParams, CotacaoEmpresaServi
 	
 	 function imprimirCotacaoEmpresa(idCotacaoEmpresa){	
     	 blockUI.start();
-    	 CotacaoEmpresaService.imprimirCotacaoEmpresa(idCotacaoEmpresa)
+    	 var soGanhador = true;
+    	 if(self.titulo != 'Vencedores'){
+			soGanhador = false;
+		}
+    	 CotacaoEmpresaService.imprimirCotacaoEmpresa(idCotacaoEmpresa, soGanhador)
    	 .then(function(d){
    		var file = new Blob([d],{type: 'application/pdf'});
    		var fileURL = URL.createObjectURL(file);

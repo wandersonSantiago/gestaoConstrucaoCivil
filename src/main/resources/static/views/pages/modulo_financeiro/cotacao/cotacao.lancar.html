@@ -18,7 +18,10 @@
 						</div>						
 					</div>
 					<br>
-					<br>				
+					<div class="label label-warning">
+				         <h7><i class="icon fa fa-info"></i> {{ctrl.cotacaoEmpresa.cotacao.porItem ? 'Esta cotação foi calculado pelo menor valor do item' : 'Esta cotação foi calculada pelo menor valor do fornecedor'}}</h7>
+				   </div>	
+					<br>					<br>
 				<div class="row">
 							<div class="col-sm-4" ng-class="{ 'has-error' : form.fornecedor.$invalid && form.$submitted }">
 							<a href="" class="fa fa-plus" ng-click="ctrl.proximaPagina('matriz.identificar')">Novo</a> | <label>Selecione a Fornecedor:</label>					 	
@@ -69,7 +72,7 @@
 							<td><input class="form-control"  id="obs"  type="text" placeholder="Observação do Produto" 
 							ng-model="f.observacao" ></td>								
 							<td><input class="form-control"  id="valorProduto"  type="text"  placeholder="Preço" ui-money-mask
-							ng-model="f.valorUnitario" ng-blur="ctrl.SomaTotal(ctrl.itens)" required> </td>
+							ng-model="f.valorUnitario" ng-blur="ctrl.SomaTotal(ctrl.itens)"> </td>
 							<td ng-if="!f.descricao">{{f.valorTotal = somaUnitario(f.item.quantidade, f.valorUnitario) | currency}}</td>
 							<td ng-if="f.descricao">{{f.valorTotal = somaUnitario(f.quantidade, f.valorUnitario) | currency}}</td>
 						</tr>

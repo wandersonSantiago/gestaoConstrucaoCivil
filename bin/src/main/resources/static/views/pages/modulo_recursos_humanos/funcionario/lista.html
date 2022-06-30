@@ -1,0 +1,86 @@
+<meta charset="UTF-8">
+<ol class="breadcrumb">
+   <li class="breadcrumb-item"><a href="#/">home</a></li>
+   <li class="breadcrumb-item"><a href="#/recursos_humanos/home">menu recursos humanos</a></li>
+   <li class="breadcrumb-item" ><a href="#/funcionario/cadastro">cadastrar</a></li>
+   <li class="breadcrumb-item active">lista</li>
+  </ol>
+<div ng-controller="cadastrarFuncionarioController as funCtrl" >
+
+	<div class="box box-primary" ng-init="funCtrl.listaComPaginacao(0 , 15)">
+		<!-- Default panel contents -->
+		<div class="box-header">
+			<span class="lead">Lista de Funcionarios </span>
+		</div>
+		<div class="panel-body"  >
+		
+		<input class="form-control" type="text" placeholder="Buscar" ng-model="buscaFuncionario" >
+			<div class="table-responsive">
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>CPF</th>
+						<th>Cargo</th>
+						<th>Telefone</th>
+						<th>Sexo</th>
+						<th>Cidade</th>
+						<th ng-if="ROLE_MODULO_RECURSOS_HUMANOS_FUNCIONARIO_ALTERAR">Editar</th>
+					</tr>
+				</thead>
+				<tbody
+					ng-repeat=" funcionario in funCtrl.listaFuncionarios | filter : buscaFuncionario">
+					<tr>
+					<td>{{ funcionario.nomeCompleto }}</td>
+						<td>{{ funcionario.cpf }}</td>
+						<td>{{ funcionario.cargo.descricao }}</td>
+						<td>{{ funcionario.telefoneCelular}}</td>
+						<td>{{ funcionario.sexo }}</td>
+						<td>{{ funcionario.endereco.localidade}}</td>
+						<td ng-if="ROLE_MODULO_RECURSOS_HUMANOS_FUNCIONARIO_ALTERAR"><a href="#/funcionario/edita/{{funcionario.id}}"><i class="glyphicon glyphicon-pencil"></i></a>
+					</tr>
+
+				</tbody>
+				<tfoot>
+					<tr>
+					
+
+					</tr>
+				</tfoot>
+			</table>
+			</div>
+			<div class="row">
+				<div class="col-sm-5"></div>				
+				<div class="2">				
+					<nav>
+						<ul class="pagination">
+						
+							<li class="{{0==funCtrl.getPage ?'disabled':''}}"><a
+								ng-if="0!=funCtrl.getPage" ng-click="funCtrl.listaComPaginacao(funCtrl.getPage -1, maxResults)"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a> <a ng-if="0==funCtrl.getPage" aria-label="Previous"> <span
+									aria-hidden="true">&laquo;</span></a></li>
+							<li ng-repeat="page in funCtrl.totalPages"
+								class="{{page==funCtrl.getPage ?'active':''}}"><a
+								ng-click="funCtrl.listaComPaginacao(page , maxResults)">{{page + 1}}</a></li>
+							<li class="{{funCtrl.getPage+1 == totalPages ?'disabled':''}}"><a
+								ng-if="funCtrl.getPage+1 != totalPages"
+								ng-click="funCtrl.listaComPaginacao(funCtrl.getPage+1, maxResults)" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a> <a ng-if="funCtrl.getPage+1==totalPages" aria-label="Next"> <span
+									aria-hidden="true">&raquo;</span>
+							</a></li>
+							
+						</ul>
+					</nav>
+				</div>
+			</div>
+			
+		</div>
+		<!-- /.box-body -->
+	</div>
+	<!-- /.box -->
+</div>
+<!-- /.col -->
+</div>
+<!-- /.row -->

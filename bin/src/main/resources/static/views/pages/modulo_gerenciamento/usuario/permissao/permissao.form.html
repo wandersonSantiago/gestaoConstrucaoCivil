@@ -1,0 +1,41 @@
+<meta charset="UTF-8">
+
+<div class="container col-sm-12 ">
+	<form role="form-vertical" ng-submit="ctrl.submit()">
+		<br>
+		<div class="row">
+			<div class="col-sm-4">
+				<input type="text" class="form-control" id="rol"
+					ng-model="ctrl.permissao.rol" placeholder="Rol"
+					title="Rol da permissão"  required>
+			</div>
+			<div class="col-sm-4">
+				<input type="text" class="form-control" id="descricao"
+					ng-model="ctrl.permissao.descricao" placeholder="Descrição"
+					title="Descrição da permissão"  required>
+			</div>
+			
+
+			<div>
+				<div class="col-sm-4">
+					<select class="form-control select2"
+						ng-model="ctrl.permissao.tipoModulo"
+						ng-options="tipoModulo for tipoModulo in ctrl.tipoModulos track by tipoModulo" required>
+					</select>
+				</div>
+			</div>
+			<div></div>
+		</div>
+		<br> <br>
+
+		<div class="row ">
+			<div class="col-sm-4"></div>
+			<div class="col-sm-3">
+				<button type="submit" name="submit"
+					class="btn btn-lg btn-primary btn-block btn-signin">Cadastrar</button>
+
+			</div>
+		</div>
+	</form>
+
+</div>

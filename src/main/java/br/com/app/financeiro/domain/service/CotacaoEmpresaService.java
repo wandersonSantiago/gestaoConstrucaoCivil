@@ -11,6 +11,7 @@ import br.com.app.financeiro.domain.enuns.CotacaoEmpresaItemStatus;
 import br.com.app.financeiro.domain.model.CotacaoEmpresa;
 import br.com.app.financeiro.domain.model.CotacaoEmpresaItem;
 import br.com.app.financeiro.domain.repository.CotacaoEmpresaRepository;
+import br.com.app.infraestructure.exception.QuebraDeRegraException;
 
 @Service
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
@@ -20,23 +21,26 @@ public class CotacaoEmpresaService {
 	private CotacaoEmpresaRepository cotacaoEmpresaRepository;
 
 	@Transactional(readOnly = false)
-	public void salvarOuEditar(CotacaoEmpresa cotacaoEmpresa) {
-
-		for (CotacaoEmpresaItem item : cotacaoEmpresa.getItens()) {
+	public void salvarOuEditar(CotacaoEmpresa obj) {
+		if(existsByFornecedorIdAndCotacaoId(obj.getFornecedor().getId(), obj.getCotacao().getId())) {
+			throw new  QuebraDeRegraException("Não foi possivel realizar este lançamento, Ja existe uma cotação para esta empresa!");
+		}
+		
+		for (CotacaoEmpresaItem item : obj.getItens()) {
 			item.setId(null);
 			item.setStatus(CotacaoEmpresaItemStatus.PENDENTE);
-			item.setCotacaoEmpresa(cotacaoEmpresa);
+			item.setCotacaoEmpresa(obj);
 		}
-		cotacaoEmpresaRepository.save(cotacaoEmpresa);
+		cotacaoEmpresaRepository.save(obj);
 	}
 	
 	@Transactional(readOnly = false)
-	public void update(CotacaoEmpresa cotacaoEmpresa) {
-		for (CotacaoEmpresaItem item : cotacaoEmpresa.getItens()) {
+	public void update(CotacaoEmpresa obj) {
+		for (CotacaoEmpresaItem item : obj.getItens()) {
 			item.setStatus(CotacaoEmpresaItemStatus.PENDENTE);
-			item.setCotacaoEmpresa(cotacaoEmpresa);
+			item.setCotacaoEmpresa(obj);
 		}
-		cotacaoEmpresaRepository.save(cotacaoEmpresa);
+		cotacaoEmpresaRepository.save(obj);
 	}
 
 	public List<CotacaoEmpresa> buscarTodos() {
@@ -44,14 +48,29 @@ public class CotacaoEmpresaService {
 		return cotacaoEmpresaRepository.findAll();
 	}
 
-	public CotacaoEmpresa buscarPorId(Long id) {
+	public boolean existsByFornecedorIdAndCotacaoId(Long fornecedorId, Long cotacaoId) {
+		return cotacaoEmpresaRepository.existsByFornecedorIdAndCotacaoId(fornecedorId,cotacaoId );
+	}
+	
+	public CotacaoEmpresa buscarPorId(Long id, boolean somenteItensGanho) {
+		
+		CotacaoEmpresa cotacao = cotacaoEmpresaRepository.findById(id).get();
+		
+		if(somenteItensGanho) {
+			cotacao.removerItensPerdedores();
+		}
+		return cotacao;
+	}
+	
+	public CotacaoEmpresa buscarPorId(Long id) {		
 		return cotacaoEmpresaRepository.findById(id).get();
 	}
 
 	public List<CotacaoEmpresa> ganhadores(Long idCotacao) {
 		List<CotacaoEmpresa> cotacoes = cotacaoEmpresaRepository.buscarGanhadores(idCotacao);
 		for (CotacaoEmpresa item : cotacoes) {
-			item.removerItensPerdedores();
+			
+				item.removerItensPerdedores();
 		}
 		return cotacoes;
 	}

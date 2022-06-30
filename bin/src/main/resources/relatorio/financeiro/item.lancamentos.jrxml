@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2022-06-29T17:22:59 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="9fb15988-3661-45c3-b0f8-44d2626085d6">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="valorEntrada" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[valorEntrada]]></fieldDescription>
+	</field>
+	<field name="observacao" class="java.lang.String">
+		<fieldDescription><![CDATA[observacao]]></fieldDescription>
+	</field>
+	<field name="tipo" class="java.lang.String">
+		<fieldDescription><![CDATA[tipo]]></fieldDescription>
+	</field>
+	<field name="editavel" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[editavel]]></fieldDescription>
+	</field>
+	<field name="categoria" class="java.lang.String">
+		<fieldDescription><![CDATA[categoria]]></fieldDescription>
+	</field>
+	<field name="valor" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[valor]]></fieldDescription>
+	</field>
+	<field name="objeto" class="java.lang.String">
+		<fieldDescription><![CDATA[objeto]]></fieldDescription>
+	</field>
+	<field name="descricao" class="java.lang.String">
+		<fieldDescription><![CDATA[descricao]]></fieldDescription>
+	</field>
+	<field name="idObjeto" class="java.lang.Long">
+		<fieldDescription><![CDATA[idObjeto]]></fieldDescription>
+	</field>
+	<field name="valorSaida" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[valorSaida]]></fieldDescription>
+	</field>
+	<field name="dataVencimento" class="java.util.Date">
+		<fieldDescription><![CDATA[dataVencimento]]></fieldDescription>
+	</field>
+	<field name="dataPagamentoOuRecebimento" class="java.util.Date">
+		<fieldDescription><![CDATA[dataPagamentoOuRecebimento]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="dataCadastro" class="java.util.Date">
+		<fieldDescription><![CDATA[dataCadastro]]></fieldDescription>
+	</field>
+	<field name="status" class="java.lang.String">
+		<fieldDescription><![CDATA[status]]></fieldDescription>
+	</field>
+	<field name="desconto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[desconto]]></fieldDescription>
+	</field>
+	<field name="juros" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[juros]]></fieldDescription>
+	</field>
+	<field name="total" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[total]]></fieldDescription>
+	</field>
+	<variable name="somaCredito" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{valorEntrada}]]></variableExpression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="somaDebito" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{valorSaida}]]></variableExpression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="somaTotal" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$V{somaCredito}.subtract( $V{somaDebito} )]]></variableExpression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="jurosCredito" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{valorEntrada} != null ? $F{juros} : 0]]></variableExpression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="descontoCredito" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{valorEntrada} != null ? $F{desconto} : 0]]></variableExpression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="jurosDebito" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{valorSaida} !=null ? $F{juros} : 0]]></variableExpression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="descontoDebito" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{valorSaida} !=null ? $F{desconto} : 0]]></variableExpression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="62" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="40" width="560" height="20" uuid="4eb907cc-0e3e-440a-900c-40f493ebea1b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="9" y="40" width="124" height="19" uuid="fc24d755-9030-47f9-831f-6d19c4a7fccd"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="40" width="60" height="20" uuid="ceddb56c-e1db-410e-ae29-61b54c20fbc6"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Vencimento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="220" y="40" width="60" height="20" uuid="c6db4dfd-7e1e-448d-bafc-5fcd2f440bde"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Pagamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="40" width="60" height="18" uuid="2ed94d55-1647-4d8b-a26b-f14ecf2730fd"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Tipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="456" y="44" width="49" height="18" uuid="06770291-bea1-4d43-aa27-50ef7773c558"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Juros]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="40" width="49" height="20" uuid="d96e5911-f9ff-44b4-8b59-f4356a92a5ca"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="511" y="40" width="49" height="20" uuid="29d52d77-a439-48bd-8ddd-e99b9f179cc1"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="39" width="49" height="20" uuid="ec79847a-824f-400e-acec-2b41504e4a4c"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Desconto]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="32" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="7" width="594" height="22" uuid="3fd716ef-14fc-41ea-b231-086a4f7684b3"/>
+				<rectangle>
+					<reportElement x="0" y="0" width="560" height="23" uuid="f1d40360-52e8-4547-a206-f8b769b67574"/>
+				</rectangle>
+				<textField>
+					<reportElement x="456" y="1" width="48" height="22" forecolor="#2A16DB" uuid="7c3a8a26-bd50-4551-8cb0-1b5be9695df6">
+						<printWhenExpression><![CDATA[$F{valorEntrada} != null]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{juros}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="280" y="-1" width="60" height="24" forecolor="#2416E0" uuid="d2de4ffc-b2b6-4b50-8033-53452044ed27">
+						<printWhenExpression><![CDATA[$F{valorEntrada} != null]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+				</textField>
+				<textField pattern="d/M/yy">
+					<reportElement x="220" y="-1" width="60" height="24" forecolor="#1215DE" uuid="4c06ddb8-7a34-46f0-8b58-96e003cd930f">
+						<printWhenExpression><![CDATA[$F{valorEntrada} != null]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dataPagamentoOuRecebimento} == null ? "" : $F{dataPagamentoOuRecebimento}]]></textFieldExpression>
+				</textField>
+				<textField pattern="d/M/yy">
+					<reportElement x="160" y="2" width="60" height="20" forecolor="#1919E0" uuid="315b79bc-22fa-4a1f-8990-305eeed1f1a8">
+						<printWhenExpression><![CDATA[$F{valorEntrada} != null]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dataVencimento}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="9" y="0" width="150" height="22" forecolor="#4023E8" uuid="4961a346-bd31-4e7b-aba8-f9e5725d87a3">
+						<printWhenExpression><![CDATA[$F{valorEntrada} != null]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤#,##0.00;¤-#,##0.00">
+					<reportElement x="340" y="0" width="52" height="22" forecolor="#F5100C" uuid="3a413998-d9c7-4f29-ba73-4496df570824"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{valorSaida} == null ? "" : $F{valorSaida}]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤#,##0.00;¤-#,##0.00">
+					<reportElement x="340" y="1" width="52" height="22" forecolor="#1D16F2" uuid="aeb8649c-9a98-4095-8b00-3d35fe7b5d38"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{valorEntrada} == null ? "" : $F{valorEntrada}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="400" y="-1" width="56" height="24" forecolor="#3D17E6" uuid="15e64505-5274-4b82-b6c0-3f75fc690194">
+						<printWhenExpression><![CDATA[$F{valorEntrada} != null]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{desconto}]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤#,##0.00;¤-#,##0.00">
+					<reportElement x="505" y="-1" width="54" height="24" forecolor="#1F0CED" uuid="5c4bb950-4c26-40de-aa38-1b013f6d5674">
+						<printWhenExpression><![CDATA[$F{valorEntrada} != null]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="10" y="1" width="150" height="22" forecolor="#D41923" uuid="f36bae8b-7039-4dc1-9b84-d853263cfcef">
+						<printWhenExpression><![CDATA[$F{valorEntrada} == null]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+				</textField>
+				<textField pattern="d/M/yy">
+					<reportElement x="160" y="1" width="60" height="20" forecolor="#E0191C" uuid="492c27b8-ad50-4944-a0ee-9c453f64a3ed">
+						<printWhenExpression><![CDATA[$F{valorEntrada} == null]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dataVencimento}]]></textFieldExpression>
+				</textField>
+				<textField pattern="d/M/yy">
+					<reportElement x="220" y="0" width="60" height="24" forecolor="#DE1212" uuid="dedb7c8a-dcf5-497e-af40-56d767835ae6">
+						<printWhenExpression><![CDATA[$F{valorEntrada} == null]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dataPagamentoOuRecebimento} == null ? "" : $F{dataPagamentoOuRecebimento}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="280" y="0" width="60" height="24" forecolor="#E01616" uuid="1c695fea-fa74-43f4-b1bf-c10517716736">
+						<printWhenExpression><![CDATA[$F{valorEntrada} == null]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="400" y="0" width="56" height="24" forecolor="#E61728" uuid="bc027ba0-e1e4-4000-9d8f-8b939be3b59d">
+						<printWhenExpression><![CDATA[$F{valorEntrada} == null]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{desconto}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="456" y="0" width="48" height="22" forecolor="#DB1626" uuid="278e790d-6a95-4168-aee3-228694be14a0">
+						<printWhenExpression><![CDATA[$F{valorEntrada} == null]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{juros}]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤#,##0.00;¤-#,##0.00">
+					<reportElement x="505" y="2" width="54" height="24" forecolor="#ED0C2A" uuid="307bc409-1a03-4fbe-a22c-48127193aa89">
+						<printWhenExpression><![CDATA[$F{valorEntrada} == null]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="91" splitType="Stretch">
+			<rectangle>
+				<reportElement x="59" y="30" width="205" height="20" forecolor="#320DD9" uuid="19301116-9482-484f-a0ad-d694fbda5654"/>
+			</rectangle>
+			<line>
+				<reportElement x="190" y="30" width="1" height="20" uuid="508e3507-4855-4bd7-bba1-e726fb023615"/>
+			</line>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="192" y="30" width="72" height="20" forecolor="#111BD4" uuid="67f33dde-8b84-4e86-86ea-0bb6b32ea2ee"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[Optional.ofNullable($V{somaCredito}).orElse(BigDecimal.ZERO)]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="30" width="48" height="20" forecolor="#2E1ADB" uuid="731035d3-9a9c-4496-bb57-a9ba7e60456d"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[CREDITO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="130" y="30" width="1" height="20" uuid="6ff738b3-3698-44c9-aa2a-e6960b49875e"/>
+			</line>
+			<textField>
+				<reportElement x="190" y="70" width="72" height="20" uuid="0fae8e27-012d-40ba-8fda-ebf0a90b728f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{somaCredito}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="60" y="70" width="204" height="20" forecolor="#CF1411" uuid="cc14d5a8-071e-4f59-9d16-daadad78b570"/>
+			</rectangle>
+			<line>
+				<reportElement x="129" y="70" width="1" height="20" uuid="1f460975-6ac5-4220-a9ad-c6f59f78e3fb"/>
+			</line>
+			<staticText>
+				<reportElement x="9" y="70" width="50" height="20" forecolor="#D1120F" uuid="a8d14e6a-f1b5-46ed-b791-95f7e1ff830b"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[DEBITO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="190" y="70" width="1" height="20" uuid="bdab65d4-f788-4339-a27d-ae20a03e0f4f"/>
+			</line>
+			<rectangle>
+				<reportElement x="350" y="51" width="100" height="19" uuid="df091465-cded-4e86-a63c-ee65aa68a9d8"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="300" y="51" width="50" height="20" uuid="31540355-9efd-425b-acb9-424ac5adbca2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[SALDO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="16" width="66" height="14" uuid="7e7ef608-7f16-4467-b32a-9fb3474da7a3"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<text><![CDATA[Juros]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="16" width="60" height="14" uuid="88dee6aa-f2c3-4ae7-b506-22bfca338829"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<text><![CDATA[Descontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="16" width="66" height="14" uuid="750eb881-8f16-4bff-9b17-ed587711380d"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="57" width="66" height="14" uuid="6f79362d-0be6-4f67-bb6e-898be8029271"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<text><![CDATA[Juros]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="56" width="60" height="14" uuid="47347870-a432-479e-8395-13b80e4c91bb"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<text><![CDATA[Descontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="56" width="66" height="14" uuid="ba374bf3-5d59-4a34-a89f-bda6d229ffb4"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="130" y="30" width="60" height="20" forecolor="#2A24ED" uuid="567e5daf-4038-43c4-a953-e558d57f849c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{descontoCredito}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="61" y="30" width="68" height="20" forecolor="#292CD6" uuid="d2b3ff2c-e5f4-4da7-809b-4e321cf3a70b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{jurosCredito}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="190" y="70" width="72" height="20" forecolor="#E61612" uuid="0a87df60-b9ed-4d85-b7b0-c904eb8ae128"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[Optional.ofNullable($V{somaDebito}).orElse(BigDecimal.ZERO)]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Auto" pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="350" y="50" width="100" height="20" uuid="70e37978-df49-427e-9930-8ef19cae3424"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[Optional.ofNullable($V{somaCredito}).orElse(BigDecimal.ZERO).subtract( Optional.ofNullable($V{somaDebito}).orElse(BigDecimal.ZERO))]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="61" y="70" width="66" height="20" forecolor="#CC1B18" uuid="c4e71da9-b632-45be-bc66-f90ca934b3cc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{jurosDebito}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="130" y="70" width="60" height="20" forecolor="#D4211E" uuid="140b5132-d2a3-4b27-9733-2b659bc0cf89"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{descontoDebito}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

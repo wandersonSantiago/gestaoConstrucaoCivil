@@ -51,5 +51,9 @@ public class CotacaoEmpresaItem implements Serializable {
 	public Double getValorTotalItem() {
 		return item.getQuantidade() * valorUnitario;
 	}
+	
+	public Double getValorTotalEmpresa() {
+		return cotacaoEmpresa.getValorTotal();
+	}
 
 }

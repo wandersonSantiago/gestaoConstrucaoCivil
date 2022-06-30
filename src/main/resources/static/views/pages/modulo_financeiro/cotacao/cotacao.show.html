@@ -7,6 +7,10 @@
 <br>
 			<div class="panel panel-default">
 				<div class="panel-body">
+					<div class="row col-sm-12">
+						<a ng-if="ctrl.cotacao.statusCotacao === 'FECHADO'"  class="btn  btn-xs btn-flat btn-info" ng-click="ctrl.findByConcorrentes(ctrl.cotacao.id)">Todos</a>
+						<a ng-if="ctrl.cotacao.statusCotacao === 'FECHADO'"  class="btn  btn-xs btn-flat btn-success" ng-click="ctrl.findByVencedores(ctrl.cotacao.id)">Vencedores</a>
+					</div>
 					<div class="row">
 						<div class="col-sm-4">
 							<label>Tema:</label>
@@ -29,6 +33,9 @@
 								<h3>{{ctrl.cotacao.dataFechamento | date : 'dd/MM/yyyy'}}</h3>
 						</div>						
 					</div>
+					<div class="label label-warning">
+				         <h7><i class="icon fa fa-info"></i> {{ctrl.cotacao.porItem ? 'Esta cotação foi calculado pelo menor valor do item' : 'Esta cotação foi calculada pelo menor valor do fornecedor'}}</h7>
+				   </div>	
 				</div>
 			</div>
 					<br>
@@ -118,7 +125,7 @@
 										</tbody>
 										<tbody>
 											<tr><td></td><td></td><td></td><td></td><td></td><td>Total</td>
-												<td>{{item.valorTotal | currency}}</td>
+												<td>{{item.valorGanho | currency}}</td>
 											</tr>
 										</tbody>					
 									</table>
